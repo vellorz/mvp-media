@@ -4,7 +4,7 @@ platforms: [tiktok, instagram, facebook, youtube]
 format: reel / short (26.6 s, 1080x1920)
 poster: "Antibes (0226), sold"
 style: "Paper collage (Collage B-roll look, built free in code with Remotion + Lemo-Opuscar halftone-dossier grammar) + Mr. Hale waist-up narrator"
-sound: "Mr. Hale voiceover + paper foley baked in. Add in-app: Pop Smoke - Dior (142 BPM) at 15-20%"
+sound: "Hale voiceover + paper foley + original music bed baked in (bright UK garage, 139 BPM; the drop lands on "Antibes." at 20.8 s). Nothing to add in-app."
 status: STYLE TEST, not scheduled
 approved: ""
 ---
@@ -19,8 +19,8 @@ approved: ""
 5. "In 1966, it became the first museum ever dedicated to him." 1966 tiles, castle, MUSÉE PICASSO placard, THE FIRST stamp.
 6. "Antibes. Piece by piece. The print is in our shop." Your poster rebuilds from colour strips, the clean print lands, then it's framed on a wall with a MODERN VISTA PRINTS stamp.
 
-## Song
-Pop Smoke, "Dior" (142 BPM, G major, per [SongBPM](https://songbpm.com/@pop-smoke/dior)), at 15-20% under the voice.
+## Music
+Original track composed for this video by Claude (bright UK garage, 139 BPM; the drop lands on "Antibes." at 20.8 s), owned by Modern Vista Prints: no credit needed, no copyright claims. Mixed at about 15-20% under the voice, ducking while Hale speaks. Nothing to add in any app.
 
 ## Captions
 TikTok: Picasso glued paper into art. Then he moved into a castle in Antibes. #antibes #picasso #frenchriviera #vintagetravelposter #wallart

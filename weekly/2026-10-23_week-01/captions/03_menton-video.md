@@ -4,7 +4,7 @@ platforms: [tiktok, instagram, facebook, youtube]
 format: reel / short (20.9 s, 1080x1920)
 poster: "Menton (0250), sold"
 style: "Paper collage (approved Antibes format) + Mr. Hale waist-up narrator"
-sound: "Mr. Hale voiceover + paper foley baked in. Add in-app: Post Malone - Saint-Tropez at 15-20%"
+sound: "Hale voiceover + paper foley + original music bed baked in (bouncy house, 130 BPM; the drop lands on "Menton." at 14.9 s). Nothing to add in-app."
 status: draft, not scheduled
 approved: ""
 ---
@@ -18,6 +18,9 @@ approved: ""
 4. "In 2020, that festival used 140 tons of citrus." 2020 and 140 tiles, six CITRONS crates stack into a pyramid, a lemon avalanche.
 5. "France has even listed it as official cultural heritage." Basilica cut-out from your poster, heritage card, OFFICIAL stamp.
 6. (Hale) "Menton. Freshly squeezed onto paper. The print is in our shop." Your poster rebuilds strip by strip, then hangs framed above a bowl of lemons with your logo on the sideboard.
+
+## Music
+Original track composed for this video by Claude (bouncy house, 130 BPM; the drop lands on "Menton." at 14.9 s), owned by Modern Vista Prints: no credit needed, no copyright claims. Mixed at about 15-20% under the voice, ducking while Hale speaks. Nothing to add in any app.
 
 ## Captions
 TikTok: Europe's lemon capital threw its lemons a party. #menton #frenchriviera #citrus #vintagetravelposter #wallart

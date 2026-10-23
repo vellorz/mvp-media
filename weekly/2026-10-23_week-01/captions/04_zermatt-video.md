@@ -4,7 +4,7 @@ platforms: [tiktok, instagram, facebook, youtube]
 format: reel / short (29.1 s, 1080x1920)
 poster: "Zermatt (0546)"
 style: "Paper collage (approved Antibes format) + Mr. Hale waist-up narrator"
-sound: "Mr. Hale voiceover + paper foley baked in. Add in-app: Young Thug & Gunna - Ski at 15-20%"
+sound: "Hale voiceover + paper foley + original music bed baked in (dark half-time garage that lifts on "Today, Zermatt" (12.3 s) and peaks on "Zermatt." at 22.8 s, 138 BPM). Nothing to add in-app."
 status: draft, not scheduled
 approved: ""
 ---
@@ -18,6 +18,9 @@ approved: ""
 4. "Today, Zermatt guards the view. No combustion-engine cars, so smog can't hide the peak." A red car gets a cream NO stamp, smog clouds slide in and are swept away, CLEAR VIEW stamp.
 5. "Or skip the climb. Europe's highest open-air railway gets you up in twenty-nine minutes." A paper train climbs the track, 29 MIN tiles, HIGHEST OPEN-AIR RAILWAY IN EUROPE stamp.
 6. (Hale) "Zermatt. All of the view, none of the danger. The print is in our shop." Your poster rebuilds strip by strip, then hangs framed in a navy room with your logo slammed onto the sideboard.
+
+## Music
+Original track composed for this video by Claude (dark half-time garage that lifts on "Today, Zermatt" (12.3 s) and peaks on "Zermatt." at 22.8 s, 138 BPM), owned by Modern Vista Prints: no credit needed, no copyright claims. Mixed at about 15-20% under the voice, ducking while Hale speaks. Nothing to add in any app.
 
 ## Captions
 TikTok: Seven climbed it first. Only three came back. #zermatt #matterhorn #switzerland #vintagetravelposter #wallart

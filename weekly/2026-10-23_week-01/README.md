@@ -11,7 +11,7 @@ Everything we made for this week's marketing, in one place. The working copies s
 | 05 | Thu Oct 29 | Gift Shelf No. 01 carousel | TikTok, Instagram | `carousels/gift-shelf-no01/` |
 | 06 | Fri Oct 23 to Fri Oct 30 | 8 Pinterest pins, one a day | Pinterest | `pinterest/` |
 
-- `captions/`: the caption, hashtags, titles, sources and song for each post.
+- `captions/`: the caption, hashtags, titles, sources and music notes for each post.
 - `schedule.md`: times and who does what.
-- `your-part-guide.md`: your TikTok-song and YouTube-upload steps.
+- `your-part-guide.md`: what you need to do (nothing weekly; one-time YouTube connection).
 - Carousels: `tiktok-9x16/` (1080x1920) and `instagram-4x5/` (1080x1350), slides in order, plus `preview.jpg`.

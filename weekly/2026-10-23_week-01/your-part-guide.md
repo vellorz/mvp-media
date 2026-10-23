@@ -1,11 +1,12 @@
 # Your part
 
-**Nothing week to week.** Each video now has its own original music track mixed in under Mr. Hale (composed for us, so there are no credits and no copyright claims). Every post on every platform publishes on its own.
+**Week to week: nothing.** Instagram, Facebook, TikTok and YouTube all publish on their own, with music already in the videos.
 
-## One-time setup
-1. Open Metricool, go to your brand (the one with TikTok), and connect **YouTube**. It takes about a minute.
-2. Tell me in the Claude app when it's done, and I'll schedule the Shorts.
+What Claude does:
+- Refills the Buffer queue every 2 to 3 days (the free plan holds 10 per channel).
+- Schedules Pinterest pins in Pinterest itself through the Claude in Chrome extension.
+- At the end of each posting week: checks the numbers on every platform, researches SEO, writes next week's plan, builds the new videos, carousels and pins, then asks you to approve before scheduling.
 
-## If something goes wrong
-- A post fails: I'll see it and fix or reschedule it.
-- You want to skip or change a post: tell me in the Claude app.
+The only things that need you:
+- Approve each new week's plan (one tap).
+- Keep the Claude in Chrome extension installed and signed in so Pinterest can be scheduled.

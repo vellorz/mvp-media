@@ -1,25 +1,29 @@
-# Pilot run: Fri Oct 23 to Thu Oct 29, 2026 (America/Chicago)
+# Week 01: Fri Oct 23 to Thu Oct 29, 2026 (America/Chicago)
 
-This replaces `2026-10-27_week.md`. The v3 videos in that plan were rejected, and the three collage videos plus the two restyled carousels take their place.
+Status: SCHEDULED (Oct 22–23). Everything below publishes automatically except Pinterest, which Claude schedules natively in Pinterest through the browser.
 
-The TikTok times come from Metricool's best-time data for this account for Oct 23 to 29. On weekdays the peaks are 10:00 (1,379 to 1,471) and 18:00 (1,096 to 1,386). On weekends 10:00 is the peak. Instagram and Facebook use the same windows until they have data of their own [assumption].
+## Where each platform runs
+- **Buffer** (free, 10 queued per channel, refilled every 2 to 3 days): Instagram, Facebook, TikTok videos.
+- **Metricool** (free, 20 published per network per month): YouTube Shorts, TikTok carousels (auto-added TikTok music).
+- **Pinterest**: native Pinterest scheduler (30 days ahead, max 10 waiting), done by Claude via the Claude in Chrome extension.
 
-| Day | Post | TikTok (Metricool) | Instagram (Buffer) | Facebook (Buffer) | YouTube (Metricool) | Folder |
-|---|---|---|---|---|---|---|
-| Fri Oct 23 | Antibes video | 18:00, auto (music baked in) | Reel 12:00 | Reel 12:00 | Short 18:00, auto (Metricool) | `collage-test_antibes` |
-| Sat Oct 24 | Vote No. 01 carousel | 10:00, auto + auto music | Carousel 10:00 | Carousel 10:00 | — | `2026-10-27_tt-ig_vote-riviera` |
-| Sun Oct 25 | Menton video | 18:00, auto (music baked in) | Reel 12:00 | Reel 12:00 | Short 18:00, auto (Metricool) | `2026-10-28_tt-ig-fb-yt_collage-menton` |
-| Tue Oct 27 | Zermatt video | 18:00, auto (music baked in) | Reel 12:00 | Reel 12:00 | Short 18:00, auto (Metricool) | `2026-10-30_tt-ig-fb-yt_collage-zermatt` |
-| Thu Oct 29 | Gift Shelf No. 01 carousel | 18:00, auto + auto music | Carousel 18:00 | Carousel 18:00 | — | `2026-11-01_tt-ig_gift-shelf-01` |
+All three videos carry an original music track composed for this shop, so no in-app music step is needed.
 
-Pinterest: one collage pin a day, Fri Oct 23 to Fri Oct 30, 8 pins in total, each linking to its Etsy listing. See `../02_drafts/2026-10-23_pinterest-pins/post.md`.
+## Schedule and post IDs
 
-Totals: 5 TikTok, 5 Instagram, 5 Facebook, 3 YouTube Shorts, 8 Pinterest. All automatic.
+| Day | Post | Instagram (Buffer) | Facebook (Buffer) | TikTok | YouTube Short (Metricool) |
+|---|---|---|---|---|---|
+| Fri Oct 23 | Antibes video | Reel 12:00 `6adab7f08d2197cb2a0c82fd` | Reel 12:00 `6adab8a9535235087b75f756` | Video 18:00, Buffer `6adab9511dc335d347ea478c` | 18:00 `403726342` |
+| Sat Oct 24 | Vote No. 01 carousel | Carousel 10:00 `6adab87f1dc335d347e9fb02` | Multi-photo post 10:00 `6adab905535235087b761a64` | Carousel 10:00, Metricool + auto music `403725872` | — |
+| Sun Oct 25 | Menton video | Reel 12:00 `6adab8221dc335d347e9eb21` | Reel 12:00 `6adab8c8cc1b7cdc08c50e07` | Video 18:00, Buffer `6adab971535235087b762d9c` | 18:00 `403726593` |
+| Tue Oct 27 | Zermatt video | Reel 12:00 `6adab83f535235087b75e03f` | Reel 12:00 `6adab8e38d2197cb2a0cc5b0` | Video 18:00, Buffer `6adab991535235087b763197` | 18:00 `403726614` |
+| Thu Oct 29 | Gift Shelf No. 01 carousel | Carousel 18:00 `6adab89f8d2197cb2a0ca608` | Multi-photo post 18:00 `6adab92b535235087b7621ae` | Carousel 18:00, Metricool + auto music `403726142` | — |
 
-**Your part:**
-- Nothing week to week. All three videos now carry an original music track, so every post publishes on its own.
-- One-time: connect YouTube to Metricool so I can schedule the Shorts.
+Times come from Metricool's best-time data for the TikTok account (weekday peaks 10:00 and 18:00). Instagram and Facebook reuse those windows until they have their own data [assumption].
 
-Media is hosted for scheduling in the public repo vellorz/mvp-media.
+Pinterest: one pin a day, Fri Oct 23 to Fri Oct 30 (8 pins), each linking to its Etsy listing. See `captions/06_pinterest-pins.md`. **Status: not yet scheduled** (needs the Claude in Chrome extension connected to Claude's thread).
 
-Nothing is scheduled until you approve.
+Totals: 5 Instagram, 5 Facebook, 5 TikTok, 3 YouTube Shorts, 8 Pinterest.
+Metricool count for October: 2 TikTok + 3 YouTube published (cap 20 each, resets Nov 1).
+
+Captions for every post are in `captions/`. Media is hosted in the public repo vellorz/mvp-media.

@@ -21,7 +21,7 @@ All three videos carry an original music track composed for this shop, so no in-
 
 Times come from Metricool's best-time data for the TikTok account (weekday peaks 10:00 and 18:00). Instagram and Facebook reuse those windows until they have their own data [assumption].
 
-Pinterest: one pin a day, Fri Oct 23 to Fri Oct 30 (8 pins), each linking to its Etsy listing. See `captions/06_pinterest-pins.md`. **Status: not yet scheduled** (needs the Claude in Chrome extension connected to Claude's thread).
+Pinterest: one pin a day, Fri Oct 23 to Fri Oct 30 (8 pins), each linking to its Etsy listing. See `captions/06_pinterest-pins.md`. **Status: SCHEDULED** in Pinterest (Oct 22), 12:00 PM CT daily, boards as listed. Visible on the profile's Scheduled Pins page.
 
 Totals: 5 Instagram, 5 Facebook, 5 TikTok, 3 YouTube Shorts, 8 Pinterest.
 Metricool count for October: 2 TikTok + 3 YouTube published (cap 20 each, resets Nov 1).

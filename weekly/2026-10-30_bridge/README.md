@@ -1,4 +1,4 @@
-# Bridge: Fri Oct 30 to Sun Nov 1 (status: BUILT, awaiting owner's final look, NOT scheduled)
+# Bridge: Fri Oct 30 to Sun Nov 1 (status: APPROVED and SCHEDULED Oct 27; see schedule.md)
 
 | # | Day | Post | TikTok | Instagram | Facebook | YouTube | Pinterest |
 |---|---|---|---|---|---|---|---|

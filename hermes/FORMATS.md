@@ -62,6 +62,14 @@ The team's running memory of what works: what was tried, the result with numbers
 
 Written by the hourly brain sync from Mission Control's SEO lab: which edited listings did better or worse than untouched listings, and what kind of edit they had. Research and the Chief read it to learn which SEO changes help.
 
+## Posting times: `hermes/insights/posting-times.md`
+
+Written by the hourly brain sync from Mission Control's Content screen (the same math as its best-time heatmap). It lists, for each platform and all together, every day × 3-hour slot (Central) that has posts, with a score = views ÷ that platform's usual post (1.0× = usual) and a rating: strong ≥ 1.15×, weak ≤ 0.85×, average in between, 2+ posts needed to be rated. It also rates each post queued in Buffer. Marketing reads it before choosing post times: favour strong slots, avoid weak ones, and sometimes test an untested slot.
+
+## Social views per day: `hermes/insights/social-daily.md`
+
+Written by the hourly brain sync from Mission Control's daily views ledger: the views each platform earned on each day (all posts, old and new), midnight to midnight Central. "not recorded" means missing (the PC was off, or before recording began on Oct 27, 2026), never 0. YouTube's older days are marked "~ (est.)". TikTok numbers come through Buffer and can land a day late. Use it for per-day claims; running totals from Buffer or Metricool are not per-day numbers.
+
 ## Metric keys
 
 | Key | Measures |

@@ -34,5 +34,5 @@ If /seo isn't available as an installed skill in that session, Claude shallow-cl
 
 ## Related changes the same day
 - Images: pngimg.com is not used (CC BY-NC 4.0: non-commercial, credit required). Approved sources: our own posters, shapes drawn in code, and public-domain or CC0 archives (Smithsonian Open Access, Library of Congress, NYPL Public Domain, Wikimedia Commons PD, Openverse CC0).
-- Network: the owner switched the project to a cloud environment that allows all domains. It applies to sessions that start after the change, not to ones already running. The Sunday run checks access first and reports any site that's still blocked.
+- Network: the owner switched the project to a cloud environment that allows all domains. It applies to sessions that start after the change, not to ones already running. The Sunday scheduled task is unchanged and resumes its saved session, so it may still have the old network. Each run checks access first and reports any site that's still blocked.
 - Etsy listing video: one shop-wide 10 s silent loop was made and approved (modern-vista-social/etsy-listing-video/).

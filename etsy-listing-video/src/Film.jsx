@@ -93,49 +93,70 @@ const LeafShadows = ({ f }) => {
   );
 };
 
-// frame geometry
-const PW = 404, PH = 606, MAT = 46, WOOD = 22;
-const FW = PW + 2 * (MAT + WOOD), FH = PH + 2 * (MAT + WOOD);
-const FX = (1080 - FW) / 2, FY = 96;
+// frame geometry: matches the shop's real frames (walnut / black / white flat moulding,
+// mitred corners, print runs edge to edge with no mat)
+const PW = 470, PH = 705, M = 36;
+const FW = PW + 2 * M, FH = PH + 2 * M;
+const FX = (1080 - FW) / 2, FY = 80;
+// sampled from the owner's "Poster Frame Colors" listing slide: [top, right, bottom, left]
+const FRAMES = [
+  ['#46362d', '#3a2c25', '#3b2e26', '#433329'], // walnut
+  ['#262626', '#353535', '#2a2a2a', '#242424'], // black
+  ['#ececec', '#dedede', '#e2e2e2', '#f1f1f1'], // white
+];
+const frameOf = (i) => i % FRAMES.length;
+
+const Moulding = ({ c, opacity }) => {
+  const o = M, w = FW, h = FH;
+  const sides = [
+    `0,0 ${w},0 ${w - o},${o} ${o},${o}`,
+    `${w},0 ${w},${h} ${w - o},${h - o} ${w - o},${o}`,
+    `0,${h} ${w},${h} ${w - o},${h - o} ${o},${h - o}`,
+    `0,0 0,${h} ${o},${h - o} ${o},${o}`,
+  ];
+  return (
+    <svg width={w} height={h} style={{ position: 'absolute', inset: 0, opacity }}>
+      {sides.map((pts, i) => <polygon key={i} points={pts} fill={c[i]} />)}
+      {/* mitre seams, outer edge highlight, inner lip shadow */}
+      {[[0, 0, o, o], [w, 0, w - o, o], [0, h, o, h - o], [w, h, w - o, h - o]].map(([a, b, x, y], i) =>
+        <line key={i} x1={a} y1={b} x2={x} y2={y} stroke="rgba(0,0,0,0.18)" strokeWidth="1" />)}
+      <rect x="0.5" y="0.5" width={w - 1} height={h - 1} fill="none" stroke="rgba(255,255,255,0.10)" />
+      <rect x={o - 1} y={o - 1} width={w - 2 * o + 2} height={h - 2 * o + 2} fill="none" stroke="rgba(0,0,0,0.28)" strokeWidth="2" />
+    </svg>
+  );
+};
 
 const Frame = ({ f, idx, mix }) => {
   const glare = interpolate((f % 150) / 150, [0, 1], [-60, 160]);
   const lightOnFrame = 0.04 + 0.03 * loop(f);
+  const cur = frameOf(idx), prev = mix.prev >= 0 ? frameOf(mix.prev) : -1;
   return (
     <div style={{ position: 'absolute', left: FX, top: FY, width: FW, height: FH }}>
       {/* cast shadow on wall */}
-      <div style={{ position: 'absolute', inset: 0, transform: 'translate(-16px, 22px)', background: 'rgba(60,40,20,0.38)', filter: 'blur(22px)' }} />
-      <div style={{ position: 'absolute', inset: 0, transform: 'translate(-4px, 6px)', background: 'rgba(50,32,16,0.35)', filter: 'blur(5px)' }} />
-      {/* oak moulding */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'repeating-linear-gradient(92deg, rgba(90,58,28,0.0) 0 3px, rgba(90,58,28,0.18) 3px 4px, rgba(90,58,28,0.0) 4px 9px), linear-gradient(135deg,#c79a64,#a87a46 45%,#8f6436)',
-        boxShadow: 'inset 2px 2px 0 rgba(255,235,200,0.55), inset -2px -2px 0 rgba(60,35,10,0.5)',
-      }} />
-      {/* mat */}
-      <div style={{
-        position: 'absolute', left: WOOD, top: WOOD, right: WOOD, bottom: WOOD, background: '#f5efe3',
-        boxShadow: 'inset 3px 3px 6px rgba(60,40,20,0.35), inset -1px -1px 2px rgba(255,255,255,0.6)',
-      }} />
-      {/* artwork with bevel */}
-      <div style={{ position: 'absolute', left: WOOD + MAT, top: WOOD + MAT, width: PW, height: PH, overflow: 'hidden', boxShadow: '0 0 0 1px rgba(120,95,70,0.35), 0 0 0 3px #fbf7ef, 0 0 0 4px rgba(120,95,70,0.25)' }}>
+      <div style={{ position: 'absolute', inset: 0, transform: 'translate(-14px, 20px)', background: 'rgba(60,40,20,0.36)', filter: 'blur(20px)' }} />
+      <div style={{ position: 'absolute', inset: 0, transform: 'translate(-3px, 5px)', background: 'rgba(50,32,16,0.35)', filter: 'blur(4px)' }} />
+      {/* frame finish switches cleanly halfway through the art crossfade (no muddy blend) */}
+      <Moulding c={FRAMES[prev >= 0 && mix.t < 0.5 ? prev : cur]} opacity={1} />
+      {/* print sits directly against the moulding */}
+      <div style={{ position: 'absolute', left: M, top: M, width: PW, height: PH, overflow: 'hidden', boxShadow: 'inset 2px 2px 4px rgba(0,0,0,0.25)' }}>
         {POSTERS.map(([file], i) => {
           const o = i === idx ? 1 : i === mix.prev ? 1 - mix.t : 0;
           if (o <= 0) return null;
           return <Img key={file} src={staticFile(`posters/${file}.png`)} style={{ position: 'absolute', width: PW, height: PH, objectFit: 'cover', opacity: i === idx ? 1 : o, zIndex: i === idx ? 1 : 2 }} />;
         })}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 3, boxShadow: 'inset 3px 3px 5px rgba(0,0,0,0.22)' }} />
       </div>
-      {/* glass sheen + light on frame */}
-      <div style={{ position: 'absolute', left: WOOD, top: WOOD, right: WOOD, bottom: WOOD, overflow: 'hidden', pointerEvents: 'none' }}>
-        <div style={{ position: 'absolute', top: -200, left: `${glare}%`, width: 120, height: FH + 400, transform: 'rotate(24deg)', background: 'linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.13),rgba(255,255,255,0))' }} />
-        <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(160deg, rgba(255,250,235,${lightOnFrame + 0.05}), rgba(255,250,235,0) 60%)` }} />
+      {/* faint glass sheen + window light */}
+      <div style={{ position: 'absolute', left: M, top: M, width: PW, height: PH, overflow: 'hidden', pointerEvents: 'none' }}>
+        <div style={{ position: 'absolute', top: -200, left: `${glare}%`, width: 120, height: FH + 400, transform: 'rotate(24deg)', background: 'linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,0.09),rgba(255,255,255,0))' }} />
+        <div style={{ position: 'absolute', inset: 0, background: `linear-gradient(160deg, rgba(255,250,235,${lightOnFrame}), rgba(255,250,235,0) 60%)` }} />
       </div>
     </div>
   );
 };
 
 const Placard = ({ idx, mix }) => (
-  <div style={{ position: 'absolute', top: FY + FH + 38, left: 0, width: 1080, height: 60, textAlign: 'center' }}>
+  <div style={{ position: 'absolute', top: FY + FH + 34, left: 0, width: 1080, height: 60, textAlign: 'center' }}>
     {POSTERS.map(([file, place, region], i) => {
       const o = i === idx ? (mix.prev === -1 ? 1 : Math.max(0, mix.t * 2 - 1)) : i === mix.prev ? Math.max(0, 1 - mix.t * 2) : 0;
       if (o <= 0) return null;

@@ -1,5 +1,5 @@
 from: research
-title: SEO scoreboard: better 1, measuring 202, same 35
+title: SEO scoreboard: better 1, measuring 209, same 39
 metric: etsy.visits
 evidence: Mission Control SEO lab (etsy-seo listing reports + weekly listing stats)
 
@@ -7,12 +7,12 @@ Edited listings compared with untouched ones over the same weeks (expected = the
 better/worse = beat or fell behind that by at least max(2 visits, 30%); measuring = no full week after the edit yet.
 Traffic is small, so single listings are noisy; look for patterns across many listings before writing a lesson.
 
-Totals: better 1, measuring 202, same 35
+Totals: better 1, measuring 209, same 39
 
 ## better (1)
 - Mürren Switzerland Travel Poster (https://www.etsy.com/listing/4552531090): edited 2026-10-20; visits 0 -> 2 (expected 0); title changed; tags +12/-12
 
-## same (35)
+## same (39)
 - Vintage Lyon France Travel Poster, Retro European Cityscape Wall Art (Matte Print) (https://www.etsy.com/listing/4551436460): edited 2026-10-22; visits 1 -> 0 (expected 1); title kept; tags +13/-13
 - Salzburg Austria Travel Poster (https://www.etsy.com/listing/4552004162): edited 2026-10-22; visits 0 -> 0 (expected 0); title changed; tags +11/-11
 - Florence Italy Travel Poster (https://www.etsy.com/listing/4552004344): edited 2026-10-22; visits 0 -> 0 (expected 0); title changed; tags +11/-11
@@ -27,6 +27,10 @@ Totals: better 1, measuring 202, same 35
 - Kotor Montenegro Travel Poster (https://www.etsy.com/listing/4552984187): edited 2026-10-22; visits 0 -> 0 (expected 0); title changed; tags +11/-11
 - Biarritz France Vintage Travel Poster (https://www.etsy.com/listing/4552984351): edited 2026-10-22; visits 0 -> 1 (expected 0); title changed; tags +13/-13
 - Innsbruck Austria Travel Poster (https://www.etsy.com/listing/4552994326): edited 2026-10-22; visits 0 -> 0 (expected 0); title changed; tags +12/-12
+- Cambridge England Vintage Travel Poster (https://www.etsy.com/listing/4554218120): edited 2026-10-22; visits 0 -> 0 (expected 0); title changed; tags +12/-12
+- Bern Switzerland Vintage Travel Poster (https://www.etsy.com/listing/4555367753): edited 2026-10-22; visits 0 -> 0 (expected 0); title changed; tags +12/-12
+- Alicante Spain Travel Poster (https://www.etsy.com/listing/4555548334): edited 2026-10-22; visits 0 -> 0 (expected 0); title changed; tags +13/-13
+- Algarve Portugal Travel Poster (https://www.etsy.com/listing/4556085605): edited 2026-10-22; visits 0 -> 0 (expected 0); title changed; tags +12/-12
 - Paris Eiffel Tower Art Print, Vintage France Travel Poster, Parisian Wall Decor (https://www.etsy.com/listing/4551436438): edited 2026-10-22; visits 0 -> 0 (expected 0); title kept; tags +10/-10
 - Athens Greece Travel Poster, Vintage Acropolis Parthenon Wall Art (https://www.etsy.com/listing/4551436476): edited 2026-10-22; visits 0 -> 0 (expected 0); title kept; tags +13/-13
 - San Sebastian Spain Vintage Travel Poster (https://www.etsy.com/listing/4551993539): edited 2026-10-20; visits 1 -> 1 (expected 1); title changed; tags +11/-11

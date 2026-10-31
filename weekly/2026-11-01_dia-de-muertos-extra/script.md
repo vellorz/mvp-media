@@ -1,6 +1,6 @@
 # Extra video (Sun Nov 1, 2026): "James Bond Invented This Parade"
 Poster: Mexico City (ID 0427, Heritage Classic, 8-28-26/Mexico City, Mexico.png)
-Status: Script approved (Oct 31 18:21 UTC). Video sent for approval; nothing scheduled.
+Status: SCHEDULED Sun Nov 1 10:00 CST on all five platforms (script + video approved).
 
 ## Trend + story
 - Trend: Día de Muertos (Nov 1-2) is the seasonal topic on every platform tomorrow, and the Halloween traffic carries into it. Format: "invented by a movie" / film-location story (our Kirkjufell "seen this on TV" angle, done fresh). Tags: #dayofthedead (~3.6M IG posts, very competitive, so pair it with smaller tags, per iqhashtags), #diadelosmuertos, #diademuertos. Tone: celebratory and respectful, not spooky (caption guides agree). [I found no live 2026 trend chart; the tag data comes from evergreen guides.]

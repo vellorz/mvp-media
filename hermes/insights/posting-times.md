@@ -1,7 +1,7 @@
 from: research
 title: Best posting slots: Thu 9 PM–12 scores 3.8× across platforms
 metric: social.views
-evidence: Mission Control Content screen, best-time heatmap; 220 posts counted over the last 90 days; 1 not counted yet (left out); posts last pulled Sat, Oct 31, 11:29 AM Central
+evidence: Mission Control Content screen, best-time heatmap; 218 posts counted over the last 90 days; 1 not counted yet (left out); posts last pulled Sat, Oct 31, 12:29 PM Central
 
 How to read this: score = a post's views ÷ that platform's usual (median) post, so 1.0× = usual.
 Each slot's score is a geometric average pulled toward 1.0× when it has few posts, so one viral post can't carry it.
@@ -10,7 +10,7 @@ Times are Central, in three-hour slots. Posts Buffer hasn't counted yet are left
 Use it to favour strong slots, avoid weak ones, and now and then test an untested slot so the ratings keep improving.
 
 ## All platforms together
-220 posts. Best slot (3+ posts): Thu 9 PM–12, 3.8× over 6 posts.
+218 posts. Best slot (3+ posts): Thu 9 PM–12, 3.8× over 6 posts.
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
@@ -18,7 +18,6 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 | Sat | 9 PM–12 | 4 | 3.2× | 8.4× | strong |
 | Tue | 12–3 AM | 2 | 3.1× | 11.6× | strong |
 | Sun | 9 PM–12 | 6 | 2.5× | 2.6× | strong |
-| Sun | 12–3 PM | 11 | 2.2× | 3.5× | strong |
 | Tue | 9 PM–12 | 4 | 2.2× | 4.0× | strong |
 | Sun | 6–9 PM | 10 | 2.1× | 2.2× | strong |
 | Fri | 9 PM–12 | 2 | 2.0× | 7.9× | strong |
@@ -26,6 +25,7 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 | Wed | 9 PM–12 | 2 | 2.0× | 3.9× | strong |
 | Fri | 12–3 PM | 7 | 2.0× | 2.1× | strong |
 | Tue | 3–6 PM | 8 | 1.9× | 1.5× | strong |
+| Sun | 12–3 PM | 9 | 1.7× | 2.5× | strong |
 | Tue | 9 AM–12 | 4 | 1.7× | 3.0× | strong |
 | Thu | 12–3 AM | 4 | 1.4× | 2.2× | strong |
 | Sat | 6–9 PM | 8 | 1.4× | 1.8× | strong |
@@ -45,9 +45,9 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 | Wed | 12–3 PM | 6 | 0.6× | 0.5× | weak |
 | Mon | 12–3 PM | 7 | 0.5× | 0.5× | weak |
 | Mon | 3–6 PM | 7 | 0.5× | 0.6× | weak |
+| Sat | 9 AM–12 | 6 | 0.4× | 0.4× | weak |
 | Sat | 3–6 PM | 6 | 0.4× | 0.2× | weak |
 | Thu | 12–3 PM | 9 | 0.3× | 0.4× | weak |
-| Sat | 9 AM–12 | 6 | 0.3× | 0.1× | weak |
 Every other day and time: untested (no posts there yet).
 
 ## TikTok
@@ -82,11 +82,11 @@ Every other day and time: untested (no posts there yet).
 Every other day and time: untested (no posts there yet).
 
 ## Instagram
-79 posts. Best slot (3+ posts): Sun 12–3 PM, 5.0× over 4 posts.
+78 posts. Best slot (3+ posts): Sun 12–3 PM, 4.0× over 3 posts.
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
-| Sun | 12–3 PM | 4 | 5.0× | 14.6× | strong |
+| Sun | 12–3 PM | 3 | 4.0× | 14.8× | strong |
 | Thu | 9 PM–12 | 3 | 3.9× | 16.5× | strong |
 | Sat | 9 PM–12 | 2 | 3.8× | 14.4× | strong |
 | Fri | 12–3 PM | 3 | 3.0× | 14.5× | strong |
@@ -116,14 +116,14 @@ Every other day and time: untested (no posts there yet).
 | Sat | 3–6 PM | 2 | 0.8× | 1.4× | weak |
 | Wed | 6–9 PM | 3 | 0.7× | 0.5× | weak |
 | Thu | 12–3 PM | 2 | 0.7× | 0.4× | weak |
+| Sat | 9 AM–12 | 3 | 0.6× | 0.5× | weak |
 | Mon | 12–3 PM | 2 | 0.6× | 0.4× | weak |
 | Wed | 3–6 PM | 2 | 0.6× | 0.4× | weak |
-| Sat | 9 AM–12 | 3 | 0.4× | 0.3× | weak |
 | Wed | 12–3 PM | 2 | 0.4× | 0.2× | weak |
 Every other day and time: untested (no posts there yet).
 
 ## Facebook
-73 posts. Best slot (3+ posts): Sun 6–9 PM, 2.5× over 3 posts.
+72 posts. Best slot (3+ posts): Sun 6–9 PM, 2.5× over 3 posts.
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
@@ -131,10 +131,10 @@ Every other day and time: untested (no posts there yet).
 | Thu | 9 PM–12 | 3 | 2.1× | 3.7× | strong |
 | Tue | 12–3 AM | 1 | 1.7× | 4.8× | too few to rate |
 | Sun | 9 PM–12 | 3 | 1.7× | 2.2× | strong |
-| Sun | 12–3 PM | 4 | 1.6× | 2.9× | strong |
 | Wed | 9 PM–12 | 1 | 1.6× | 3.9× | too few to rate |
 | Sat | 9 PM–12 | 2 | 1.5× | 2.6× | strong |
 | Mon | 6–9 PM | 4 | 1.5× | 1.9× | strong |
+| Sun | 12–3 PM | 3 | 1.4× | 2.4× | strong |
 | Mon | 9 PM–12 | 3 | 1.3× | 6.5× | strong |
 | Fri | 12–3 PM | 3 | 1.3× | 2.1× | strong |
 | Sat | 6–9 PM | 3 | 1.3× | 2.9× | strong |
@@ -192,6 +192,6 @@ Every other day and time: untested (no posts there yet).
 Every other day and time: untested (no posts there yet).
 
 ## Queued in Buffer
-- Sun, Nov 1, 12:00 PM, Instagram: strong slot (5.0×, Instagram's own posts)
-- Sun, Nov 1, 12:00 PM, Facebook: strong slot (1.6×, Facebook's own posts)
+- Sun, Nov 1, 12:00 PM, Instagram: strong slot (4.0×, Instagram's own posts)
+- Sun, Nov 1, 12:00 PM, Facebook: strong slot (1.4×, Facebook's own posts)
 - Sun, Nov 1, 6:00 PM, TikTok: average slot (1.0×, TikTok's own posts)

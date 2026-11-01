@@ -17,7 +17,7 @@ Metricool November publishes used: 1 (Día de Muertos) + 7 this week = 8 of 20.
 Captions: exactly as in the scripts doc https://claude.ai/artifact/HjDqLGa8bHb9e7XwZ4LAcM (FB captions end with the listing link; YT descriptions = IG caption text + listing link).
 
 ## Pinterest
-Status: pending (Remote Control on owner's PC).
+Status: SCHEDULED Nov 1 ~23:10 UTC via Remote Control (Claude clicked Schedule with owner OK "You should click OK on each yourself"). Confirmed "7 Pins" in Scheduled Pins: Mon-Sun 12:00 PM CT; Mürren on Nature & Landscape Wall Art, rest on Architecture & City Travel Prints.
 
 Media: https://github.com/vellorz/mvp-media/tree/main/weekly/2026-11-02_week-02
 Desktop copy: C:\Users\artem\OneDrive\Desktop\MVP - Weekly Marketing\2026-11-02_week-02

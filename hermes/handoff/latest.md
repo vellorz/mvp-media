@@ -1,26 +1,36 @@
-# Bridge handoff (Fri Oct 30 - Sun Nov 1)
-schedule: Sundays 12:00 Central, posting weeks Mon to Sun (first full run Sun Nov 1, for Nov 2-8)
+# Week 02 handoff (Mon Nov 2 - Sun Nov 8)
+schedule: Sundays 12:00 Central, data review + scripts only; build and scheduling after the owner says finish this week; posting weeks Mon to Sun
+status: Gate 1 waiting (scripts doc https://claude.ai/artifact/HjDqLGa8bHb9e7XwZ4LAcM)
+pinterest: waiting for the owner's PC
 
-## Data takeaways (week 1, Buffer Oct 23-26, low confidence)
-- Average watch about 4 s on every platform, for 21-29 s videos -> new videos are 13-15 s, hook on screen at 0 s.
-- TikTok vote carousel had the best engagement: 7.02% ER (57 views, 2 likes, 2 shares) -> weekly vote carousel.
-- IG and FB carousels barely reached anyone (IG reach 3, FB 1 impression).
+## Data takeaways (Buffer, Oct 23 - Nov 1, low confidence)
+- IG Reels avg 142 views vs carousels 4; FB Reels avg 179 impressions vs multi-photo 0.3 -> no IG/FB carousels this week.
+- TikTok carousels 6.5% ER vs videos 3.5% -> keep one TikTok vote carousel.
+- Portofino (14.4 s) kept 46% of its length vs Antibes (26.6 s) 15% -> videos 14-16 s.
+- Bran Castle (Halloween) TikTok ER 10.34% -> timely local stories.
+- Facebook link clicks 0. Metricool TikTok/YouTube per-post data stale since Oct 20.
 
 ## Destinations and listings
-- Portofino https://www.etsy.com/listing/4552004272
-- Kirkjufell https://www.etsy.com/listing/4559121177
-- Zermatt 4552531010, St Andrews 4559120997 (vote carousel)
-- Cefalù https://www.etsy.com/listing/4555368299 (pin)
+- Mon Mürren 4552531090 (Bond / Piz Gloria)
+- Tue Ghent 4552531828 (1934 Just Judges theft)
+- Wed Florence 4552004344 (1966 flood, 60th anniversary)
+- Thu Cambridge 4554218120 (Newton bridge myth)
+- Fri Prague 4552004244 (Orloj, 1410)
+- Sat TikTok Vote No. 03: Edinburgh 4552519789, Bergen 4552531916, Salzburg 4552004162
+- Sun Copenhagen Nyhavn 4552984049 (Andersen at Nyhavn 20)
+- Pins daily 12:00, Mon-Sun (Sat = Edinburgh)
 
-## Schedule with post IDs
-See weekly/2026-10-30_bridge/schedule.md. Fri Portofino video (IG/FB 12:00, TikTok/YT 18:00); Sat Vote No. 02 carousel 10:00; Sun Kirkjufell video (same slots); pins Sat/Sun 12:00.
+## Schedule
+Times per platform are in the scripts doc and weekly/2026-11-02_week-02/schedule.md once built. Nothing is scheduled yet.
 
 ## What changed in how videos are made
-New engine v2 "ticket collage", based on the owner's style reference (IG De9ZTDwsDy0): per-letter colour headlines, torn poster crops, hand-drawn arrows, ticket-card end frame, scene transitions. Music is one steady level (owner feedback: no pumping); measured difference 0.00-0.06 dB.
+Each video starts from platform trends and tells one sourced story about its place. 14-16 s, hook at 0 s, steady music bed.
 
 ## Tried -> result -> keep/drop/retest
-- 21-29 s videos -> ~4 s average watch -> drop; testing 13-15 s from Oct 30.
-- Vote carousel on TikTok -> 7% ER -> retest (Vote No. 02).
+- IG/FB carousels -> 4 and 0.3 avg views -> drop.
+- 14 s video -> 46% watched -> keep.
+- Holiday-tied story -> 10.34% TikTok ER -> retest.
 
 ## Open questions for the owner
-- None. Bridge approved with no changes.
+- Reconnect TikTok/YouTube in Metricool? Data stopped Oct 20.
+- Lead next week with Berlin (Wall anniversary Nov 9)?

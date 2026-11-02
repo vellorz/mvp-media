@@ -1,7 +1,7 @@
 from: research
 title: Best posting slots: Thu 9 PM–12 scores 3.8× across platforms
 metric: social.views
-evidence: Mission Control Content screen, best-time heatmap; 223 posts counted over the last 90 days; 2 not counted yet (left out); posts last pulled Mon, Nov 2, 4:02 PM Central
+evidence: Mission Control Content screen, best-time heatmap; 223 posts counted over the last 90 days; 2 not counted yet (left out); posts last pulled Mon, Nov 2, 5:02 PM Central
 
 How to read this: score = a post's views ÷ that platform's usual (median) post, so 1.0× = usual.
 Each slot's score is a geometric average pulled toward 1.0× when it has few posts, so one viral post can't carry it.
@@ -43,10 +43,10 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 | Wed | 3–6 PM | 6 | 0.6× | 0.8× | weak |
 | Fri | 3–6 PM | 3 | 0.6× | 0.5× | weak |
 | Wed | 12–3 PM | 6 | 0.5× | 0.3× | weak |
-| Mon | 3–6 PM | 8 | 0.5× | 0.5× | weak |
 | Mon | 12–3 PM | 7 | 0.5× | 0.4× | weak |
 | Sat | 9 AM–12 | 6 | 0.5× | 0.6× | weak |
 | Sat | 3–6 PM | 5 | 0.4× | 0.3× | weak |
+| Mon | 3–6 PM | 8 | 0.4× | 0.4× | weak |
 | Thu | 12–3 PM | 9 | 0.3× | 0.4× | weak |
 Every other day and time: untested (no posts there yet).
 
@@ -185,10 +185,10 @@ Every other day and time: untested (no posts there yet).
 | Sun | 3–6 PM | 1 | 0.8× | 0.5× | too few to rate |
 | Mon | 12–3 PM | 1 | 0.6× | 0.3× | too few to rate |
 | Wed | 12–3 PM | 1 | 0.6× | 0.3× | too few to rate |
-| Mon | 3–6 PM | 2 | 0.5× | 0.3× | weak |
 | Mon | 6–9 PM | 1 | 0.5× | 0.0× | too few to rate |
 | Thu | 12–3 PM | 1 | 0.5× | 0.0× | too few to rate |
 | Sun | 12–3 PM | 1 | 0.5× | 0.0× | too few to rate |
+| Mon | 3–6 PM | 2 | 0.3× | 0.0× | weak |
 Every other day and time: untested (no posts there yet).
 
 ## Queued in Buffer

@@ -34,6 +34,7 @@ Not visible to the dashboard:
 - Pinterest (native): 12:00 daily Mon-Sun (Sat = Edinburgh).
 
 ## What changed in how videos are made
+Voice (owner decision, Nov 2 04:41 UTC, re Hermes note 11-01b): Drew stays the DEFAULT narrator. Max, Samara X and Mr. Hale keep 1-2 test slots per run; every row on the format scoreboard names its voice.
 Each video starts from platform trends and tells one sourced story about its place. 14-16 s, hook at 0 s, steady music bed.
 
 ## Tried -> result -> keep/drop/retest

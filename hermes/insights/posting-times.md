@@ -1,7 +1,7 @@
 from: research
 title: Best posting slots: Thu 9 PM–12 scores 3.8× across platforms
 metric: social.views
-evidence: Mission Control Content screen, best-time heatmap; 221 posts counted over the last 90 days; 3 not counted yet (left out); posts last pulled Sun, Nov 1, 11:46 PM Central
+evidence: Mission Control Content screen, best-time heatmap; 221 posts counted over the last 90 days; 3 not counted yet (left out); posts last pulled Mon, Nov 2, 12:46 AM Central
 
 How to read this: score = a post's views ÷ that platform's usual (median) post, so 1.0× = usual.
 Each slot's score is a geometric average pulled toward 1.0× when it has few posts, so one viral post can't carry it.
@@ -22,9 +22,9 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 | Fri | 6–9 PM | 14 | 2.0× | 1.6× | strong |
 | Wed | 9 PM–12 | 2 | 2.0× | 3.9× | strong |
 | Fri | 12–3 PM | 7 | 1.9× | 2.1× | strong |
-| Sun | 9 PM–12 | 4 | 1.8× | 2.0× | strong |
+| Sun | 6–9 PM | 11 | 1.9× | 1.6× | strong |
 | Sun | 12–3 PM | 11 | 1.8× | 2.4× | strong |
-| Sun | 6–9 PM | 11 | 1.8× | 1.6× | strong |
+| Sun | 9 PM–12 | 4 | 1.8× | 2.0× | strong |
 | Tue | 3–6 PM | 8 | 1.8× | 1.4× | strong |
 | Sat | 6–9 PM | 12 | 1.8× | 3.1× | strong |
 | Tue | 9 AM–12 | 4 | 1.5× | 3.0× | strong |
@@ -93,7 +93,7 @@ Every other day and time: untested (no posts there yet).
 | Tue | 9 PM–12 | 2 | 2.9× | 11.9× | strong |
 | Fri | 6–9 PM | 4 | 2.6× | 8.3× | strong |
 | Fri | 9 PM–12 | 1 | 2.4× | 14.6× | too few to rate |
-| Sun | 9 AM–12 | 1 | 2.3× | 12.1× | too few to rate |
+| Sun | 9 AM–12 | 1 | 2.3× | 12.8× | too few to rate |
 | Sat | 6–9 PM | 4 | 2.2× | 3.8× | strong |
 | Sun | 6–9 PM | 3 | 2.0× | 4.9× | strong |
 | Sun | 9 PM–12 | 2 | 1.8× | 7.9× | strong |
@@ -164,7 +164,7 @@ Every other day and time: untested (no posts there yet).
 Every other day and time: untested (no posts there yet).
 
 ## YouTube
-25 posts. Best slot (3+ posts): Sun 6–9 PM, 0.9× over 3 posts.
+25 posts. Best slot (3+ posts): Sun 6–9 PM, 1.0× over 3 posts.
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
@@ -177,8 +177,8 @@ Every other day and time: untested (no posts there yet).
 | Tue | 12–3 PM | 1 | 1.6× | 4.0× | too few to rate |
 | Sat | 6–9 PM | 2 | 1.4× | 7.0× | strong |
 | Wed | 3–6 PM | 1 | 1.1× | 1.5× | too few to rate |
+| Sun | 6–9 PM | 3 | 1.0× | 0.8× | average |
 | Wed | 6–9 PM | 1 | 1.0× | 1.0× | too few to rate |
-| Sun | 6–9 PM | 3 | 0.9× | 0.5× | average |
 | Thu | 3–6 PM | 1 | 0.9× | 0.8× | too few to rate |
 | Tue | 6–9 PM | 2 | 0.9× | 0.9× | average |
 | Sun | 3–6 PM | 1 | 0.8× | 0.5× | too few to rate |

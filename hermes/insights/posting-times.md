@@ -1,7 +1,7 @@
 from: research
 title: Best posting slots: Thu 9 PM–12 scores 3.6× across platforms
 metric: social.views
-evidence: Mission Control Content screen, best-time heatmap; 223 posts counted over the last 90 days; 3 not counted yet (left out); posts last pulled Sun, Nov 1, 8:34 PM Central
+evidence: Mission Control Content screen, best-time heatmap; 223 posts counted over the last 90 days; 3 not counted yet (left out); posts last pulled Sun, Nov 1, 9:46 PM Central
 
 How to read this: score = a post's views ÷ that platform's usual (median) post, so 1.0× = usual.
 Each slot's score is a geometric average pulled toward 1.0× when it has few posts, so one viral post can't carry it.
@@ -23,8 +23,8 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 | Wed | 9 PM–12 | 2 | 1.9× | 3.7× | strong |
 | Fri | 6–9 PM | 14 | 1.9× | 1.5× | strong |
 | Fri | 12–3 PM | 7 | 1.9× | 1.8× | strong |
-| Sun | 6–9 PM | 11 | 1.8× | 1.6× | strong |
 | Sun | 9 PM–12 | 4 | 1.8× | 1.8× | strong |
+| Sun | 6–9 PM | 11 | 1.7× | 1.6× | strong |
 | Tue | 3–6 PM | 8 | 1.7× | 1.4× | strong |
 | Sun | 12–3 PM | 11 | 1.7× | 2.3× | strong |
 | Sat | 6–9 PM | 12 | 1.7× | 2.9× | strong |
@@ -46,8 +46,8 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 | Wed | 12–3 PM | 6 | 0.5× | 0.3× | weak |
 | Mon | 3–6 PM | 7 | 0.5× | 0.5× | weak |
 | Mon | 12–3 PM | 7 | 0.5× | 0.4× | weak |
+| Sat | 9 AM–12 | 6 | 0.5× | 0.6× | weak |
 | Sat | 3–6 PM | 5 | 0.4× | 0.2× | weak |
-| Sat | 9 AM–12 | 6 | 0.4× | 0.5× | weak |
 | Thu | 12–3 PM | 9 | 0.3× | 0.3× | weak |
 Every other day and time: untested (no posts there yet).
 
@@ -95,7 +95,7 @@ Every other day and time: untested (no posts there yet).
 | Tue | 12–3 AM | 1 | 2.6× | 18.4× | too few to rate |
 | Fri | 6–9 PM | 4 | 2.6× | 8.3× | strong |
 | Fri | 9 PM–12 | 1 | 2.4× | 14.6× | too few to rate |
-| Sun | 9 AM–12 | 1 | 2.2× | 10.9× | too few to rate |
+| Sun | 9 AM–12 | 1 | 2.2× | 11.0× | too few to rate |
 | Sat | 6–9 PM | 4 | 2.2× | 3.8× | strong |
 | Sun | 6–9 PM | 3 | 2.0× | 4.9× | strong |
 | Sun | 9 PM–12 | 2 | 1.8× | 7.9× | strong |
@@ -116,8 +116,8 @@ Every other day and time: untested (no posts there yet).
 | Sun | 12–3 AM | 1 | 0.8× | 0.5× | too few to rate |
 | Thu | 3–6 PM | 2 | 0.8× | 0.7× | weak |
 | Sat | 3–6 PM | 2 | 0.8× | 1.4× | weak |
-| Wed | 6–9 PM | 3 | 0.7× | 0.5× | weak |
 | Sat | 9 AM–12 | 3 | 0.7× | 0.6× | weak |
+| Wed | 6–9 PM | 3 | 0.7× | 0.5× | weak |
 | Thu | 12–3 PM | 2 | 0.7× | 0.4× | weak |
 | Mon | 12–3 PM | 2 | 0.6× | 0.4× | weak |
 | Wed | 3–6 PM | 2 | 0.6× | 0.4× | weak |
@@ -167,7 +167,7 @@ Every other day and time: untested (no posts there yet).
 Every other day and time: untested (no posts there yet).
 
 ## YouTube
-25 posts. Best slot (3+ posts): Sun 6–9 PM, 1.0× over 3 posts.
+25 posts. Best slot (3+ posts): Sun 6–9 PM, 0.9× over 3 posts.
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
@@ -180,8 +180,8 @@ Every other day and time: untested (no posts there yet).
 | Tue | 12–3 PM | 1 | 1.6× | 4.0× | too few to rate |
 | Sat | 6–9 PM | 2 | 1.4× | 7.0× | strong |
 | Wed | 3–6 PM | 1 | 1.1× | 1.5× | too few to rate |
-| Sun | 6–9 PM | 3 | 1.0× | 0.8× | average |
 | Wed | 6–9 PM | 1 | 1.0× | 1.0× | too few to rate |
+| Sun | 6–9 PM | 3 | 0.9× | 0.5× | average |
 | Thu | 3–6 PM | 1 | 0.9× | 0.8× | too few to rate |
 | Tue | 6–9 PM | 2 | 0.9× | 0.9× | average |
 | Sun | 3–6 PM | 1 | 0.8× | 0.5× | too few to rate |

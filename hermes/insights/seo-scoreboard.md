@@ -1,5 +1,5 @@
 from: research
-title: SEO scoreboard: better 1, measuring 229, same 39
+title: SEO scoreboard: better 1, measuring 223, same 45
 metric: etsy.visits
 evidence: Mission Control SEO lab (etsy-seo listing reports + weekly listing stats)
 
@@ -7,12 +7,18 @@ Edited listings compared with untouched ones over the same weeks (expected = the
 better/worse = beat or fell behind that by at least max(2 visits, 30%); measuring = no full week after the edit yet.
 Traffic is small, so single listings are noisy; look for patterns across many listings before writing a lesson.
 
-Totals: better 1, measuring 229, same 39
+Totals: better 1, measuring 223, same 45
 
 ## better (1)
 - Mürren Switzerland Travel Poster (https://www.etsy.com/listing/4552531090): edited 2026-10-20; visits 0 -> 2 (expected 0); title changed; tags +12/-12
 
-## same (39)
+## same (45)
+- Taormina Italy Travel Poster Art Print, Vintage Sicilian Coastline Wall Art, Mount Etna Landscape (https://www.etsy.com/listing/4551993525): edited 2026-10-25; visits 0 -> 0 (expected 0); title changed; tags +0/-0
+- Lisbon Portugal Cityscape Vintage Travel Poster Wall Art , Alfama District Hillside Decor (https://www.etsy.com/listing/4551993785): edited 2026-10-25; visits 0 -> 0 (expected 0); title changed; tags +0/-0
+- Dubrovnik Croatia Vintage Travel Poster Print, Adriatic Sea Old City Wall Art, Croatia Gift (https://www.etsy.com/listing/4551994305): edited 2026-10-25; visits 0 -> 0 (expected 0); title changed; tags +0/-0
+- Vintage Portofino Italy Travel Poster Art Print, Coastal Wall Decor for Italian Riviera Enthusiasts (https://www.etsy.com/listing/4552004272): edited 2026-10-25; visits 0 -> 1 (expected 0); title changed; tags +0/-0
+- Vienna Austria Travel Poster Print, Karlskirche Vintage Cityscape Art, Europe Architectural Wall Decor (https://www.etsy.com/listing/4552518861): edited 2026-10-25; visits 0 -> 1 (expected 0); title changed; tags +0/-0
+- Slovenia Lake Bled Vintage Travel Poster Print | European Landscape Art, Retro Wall Decor (https://www.etsy.com/listing/4552519055): edited 2026-10-25; visits 0 -> 0 (expected 0); title changed; tags +0/-0
 - Vintage Lyon France Travel Poster, Retro European Cityscape Wall Art (Matte Print) (https://www.etsy.com/listing/4551436460): edited 2026-10-22; visits 1 -> 0 (expected 1); title kept; tags +13/-13
 - Salzburg Austria Travel Poster (https://www.etsy.com/listing/4552004162): edited 2026-10-22; visits 0 -> 0 (expected 0); title changed; tags +11/-11
 - Florence Italy Travel Poster (https://www.etsy.com/listing/4552004344): edited 2026-10-22; visits 0 -> 0 (expected 0); title changed; tags +11/-11
@@ -47,9 +53,4 @@ Totals: better 1, measuring 229, same 39
 - Edinburgh Scotland Travel Poster (https://www.etsy.com/listing/4552519789): edited 2026-10-20; visits 0 -> 0 (expected 0); title changed; tags +11/-11
 - Interlaken Switzerland Vintage Travel Poster (https://www.etsy.com/listing/4552531214): edited 2026-10-20; visits 0 -> 0 (expected 0); title changed; tags +13/-13
 - Ghent Belgium Vintage Travel Poster (https://www.etsy.com/listing/4552531828): edited 2026-10-20; visits 0 -> 0 (expected 0); title changed; tags +10/-10
-- Bergen Norway Vintage Travel Poster (https://www.etsy.com/listing/4552531916): edited 2026-10-20; visits 0 -> 0 (expected 0); title changed; tags +10/-10
-- Riga Latvia Travel Poster (https://www.etsy.com/listing/4552993924): edited 2026-10-20; visits 0 -> 0 (expected 0); title changed; tags +11/-11
-- Cannes France Vintage Travel Poster (https://www.etsy.com/listing/4552993984): edited 2026-10-20; visits 0 -> 0 (expected 0); title changed; tags +12/-12
-- Sirmione Italy Travel Poster (https://www.etsy.com/listing/4555339989): edited 2026-10-20; visits 0 -> 0 (expected 0); title changed; tags +11/-11
-- Hampi India Travel Poster (https://www.etsy.com/listing/4580095068): edited 2026-10-20; visits 0 -> 0 (expected 0); title changed; tags +11/-11
 

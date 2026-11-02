@@ -1,7 +1,7 @@
 from: research
 title: Best posting slots: Thu 9 PM–12 scores 3.8× across platforms
 metric: social.views
-evidence: Mission Control Content screen, best-time heatmap; 223 posts counted over the last 90 days; 1 not counted yet (left out); posts last pulled Mon, Nov 2, 11:01 AM Central
+evidence: Mission Control Content screen, best-time heatmap; 223 posts counted over the last 90 days; 2 not counted yet (left out); posts last pulled Mon, Nov 2, 12:01 PM Central
 
 How to read this: score = a post's views ÷ that platform's usual (median) post, so 1.0× = usual.
 Each slot's score is a geometric average pulled toward 1.0× when it has few posts, so one viral post can't carry it.
@@ -22,7 +22,7 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 | Wed | 9 PM–12 | 2 | 2.0× | 3.9× | strong |
 | Fri | 6–9 PM | 14 | 1.9× | 1.5× | strong |
 | Fri | 12–3 PM | 7 | 1.9× | 2.1× | strong |
-| Sun | 12–3 PM | 11 | 1.9× | 3.3× | strong |
+| Sun | 12–3 PM | 11 | 1.9× | 3.5× | strong |
 | Sun | 9 PM–12 | 4 | 1.8× | 2.0× | strong |
 | Sat | 6–9 PM | 12 | 1.8× | 3.1× | strong |
 | Sun | 6–9 PM | 12 | 1.8× | 1.3× | strong |
@@ -83,12 +83,12 @@ Every other day and time: untested (no posts there yet).
 Every other day and time: untested (no posts there yet).
 
 ## Instagram
-79 posts. Best slot (3+ posts): Thu 9 PM–12, 3.9× over 3 posts.
+79 posts. Best slot (3+ posts): Sun 12–3 PM, 3.9× over 4 posts.
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
-| Thu | 9 PM–12 | 3 | 3.9× | 16.5× | strong |
 | Sun | 12–3 PM | 4 | 3.9× | 9.8× | strong |
+| Thu | 9 PM–12 | 3 | 3.9× | 16.5× | strong |
 | Sat | 9 PM–12 | 2 | 3.8× | 14.4× | strong |
 | Fri | 12–3 PM | 3 | 3.0× | 14.5× | strong |
 | Tue | 9 PM–12 | 2 | 2.9× | 11.9× | strong |
@@ -192,7 +192,6 @@ Every other day and time: untested (no posts there yet).
 Every other day and time: untested (no posts there yet).
 
 ## Queued in Buffer
-- Mon, Nov 2, 12:00 PM, TikTok: average slot (0.9×, TikTok's own posts)
 - Mon, Nov 2, 7:00 PM, Facebook: strong slot (1.5×, Facebook's own posts)
 - Mon, Nov 2, 7:00 PM, Instagram: strong slot (1.5×, Instagram's own posts)
 - Tue, Nov 3, 4:00 PM, TikTok: average slot (1.1×, TikTok's own posts)

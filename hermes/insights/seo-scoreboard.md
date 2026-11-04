@@ -1,5 +1,5 @@
 from: research
-title: SEO scoreboard: better 1, measuring 212, same 56
+title: SEO scoreboard: better 1, measuring 211, same 57
 metric: etsy.visits
 evidence: Mission Control SEO lab (etsy-seo listing reports + weekly listing stats)
 
@@ -7,12 +7,13 @@ Edited listings compared with untouched ones over the same weeks (expected = the
 better/worse = beat or fell behind that by at least max(2 visits, 30%); measuring = no full week after the edit yet.
 Traffic is small, so single listings are noisy; look for patterns across many listings before writing a lesson.
 
-Totals: better 1, measuring 212, same 56
+Totals: better 1, measuring 211, same 57
 
 ## better (1)
 - Mürren Switzerland Travel Poster (https://www.etsy.com/listing/4552531090): edited 2026-10-20; visits 0 -> 2 (expected 0); title changed; tags +12/-12
 
-## same (56)
+## same (57)
+- Venice Italy Travel Poster , Vintage Grand Canal Wall Art, Gondola Ride Home Decor, European City Gift (https://www.etsy.com/listing/4551993517): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
 - Sorrento Italy Travel Poster Art, Mediterranean Coastal Decor, Vintage Italian Seaside Print Gift (https://www.etsy.com/listing/4551993527): edited 2026-10-26; visits 0 -> 0 (expected 0); title changed; tags +0/-0
 - Positano Italy Travel Poster Art Print, Amalfi Coast Wall Decor, Vintage Italian Beach Artwork (https://www.etsy.com/listing/4552004210): edited 2026-10-26; visits 0 -> 0 (expected 0); title changed; tags +0/-0
 - Granada Spain Travel Poster Print, Alhambra Vintage Art, Andalusia Wall Art, European Cityscape Decor (https://www.etsy.com/listing/4552994156): edited 2026-10-26; visits 0 -> 0 (expected 0); title changed; tags +0/-0
@@ -52,5 +53,4 @@ Totals: better 1, measuring 212, same 56
 - Athens Greece Travel Poster, Vintage Acropolis Parthenon Wall Art (https://www.etsy.com/listing/4551436476): edited 2026-10-22; visits 0 -> 0 (expected 0); title kept; tags +13/-13
 - San Sebastian Spain Vintage Travel Poster (https://www.etsy.com/listing/4551993539): edited 2026-10-20; visits 1 -> 1 (expected 1); title changed; tags +11/-11
 - Saint Tropez Vintage Travel Poster (https://www.etsy.com/listing/4552004136): edited 2026-10-20; visits 1 -> 2 (expected 1); title changed; tags +12/-12
-- Palma de Mallorca Vintage Travel Poster (https://www.etsy.com/listing/4551993755): edited 2026-10-20; visits 0 -> 0 (expected 0); title changed; tags +12/-12
 

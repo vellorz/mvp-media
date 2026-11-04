@@ -1,5 +1,5 @@
 from: research
-title: SEO scoreboard: better 1, measuring 156, same 112
+title: SEO scoreboard: better 1, measuring 151, same 117
 metric: etsy.visits
 evidence: Mission Control SEO lab (etsy-seo listing reports + weekly listing stats)
 
@@ -7,12 +7,12 @@ Edited listings compared with untouched ones over the same weeks (expected = the
 better/worse = beat or fell behind that by at least max(2 visits, 30%); measuring = no full week after the edit yet.
 Traffic is small, so single listings are noisy; look for patterns across many listings before writing a lesson.
 
-Totals: better 1, measuring 156, same 112
+Totals: better 1, measuring 151, same 117
 
 ## better (1)
 - Mürren Switzerland Travel Poster (https://www.etsy.com/listing/4552531090): edited 2026-10-20; visits 0 -> 2 (expected 0); title changed; tags +12/-12
 
-## same (112)
+## same (117)
 - Vintage Warsaw Poland Travel Poster Print | European City Skyline Wall Art Old Town Architecture Retro Style (https://www.etsy.com/listing/4554216246): edited 2026-10-27; visits 1 -> 0 (expected 1); title changed; tags +0/-0
 - Oxford England Vintage Travel Poster Wall Art Print, Radcliffe Camera Dark Academia Decor, UK Collegiate Gift (https://www.etsy.com/listing/4554216416): edited 2026-10-27; visits 1 -> 0 (expected 1); title changed; tags +0/-0
 - Siena Italy Travel Poster Art Print, Vintage European Cityscape Wall Decor, Tuscan Architectural Art Gift (https://www.etsy.com/listing/4555351122): edited 2026-10-27; visits 1 -> 0 (expected 1); title changed; tags +0/-0

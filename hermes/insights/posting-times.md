@@ -1,7 +1,7 @@
 from: research
 title: Best posting slots: Thu 9 PM–12 scores 3.6× across platforms
 metric: social.views
-evidence: Mission Control Content screen, best-time heatmap; 228 posts counted over the last 90 days; 1 not counted yet (left out); posts last pulled Wed, Nov 4, 6:03 PM Central
+evidence: Mission Control Content screen, best-time heatmap; 228 posts counted over the last 90 days; 2 not counted yet (left out); posts last pulled Wed, Nov 4, 7:04 PM Central
 
 How to read this: score = a post's views ÷ that platform's usual (median) post, so 1.0× = usual.
 Each slot's score is a geometric average pulled toward 1.0× when it has few posts, so one viral post can't carry it.
@@ -40,8 +40,8 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 | Tue | 6–9 PM | 10 | 0.7× | 0.6× | weak |
 | Thu | 3–6 PM | 6 | 0.7× | 0.8× | weak |
 | Sat | 12–3 PM | 3 | 0.6× | 0.3× | weak |
-| Fri | 3–6 PM | 3 | 0.6× | 0.4× | weak |
 | Mon | 3–6 PM | 8 | 0.6× | 0.6× | weak |
+| Fri | 3–6 PM | 3 | 0.6× | 0.4× | weak |
 | Mon | 12–3 PM | 8 | 0.5× | 0.4× | weak |
 | Sat | 9 AM–12 | 7 | 0.5× | 0.6× | weak |
 | Wed | 3–6 PM | 7 | 0.5× | 0.5× | weak |
@@ -179,7 +179,7 @@ Every other day and time: untested (no posts there yet).
 | Tue | 3–6 PM | 2 | 1.3× | 2.0× | strong |
 | Sun | 6–9 PM | 3 | 1.0× | 0.8× | average |
 | Wed | 6–9 PM | 1 | 0.9× | 0.7× | too few to rate |
-| Mon | 3–6 PM | 2 | 0.8× | 2.3× | weak |
+| Mon | 3–6 PM | 2 | 0.9× | 2.7× | average |
 | Thu | 3–6 PM | 1 | 0.8× | 0.5× | too few to rate |
 | Wed | 3–6 PM | 2 | 0.6× | 0.6× | weak |
 | Tue | 6–9 PM | 2 | 0.6× | 0.5× | weak |
@@ -190,7 +190,6 @@ Every other day and time: untested (no posts there yet).
 Every other day and time: untested (no posts there yet).
 
 ## Queued in Buffer
-- Wed, Nov 4, 7:00 PM, TikTok: strong slot (1.3×, TikTok's own posts)
 - Wed, Nov 4, 9:00 PM, Facebook: strong slot (1.9×, all platforms)
 - Wed, Nov 4, 9:00 PM, Instagram: strong slot (1.9×, all platforms)
 - Thu, Nov 5, 4:00 PM, TikTok: strong slot (1.2×, TikTok's own posts)

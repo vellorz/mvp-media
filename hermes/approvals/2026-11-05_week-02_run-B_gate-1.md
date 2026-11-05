@@ -1,7 +1,7 @@
 # Week 02 run B: approve scripts
 link: https://claude.ai/artifact/TkULojuLxi7p8zqdYKmB5P
-status: waiting
+status: approved
 items: 6
 changed: 0
 
-Scripts for Fri Nov 6 - Sun Nov 8 (Giethoorn, Dublin, Kraków, Ronda + 3 pins + schedule). Waiting for the owner.
+Owner approved all 6 items with "Approved." (Nov 5, 22:22 UTC), no changes. Part B build started.

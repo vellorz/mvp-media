@@ -1,7 +1,7 @@
 from: research
 title: Best posting slots: Sat 9 PM–12 scores 3.2× across platforms
 metric: social.views
-evidence: Mission Control Content screen, best-time heatmap; 237 posts counted over the last 90 days; 2 not counted yet (left out); posts last pulled Fri, Nov 6, 3:52 PM Central
+evidence: Mission Control Content screen, best-time heatmap; 237 posts counted over the last 90 days; 2 not counted yet (left out); posts last pulled Fri, Nov 6, 4:53 PM Central
 
 How to read this: score = a post's views ÷ that platform's usual (median) post, so 1.0× = usual.
 Each slot's score is a geometric average pulled toward 1.0× when it has few posts, so one viral post can't carry it.
@@ -25,8 +25,8 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 | Fri | 6–9 PM | 14 | 1.8× | 1.6× | strong |
 | Tue | 9 PM–12 | 3 | 1.7× | 2.9× | strong |
 | Tue | 3–6 PM | 11 | 1.6× | 1.6× | strong |
-| Thu | 12–3 AM | 4 | 1.4× | 2.3× | strong |
 | Fri | 12–3 PM | 11 | 1.4× | 2.1× | strong |
+| Thu | 12–3 AM | 4 | 1.4× | 2.3× | strong |
 | Wed | 9 PM–12 | 5 | 1.4× | 3.4× | strong |
 | Mon | 6–9 PM | 13 | 1.4× | 1.1× | strong |
 | Tue | 9 AM–12 | 4 | 1.4× | 2.7× | strong |

@@ -1,5 +1,5 @@
 from: research
-title: SEO scoreboard: better 1, measuring 153, same 117
+title: SEO scoreboard: better 2, measuring 111, same 158
 metric: etsy.visits
 evidence: Mission Control SEO lab (etsy-seo listing reports + weekly listing stats)
 
@@ -7,50 +7,51 @@ Edited listings compared with untouched ones over the same weeks (expected = the
 better/worse = beat or fell behind that by at least max(2 visits, 30%); measuring = no full week after the edit yet.
 Traffic is small, so single listings are noisy; look for patterns across many listings before writing a lesson.
 
-Totals: better 1, measuring 153, same 117
+Totals: better 2, measuring 111, same 158
 
-## better (1)
+## better (2)
+- Menorca Spain Travel Poster , Vintage Mediterranean Beach Print Wall Art, Balearic Island Decor Gift (https://www.etsy.com/listing/4555349538): edited 2026-10-28; visits 0 -> 2 (expected 0); title changed; tags +1/-1
 - Mürren Switzerland Travel Poster (https://www.etsy.com/listing/4552531090): edited 2026-10-20; visits 0 -> 2 (expected 0); title changed; tags +12/-12
 
-## same (117)
-- Vintage Warsaw Poland Travel Poster Print | European City Skyline Wall Art Old Town Architecture Retro Style (https://www.etsy.com/listing/4554216246): edited 2026-10-27; visits 1 -> 0 (expected 1); title changed; tags +0/-0
-- Oxford England Vintage Travel Poster Wall Art Print, Radcliffe Camera Dark Academia Decor, UK Collegiate Gift (https://www.etsy.com/listing/4554216416): edited 2026-10-27; visits 1 -> 0 (expected 1); title changed; tags +0/-0
-- Siena Italy Travel Poster Art Print, Vintage European Cityscape Wall Decor, Tuscan Architectural Art Gift (https://www.etsy.com/listing/4555351122): edited 2026-10-27; visits 1 -> 0 (expected 1); title changed; tags +0/-0
-- Cortina D'Ampezzo Italy Travel Poster Art, Vintage Ski Resort Print, Dolomite Mountain Wall Art Decor (https://www.etsy.com/listing/4555379538): edited 2026-10-27; visits 1 -> 0 (expected 1); title changed; tags +0/-0
-- Azores Portugal Travel Poster Print, Vintage European Landscape Wall Art, São Miguel Lake View Hydrangea Home Decor Gift (https://www.etsy.com/listing/4555548322): edited 2026-10-27; visits 1 -> 0 (expected 1); title changed; tags +0/-0
-- Korčula Croatia Vintage Travel Poster Print, Mediterranean Coastal City Wall Art Decor Gift for Home (https://www.etsy.com/listing/4556085861): edited 2026-10-27; visits 1 -> 0 (expected 1); title changed; tags +0/-0
-- Venice Italy Travel Poster , Vintage Grand Canal Wall Art, Gondola Ride Home Decor, European City Gift (https://www.etsy.com/listing/4551993517): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Montreux Switzerland Travel Poster Print, Vintage Alpine Lake & Mountain Scenery Art, European Riviera Wall Decor (https://www.etsy.com/listing/4554205563): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Kraków Poland Vintage Travel Poster , European Cityscape Wall Art, Poland Wanderlust Gift, Wawel Castle Art (https://www.etsy.com/listing/4554205831): edited 2026-10-27; visits 0 -> 1 (expected 0); title changed; tags +0/-0
-- Zurich Switzerland Vintage Travel Poster Print, European City Alpine Mountains Wall Art Decor, Retro Swiss Cityscape Art (https://www.etsy.com/listing/4554216298): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Vintage Nuremberg Germany Travel Poster Print | Old World European Cityscape Wall Art for Home Decor (https://www.etsy.com/listing/4554216456): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Palermo Italy Vintage Travel Poster Art Print - Sicilian Cityscape Wall Decor for Home & Office (https://www.etsy.com/listing/4554216460): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Oslo Norway Travel Poster Print, Vintage Style European Cityscape Wall Art, Nordic Home Decor Gift (https://www.etsy.com/listing/4554216534): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Dublin Ireland Vintage Travel Poster Wall Art | Ha'penny Bridge Cityscape Print | Irish Landmark Home Decor Gift (https://www.etsy.com/listing/4554218108): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Vintage Cologne Germany Travel Poster Art Print | Iconic German Cathedral Cityscape Wall Decor | Retro European Landmark Gift (https://www.etsy.com/listing/4554218128): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Basel Switzerland Travel Poster Canvas Art Print, Vintage European Cityscape Wall Decor, Swiss Architecture Home Decor Gift (https://www.etsy.com/listing/4554218374): edited 2026-10-27; visits 0 -> 0 (expected 0); title kept; tags +0/-0
-- Naxos Greece Travel Poster Print | Vintage Greek Island Wall Art Decor | Ancient Ruins & Sea Landscape (https://www.etsy.com/listing/4555338157): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Milan Italy Duomo Travel Poster Wall Art | Vintage European Cityscape Print | Architectural Landmark Decor Gift (https://www.etsy.com/listing/4555338159): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Orvieto Italy Travel Poster , Vintage European Cityscape Wall Art, Italian Landscape Decor, Italy Gift Idea (https://www.etsy.com/listing/4555338209): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Plitvice Lakes Croatia Vintage Travel Poster Wall Art | Nature Landscape Print | Croatia Home Decor Gift (https://www.etsy.com/listing/4555338285): edited 2026-10-27; visits 0 -> 1 (expected 0); title changed; tags +0/-0
-- Rome Italy Vintage Travel Poster Wall Art, Colosseum Vatican City Retro Print European Home Decor Gift (https://www.etsy.com/listing/4555338331): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Lugano Switzerland Vintage Travel Poster Art | Retro Switzerland Lake Landscape Print | Aesthetic European City Wall Decor Gift (https://www.etsy.com/listing/4555349296): edited 2026-10-27; visits 0 -> 1 (expected 0); title changed; tags +0/-0
-- Malaga Spain Travel Poster Print | Vintage Cityscape Wall Art | Mediterranean Coastal Decor Gift (https://www.etsy.com/listing/4555349462): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Meteora Greece Vintage Travel Poster Canvas Wall Art | Greek Monastery Landscape Print | Mediterranean Home Decor Gift (https://www.etsy.com/listing/4555349576): edited 2026-10-27; visits 0 -> 0 (expected 0); title kept; tags +0/-0
-- Vintage Ronda Spain Travel Poster Print, Iconic Puente Nuevo Bridge Wall Art, Andalusia Europe Decor Gift (https://www.etsy.com/listing/4555349956): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- San Gimignano Italy Travel Poster Art, Tuscan Hill Town Wall Art Print, Vintage Style Italian Landscape Decor (https://www.etsy.com/listing/4555351216): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Vintage Taormina Italy Travel Poster , Sicily Landscape Wall Art Print, Mount Etna Mediterranean Decor, Retro European Gift (https://www.etsy.com/listing/4555351376): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Tuscany Italy Travel Poster Art Print, Vintage Italian Landscape Wall Decor, Villa & Cypress Trees (https://www.etsy.com/listing/4555351406): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Vintage Antibes France Travel Poster Wall Art, Coastal Town Print, French Riviera Mediterranean Home Decor Gift (https://www.etsy.com/listing/4555367269): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Assisi Italy Travel Poster Art Print, Vintage Italian Hilltop Town Wall Decor, Europe Trip Souvenir Gift (https://www.etsy.com/listing/4555367745): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Gdańsk Poland Vintage Travel Poster Wall Art | Historic European Cityscape Print | Retro Poland Gift Idea (https://www.etsy.com/listing/4555368115): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Grand Place Brussels Belgium Vintage Travel Poster Wall Art | European Cityscape Home Decor Gift Idea (https://www.etsy.com/listing/4555368121): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Geneva Switzerland Travel Poster Print | Lake Geneva Jet d'Eau Wall Art Decor | Swiss Alps Scenery (https://www.etsy.com/listing/4555368181): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Heidelberg Germany Vintage Travel Poster Wall Art | Retro European City Art Print, German Cityscape Decor Gift (https://www.etsy.com/listing/4555368323): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Córdoba Spain Vintage Travel Poster Wall Art Print, Retro European City Scenery Decor, Andalusia Spain Art Gift (https://www.etsy.com/listing/4555368355): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Geneva Switzerland Vintage Travel Poster Art , Lake Geneva Jet d'Eau, Mid Century Swiss Cityscape Wall Art Print, European Travel (https://www.etsy.com/listing/4555369795): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Giethoorn Netherlands Travel Poster , Cozy Cottagecore Wall Art, European Village Canal Print for Home Decor (https://www.etsy.com/listing/4555369801): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Bolzano Italy Travel Poster Wall Art | Vintage European Cityscape Print | Dolomites Mountain Landscape Art Home Decor Gift (https://www.etsy.com/listing/4555378958): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Bosa Italy Travel Poster | Vintage Italian Wall Art | Mediterranean Decor Print | Colorful Cityscape Home Decor Gift (https://www.etsy.com/listing/4555379044): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
-- Alberobello Italy Travel Poster Print, Puglia Trulli Houses Wall Art, Mediterranean Decor, Gift for Travelers (https://www.etsy.com/listing/4555379046): edited 2026-10-27; visits 0 -> 0 (expected 0); title changed; tags +0/-0
+## same (158)
+- Cornwall England Travel Poster , Vintage Coastal Village Wall Art Print, Retro UK Seaside Decor Gift for Travelers (https://www.etsy.com/listing/4555537211): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +0/-0
+- Tenby Wales Vintage Travel Poster | Colorful Coastal Town Art Print | Welsh Harbour Beach Wall Art Decor Gift (https://www.etsy.com/listing/4556098828): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- Dresden Germany Vintage Travel Poster Wall Art, European Cityscape Print, Historic Landmark Home Decor Gift (https://www.etsy.com/listing/4556160035): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- France Étretat Travel Poster Wall Art, Vintage French Beach Cliffs Ocean Print, Vacation Home Decor Gift (https://www.etsy.com/listing/4556160049): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +2/-2
+- Faroe Islands Vintage Travel Poster , Denmark Nordic Scenery Wall Art, Retro Coastal Landscape Print, Wanderlust Home Decor (https://www.etsy.com/listing/4556160059): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- Coimbra Portugal Travel Poster Print | Vintage Cityscape Wall Art | Retro Portugal Decor Print (https://www.etsy.com/listing/4556160085): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- Picos de Europa Spain Vintage Travel Poster Wall Art | Mountain Lake Landscape Print | Rustic European Nature Decor Gift (https://www.etsy.com/listing/4556160805): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- Pisa Italy Travel Poster Art Print | Vintage Italian Landmark Wall Decor | Leaning Tower of Pisa Gift (https://www.etsy.com/listing/4556160821): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- Bamberg Germany Travel Poster Wall Art - Vintage European Cityscape Print, Scenic Bridge & River Decor (https://www.etsy.com/listing/4556171458): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- Seville Spain Travel Poster , Vintage Cityscape Wall Art, Andalusia Architecture Print, Spanish Decor (https://www.etsy.com/listing/4551993605): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +2/-2
+- Hvar Croatia Travel Poster, Mediterranean Coastal Town Wall Art (https://www.etsy.com/listing/4552531230): edited 2026-10-28; visits 0 -> 0 (expected 0); title kept; tags +0/-0
+- Chamonix France Travel Poster, Mont Blanc French Alps Wall Art (https://www.etsy.com/listing/4552531894): edited 2026-10-28; visits 0 -> 1 (expected 0); title kept; tags +0/-0
+- Sintra Portugal Travel Poster , Pena Palace Wall Art, Vintage European Castle Print, Portugal Decor (https://www.etsy.com/listing/4552983781): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +0/-0
+- Reykjavik Iceland Hallgrímskirkja Church Vintage Travel Poster Print | Nordic Cityscape Art Decor (https://www.etsy.com/listing/4552993848): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +0/-0
+- Munich Germany Travel Poster, Vintage European Cityscape Wall Art (https://www.etsy.com/listing/4554205639): edited 2026-10-28; visits 0 -> 0 (expected 0); title kept; tags +0/-0
+- Monaco Travel Poster , Vintage Glamour Wall Art, Retro Europe Print, Luxury Cityscape Decor Gift (https://www.etsy.com/listing/4554205695): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +0/-0
+- Ljubljana Slovenia Travel Poster Print, Vintage Cityscape Wall Art, Europe Castle Home Decor Gift (https://www.etsy.com/listing/4554216746): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- Bologna Italy Vintage Travel Poster Print, Italian Cityscape Wall Art, Europe Travel Decor Gift (https://www.etsy.com/listing/4554218260): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +0/-0
+- Berlin Germany Travel Poster, Berliner Dom Cityscape Wall Art (https://www.etsy.com/listing/4554218278): edited 2026-10-28; visits 0 -> 0 (expected 0); title kept; tags +0/-0
+- France Èze Travel Poster Print | French Riviera Art, Mediterranean Village Wall Art Decor (https://www.etsy.com/listing/4555337697): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- Naples Italy Travel Poster Art, Vintage Mediterranean Vacation Wall Decor, Italian Riviera Gift (https://www.etsy.com/listing/4555338207): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- Turin Italy Travel Poster Art Print | Vintage Italian Cityscape Wall Decor for Home (https://www.etsy.com/listing/4555339883): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +2/-2
+- Aix-en-Provence France Travel Poster Wall Art, Vintage European Cityscape Print, French Home Decor Gift (https://www.etsy.com/listing/4555339993): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +0/-0
+- Crete Greece Travel Poster Print, Vintage Chania Harbor Lighthouse Wall Art, Mediterranean Decor Gift (https://www.etsy.com/listing/4555368749): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +0/-0
+- Vintage Gdansk Poland Travel Poster Wall Art | European Cityscape Home Decor Print Gift (https://www.etsy.com/listing/4555369689): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- Vintage Heidelberg Travel Poster , Germany European Cityscape Art Print, Retro Home Decor Wall Art (https://www.etsy.com/listing/4555369831): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +2/-2
+- Ascona Switzerland Vintage Travel Poster Wall Art | European Lake Cityscape Print Decor Gift (https://www.etsy.com/listing/4555378576): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +0/-0
+- Locarno Switzerland Travel Poster Print, Vintage Alpine Lake Wall Art, Europe Cityscape Decor (https://www.etsy.com/listing/4555536353): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +2/-2
+- Ibiza Spain Travel Poster Wall Art Print - Mediterranean Coastal Village Landscape Print (https://www.etsy.com/listing/4555536357): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +0/-0
+- Vintage Istanbul Travel Poster Print, Iconic Turkey Cityscape Wall Art for Home Decor (https://www.etsy.com/listing/4555536695): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +2/-2
+- Vintage York England Travel Poster Print - Historic Cityscape Wall Art, Europe Home Decor (https://www.etsy.com/listing/4555547434): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +2/-2
+- Loire Valley Chateau France Travel Poster Art Print - Vintage European Castle Wall Decor (https://www.etsy.com/listing/4556085961): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- Cotswolds England Travel Poster , Vintage European Landscape Art Print, Charming Village Wall Art Decor (https://www.etsy.com/listing/4556087177): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- Santiago de Compostela Spain Travel Poster Print, Vintage Cathedral Wall Art, European City Decor (https://www.etsy.com/listing/4556098480): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- Toledo Spain Vintage Travel Poster Print, Historic Spanish Cityscape Wall Art, European Art Decor (https://www.etsy.com/listing/4556098610): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- Tromsø Norway Travel Poster Wall Art, Vintage Nordic Landscape Print, Mountain & Bridge Cityscape (https://www.etsy.com/listing/4556098694): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- Snowdonia Wales Vintage Travel Poster, Mountain Lake Landscape Art Print, Retro Nature Wall Decor (https://www.etsy.com/listing/4556098768): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +1/-1
+- Neuschwanstein Castle Bavaria Germany Travel Poster Wall Art Vintage European Home Decor Print (https://www.etsy.com/listing/4556159853): edited 2026-10-28; visits 0 -> 0 (expected 0); title changed; tags +0/-0
+- Connemara Ireland Travel Poster, Kylemore Abbey Lake Wall Art (https://www.etsy.com/listing/4556160045): edited 2026-10-28; visits 0 -> 0 (expected 0); title kept; tags +0/-0
+- Kinsale Ireland Travel Poster, Colorful Irish Town Wall Art (https://www.etsy.com/listing/4556160733): edited 2026-10-28; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 

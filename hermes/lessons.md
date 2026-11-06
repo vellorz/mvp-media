@@ -49,3 +49,10 @@ Rules:
 - verdict: retest
 - confidence: low
 - next: read the SEO scoreboard (hermes/insights/seo-scoreboard.md) each week once it shows "better"/"worse" results, and record what kind of edit helped
+
+## 2026-11-05 · Owner taste at Gate 2 (run B)
+- tried: crop-zoom detail shots on posters; postcard handwriting; music-only video at -14.5 LUFS
+- result: owner rejected crops that cut the border/bottom text, text crossing the postcard divider, and the loud music-only mix. Source: owner review in thread
+- verdict: keep the fixes (always show the full poster, magnifier circles for details; text inside its frame; music-only ~-20 LUFS)
+- confidence: high
+- next: apply to every run; also render upload copies under 10 MB for YouTube/Pinterest browser uploads

@@ -1,7 +1,7 @@
 # Week 02 run B handoff (Fri Nov 6 - Sun Nov 8)
 schedule: Thursday run B, 12:00 Central; data review + scripts only (Part A). Build + scheduling after the owner says "finish this run" (Part B).
-status: Gate 1 WAITING (scripts doc posted Nov 5). Scripts doc https://claude.ai/artifact/TkULojuLxi7p8zqdYKmB5P
-pinterest: 3 video pins drafted, 18:00 CT Fri/Sat/Sun (Part B). Pinterest analytics: waiting for the owner's PC.
+status: SCHEDULED Nov 5 ~18:30 CT. Gate 1 approved (6 items, 0 changed); Gate 2 approved after 4 fixes. Scripts doc https://claude.ai/artifact/TkULojuLxi7p8zqdYKmB5P
+pinterest: 3 video pins SCHEDULED 18:00 CT Fri/Sat/Sun. Analytics 30d: 735 impr, 3 eng, 0 outbound clicks, 0 saves; 7d: 281 impr (source: Pinterest Analytics, Nov 5).
 research: hermes/research had nothing new since Oct 28.
 
 ## Data takeaways (Buffer, Mon-Wed week 02, pulled Nov 5 18:40 UTC)
@@ -17,17 +17,18 @@ Full table: weekly/2026-11-02_week-02/analytics-thu.md (project files).
 - Sat Kraków Wawel dragon 4554205831 — Postcard from 1930 — Max (voice TEST)
 - Sun Ronda Puente Nuevo 4555349956 — Silkscreen print-on-beat — no voice
 
-## Schedule (Central time, proposed; 4h+ apart from existing week-02 posts)
+## Schedule (Central time, SCHEDULED; Buffer post IDs in weekly/2026-11-02_week-02/schedule.md)
 Buffer:
 - Fri Giethoorn: IG 19:00, FB 19:00, TikTok 13:00
 - Sat Dublin: IG 18:00, FB 18:00, TikTok 19:00
 - Sat Kraków: IG 22:00, FB 22:00 (no TikTok; Vote 03 carousel at 10:00)
 - Sun Ronda: IG 19:00, FB 13:00, TikTok 11:00 (test slot)
 Not visible to the dashboard:
-- YouTube Shorts (YouTube Studio via Remote Control): Fri 13:00, Sat 18:00 + 22:00, Sun 13:00.
+- YouTube Shorts (YouTube Studio): Giethoorn 1ugtT7vchqE Fri 13:00; Dublin eHWswQN6er0 Sat 18:00; Kraków SbPsMTD--xY Sat 22:00; Ronda yQw5w6hFZSI Sun 13:00.
 - Pinterest (native): Fri/Sat/Sun 18:00 (Giethoorn, Dublin, Ronda).
 
 ## What changed in how videos are made
 - No paper collage this run: four new formats from the format menu.
+- Owner rule: whole poster incl. border + bottom text always visible (magnifier circles, no crop-zooms). Music-only videos ~-20 LUFS.
 - Shorter: 12-15 s. Hook line on screen at 0 s.
 - Voice: Drew default; Max in 1 test slot (Kraków).

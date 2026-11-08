@@ -11,7 +11,8 @@ TikTok numbers come through Buffer, which refreshes them about once a day, so Ti
 
 | Date | TikTok | Instagram | Facebook | YouTube |
 |---|---|---|---|---|
-| Sat, Nov 7 | 483 (so far) | 48 (so far) | 67 (so far) | 28 (so far) |
+| Sun, Nov 8 | not recorded | not recorded | not recorded | not recorded |
+| Sat, Nov 7 | 483 | 48 | 67 | 28 |
 | Fri, Nov 6 | 163 | 311 | 240 | 13 |
 | Thu, Nov 5 | 175 | 238 | 34 | 24 |
 | Wed, Nov 4 | 833 | 136 | 24 | 9 |

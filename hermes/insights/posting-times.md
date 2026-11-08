@@ -190,8 +190,6 @@ Every other day and time: untested (no posts there yet).
 Every other day and time: untested (no posts there yet).
 
 ## Queued in Buffer
-- Sat, Nov 7, 6:00 PM, Instagram: strong slot (2.2×, Instagram's own posts)
-- Sat, Nov 7, 6:00 PM, Facebook: strong slot (2.2×, Facebook's own posts)
 - Sat, Nov 7, 7:00 PM, TikTok: average slot (0.9×, TikTok's own posts)
 - Sat, Nov 7, 10:00 PM, Facebook: strong slot (3.0×, all platforms)
 - Sat, Nov 7, 10:00 PM, Instagram: strong slot (3.0×, all platforms)

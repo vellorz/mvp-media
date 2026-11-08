@@ -29,4 +29,4 @@ TikTok numbers come through Buffer, which refreshes them about once a day, so Ti
 
 Before Sat, Oct 24: not recorded on any platform.
 
-Posts not counted yet by Buffer (left out above): Instagram 1.
+Posts not counted yet by Buffer (left out above): none.

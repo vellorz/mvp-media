@@ -1,0 +1,52 @@
+# cues
+-   0.00s sub thump
+-   3.90s tower creak (falling over)
+-   4.74s whoosh (cut)
+-   7.32s whoosh (cut)
+-   7.50s flash
+-   8.54s starts leaning
+-   8.82s calendar 1178
+-  12.24s whoosh (cut)
+-  15.60s sponge squish
+-  16.50s whoosh (cut)
+-  17.54s army march
+-  18.24s army march
+-  18.92s army march
+-  20.00s tools dropped
+-  21.46s calendar 1272
+-  22.44s whoosh (cut)
+-  26.10s soil packs
+-  27.84s whoosh (cut)
+-  32.06s floor lands
+-  32.80s floor lands
+-  33.34s floor lands
+-  34.22s floor lands
+-  34.80s floor lands
+-  34.98s whoosh (cut)
+-  37.82s banana pop
+-  38.26s whoosh (cut)
+-  39.66s 5.5 degrees
+-  41.08s whoosh (cut)
+-  41.72s lead block
+-  41.91s lead block
+-  42.09s lead block
+-  42.28s lead block
+-  42.46s lead block
+-  42.65s lead block
+-  42.84s lead block
+-  43.02s lead block
+-  43.21s lead block
+-  43.39s lead block
+-  44.76s whoosh (cut)
+-  45.32s drills
+-  48.94s whoosh (cut)
+-  49.50s settles back
+-  50.60s 45 cm tag
+-  52.40s 1838 tag
+-  53.62s whoosh (cut)
+-  54.56s STOP
+-  55.58s whoosh (cut)
+-  58.98s whoosh (cut)
+-  59.86s 2001
+-  63.88s to poster
+-  64.60s poster lands

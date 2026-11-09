@@ -1,0 +1,4 @@
+These 26 models (and Textures/colormap.png) are from Kenney's Nature Kit and Fantasy Town Kit (www.kenney.nl).
+License: Creative Commons Zero (CC0) - http://creativecommons.org/publicdomain/zero/1.0/
+Crediting 'Kenney' is appreciated but not required.
+Copy this whole folder (including Textures/) to public/bridge/kenney/ of the Remotion project.

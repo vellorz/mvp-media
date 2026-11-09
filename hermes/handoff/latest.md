@@ -1,34 +1,29 @@
-# Week 02 run B handoff (Fri Nov 6 - Sun Nov 8)
-schedule: Thursday run B, 12:00 Central; data review + scripts only (Part A). Build + scheduling after the owner says "finish this run" (Part B).
-status: SCHEDULED Nov 5 ~18:30 CT. Gate 1 approved (6 items, 0 changed); Gate 2 approved after 4 fixes. Scripts doc https://claude.ai/artifact/TkULojuLxi7p8zqdYKmB5P
-pinterest: 3 video pins SCHEDULED 18:00 CT Fri/Sat/Sun. Analytics 30d: 735 impr, 3 eng, 0 outbound clicks, 0 saves; 7d: 281 impr (source: Pinterest Analytics, Nov 5).
-research: hermes/research had nothing new since Oct 28.
+# Week 03 handoff (Mon Nov 9 - Sun Nov 15) — new daily cartoon format
+schedule: Sundays 12:00 Central plans Mon-Thu and Thursdays 12:00 Central plans Fri-Sun; 1 cartoon video per day per platform plus maximized Pinterest; scripts first (Gate 1), build and scheduling after the owner says finish this run, Gate 2 per video.
+status: Mon SCHEDULED (Gate 2 approved Nov 9 03:57 UTC). Tue Eiffel + Wed Pisa scripts approved Nov 8, rendering, Gate 2 pending. Thu Nov 12 not planned. Fri-Sun = Thursday Nov 12 run.
+pinterest: Mon video pin scheduled 18:00 CT (Architecture & City Travel Prints); scheduled pins = 1 after scheduling. From the Nov 12 run: video pin + 3-4 static pins per day, new keyword boards.
+research: nothing new in hermes/research since Oct 28.
 
-## Data takeaways (Buffer, Mon-Wed week 02, pulled Nov 5 18:40 UTC)
-- Avg watch 3.8-6.1 s on 17-21 s collage videos (~20-33% completion) -> run B videos are 12-15 s, story stated in first 2 s.
-- Florence (timely anniversary) best IG reach 146 / watch 6.12 s. Mürren best TikTok views 281, ER 1.42%.
-- 0 saves, 0 shares, 0 FB link clicks -> gift angle + question captions.
-- Carousels still best ER on record (Vote 01 7.02%); keep, re-check after Vote 03.
-Full table: weekly/2026-11-02_week-02/analytics-thu.md (project files).
+## Data takeaways
+- Week 02 collage videos averaged 3.8-6.1 s watch; the owner moved to longer story-driven cartoon shorts (60-70 s) modeled on a measured reference channel. Watch time and completion are the numbers to track now.
+- Metricool best times, Mondays (Central): TikTok peak 18:00, YouTube 16:00. Instagram has no best-time data yet.
 
-## Destinations, formats, voices
-- Fri Giethoorn 4555369801 — 3 things you didn't know — Drew
-- Sat Dublin Ha'penny 4554218108 — Then and now — Drew
-- Sat Kraków Wawel dragon 4554205831 — Postcard from 1930 — Max (voice TEST)
-- Sun Ronda Puente Nuevo 4555349956 — Silkscreen print-on-beat — no voice
+## Videos
+- Mon London Bridge -> Arizona (1968 McCulloch purchase, rebuilt over dry land at Lake Havasu) -> poster 0245 London; link https://www.etsy.com/shop/ModernVistaPrints?search_query=london
+- Tue The tower Paris tried to tear down (Eiffel, 1909 demolition plan, saved by the radio antenna) -> poster 0495 Paris
+- Wed Pisa: fix it without fixing it (1990-2001 soil extraction) -> poster 0351 Pisa
 
-## Schedule (Central time, SCHEDULED; Buffer post IDs in weekly/2026-11-02_week-02/schedule.md)
-Buffer:
-- Fri Giethoorn: IG 19:00, FB 19:00, TikTok 13:00
-- Sat Dublin: IG 18:00, FB 18:00, TikTok 19:00
-- Sat Kraków: IG 22:00, FB 22:00 (no TikTok; Vote 03 carousel at 10:00)
-- Sun Ronda: IG 19:00, FB 13:00, TikTok 11:00 (test slot)
-Not visible to the dashboard:
-- YouTube Shorts (YouTube Studio): Giethoorn 1ugtT7vchqE Fri 13:00; Dublin eHWswQN6er0 Sat 18:00; Kraków SbPsMTD--xY Sat 22:00; Ronda yQw5w6hFZSI Sun 13:00.
-- Pinterest (native): Fri/Sat/Sun 18:00 (Giethoorn, Dublin, Ronda).
+## Schedule (Central)
+Buffer: Mon IG 19:00 6af14658796ccae2668143d7, FB 19:00 6af14659e29b1359f0ca150d, TikTok 18:00 6af1465a2f1ff83d4513fcf5
+Not visible to the dashboard: YouTube Mon 16:00 (Metricool 421343968); Pinterest Mon 18:00 video pin.
 
-## What changed in how videos are made
-- No paper collage this run: four new formats from the format menu.
-- Owner rule: whole poster incl. border + bottom text always visible (magnifier circles, no crop-zooms). Music-only videos ~-20 LUFS.
-- Shorter: 12-15 s. Hook line on screen at 0 s.
-- Voice: Drew default; Max in 1 test slot (Kraków).
+## What changed and why
+- Format: cartoon-3d story short only (engine in engine/cartoon-3d). Volume 1/day/platform, not 2: each video takes ~3 h to render.
+- Owner corrections become checklist rules (engine/cartoon-3d/CHECKLIST.md, 12 rules) so fixes shrink each round.
+
+## Tried -> result -> keep/drop
+- Paper collage + format menu (weeks 01-02) -> low watch time, 0 saves -> dropped for the cartoon format.
+
+## Open questions
+- Thu Nov 12: no video planned (Sunday task was paused when week 03 started).
+- Exact Etsy listing URLs for posters 0245, 0495, 0351 (using shop search links for now).

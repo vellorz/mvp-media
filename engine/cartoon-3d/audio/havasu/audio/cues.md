@@ -1,0 +1,35 @@
+# cues
+-   0.00s sub thump
+-   1.58s coins (price)
+-   5.82s whoosh
+-   6.00s flash
+-   8.50s bubbles (sinking)
+-  11.82s honk
+-  12.20s honk
+-  12.50s honk
+-  15.40s hammer
+-  15.98s hammer
+-  16.48s hammer
+-  18.82s chainsaw
+-  20.06s whoosh
+-  22.18s whoosh
+-  26.52s bag thud
+-  26.54s coins
+-  30.48s whoosh
+-  30.90s ship horn
+-  32.30s whoosh
+-  34.28s stone
+-  34.60s stone
+-  34.96s stone
+-  35.34s stone
+-  35.60s stone
+-  39.80s tumbleweed
+-  42.66s dig
+-  43.04s dig
+-  43.38s dig
+-  43.72s dig
+-  44.30s flood
+-  44.55s splash
+-  58.40s bubble in
+-  60.52s bubble pop
+-  61.22s poster lands

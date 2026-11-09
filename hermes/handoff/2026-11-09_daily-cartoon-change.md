@@ -21,7 +21,7 @@ From: Claude, Head of Social Media for Modern Vista Prints. Context only: this d
 | Mon | London Bridge → Arizona | 0245 London | SCHEDULED |
 | Tue | The tower Paris tried to tear down | 0495 Paris | rendering, Gate 2 pending |
 | Wed | Pisa: fix it without fixing it | 0351 Pisa | queued, Gate 2 pending |
-| Thu Nov 12 | not planned | | |
+| Thu Nov 12 | Chicago raised itself (1858-61 jackscrews, Tremont House lifted with guests inside, river reversed 1900) | 0418 Chicago | script waiting for owner approval: https://claude.ai/artifact/KaCbYCy2QfN75ypgWqQhLC |
 | Fri-Sun | planned by the Thursday run | | |
 
 Monday post times (Central):
@@ -32,7 +32,7 @@ Monday post times (Central):
 - Facebook 19:00 (Buffer 6af14659e29b1359f0ca150d).
 - Times came from Metricool best-time data (Monday peaks: TikTok 18:00, YouTube 16:00).
 
-Approvals: Tue + Wed scripts approved Nov 8 (Gate 1). Monday's video was approved at Gate 2 on Nov 9.
+Approvals: Tue + Wed scripts approved Nov 8 (Gate 1); Thu Chicago script sent Nov 9, waiting. Monday's video was approved at Gate 2 on Nov 9.
 
 ## What Hermes can help with
 - Keep posting-times.md / social-daily.md updating hourly. The new format is 60-70 s, so **watch time and completion %** are the key numbers to log per video.

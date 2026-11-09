@@ -11,9 +11,9 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Platform | Videos | Measured | Median watched | Median completion |
 |---|---|---|---|---|
-| TikTok | 38 | 12 | 4.3 s | 22.9% |
-| Instagram | 37 | 14 | 5.2 s | 27.8% |
-| Facebook | 28 | 28 | 2.0 s | 13.1% |
+| TikTok | 37 | 12 | 4.3 s | 22.9% |
+| Instagram | 36 | 14 | 5.2 s | 27.8% |
+| Facebook | 27 | 27 | 2.0 s | 13.3% |
 | YouTube | 25 | 0 | not recorded | not recorded |
 
 ## Each video
@@ -145,6 +145,3 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 10, 8:01 PM | Instagram | AQMGe8bvd0qSIG7_msHClfMisCLIW7Y7zb_3roC-aYVtu9DK0PLZJWShtmgtP3KauzSDQ0HYP2buA85UpNndfKIfbt9AxRE0BWj0V0Y.mp4?_nc_cat=105&_nc_sid=5e9851&_nc_ht=scontent-iad3-2.cdninstagram.com&_nc_ohc=wZoKWBQ5cuAQ7kNvwHl4GZv&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTgxNjE1MTgxODA1MTQ5MzAsImFzc2V0X2FnZV9kYXlzIjowLCJ2aV91c2VjYXNlX2lkIjoxMDA5OSwiZHVyYXRpb25fcyI6MTIsInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&vs=893c888adfcd73ee&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC83MTY0RUE2MzcxM0I0QUM3OEI3NDJBQkM1QUY0RERDN192aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyL0UyQzY3QTU4RUY4MjREOEU5REI1RUY3QjRENTREMzM0X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbk8dn7vvPCQBUCKAJDMywXQCgAAAAAAAAYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=8yCDa6E__I6O2NgdOAvSDw&edm=ANo9K5cEAAAA&_nc_zt=28&_nc_tpa=Q5bMBQK5U3qNR31gvLXqHhUyZUlR_SiPz0r2aRtEKuphmcJEKWqOpSipiRMn81DPFFNIdG0E6th8vhgwGQ&oh=00_AQOX8LmksJELoZ95LDoAe6ND6HdZrQqM3WWYGU5eciem9A&oe=6ACDFBA2 (https://www.instagram.com/reel/DeVbemWFHtY/) | 26 | 7.9 s | not recorded | — |
 | Oct 10, 8:01 PM | Facebook | 6ac7f213b804c8efaf0e0daa_transcoded.mp4 (https://www.facebook.com/reel/1577940687467331/) | 18 | 1.5 s | 12.0 s | 12.5% |
 | Oct 10, 8:00 PM | TikTok | 7695208854736375053?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7695208854736375053?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 43 | 1.0 s | not recorded | — |
-| Oct 10, 4:01 PM | Instagram | 6ac7f1c1a5f6dcdb5976437c_transcoded.mp4 (https://www.instagram.com/reel/DeVADAikQjz/) | 22 | 1.1 s | not recorded | — |
-| Oct 10, 4:00 PM | Facebook | 6ac7f1c1a5f6dcdb5976437c_transcoded.mp4 (https://www.facebook.com/reel/1173628568507160/) | 3 | 1.5 s | 12.0 s | 12.5% |
-| Oct 10, 4:00 PM | TikTok | 7695147010445298957?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7695147010445298957?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 28 | 1.6 s | not recorded | — |

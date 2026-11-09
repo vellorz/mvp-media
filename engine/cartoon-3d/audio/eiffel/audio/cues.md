@@ -1,0 +1,38 @@
+# cues
+-   0.00s sub thump
+-   2.90s sledgehammer
+-   3.40s sledgehammer
+-   3.82s sledgehammer
+-   4.60s whoosh (cut)
+-   4.78s flash
+-   6.60s fair crowd
+-   8.30s whoosh (cut)
+-  12.10s letter up
+-  13.40s wax seal
+-  13.60s whoosh (cut)
+-  18.00s why?
+-  20.90s whoosh (cut)
+-  22.50s calendar flip
+-  24.76s come down
+-  25.28s whoosh (cut)
+-  28.46s bolt
+-  28.80s bolt
+-  29.15s bolt
+-  30.36s drop
+-  31.16s ball lands
+-  31.34s whoosh (cut)
+-  33.20s radio ding
+-  33.20s radio on
+-  36.50s morse (french)
+-  40.50s whoosh (cut)
+-  40.80s column march
+-  42.32s jamming static
+-  46.30s column stops
+-  46.90s whoosh (cut)
+-  47.86s coded message
+-  50.52s H-21
+-  52.00s whoosh (cut)
+-  56.12s whoosh (cut)
+-  56.98s paint tons
+-  59.40s to poster
+-  60.20s poster lands

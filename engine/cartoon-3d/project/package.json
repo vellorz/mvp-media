@@ -1,0 +1,30 @@
+{
+  "name": "cartoon-shorts",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "still": "remotion still src/index.ts BridgeShort out/still.jpg --frame=400 --scale=0.5 --image-format=jpeg",
+    "render": "remotion render src/index.ts BridgeShort out/video.mp4 --codec=h264 --crf=16 --scale=1.3333"
+  },
+  "dependencies": {
+    "@react-three/fiber": "9.8.2",
+    "@react-three/postprocessing": "3.2.2",
+    "@remotion/bundler": "4.0.541",
+    "@remotion/cli": "4.0.541",
+    "@remotion/renderer": "4.0.541",
+    "@remotion/three": "4.0.541",
+    "postprocessing": "6.39.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.541",
+    "three": "0.187.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/three": "0.187.0",
+    "typescript": "5.9.3"
+  }
+}

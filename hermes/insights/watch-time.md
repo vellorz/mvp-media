@@ -20,7 +20,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 504 | 38.5 s | not recorded | — |
+| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 536 | 38.5 s | not recorded | — |
 | Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 250 | 12.4 s | 66.2 s | 18.7% |
 | Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706326116595813645) | 100 | 16.7 s | not recorded | — |
 | Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1080 | not available | 67.0 s | — |
@@ -33,7 +33,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 8, 12:31 PM | Instagram | 6_copenhagen.mp4 (https://www.instagram.com/reel/DffZ_eBgYRE/) | 83 | 2.9 s | 16.8 s | 17.5% |
 | Nov 8, 11:05 AM | TikTok | 10_ronda.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7705847499013016846) | 96 | 1.9 s | 12.0 s | 15.6% |
 | Nov 7, 10:01 PM | Instagram | 9_krakow.mp4 (https://www.instagram.com/reel/Dfd2Vr7iArn/) | 62 | 3.6 s | 14.3 s | 25.5% |
-| Nov 7, 10:00 PM | Facebook | 9_krakow.mp4 (https://www.facebook.com/reel/2966313087059277/) | 323 | 1.4 s | 14.3 s | 9.8% |
+| Nov 7, 10:00 PM | Facebook | 9_krakow.mp4 (https://www.facebook.com/reel/2966313087059277/) | 324 | 1.4 s | 14.3 s | 9.8% |
 | Nov 7, 10:00 PM | YouTube | The dragon that lived under Kraków #shorts (https://www.youtube.com/watch?v=SbPsMTD--xY) | 2 | not available | 15.0 s | — |
 | Nov 7, 7:02 PM | TikTok | 8_dublin.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7705599353200643342) | 260 | 4.6 s | 15.7 s | 29.5% |
 | Nov 7, 6:02 PM | Instagram | 8_dublin.mp4 (https://www.instagram.com/reel/Dfda9XGmeNU/) | 70 | 4.7 s | 15.7 s | 29.8% |

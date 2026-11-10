@@ -5,8 +5,8 @@ New format from this week (owner, Nov 8-9): ONE cartoon-3d story video per day o
 | Day | Video | Instagram (Buffer) | Facebook (Buffer, title set) | TikTok (Buffer) | YouTube Short | Pinterest (native) |
 |---|---|---|---|---|---|---|
 | Mon Nov 9 | London Bridge -> Arizona (poster 0245 London) | 19:00 · 6af14658796ccae2668143d7 | 19:00 · 6af14659e29b1359f0ca150d | 18:00 · 6af1465a2f1ff83d4513fcf5 | 16:00 · Metricool 421343968 | 18:00 video pin, Architecture & City Travel Prints |
-| Tue Nov 10 | The tower Paris tried to tear down (poster 0495 Paris) | 19:00 · 6af2b44026f9e6aeeaea15a8 | 19:00 · 6af2b44105af22d7260da34f | 18:00 · 6af2b43fd35dff5701e152d3 | 16:00 · Metricool 422764569 | pending: needs laptop + Remote Control |
-| Wed Nov 11 | Pisa: fix it without fixing it (poster 0351 Pisa) | 19:00 · 6af2b45505af22d7260da682 | 19:00 · 6af2b456223aa16048f1a141 | 10:00 · 6af2b454e261c09acca2f356 | 16:00 · Metricool 422764589 | pending: needs laptop + Remote Control |
+| Tue Nov 10 | The tower Paris tried to tear down (poster 0495 Paris) | 19:00 · 6af2b44026f9e6aeeaea15a8 | 19:00 · 6af2b44105af22d7260da34f | 18:00 · 6af2b43fd35dff5701e152d3 | 16:00 · Metricool 422764569 | 18:00 video pin, Architecture & City Travel Prints (scheduled natively, full quality) |
+| Wed Nov 11 | Pisa: fix it without fixing it (poster 0351 Pisa) | 19:00 · 6af2b45505af22d7260da682 | 19:00 · 6af2b456223aa16048f1a141 | 10:00 · 6af2b454e261c09acca2f356 | 16:00 · Metricool 422764589 | 18:00 video pin, Architecture & City Travel Prints (scheduled natively, full quality) |
 | Thu Nov 12 | not planned yet | | | | | |
 
 Tue+Wed approval (Nov 10): "I want you to schedule the Tuesday and Wednesday video for the best time slots on each respective platform ... I approved their scheduling." Full-quality files used. Times: Metricool best-time (YT 16:00 both days; TikTok Tue 18:00, Wed 10:00 peak); IG/FB 19:00 (no IG data). Etsy links: shop search ?search_query=paris / ?search_query=pisa.

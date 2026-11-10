@@ -20,7 +20,8 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 572 | 34.6 s | not recorded | — |
+| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 15 | not available | 66.0 s | — |
+| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 670 | 34.6 s | not recorded | — |
 | Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 250 | 12.4 s | 66.2 s | 18.7% |
 | Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706326116595813645) | 100 | 16.7 s | not recorded | — |
 | Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1080 | not available | 67.0 s | — |
@@ -118,7 +119,6 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 14, 8:00 PM | YouTube | Jeju Island Korea Wall Art: A Quieter Coastal Corner #Shorts (https://www.youtube.com/watch?v=DZCipO7hhTw) | 4 | not available | 17.0 s | — |
 | Oct 14, 4:02 PM | Instagram | 6ace6c23f14f15bbfed660c8_transcoded.mp4 (https://www.instagram.com/reel/DefTUdzk5jw/) | 2 | 8.0 s | not recorded | — |
 | Oct 14, 4:00 PM | TikTok | 7696631405769526542?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696631405769526542?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 77 | 2.3 s | not recorded | — |
-| Oct 14, 4:00 PM | YouTube | Horseshoe Bend Arizona Wall Art: A Landscape You Recognize #Shorts (https://www.youtube.com/watch?v=3G_RTdK7mqU) | 6 | not available | 17.0 s | — |
 | Oct 14, 12:03 PM | Instagram | 6ace6bbe555a834020668c29_transcoded.mp4 (https://www.instagram.com/reel/Dee373QiDbw/) | 2 | 3.8 s | not recorded | — |
 | Oct 14, 12:02 PM | TikTok | 7696569988806642958?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696569988806642958?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 68 | 1.9 s | not recorded | — |
 | Oct 13, 8:01 PM | Instagram | 6ace6747262e9db630f4990a_transcoded.mp4 (https://www.instagram.com/reel/DedJ7jdjl0N/) | 4 | 2.2 s | not recorded | — |

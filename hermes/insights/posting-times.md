@@ -1,7 +1,7 @@
 from: research
 title: Best posting slots: Sun 12–3 PM scores 3.3× across platforms
 metric: social.views
-evidence: Mission Control Content screen, best-time heatmap; 253 posts counted over the last 90 days; 1 not counted yet (left out); posts last pulled Tue, Nov 10, 1:59 PM Central
+evidence: Mission Control Content screen, best-time heatmap; 253 posts counted over the last 90 days; 1 not counted yet (left out); posts last pulled Tue, Nov 10, 2:59 PM Central
 
 How to read this: score = a post's views ÷ that platform's usual (median) post, so 1.0× = usual.
 Each slot's score is a geometric average pulled toward 1.0× when it has few posts, so one viral post can't carry it.
@@ -27,8 +27,8 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 | Tue | 3–6 PM | 10 | 1.3× | 1.2× | strong |
 | Thu | 9 PM–12 | 7 | 1.2× | 2.3× | strong |
 | Sun | 3–6 PM | 6 | 1.2× | 1.2× | strong |
+| Sat | 9 PM–12 | 6 | 1.1× | 3.2× | average |
 | Fri | 6–9 PM | 19 | 1.1× | 1.1× | average |
-| Sat | 9 PM–12 | 6 | 1.1× | 3.1× | average |
 | Fri | 9 PM–12 | 2 | 1.0× | 5.8× | average |
 | Wed | 9 PM–12 | 5 | 1.0× | 1.9× | average |
 | Sun | 6–9 PM | 14 | 0.9× | 1.0× | average |
@@ -92,7 +92,7 @@ Every other day and time: untested (no posts there yet).
 | Fri | 12–3 PM | 4 | 3.6× | 13.6× | strong |
 | Sat | 9 PM–12 | 2 | 2.8× | 8.3× | strong |
 | Wed | 9 PM–12 | 2 | 2.8× | 10.8× | strong |
-| Mon | 6–9 PM | 6 | 2.6× | 6.5× | strong |
+| Mon | 6–9 PM | 6 | 2.7× | 6.5× | strong |
 | Fri | 6–9 PM | 5 | 2.6× | 6.2× | strong |
 | Tue | 9 PM–12 | 1 | 2.4× | 13.2× | too few to rate |
 | Fri | 9 PM–12 | 1 | 2.3× | 11.7× | too few to rate |
@@ -182,9 +182,9 @@ Every other day and time: untested (no posts there yet).
 | Thu | 3–6 PM | 2 | 0.7× | 0.9× | weak |
 | Wed | 3–6 PM | 2 | 0.6× | 0.3× | weak |
 | Wed | 6–9 PM | 1 | 0.6× | 0.2× | too few to rate |
+| Sat | 9 PM–12 | 1 | 0.5× | 0.1× | too few to rate |
 | Tue | 6–9 PM | 1 | 0.5× | 0.1× | too few to rate |
 | Thu | 12–3 PM | 1 | 0.5× | 0.0× | too few to rate |
-| Sat | 9 PM–12 | 1 | 0.5× | 0.1× | too few to rate |
 Every other day and time: untested (no posts there yet).
 
 ## Queued in Buffer

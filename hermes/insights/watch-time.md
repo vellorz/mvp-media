@@ -11,30 +11,30 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Platform | Videos | Measured | Median watched | Median completion |
 |---|---|---|---|---|
-| TikTok | 36 | 14 | 4.2 s | 22.6% |
-| Instagram | 35 | 15 | 4.7 s | 26.8% |
-| Facebook | 26 | 26 | 2.0 s | 13.4% |
+| TikTok | 35 | 14 | 4.2 s | 22.6% |
+| Instagram | 34 | 15 | 4.7 s | 26.8% |
+| Facebook | 25 | 25 | 2.1 s | 13.3% |
 | YouTube | 25 | 0 | not recorded | not recorded |
 
 ## Each video
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 536 | 38.5 s | not recorded | — |
+| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 572 | 34.6 s | not recorded | — |
 | Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 250 | 12.4 s | 66.2 s | 18.7% |
 | Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706326116595813645) | 100 | 16.7 s | not recorded | — |
 | Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1080 | not available | 67.0 s | — |
 | Nov 8, 7:02 PM | YouTube | The Copenhagen Harbour Where Fairy Tales Began #shorts (https://www.youtube.com/watch?v=6T8XoSWypVI) | 15 | not available | 17.0 s | — |
 | Nov 8, 7:02 PM | Instagram | 10_ronda.mp4 (https://www.instagram.com/reel/DfgGmeAFUxG/) | 20 | 2.9 s | 12.0 s | 24.2% |
 | Nov 8, 7:02 PM | TikTok | 6_copenhagen.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7705970424198286606) | 68 | 3.0 s | 16.8 s | 18.1% |
-| Nov 8, 7:01 PM | Facebook | 6_copenhagen.mp4 (https://www.facebook.com/reel/2401251877350550/) | 96 | 2.0 s | 16.8 s | 11.9% |
+| Nov 8, 7:01 PM | Facebook | 6_copenhagen.mp4 (https://www.facebook.com/reel/2401251877350550/) | 97 | 2.0 s | 16.8 s | 11.9% |
 | Nov 8, 1:02 PM | Facebook | 10_ronda.mp4 (https://www.facebook.com/reel/1848171839696903/) | 158 | 3.9 s | 12.0 s | 32.5% |
 | Nov 8, 1:00 PM | YouTube | The bridge that took 34 years to build #shorts (https://www.youtube.com/watch?v=yQw5w6hFZSI) | 41 | not available | 13.0 s | — |
 | Nov 8, 12:31 PM | Instagram | 6_copenhagen.mp4 (https://www.instagram.com/reel/DffZ_eBgYRE/) | 83 | 2.9 s | 16.8 s | 17.5% |
 | Nov 8, 11:05 AM | TikTok | 10_ronda.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7705847499013016846) | 96 | 1.9 s | 12.0 s | 15.6% |
 | Nov 7, 10:01 PM | Instagram | 9_krakow.mp4 (https://www.instagram.com/reel/Dfd2Vr7iArn/) | 62 | 3.6 s | 14.3 s | 25.5% |
 | Nov 7, 10:00 PM | Facebook | 9_krakow.mp4 (https://www.facebook.com/reel/2966313087059277/) | 324 | 1.4 s | 14.3 s | 9.8% |
-| Nov 7, 10:00 PM | YouTube | The dragon that lived under Kraków #shorts (https://www.youtube.com/watch?v=SbPsMTD--xY) | 2 | not available | 15.0 s | — |
+| Nov 7, 10:00 PM | YouTube | The dragon that lived under Kraków #shorts (https://www.youtube.com/watch?v=SbPsMTD--xY) | 3 | not available | 15.0 s | — |
 | Nov 7, 7:02 PM | TikTok | 8_dublin.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7705599353200643342) | 260 | 4.6 s | 15.7 s | 29.5% |
 | Nov 7, 6:02 PM | Instagram | 8_dublin.mp4 (https://www.instagram.com/reel/Dfda9XGmeNU/) | 70 | 4.7 s | 15.7 s | 29.8% |
 | Nov 7, 6:01 PM | Facebook | 8_dublin.mp4 (https://www.facebook.com/reel/1142952334762526/) | 175 | 1.5 s | 15.7 s | 9.6% |
@@ -139,6 +139,3 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 11, 8:02 PM | Instagram | 6aca891876628b9f70907d0c_transcoded.mp4 (https://www.instagram.com/reel/DeYAS6kjNyV/) | 4 | 0.6 s | not recorded | — |
 | Oct 11, 8:00 PM | Facebook | 6aca891876628b9f70907d0c_transcoded.mp4 (https://www.facebook.com/reel/1412457897658707/) | 32 | 1.6 s | 12.0 s | 13.3% |
 | Oct 11, 8:00 PM | TikTok | 7695579933799714062?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7695579933799714062?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 32 | 2.0 s | not recorded | — |
-| Oct 11, 4:01 PM | Instagram | 6aca88869e6c9891a291b1ad_transcoded.mp4 (https://www.instagram.com/reel/DeXk1mAiP6Q/) | 13 | 1.2 s | not recorded | — |
-| Oct 11, 4:00 PM | Facebook | 6aca88869e6c9891a291b1ad_transcoded.mp4 (https://www.facebook.com/reel/1864161188081675/) | 26 | 1.9 s | 12.0 s | 15.8% |
-| Oct 11, 4:00 PM | TikTok | 7695518019585461518?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7695518019585461518?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 21 | 1.1 s | not recorded | — |

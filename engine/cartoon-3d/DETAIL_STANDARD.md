@@ -38,8 +38,9 @@ D7. CHARACTER SIZE (consistent). In medium shots the head is 18-22 % of frame wi
 D8. ACTING (1 video). In any shot where a character is the subject: a new face every 8-15 frames while speaking or reacting, a blink every
     0.5-2 s, one clear gesture on the key word of each sentence, and a body reaction (lean, squash, sweat drop, jump). Background people
     react too and change expression when the mood turns.
-D9. SHOW THE MECHANISM, DON'T LABEL IT (1 video). Explain with the object itself: cutaway, x-ray, cross-section, or camera inside the machine.
-    Use overlay arrows/labels only when the owner has approved them for that short (open design question, see owner Q&A).
+D9. SHOW THE MECHANISM, DON'T LABEL IT (owner decision 2A). Explain with the object itself: cutaway, x-ray, cross-section, or camera inside
+    the machine. NO overlay arrows, NO date cards/calendars on easels, NO diagram labels. Years and numbers live in the narration and captions,
+    or on an object that would really carry them in that place (a carved cornerstone, a newspaper, a shop sign).
 D10. ONE EXTRA GAG PER SET (1 video). A small true-to-period visual joke or life detail not in the narration (animal, mishap, time-passing
     cue like a cobweb). Never one that contradicts the facts.
 D11. HERO PROP IN TRUE 3D (1 video). The 1-3 objects the story is about are modelled with real volume, a bump/pattern texture and
@@ -82,3 +83,19 @@ Q5. Acting check: step through each character shot at 2 f intervals; fewer than 
 Q6. Transition census: list every shot change with its recipe (T1-T7); more than 2 hard cuts or more than half plain dissolves = rework.
 Q7. Saturation check per set: mean saturation 0.40-0.48; any large flat pure-colour area (sky, ground) = repaint.
 Q8. More props means more z-fight risk: re-run rule 43 (grass/ground flicker routine) and the heat-map scrub after dressing each set.
+
+## F. Owner decisions, Nov 10 2026 (answered with side-by-side pictures; these override anything softer above)
+1A. Set dressing at full reference density: >= 20 props per wide shot, >= 6 per close-up. Not a reduced version.
+2A. No arrows and no date cards. Show the mechanism instead (rule D9). This retires the calendar-on-easel device used in week 03;
+    checklist rules about easels/calendars/diagram arrows now only matter if the owner asks for one again.
+3A. Greyed scene palettes like the reference (rule D6, saturation 0.40-0.48), not the old vivid pure-colour look.
+4A. Characters big and constantly acting (rules D7, D8), not a calmer version.
+5A. Small invented sight gags are allowed (rule D10) as long as they never change or contradict the facts of the story.
+6A. BACKDROPS ARE HAND-DRAWN FLAT ART. Build each set as illustrated artwork (Canvas2D paintings with their own ink lines, drawn
+    with variation) placed on flat cards and simple boxes at several depths so the camera gets parallax: far card (skyline/hills), mid
+    cards (facades, walls), near cards (props, foreground). True 3D geometry is kept for the 1-3 hero props and for anything the camera
+    must orbit or fly through. No more procedurally tiled 3D buildings. How the reference builds its sets is inferred, not confirmed,
+    so the first short made this way goes to Gate 2 with a note on what worked and what did not.
+    Engineering cautions: stagger cards >= 0.25 m apart in depth (z-fight), keep world ink off painted cards (NOINK layer, they carry
+    their own lines), paint at >= 2x the on-screen size of the closest camera so close-ups stay sharp, and plan camera moves so a card
+    is never seen edge-on.

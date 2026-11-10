@@ -66,3 +66,6 @@ Engineering fixes found Nov 9 (apply in every new short): black flicker = (a) gr
 48. Seated side bodies: chair back must stay behind the torso and below the head (never crossing the face).
 49. Held clipboards sit at chest/waist height, below the chin, never overlapping the face.
 50. Signs on posts: the board is attached to its posts (posts reach the board's edges), at every frame incl. pop-in animation.
+
+## Rule 51 (owner, Nov 10 2026): DETAIL STANDARD
+51. "These videos are way more detailed than ours, so I want ours to become as detailed as theirs." Before building and before rendering, apply every rule, recipe and QA check in engine/cartoon-3d/DETAIL_STANDARD.md (>= 20 props per wide shot, three depth layers, no repeated tiles, no bare ground, visible light sources, scene palettes at 0.40-0.48 saturation, big acting characters, >= 5 object close-ups, travelling transitions, >= 8 sets) and run engine/cartoon-3d/render/detail_metrics.py on the render. Report the numbers in the Gate 2 note.

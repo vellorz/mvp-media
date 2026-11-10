@@ -20,9 +20,12 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 35 | not available | 67.0 s | — |
+| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 4 | not recorded | not recorded | — |
+| Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 237 | 12.2 s | 66.2 s | 18.4% |
+| Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706326116595813645) | not counted yet | not counted yet | not recorded | — |
+| Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1025 | not available | 67.0 s | — |
 | Nov 8, 7:02 PM | YouTube | The Copenhagen Harbour Where Fairy Tales Began #shorts (https://www.youtube.com/watch?v=6T8XoSWypVI) | 12 | not available | 17.0 s | — |
-| Nov 8, 7:02 PM | Instagram | 10_ronda.mp4 (https://www.instagram.com/reel/DfgGmeAFUxG/) | 19 | 2.9 s | 12.0 s | 23.9% |
+| Nov 8, 7:02 PM | Instagram | 10_ronda.mp4 (https://www.instagram.com/reel/DfgGmeAFUxG/) | 20 | 2.9 s | 12.0 s | 23.9% |
 | Nov 8, 7:02 PM | TikTok | 6_copenhagen.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7705970424198286606) | 53 | 2.6 s | 16.8 s | 15.3% |
 | Nov 8, 7:01 PM | Facebook | 6_copenhagen.mp4 (https://www.facebook.com/reel/2401251877350550/) | 96 | 2.0 s | 16.8 s | 11.9% |
 | Nov 8, 1:02 PM | Facebook | 10_ronda.mp4 (https://www.facebook.com/reel/1848171839696903/) | 158 | 3.9 s | 12.0 s | 32.5% |
@@ -142,6 +145,3 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 11, 12:03 PM | Instagram | 6aca87039e6c9891a291ad83_transcoded.mp4 (https://www.instagram.com/reel/DeXJb5nAcwn/) | 119 | 1.1 s | not recorded | — |
 | Oct 11, 12:01 PM | TikTok | 7695456493033819406?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7695456493033819406?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 22 | 1.0 s | not recorded | — |
 | Oct 11, 12:01 PM | Facebook | 6aca87039e6c9891a291ad83_transcoded.mp4 (https://www.facebook.com/reel/2207800203504630/) | 32 | 1.2 s | 12.0 s | 10.0% |
-| Oct 10, 8:01 PM | Instagram | AQMGe8bvd0qSIG7_msHClfMisCLIW7Y7zb_3roC-aYVtu9DK0PLZJWShtmgtP3KauzSDQ0HYP2buA85UpNndfKIfbt9AxRE0BWj0V0Y.mp4?_nc_cat=105&_nc_sid=5e9851&_nc_ht=scontent-iad3-2.cdninstagram.com&_nc_ohc=wZoKWBQ5cuAQ7kNvwHl4GZv&efg=eyJ2ZW5jb2RlX3RhZyI6Inhwdl9wcm9ncmVzc2l2ZS5JTlNUQUdSQU0uQ0xJUFMuQzMuNzIwLmRhc2hfYmFzZWxpbmVfMV92MSIsInhwdl9hc3NldF9pZCI6MTgxNjE1MTgxODA1MTQ5MzAsImFzc2V0X2FnZV9kYXlzIjowLCJ2aV91c2VjYXNlX2lkIjoxMDA5OSwiZHVyYXRpb25fcyI6MTIsInVybGdlbl9zb3VyY2UiOiJ3d3cifQ%3D%3D&ccb=17-1&vs=893c888adfcd73ee&_nc_vs=HBksFQIYUmlnX3hwdl9yZWVsc19wZXJtYW5lbnRfc3JfcHJvZC83MTY0RUE2MzcxM0I0QUM3OEI3NDJBQkM1QUY0RERDN192aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYUWlnX3hwdl9wbGFjZW1lbnRfcGVybWFuZW50X3YyL0UyQzY3QTU4RUY4MjREOEU5REI1RUY3QjRENTREMzM0X2F1ZGlvX2Rhc2hpbml0Lm1wNBUCAsgBEgAoABgAGwKIB3VzZV9vaWwBMRJwcm9ncmVzc2l2ZV9yZWNpcGUBMRUAACbk8dn7vvPCQBUCKAJDMywXQCgAAAAAAAAYEmRhc2hfYmFzZWxpbmVfMV92MREAdf4HZeadAQA&_nc_gid=8yCDa6E__I6O2NgdOAvSDw&edm=ANo9K5cEAAAA&_nc_zt=28&_nc_tpa=Q5bMBQK5U3qNR31gvLXqHhUyZUlR_SiPz0r2aRtEKuphmcJEKWqOpSipiRMn81DPFFNIdG0E6th8vhgwGQ&oh=00_AQOX8LmksJELoZ95LDoAe6ND6HdZrQqM3WWYGU5eciem9A&oe=6ACDFBA2 (https://www.instagram.com/reel/DeVbemWFHtY/) | 26 | 7.9 s | not recorded | — |
-| Oct 10, 8:01 PM | Facebook | 6ac7f213b804c8efaf0e0daa_transcoded.mp4 (https://www.facebook.com/reel/1577940687467331/) | 18 | 1.5 s | 12.0 s | 12.5% |
-| Oct 10, 8:00 PM | TikTok | 7695208854736375053?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7695208854736375053?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 43 | 1.0 s | not recorded | — |

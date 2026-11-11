@@ -11,9 +11,9 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Platform | Videos | Measured | Median watched | Median completion |
 |---|---|---|---|---|
-| TikTok | 37 | 14 | 4.0 s | 23.1% |
-| Instagram | 34 | 15 | 4.7 s | 26.8% |
-| Facebook | 25 | 25 | 2.1 s | 13.4% |
+| TikTok | 36 | 14 | 4.0 s | 23.1% |
+| Instagram | 33 | 15 | 4.7 s | 26.8% |
+| Facebook | 24 | 24 | 2.2 s | 13.6% |
 | YouTube | 25 | 0 | not recorded | not recorded |
 
 ## Each video
@@ -22,10 +22,10 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 |---|---|---|---|---|---|---|
 | Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706945601526631693) | not counted yet | not counted yet | not recorded | — |
 | Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.3 s | not recorded | — |
-| Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 173 | 10.4 s | 65.4 s | 15.9% |
+| Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 174 | 10.4 s | 65.4 s | 15.9% |
 | Nov 10, 6:03 PM | TikTok | 02_tue_eiffel-tower.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706697475796602126?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 101 | 12.9 s | not recorded | — |
-| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 1197 | not available | 66.0 s | — |
-| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1159 | 36.7 s | not recorded | — |
+| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 1195 | not available | 66.0 s | — |
+| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1160 | 36.7 s | not recorded | — |
 | Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 252 | 12.3 s | 66.2 s | 18.6% |
 | Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706326116595813645?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 141 | 19.3 s | not recorded | — |
 | Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1081 | not available | 67.0 s | — |
@@ -41,7 +41,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 7, 10:00 PM | Facebook | 9_krakow.mp4 (https://www.facebook.com/reel/2966313087059277/) | 324 | 1.4 s | 14.3 s | 9.8% |
 | Nov 7, 10:00 PM | YouTube | The dragon that lived under Kraków #shorts (https://www.youtube.com/watch?v=SbPsMTD--xY) | 3 | not available | 15.0 s | — |
 | Nov 7, 7:02 PM | TikTok | 8_dublin.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705599353200643342?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 260 | 4.6 s | 15.7 s | 29.5% |
-| Nov 7, 6:02 PM | Instagram | 8_dublin.mp4 (https://www.instagram.com/reel/Dfda9XGmeNU/) | 70 | 4.7 s | 15.7 s | 29.8% |
+| Nov 7, 6:02 PM | Instagram | 8_dublin.mp4 (https://www.instagram.com/reel/Dfda9XGmeNU/) | 71 | 4.7 s | 15.7 s | 29.8% |
 | Nov 7, 6:01 PM | Facebook | 8_dublin.mp4 (https://www.facebook.com/reel/1142952334762526/) | 175 | 1.5 s | 15.7 s | 9.6% |
 | Nov 7, 6:00 PM | YouTube | Why Dublin's bridge is called the Ha'penny #shorts (https://www.youtube.com/watch?v=eHWswQN6er0) | 4 | not available | 16.0 s | — |
 | Nov 7, 10:02 AM | TikTok | 6af3d8cbe6c868db7e9d91f5_thumbnail.webp (https://www.tiktok.com/@modernvistaprintsshop/video/7705860933783932173?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 2 | 6.0 s | not recorded | — |
@@ -138,6 +138,3 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 12, 4:02 PM | Instagram | 6aca8a0c44050b7506eefee9_transcoded.mp4 (https://www.instagram.com/reel/DeaJs0qkcmE/) | 5 | 0.6 s | not recorded | — |
 | Oct 12, 4:01 PM | Facebook | 6aca8a0c44050b7506eefee9_transcoded.mp4 (https://www.facebook.com/reel/28894111476874835/) | 8 | 3.0 s | 12.0 s | 25.0% |
 | Oct 12, 4:01 PM | TikTok | 7695889223655656718?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7695889223655656718?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 20 | 2.9 s | not recorded | — |
-| Oct 12, 12:03 PM | Instagram | 6aca899c9e6c9891a291b472_transcoded.mp4 (https://www.instagram.com/reel/DeZucL2iC5Z/) | 4 | 2.3 s | not recorded | — |
-| Oct 12, 12:03 PM | TikTok | 7695827968010013966?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7695827968010013966?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 30 | 2.9 s | not recorded | — |
-| Oct 12, 12:02 PM | Facebook | 6aca899c9e6c9891a291b472_transcoded.mp4 (https://www.facebook.com/reel/1778866813321131/) | 6 | 1.2 s | 12.0 s | 10.0% |

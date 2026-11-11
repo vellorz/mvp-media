@@ -13,18 +13,18 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 |---|---|---|---|---|
 | TikTok | 35 | 14 | 4.2 s | 22.6% |
 | Instagram | 34 | 15 | 4.7 s | 26.8% |
-| Facebook | 25 | 24 | 2.1 s | 13.4% |
+| Facebook | 25 | 25 | 2.1 s | 13.3% |
 | YouTube | 25 | 0 | not recorded | not recorded |
 
 ## Each video
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 0 | not recorded | not recorded | — |
-| Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 0 | not recorded | 65.4 s | — |
+| Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 132 | not recorded | not recorded | — |
+| Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 14 | 4.9 s | 65.4 s | 7.5% |
 | Nov 10, 6:03 PM | TikTok | 02_tue_eiffel-tower.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706697475796602126) | not counted yet | not counted yet | not recorded | — |
-| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 828 | not available | 66.0 s | — |
-| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1153 | 34.6 s | not recorded | — |
+| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 911 | not available | 66.0 s | — |
+| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1157 | 34.6 s | not recorded | — |
 | Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 250 | 12.4 s | 66.2 s | 18.7% |
 | Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706326116595813645) | 100 | 16.7 s | not recorded | — |
 | Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1079 | not available | 67.0 s | — |
@@ -115,7 +115,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 15, 12:00 PM | YouTube | Lake Powell Utah Wall Art: Warm or Cool Room Colors? #Shorts (https://www.youtube.com/watch?v=skn8DA3EgaY) | 0 | not available | 17.0 s | — |
 | Oct 15, 11:03 AM | Instagram | 6ad07cc40800c4b97088869d_transcoded.mp4 (https://www.instagram.com/reel/DehV10XDL3q/) | 7 | 2.7 s | not recorded | — |
 | Oct 15, 11:01 AM | Facebook | 6ad07cc40800c4b97088869d_transcoded.mp4 (https://www.facebook.com/reel/28626966323592538/) | 11 | 2.0 s | 15.0 s | 13.3% |
-| Oct 15, 11:00 AM | YouTube | Travel Posters for Your Walls / ModernVistaPrints #Shorts (https://www.youtube.com/watch?v=0bkNTJWMOpQ) | 21 | not available | 16.0 s | — |
+| Oct 15, 11:00 AM | YouTube | Travel Posters for Your Walls / ModernVistaPrints #Shorts (https://www.youtube.com/watch?v=0bkNTJWMOpQ) | 22 | not available | 16.0 s | — |
 | Oct 15, 11:00 AM | TikTok | 7696793475156692238?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696793475156692238?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 48 | 2.1 s | not recorded | — |
 | Oct 14, 8:02 PM | Instagram | 6ace6dc47ac896f8054165c5_transcoded.mp4 (https://www.instagram.com/reel/Defuy4cIGp4/) | 2 | 2.2 s | not recorded | — |
 | Oct 14, 8:00 PM | TikTok | 7696693236647120141?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696693236647120141?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 92 | 1.4 s | not recorded | — |

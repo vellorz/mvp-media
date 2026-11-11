@@ -1,7 +1,7 @@
 from: research
 title: Best posting slots: Sun 12–3 PM scores 3.4× across platforms
 metric: social.views
-evidence: Mission Control Content screen, best-time heatmap; 258 posts counted over the last 90 days; 1 not counted yet (left out); posts last pulled Tue, Nov 10, 10:01 PM Central
+evidence: Mission Control Content screen, best-time heatmap; 256 posts counted over the last 90 days; 1 not counted yet (left out); posts last pulled Tue, Nov 10, 11:01 PM Central
 
 How to read this: score = a post's views ÷ that platform's usual (median) post, so 1.0× = usual.
 Each slot's score is a geometric average pulled toward 1.0× when it has few posts, so one viral post can't carry it.
@@ -10,7 +10,7 @@ Times are Central, in three-hour slots. Posts Buffer hasn't counted yet are left
 Use it to favour strong slots, avoid weak ones, and now and then test an untested slot so the ratings keep improving.
 
 ## All platforms together
-258 posts. Best slot (3+ posts): Sun 12–3 PM, 3.4× over 14 posts.
+256 posts. Best slot (3+ posts): Sun 12–3 PM, 3.4× over 14 posts.
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
@@ -44,7 +44,7 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 | Sun | 9 PM–12 | 4 | 0.6× | 0.3× | weak |
 | Wed | 3–6 PM | 6 | 0.6× | 0.5× | weak |
 | Sat | 3–6 PM | 5 | 0.6× | 0.4× | weak |
-| Thu | 12–3 AM | 4 | 0.6× | 0.2× | weak |
+| Thu | 12–3 AM | 2 | 0.4× | 0.2× | weak |
 | Sat | 9 AM–12 | 8 | 0.4× | 0.5× | weak |
 | Thu | 12–3 PM | 9 | 0.4× | 0.3× | weak |
 | Mon | 9 PM–12 | 4 | 0.3× | 0.1× | weak |
@@ -83,7 +83,7 @@ Every other day and time: untested (no posts there yet).
 Every other day and time: untested (no posts there yet).
 
 ## Instagram
-85 posts. Best slot (3+ posts): Sun 12–3 PM, 3.9× over 5 posts.
+84 posts. Best slot (3+ posts): Sun 12–3 PM, 3.9× over 5 posts.
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
@@ -98,11 +98,10 @@ Every other day and time: untested (no posts there yet).
 | Fri | 9 PM–12 | 1 | 2.3× | 11.7× | too few to rate |
 | Sat | 6–9 PM | 5 | 2.3× | 3.5× | strong |
 | Sun | 9 AM–12 | 1 | 2.2× | 11.3× | too few to rate |
-| Tue | 6–9 PM | 4 | 1.7× | 1.3× | strong |
+| Tue | 6–9 PM | 4 | 1.9× | 1.3× | strong |
 | Sun | 9 PM–12 | 2 | 1.6× | 6.3× | strong |
 | Tue | 9 AM–12 | 1 | 1.5× | 3.7× | too few to rate |
 | Tue | 3–6 PM | 3 | 1.5× | 0.8× | strong |
-| Thu | 12–3 AM | 2 | 1.5× | 6.0× | strong |
 | Sun | 6–9 PM | 3 | 1.3× | 2.0× | strong |
 | Tue | 12–3 PM | 3 | 1.2× | 0.5× | strong |
 | Sat | 12–3 PM | 1 | 1.1× | 1.4× | too few to rate |
@@ -110,6 +109,7 @@ Every other day and time: untested (no posts there yet).
 | Sun | 3–6 PM | 2 | 0.9× | 0.9× | average |
 | Thu | 9 AM–12 | 1 | 0.9× | 0.7× | too few to rate |
 | Mon | 3–6 PM | 2 | 0.7× | 0.6× | weak |
+| Thu | 12–3 AM | 1 | 0.7× | 0.4× | too few to rate |
 | Fri | 3–6 PM | 1 | 0.7× | 0.4× | too few to rate |
 | Sun | 12–3 AM | 1 | 0.7× | 0.4× | too few to rate |
 | Thu | 3–6 PM | 2 | 0.7× | 0.6× | weak |
@@ -124,7 +124,7 @@ Every other day and time: untested (no posts there yet).
 Every other day and time: untested (no posts there yet).
 
 ## Facebook
-89 posts. Best slot (3+ posts): Sun 12–3 PM, 3.4× over 6 posts.
+88 posts. Best slot (3+ posts): Sun 12–3 PM, 3.4× over 6 posts.
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
@@ -153,12 +153,12 @@ Every other day and time: untested (no posts there yet).
 | Wed | 6–9 PM | 2 | 0.6× | 0.7× | weak |
 | Thu | 6–9 PM | 3 | 0.5× | 0.0× | weak |
 | Fri | 6–9 PM | 7 | 0.5× | 0.0× | weak |
+| Thu | 12–3 AM | 1 | 0.5× | 0.0× | too few to rate |
 | Fri | 9 PM–12 | 1 | 0.5× | 0.0× | too few to rate |
 | Wed | 9 PM–12 | 3 | 0.5× | 0.0× | weak |
 | Thu | 9 PM–12 | 4 | 0.4× | 0.0× | weak |
 | Thu | 12–3 PM | 4 | 0.3× | 0.0× | weak |
 | Mon | 9 PM–12 | 2 | 0.3× | 0.0× | weak |
-| Thu | 12–3 AM | 2 | 0.3× | 0.0× | weak |
 | Sat | 9 AM–12 | 2 | 0.3× | 0.0× | weak |
 | Sun | 9 PM–12 | 2 | 0.3× | 0.0× | weak |
 Every other day and time: untested (no posts there yet).

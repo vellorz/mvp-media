@@ -117,10 +117,11 @@ What both teardowns agree on is a RULE. What only one does is a CHOICE that depe
 | Character acting | pose-to-pose | pose-to-pose | G3 below |
 
 ### G2. Depends on the story (choose per short, say which in the Gate 2 note)
-- Transition family. Day story: whips, match-moves, crane reveals. Night story: 17 cross-dissolves and 1 fly-through-a-window, nothing else.
-  A quiet or eerie story takes the dissolve family (G4). A busy or comic story takes the whip family (T2, T4, T5). Do not mix evenly:
-  one family carries at least two thirds of the shot changes.
-- Shot count. 27 shots in 65 s (day) against 19 shots in 59.5 s (night). The night story has four one-take shots of 5-8.5 s that visit
+- Transition family. CORRECTED Nov 11 after the every-frame pass of the day story (section H): both references are carried by
+  bridged cross-dissolves (T10). The day story has 1 hard cut, 2 joins made by a camera move inside one set, and about 18 shape-matched
+  dissolves of 4-8 f; no whip pan was found. So bridged dissolves are the default for every short. Whips (T2) stay allowed inside one
+  set but are not what the reference does. Dissolve length is the story choice: 4-8 f for a busy or comic story, 7-12 f for a quiet one.
+- Shot count. 22 takes in 65 s (day; 27 when its long takes are split by subject) against 19 in 59.5 s (night). The night story has four one-take shots of 5-8.5 s that visit
   3-5 subjects each. Target is now 19-28 shots, and a shot longer than 4 s must visit at least 3 subjects.
 - Saturation and edge density. Day 0.41 / 34.6 %. Night 0.52 / 28.1 %. Night scenes are two-colour pictures: a deep blue-violet world
   (about #1B2A9E to #3B2FA8) plus ONE warm emitter (about #FFC463 to #F5A03C). Section A saturation 0.40-0.48 applies to daylight sets.
@@ -205,3 +206,70 @@ Q11. Every night shot: one warm emitter visible, halo and ground pool present, c
 Q12. Word-sync table for at least 20 events: picture within 0 to +1 f of its noun.
 Q13. First frame is already moving; last frame is within 20 f of the last word's start; no fade.
 Q14. ffprobe the master: 1440x2560, 30 fps, and report size and bitrate in the Gate 2 note.
+
+## H. Every-frame pass of the first reference (day story, all 1,945 frames logged Nov 11 2026)
+The first teardown looked at every 6th frame. This pass logged every frame and corrects or adds the following. Logs: project folder
+`research/reference-teardown-dragon/frame-logs/`.
+
+### H1. Corrections to sections A-C
+- 22 takes, 21 shot changes: 1 hard cut (at 3.1 s, inside the hook), 2 camera-move joins, about 18 shape-matched dissolves of 4-8 f.
+  T2 (whip arc) and T7 (snap cut) are optional devices, not reference practice. T10 is the default.
+- The bridge can be a SHAPE, not only the same object: round head to head cluster, throne arch to gate arch, sun disc to jar dome,
+  sun to moon, dust plume to an interior of the same orange, lawn crack to street crack. Same screen zone, within about 5 % of frame.
+- Before a dissolve the camera travels to the bridge shape and parks on it for about 4 f, or fills the frame with it (28 f tilt
+  into a dust plume), and only then mixes.
+- The caption layer sits above both shots and never fades. Captions change 0-6 f before the word (median 2), never after.
+- Sets are real 3D rooms and props with painted textures; people are flat cards. Same finding as G9.
+- Ending: hard stop 7 f after the last word starts, mid-move, no fade.
+
+### H2. New recipes
+T20. ZOOM PUNCH. 4 f accelerating push with radial blur into a 3D hero prop, then 6 f ease-out on the close-up. Used at 0.7 s.
+T21. CRASH ZOOM. About 2.7x in 10 f, ease in-out, no blur, landing on the noun. Near cards slide out of frame by parallax.
+T22. OBJECT TOUR. One descend + orbit + tilt around the 3D hero prop; each named part is centred on the frame its word is spoken.
+     The prop itself does not animate. Phases of a long move start within 1 f of a caption change.
+T23. CRANE AND RETURN. Rise over the speaker to the big view, hold for exactly one caption (about 19 f), come back down for the
+     punch line. Ease in 6 f, cruise 18 f, ease out 18 f. A pre-blurred foreground slab (10-25 % of width) gives the fastest parallax.
+T24. HAND-OVER. Change speaker by pushing the camera past speaker 1 (who becomes a blurred foreground wipe) onto speaker 2 in 24 f,
+     starting on the last word of line 1 and landing on the first word of line 2.
+T25. SURGING PULL-BACK. One pull-back of about 95 f whose speed rises exactly when a story event needs more frame and idles between.
+T26. GOING UNDERGROUND. Tilt down at 5-6 % per frame so a perspective street is swapped for a flat cut-away drawing, with the crack
+     staying at the same x. A flare then climbs the crack at about 3.5 % of frame height per frame.
+T27. OCCLUDER APPROACH. Bars or a gate close to the lens; a tiny card grows from 3 % to 36 % head width in 50 f by moving along z,
+     with a bob every 2 f and a 2 f overshoot on arrival.
+
+### H3. Showing ideas without overlays (supports owner decision 2A)
+- A "what would happen" is a ghost: a flat 50 % opacity copy of the object with a dotted outline that performs the action in 11 f
+  while the real object stays put.
+- Time passing in one held shot is a stack of small cues staggered 2-5 f apart: passers-by as a smear, a cobweb line growing, a
+  pigeon fading in on a head, stubble dots, the light shaft brightening, the grade cooling. No calendar, no text.
+- Teach, then repeat: show the mechanism once in close-up, once wide, then all copies at once offset 1-3 f each.
+- A state stays visible: a caught ball leaves a glowing mouth for the rest of the shot.
+- Far-away destruction is 4 cheap parts: a rigid card rotating 90 degrees in 8 f, round dust puffs, a column of circles reaching
+  the top of frame in 5 f, a dust band travelling toward camera over 12 f. Birds leave a tree 21 f after the first lean.
+
+### H4. Acting and reaction details
+- Emotion stack on one card, in this order: 1 f eye snap, sweat drop pops, card mirror-flips, white speed lines redrawn every frame
+  for 12 f, 7 f camera push.
+- Small event, big vocabulary: 3 f hang, 7 f accelerating fall with one smear frame, white dash ring for 8 f, a 1 f camera kick of
+  3 %, reactions 1 f apart (bird, eyes, body), then sparkles and a slow feather to stretch the silence.
+- Fixed chain constants, reused so the rhythm is recognised: anticipate 3 f, travel 8 f, settle 1 f, react 5 f later.
+- Startle: swap to the new pose, 115 % scale and 7 % up for 1 f, settle over 4 f. Fright jump: up 7 % in 2 f, down in 2-3 f, plus
+  a ground dust ring fading over 8 f.
+- Laugh: blush, 2 f head tip back, mouth opens, body leans, crown or hat lags. Side characters join 1-4 f later, out of phase.
+- Lips move only when the narration quotes speech: 3 mouth shapes on 2 f holds, bigger "o" on stressed vowels. Under plain
+  narration the mouth stays shut.
+- Pose and prop swaps are hidden in a blink or on the first frame of a dissolve. An arm may exist only for the frames it gestures.
+- A walk toward camera on a locked shot: card grows about 0.45 % per frame, rocks 2 degrees per step, one incidental event (a
+  kicked pebble) keeps a 2 s walk alive, and a carried light drags a glow pool on the ground.
+- Light is tint and glow, not shading: per-card colour multiply, additive radial sprites at each light, ray wedges fanned from the sun.
+
+### H5. Where the reference does NOT spend effort (so we need not either)
+3D props never animate except the one moving part. A crowd or army is a static painting sold by a camera crane. Tears fade by
+opacity. One-frame pops with no travel-in are accepted when they land on an impact frame. Small continuity slips pass at speed.
+Spend the saved time on the bridges, the timing and the density.
+
+### H6. QA checks added
+Q15. Every dissolve: name the bridge shape and give its screen position in both shots; the caption layer is not inside the fade.
+Q16. No lip movement under plain narration; lips only on quoted speech.
+Q17. Each idea that used to need an overlay is listed with the device from H3 that replaced it.
+

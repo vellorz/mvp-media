@@ -11,22 +11,24 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Platform | Videos | Measured | Median watched | Median completion |
 |---|---|---|---|---|
-| TikTok | 36 | 14 | 4.2 s | 22.6% |
+| TikTok | 35 | 14 | 4.2 s | 22.6% |
 | Instagram | 34 | 15 | 4.7 s | 26.8% |
-| Facebook | 25 | 25 | 2.1 s | 13.3% |
+| Facebook | 25 | 24 | 2.1 s | 13.4% |
 | YouTube | 25 | 0 | not recorded | not recorded |
 
 ## Each video
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
+| Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 0 | not recorded | not recorded | — |
+| Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 0 | not recorded | 65.4 s | — |
 | Nov 10, 6:03 PM | TikTok | 02_tue_eiffel-tower.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706697475796602126) | not counted yet | not counted yet | not recorded | — |
-| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 672 | not available | 66.0 s | — |
-| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1019 | 34.6 s | not recorded | — |
+| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 828 | not available | 66.0 s | — |
+| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1153 | 34.6 s | not recorded | — |
 | Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 250 | 12.4 s | 66.2 s | 18.7% |
 | Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706326116595813645) | 100 | 16.7 s | not recorded | — |
 | Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1079 | not available | 67.0 s | — |
-| Nov 8, 7:02 PM | YouTube | The Copenhagen Harbour Where Fairy Tales Began #shorts (https://www.youtube.com/watch?v=6T8XoSWypVI) | 15 | not available | 17.0 s | — |
+| Nov 8, 7:02 PM | YouTube | The Copenhagen Harbour Where Fairy Tales Began #shorts (https://www.youtube.com/watch?v=6T8XoSWypVI) | 17 | not available | 17.0 s | — |
 | Nov 8, 7:02 PM | Instagram | 10_ronda.mp4 (https://www.instagram.com/reel/DfgGmeAFUxG/) | 20 | 2.9 s | 12.0 s | 24.2% |
 | Nov 8, 7:02 PM | TikTok | 6_copenhagen.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7705970424198286606) | 68 | 3.0 s | 16.8 s | 18.1% |
 | Nov 8, 7:01 PM | Facebook | 6_copenhagen.mp4 (https://www.facebook.com/reel/2401251877350550/) | 97 | 2.0 s | 16.8 s | 11.9% |
@@ -137,6 +139,3 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 12, 12:03 PM | Instagram | 6aca899c9e6c9891a291b472_transcoded.mp4 (https://www.instagram.com/reel/DeZucL2iC5Z/) | 4 | 2.3 s | not recorded | — |
 | Oct 12, 12:03 PM | TikTok | 7695827968010013966?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7695827968010013966?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 30 | 2.9 s | not recorded | — |
 | Oct 12, 12:02 PM | Facebook | 6aca899c9e6c9891a291b472_transcoded.mp4 (https://www.facebook.com/reel/1778866813321131/) | 6 | 1.2 s | 12.0 s | 10.0% |
-| Oct 11, 8:02 PM | Instagram | 6aca891876628b9f70907d0c_transcoded.mp4 (https://www.instagram.com/reel/DeYAS6kjNyV/) | 4 | 0.6 s | not recorded | — |
-| Oct 11, 8:00 PM | Facebook | 6aca891876628b9f70907d0c_transcoded.mp4 (https://www.facebook.com/reel/1412457897658707/) | 32 | 1.6 s | 12.0 s | 13.3% |
-| Oct 11, 8:00 PM | TikTok | 7695579933799714062?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7695579933799714062?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 32 | 2.0 s | not recorded | — |

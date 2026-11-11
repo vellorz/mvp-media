@@ -69,3 +69,6 @@ Engineering fixes found Nov 9 (apply in every new short): black flicker = (a) gr
 
 ## Rule 51 (owner, Nov 10 2026): DETAIL STANDARD
 51. "These videos are way more detailed than ours, so I want ours to become as detailed as theirs." Before building and before rendering, apply every rule, recipe and QA check in engine/cartoon-3d/DETAIL_STANDARD.md (>= 20 props per wide shot, three depth layers, no repeated tiles, no bare ground, visible light sources, scene palettes at 0.40-0.48 saturation, big acting characters, >= 5 object close-ups, travelling transitions, >= 8 sets) and run engine/cartoon-3d/render/detail_metrics.py on the render. Report the numbers in the Gate 2 note.
+
+## Rule 52 (owner, Nov 10 2026): BIGGER FRAMES, SECOND TEARDOWN
+52. "I want it to be higher quality, meaning each frame will be bigger in size and the video size will therefore also be larger." The master of every short is 2K (1440x2560, `--scale 1.3333 --crf 16`), and the full-quality file is what gets scheduled wherever the upload path allows. Apply DETAIL_STANDARD.md section G as well: at most 1 hard cut, pick a transition family, bridged dissolves, pose-to-pose acting with no tweened faces, one warm light source in every night shot, facts shown as in-world documents, cold open in motion, no outro. Run QA checks Q9-Q14.

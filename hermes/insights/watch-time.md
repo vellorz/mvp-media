@@ -22,9 +22,9 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 |---|---|---|---|---|---|---|
 | Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706945601526631693) | not counted yet | not counted yet | not recorded | — |
 | Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.3 s | not recorded | — |
-| Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 174 | 10.4 s | 65.4 s | 15.9% |
+| Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 178 | 10.4 s | 65.4 s | 15.9% |
 | Nov 10, 6:03 PM | TikTok | 02_tue_eiffel-tower.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706697475796602126?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 101 | 12.9 s | not recorded | — |
-| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 1195 | not available | 66.0 s | — |
+| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 1197 | not available | 66.0 s | — |
 | Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1160 | 36.7 s | not recorded | — |
 | Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 252 | 12.3 s | 66.2 s | 18.6% |
 | Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706326116595813645?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 141 | 19.3 s | not recorded | — |
@@ -56,7 +56,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 5, 9:02 PM | Instagram | 4_cambridge.mp4 (https://www.instagram.com/reel/DfYl-ETDZ4y/) | 203 | 6.3 s | 14.0 s | 44.8% |
 | Nov 5, 9:01 PM | Facebook | 4_cambridge.mp4 (https://www.facebook.com/reel/1625482582647758/) | 81 | 2.8 s | 14.0 s | 20.0% |
 | Nov 5, 4:02 PM | TikTok | 4_cambridge.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7704811107596209421?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 140 | 3.3 s | 14.0 s | 23.3% |
-| Nov 5, 4:02 PM | YouTube | Did Newton Build This Cambridge Bridge? (Myth Busted) #shorts (https://www.youtube.com/watch?v=Szok1WjHUiQ) | 32 | not available | 15.0 s | — |
+| Nov 5, 4:02 PM | YouTube | Did Newton Build This Cambridge Bridge? (Myth Busted) #shorts (https://www.youtube.com/watch?v=Szok1WjHUiQ) | 33 | not available | 15.0 s | — |
 | Nov 4, 9:03 PM | Instagram | 3_florence.mp4 (https://www.instagram.com/reel/DfWBXoVkgDb/) | 185 | 6.3 s | 18.4 s | 34.1% |
 | Nov 4, 9:01 PM | Facebook | 3_florence.mp4 (https://www.facebook.com/reel/1111026041779662/) | 21 | 1.3 s | 18.4 s | 7.1% |
 | Nov 4, 7:02 PM | TikTok | 3_florence.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7704486333493939469?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 162 | 4.5 s | 18.4 s | 24.2% |

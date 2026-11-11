@@ -13,8 +13,8 @@ Run `python3 engine/cartoon-3d/render/detail_metrics.py <video.mp4>` on the fini
 | Frame-to-frame change, median | 7.0 | 2.9 | >= 5.0 |
 | Edge density (drawn detail) | 34.6 % | 26 % | >= 32 %, and NOT from repeated tiles |
 | Mean saturation | 0.41 | 0.59 | 0.40-0.48 |
-| Hard cuts | 1 | 2-4 | <= 2 |
-| Shots | 27 in 65 s | ~14-18 | 22-28 per 60-70 s |
+| Hard cuts | 1 (0 in the second reference) | 2-4 | <= 1 |
+| Shots | 27 in 65 s (19 in 59.5 s in the second) | ~14-18 | 19-28 per 60-70 s, see G2 |
 | Distinct sets | 12 | 4-6 | >= 8 |
 | Insert close-ups of objects | 6 | 0-1 | >= 5 |
 | Props per wide shot | 25-30 | ~6 | >= 20 |
@@ -80,7 +80,7 @@ Q2. Stills sheet of every shot: count props (>= 20 wide / >= 6 close), confirm 3
 Q3. Tile check: no facade/ground with more than 3 identical neighbouring elements.
 Q4. Character-size check on every MS: head >= 18 % of frame width.
 Q5. Acting check: step through each character shot at 2 f intervals; fewer than 2 face changes per second = fix.
-Q6. Transition census: list every shot change with its recipe (T1-T7); more than 2 hard cuts or more than half plain dissolves = rework.
+Q6. Transition census: list every shot change with its recipe (T1-T19); more than 1 hard cut, or more than 2 dissolves without a bridge object (T10), = rework.
 Q7. Saturation check per set: mean saturation 0.40-0.48; any large flat pure-colour area (sky, ground) = repaint.
 Q8. More props means more z-fight risk: re-run rule 43 (grass/ground flicker routine) and the heat-map scrub after dressing each set.
 
@@ -99,3 +99,109 @@ Q8. More props means more z-fight risk: re-run rule 43 (grass/ground flicker rou
     Engineering cautions: stagger cards >= 0.25 m apart in depth (z-fight), keep world ink off painted cards (NOINK layer, they carry
     their own lines), paint at >= 2x the on-screen size of the closest camera so close-ups stay sharp, and plan camera moves so a card
     is never seen edge-on.
+
+## G. Second teardown, Nov 11 2026 (night-story reference, 59.5 s, every one of its 1,785 frames logged)
+Private notes and frame logs: project folder `research/reference-teardown-bell/`. No reference frames in this repo.
+What both teardowns agree on is a RULE. What only one does is a CHOICE that depends on the story.
+
+### G1. Consistent across both references (treat as rules)
+| Item | Day story (first teardown) | Night story (this one) | Rule for us |
+|---|---|---|---|
+| Frame-to-frame change, median | 7.0 | 7.1 | >= 5.0 stays the floor, 7.0 is the goal |
+| Hard cuts | 1 | 0 | <= 1. Replaces "<= 2" in section A |
+| Still frames | under 1 % | 0.4 % | no frozen frame anywhere |
+| Opening | in motion on frame 1 | in motion on frame 1, no cut for 3.4 s | cold open inside a camera move, no title |
+| Ending | on the last word | 16 frames after the last word starts, held smirk, hard stop | no outro, no fade, no call to action |
+| Words per second | about 3.7 | 3.7 | unchanged |
+| Loudness | | -14.0 LUFS, range 2.3 LU, peak -1.9 dBFS | -14 LUFS, range <= 3 LU |
+| Character acting | pose-to-pose | pose-to-pose | G3 below |
+
+### G2. Depends on the story (choose per short, say which in the Gate 2 note)
+- Transition family. Day story: whips, match-moves, crane reveals. Night story: 17 cross-dissolves and 1 fly-through-a-window, nothing else.
+  A quiet or eerie story takes the dissolve family (G4). A busy or comic story takes the whip family (T2, T4, T5). Do not mix evenly:
+  one family carries at least two thirds of the shot changes.
+- Shot count. 27 shots in 65 s (day) against 19 shots in 59.5 s (night). The night story has four one-take shots of 5-8.5 s that visit
+  3-5 subjects each. Target is now 19-28 shots, and a shot longer than 4 s must visit at least 3 subjects.
+- Saturation and edge density. Day 0.41 / 34.6 %. Night 0.52 / 28.1 %. Night scenes are two-colour pictures: a deep blue-violet world
+  (about #1B2A9E to #3B2FA8) plus ONE warm emitter (about #FFC463 to #F5A03C). Section A saturation 0.40-0.48 applies to daylight sets.
+  Night sets are allowed 0.48-0.55 when the picture is the blue + one warm source scheme, and edge density >= 28 %.
+- Depth of field. Outdoors everything is sharp. Indoors at night the background is blurred and focus is pulled between subjects in 4-7 f.
+
+### G3. Character acting (measured)
+- Face and pose changes are single-frame swaps, held 6-16 f. No in-between drawings and no motion blur on characters, even on a jump.
+- One payoff expression per short may get 4 in-between frames. Everything else pops.
+- Blinks last 2-3 f and sit on or just before a pose change, which hides the swap.
+- Anticipation is the only part that ramps: crouch 8 f, jump 2 f, hang 2 f, land. Dig: raise 2 f, contact 1 f, squash 1 f, pop 3 f,
+  overshoot to about 130 % for 1 f, settle with two small bobs over 8 f.
+- Deadpan contrast: in a two-character shot one acts every 1-2 f while the other is frozen except blinks and eye darts.
+- Background characters react 1-2 f AFTER the lead's line, never on the same frame.
+- A quoted in-world phrase may be mouthed by the character (5 mouth shapes, each held 2-7 f, starting 3-4 f after the word).
+- Character outline is about twice the weight of the set outline (about 6-8 px against 3-4 px at 1080 wide), fills are flat.
+  The scene's colour grade tints the card (skin goes lilac at night); the card is never left in its daylight colours.
+
+### G4. Dissolve-family recipes (frames at 30 fps)
+T10. BRIDGED DISSOLVE. 7-12 f, linear. Both cameras are already moving: the incoming shot starts its move 10 f before it is visible.
+     One bridge object sits at the same screen position in both shots (within about 2-10 % of frame width): bell to bell, head to head,
+     shovel to shovel, held paper to the notice on a door, lit window to a face. Replaces T3's "4-6 f" for this family.
+     A dissolve with no bridge object is allowed at most twice per short.
+T11. REALITY SWAP. Match-dissolve on a locked hero prop (7 f), hold 10 f, then pull back 24 f to show the prop now sits in a
+     different world (a model on a table, a picture on a wall).
+T12. FOLLOW THE LINE. A bright cord, pipe, rope or road stays in frame and the camera travels along it from subject A to subject B
+     in about 36 f (ease in 3, ease out 7).
+T13. THROUGH THE GLASS. Accelerating push at a window (1.5 to 4 % per frame). The next scene fades up inside the panes first, then
+     fills the frame. Or fly through the sash with 4 f of blur and bring a new foreground prop in from the edge within 2 f.
+T14. INSERT TO REVEAL. Start on a document or small prop filling 98 % of the width, pull straight back with ease-out for about 26 f
+     until the whole situation is in frame.
+T15. ORDERED EDGE REVEAL. One pull-back of about 40 f in which story items cross the frame edge one at a time, 2-5 f apart, in the
+     order the narration needs them.
+T16. PARK, THEN DISSOLVE. Empty the frame of characters, hold 18 f on one prop during a narration pause, then T10 on that prop.
+T17. POINTING ONE-TAKE. One room, the camera trucks between 3 subjects, each arrival lands on its noun, focus pulled 3-5 f ahead.
+T18. STILLNESS BEAT. Hold dead still for 10 f on a one-word line ("Wait."), then an accelerating push to an extreme close-up of
+     the clue. Legible hand-written detail in the texture at 2x so the push pays off.
+T19. GRADE RAMP. Time passing = the whole picture changes colour over about 17 f on a locked wide, starting on the time word.
+     Same room, two paint sets (night and day) also serves as a flashback with no caption.
+
+### G5. Light and effects (measured)
+- Every night shot has a visible warm emitter (window, candle, lantern, stove, doorway) with a soft halo and a glow pool on the
+  ground. Lights switch on as the event of a wide shot: each ramps over 3 f, near to far, 1-2 f apart.
+- The warm source may leave the frame during a move so the picture turns single-colour just before a reveal.
+- A fixed light shaft (soft additive quad from a window) crosses props and later the character's eyes. Use it to tag the clue.
+- During a push-in, darken everything except the destination.
+- Impacts leave fallout: 8-30 particles with gravity plus one puff that grows for 8 f and fades over 18 f. The fallout keeps
+  falling through the next action.
+- Pendulum props: 1 f kick, peak in 2 f, then damped swings (35, 30, 20, 10, 5 degrees, about 9 f per half swing).
+- A static hold gets one small independent mover: a bird, chimney smoke, falling snow in two sizes.
+
+### G6. Timing against the voice (measured over about 150 word events)
+- Picture event lands 0 to +1 f from the noun it shows. Camera moves start on a word. Background lights lead by 2-6 f.
+- First picture change after a sentence break may lead the word by 2-3 f.
+- Sound effects sit in the gaps between words. The music bed is about 20-28 dB under the voice (estimate). The story's own sound
+  (here a bell) returns in the last ten seconds.
+
+### G7. In-world documents instead of overlays (supports owner decision 2A)
+Every fact that we used to put on a card is a drawn object in the scene: a nameplate with dates, a certificate with typeset text and
+a stamp, a notice nailed to a door, tally marks and chalk dates on a wall, a price tag on a shovel. Text is real type, readable at the
+closest camera, and present in the set from the first frame.
+
+### G8. Output size and quality (owner, Nov 10: bigger frames, larger files)
+- The reference copies are 1080x1920, 30 fps, 4.6-5.2 Mbps (35-43 MB): that is the platform's re-encode, not the maker's master.
+- Our week-03 files were already 1080x1920 at 7.7-10.6 Mbps (69-100 MB). So file size was never the gap; drawn detail per frame is.
+- From the next short the master is 2K: 1440x2560, 30 fps, H.264 High, `--scale 1.3333 --crf 16`, audio AAC 320 kbps 48 kHz.
+  Expect about 130-250 MB per minute and roughly 1.8x the render time (estimate). Every pixel-sized post value scales with height / 1920.
+- Schedule the 2K master wherever the platform and tool accept it. A reduced copy is made only when an upload path has a size cap,
+  and it is never below 1080x1920 at 8 Mbps unless the cap forces it. Say in the Gate 2 note which file went where.
+- Paint textures, documents and character cards at 2x the size they reach in the closest 2K camera.
+
+### G9. Note on owner decision 6A (flat backdrops)
+The night-story reference shows true perspective change on houses, rooms, posts and windows during orbits and push-throughs, so its
+sets are simple 3D shapes carrying hand-drawn textures, with flat 2D characters. That fits 6A as written (flat art on cards and simple
+boxes, real 3D where the camera orbits or flies through). In practice: any room the camera trucks across, and any building the
+camera pushes into, is a box set with painted walls, not a single card.
+
+### G10. QA checks added
+Q9.  Transition census names the family (G2) and the bridge object of every dissolve; more than 2 unbridged dissolves = rework.
+Q10. Step every character shot frame by frame: any tweened face, or motion blur on a character = fix (G3).
+Q11. Every night shot: one warm emitter visible, halo and ground pool present, card tinted by the grade.
+Q12. Word-sync table for at least 20 events: picture within 0 to +1 f of its noun.
+Q13. First frame is already moving; last frame is within 20 f of the last word's start; no fade.
+Q14. ffprobe the master: 1440x2560, 30 fps, and report size and bitrate in the Gate 2 note.

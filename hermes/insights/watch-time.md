@@ -11,8 +11,8 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Platform | Videos | Measured | Median watched | Median completion |
 |---|---|---|---|---|
-| TikTok | 34 | 14 | 4.0 s | 23.1% |
-| Instagram | 32 | 15 | 4.7 s | 26.8% |
+| TikTok | 33 | 14 | 4.0 s | 23.1% |
+| Instagram | 31 | 15 | 4.7 s | 26.8% |
 | Facebook | 23 | 23 | 2.1 s | 13.3% |
 | YouTube | 25 | 0 | not recorded | not recorded |
 
@@ -20,15 +20,15 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2502 | not recorded | not recorded | — |
+| Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2502 | 39.5 s | not recorded | — |
 | Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 210 | 23.8 s | 69.3 s | 34.3% |
 | Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 1137 | not available | 70.0 s | — |
 | Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706945601526631693) | 1289 | 23.8 s | not recorded | — |
-| Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.2 s | not recorded | — |
+| Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.1 s | not recorded | — |
 | Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 226 | 8.6 s | 65.4 s | 13.1% |
 | Nov 10, 6:03 PM | TikTok | 02_tue_eiffel-tower.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706697475796602126?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1181 | 24.0 s | not recorded | — |
 | Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 1214 | not available | 66.0 s | — |
-| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1162 | 36.7 s | not recorded | — |
+| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1162 | 36.6 s | not recorded | — |
 | Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 252 | 12.3 s | 66.2 s | 18.6% |
 | Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706326116595813645?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 150 | 18.6 s | not recorded | — |
 | Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1085 | not available | 67.0 s | — |
@@ -132,5 +132,3 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 13, 8:00 PM | TikTok | 7696322087127993614?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696322087127993614?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 65 | 3.0 s | not recorded | — |
 | Oct 13, 4:01 PM | Instagram | 6ace663d3929a4719ae30bd7_transcoded.mp4 (https://www.instagram.com/reel/DecuZSmD_lR/) | 4 | 2.0 s | not recorded | — |
 | Oct 13, 4:00 PM | TikTok | 7696260230228872461?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696260230228872461?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 76 | 2.4 s | not recorded | — |
-| Oct 13, 12:09 PM | Instagram | 6acdcc4d23549bfafe1f77aa_transcoded.mp4 (https://www.instagram.com/reel/DecT1Q4ir0o/) | 4 | 0.9 s | not recorded | — |
-| Oct 13, 12:08 PM | TikTok | 7696200366815202573?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696200366815202573?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 30 | 1.7 s | not recorded | — |

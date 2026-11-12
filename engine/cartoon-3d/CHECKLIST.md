@@ -109,3 +109,13 @@ The new rules from the Chicago remake. They are owner corrections plus findings 
     - Quiet close-ups and the ending may sit at 12-18, like the references, as long as the average holds.
     - Raise weak shots with more DRAWN OBJECTS that belong to the place and story (props, set dressing, drawn textures on flat surfaces such as water, sand, ceilings and plank walls), never noise.
     - Every added object passes rules 53-71.
+73. A crane or pan never sweeps past large near objects (sails swept through the frame bottom). Kit trees near a high camera read as blurred green balls at the frame edge: skip them by region and keep the rng draws. A flying-bird card in a blurred sky reads as a grey saucer: leave it out.
+74. Sign lettering is fully in frame or fully out for a whole cut-to-cut shot (rule 64, automated in chicago2):
+    - World signs are listed in `SIGN_LIST` (city.ts). `World.signsFor` (world.ts) samples every second frame of the shot; any sign the frame edge cuts (signcut.ts, 9x3 grid) shows its blank board for the whole shot.
+    - Foreground hanging-sign cards must keep the whole board in frame for every frame of the shot and keep the bracket's wall end off-frame. Check with render/signscan/fg2.ts. A card that sweeps across the frame is removed (rule 73).
+    - Before a final render, run render/signscan/scan.ts to list the shots that blank signs and spot-check them.
+75. 2K final render (see render/run_2k_final.sh):
+    - Use `SCALE=1.3333333333333333` exactly.
+    - Run at most 2 browsers, concurrency 1 each, every frame single-layer (`ONLY=base`).
+    - Render the dissolve over-layers as PNGs (scripts/overframes.mjs) and blend them in render/assemble.py, which also logs the edge average of the real video.
+    - Background jobs die after 2 h, so run.sh is resumable: re-run it until both workers print DONE.

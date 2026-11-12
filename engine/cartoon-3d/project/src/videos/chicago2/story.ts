@@ -55,6 +55,8 @@ export const layersAt = (f: number): Layer[] => {
   return [{ id, alpha: 1 }];
 };
 const CAMS_REF = () => CAMS;
+/** frames where take `id` hard-cuts (rule 64 decides sign lettering once per cut-to-cut shot) */
+export const cutsOf = (id: number): number[] => (CAMS[id] ?? []).filter((k) => k.cut).map((k) => k.f);
 export const cutPre = (id: number, f: number, span = CUT_X): number | undefined => { for (const k of CAMS[id] ?? []) if (k.cut && f >= k.f && f < k.f + span) return k.f; return undefined; };
 
 // ---------------- legacy story state (kept for the shared world code) ----------------

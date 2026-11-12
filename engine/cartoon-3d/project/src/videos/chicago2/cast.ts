@@ -214,11 +214,11 @@ const blob = (out: Stage, x: number, y: number, z: number, sc = 1, k = 1) => {
 // ---------------- v3 foreground layer (teardown: a cropped, lens-blurred near prop in every shot) ----------------
 import { fxLantern, fxLamp, fxReeds, fxTeapot, fxBackHat, fxBarrel, fxSign, fxGeranium, fxCandle, fxFern, fxTrunk, fxScrew, fxGull, fxInkwell, fxDrape } from "./fx7";
 import { camAt } from "./story";
-type FgK = "lamp" | "reeds" | "teapot" | "backhat" | "barrel" | "sign" | "signDG" | "geranium" | "candle" | "fern" | "trunk" | "screw" | "gull" | "inkwell" | "drape";
+type FgK = "lamp" | "reeds" | "teapot" | "backhat" | "barrel" | "sign" | "signR" | "signDG" | "geranium" | "candle" | "fern" | "trunk" | "screw" | "gull" | "inkwell" | "drape";
 const FGART: Record<FgK, [number, number, (p: Pen, t: number) => void]> = {
   lamp: [300, 1000, (p) => fxLamp(p, 0)], reeds: [600, 800, (p) => fxReeds(p)], teapot: [600, 500, (p) => fxTeapot(p)],
-  backhat: [700, 700, (p) => fxBackHat(p)], barrel: [500, 620, (p) => fxBarrel(p)], sign: [760, 520, (p) => fxSign(p, "HARDWARE", "#6a2f2f")],
-  signDG: [760, 520, (p) => fxSign(p, "DRY GOODS")], geranium: [520, 520, (p) => fxGeranium(p)], candle: [520, 760, (p) => fxCandle(p)],
+  backhat: [700, 700, (p) => fxBackHat(p)], barrel: [500, 620, (p) => fxBarrel(p)], sign: [760, 520, (p) => fxSign(p, "HARDWARE", "#6a2f2f")], signR: [1000, 520, (p) => fxSign(p, "HARDWARE", "#6a2f2f", true, 1000)],
+  signDG: [760, 520, (p) => fxSign(p, "DRY GOODS", "#2f4f3a", true)], geranium: [520, 520, (p) => fxGeranium(p)], candle: [520, 760, (p) => fxCandle(p)],
   fern: [700, 800, (p) => fxFern(p)], trunk: [760, 520, (p) => fxTrunk(p)], screw: [500, 900, (p) => fxScrew(p)],
   gull: [500, 300, (p, t) => fxGull(p, t)], inkwell: [640, 600, (p) => fxInkwell(p)], drape: [400, 1000, (p) => fxDrape(p)],
 };
@@ -232,15 +232,15 @@ const FG: [number, number, number, FgK, number, number, number, number][] = [
   [5, 384, 468, "lamp", -1.0, 0.0, 1.7, 0.3],
 
   [7, 572, 676, "drape", -0.93, 0.05, 1.3, 0.34],
-  [8, 701, 752, "sign", -0.7, 0.72, 3.2, 0.55], [8, 752, 836, "barrel", 0.82, -0.72, 1.4, 0.45], [8, 836, 880, "sign", 0.75, 0.75, 2.4, 0.5],
-  [9, 872, 902, "signDG", 0.78, 0.72, 2.4, 0.55], [9, 985, 1052, "barrel", -0.86, -0.7, 1.2, 0.42], [9, 1052, 1097, "barrel", 0.8, -0.74, 1.2, 0.42] /* v17 rule 59: the lamp crossed the baker after the reframe */,
+  /* v20 rules 64+73: the f701 and f872 hanging-sign cards swept across the frame (lettering cut on the way): removed */ [8, 752, 836, "barrel", 0.82, -0.72, 1.4, 0.45], [8, 836, 880, "signR", 0.64, 0.62, 2.4, 0.66] /* v20 rule 64: board fully in frame through the push-in, wall end of the bracket off-frame right */,
+  [9, 985, 1052, "barrel", -0.86, -0.7, 1.2, 0.42], [9, 1052, 1097, "barrel", 0.8, -0.74, 1.2, 0.42] /* v17 rule 59: the lamp crossed the baker after the reframe */,
   [10, 1089, 1150, "gull", 0.45, 0.45, 3.5, 0.32], [10, 1150, 1196, "lamp", 0.84, 0.0, 2.2, 0.3], [10, 1196, 1250, "screw", -0.82, -0.3, 1.5, 0.42], [10, 1250, 1298, "screw", 0.84, -0.3, 1.0, 0.42],
   [11, 1326, 1355, "drape", 0.9, 0.0, 1.0, 0.36],
   [12, 1347, 1444, "lamp", 0.86, 0.0, 1.6, 0.3], [12, 1444, 1478, "geranium", -0.8, -0.82, 0.8, 0.5],
   [13, 1470, 1585, "fern", -0.82, -0.42, 1.4, 0.5],
   [14, 1577, 1620, "lamp", -0.86, 0.0, 2.0, 0.3], [14, 1650, 1730, "trunk", 0.74, -0.8, 1.2, 0.55],
   [15, 1722, 1782, "gull", -0.4, 0.5, 4.0, 0.3], [15, 1782, 1823, "reeds", -0.78, -0.74, 1.2, 0.65],
-  [16, 1815, 1858, "gull", 0.45, 0.4, 4.0, 0.3], [16, 1858, TOTAL_F, "gull", -0.5, 0.45, 5.0, 0.28],
+  /* v19f: take-16 gulls read as a grey blurred saucer in the sunset sky, removed */
 ];
 const fgF = new THREE.Vector3(), fgR = new THREE.Vector3(), fgU = new THREE.Vector3(), fgUp = new THREE.Vector3(0, 1, 0);
 const foreground = (out: Stage, id: number, t: number) => {

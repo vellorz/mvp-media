@@ -63,15 +63,18 @@ export const fxBarrel = (p: Pen) => {
 };
 
 /** a hanging shop sign on an iron bracket. 760 x 520. words on the board (Lake Street trades) */
-export const fxSign = (p: Pen, word: string, col = "#2f4f3a") => {
-  p.line([[0, 40], [700, 40]], "#2f3540", 14);
-  p.arc(560, 40, 120, 120, 0, 90, 8, "#2f3540");
-  for (const x of [140, 600]) p.stroke([[x, 40], [x, 150]], 5, "#2f3540");
-  p.poly([[90, 150], [650, 150], [650, 470], [90, 470]], col, 8);
-  p.poly([[115, 175], [625, 175], [625, 445], [115, 445]], null, 0); p.stroke([[115, 175], [625, 175], [625, 445], [115, 445], [115, 175]], 5, "#d9b04a");
+export const fxSign = (p: Pen, word: string, col = "#2f4f3a", flip = false, W = 760) => {
+  // flip: the iron bracket comes in from the RIGHT card edge (the wall is off-frame right) and the lettering stays readable;
+  // W > 760 lengthens the bracket arm (board moved away from the wall end) so a push-in keeps the wall end off-frame
+  const S = W - 760, X = (x: number) => { const o = x === 0 ? 0 : x + S; return flip ? W - o : o; }, Q = (pts: [number, number][]) => pts.map(([x, y]) => [X(x), y] as [number, number]);
+  p.line(Q([[0, 40], [700, 40]]), "#2f3540", 14);
+  if (flip) p.arc(X(560), 40, 120, 120, 90, 180, 8, "#2f3540"); else p.arc(560 + S, 40, 120, 120, 0, 90, 8, "#2f3540");
+  for (const x of [140, 600]) p.stroke(Q([[x, 40], [x, 150]]), 5, "#2f3540");
+  p.poly(Q([[90, 150], [650, 150], [650, 470], [90, 470]]), col, 8);
+  p.stroke(Q([[115, 175], [625, 175], [625, 445], [115, 445], [115, 175]]), 5, "#d9b04a");
   const g = p.g; let z = 120; g.font = `bold ${z}px ${SERIF}`;
   while (g.measureText(word).width > 470 && z > 20) { z -= 4; g.font = `bold ${z}px ${SERIF}`; }
-  g.textAlign = "center"; g.textBaseline = "middle"; g.fillStyle = "#f0dca0"; g.fillText(word, 370, 312);
+  g.textAlign = "center"; g.textBaseline = "middle"; g.fillStyle = "#f0dca0"; g.fillText(word, X(370), 312);
 };
 
 /** a clay pot of red geraniums (sill / steps prop). 520 x 520 */

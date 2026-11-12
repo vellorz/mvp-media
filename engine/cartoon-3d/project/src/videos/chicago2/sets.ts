@@ -287,7 +287,7 @@ export const buildSets = (root: THREE.Object3D, kit: Kit, rays: Ray[], tre: THRE
         g.beginPath(); g.arc(cx, cy, 9, 0, 6.28); g.stroke(); g.beginPath(); g.arc(cx, cy, 40, 0, 6.28); g.stroke(); }
     }) })));
     // a patterned rug under the couch, a framed picture over it, a lamp on a side table, a fern, a mantel clock
-    box(b, matTex("cRugM", carpetT(), 2, 1), R.x - 2.4, D0 + 0.035, z1 - 3.4, R.x + 2.4, D0 + 0.05, z1 - 0.3);
+    box(b, matTex("cRugM", carpetT(), 2, 1.5), R.x - 2.4, D0 + 0.035, z1 - 5.2, R.x + 2.4, D0 + 0.05, z1 - 0.3); // v19: the rug runs on toward the lens (the bare near boards were the flattest part of the couch wide)
     box(b, M.brass(), R.x - 0.9, D0 + 1.85, z1 - 0.06, R.x + 0.9, D0 + 2.85, z1 - 0.02);
     box(b, lam("cPictureM", () => ({ map: streetViewT() })), R.x - 0.8, D0 + 1.93, z1 - 0.075, R.x + 0.8, D0 + 2.77, z1 - 0.06);
     const tx = R.x + 2.2, tz = z1 - 0.8;
@@ -446,8 +446,9 @@ export const buildSets = (root: THREE.Object3D, kit: Kit, rays: Ray[], tre: THRE
       const n = 6 + Math.floor(r() * 10);
       for (let k = 0; k < n; k++) {
         const h = 0.7 + r() * 1.1, x = cx + (r() - 0.5) * 0.9, z = cz + (r() - 0.5) * 0.9;
-        const g = new THREE.ConeGeometry(0.025, h, 4); g.rotateZ((r() - 0.5) * 0.35); g.translate(x, D0 + h / 2, z); b.add(g, k % 3 ? reedM : reedD);
-        if (k % 4 === 0) cyl(b, cattail, x, D0 + h * 0.82, z, 0.035, 0.035, 0.18, 6);
+        const tilt = (r() - 0.5) * 0.35, g = new THREE.ConeGeometry(0.025, h, 4); g.rotateZ(tilt); g.translate(x, D0 + h / 2, z); b.add(g, k % 3 ? reedM : reedD);
+        // v20 (rule 67/71): the cattail head sits ON the tilted stem (it floated beside it when placed straight up)
+        if (k % 4 === 0) { const hd = new THREE.CylinderGeometry(0.035, 0.035, 0.18, 6); hd.rotateZ(tilt); hd.translate(x - Math.sin(tilt) * h * 0.32, D0 + h / 2 + Math.cos(tilt) * h * 0.32, z); b.add(hd, cattail); }
       }
     }
     // a plank boardwalk on stilts, shacks on stilts, a rowboat, barrels, a laundry line, a crooked fence
@@ -527,6 +528,23 @@ export const buildSets = (root: THREE.Object3D, kit: Kit, rays: Ray[], tre: THRE
     cyl(b, lam("cGlassC", () => ({ color: "#bfd6e0" })), tx1 - 0.35, ty, tz1 - 0.3, 0.07, 0.05, 0.26, 12);
     for (const gx of [tx1 - 0.6, tx1 - 0.75]) cyl(b, lam("cGlassC", () => ({ color: "#bfd6e0" })), gx, ty, tz1 - 0.25, 0.035, 0.03, 0.1, 10);
     cyl(b, M.brass(), tx0 + 0.3, ty, tz1 - 0.3, 0.06, 0.03, 0.08, 10);
+    // v19: a damask table runner across the table under the model and the drafting tools (the near strip the inserts look down
+    // was a bare green field); burgundy with gold motifs, a woven border and gold fringe at both ends
+    { const runT = ctex("cRunnerT", 256, 1024, (g) => {
+        g.fillStyle = "#7a2430"; g.fillRect(0, 0, 256, 1024);
+        g.strokeStyle = "#c9a24a"; g.lineWidth = 6; g.strokeRect(10, 10, 236, 1004); g.lineWidth = 2.5; g.strokeRect(22, 22, 212, 980);
+        for (let y = 32; y < 1000; y += 14) { g.fillStyle = "#c9a24a"; g.beginPath(); g.arc(16, y, 2.2, 0, 6.28); g.arc(240, y, 2.2, 0, 6.28); g.fill(); }
+        for (let row = 0; row < 9; row++) for (let col = 0; col < 2; col++) {
+          const cx = 74 + col * 108 + (row % 2) * 0, cy = 70 + row * 110; g.strokeStyle = "#d9b45a"; g.fillStyle = "#9a3440"; g.lineWidth = 3;
+          g.beginPath(); g.moveTo(cx, cy - 34); g.quadraticCurveTo(cx + 26, cy - 10, cx, cy + 34); g.quadraticCurveTo(cx - 26, cy - 10, cx, cy - 34); g.fill(); g.stroke();
+          g.beginPath(); g.arc(cx, cy - 4, 7, 0, 6.28); g.stroke();
+          for (const sx of [-1, 1]) { g.beginPath(); g.moveTo(cx + sx * 8, cy + 14); g.quadraticCurveTo(cx + sx * 30, cy + 10, cx + sx * 36, cy - 12); g.stroke(); }
+        }
+      });
+      const rx0 = R.x - 0.42, rx1 = R.x + 0.78;
+      box(b, lam("cRunner", () => ({ map: runT, emissive: new THREE.Color(0.3, 0.3, 0.3), emissiveMap: runT })), rx0, ty, tz0 - 0.02, rx1, ty + 0.0025, tz1 + 0.02);
+      for (const z of [tz0 - 0.02, tz1 + 0.02]) for (let x = rx0 + 0.02; x < rx1; x += 0.045) bar(b, M.brass(), V(x, ty, z), V(x, ty - 0.07, z + (z < R.z ? -0.005 : 0.005)), 0.006);
+    }
     // v17 (owner Nov 12: council room needs more drawn objects): ledgers, a book stack, a candlestick with a lit candle (visible
     // light source, D5), a gavel on its block, rolled plans, a pen tray, spectacles. Kept clear of the model (|x - R.x| > 0.8)
     const ledgerT = ctex("cLedgerT", 256, 160, (g) => { g.fillStyle = "#f2ead6"; g.fillRect(0, 0, 256, 160); g.fillStyle = "#5a2a24"; g.fillRect(124, 0, 8, 160); g.strokeStyle = "#5a6a8a"; g.lineWidth = 2; for (let y = 22; y < 150; y += 12) { g.beginPath(); g.moveTo(12, y); g.lineTo(116, y); g.moveTo(140, y); g.lineTo(244, y); g.stroke(); } g.strokeStyle = "#a8322c"; g.beginPath(); g.moveTo(40, 10); g.lineTo(40, 152); g.moveTo(168, 10); g.lineTo(168, 152); g.stroke(); g.strokeStyle = "#241726"; g.lineWidth = 4; g.strokeRect(2, 2, 252, 156); });
@@ -643,6 +661,18 @@ export const buildSets = (root: THREE.Object3D, kit: Kit, rays: Ray[], tre: THRE
       if (i % 2 === 0) cask(x - 0.2, 125.2); else crib(x, 125.2, 5);
     });
     crib(13.6, 117.3, 3); cask(13.4, 114.0); pail(13.9, 114.5); plank(12.8, 115.0, 1.2); coil(14.0, 118.6);
+    // v19f (edge floor): the trodden work floor is drawn (boot prints, wood chips, pebbles, wheel ruts, cracks), a flat
+    // alpha-tested decal just over the mud so the plain ground under the hotel reads as a busy site
+    { const dt = ctex("cWorkFloorT", 1024, 1024, (g, rr) => {
+        g.clearRect(0, 0, 1024, 1024); g.lineCap = "round";
+        g.strokeStyle = "#5a4028"; g.lineWidth = 5; for (const y0 of [300, 360]) { g.beginPath(); g.moveTo(0, y0); for (let x = 0; x <= 1024; x += 64) g.lineTo(x, y0 + Math.sin(x * 0.01) * 14); g.stroke(); }
+        for (let k = 0; k < 40; k++) { const x = rr() * 1024, y = rr() * 1024, a = rr() * 6.28; g.save(); g.translate(x, y); g.rotate(a); g.fillStyle = "rgba(70,48,28,0.75)"; g.beginPath(); g.ellipse(0, 0, 9, 18, 0, 0, 6.29); g.fill(); g.beginPath(); g.ellipse(0, 26, 8, 9, 0, 0, 6.29); g.fill(); g.restore(); }
+        for (let k = 0; k < 120; k++) { const x = rr() * 1024, y = rr() * 1024, a = rr() * 6.28, l = 10 + rr() * 22; g.strokeStyle = rr() < 0.5 ? "#d9b878" : "#a07a48"; g.lineWidth = 5; g.beginPath(); g.moveTo(x, y); g.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l); g.stroke(); }
+        for (let k = 0; k < 90; k++) { const x = rr() * 1024, y = rr() * 1024, rd = 4 + rr() * 8; g.fillStyle = rr() < 0.5 ? "#b8ad9a" : "#8a8070"; g.strokeStyle = "#2a1e24"; g.lineWidth = 2.5; g.beginPath(); g.ellipse(x, y, rd * 1.3, rd, rr() * 3, 0, 6.29); g.fill(); g.stroke(); }
+        g.strokeStyle = "#3a2a1c"; g.lineWidth = 3; for (let k = 0; k < 14; k++) { let x = rr() * 1024, y = rr() * 1024; g.beginPath(); g.moveTo(x, y); for (let j = 0; j < 4; j++) { x += (rr() - 0.5) * 60; y += 15 + rr() * 25; g.lineTo(x, y); } g.stroke(); }
+      }); dt.wrapS = dt.wrapT = THREE.RepeatWrapping; dt.repeat.set(7, 5);
+      const fl = new THREE.PlaneGeometry(30, 20); fl.rotateX(-Math.PI / 2); fl.translate(0, D0 + 0.012, 121); // inside the hotel footprint (TRE x -15..15, z 111..131)
+      b.add(fl, lam("cWorkFloor", () => ({ map: dt, transparent: true, alphaTest: 0.35, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 }))); }
   });
   // v17 (owner Nov 12: more drawn objects on the water): the lake beyond the shore close-up and the river ending gets a pier on
   // pilings, moored schooners with sails, a lighthouse with a lit lamp, buoys and mooring posts (teardown: every layer dressed)
@@ -657,22 +687,31 @@ export const buildSets = (root: THREE.Object3D, kit: Kit, rays: Ray[], tre: THRE
     // schooners at anchor
     const schooner = (x: number, z: number, L: number, yaw: number) => {
       const c = Math.cos(yaw), sn = Math.sin(yaw), P = (u: number, y: number, v: number) => V(x + u * c - v * sn, y, z + u * sn + v * c);
-      const hull = new THREE.BoxGeometry(L, 1.1, L * 0.24); hull.rotateY(-yaw); hull.translate(x, wl + 0.35, z); b.add(hull, hullM);
-      const rail = new THREE.BoxGeometry(L * 1.01, 0.12, L * 0.25); rail.rotateY(-yaw); rail.translate(x, wl + 0.92, z); b.add(rail, lam("cHullT", () => ({ color: "#d9c79a" })));
+      const hull = new THREE.BoxGeometry(L, 1.1, L * 0.24); hull.rotateY(-yaw); hull.translate(x, wl + 0.2, z); b.add(hull, hullM); // v19: hull sunk 0.4 m into the water so it never reads as a slab sitting on it
+      const rail = new THREE.BoxGeometry(L * 1.01, 0.12, L * 0.25); rail.rotateY(-yaw); rail.translate(x, wl + 0.77, z); b.add(rail, lam("cHullT", () => ({ color: "#d9c79a" })));
       for (const m of [-0.22, 0.2]) {
-        const top = P(m * L, wl + L * 0.95, 0), bot = P(m * L, wl + 0.9, 0); pole(b, M.woodD(), bot, top, 0.07);
+        const top = P(m * L, wl + L * 0.95, 0), bot = P(m * L, wl + 0.75, 0); pole(b, M.woodD(), bot, top, 0.07);
         const s0 = P(m * L + 0.3, wl + 1.3, 0), s1 = P(m * L + L * 0.3, wl + 1.3, 0), s2 = P(m * L + 0.3, wl + L * 0.85, 0);
         const g = new THREE.BufferGeometry().setFromPoints([s0, s1, s2]); g.setIndex([0, 1, 2]); g.computeVertexNormals(); b.add(g, sailM);
       }
-      bar(b, M.woodD(), P(L * 0.5, wl + 0.9, 0), P(L * 0.75, wl + 1.6, 0), 0.04);
+      bar(b, M.woodD(), P(L * 0.5, wl + 0.75, 0), P(L * 0.75, wl + 1.45, 0), 0.04);
     };
     // the river for the ending (take 16 looks west up it): schooners moored along both quays, a lumber barge, mooring piles
-    schooner(146, -16, 10, 0.05); schooner(124, -15.5, 8, -0.08); schooner(118, 24, 9, 0.1); schooner(140, 25, 11, -0.05);
+    /* v19f: (146,-16) + (124,-15.5) removed, the ending crane swept over them as cut sails */ schooner(118, 24, 9, 0.1); schooner(140, 25, 11, -0.05);
     // v19: the ending camera (f1823-2200) looks NW across the river from x 108-144, z -19..-56: schooners moored on both quays in view
     schooner(95, 24.4, 10, 0.03); schooner(82, 24.6, 8, -0.04); schooner(104, -15.4, 9, -0.04); schooner(88, -15.6, 7, 0.06);
     // (v17 self-review: a lumber barge here read as grey boxes floating on the water at the ending, removed)
     for (let x = 96; x < 166; x += 4.5) { cyl(b, M.woodD(), x, wl - 0.4, -18.4, 0.16, 0.16, 2.2, 8); cyl(b, M.woodD(), x + 1.6, wl - 0.4, 27, 0.16, 0.16, 2.2, 8); }
     schooner(205, 78, 9, 0.5); schooner(232, 62, 11, -0.3); schooner(190, 105, 8, 1.1); schooner(260, 95, 12, 0.2); schooner(176, 70, 7, 2.6);
+    // v19: the ending crane (f1880-1960) passes over the south quay top (z < -30.5): bollards along the parapet, barrels, crates,
+    // a tarp-covered cargo pile and rope coils, all standing on the quay at D0
+    { const G = D0 + 0.01, rope = lam("cRope3", () => ({ color: "#b89a6a" })), tarp = lam("cTarp", () => ({ color: "#6a6a4a" }));
+      for (let x = 94; x <= 118; x += 4) { cyl(b, M.iron(), x, G, -31.0, 0.16, 0.2, 0.55, 10); cyl(b, M.iron(), x, G + 0.55, -31.0, 0.22, 0.22, 0.08, 10); }
+      for (const [x, z] of [[97.2, -32.2], [97.9, -32.6], [97.5, -33.3], [109.4, -32.4], [110.1, -32.1]] as const) { cyl(b, lam("cBarrel", () => ({ color: "#9a6a3a" })), x, G, z, 0.3, 0.3, 0.85, 14); for (const y of [0.15, 0.68]) cyl(b, M.iron(), x, G + y, z, 0.31, 0.31, 0.05, 14); }
+      for (const [x, z, s2, y0] of [[101.0, -32.4, 0.4, 0], [101.9, -32.6, 0.35, 0], [101.4, -32.5, 0.3, 0.8]] as const) { box(b, M.wood(), x - s2, G + y0, z - s2, x + s2, G + y0 + s2 * 2, z + s2); for (const d of [-0.55, 0.55]) box(b, M.woodD(), x - s2 - 0.01, G + y0 + 0.05, z + d * s2 - 0.03, x + s2 + 0.01, G + y0 + s2 * 2 - 0.05, z + d * s2 + 0.03); }
+      box(b, tarp, 104.4, G, -33.6, 107.0, G + 0.9, -31.9); for (const x of [104.9, 105.7, 106.5]) bar(b, rope, V(x, G + 0.92, -33.62), V(x, G + 0.92, -31.88), 0.02);
+      for (const [x, z] of [[99.4, -31.9], [112.5, -32.0], [115.6, -32.2]] as const) for (let k = 0; k < 4; k++) { const t2 = new THREE.TorusGeometry(0.3 - k * 0.05, 0.035, 6, 20); t2.rotateX(Math.PI / 2); t2.translate(x, G + 0.035 + k * 0.06, z); b.add(t2, rope); }
+    }
     // lighthouse on a stone crib out in the lake
     box(b, lam("cCribStone", () => ({ color: "#8a8478" })), 236, wl - 0.5, 118, 244, D0 + 1.2, 126);
     cyl(b, M.white(), 240, D0 + 1.2, 122, 1.5, 1.1, 9, 16); for (const y of [3, 6]) cyl(b, M.red(), 240, D0 + 1.2 + y, 122, 1.4 - y * 0.04, 1.38 - y * 0.04, 0.8, 16);
@@ -721,13 +760,7 @@ export const buildSets = (root: THREE.Object3D, kit: Kit, rays: Ray[], tre: THRE
     for (const sz of [-0.52, 0.52]) { const w = new THREE.TorusGeometry(0.45, 0.04, 8, 22); w.translate(hx, G + 0.45, hz + sz); b.add(w, M.woodD()); for (let k = 0; k < 4; k++) { const a = (k / 4) * Math.PI; bar(b, M.woodD(), V(hx + Math.cos(a) * 0.43, G + 0.45 + Math.sin(a) * 0.43, hz + sz), V(hx - Math.cos(a) * 0.43, G + 0.45 - Math.sin(a) * 0.43, hz + sz), 0.015); } }
     bar(b, M.wood(), V(hx - 0.7, G + 0.6, hz - 0.3), V(hx - 1.6, G + 0.05, hz - 0.3), 0.03); bar(b, M.wood(), V(hx - 0.7, G + 0.6, hz + 0.3), V(hx - 1.6, G + 0.05, hz + 0.3), 0.03);
     // (v18 self-review: a hitching rail read as a bar through the doctor's waist, removed)
-    // v19: the doctor's wide (f390-415) shows an empty yard beside him: barrels + a crate stack screen-right of his body, under the
-    // raised glass, on the yard ground (z > 111). (A parked wagon was tried: its sideboards would cross behind his chest, rule 69.)
-    {
-      for (const [bx, bz] of [[38.4, 113.0], [38.95, 113.3]] as const) { cyl(b, lam("cBarrel", () => ({ color: "#9a6a3a" })), bx, G, bz, 0.26, 0.26, 0.7, 14); for (const y of [0.12, 0.55]) cyl(b, M.iron(), bx, G + y, bz, 0.27, 0.27, 0.05, 14); }
-      box(b, M.wood(), 37.6, G, 113.4, 38.2, G + 0.5, 114.0); box(b, M.wood(), 37.7, G + 0.5, 113.5, 38.1, G + 0.85, 113.9);
-      for (const [x0, y0, x1, y1] of [[37.6, 0, 38.2, 0.5], [37.7, 0.5, 38.1, 0.85]] as const) box(b, M.woodD(), x0 - 0.01, G + y0 + 0.04, 113.38, x1 + 0.01, G + y1 - 0.04, 113.42);
-    }
+    // (v19 self-review: barrels + crates tried in the yard beside the doctor touched his raised glass from below, rule 59: removed)
   });
   void TRE;
   setSight([]);

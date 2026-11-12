@@ -19,7 +19,8 @@ import { LensBlur, GrainEffect } from "./lensblur";
 import { GradeEffect, GRADES, GRADE_STRENGTH, gradeFor, todFor } from "./grade";
 import { Kit } from "./build";
 import { SHOTS, POSTER_AT, dofAt, cutPre, DAYS, FPS as FPS_S } from "./story";
-import { NEW_TOTAL, NEW_FLASH_AT, NEW_POSTER_AT, SEGS, segLayers, oldOf } from "./remap";
+import { NEW_TOTAL, NEW_FLASH_AT, NEW_POSTER_AT } from "./remap";
+import { layersFor } from "./layers";
 import { Img, staticFile, interpolate, Easing } from "remotion";
 
 export const CHICAGO2_FRAMES = NEW_TOTAL;
@@ -172,22 +173,19 @@ const Captions: React.FC<{ f: number }> = ({ f }) => {
 };
 
 export const ChicagoV2Short: React.FC = () => {
-  const n = useCurrentFrame();
+  // 2K split render: inputProps `frames` maps output frame i to timeline frame frames[i] (renders only the dissolve frames)
+  const cf = useCurrentFrame(), fl = (getInputProps() as { frames?: number[] }).frames, n = fl ? fl[Math.min(cf, fl.length - 1)] : cf;
   const kit = useKit();
   useCaptionFont();
   if (!kit) return null;
   const flash = n >= NEW_FLASH_AT && n < NEW_FLASH_AT + 4 ? [1, 0.75, 0.45, 0.2][n - NEW_FLASH_AT] : 0;
   const end = n >= NEW_POSTER_AT + 14; // once the end card covers the frame, the 3D world stops rendering
-  // layers: segment dissolves from the new timeline; inside one segment, in-shot camera cuts dissolve too
-  type L = { id: number; of: number; alpha: number; pre?: number };
-  const segs = segLayers(Math.min(n, NEW_POSTER_AT + 13));
-  let layers: L[] = segs.map((l) => ({ id: SEGS[l.seg].shot, of: l.old, alpha: l.alpha }));
-  if (layers.length === 1) {
-    const { id, of } = layers[0], si = segs[0].seg;
-    // cut dissolve lasts 6 new frames whatever the local speed of the old timeline
-    const rate = Math.max(0.2, oldOf(si, n + 1) - oldOf(si, n)), pre = cutPre(id, of, 9 * rate);
-    if (pre !== undefined) layers = [{ id, of, alpha: 1, pre }, { id, of, alpha: Math.min(1, (of - pre) / (9 * rate) + 1 / 10) }];
-  }
+  // layers: segment dissolves + in-shot cut dissolves (layers.ts). 2K split render: inputProps `only` draws one layer at
+  // full opacity ("base" = first, "over" = second), so no frame needs two WebGL contexts; the two are blended afterwards
+  const only = (getInputProps() as { only?: "base" | "over" }).only;
+  let layers = layersFor(n);
+  if (only === "base") layers = [{ ...layers[0], alpha: 1 }];
+  else if (only === "over") layers = [{ ...layers[layers.length - 1], alpha: 1 }];
   const fEnd = POSTER_AT + (n - NEW_POSTER_AT);
   return (
     <AbsoluteFill style={{ background: "#cfe3f2" }}>

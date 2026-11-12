@@ -35,9 +35,12 @@ const signTex = (s: string, bg: string, fg: string, w = 1024, h = 192) => ctex("
 const signMat = (s: string, bg = "#2f4a3a", fg = "#f2e3b8") => {
   const key = "signM" + s + bg;
   let m = SIGNS.get(key);
-  if (!m) { m = new THREE.MeshBasicMaterial({ map: signTex(s, bg, fg) }); SIGNS.set(key, m); }
+  if (!m) { m = new THREE.MeshBasicMaterial({ map: signTex(s, bg, fg) }); m.userData.full = m.map; m.userData.blank = signTex("", bg, fg); SIGNS.set(key, m); }
   return m;
 };
+/** rule 64: every lettered sign in the world, so a shot that would crop its lettering shows the board blank instead */
+export type SignRec = { m: THREE.MeshBasicMaterial; c: [number, number, number][]; which?: "tre" | "b58" | "blk" };
+export const SIGN_LIST: SignRec[] = [];
 const SIGNS = new Map<string, THREE.MeshBasicMaterial>();
 
 // ---------------- grid ----------------
@@ -107,6 +110,7 @@ const block = (b: Batch, x0: number, x1: number, zf: number, dir: 1 | -1, d: num
     const g = dir > 0 ? quad(V(cx - sw / 2, y + 2.5, zz), V(cx + sw / 2, y + 2.5, zz), V(cx + sw / 2, y + 3.4, zz), V(cx - sw / 2, y + 3.4, zz))
       : quad(V(cx + sw / 2, y + 2.5, zz), V(cx - sw / 2, y + 2.5, zz), V(cx - sw / 2, y + 3.4, zz), V(cx + sw / 2, y + 3.4, zz));
     b.add(g, signMat(o.sign, o.signBg));
+    SIGN_LIST.push({ m: signMat(o.sign, o.signBg), c: [[cx - sw / 2, y + 2.5, zz], [cx + sw / 2, y + 2.5, zz], [cx - sw / 2, y + 3.4, zz], [cx + sw / 2, y + 3.4, zz]], which: o.key === "b58" ? "b58" : o.key?.startsWith("blk") ? "blk" : undefined });
     // v6: the frame box stops 3 cm BEHIND the sign face on both street sides (on north-row blocks, dir -1, it used to
     // stick out in front and hide every sign behind a blank cream board with inked dashes)
     const zIn = zz - dir * 0.03;
@@ -273,6 +277,7 @@ export const buildCity = (root: THREE.Object3D, kit: Kit, rays: Ray[]) => {
     // name board on the parapet + a flag
     const zz = TRE.z - 0.42;
     tb.add(quad(V(7, TRE.h + 0.2, zz), V(-7, TRE.h + 0.2, zz), V(-7, TRE.h + 1.9, zz), V(7, TRE.h + 1.9, zz)), signMat("TREMONT HOUSE", "#f4ead2", "#2b2830"));
+    SIGN_LIST.push({ m: signMat("TREMONT HOUSE", "#f4ead2", "#2b2830"), c: [[7, TRE.h + 0.2, zz], [-7, TRE.h + 0.2, zz], [-7, TRE.h + 1.9, zz], [7, TRE.h + 1.9, zz]], which: "tre" });
     tb.add(boxGeo(V(-7.2, TRE.h + 0.1, zz + 0.02), V(7.2, TRE.h + 2.0, zz + 0.25)), trimL("#8a5a3c"));
     const pole = new THREE.CylinderGeometry(0.07, 0.07, 6, 8); pole.translate(0, TRE.h + 3, TRE.z + 6); tb.add(pole, ironM());
     tb.add(boxGeo(V(0.07, TRE.h + 4.4, TRE.z + 5.98), V(2.6, TRE.h + 5.9, TRE.z + 6.02)), lam("flagRed", () => ({ color: "#c8352e", side: THREE.DoubleSide })));

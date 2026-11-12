@@ -20,8 +20,8 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2706 | 39.5 s | not recorded | — |
-| Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 282 | 21.4 s | 69.3 s | 30.9% |
+| Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2708 | 39.5 s | not recorded | — |
+| Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 282 | 21.1 s | 69.3 s | 30.4% |
 | Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 1252 | not available | 70.0 s | — |
 | Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706945601526631693) | 1289 | 23.8 s | not recorded | — |
 | Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.1 s | not recorded | — |

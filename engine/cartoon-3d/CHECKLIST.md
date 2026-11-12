@@ -72,3 +72,40 @@ Engineering fixes found Nov 9 (apply in every new short): black flicker = (a) gr
 
 ## Rule 52 (owner, Nov 10 2026): BIGGER FRAMES, SECOND TEARDOWN
 52. "I want it to be higher quality, meaning each frame will be bigger in size and the video size will therefore also be larger." The master of every short is 2K (1440x2560, `--scale 1.3333 --crf 16`), and the full-quality file is what gets scheduled wherever the upload path allows. Apply DETAIL_STANDARD.md section G as well: at most 1 hard cut, pick a transition family, bridged dissolves, pose-to-pose acting with no tweened faces, one warm light source in every night shot, facts shown as in-world documents, cold open in motion, no outro. Run QA checks Q9-Q14.
+
+## Rules 53-71 (Chicago remake, Nov 11-12 2026)
+The new rules from the Chicago remake. They are owner corrections plus findings from my own reviews. Reference build: project/src/videos/chicago2 (composition ChicagoV2). QA tools: render/qa/ (edge.py, p.mjs projection, est.mjs motion, sheet17.py contact sheets, stills.mjs).
+53. No character card may cut into a wall. People working at a wall stand at least 0.4 m out from the plinth, and their card is yaw-locked parallel to the wall (cranker(..., yaw)). Check every still for half-hidden bodies at walls, tables and counters.
+54. ZERO object mistakes. That means no glitches and nothing appearing where it shouldn't (floating pencils, blobs, half bodies). It also means nothing changed by the environment when it shouldn't be (rain, fog or lights on cards), or the reverse. Held props never cross faces and stay out of the caption band (about 65-75% of the height). Before sending any sheet, review every still at full size against all rules and send a written list with the sheet.
+55. Style follows the references 100% (never their characters):
+    - About 2.9 head-heights: big head, straight-sided garment with a flat hem, short stick legs.
+    - Character outline about 6-8 px at 1080.
+    - One pale near-white head tone with cool shading.
+    - Motion (est.mjs): median 1.2-1.5 px/f at 180 w, p90 at most 3, no lunges. Big moves become soft dissolves.
+56. In a tight insert where a prop fills the frame, nobody peeks round it. Characters at a frame edge are fully in or clearly out for the whole move (check with p.mjs). Foreground decor must read as a thing. The subject sits in the upper 55% of the frame, never under the caption.
+57. Focus blur is used only indoors. Outdoor takes use cInf 1.5. Indoor close-ups use 2.5-3.5 when the set is detailed (the drawn detail must survive).
+58. Every handle, strap, string or loop joins the object it belongs to: draw it first, with its ends running into the body.
+59. A held prop reads against a clear background. No post, pole, lamp, edge or card crosses or touches its silhouette at any frame. Check with p.mjs over the whole shot.
+60. Soles sit exactly on the surface under them: sidewalk, porch, platform, or raised floor plus lift. Surfaces that meet are level or visibly stepped.
+61. Anyone under or beside a raised floor, beam or table fits under it with clearance at every frame of a lift.
+62. Grounded foreground objects (lamp posts, barrels, plants) stand on the real floor, or have the base cropped by the frame bottom. Never use a camera-pinned card with its foot in the air.
+63. Signs and posters are never cut by doors, windows or frames. Their text is whole. Hanging signs: both cords meet at one hook on a visible bracket.
+64. Signs, shop names and logos are fully in frame or fully out. Never crop lettering.
+65. A tool points AT its target (jack under the object it lifts, worker facing it). No tool part crosses a body. Pick the facing per camera (viewOf).
+66. Held props and the hands holding them are the TOP layer, drawn after the head.
+67. Every small prop stands inside the footprint of the surface it rests on. Check x/z against the surface bounds, not just y.
+68. Seated front-on people show lap, shins and feet (kids' feet dangle) in front of the seat, with hips at the seat top. Show the owner a pose-options sheet before re-rendering a new seated pose.
+69. No background rail, fence, beam, belt strap or table edge runs behind a character at waist or chest height in a close or medium shot. Move it, lower it below the knees, or leave it out.
+70. The owner's goal is ZERO corrections after the final render:
+    - Before any full render: every still at full size against ALL rules.
+    - After the render: frame QA of the whole video (black, frozen and pop frames, loudness) plus a spot still from every shot.
+    - Fix everything found before delivering. Renders run in the cloud, one at a time, in chunks under 2 h.
+71. No frame, lid, rail or rod is drawn across an object that moves past it (the model's glass-box lid cut through the lifted houses, so it became an open-top diorama). Small table props must read as a named thing at full size. Extras must not stack head-over-head behind a nearer character.
+
+## Rule 72 (owner, Nov 12 2026): EDGE-DENSITY FLOOR
+72. Measure the edge density of 24 evenly spread stills (render/qa/edge.py: 180x320 grey, sobel > 60).
+    - The average must be **at least 28%**, the lower of the two reference videos (references per frame: min 8-14, median 27-33, mean 28-35).
+    - Going higher where it makes a scene richer is welcome.
+    - Quiet close-ups and the ending may sit at 12-18, like the references, as long as the average holds.
+    - Raise weak shots with more DRAWN OBJECTS that belong to the place and story (props, set dressing, drawn textures on flat surfaces such as water, sand, ceilings and plank walls), never noise.
+    - Every added object passes rules 53-71.

@@ -11,24 +11,27 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Platform | Videos | Measured | Median watched | Median completion |
 |---|---|---|---|---|
-| TikTok | 35 | 14 | 4.0 s | 23.1% |
+| TikTok | 34 | 14 | 4.0 s | 23.1% |
 | Instagram | 32 | 15 | 4.7 s | 26.8% |
-| Facebook | 23 | 23 | 2.1 s | 13.4% |
+| Facebook | 23 | 23 | 2.1 s | 13.3% |
 | YouTube | 25 | 0 | not recorded | not recorded |
 
 ## Each video
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
+| Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2263 | not recorded | not recorded | — |
+| Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 208 | 23.7 s | 69.3 s | 34.2% |
+| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 1137 | not available | 70.0 s | — |
 | Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706945601526631693) | not counted yet | not counted yet | not recorded | — |
 | Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.2 s | not recorded | — |
-| Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 212 | 8.9 s | 65.4 s | 13.6% |
+| Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 226 | 8.6 s | 65.4 s | 13.1% |
 | Nov 10, 6:03 PM | TikTok | 02_tue_eiffel-tower.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706697475796602126?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 101 | 12.9 s | not recorded | — |
-| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 1211 | not available | 66.0 s | — |
-| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1161 | 36.7 s | not recorded | — |
+| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 1214 | not available | 66.0 s | — |
+| Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1162 | 36.7 s | not recorded | — |
 | Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 252 | 12.3 s | 66.2 s | 18.6% |
 | Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706326116595813645?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 141 | 19.3 s | not recorded | — |
-| Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1084 | not available | 67.0 s | — |
+| Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1088 | not available | 67.0 s | — |
 | Nov 8, 7:02 PM | YouTube | The Copenhagen Harbour Where Fairy Tales Began #shorts (https://www.youtube.com/watch?v=6T8XoSWypVI) | 18 | not available | 17.0 s | — |
 | Nov 8, 7:02 PM | Instagram | 10_ronda.mp4 (https://www.instagram.com/reel/DfgGmeAFUxG/) | 20 | 2.9 s | 12.0 s | 24.2% |
 | Nov 8, 7:02 PM | TikTok | 6_copenhagen.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705970424198286606?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 69 | 3.9 s | 16.8 s | 23.0% |
@@ -121,7 +124,6 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 15, 11:00 AM | TikTok | 7696793475156692238?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696793475156692238?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 48 | 2.1 s | not recorded | — |
 | Oct 14, 8:02 PM | Instagram | 6ace6dc47ac896f8054165c5_transcoded.mp4 (https://www.instagram.com/reel/Defuy4cIGp4/) | 2 | 2.2 s | not recorded | — |
 | Oct 14, 8:00 PM | TikTok | 7696693236647120141?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696693236647120141?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 92 | 1.4 s | not recorded | — |
-| Oct 14, 8:00 PM | YouTube | Jeju Island Korea Wall Art: A Quieter Coastal Corner #Shorts (https://www.youtube.com/watch?v=DZCipO7hhTw) | 4 | not available | 17.0 s | — |
 | Oct 14, 4:02 PM | Instagram | 6ace6c23f14f15bbfed660c8_transcoded.mp4 (https://www.instagram.com/reel/DefTUdzk5jw/) | 2 | 8.0 s | not recorded | — |
 | Oct 14, 4:00 PM | TikTok | 7696631405769526542?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696631405769526542?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 77 | 2.3 s | not recorded | — |
 | Oct 14, 12:03 PM | Instagram | 6ace6bbe555a834020668c29_transcoded.mp4 (https://www.instagram.com/reel/Dee373QiDbw/) | 2 | 3.8 s | not recorded | — |
@@ -132,6 +134,3 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 13, 4:00 PM | TikTok | 7696260230228872461?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696260230228872461?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 76 | 2.4 s | not recorded | — |
 | Oct 13, 12:09 PM | Instagram | 6acdcc4d23549bfafe1f77aa_transcoded.mp4 (https://www.instagram.com/reel/DecT1Q4ir0o/) | 4 | 0.9 s | not recorded | — |
 | Oct 13, 12:08 PM | TikTok | 7696200366815202573?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696200366815202573?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 30 | 1.7 s | not recorded | — |
-| Oct 12, 8:01 PM | Instagram | 6aca8a6c44050b7506eeffd0_transcoded.mp4 (https://www.instagram.com/reel/DealH3ZGyee/) | 3 | 0.5 s | not recorded | — |
-| Oct 12, 8:01 PM | Facebook | 6aca8a6c44050b7506eeffd0_transcoded.mp4 (https://www.facebook.com/reel/1671735174292256/) | 29 | 2.3 s | 12.0 s | 19.2% |
-| Oct 12, 8:00 PM | TikTok | 7695951045985570062?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7695951045985570062?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 19 | 3.1 s | not recorded | — |

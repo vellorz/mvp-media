@@ -11,8 +11,8 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Platform | Videos | Measured | Median watched | Median completion |
 |---|---|---|---|---|
-| TikTok | 33 | 14 | 4.0 s | 23.1% |
-| Instagram | 31 | 15 | 4.7 s | 26.8% |
+| TikTok | 32 | 14 | 4.0 s | 23.1% |
+| Instagram | 30 | 15 | 4.7 s | 26.8% |
 | Facebook | 23 | 23 | 2.1 s | 13.3% |
 | YouTube | 25 | 0 | not recorded | not recorded |
 
@@ -130,5 +130,3 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 14, 12:02 PM | TikTok | 7696569988806642958?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696569988806642958?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 68 | 1.9 s | not recorded | — |
 | Oct 13, 8:01 PM | Instagram | 6ace6747262e9db630f4990a_transcoded.mp4 (https://www.instagram.com/reel/DedJ7jdjl0N/) | 4 | 2.2 s | not recorded | — |
 | Oct 13, 8:00 PM | TikTok | 7696322087127993614?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696322087127993614?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 65 | 3.0 s | not recorded | — |
-| Oct 13, 4:01 PM | Instagram | 6ace663d3929a4719ae30bd7_transcoded.mp4 (https://www.instagram.com/reel/DecuZSmD_lR/) | 4 | 2.0 s | not recorded | — |
-| Oct 13, 4:00 PM | TikTok | 7696260230228872461?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696260230228872461?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 76 | 2.4 s | not recorded | — |

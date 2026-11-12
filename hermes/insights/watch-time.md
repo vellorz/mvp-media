@@ -20,18 +20,18 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2502 | 39.5 s | not recorded | — |
-| Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 210 | 23.8 s | 69.3 s | 34.3% |
-| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 1137 | not available | 70.0 s | — |
+| Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2706 | 39.5 s | not recorded | — |
+| Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 282 | 21.4 s | 69.3 s | 30.9% |
+| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 1252 | not available | 70.0 s | — |
 | Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706945601526631693) | 1289 | 23.8 s | not recorded | — |
 | Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.1 s | not recorded | — |
-| Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 226 | 8.6 s | 65.4 s | 13.1% |
+| Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 230 | 8.5 s | 65.4 s | 13.0% |
 | Nov 10, 6:03 PM | TikTok | 02_tue_eiffel-tower.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706697475796602126?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1181 | 24.0 s | not recorded | — |
-| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 1214 | not available | 66.0 s | — |
+| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 1310 | not available | 66.0 s | — |
 | Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1162 | 36.6 s | not recorded | — |
 | Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 252 | 12.3 s | 66.2 s | 18.6% |
 | Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706326116595813645?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 150 | 18.6 s | not recorded | — |
-| Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1085 | not available | 67.0 s | — |
+| Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1090 | not available | 67.0 s | — |
 | Nov 8, 7:02 PM | YouTube | The Copenhagen Harbour Where Fairy Tales Began #shorts (https://www.youtube.com/watch?v=6T8XoSWypVI) | 18 | not available | 17.0 s | — |
 | Nov 8, 7:02 PM | Instagram | 10_ronda.mp4 (https://www.instagram.com/reel/DfgGmeAFUxG/) | 20 | 2.9 s | 12.0 s | 24.2% |
 | Nov 8, 7:02 PM | TikTok | 6_copenhagen.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705970424198286606?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 70 | 3.8 s | 16.8 s | 22.8% |
@@ -42,7 +42,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 8, 11:05 AM | TikTok | 10_ronda.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705847499013016846?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 98 | 1.9 s | 12.0 s | 15.4% |
 | Nov 7, 10:01 PM | Instagram | 9_krakow.mp4 (https://www.instagram.com/reel/Dfd2Vr7iArn/) | 62 | 3.6 s | 14.3 s | 25.5% |
 | Nov 7, 10:00 PM | Facebook | 9_krakow.mp4 (https://www.facebook.com/reel/2966313087059277/) | 324 | 1.4 s | 14.3 s | 9.8% |
-| Nov 7, 10:00 PM | YouTube | The dragon that lived under Kraków #shorts (https://www.youtube.com/watch?v=SbPsMTD--xY) | 3 | not available | 15.0 s | — |
+| Nov 7, 10:00 PM | YouTube | The dragon that lived under Kraków #shorts (https://www.youtube.com/watch?v=SbPsMTD--xY) | 4 | not available | 15.0 s | — |
 | Nov 7, 7:02 PM | TikTok | 8_dublin.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705599353200643342?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 261 | 4.6 s | 15.7 s | 29.4% |
 | Nov 7, 6:02 PM | Instagram | 8_dublin.mp4 (https://www.instagram.com/reel/Dfda9XGmeNU/) | 71 | 4.7 s | 15.7 s | 29.8% |
 | Nov 7, 6:01 PM | Facebook | 8_dublin.mp4 (https://www.facebook.com/reel/1142952334762526/) | 175 | 1.5 s | 15.7 s | 9.6% |
@@ -76,7 +76,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 1, 6:02 PM | YouTube | You've seen this mountain on TV #shorts (https://www.youtube.com/watch?v=AWB7WhkiIw0) | 5 | not available | 14.0 s | — |
 | Nov 1, 12:04 PM | Instagram | 03_kirkjufell_sun-nov1.mp4 (https://www.instagram.com/reel/DfNVN5QlBQv/) | 28 | 3.9 s | 13.5 s | 28.8% |
 | Nov 1, 12:03 PM | Facebook | 03_kirkjufell_sun-nov1.mp4 (https://www.facebook.com/reel/2904877756551077/) | 203 | 1.9 s | 13.5 s | 14.1% |
-| Nov 1, 10:05 AM | YouTube | James Bond Invented This Day of the Dead Parade #shorts (https://www.youtube.com/watch?v=H9-UZzbiTXs) | 22 | not available | 21.0 s | — |
+| Nov 1, 10:05 AM | YouTube | James Bond Invented This Day of the Dead Parade #shorts (https://www.youtube.com/watch?v=H9-UZzbiTXs) | 23 | not available | 21.0 s | — |
 | Nov 1, 10:03 AM | TikTok | mexico-city_dia-de-muertos.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7703233794454605069?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 114 | 3.3 s | not recorded | — |
 | Nov 1, 10:02 AM | Instagram | mexico-city_dia-de-muertos.mp4 (https://www.instagram.com/reel/DfNHSd9ETir/) | 113 | 3.8 s | not recorded | — |
 | Nov 1, 10:01 AM | Facebook | mexico-city_dia-de-muertos.mp4 (https://www.facebook.com/reel/1118506084100110/) | 198 | 2.6 s | 20.3 s | 12.8% |
@@ -95,7 +95,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 27, 12:07 PM | Instagram | 04_tue-oct27_zermatt.mp4 (https://www.instagram.com/reel/DfAWsgeDDpe/) | 141 | 8.6 s | 29.1 s | 29.5% |
 | Oct 27, 12:04 PM | Facebook | 04_tue-oct27_zermatt.mp4 (https://www.facebook.com/reel/3176946835833434/) | 185 | 1.9 s | 29.1 s | 6.5% |
 | Oct 25, 6:03 PM | TikTok | 03_sun-oct25_menton.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7700744428943609102?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 112 | 3.8 s | 20.9 s | 17.9% |
-| Oct 25, 6:02 PM | YouTube | The town that threw its lemons a party #shorts (https://www.youtube.com/watch?v=fUqFvEKpBdw) | 61 | not available | 21.0 s | — |
+| Oct 25, 6:02 PM | YouTube | The town that threw its lemons a party #shorts (https://www.youtube.com/watch?v=fUqFvEKpBdw) | 62 | not available | 21.0 s | — |
 | Oct 25, 12:04 PM | Instagram | 03_sun-oct25_menton.mp4 (https://www.instagram.com/reel/De7MxOZjIoE/) | 118 | 5.5 s | 20.9 s | 26.4% |
 | Oct 25, 12:02 PM | Facebook | 03_sun-oct25_menton.mp4 (https://www.facebook.com/reel/1032559319874166/) | 136 | 2.8 s | 20.9 s | 13.4% |
 | Oct 24, 10:06 AM | TikTok | 6adebac84582dd4a9550950e_thumbnail.webp (https://www.tiktok.com/@modernvistaprintsshop/video/7700250963382209806?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 59 | 2.3 s | not recorded | — |

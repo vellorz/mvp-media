@@ -1,5 +1,5 @@
 from: research
-title: SEO scoreboard: better 5, measuring 7, same 262, worse 2
+title: SEO scoreboard: better 5, measuring 11, same 262, worse 2
 metric: etsy.visits
 evidence: Mission Control SEO lab (etsy-seo listing reports + weekly listing stats)
 
@@ -7,7 +7,7 @@ Edited listings compared with untouched ones over the same weeks (expected = the
 better/worse = beat or fell behind that by at least max(2 visits, 30%); measuring = no full week after the edit yet.
 Traffic is small, so single listings are noisy; look for patterns across many listings before writing a lesson.
 
-Totals: better 5, measuring 7, same 262, worse 2
+Totals: better 5, measuring 11, same 262, worse 2
 
 ## better (5)
 - Aoraki Mount Cook New Zealand Travel Poster, Alpine Mountain Landscape Print (https://www.etsy.com/listing/4571720088): edited 2026-10-30; visits 0 -> 4 (expected 0); title kept; tags +0/-0

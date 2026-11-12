@@ -22,6 +22,13 @@ Rules:
 
 ## Lessons
 
+## 2026-11-12 · Cartoon story shorts beat every earlier format
+- tried: 65-70 s cartoon-3d story shorts (London Bridge, Eiffel Tower, Pisa), Mon-Wed Nov 9-11, on IG, FB, TikTok and YouTube
+- result: IG avg watch 31-40 s (48-57% of the video) vs 5.3 s for paper collage; IG views 1,162 / 1,351 / 2,671; TikTok 150 / 1,181 / 1,289 (ER 3.9-4.7% vs 0.5%); YouTube ~1.1-1.2k each vs 13-71/day before. Still 0 shares and 0 FB link clicks. Source: Buffer post metrics Nov 12; hermes/insights/watch-time.md; social-daily.md
+- verdict: keep (the format); retest how the ending drives clicks
+- confidence: medium (3 videos, 4 platforms, all pointing the same way)
+- next: run B tests trend-led stories (Friday the 13th, LoL Worlds in Brooklyn, NFL in Munich) and a gift-led last line; Facebook moves to its strong 12-3 PM slots
+
 ## 2026-11-01 · Carousels vs videos on Instagram and Facebook
 - tried: carousels and videos side by side, Oct 23 - Nov 1, on IG, FB and TikTok
 - result: IG Reels avg 142 views vs carousels 4; FB Reels avg 179 impressions vs multi-photo 0.3; TikTok videos avg 79 views (3.5% ER) vs carousels 62 views (6.5% ER). Source: Buffer post metrics, pulled Nov 1

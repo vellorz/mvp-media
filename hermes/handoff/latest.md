@@ -1,29 +1,32 @@
-# Week 03 handoff (Mon Nov 9 - Sun Nov 15) — new daily cartoon format
-schedule: Sundays 12:00 Central plans Mon-Thu and Thursdays 12:00 Central plans Fri-Sun; 1 cartoon video per day per platform plus maximized Pinterest; scripts first (Gate 1), build and scheduling after the owner says finish this run, Gate 2 per video.
-status: Mon SCHEDULED (Gate 2 approved Nov 9 03:57 UTC). Tue Eiffel + Wed Pisa scripts approved Nov 8, rendering, Gate 2 pending. Thu Nov 12 Chicago script waiting for approval (https://claude.ai/artifact/KaCbYCy2QfN75ypgWqQhLC). Fri-Sun = Thursday Nov 12 run.
-pinterest: Mon video pin scheduled 18:00 CT (Architecture & City Travel Prints); scheduled pins = 1 after scheduling. From the Nov 12 run: video pin + 3-4 static pins per day, new keyword boards.
-research: nothing new in hermes/research since Oct 28.
+# Week 03 run B handoff (Fri Nov 13 - Sun Nov 15)
+schedule: Sundays 12:00 Central plans Mon-Thu and Thursdays 12:00 Central plans Fri-Sun; 1 cartoon video per day per platform plus maximized Pinterest.
+status: Gate 1 WAITING (scripts doc posted Nov 12). https://claude.ai/artifact/LBZFyRMCuw4yufAEyrU4qQ
+pinterest: 3 video pins 18:00 + 12 static pins (4/day) + 4 new boards, planned. Analytics: read at start of Part B (needs the owner's laptop).
+research: hermes/research had nothing new since Oct 28.
 
-## Data takeaways
-- Week 02 collage videos averaged 3.8-6.1 s watch; the owner moved to longer story-driven cartoon shorts (60-70 s) modeled on a measured reference channel. Watch time and completion are the numbers to track now.
-- Metricool best times, Mondays (Central): TikTok peak 18:00, YouTube 16:00. Instagram has no best-time data yet.
+## Takeaways (Buffer, Mon-Wed cartoon shorts, pulled Nov 12)
+- Cartoon shorts: IG avg watch 31-40 s (48-57%) vs 5.3 s for collage; IG views 1,162 / 1,351 / 2,671; TikTok ER 3.9-4.7%; YouTube ~1.1-1.2k each.
+- 0 shares, 0 FB link clicks -> gift line before the poster, FB copy leads with the Etsy link.
+- Facebook weakest (reach 210-252) -> FB moves to strong Fri/Sun 12-3 PM slots.
+- All three run B videos are trend-led, to compare with Mon-Wed (not trend-led).
 
-## Videos
-- Mon London Bridge -> Arizona (1968 McCulloch purchase, rebuilt over dry land at Lake Havasu) -> poster 0245 London; link https://www.etsy.com/shop/ModernVistaPrints?search_query=london
-- Tue The tower Paris tried to tear down (Eiffel, 1909 demolition plan, saved by the radio antenna) -> poster 0495 Paris
-- Wed Pisa: fix it without fixing it (1990-2001 soil extraction) -> poster 0351 Pisa
-- Thu Chicago raised itself (1858-61 buildings jacked up, Tremont House lifted with guests inside; river reversed 1900) -> poster 0418 Chicago; link https://www.etsy.com/shop/ModernVistaPrints?search_query=chicago
+## Days
+- Fri Istanbul (0302): Friday the 13th -> Greece fears Tuesday the 13th; 1453 ships dragged over a hill. shop search ?search_query=istanbul
+- Sat New York City (0402): LoL Worlds final at Barclays Center -> 21 elephants on the Brooklyn Bridge (1884). ?search_query=new+york
+- Sun Munich (0216): NFL Patriots-Lions in Munich -> Oktoberfest began as a 1810 wedding. ?search_query=munich
 
-## Schedule (Central)
-Buffer: Mon IG 19:00 6af14658796ccae2668143d7, FB 19:00 6af14659e29b1359f0ca150d, TikTok 18:00 6af1465a2f1ff83d4513fcf5
-Not visible to the dashboard: YouTube Mon 16:00 (Metricool 421343968); Pinterest Mon 18:00 video pin.
+## Schedule (Central, proposed)
+Buffer:
+- Fri Istanbul: IG 13:00, FB 13:00, TikTok 18:00
+- Sat NYC: IG 19:00, FB 13:00 (test), TikTok 18:00
+- Sun Munich: IG 13:00, FB 13:00, TikTok 11:00
+Not visible to the dashboard:
+- YouTube: Fri 18:00 (strong-slot test), Sat 16:00, Sun 14:00.
+- Pinterest: video pins 18:00 Fri/Sat/Sun; static pins 12:00-21:00, 1 h+ apart.
 
 ## What changed and why
-- Format: cartoon-3d story short only (engine in engine/cartoon-3d). Volume 1/day/platform, not 2: each video takes ~3 h to render.
-- Owner corrections become checklist rules (engine/cartoon-3d/CHECKLIST.md, 12 rules) so fixes shrink each round.
-
-## Tried -> result -> keep/drop
-- Paper collage + format menu (weeks 01-02) -> low watch time, 0 saves -> dropped for the cartoon format.
+- Trend-led stories on all 3 days (owner rule Nov 10); logged as "Trend-led cartoon short" on the format scoreboard.
+- Gift line before the poster pivot (0 shares/clicks so far).
 
 ## Open questions
-- Exact Etsy listing URLs for posters 0245, 0495, 0351 (using shop search links for now).
+- Etsy visits/orders from the cartoon shorts: not recorded yet.

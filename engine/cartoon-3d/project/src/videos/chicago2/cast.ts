@@ -231,10 +231,10 @@ const FG: [number, number, number, FgK, number, number, number, number][] = [
   [4, 288, 373, "barrel", -0.84, -0.72, 1.3, 0.45],
   [5, 384, 468, "lamp", -1.0, 0.0, 1.7, 0.3],
 
-  [7, 572, 676, "drape", -0.93, 0.05, 1.3, 0.34],
+  [7, 572, 700, "drape", -0.93, 0.05, 1.3, 0.34] /* v20 QA: it vanished in one frame at f676; now slides out the left edge from f668 */,
   /* v20 rules 64+73: the f701 and f872 hanging-sign cards swept across the frame (lettering cut on the way): removed */ [8, 752, 836, "barrel", 0.82, -0.72, 1.4, 0.45], [8, 836, 880, "signR", 0.64, 0.62, 2.4, 0.66] /* v20 rule 64: board fully in frame through the push-in, wall end of the bracket off-frame right */,
   [9, 985, 1052, "barrel", -0.86, -0.7, 1.2, 0.42], [9, 1052, 1097, "barrel", 0.8, -0.74, 1.2, 0.42] /* v17 rule 59: the lamp crossed the baker after the reframe */,
-  [10, 1089, 1150, "gull", 0.45, 0.45, 3.5, 0.32], [10, 1150, 1196, "lamp", 0.84, 0.0, 2.2, 0.3], [10, 1196, 1250, "screw", -0.82, -0.3, 1.5, 0.42], [10, 1250, 1298, "screw", 0.84, -0.3, 1.0, 0.42],
+  [10, 1089, 1150, "gull", 0.45, 0.45, 3.5, 0.32], [10, 1150, 1196, "lamp", 0.84, 0.0, 2.2, 0.3], [10, 1196, 1250, "screw", -0.82, -0.3, 1.5, 0.42], /* v20: the f1250 screw card stood in front of the reframed worker's lever (rule 59): removed */
   [11, 1326, 1355, "drape", 0.9, 0.0, 1.0, 0.36],
   [12, 1347, 1444, "lamp", 0.86, 0.0, 1.6, 0.3], [12, 1444, 1478, "geranium", -0.8, -0.82, 0.8, 0.5],
   [13, 1470, 1585, "fern", -0.82, -0.42, 1.4, 0.5],
@@ -253,6 +253,7 @@ const foreground = (out: Stage, id: number, t: number) => {
     const hH = d * Math.tan((c.fov * Math.PI) / 360), hW = hH * (9 / 16);
     const [cw, ch, draw] = FGART[k], w = wf * 2 * hW;
     let du = u, dv = v, ph = 0;
+    if (k === "drape" && tk === 7) du = u - 0.06 * Math.max(0, f - 668);
     if (k === "gull") { const s = (f - a) / FPS; du = u + 0.16 * s * (u < 0 ? 1 : -1); dv = v + 0.05 * Math.sin(s * 2); ph = q(((s * 2.4) % 1 + 1) % 1, 8); }
     const x = c.pos[0] + fgF.x * d + fgR.x * du * hW + fgU.x * dv * hH, y = c.pos[1] + fgF.y * d + fgR.y * du * hW + fgU.y * dv * hH, z = c.pos[2] + fgF.z * d + fgR.z * du * hW + fgU.z * dv * hH;
     // v8 (rule 62): a street lamp is a real 3.2 m post standing ON the sidewalk (base at D0 + SW), never a camera-pinned
@@ -443,7 +444,8 @@ export const stage = (id: number, t: number, _ws: World, cam: CamInfo): Stage =>
     }
     case 4: { // rain: mud to the shins, sewage with nowhere to go, the newspaper going soggy in the gutter
       stand(out, cam, t, who(5, townsfolk(2), "stuck"), STUCK, { expr: act(t, "nervous", [[10.2, "stern"], [10.46, "pained"], [11.42, "dazed"], [11.78, "pained"]]), facing: 1 });
-      stand(out, cam, t, who(6, townsfolk(3), "walk2"), [36.4, D0 - 0.12, 103.6], { expr: act(t, "neutral", [[10.94, "shock"], [11.26, "pained"]]), facing: -1 });
+      // v20 QA (rule 56): in the f336 tilt down to the paper her head was cut off by the top edge: she leaves before it
+      if (!(t >= 336 / FPS && cam.pos.z < 99.5)) stand(out, cam, t, who(6, townsfolk(3), "walk2"), [36.4, D0 - 0.12, 103.6], { expr: act(t, "neutral", [[10.94, "shock"], [11.26, "pained"]]), facing: -1 });
       stand(out, cam, t, who(53, WORK(2), "plank"), [29.0, Y, 109.2], { expr: idle(t, 53, ["stern", "nervous"]), facing: 1, prop: ["hold", "shovel", q((t * 0.7) % 1, 20)] });
       if (at(t, 10.94)) { const k = q((t * 1.5) % 1, 12); card(out, `stink${k}`, 300, 360, (p) => fxStink(p, k), 31.0, D0 + 0.55, 99.9, 0.8 * pop(t, 10.94)); }
       card(out, "soggy", 500, 380, fxSoggy, PAPER[0], PAPER[1], PAPER[2], 0.9, Math.PI + 0.3, { flat: true });

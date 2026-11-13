@@ -206,3 +206,14 @@ export const fxMud = (p: Pen) => {
   p.g.fillStyle = "#4a3220"; for (const [x, y, r] of [[160, 175, 14], [260, 160, 10], [420, 170, 16], [500, 180, 9], [90, 185, 8], [340, 185, 12]] as const) { p.g.beginPath(); p.g.ellipse(x, y, r * 1.6, r, 0, 0, Math.PI * 2); p.g.fill(); }
   p.g.fillStyle = "#7a5634"; for (const [x, y, r] of [[40, 70, 9], [560, 60, 8], [120, 40, 6], [480, 35, 7], [300, 30, 5]] as const) { p.g.beginPath(); p.g.arc(x, y, r, 0, Math.PI * 2); p.g.fill(); }
 };
+
+/** v21 (rule 78/79): the brick wall the CHOLERA paper is pasted on, so the insert never hangs in the open street */
+export const fxNewsWall = (p: Pen) => {
+  const g = p.g; g.fillStyle = "#8a4a3c"; g.fillRect(0, 0, 800, 1120);
+  for (let r = 0; r < 28; r++) for (let c = -1; c < 6; c++) {
+    const x = c * 160 + (r % 2 ? 80 : 0), y = r * 40, k = (r * 7 + c * 13) % 5;
+    g.fillStyle = ["#93503f", "#84463a", "#9a5844", "#7c4136", "#8e4c3d"][k]; g.fillRect(x + 3, y + 3, 154, 34);
+  }
+  g.strokeStyle = "#3a2226"; g.lineWidth = 3;
+  for (let r = 0; r <= 28; r++) { g.beginPath(); g.moveTo(0, r * 40); g.lineTo(800, r * 40); g.stroke(); for (let c = -1; c < 6; c++) { const x = c * 160 + (r % 2 ? 80 : 0); g.beginPath(); g.moveTo(x, r * 40); g.lineTo(x, r * 40 + 40); g.stroke(); } }
+};

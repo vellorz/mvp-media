@@ -47,7 +47,7 @@ const NO_ORBIT = new Set<number>([]); // teardown: constant motion, every take d
 /** v8: tight framings get a small orbit cap instead of none (steps, couch wide) so they still drift */
 /** v21 rule 87 (owner): per-run orbit caps; take 9's pull-back orbited 0.6 rad round a look point 26 m away and swung
  *  the lens through an awning into the Lake Street block (f955-984) */
-const RUN_CAP: Record<string, number> = { "9|872": 0.06 };
+const RUN_CAP: Record<string, number> = { "9|872": 0.06, "5|365": 0.22 /* rule 82: the poster insert stays front-on */ };
 const ORB_CAP: Record<number, number> = { 7: 0.06, 12: 0.12, 13: 0.1 }; // v21 rule 82: take 7 keeps the model front-on
 export const FLASH_AT = -100;
 export const shotAt = (f: number) => SHOTS.find((s) => f >= s.a && f < s.b) ?? SHOTS[SHOTS.length - 1];

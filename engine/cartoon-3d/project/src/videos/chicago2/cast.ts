@@ -212,7 +212,7 @@ const blob = (out: Stage, x: number, y: number, z: number, sc = 1, k = 1) => {
 };
 
 // ---------------- v3 foreground layer (teardown: a cropped, lens-blurred near prop in every shot) ----------------
-import { fxMud, fxLantern, fxLamp, fxReeds, fxTeapot, fxBackHat, fxBarrel, fxSign, fxGeranium, fxCandle, fxFern, fxTrunk, fxScrew, fxGull, fxInkwell, fxDrape } from "./fx7";
+import { fxMud, fxNewsWall, fxLantern, fxLamp, fxReeds, fxTeapot, fxBackHat, fxBarrel, fxSign, fxGeranium, fxCandle, fxFern, fxTrunk, fxScrew, fxGull, fxInkwell, fxDrape } from "./fx7";
 import { camAt } from "./story";
 type FgK = "lamp" | "reeds" | "teapot" | "backhat" | "barrel" | "sign" | "signR" | "signDG" | "geranium" | "candle" | "fern" | "trunk" | "screw" | "gull" | "inkwell" | "drape";
 const FGART: Record<FgK, [number, number, (p: Pen, t: number) => void]> = {
@@ -460,6 +460,8 @@ export const stage = (id: number, t: number, _ws: World, cam: CamInfo): Stage =>
     }
     case 5: { // 1854: the same headline pasted on a wall; the doctor holds up a glass of the drinking water
       card(out, "news", 500, 680, fxNews, NEWS[0], NEWS[1], NEWS[2] - 0.02, 0.62, 0, { yaw: Math.PI });
+      // v21: a brick wall card behind the paper, only for the insert camera (never in the doctor shot)
+      if (Math.hypot(cam.pos.x - NEWS[0], cam.pos.z - NEWS[2]) < 2.8) card(out, "newsWall", 800, 1120, fxNewsWall, NEWS[0], NEWS[1] + 0.2, NEWS[2] + 0.02, 3.2, 0, { yaw: Math.PI });
       stand(out, cam, t, who(7, DOCO, "doc"), DOC, { expr: act(t, "stern", [[13.38, "nervous"], [13.82, "stern"], [14.34, "shock"], [15.0, "pained"]]), facing: 1, prop: "glassUp" });
       stand(out, cam, t, who(54, townsfolk(5), "cough"), [DOC[0] + 2.2, Y, DOC[2] - 0.6], { expr: idle(t, 54, ["pained", "dazed", "pained", "nervous"]), facing: -1 });
       // v19: a woman waits at the water pump with her jug (on-story: the pump water), in the close-up only, fully in frame

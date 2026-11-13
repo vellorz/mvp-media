@@ -22,16 +22,16 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 |---|---|---|---|---|---|---|
 | Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2717 | 39.3 s | not recorded | — |
 | Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 283 | 21.1 s | 69.3 s | 30.4% |
-| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 5283 | not available | 70.0 s | — |
-| Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706945601526631693) | 1289 | 23.8 s | not recorded | — |
+| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 7004 | not available | 70.0 s | — |
+| Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706945601526631693) | 1372 | 23.4 s | not recorded | — |
 | Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.1 s | not recorded | — |
 | Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 230 | 8.5 s | 65.4 s | 13.0% |
-| Nov 10, 6:03 PM | TikTok | 02_tue_eiffel-tower.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706697475796602126?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1181 | 24.0 s | not recorded | — |
-| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 1366 | not available | 66.0 s | — |
+| Nov 10, 6:03 PM | TikTok | 02_tue_eiffel-tower.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706697475796602126?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1186 | 23.9 s | not recorded | — |
+| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 1445 | not available | 66.0 s | — |
 | Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1162 | 36.6 s | not recorded | — |
 | Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 253 | 12.3 s | 66.2 s | 18.6% |
-| Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706326116595813645?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 150 | 18.6 s | not recorded | — |
-| Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1093 | not available | 67.0 s | — |
+| Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706326116595813645?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 150 | 18.5 s | not recorded | — |
+| Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1095 | not available | 67.0 s | — |
 | Nov 8, 7:02 PM | YouTube | The Copenhagen Harbour Where Fairy Tales Began #shorts (https://www.youtube.com/watch?v=6T8XoSWypVI) | 18 | not available | 17.0 s | — |
 | Nov 8, 7:02 PM | Instagram | 10_ronda.mp4 (https://www.instagram.com/reel/DfgGmeAFUxG/) | 20 | 2.9 s | 12.0 s | 24.2% |
 | Nov 8, 7:02 PM | TikTok | 6_copenhagen.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705970424198286606?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 70 | 3.8 s | 16.8 s | 22.8% |
@@ -43,12 +43,12 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 7, 10:01 PM | Instagram | 9_krakow.mp4 (https://www.instagram.com/reel/Dfd2Vr7iArn/) | 62 | 3.6 s | 14.3 s | 25.5% |
 | Nov 7, 10:00 PM | Facebook | 9_krakow.mp4 (https://www.facebook.com/reel/2966313087059277/) | 324 | 1.4 s | 14.3 s | 9.8% |
 | Nov 7, 10:00 PM | YouTube | The dragon that lived under Kraków #shorts (https://www.youtube.com/watch?v=SbPsMTD--xY) | 6 | not available | 15.0 s | — |
-| Nov 7, 7:02 PM | TikTok | 8_dublin.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705599353200643342?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 261 | 4.6 s | 15.7 s | 29.4% |
+| Nov 7, 7:02 PM | TikTok | 8_dublin.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705599353200643342?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 262 | 4.6 s | 15.7 s | 29.3% |
 | Nov 7, 6:02 PM | Instagram | 8_dublin.mp4 (https://www.instagram.com/reel/Dfda9XGmeNU/) | 71 | 4.7 s | 15.7 s | 29.8% |
 | Nov 7, 6:01 PM | Facebook | 8_dublin.mp4 (https://www.facebook.com/reel/1142952334762526/) | 175 | 1.5 s | 15.7 s | 9.6% |
 | Nov 7, 6:00 PM | YouTube | Why Dublin's bridge is called the Ha'penny #shorts (https://www.youtube.com/watch?v=eHWswQN6er0) | 4 | not available | 16.0 s | — |
 | Nov 7, 10:02 AM | TikTok | 6af3d8cbe6c868db7e9d91f5_thumbnail.webp (https://www.tiktok.com/@modernvistaprintsshop/video/7705860933783932173?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 2 | 6.0 s | not recorded | — |
-| Nov 6, 7:03 PM | TikTok | 5_prague.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705228553654160653?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 163 | 4.5 s | 15.1 s | 29.9% |
+| Nov 6, 7:03 PM | TikTok | 5_prague.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705228553654160653?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 164 | 4.6 s | 15.1 s | 30.5% |
 | Nov 6, 7:03 PM | Instagram | 7_giethoorn.mp4 (https://www.instagram.com/reel/Dfa9EaSET1Y/) | 62 | 2.4 s | 16.6 s | 14.4% |
 | Nov 6, 7:02 PM | YouTube | Prague's 600-Year-Old Clock: The Legend Isn't True #shorts (https://www.youtube.com/watch?v=E4b5qICIba8) | 21 | not available | 16.0 s | — |
 | Nov 6, 7:01 PM | Facebook | 7_giethoorn.mp4 (https://www.facebook.com/reel/3048891488795553/) | 99 | 1.8 s | 16.6 s | 10.8% |
@@ -66,7 +66,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 4, 4:02 PM | YouTube | Florence Flooded 60 Years Ago Today: The Mud Angels #shorts (https://www.youtube.com/watch?v=jRdPNmXNwJM) | 8 | not available | 19.0 s | — |
 | Nov 3, 9:02 PM | Instagram | 2_ghent.mp4 (https://www.instagram.com/reel/DfTcYqdlDPo/) | 132 | 4.1 s | 17.2 s | 23.8% |
 | Nov 3, 4:03 PM | YouTube | Ghent's Unsolved Art Heist (Still Missing Since 1934) #shorts (https://www.youtube.com/watch?v=Y5hli5ikevM) | 7 | not available | 18.0 s | — |
-| Nov 3, 4:02 PM | TikTok | 2_ghent.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7704068722792615181?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 157 | 6.2 s | 17.2 s | 35.8% |
+| Nov 3, 4:02 PM | TikTok | 2_ghent.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7704068722792615181?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 157 | 5.5 s | 17.2 s | 31.9% |
 | Nov 3, 4:02 PM | Facebook | 2_ghent.mp4 (https://www.facebook.com/reel/1438962015054698/) | 94 | 2.8 s | 17.2 s | 16.3% |
 | Nov 2, 7:04 PM | Instagram | 1_murren.mp4 (https://www.instagram.com/reel/DfQqHdNjzZ8/) | 94 | 5.6 s | 20.9 s | 26.8% |
 | Nov 2, 7:01 PM | Facebook | 1_murren.mp4 (https://www.facebook.com/reel/39948020921479338/) | 196 | 3.1 s | 20.9 s | 14.8% |
@@ -82,10 +82,10 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 1, 10:01 AM | Facebook | mexico-city_dia-de-muertos.mp4 (https://www.facebook.com/reel/1118506084100110/) | 198 | 2.6 s | 20.3 s | 12.8% |
 | Oct 31, 6:03 PM | YouTube | Dracula Never Lived in Dracula's Castle #shorts #halloween (https://www.youtube.com/watch?v=SC0xJRXzmAc) | 52 | not available | 20.0 s | — |
 | Oct 31, 6:01 PM | Instagram | bran-castle_halloween.mp4 (https://www.instagram.com/reel/DfLSZ6mlE5z/) | 35 | 1.8 s | not recorded | — |
-| Oct 31, 6:01 PM | TikTok | bran-castle_halloween.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7702970659701263629?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 101 | 6.2 s | not recorded | — |
+| Oct 31, 6:01 PM | TikTok | bran-castle_halloween.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7702970659701263629?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 102 | 6.1 s | not recorded | — |
 | Oct 31, 6:00 PM | Facebook | bran-castle_halloween.mp4 (https://www.facebook.com/reel/987068443837839/) | 260 | 2.6 s | 19.0 s | 13.7% |
 | Oct 31, 10:03 AM | TikTok | 6aeaf7d5c449d1813fdd7406_thumbnail.webp (https://www.tiktok.com/@modernvistaprintsshop/video/7702847693499927821?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 141 | 2.1 s | not recorded | — |
-| Oct 30, 6:03 PM | TikTok | 01_portofino_fri-oct30.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7702599865381047566?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 74 | 3.9 s | 14.4 s | 27.4% |
+| Oct 30, 6:03 PM | TikTok | 01_portofino_fri-oct30.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7702599865381047566?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 75 | 3.9 s | 14.4 s | 27.4% |
 | Oct 30, 6:02 PM | YouTube | Portofino's fake windows #shorts (https://www.youtube.com/watch?v=-HtXYNlci5M) | 32 | not available | 15.0 s | — |
 | Oct 30, 12:07 PM | Instagram | 01_portofino_fri-oct30.mp4 (https://www.instagram.com/reel/DfIE8aQgYU0/) | 194 | 6.7 s | 14.4 s | 46.5% |
 | Oct 30, 12:04 PM | Facebook | 01_portofino_fri-oct30.mp4 (https://www.facebook.com/reel/1847725176237917/) | 117 | 2.2 s | 14.4 s | 15.3% |
@@ -94,7 +94,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 27, 6:02 PM | YouTube | Only three came back down #shorts (https://www.youtube.com/watch?v=nDIL_b-24vM) | 1 | not available | 30.0 s | — |
 | Oct 27, 12:07 PM | Instagram | 04_tue-oct27_zermatt.mp4 (https://www.instagram.com/reel/DfAWsgeDDpe/) | 141 | 8.6 s | 29.1 s | 29.5% |
 | Oct 27, 12:04 PM | Facebook | 04_tue-oct27_zermatt.mp4 (https://www.facebook.com/reel/3176946835833434/) | 185 | 1.9 s | 29.1 s | 6.5% |
-| Oct 25, 6:03 PM | TikTok | 03_sun-oct25_menton.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7700744428943609102?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 112 | 3.8 s | 20.9 s | 17.9% |
+| Oct 25, 6:03 PM | TikTok | 03_sun-oct25_menton.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7700744428943609102?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 112 | 3.7 s | 20.9 s | 17.8% |
 | Oct 25, 6:02 PM | YouTube | The town that threw its lemons a party #shorts (https://www.youtube.com/watch?v=fUqFvEKpBdw) | 62 | not available | 21.0 s | — |
 | Oct 25, 12:04 PM | Instagram | 03_sun-oct25_menton.mp4 (https://www.instagram.com/reel/De7MxOZjIoE/) | 118 | 5.5 s | 20.9 s | 26.4% |
 | Oct 25, 12:02 PM | Facebook | 03_sun-oct25_menton.mp4 (https://www.facebook.com/reel/1032559319874166/) | 136 | 2.8 s | 20.9 s | 13.4% |
@@ -113,7 +113,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 15, 8:01 PM | TikTok | 7697064388435463438?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7697064388435463438?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 99 | 2.2 s | not recorded | — |
 | Oct 15, 8:00 PM | YouTube | Zanzibar Tanzania Wall Art: A Destination for Your Walls #Shorts (https://www.youtube.com/watch?v=YIT8HAtjXkE) | 20 | not available | 17.0 s | — |
 | Oct 15, 4:03 PM | Instagram | 6ace6e4b7ac896f8054169d0_transcoded.mp4 (https://www.instagram.com/reel/Deh4NJniujr/) | 8 | 1.0 s | not recorded | — |
-| Oct 15, 4:00 PM | TikTok | 7697002494777412878?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7697002494777412878?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 112 | 2.2 s | not recorded | — |
+| Oct 15, 4:00 PM | TikTok | 7697002494777412878?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7697002494777412878?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 113 | 2.2 s | not recorded | — |
 | Oct 15, 4:00 PM | YouTube | Whistler Canada Wall Art: Keep Mountain Season Close #Shorts (https://www.youtube.com/watch?v=Ki5aaxYjnyc) | 3 | not available | 17.0 s | — |
 | Oct 15, 12:04 PM | Instagram | 6ace6e0cf14f15bbfed672d1_transcoded.mp4 (https://www.instagram.com/reel/Dehcz5qFDy9/) | 4 | 1.9 s | not recorded | — |
 | Oct 15, 12:03 PM | TikTok | 7696941211692698894?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696941211692698894?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 76 | 11.2 s | not recorded | — |

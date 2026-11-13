@@ -212,7 +212,7 @@ const blob = (out: Stage, x: number, y: number, z: number, sc = 1, k = 1) => {
 };
 
 // ---------------- v3 foreground layer (teardown: a cropped, lens-blurred near prop in every shot) ----------------
-import { fxLantern, fxLamp, fxReeds, fxTeapot, fxBackHat, fxBarrel, fxSign, fxGeranium, fxCandle, fxFern, fxTrunk, fxScrew, fxGull, fxInkwell, fxDrape } from "./fx7";
+import { fxMud, fxLantern, fxLamp, fxReeds, fxTeapot, fxBackHat, fxBarrel, fxSign, fxGeranium, fxCandle, fxFern, fxTrunk, fxScrew, fxGull, fxInkwell, fxDrape } from "./fx7";
 import { camAt } from "./story";
 type FgK = "lamp" | "reeds" | "teapot" | "backhat" | "barrel" | "sign" | "signR" | "signDG" | "geranium" | "candle" | "fern" | "trunk" | "screw" | "gull" | "inkwell" | "drape";
 const FGART: Record<FgK, [number, number, (p: Pen, t: number) => void]> = {
@@ -224,20 +224,21 @@ const FGART: Record<FgK, [number, number, (p: Pen, t: number) => void]> = {
 };
 /** [take, from frame, to frame, prop, u, v, d, width share]: anchored in the WORLD where the camera was at `from`
  *  (so it parallaxes as the camera moves); u/v = screen position -1..1 (right / up), d = metres from the lens */
-const FG: [number, number, number, FgK, number, number, number, number][] = [
+/** optional 9th/10th: floor height + real height (rule 79, owner v21): a grounded prop stands ON that floor at its true size */
+const FG: [number, number, number, FgK, number, number, number, number, number?, number?][] = [
   [1, 0, 92, "lamp", -0.88, 0.1, 1.7, 0.3], [1, 92, 146, "geranium", 0.72, -0.82, 1.3, 0.5],
   [2, 136, 197, "teapot", 0.74, -0.8, 1.1, 0.5],
   /* v19: the f190-220 reed card showed only cattail heads on stubs at this low lens (rule 56): removed */ [3, 220, 286, "reeds", 0.78, -0.74, 2.0, 0.7],
-  [4, 288, 373, "barrel", -0.84, -0.72, 1.3, 0.45],
-  [5, 384, 468, "lamp", -1.0, 0.0, 1.7, 0.3],
+  [4, 286, 373, "barrel", -0.62, -0.6, 2.6, 0.45, D0, 0.95] /* v21 rule 79: a real barrel standing in the mud (it floated in the air on pans) */,
+  [5, 410, 468, "lamp", -1.0, 0.0, 1.7, 0.3],
 
-  [7, 572, 700, "drape", -0.93, 0.05, 1.3, 0.34] /* v20 QA: it vanished in one frame at f676; now slides out the left edge from f668 */,
+  /* v21 rule 81 (owner): the take-7 curtain covered the model, removed */
   /* v20 rules 64+73: the f701 and f872 hanging-sign cards swept across the frame (lettering cut on the way): removed */ [8, 752, 836, "barrel", 0.82, -0.72, 1.4, 0.45], [8, 836, 880, "signR", 0.64, 0.62, 2.4, 0.66] /* v20 rule 64: board fully in frame through the push-in, wall end of the bracket off-frame right */,
   [9, 985, 1052, "barrel", -0.86, -0.7, 1.2, 0.42], [9, 1052, 1097, "barrel", 0.8, -0.74, 1.2, 0.42] /* v17 rule 59: the lamp crossed the baker after the reframe */,
   [10, 1089, 1150, "gull", 0.45, 0.45, 3.5, 0.32], [10, 1150, 1196, "lamp", 0.84, 0.0, 2.2, 0.3], [10, 1196, 1250, "screw", -0.82, -0.3, 1.5, 0.42], /* v20: the f1250 screw card stood in front of the reframed worker's lever (rule 59): removed */
-  [11, 1326, 1355, "drape", 0.9, 0.0, 1.0, 0.36],
+  /* v21 rule 81 (owner): the take-11 curtain on the right read as out of place, removed */
   [12, 1347, 1444, "lamp", 0.86, 0.0, 1.6, 0.3], [12, 1444, 1478, "geranium", -0.8, -0.82, 0.8, 0.5],
-  [13, 1470, 1585, "fern", -0.82, -0.42, 1.4, 0.5],
+  // take 13 fern FG card removed (owner Nov 13: levitating plant in a pot; rule 79)
   [14, 1577, 1620, "lamp", -0.86, 0.0, 2.0, 0.3], [14, 1650, 1730, "trunk", 0.74, -0.8, 1.2, 0.55],
   [15, 1722, 1782, "gull", -0.4, 0.5, 4.0, 0.3], [15, 1782, 1823, "reeds", -0.78, -0.74, 1.2, 0.65],
   /* v19f: take-16 gulls read as a grey blurred saucer in the sunset sky, removed */
@@ -245,7 +246,7 @@ const FG: [number, number, number, FgK, number, number, number, number][] = [
 const fgF = new THREE.Vector3(), fgR = new THREE.Vector3(), fgU = new THREE.Vector3(), fgUp = new THREE.Vector3(0, 1, 0);
 const foreground = (out: Stage, id: number, t: number) => {
   const f = Math.round(t * FPS);
-  for (const [tk, a, b, k, u, v, d, wf] of FG) {
+  for (const [tk, a, b, k, u, v, d, wf, gy, gh] of FG) {
     if (tk !== id || f < a || f >= b) continue;
     const c = camAt(id, Math.round((a + Math.min(b, a + 60)) / 2));
     fgF.set(c.look[0] - c.pos[0], c.look[1] - c.pos[1], c.look[2] - c.pos[2]).normalize();
@@ -253,12 +254,12 @@ const foreground = (out: Stage, id: number, t: number) => {
     const hH = d * Math.tan((c.fov * Math.PI) / 360), hW = hH * (9 / 16);
     const [cw, ch, draw] = FGART[k], w = wf * 2 * hW;
     let du = u, dv = v, ph = 0;
-    if (k === "drape" && tk === 7) du = u - 0.06 * Math.max(0, f - 668);
     if (k === "gull") { const s = (f - a) / FPS; du = u + 0.16 * s * (u < 0 ? 1 : -1); dv = v + 0.05 * Math.sin(s * 2); ph = q(((s * 2.4) % 1 + 1) % 1, 8); }
     const x = c.pos[0] + fgF.x * d + fgR.x * du * hW + fgU.x * dv * hH, y = c.pos[1] + fgF.y * d + fgR.y * du * hW + fgU.y * dv * hH, z = c.pos[2] + fgF.z * d + fgR.z * du * hW + fgU.z * dv * hH;
     // v8 (rule 62): a street lamp is a real 3.2 m post standing ON the sidewalk (base at D0 + SW), never a camera-pinned
     // card whose foot hangs in the air; the camera anchor only chooses where it stands
     if (k === "lamp") { out.fx.push({ key: `fg|lamp|0`, cw, ch, draw: (p) => draw(p, ph), x, y: D0 + SW + 1.6, z, w: 0.96, h: 3.2 }); continue; }
+    if (gy !== undefined && gh !== undefined) { out.fx.push({ key: `fg|${k}|${ph}`, cw, ch, draw: (p) => draw(p, ph), x, y: gy + gh / 2, z, w: (gh * cw) / ch, h: gh }); continue; }
     out.fx.push({ key: `fg|${k}|${ph}`, cw, ch, draw: (p) => draw(p, ph), x, y, z, w, h: (w * ch) / cw });
   }
 };
@@ -392,11 +393,13 @@ const idle = (t: number, i: number, xs: Expr[]) => {
 const COUNCILO = (v: number): Outfit => ({ ...townsfolk(v), hat: v % 2 ? "tophat" : "hair", hair: ["#5a3b2a", "#8a8a8a", "#2a201a"][v % 3], moustache: v % 3 === 2 ? undefined : "#5a4a3a", jacket: ["#3b3a40", "#4a3f36", "#2f3a4a", "#3f4038"][v % 4], buttons: "#c9b48a" });
 
 /** a busy street: townsfolk on both plank sidewalks and a few crossing the road, seeded, each acting on its own clock */
-const street = (out: Stage, cam: CamInfo, t: number, base: number, x0: number, x1: number, step = 3.2) => {
+/** zN: north-side walkers' z (default 109.4-109.9). v21 rule 88 (owner): under the raised Lake Street porch (front at
+ *  z 109.1) their heads went into the boards and one hat slid along them, so take 9 keeps them in front of the porch */
+const street = (out: Stage, cam: CamInfo, t: number, base: number, x0: number, x1: number, step = 3.2, zN = 109.4) => {
   let k = 0;
   for (let x = x0; x < x1; x += step) {
     const r1 = hh(base + k, 1), r2 = hh(base + k, 2), side = r1 < 0.42 ? 0 : r1 < 0.84 ? 1 : 2;
-    const z = side === 0 ? 109.4 + 0.5 * r2 : side === 1 ? 94.6 - 0.5 * r2 : 98 + 8 * r2, y = side === 2 ? D0 : Y;
+    const z = side === 0 ? zN + 0.5 * r2 : side === 1 ? 94.6 - 0.5 * r2 : 98 + 8 * r2, y = side === 2 ? D0 : Y;
     const xx = x + step * 0.8 * (r2 - 0.5);
     if (Math.hypot(xx - cam.pos.x, z - cam.pos.z) > 6.5) stand(out, cam, t, who(base + k, townsfolk(k % 8), "st" + (k % 8)), [xx, y, z],
       { expr: idle(t, base + k, (["smile", "neutral", "grin", "shock", "dazed"] as Expr[]).slice(k % 3, k % 3 + 3)), facing: r2 < 0.5 ? 1 : -1, wave: k % 7 === 3 && Math.floor(t * 1.3 + k) % 3 === 0 ? 0.8 : undefined });
@@ -443,6 +446,8 @@ export const stage = (id: number, t: number, _ws: World, cam: CamInfo): Stage =>
       break;
     }
     case 4: { // rain: mud to the shins, sewage with nowhere to go, the newspaper going soggy in the gutter
+      { const dx = cam.pos.x - STUCK[0], dz = cam.pos.z - STUCK[2], L = Math.hypot(dx, dz) || 1; // v21 rule 80: mud ring in front of his shins
+        card(out, "mud", 600, 220, fxMud, STUCK[0] + (dx / L) * 0.14, D0 + 0.1, STUCK[2] + (dz / L) * 0.14, 0.95); }
       stand(out, cam, t, who(5, townsfolk(2), "stuck"), STUCK, { expr: act(t, "nervous", [[10.2, "stern"], [10.46, "pained"], [11.42, "dazed"], [11.78, "pained"]]), facing: 1 });
       // v20 QA (rule 56): in the f336 tilt down to the paper her head was cut off by the top edge: she leaves before it
       if (!(t >= 336 / FPS && cam.pos.z < 99.5)) stand(out, cam, t, who(6, townsfolk(3), "walk2"), [36.4, D0 - 0.12, 103.6], { expr: act(t, "neutral", [[10.94, "shock"], [11.26, "pained"]]), facing: -1 });
@@ -480,7 +485,9 @@ export const stage = (id: number, t: number, _ws: World, cam: CamInfo): Stage =>
     }
     case 8: { // 1858: four floors on 200 screws; the flowerpot on the sill never wobbles
       const L = lift("b58", id, t);
-      for (const [k, x] of [[0, 23.2], [1, 25.4], [2, 27.6], [3, 29.8], [4, 32.0], [5, 34.4]] as const) cranker(out, cam, t, 3 + k, [x, Y, B58.z + 0.12], 0.85, true, D0 + L);
+      // v21 rule 90 (owner): the crankers stood 12 cm from the facade and their camera-facing cards cut into the wall;
+      // now 0.2 m out (screw still at the sill edge, rule 44) with the card locked parallel to the wall (rule 53)
+      for (const [k, x] of [[0, 23.2], [1, 25.4], [2, 27.6], [3, 29.8], [4, 32.0], [5, 34.4]] as const) cranker(out, cam, t, 3 + k, [x, Y, B58.z + 0.2], 0.85, true, D0 + L, 0);
       stand(out, cam, t, who(9, townsfolk(4), "w58"), [37.5, D0, 101.6], { expr: act(t, "neutral", [[25.7, "shock"], [26.92, "dazed"], [28.12, "grin"], [28.64, "laugh"]]), facing: -1 });
       street(out, cam, t, 280, 12, 46, 3.6);
       stand(out, cam, t, who(59, ENGO, "fore58"), [21.0, D0, 99.8], { expr: act(t, "stern", [[26.0, "nervous"], [27.9, "relief"], [28.64, "grin"]]), facing: 1, prop: "clipboard" });
@@ -494,13 +501,13 @@ export const stage = (id: number, t: number, _ws: World, cam: CamInfo): Stage =>
       const L = lift("blk", id, t);
       for (let k = 0; k < 16; k++) if (Math.abs(-114 + k * 2.75 - SHOP[0]) > 1.2) cranker(out, cam, t, 6 + k, [-114 + k * 2.75, Y, BLK.z - 1.75], 0.8, true, D0 + SW + L - 0.22); // v8: no jack under the shop door, so the baker is never hidden
       stand(out, cam, t, who(10, ENGO, "fore"), [-68.5, D0, 97.0], { expr: act(t, "stern", [[31.4, "grin"], [32.86, "stern"], [33.76, "shock"], [34.56, "grin"]]), facing: 1, prop: "clipboard" });
-      const py = D0 + SW + L; // v8 (rule 60): feet on the porch boards, not 15 cm inside them
+      const py = D0 + SW + 0.025 + L; // v8 (rule 60): feet on the porch boards (v21: porch top 2.5 cm above the sidewalk)
       stand(out, cam, t, who(12, BAKER, "baker"), [SHOP[0], py, BLK.z - 0.9], { expr: act(t, "grin", [[31.2, "shock"], [32.18, "grin"], [35.32, "laugh"], [35.9, "grin"]]), facing: 1, prop: "loaf" });
       card(out, "open", 400, 260, fxOpen, SHOP[0] - 1.25, py + 1.75, BLK.z - 0.08, 0.75, 0, { yaw: Math.PI });
       stand(out, cam, t, who(13, MOM, "cust"), [SHOP[0] + 1.75, Y, BLK.z - 2.6], { expr: act(t, "neutral", [[31.4, "shock"], [35.66, "smile"]]), facing: -1 });
       stand(out, cam, t, who(61, KID, "cust2"), [SHOP[0] + 2.6, Y, BLK.z - 2.9], { expr: idle(t, 61, ["laugh", "grin", "shock"]), facing: -1 }, 0.8);
       crowd(out, cam, t, 70, 6);
-      street(out, cam, t, 200, -120, -64);
+      street(out, cam, t, 200, -120, -64, 3.2, 108.1);
       break;
     }
     case 10: { // the Tremont House: guests at every window, then under it among 500 men

@@ -198,3 +198,11 @@ export const fxLantern = (p: Pen) => {
   p.poly([[50, 420], [150, 420], [140, 450], [60, 450]], "#2f3540", 5);
   p.arc(100, 262, 22, 18, 180, 360, 6, "#3c3f46");
 };
+
+/** v21 (owner rule 80): a ring of churned mud round a sunk man's shins, so the legs read as IN the mud. 600 x 220 */
+export const fxMud = (p: Pen) => {
+  p.poly([[20, 200], [60, 120], [140, 90], [230, 70], [300, 82], [380, 66], [470, 92], [550, 125], [585, 200]], "#6b4a2c", 7);
+  p.poly([[90, 140], [170, 108], [250, 96], [330, 104], [420, 96], [500, 128], [470, 150], [380, 136], [300, 146], [210, 138], [130, 158]], "#87613b", 0);
+  p.g.fillStyle = "#4a3220"; for (const [x, y, r] of [[160, 175, 14], [260, 160, 10], [420, 170, 16], [500, 180, 9], [90, 185, 8], [340, 185, 12]] as const) { p.g.beginPath(); p.g.ellipse(x, y, r * 1.6, r, 0, 0, Math.PI * 2); p.g.fill(); }
+  p.g.fillStyle = "#7a5634"; for (const [x, y, r] of [[40, 70, 9], [560, 60, 8], [120, 40, 6], [480, 35, 7], [300, 30, 5]] as const) { p.g.beginPath(); p.g.arc(x, y, r, 0, Math.PI * 2); p.g.fill(); }
+};

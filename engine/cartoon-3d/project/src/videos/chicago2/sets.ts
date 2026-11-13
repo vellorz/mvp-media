@@ -115,6 +115,14 @@ const streetViewT = () => ctex("cStreetView", 1024, 512, (g, r) => {
   g.fillStyle = "#6f5238"; for (let i = 0; i < 40; i++) g.fillRect(r() * 1024, 430 + r() * 80, 30 + r() * 60, 3);
   g.fillStyle = "#c08a52"; g.fillRect(0, 414, 1024, 8);
 });
+/** v21 (owner rule 83): the council windows showed a painted building that read as a poster stuck in the glass; this
+ *  view is open sky with clouds over a faint, hazy far roofline, so it reads as distance */
+const skyViewT = () => ctex("cSkyView", 1024, 512, (g, r) => {
+  const sk = g.createLinearGradient(0, 0, 0, 512); sk.addColorStop(0, "#5f95dc"); sk.addColorStop(0.75, "#c8dcf0"); sk.addColorStop(1, "#dfe9f2");
+  g.fillStyle = sk; g.fillRect(0, 0, 1024, 512);
+  for (const [x, y, s] of [[180, 120, 1], [620, 80, 1.3], [900, 190, 0.9]]) { g.fillStyle = "#fbf8f1"; for (const [dx, dy, rr] of [[0, 0, 30], [32, 8, 24], [-30, 9, 22], [10, -16, 24]]) { g.beginPath(); g.arc(x + dx * s, y + dy * s, rr * s, 0, 7); g.fill(); } }
+  g.fillStyle = "#b3c4d6"; let x = 0; while (x < 1024) { const w = 40 + r() * 60, h = 18 + r() * 34; g.fillRect(x, 470 - h, w, h + 42); x += w; }
+});
 const gravelT = () => { const t = ctex("cGravel", 256, 256, (g, r) => {
   g.fillStyle = "#9a8e7a"; g.fillRect(0, 0, 256, 256);
   for (let i = 0; i < 1400; i++) { g.fillStyle = ["#8a7e6a", "#aca08a", "#7a6e5c", "#b8ad98"][i % 4]; g.fillRect(r() * 256, r() * 256, 2 + r() * 3, 2 + r() * 3); }
@@ -231,8 +239,10 @@ export const buildSets = (root: THREE.Object3D, kit: Kit, rays: Ray[], tre: THRE
         for (let x = 0; x < 1024; x += 32) { g.fillStyle = "#a8322c"; g.beginPath(); g.arc(x + 16, 455, 7, 0, 6.29); g.fill(); g.strokeStyle = "#241726"; g.lineWidth = 2; g.stroke(); }
         g.fillStyle = "#f6f3ea"; for (let x = 0; x < 1024; x += 24) { g.beginPath(); g.arc(x + 12, 500, 10, 0, 3.15); g.fill(); g.stroke(); }
       }); tx2.wrapS = THREE.RepeatWrapping; tx2.repeat.set(2, 1); tx2.flipY = true; return tx2; })() })), tx, D0, tz, 0.62, 0.56, TAB_Y - D0, 24);
-      for (let k = 0; k < 3; k++) { const a = (k / 3) * Math.PI * 2 + i; cyl(b, M.china(), tx + Math.cos(a) * 0.32, TAB_Y, tz + Math.sin(a) * 0.32, 0.13, 0.13, 0.012, 18); }
-      teacup(b, tx + 0.18, TAB_Y, tz - 0.3); teacup(b, tx - 0.25, TAB_Y, tz + 0.12);
+      const plates: [number, number][] = [];
+      for (let k = 0; k < 3; k++) { const a = (k / 3) * Math.PI * 2 + i; plates.push([tx + Math.cos(a) * 0.32, tz + Math.sin(a) * 0.32]); cyl(b, M.china(), tx + Math.cos(a) * 0.32, TAB_Y, tz + Math.sin(a) * 0.32, 0.13, 0.13, 0.012, 18); }
+      // v21 rule 89 (owner): a cup's saucer sank into a plate it overlapped; a cup over a plate now sits ON it
+      for (const [cx, cz] of [[tx + 0.18, tz - 0.3], [tx - 0.25, tz + 0.12]]) { const pl = plates.find(([px, pz]) => Math.hypot(px - cx, pz - cz) < 0.21); if (pl) teacup(b, pl[0], TAB_Y + 0.0125, pl[1]); else teacup(b, cx, TAB_Y, cz); }
       const vx = tx + (i === 0 ? 0.36 : 0), vz = tz + (i === 0 ? 0.1 : 0);
       cyl(b, M.blueC(), vx, TAB_Y, vz, 0.05, 0.035, 0.18, 10);
       for (let k = 0; k < 5; k++) { const f = new THREE.SphereGeometry(0.045, 8, 6); f.translate(tx + Math.cos(k * 1.3) * 0.06, TAB_Y + 0.24 + (k % 2) * 0.04, tz + Math.sin(k * 1.3) * 0.06); f.translate(vx - tx, 0, vz - tz); b.add(f, k % 2 ? M.red() : lam("cFlowerY", () => ({ color: "#f2c230" }))); }
@@ -316,7 +326,7 @@ export const buildSets = (root: THREE.Object3D, kit: Kit, rays: Ray[], tre: THRE
     box(b, lam("cSampler", () => ({ map: ctex("cSamplerT", 140, 110, (g) => { g.fillStyle = "#efe6cc"; g.fillRect(0, 0, 140, 110); g.fillStyle = "#a8322c"; g.font = "bold 22px Georgia, serif"; g.textAlign = "center"; g.fillText("HOME", 70, 32); g.strokeStyle = "#3f5a3a"; g.lineWidth = 3; g.strokeRect(50, 56, 40, 30); g.beginPath(); g.moveTo(44, 58); g.lineTo(70, 40); g.lineTo(96, 58); g.stroke(); for (let x = 8; x < 140; x += 10) { g.fillStyle = "#3f6fb5"; g.fillRect(x, 96, 5, 5); g.fillRect(x, 6, 5, 5); } }) })), R.x - 2.9, D0 + 1.3, z1 - 0.05, R.x - 2.3, D0 + 1.75, z1 - 0.04);
     cyl(b, M.iron(), x1 - 0.8, D0, z1 - 1.6, 0.32, 0.36, 0.95, 14); pole(b, M.iron(), V(x1 - 0.8, D0 + 0.95, z1 - 1.6), V(x1 - 0.8, D0 + R.h, z1 - 1.6), 0.08);
     box(b, glow("stoveDoor", 2.4, 1.2, 0.4), x1 - 1.14, D0 + 0.3, z1 - 1.72, x1 - 1.1, D0 + 0.5, z1 - 1.48);
-    box(b, M.plush(), R.x - 1.6, D0 + 0.2, z1 - 3.0, R.x - 1.1, D0 + 0.36, z1 - 2.6); for (const [dx, dz] of [[-1.55, -2.95], [-1.15, -2.95], [-1.55, -2.65], [-1.15, -2.65]]) cyl(b, M.woodD(), R.x + dx, D0, z1 + dz, 0.025, 0.02, 0.2, 6);
+    // v21 (owner Nov 13, rule 76): the footstool stood inside the right-hand jack worker; removed
     cyl(b, M.brass(), tx, D0 + 0.66, tz - 0.16, 0.12, 0.12, 0.012, 16); cyl(b, M.china(), tx - 0.05, D0 + 0.672, tz - 0.18, 0.05, 0.065, 0.11, 12); cyl(b, M.china(), tx + 0.08, D0 + 0.672, tz - 0.12, 0.03, 0.035, 0.05, 10);
     for (let k = 0; k < 3; k++) box(b, M.brass(), x0 + 0.74, D0 + 0.25 + k * 0.3, z1 - 1.9, x0 + 0.77, D0 + 0.29 + k * 0.3, z1 - 1.7);
     b.build(root);
@@ -502,7 +512,7 @@ export const buildSets = (root: THREE.Object3D, kit: Kit, rays: Ray[], tre: THRE
     }) }));
     room(b, x0, x1, D0, z0, z1, R.h, lam("cWallInkCouncil", () => ({ map: wallpaperInk("council", "#b7a27a", "#6a4a3a", "#4a2e1e") })), matTex("cCouncilFloor", plankT(), 1, 1),
       [{ at: R.x - 3.6, w: 1.3, y0: 0.9, y1: 3.0 }, { at: R.x + 2.3, w: 1.3, y0: 0.9, y1: 3.0 }],
-      lam("cStreetViewM", () => ({ map: streetViewT() })), lam("cCeilM", () => ({ color: "#e8dcc0" })));
+      lam("cSkyViewM", () => ({ map: skyViewT() })), lam("cCeilM", () => ({ color: "#e8dcc0" })));
     for (const [ax, az, cx, cz] of [[x0, z0, x1, z0 + 0.15], [x0, z1 - 0.15, x1, z1], [x0, z0, x0 + 0.15, z1], [x1 - 0.15, z0, x1, z1]]) box(b, M.cream(), ax, D0 + R.h - 0.25, az, cx, D0 + R.h, cz);
     // the long table: green baize top, carved legs, papers, inkwells, quills, a bell, water carafe + glasses
     const tz0 = R.z - 1.0, tz1 = R.z + 1.0, tx0 = R.x - 1.9, tx1 = R.x + 1.9, ty = D0 + 0.76;

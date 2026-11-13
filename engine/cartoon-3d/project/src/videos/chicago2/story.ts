@@ -45,7 +45,10 @@ export const XFADE: Record<number, number> = {};
 export const CUT_X = 9;
 const NO_ORBIT = new Set<number>([]); // teardown: constant motion, every take drifts
 /** v8: tight framings get a small orbit cap instead of none (steps, couch wide) so they still drift */
-const ORB_CAP: Record<number, number> = { 12: 0.12, 13: 0.1 };
+/** v21 rule 87 (owner): per-run orbit caps; take 9's pull-back orbited 0.6 rad round a look point 26 m away and swung
+ *  the lens through an awning into the Lake Street block (f955-984) */
+const RUN_CAP: Record<string, number> = { "9|872": 0.06 };
+const ORB_CAP: Record<number, number> = { 7: 0.06, 12: 0.12, 13: 0.1 }; // v21 rule 82: take 7 keeps the model front-on
 export const FLASH_AT = -100;
 export const shotAt = (f: number) => SHOTS.find((s) => f >= s.a && f < s.b) ?? SHOTS[SHOTS.length - 1];
 export type Layer = { id: number; alpha: number; pre?: number };
@@ -239,13 +242,14 @@ const CAMS: Record<number, Key[]> = {
     { f: 220, dur: 90, s: look([SWAMP.x + 0.6, D0 + 2.4, SWAMP.z - 7.5], [SWAMP.x, D0 + 1.0, SWAMP.z + 8], 56, 202, 0.0007, 0.02) },
   ],
   4: [ // rain: low over a street puddle, rise to the man stuck in the mud, pan down to the gutter and the soggy paper
-    { f: 278, s: look([32.0, D0 + 0.5, 99.4], [32.6, D0 - 0.1, 101.3], 50, 278, 0.0) },
-    { f: 288, cut: true, s: look(nr([36.8, D0 + 1.5, 98.9], [33.8, D0 + 1.25, 102], 0.66), [33.8, D0 + 1.25, 102], 48, 288, 0.0012, 0.02) },
+    // v21 rule 77: the f278 puddle key showed for 2 stray frames (286-287) between the swamp and this shot: removed
+    { f: 278, s: look(nr([36.8, D0 + 1.5, 98.9], [33.8, D0 + 1.25, 102], 0.66), [33.8, D0 + 1.25, 102], 48, 288, 0.0012, 0.02) },
     { f: 336, cut: true, s: look([32.6, D0 + 1.0, 97.4], [PAPER[0], D0 + 0.05, PAPER[2]], 46, 336, 0.0010) },
   ],
   5: [ // 1854: the newspaper on the wall, pull back to the doctor in the dusk street
-    { f: 365, s: look([NEWS[0] + 0.1, NEWS[1] + 0.05, NEWS[2] - 1.45], NEWS, 40, 365, 0.0008) },
-    { f: 384, cut: true, s: look(nr([41.6, D0 + 1.75, 104.6], [40.1, D0 + 1.4, 109.7], 0.6), [40.1, D0 + 1.4, 109.7], 48, 384, 0.0012, -0.02) },
+    { f: 365, s: look([NEWS[0] + 0.08, NEWS[1] + 0.27, NEWS[2] - 1.8], [NEWS[0], NEWS[1] + 0.24, NEWS[2]], 40, 365, 0.0004) }, // v21 rule 78: whole poster in frame for the full hold
+    // v21 rule 78: the poster showed fully for only ~6 frames; it now holds ~1 s before the cut to the doctor
+    { f: 410, cut: true, s: look(nr([41.6, D0 + 1.75, 104.6], [40.1, D0 + 1.4, 109.7], 0.6), [40.1, D0 + 1.4, 109.7], 48, 410, 0.0012, -0.02) },
   ],
   6: [ // the council: the plan on the table, pull back to the engineer and the council; push to the covered model
     { f: 460, s: look([CX, CY + 0.72, CZ - 0.37], [CX, CY, CZ - 0.35], 46, 460, 0.0) },
@@ -277,7 +281,9 @@ const CAMS: Record<number, Key[]> = {
     { f: 1326, cut: true, s: look([-559.0, D0 + 1.3, -621.0], [-560.6, D0 + 0.95, -619.0], 44, 1326, 0.0016) }],
   12: [{ f: 1347, s: look([-3.9, D0 + 1.25, 104.9], [-0.5, D0 + 0.95, 109.7], 52, 1347, 0.0008, -0.02) },
     { f: 1444, cut: true, s: look([1.55, D0 + 2.05, 108.0], [1.4, D0 + 1.7, 110.65], 40, 1444, 0.0008) }],
-  13: [{ f: 1470, s: (f) => look(nr([COUCH[0] + 0.3, D0 + 1.9 + 0.018 * Math.max(0, f - 1470), COUCH[2] - 6.0], [COUCH[0], D0 + 0.85, COUCH[2]], 1.25), [COUCH[0], D0 + 0.85, COUCH[2]], 58, 1470, 0.0004)(f) }], // v8: slow crane up keeps the couch drifting without cropping the jack men
+  // v21 rule 87 (owner): the crane rose through the parlour ceiling (3.4 m) and started 1.3 m behind the near wall; now
+  // it starts inside the room and tops out 0.4 m under the ceiling
+  13: [{ f: 1470, s: (f) => look(nr([COUCH[0] + 0.3, D0 + 1.9 + 0.0075 * Math.max(0, f - 1470), COUCH[2] - 4.5], [COUCH[0], D0 + 0.85, COUCH[2]], 1.25), [COUCH[0], D0 + 0.85, COUCH[2]], 58, 1470, 0.0004)(f) }], // v8: slow crane up keeps the couch drifting without cropping the jack men
   14: [
     { f: 1577, s: look(nr([PULL[0] + 1.1, D0 + 1.75, PULL[2] - 4.6], [PULL[0] + 0.25, D0 + 1.05, PULL[2]], 0.64), [PULL[0] + 0.25, D0 + 1.05, PULL[2]], 52, 1577, 0.0012, -0.02) },
     { f: 1620, dur: 24, s: look([PULL[0] + 0.45, D0 + 1.45, PULL[2] - 1.4], [PULL[0] + 0.2, D0 + 1.25, PULL[2]], 44, 1620, 0.0012) },
@@ -303,7 +309,7 @@ export const kickAt = (t: number) => {
   return a;
 };
 export const camAt = (id: number, f: number, pre?: number): Cam => {
-  const c0 = run(CAMS[id], f, pre), dir = (id + runIdx) % 2 ? 1 : -1, oa = dir * Math.min(ORB_CAP[id] ?? ORBIT_MAX, ORBIT * Math.max(0, f - runStart));
+  const c0 = run(CAMS[id], f, pre), dir = (id + runIdx) % 2 ? 1 : -1, oa = dir * Math.min(RUN_CAP[`${id}|${runStart}`] ?? ORB_CAP[id] ?? ORBIT_MAX, ORBIT * Math.max(0, f - runStart));
   const c = orbit(widen(c0), NO_ORBIT.has(id) ? 0 : oa), a = kickAt(f / FPS);
   if (!a) return c;
   const d: V3 = [c.look[0] - c.pos[0], c.look[1] - c.pos[1], c.look[2] - c.pos[2]];
@@ -328,7 +334,7 @@ export const DOF: Dof[] = [
   { f: 215, dur: 30, cInf: 1.5 },
   { f: 286, cInf: 1.5, focus: eyes(STUCK, 1.4) },
   { f: 373, cInf: 1.5, focus: () => NEWS },
-  { f: 390, dur: 30, cInf: 1.5, focus: eyes(DOC) },
+  { f: 410, dur: 20, cInf: 1.5, focus: eyes(DOC) },
   { f: 468, cInf: 3, focus: () => [CX, CY, CZ - 0.35] },
   { f: 485, dur: 30, cInf: 3, focus: () => [CX, D0 + 1.5, CZ + 1.3] },
   { f: 580, cInf: 3.5, focus: () => MODEL },

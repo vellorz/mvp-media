@@ -109,3 +109,46 @@ The new rules from the Chicago remake. They are owner corrections plus findings 
     - Quiet close-ups and the ending may sit at 12-18, like the references, as long as the average holds.
     - Raise weak shots with more DRAWN OBJECTS that belong to the place and story (props, set dressing, drawn textures on flat surfaces such as water, sand, ceilings and plank walls), never noise.
     - Every added object passes rules 53-71.
+73. A crane or pan never sweeps past large near objects (sails swept through the frame bottom). Kit trees near a high camera read as blurred green balls at the frame edge: skip them by region and keep the rng draws. A flying-bird card in a blurred sky reads as a grey saucer: leave it out.
+74. Sign lettering is fully in frame or fully out for a whole cut-to-cut shot (rule 64, automated in chicago2):
+    - World signs are listed in `SIGN_LIST` (city.ts). `World.signsFor` (world.ts) samples every second frame of the shot; any sign the frame edge cuts (signcut.ts, 9x3 grid) shows its blank board for the whole shot.
+    - Foreground hanging-sign cards must keep the whole board in frame for every frame of the shot and keep the bracket's wall end off-frame. Check with render/signscan/fg2.ts. A card that sweeps across the frame is removed (rule 73).
+    - Before a final render, run render/signscan/scan.ts to list the shots that blank signs and spot-check them.
+75. 2K final render (see render/run_2k_final.sh):
+    - Use `SCALE=1.3333333333333333` exactly.
+    - Run at most 2 browsers, concurrency 1 each, every frame single-layer (`ONLY=base`).
+    - Render the dissolve over-layers as PNGs (scripts/overframes.mjs) and blend them in render/assemble.py, which also logs the edge average of the real video.
+    - Background jobs die after 2 h, so run.sh is resumable: re-run it until both workers print DONE.
+
+## Rules 77-91 (owner review of Chicago v20, Nov 13 2026)
+
+77. **Clean cuts.** No orphan camera key may show a different framing for 1-5 frames around a cut or dissolve. Chicago 0:09 showed a stray 2-frame blurry puddle shot between the swamp and the rain.
+    - Every shot lasts at least 18 frames.
+    - Check the frame-diff at every cut ±3 frames.
+    - Look at those frames one by one.
+78. **Inserts hold long enough.** A poster, newspaper or document insert stays fully visible for at least 1.0 s, not counting the dissolves. Never flash a readable insert for a fraction of a second (Chicago 0:12, the CHOLERA poster).
+79. **Grounded foreground props stand on the floor.** Barrels, pots, plants, crates and stools used as foreground must stand on the real floor at their spot. Never use camera-pinned cards in the air: they float when the camera pans (Chicago 0:09 barrel, 0:50 fern pot). This extends rule 62 to every grounded prop.
+80. **Sinking reads as sinking.** A character sunk in mud, water or snow shows that material around the legs (a mud ring or splash at the shins), so it never reads as legs cut off.
+81. **Frame with drapes only from the edge, never over the subject.**
+    - A curtain or drape foreground card may frame the edge of the frame, at no more than about 12% of the width, and never over the subject.
+    - When in doubt, leave it out. The owner called the 0:20 and 0:44 curtains distracting.
+82. **Models face the camera.** Models, plans, maps and displays are shot front-on, with the camera within about 20° of the face's normal. Never side-on.
+83. **Wall decor stays off glass.** Posters, pictures and frames never overlap windows, doors or glass. The Chicago 0:20 picture showed inside the window glass. Place decor on clear wall piers and check every interior wall.
+84. **Nothing crosses sign lettering.** Floor bands, beams, awnings and posts stay clear of a sign board. Either draw the board in front, or cut the band around it (Chicago 0:24, DRY GOODS).
+85. **No coplanar surfaces.**
+    - Porches, sidewalks, floors and decals at the same height get at least 2 cm of separation plus polygonOffset.
+    - Scrub every pan across boards frame by frame for flicker (Chicago 0:29 porch).
+    - This extends rule 43.
+86. **Awnings sit above doors.** An awning or canopy mounts above the door head, with its lowest edge at least 0.15 m above the door top. It must never sit across the door (Chicago 0:29).
+87. **The camera never enters geometry.** Sample every camera path every frame:
+    - Keep it at least 0.3 m from walls, awnings, ceilings and floors.
+    - Indoors, keep it below the ceiling at every frame; above the ceiling the room opens to the sky.
+    - Chicago faults: 0:32, the camera went through an awning and into a building; 0:51, it rose above the parlour ceiling.
+88. **No body crosses a floor, porch, ceiling or beam.**
+    - Anyone under a raised floor fits under it, with at least 5 cm of head clearance at every frame of a lift.
+    - People on a lower street near a raised sidewalk are fully visible or fully hidden: no hats sliding along the boards.
+    - Chicago faults: 0:32, a hat slid along the boards; 0:33, a woman's head was inside the porch.
+89. **Props rest on their supports.** Cups sit on saucers or plates with the bottom at the plate top, and plates sit on the table. Check every prop's base against its support (Chicago 0:44, a cup sank into its plate). This extends rule 67.
+90. **Workers at walls stay out of the wall.** Rule 53 applies to every take, including wides: yaw-lock the card parallel to the wall and keep it at least 0.4 m out (Chicago 0:24).
+91. **Fix only what the owner names.** When the owner lists issues by timestamp, fix only those parts, re-render only the affected segments, and keep everything else frame-identical. Turn every item into a rule here.
+    - The 0:51 "stool glitch" was a parlour footstool standing inside the right-hand jack worker (rule 76): it was removed.

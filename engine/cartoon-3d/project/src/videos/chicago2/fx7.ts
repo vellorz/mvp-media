@@ -63,15 +63,18 @@ export const fxBarrel = (p: Pen) => {
 };
 
 /** a hanging shop sign on an iron bracket. 760 x 520. words on the board (Lake Street trades) */
-export const fxSign = (p: Pen, word: string, col = "#2f4f3a") => {
-  p.line([[0, 40], [700, 40]], "#2f3540", 14);
-  p.arc(560, 40, 120, 120, 0, 90, 8, "#2f3540");
-  for (const x of [140, 600]) p.stroke([[x, 40], [x, 150]], 5, "#2f3540");
-  p.poly([[90, 150], [650, 150], [650, 470], [90, 470]], col, 8);
-  p.poly([[115, 175], [625, 175], [625, 445], [115, 445]], null, 0); p.stroke([[115, 175], [625, 175], [625, 445], [115, 445], [115, 175]], 5, "#d9b04a");
+export const fxSign = (p: Pen, word: string, col = "#2f4f3a", flip = false, W = 760) => {
+  // flip: the iron bracket comes in from the RIGHT card edge (the wall is off-frame right) and the lettering stays readable;
+  // W > 760 lengthens the bracket arm (board moved away from the wall end) so a push-in keeps the wall end off-frame
+  const S = W - 760, X = (x: number) => { const o = x === 0 ? 0 : x + S; return flip ? W - o : o; }, Q = (pts: [number, number][]) => pts.map(([x, y]) => [X(x), y] as [number, number]);
+  p.line(Q([[0, 40], [700, 40]]), "#2f3540", 14);
+  if (flip) p.arc(X(560), 40, 120, 120, 90, 180, 8, "#2f3540"); else p.arc(560 + S, 40, 120, 120, 0, 90, 8, "#2f3540");
+  for (const x of [140, 600]) p.stroke(Q([[x, 40], [x, 150]]), 5, "#2f3540");
+  p.poly(Q([[90, 150], [650, 150], [650, 470], [90, 470]]), col, 8);
+  p.stroke(Q([[115, 175], [625, 175], [625, 445], [115, 445], [115, 175]]), 5, "#d9b04a");
   const g = p.g; let z = 120; g.font = `bold ${z}px ${SERIF}`;
   while (g.measureText(word).width > 470 && z > 20) { z -= 4; g.font = `bold ${z}px ${SERIF}`; }
-  g.textAlign = "center"; g.textBaseline = "middle"; g.fillStyle = "#f0dca0"; g.fillText(word, 370, 312);
+  g.textAlign = "center"; g.textBaseline = "middle"; g.fillStyle = "#f0dca0"; g.fillText(word, X(370), 312);
 };
 
 /** a clay pot of red geraniums (sill / steps prop). 520 x 520 */
@@ -194,4 +197,23 @@ export const fxLantern = (p: Pen) => {
   p.ell(100, 370, 14, 22, "#fff6d8", 0);
   p.poly([[50, 420], [150, 420], [140, 450], [60, 450]], "#2f3540", 5);
   p.arc(100, 262, 22, 18, 180, 360, 6, "#3c3f46");
+};
+
+/** v21 (owner rule 80): a ring of churned mud round a sunk man's shins, so the legs read as IN the mud. 600 x 220 */
+export const fxMud = (p: Pen) => {
+  p.poly([[20, 200], [60, 120], [140, 90], [230, 70], [300, 82], [380, 66], [470, 92], [550, 125], [585, 200]], "#6b4a2c", 7);
+  p.poly([[90, 140], [170, 108], [250, 96], [330, 104], [420, 96], [500, 128], [470, 150], [380, 136], [300, 146], [210, 138], [130, 158]], "#87613b", 0);
+  p.g.fillStyle = "#4a3220"; for (const [x, y, r] of [[160, 175, 14], [260, 160, 10], [420, 170, 16], [500, 180, 9], [90, 185, 8], [340, 185, 12]] as const) { p.g.beginPath(); p.g.ellipse(x, y, r * 1.6, r, 0, 0, Math.PI * 2); p.g.fill(); }
+  p.g.fillStyle = "#7a5634"; for (const [x, y, r] of [[40, 70, 9], [560, 60, 8], [120, 40, 6], [480, 35, 7], [300, 30, 5]] as const) { p.g.beginPath(); p.g.arc(x, y, r, 0, Math.PI * 2); p.g.fill(); }
+};
+
+/** v21 (rule 78/79): the brick wall the CHOLERA paper is pasted on, so the insert never hangs in the open street */
+export const fxNewsWall = (p: Pen) => {
+  const g = p.g; g.fillStyle = "#8a4a3c"; g.fillRect(0, 0, 800, 1120);
+  for (let r = 0; r < 28; r++) for (let c = -1; c < 6; c++) {
+    const x = c * 160 + (r % 2 ? 80 : 0), y = r * 40, k = (r * 7 + c * 13) % 5;
+    g.fillStyle = ["#93503f", "#84463a", "#9a5844", "#7c4136", "#8e4c3d"][k]; g.fillRect(x + 3, y + 3, 154, 34);
+  }
+  g.strokeStyle = "#3a2226"; g.lineWidth = 3;
+  for (let r = 0; r <= 28; r++) { g.beginPath(); g.moveTo(0, r * 40); g.lineTo(800, r * 40); g.stroke(); for (let c = -1; c < 6; c++) { const x = c * 160 + (r % 2 ? 80 : 0); g.beginPath(); g.moveTo(x, r * 40); g.lineTo(x, r * 40 + 40); g.stroke(); } }
 };

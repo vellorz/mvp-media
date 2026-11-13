@@ -17,6 +17,6 @@ const onBrowserLog = (l) => { if (l.type === "error" || l.type === "warning") co
 for (const f of frames.split(",").map(Number)) {
   const t0 = Date.now();
   await renderStill({ composition, serveUrl, frame: f, output: `${prefix}${f}.jpg`, imageFormat: "jpeg", jpegQuality: 88, scale: Number(scale),
-    browserExecutable, chromiumOptions, timeoutInMilliseconds: 180000, onBrowserLog });
+    browserExecutable, chromiumOptions, timeoutInMilliseconds: 600000, onBrowserLog });
   console.log("still", f, ((Date.now() - t0) / 1000).toFixed(1) + "s");
 }

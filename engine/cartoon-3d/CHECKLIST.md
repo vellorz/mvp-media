@@ -182,3 +182,9 @@ Apply these with rules 1-91 to every cartoon short. Check them on stills and on 
     - The "or set sail" beat is a boatman coiling his mooring line back up beside his boat, not a man with a fishing rod.
     - Props never cross a boat or wall (1:01).
 106. **No shared faces.** Plinths, slabs, floors and decals never share a top or bottom face. Leave at least 2 cm between them. A chain or other object laid on a surface rests every link on the surface, never sinking into it (1:06). This extends rule 85.
+
+## Rules 107-110 (owner review, Nov 13 2026: Istanbul v4, Chicago v21)
+107. Buildings stay whole from every camera angle: domes, half-domes, drums and roofs meet cleanly, with no sliced shells, interpenetration or gaps. Scrub every move past a landmark (Istanbul 0:11, Hagia Sophia).
+108. Every torch, lantern and lamp is held, or touches a visible bracket, post or wall. Check from the shot camera, at the bracket's depth (Istanbul 0:48-0:49).
+109. No one vanishes in front of the camera mid-shot. Cull with the whole card, never pop a person near the lens (Chicago 0:32-0:33).
+110. Small props rest on a floor or table top with a contact shadow, or sit in a hand (Chicago 0:55-0:56, case in front of Pullman).

@@ -109,3 +109,76 @@ The new rules from the Chicago remake. They are owner corrections plus findings 
     - Quiet close-ups and the ending may sit at 12-18, like the references, as long as the average holds.
     - Raise weak shots with more DRAWN OBJECTS that belong to the place and story (props, set dressing, drawn textures on flat surfaces such as water, sand, ceilings and plank walls), never noise.
     - Every added object passes rules 53-71.
+
+## Rules 73-76 (Nov 12 2026)
+73. A crane or pan never sweeps past large near objects; leave out blurred kit trees at high-camera frame edges and flying-bird cards in blurred skies.
+74. No block-shaped bushes, hedges or plants: rounded cartoon shapes or drawn cards only.
+75. No object passes through a wall, quay, floor or any solid at any frame of its move; trace every moving object's path before rendering.
+76. No person or prop passes through another object: clamp people to the footprint they stand in, keep rails behind bodies, use open-top frames.
+
+## Rules 77-91 (owner review of Chicago v20, Nov 13 2026)
+
+Apply these with rules 1-76 to every cartoon short, including the week-03 Fri-Sun videos.
+Check them on stills AND on scrubbed camera moves before any full render. Re-check them on the final video before delivering.
+
+77. **Clean cuts.** No orphan camera key may show a different framing for 1-5 frames around a cut or dissolve. Chicago 0:09 showed a stray 2-frame blurry puddle shot between the swamp and the rain.
+    - Every shot lasts at least 18 frames.
+    - Check the frame-diff at every cut ±3 frames.
+    - Look at those frames one by one.
+78. **Inserts hold long enough.** A poster, newspaper or document insert stays fully visible for at least 1.0 s, not counting the dissolves. Never flash a readable insert for a fraction of a second (Chicago 0:12, the CHOLERA poster).
+79. **Grounded foreground props stand on the floor.** Barrels, pots, plants, crates and stools used as foreground must stand on the real floor at their spot. Never use camera-pinned cards in the air: they float when the camera pans (Chicago 0:09 barrel, 0:50 fern pot). This extends rule 62 to every grounded prop.
+80. **Sinking reads as sinking.** A character sunk in mud, water or snow shows that material around the legs (a mud ring or splash at the shins), so it never reads as legs cut off.
+81. **Frame with drapes only from the edge, never over the subject.**
+    - A curtain or drape foreground card may frame the edge of the frame, at no more than about 12% of the width, and never over the subject.
+    - When in doubt, leave it out. The owner called the 0:20 and 0:44 curtains distracting.
+82. **Models face the camera.** Models, plans, maps and displays are shot front-on, with the camera within about 20° of the face's normal. Never side-on.
+83. **Wall decor stays off glass.** Posters, pictures and frames never overlap windows, doors or glass. The Chicago 0:20 picture showed inside the window glass. Place decor on clear wall piers and check every interior wall.
+84. **Nothing crosses sign lettering.** Floor bands, beams, awnings and posts stay clear of a sign board. Either draw the board in front, or cut the band around it (Chicago 0:24, DRY GOODS).
+85. **No coplanar surfaces.**
+    - Porches, sidewalks, floors and decals at the same height get at least 2 cm of separation plus polygonOffset.
+    - Scrub every pan across boards frame by frame for flicker (Chicago 0:29 porch).
+    - This extends rule 43.
+86. **Awnings sit above doors.** An awning or canopy mounts above the door head, with its lowest edge at least 0.15 m above the door top. It must never sit across the door (Chicago 0:29).
+87. **The camera never enters geometry.** Sample every camera path every frame:
+    - Keep it at least 0.3 m from walls, awnings, ceilings and floors.
+    - Indoors, keep it below the ceiling at every frame; above the ceiling the room opens to the sky.
+    - Chicago faults: 0:32, the camera went through an awning and into a building; 0:51, it rose above the parlour ceiling.
+88. **No body crosses a floor, porch, ceiling or beam.**
+    - Anyone under a raised floor fits under it, with at least 5 cm of head clearance at every frame of a lift.
+    - People on a lower street near a raised sidewalk are fully visible or fully hidden: no hats sliding along the boards.
+    - Chicago faults: 0:32, a hat slid along the boards; 0:33, a woman's head was inside the porch.
+89. **Props rest on their supports.** Cups sit on saucers or plates with the bottom at the plate top, and plates sit on the table. Check every prop's base against its support (Chicago 0:44, a cup sank into its plate). This extends rule 67.
+90. **Workers at walls stay out of the wall.** Rule 53 applies to every take, including wides: yaw-lock the card parallel to the wall and keep it at least 0.4 m out (Chicago 0:24).
+91. **Fix only what the owner names.** When the owner lists issues by timestamp, fix only those parts, re-render only the affected segments, and keep everything else frame-identical. Turn every item into a rule here.
+
+## Rules 92-106 (owner review of Istanbul v3, Nov 13 2026)
+
+Apply these with rules 1-91 to every cartoon short. Check them on stills and on scrubbed moves before any full render, and again on the final video.
+
+92. **The voiceover is never cut.** When a take has to fit the picture, only silence may be removed or added.
+    - Split only inside pauses quieter than -45 dB that last at least 150 ms, and keep 70 ms of the pause on each side.
+    - Never drop a chunk, and never speed up the whole take.
+    - Check that the voiced seconds (above -40 dB) of the fitted file equal the source take.
+    - Retime the captions to the new word times. Ease the picture onto the narration (piecewise slope 0.85-1.15) and move the sound effects with the picture.
+    - Istanbul v3 lost about 6 s of word starts and ends, and the voice dropped in and out.
+93. **One mouth per face.** No costume part may sit as a dark oval or blob inside the face near the mouth or chin: scarf knots, collars, buttons, beards in a dark colour. The grandmother's scarf knot read as a second black mouth (0:04, 0:56).
+94. **Props never pass through furniture.** A held, lowered or set-down prop stays above the surface at every frame. "Lowering" a newspaper means folding it down onto the table, never sinking it through (0:04). This extends rule 89.
+95. **Map pieces follow the map.** Tokens on a map move only over the painted feature they stand for: ships on water, armies on land. Check token paths against the drawing's pixel coordinates, and frame the camera so the token and its goal are in shot (0:28).
+96. **Every tool works on a visible target.** A brush, swab, hammer or shovel touches the material it works on at every frame. Nobody paints the air (0:35). This extends rule 65.
+97. **Everything mounted is attached.**
+    - Oars, rails, outriggers, torches, lamps and flags connect to a visible support: a bracket, sconce, pole or wall.
+    - Nothing floats beside the object it belongs to.
+    - On land, a galley's oars are stowed flat on deck, never standing upright in the air (0:37 oars, 0:48 torch).
+98. **People keep clear of every vehicle in a convoy.** Workers ahead of one ship, cart or car must not stand inside the next one. Space the vehicles so the crew zone (bow + 0.8 m to the last hauler) ends at least 1 m before the next stern (0:38). This extends rule 76.
+99. **No single-sided cloth.** Flags, banners, sails and pennants are double-sided. A flag seen from behind must never vanish (0:41).
+100. **Gags show cause and effect in frame.**
+    - Example: the guard watches the event through his spyglass, lowers it in shock, and it slips from his hand to the floor at his feet, where it stays.
+    - A prop never appears or falls from mid-air, and never falls through a floor (0:43).
+101. **Roofs are closed from every camera.** Houses get both roof slopes and their gable ends, so no sky shows through any roof (0:47).
+102. **Walking means steps.** Anyone moving over the ground uses a walk cycle with the stride locked to the distance covered. Nobody glides, including someone carrying something (0:47).
+103. **Feet sit on the tread they stand on.** On stairs, every foot rests on a real tread height at every frame. Walking down steps follows the step heights, never a ramp (1:00).
+104. **A place must read in one second.** A story place shows unmistakable cues. A wedding chapel needs a flower garland on the door, petals, a bride in veil with a bouquet, and guests. If a viewer can't name the place at a glance, add cues (1:00).
+105. **No filler shots.** Every shot shows what its narration line says, and a beat under 1.5 s must still read.
+    - The "or set sail" beat is a boatman coiling his mooring line back up beside his boat, not a man with a fishing rod.
+    - Props never cross a boat or wall (1:01).
+106. **No shared faces.** Plinths, slabs, floors and decals never share a top or bottom face. Leave at least 2 cm between them. A chain or other object laid on a surface rests every link on the surface, never sinking into it (1:06). This extends rule 85.

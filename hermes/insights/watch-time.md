@@ -11,8 +11,8 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Platform | Videos | Measured | Median watched | Median completion |
 |---|---|---|---|---|
-| TikTok | 32 | 14 | 4.0 s | 23.1% |
-| Instagram | 30 | 15 | 4.7 s | 26.8% |
+| TikTok | 31 | 14 | 4.0 s | 23.1% |
+| Instagram | 29 | 15 | 4.7 s | 26.8% |
 | Facebook | 23 | 23 | 2.1 s | 13.3% |
 | YouTube | 25 | 0 | not recorded | not recorded |
 
@@ -20,7 +20,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2713 | 39.3 s | not recorded | — |
+| Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2714 | 39.3 s | not recorded | — |
 | Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 282 | 21.1 s | 69.3 s | 30.4% |
 | Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 1252 | not available | 70.0 s | — |
 | Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706945601526631693) | 1289 | 23.8 s | not recorded | — |
@@ -128,5 +128,3 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 14, 4:00 PM | TikTok | 7696631405769526542?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696631405769526542?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 78 | 2.3 s | not recorded | — |
 | Oct 14, 12:03 PM | Instagram | 6ace6bbe555a834020668c29_transcoded.mp4 (https://www.instagram.com/reel/Dee373QiDbw/) | 2 | 3.8 s | not recorded | — |
 | Oct 14, 12:02 PM | TikTok | 7696569988806642958?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696569988806642958?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 68 | 1.9 s | not recorded | — |
-| Oct 13, 8:01 PM | Instagram | 6ace6747262e9db630f4990a_transcoded.mp4 (https://www.instagram.com/reel/DedJ7jdjl0N/) | 4 | 2.2 s | not recorded | — |
-| Oct 13, 8:00 PM | TikTok | 7696322087127993614?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696322087127993614?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 65 | 3.0 s | not recorded | — |

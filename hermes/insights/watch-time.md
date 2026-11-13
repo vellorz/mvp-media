@@ -11,20 +11,20 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Platform | Videos | Measured | Median watched | Median completion |
 |---|---|---|---|---|
-| TikTok | 30 | 14 | 4.0 s | 23.1% |
-| Instagram | 29 | 15 | 4.7 s | 26.8% |
-| Facebook | 24 | 23 | 2.1 s | 13.3% |
+| TikTok | 29 | 14 | 4.0 s | 23.1% |
+| Instagram | 28 | 15 | 4.7 s | 26.8% |
+| Facebook | 24 | 24 | 2.2 s | 13.2% |
 | YouTube | 25 | 0 | not recorded | not recorded |
 
 ## Each video
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 13, 2:46 PM | Instagram | 05_fri-nov13_istanbul_2k.mp4 (https://www.instagram.com/reel/DfshSHeCF-A/) | 0 | not recorded | not recorded | — |
-| Nov 13, 2:45 PM | Facebook | 05_fri-nov13_istanbul_2k.mp4 (https://www.facebook.com/reel/4575624492685348/) | 134 | not recorded | 74.7 s | — |
-| Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2723 | 39.3 s | not recorded | — |
+| Nov 13, 2:46 PM | Instagram | 05_fri-nov13_istanbul_2k.mp4 (https://www.instagram.com/reel/DfshSHeCF-A/) | 134 | not recorded | not recorded | — |
+| Nov 13, 2:45 PM | Facebook | 05_fri-nov13_istanbul_2k.mp4 (https://www.facebook.com/reel/4575624492685348/) | 279 | 5.9 s | 74.7 s | 7.9% |
+| Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2724 | 39.3 s | not recorded | — |
 | Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 285 | 21.2 s | 69.3 s | 30.6% |
-| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 23994 | not available | 70.0 s | — |
+| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 24069 | not available | 70.0 s | — |
 | Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7706945601526631693) | 1372 | 23.4 s | not recorded | — |
 | Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.1 s | not recorded | — |
 | Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 230 | 8.5 s | 65.4 s | 13.0% |
@@ -33,7 +33,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1162 | 36.6 s | not recorded | — |
 | Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 253 | 12.3 s | 66.2 s | 18.6% |
 | Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706326116595813645?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 150 | 18.5 s | not recorded | — |
-| Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1099 | not available | 67.0 s | — |
+| Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1098 | not available | 67.0 s | — |
 | Nov 8, 7:02 PM | YouTube | The Copenhagen Harbour Where Fairy Tales Began #shorts (https://www.youtube.com/watch?v=6T8XoSWypVI) | 20 | not available | 17.0 s | — |
 | Nov 8, 7:02 PM | Instagram | 10_ronda.mp4 (https://www.instagram.com/reel/DfgGmeAFUxG/) | 20 | 2.9 s | 12.0 s | 24.2% |
 | Nov 8, 7:02 PM | TikTok | 6_copenhagen.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705970424198286606?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 70 | 3.8 s | 16.8 s | 22.8% |
@@ -126,5 +126,3 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 15, 11:00 AM | TikTok | 7696793475156692238?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696793475156692238?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 48 | 2.1 s | not recorded | — |
 | Oct 14, 8:02 PM | Instagram | 6ace6dc47ac896f8054165c5_transcoded.mp4 (https://www.instagram.com/reel/Defuy4cIGp4/) | 2 | 2.2 s | not recorded | — |
 | Oct 14, 8:00 PM | TikTok | 7696693236647120141?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696693236647120141?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 92 | 1.4 s | not recorded | — |
-| Oct 14, 4:02 PM | Instagram | 6ace6c23f14f15bbfed660c8_transcoded.mp4 (https://www.instagram.com/reel/DefTUdzk5jw/) | 2 | 8.0 s | not recorded | — |
-| Oct 14, 4:00 PM | TikTok | 7696631405769526542?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696631405769526542?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 78 | 2.3 s | not recorded | — |

@@ -1,7 +1,7 @@
 from: research
 title: Best posting slots: Sun 12–3 PM scores 3.3× across platforms
 metric: social.views
-evidence: Mission Control Content screen, best-time heatmap; 256 posts counted over the last 90 days; 1 not counted yet (left out); posts last pulled Thu, Nov 12, 8:32 PM Central
+evidence: Mission Control Content screen, best-time heatmap; 256 posts counted over the last 90 days; 1 not counted yet (left out); posts last pulled Thu, Nov 12, 9:32 PM Central
 
 How to read this: score = a post's views ÷ that platform's usual (median) post, so 1.0× = usual.
 Each slot's score is a geometric average pulled toward 1.0× when it has few posts, so one viral post can't carry it.
@@ -28,11 +28,11 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 | Sat | 6–9 PM | 16 | 1.3× | 1.9× | strong |
 | Wed | 6–9 PM | 11 | 1.3× | 1.1× | strong |
 | Mon | 3–6 PM | 8 | 1.3× | 0.9× | strong |
-| Sat | 9 PM–12 | 6 | 1.2× | 3.5× | strong |
+| Sat | 9 PM–12 | 6 | 1.2× | 3.6× | strong |
+| Wed | 3–6 PM | 7 | 1.2× | 0.6× | strong |
 | Sun | 3–6 PM | 6 | 1.2× | 1.3× | strong |
 | Tue | 6–9 PM | 13 | 1.1× | 0.7× | average |
 | Fri | 6–9 PM | 19 | 1.1× | 1.0× | average |
-| Wed | 3–6 PM | 7 | 1.1× | 0.6× | average |
 | Wed | 9 PM–12 | 5 | 1.0× | 1.8× | average |
 | Sun | 6–9 PM | 14 | 0.9× | 1.0× | average |
 | Thu | 9 AM–12 | 4 | 0.9× | 0.8× | average |
@@ -167,8 +167,8 @@ Every other day and time: untested (no posts there yet).
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
+| Wed | 3–6 PM | 2 | 3.0× | 115.0× | strong |
 | Mon | 3–6 PM | 2 | 2.9× | 24.5× | strong |
-| Wed | 3–6 PM | 2 | 2.6× | 64.9× | strong |
 | Tue | 3–6 PM | 2 | 2.1× | 29.8× | strong |
 | Fri | 6–9 PM | 3 | 1.3× | 1.4× | strong |
 | Sun | 12–3 PM | 1 | 1.2× | 1.8× | too few to rate |
@@ -180,7 +180,7 @@ Every other day and time: untested (no posts there yet).
 | Sat | 6–9 PM | 2 | 0.8× | 1.2× | weak |
 | Fri | 12–3 PM | 1 | 0.7× | 0.4× | too few to rate |
 | Thu | 3–6 PM | 2 | 0.7× | 0.8× | weak |
-| Sat | 9 PM–12 | 1 | 0.6× | 0.2× | too few to rate |
+| Sat | 9 PM–12 | 1 | 0.6× | 0.3× | too few to rate |
 | Tue | 6–9 PM | 1 | 0.5× | 0.0× | too few to rate |
 | Thu | 12–3 PM | 1 | 0.5× | 0.0× | too few to rate |
 Every other day and time: untested (no posts there yet).

@@ -11,8 +11,8 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Platform | Videos | Measured | Median watched | Median completion |
 |---|---|---|---|---|
-| TikTok | 30 | 14 | 4.0 s | 23.1% |
-| Instagram | 28 | 15 | 4.7 s | 26.8% |
+| TikTok | 29 | 14 | 4.0 s | 23.1% |
+| Instagram | 27 | 15 | 4.7 s | 26.8% |
 | Facebook | 24 | 24 | 2.2 s | 13.2% |
 | YouTube | 25 | 0 | not recorded | not recorded |
 
@@ -20,7 +20,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 13, 6:05 PM | YouTube | Why Greece Fears Tuesday the 13th, Not Friday #shorts (https://www.youtube.com/watch?v=zCNh2GtlnsM) | 27 | not available | 75.0 s | — |
+| Nov 13, 6:05 PM | YouTube | Why Greece Fears Tuesday the 13th, Not Friday #shorts (https://www.youtube.com/watch?v=zCNh2GtlnsM) | 318 | not available | 75.0 s | — |
 | Nov 13, 6:01 PM | TikTok | 05_fri-nov13_istanbul_2k.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7707810271749868814) | not counted yet | not counted yet | not recorded | — |
 | Nov 13, 2:46 PM | Instagram | 05_fri-nov13_istanbul_2k.mp4 (https://www.instagram.com/reel/DfshSHeCF-A/) | 134 | not recorded | not recorded | — |
 | Nov 13, 2:45 PM | Facebook | 05_fri-nov13_istanbul_2k.mp4 (https://www.facebook.com/reel/4575624492685348/) | 301 | 4.9 s | 74.7 s | 6.6% |
@@ -125,5 +125,3 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 15, 11:03 AM | Instagram | 6ad07cc40800c4b97088869d_transcoded.mp4 (https://www.instagram.com/reel/DehV10XDL3q/) | 7 | 2.7 s | not recorded | — |
 | Oct 15, 11:01 AM | Facebook | 6ad07cc40800c4b97088869d_transcoded.mp4 (https://www.facebook.com/reel/28626966323592538/) | 11 | 2.0 s | 15.0 s | 13.3% |
 | Oct 15, 11:00 AM | TikTok | 7696793475156692238?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696793475156692238?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 48 | 2.1 s | not recorded | — |
-| Oct 14, 8:02 PM | Instagram | 6ace6dc47ac896f8054165c5_transcoded.mp4 (https://www.instagram.com/reel/Defuy4cIGp4/) | 2 | 2.2 s | not recorded | — |
-| Oct 14, 8:00 PM | TikTok | 7696693236647120141?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696693236647120141?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 92 | 1.4 s | not recorded | — |

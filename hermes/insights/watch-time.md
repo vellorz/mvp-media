@@ -22,11 +22,11 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 |---|---|---|---|---|---|---|
 | Nov 13, 6:05 PM | YouTube | Why Greece Fears Tuesday the 13th, Not Friday #shorts (https://www.youtube.com/watch?v=zCNh2GtlnsM) | 1117 | not available | 75.0 s | — |
 | Nov 13, 6:01 PM | TikTok | 05_fri-nov13_istanbul_2k.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7707810271749868814?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 184 | 12.8 s | not recorded | — |
-| Nov 13, 2:46 PM | Instagram | 05_fri-nov13_istanbul_2k.mp4 (https://www.instagram.com/reel/DfshSHeCF-A/) | 137 | 13.0 s | not recorded | — |
+| Nov 13, 2:46 PM | Instagram | 05_fri-nov13_istanbul_2k.mp4 (https://www.instagram.com/reel/DfshSHeCF-A/) | 137 | 12.8 s | not recorded | — |
 | Nov 13, 2:45 PM | Facebook | 05_fri-nov13_istanbul_2k.mp4 (https://www.facebook.com/reel/4575624492685348/) | 307 | 4.9 s | 74.7 s | 6.6% |
 | Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2725 | 39.2 s | not recorded | — |
 | Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 286 | 21.1 s | 69.3 s | 30.4% |
-| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 24340 | not available | 70.0 s | — |
+| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 24341 | not available | 70.0 s | — |
 | Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706945601526631693?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1393 | 23.3 s | not recorded | — |
 | Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.1 s | not recorded | — |
 | Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 230 | 8.5 s | 65.4 s | 13.0% |

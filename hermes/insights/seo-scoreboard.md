@@ -1,5 +1,5 @@
 from: research
-title: SEO scoreboard: better 5, measuring 52, same 230, worse 2
+title: SEO scoreboard: better 5, measuring 55, same 227, worse 2
 metric: etsy.visits
 evidence: Mission Control SEO lab (etsy-seo listing reports + weekly listing stats)
 
@@ -7,7 +7,7 @@ Edited listings compared with untouched ones over the same weeks (expected = the
 better/worse = beat or fell behind that by at least max(2 visits, 30%); measuring = no full week after the edit yet.
 Traffic is small, so single listings are noisy; look for patterns across many listings before writing a lesson.
 
-Totals: better 5, measuring 52, same 230, worse 2
+Totals: better 5, measuring 55, same 227, worse 2
 
 ## better (5)
 - Aoraki Mount Cook New Zealand Travel Poster, Alpine Mountain Landscape Print (https://www.etsy.com/listing/4571720088): edited 2026-10-30; visits 0 -> 4 (expected 0); title kept; tags +0/-0
@@ -20,9 +20,8 @@ Totals: better 5, measuring 52, same 230, worse 2
 - Oaxaca Mexico Travel Poster, Monte Alban Pyramid Wall Art Print (https://www.etsy.com/listing/4571720597): edited 2026-10-30; visits 6 -> 0 (expected 6); title kept; tags +0/-0
 - Auckland New Zealand Travel Poster, Vintage Coastal Skyline Cityscape Print (https://www.etsy.com/listing/4571701755): edited 2026-10-30; visits 2 -> 0 (expected 2); title kept; tags +0/-0
 
-## same (230)
+## same (227)
 - Lake Baikal Russia Winter Sunset Travel Poster, Ice Landscape Print (https://www.etsy.com/listing/4580086005): edited 2026-11-04; visits 0 -> 0 (expected 0); title kept; tags +0/-0
-- Bratislava Slovakia Travel Poster, Castle Over Danube River, European Cityscape Art (https://www.etsy.com/listing/4589210167): edited 2026-11-04; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Lake Tahoe Emerald Bay California Vintage Travel Poster, Nature Landscape Print (https://www.etsy.com/listing/4567803477): edited 2026-10-30; visits 1 -> 0 (expected 1); title kept; tags +0/-0
 - Vintage Rio de Janeiro Brazil Travel Poster, Christ the Redeemer Art Print (https://www.etsy.com/listing/4564695100): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Melbourne Australia Travel Poster, Flinders Street Station, Retro City Skyline Print (https://www.etsy.com/listing/4564707654): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
@@ -37,7 +36,6 @@ Totals: better 5, measuring 52, same 230, worse 2
 - Everglades National Park Travel Poster, Florida Swamp Sunset, Alligator Wildlife Art (https://www.etsy.com/listing/4567818172): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Mount Rainier National Park Washington Vintage Travel Poster, PNW Mountain Landscape Print (https://www.etsy.com/listing/4567818428): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Nara Japan Travel Poster, Vintage Deer, Kasuga Shrine Forest Art Print (https://www.etsy.com/listing/4567818488): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
-- Patagonia Argentina Travel Poster, Vintage Mountain Landscape Print (https://www.etsy.com/listing/4567819440): edited 2026-10-30; visits 0 -> 1 (expected 0); title kept; tags +0/-0
 - Sheikh Zayed Mosque Abu Dhabi UAE Travel Poster, Retro Architecture Print (https://www.etsy.com/listing/4571701573): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Taj Mahal Agra India Travel Poster, Sunset Architecture Print (https://www.etsy.com/listing/4571701619): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Big Bend National Park Texas Travel Poster, Desert Canyon Landscape Print (https://www.etsy.com/listing/4571701797): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
@@ -52,7 +50,6 @@ Totals: better 5, measuring 52, same 230, worse 2
 - Shenandoah National Park Fall Travel Poster, Blue Ridge Mountains, Rustic Virginia Landscape Art (https://www.etsy.com/listing/4571755780): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Udaipur India Travel Poster, Lake Pichola Palace, Rajasthan Architecture Print (https://www.etsy.com/listing/4571755804): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Bukhara Uzbekistan Travel Poster, Vintage Silk Road Islamic Architecture Print (https://www.etsy.com/listing/4580078819): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
-- Fiji Travel Poster, Tropical Island Landscape, Coastal Beach Art (https://www.etsy.com/listing/4580078935): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Cassis France Vintage Travel Poster, French Riviera Mediterranean Coastal Town Print (https://www.etsy.com/listing/4559143636): edited 2026-10-29; visits 1 -> 0 (expected 1); title kept; tags +0/-0
 - Mykonos Greece Travel Poster, Vintage Greek Island Mediterranean Wall Art (https://www.etsy.com/listing/4557146250): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Eilean Donan Castle Scotland Travel Poster, Vintage Scottish Landscape Wall Art (https://www.etsy.com/listing/4557146308): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
@@ -61,4 +58,7 @@ Totals: better 5, measuring 52, same 230, worse 2
 - Kirkjufell Iceland Vintage Travel Poster, Nordic Waterfall Mountain Wall Art Print (https://www.etsy.com/listing/4559121177): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Douro Valley Portugal Vintage Travel Poster, Vineyard River Landscape Wall Art (https://www.etsy.com/listing/4559143542): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Lake Louise Canada Vintage Travel Poster, Banff National Park Rocky Mountains Print (https://www.etsy.com/listing/4559143880): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
+- Lake Bohinj Slovenia Vintage Travel Poster, Mountain Landscape Wall Art Print (https://www.etsy.com/listing/4559143948): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
+- Bodrum Turkey Travel Poster, Vintage Mediterranean Coastal Wall Art, Retro Aegean Print (https://www.etsy.com/listing/4559144506): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
+- Bora Bora French Polynesia Travel Poster, Tropical Island Landscape Print (https://www.etsy.com/listing/4562069461): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 

@@ -1,5 +1,5 @@
 from: research
-title: SEO scoreboard: better 5, measuring 15, same 264, worse 2
+title: SEO scoreboard: better 5, measuring 22, same 260, worse 2
 metric: etsy.visits
 evidence: Mission Control SEO lab (etsy-seo listing reports + weekly listing stats)
 
@@ -7,7 +7,7 @@ Edited listings compared with untouched ones over the same weeks (expected = the
 better/worse = beat or fell behind that by at least max(2 visits, 30%); measuring = no full week after the edit yet.
 Traffic is small, so single listings are noisy; look for patterns across many listings before writing a lesson.
 
-Totals: better 5, measuring 15, same 264, worse 2
+Totals: better 5, measuring 22, same 260, worse 2
 
 ## better (5)
 - Aoraki Mount Cook New Zealand Travel Poster, Alpine Mountain Landscape Print (https://www.etsy.com/listing/4571720088): edited 2026-10-30; visits 0 -> 4 (expected 0); title kept; tags +0/-0
@@ -20,7 +20,7 @@ Totals: better 5, measuring 15, same 264, worse 2
 - Oaxaca Mexico Travel Poster, Monte Alban Pyramid Wall Art Print (https://www.etsy.com/listing/4571720597): edited 2026-10-30; visits 6 -> 0 (expected 6); title kept; tags +0/-0
 - Auckland New Zealand Travel Poster, Vintage Coastal Skyline Cityscape Print (https://www.etsy.com/listing/4571701755): edited 2026-10-30; visits 2 -> 0 (expected 2); title kept; tags +0/-0
 
-## same (264)
+## same (260)
 - Lake Baikal Russia Winter Sunset Travel Poster, Ice Landscape Print (https://www.etsy.com/listing/4580086005): edited 2026-11-04; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Bratislava Slovakia Travel Poster, Castle Over Danube River, European Cityscape Art (https://www.etsy.com/listing/4589210167): edited 2026-11-04; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Lake Tahoe Emerald Bay California Vintage Travel Poster, Nature Landscape Print (https://www.etsy.com/listing/4567803477): edited 2026-10-30; visits 1 -> 0 (expected 1); title kept; tags +0/-0

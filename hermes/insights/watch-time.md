@@ -11,10 +11,10 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Platform | Videos | Measured | Median watched | Median completion |
 |---|---|---|---|---|
-| TikTok | 28 | 14 | 4.1 s | 23.0% |
-| Instagram | 26 | 15 | 4.7 s | 26.8% |
+| TikTok | 27 | 14 | 4.1 s | 23.0% |
+| Instagram | 25 | 15 | 4.7 s | 26.8% |
 | Facebook | 23 | 23 | 2.2 s | 13.0% |
-| YouTube | 25 | 0 | not recorded | not recorded |
+| YouTube | 24 | 0 | not recorded | not recorded |
 
 ## Each video
 
@@ -26,12 +26,12 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 13, 2:45 PM | Facebook | 05_fri-nov13_istanbul_2k.mp4 (https://www.facebook.com/reel/4575624492685348/) | 307 | 4.9 s | 74.7 s | 6.6% |
 | Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2725 | 39.2 s | not recorded | — |
 | Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 285 | 21.2 s | 69.3 s | 30.6% |
-| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 24326 | not available | 70.0 s | — |
+| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 24327 | not available | 70.0 s | — |
 | Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706945601526631693?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1393 | 23.3 s | not recorded | — |
 | Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.1 s | not recorded | — |
 | Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 230 | 8.5 s | 65.4 s | 13.0% |
 | Nov 10, 6:03 PM | TikTok | 02_tue_eiffel-tower.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706697475796602126?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1187 | 23.9 s | not recorded | — |
-| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 1699 | not available | 66.0 s | — |
+| Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 1700 | not available | 66.0 s | — |
 | Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1162 | 36.6 s | not recorded | — |
 | Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 253 | 12.3 s | 66.2 s | 18.6% |
 | Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706326116595813645?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 150 | 18.5 s | not recorded | — |
@@ -119,6 +119,3 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 15, 4:03 PM | Instagram | 6ace6e4b7ac896f8054169d0_transcoded.mp4 (https://www.instagram.com/reel/Deh4NJniujr/) | 8 | 1.0 s | not recorded | — |
 | Oct 15, 4:00 PM | TikTok | 7697002494777412878?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7697002494777412878?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 113 | 2.2 s | not recorded | — |
 | Oct 15, 4:00 PM | YouTube | Whistler Canada Wall Art: Keep Mountain Season Close #Shorts (https://www.youtube.com/watch?v=Ki5aaxYjnyc) | 3 | not available | 17.0 s | — |
-| Oct 15, 12:04 PM | Instagram | 6ace6e0cf14f15bbfed672d1_transcoded.mp4 (https://www.instagram.com/reel/Dehcz5qFDy9/) | 4 | 1.9 s | not recorded | — |
-| Oct 15, 12:03 PM | TikTok | 7696941211692698894?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7696941211692698894?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 76 | 11.2 s | not recorded | — |
-| Oct 15, 12:00 PM | YouTube | Lake Powell Utah Wall Art: Warm or Cool Room Colors? #Shorts (https://www.youtube.com/watch?v=skn8DA3EgaY) | 0 | not available | 17.0 s | — |

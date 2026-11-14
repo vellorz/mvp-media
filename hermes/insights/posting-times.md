@@ -1,7 +1,7 @@
 from: research
 title: Best posting slots: Sun 12–3 PM scores 3.3× across platforms
 metric: social.views
-evidence: Mission Control Content screen, best-time heatmap; 257 posts counted over the last 90 days; 2 not counted yet (left out); posts last pulled Fri, Nov 13, 8:43 PM Central
+evidence: Mission Control Content screen, best-time heatmap; 258 posts counted over the last 90 days; 1 not counted yet (left out); posts last pulled Fri, Nov 13, 9:43 PM Central
 
 How to read this: score = a post's views ÷ that platform's usual (median) post, so 1.0× = usual.
 Each slot's score is a geometric average pulled toward 1.0× when it has few posts, so one viral post can't carry it.
@@ -10,12 +10,12 @@ Times are Central, in three-hour slots. Posts Buffer hasn't counted yet are left
 Use it to favour strong slots, avoid weak ones, and now and then test an untested slot so the ratings keep improving.
 
 ## All platforms together
-257 posts. Best slot (3+ posts): Sun 12–3 PM, 3.3× over 14 posts.
+258 posts. Best slot (3+ posts): Sun 12–3 PM, 3.3× over 14 posts.
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
 | Sun | 12–3 PM | 14 | 3.3× | 6.8× | strong |
-| Wed | 9 AM–12 | 1 | 2.5× | 16.1× | too few to rate |
+| Wed | 9 AM–12 | 1 | 2.5× | 16.4× | too few to rate |
 | Fri | 12–3 PM | 15 | 2.5× | 9.8× | strong |
 | Tue | 9 PM–12 | 1 | 2.4× | 14.7× | too few to rate |
 | Sun | 9 AM–12 | 5 | 2.3× | 1.3× | strong |
@@ -30,7 +30,7 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 | Sat | 6–9 PM | 16 | 1.4× | 1.9× | strong |
 | Wed | 6–9 PM | 11 | 1.3× | 1.1× | strong |
 | Mon | 3–6 PM | 8 | 1.3× | 0.9× | strong |
-| Fri | 6–9 PM | 20 | 1.3× | 1.1× | strong |
+| Fri | 6–9 PM | 21 | 1.3× | 1.1× | strong |
 | Sun | 3–6 PM | 6 | 1.2× | 1.3× | strong |
 | Tue | 6–9 PM | 13 | 1.1× | 0.7× | average |
 | Wed | 9 PM–12 | 5 | 1.0× | 1.8× | average |
@@ -51,11 +51,11 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 Every other day and time: untested (no posts there yet).
 
 ## TikTok
-60 posts. Best slot (3+ posts): Wed 6–9 PM, 1.3× over 3 posts.
+61 posts. Best slot (3+ posts): Wed 6–9 PM, 1.3× over 3 posts.
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
-| Wed | 9 AM–12 | 1 | 2.5× | 16.1× | too few to rate |
+| Wed | 9 AM–12 | 1 | 2.5× | 16.4× | too few to rate |
 | Wed | 6–9 PM | 3 | 1.3× | 1.9× | strong |
 | Thu | 3–6 PM | 3 | 1.3× | 1.5× | strong |
 | Tue | 6–9 PM | 4 | 1.2× | 0.7× | strong |
@@ -63,9 +63,9 @@ Every other day and time: untested (no posts there yet).
 | Sat | 6–9 PM | 3 | 1.1× | 1.2× | average |
 | Sun | 9 AM–12 | 2 | 1.1× | 1.2× | average |
 | Mon | 12–3 PM | 3 | 1.1× | 1.4× | average |
+| Fri | 6–9 PM | 5 | 1.1× | 1.1× | average |
 | Wed | 12–3 PM | 2 | 1.0× | 1.1× | average |
 | Tue | 9 AM–12 | 1 | 1.0× | 1.1× | too few to rate |
-| Fri | 6–9 PM | 4 | 1.0× | 1.0× | average |
 | Thu | 6–9 PM | 3 | 1.0× | 1.0× | average |
 | Wed | 3–6 PM | 2 | 1.0× | 0.9× | average |
 | Thu | 12–3 PM | 2 | 0.9× | 0.9× | average |
@@ -167,7 +167,7 @@ Every other day and time: untested (no posts there yet).
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
-| Wed | 3–6 PM | 2 | 4.4× | 525.5× | strong |
+| Wed | 3–6 PM | 2 | 4.4× | 526.6× | strong |
 | Mon | 3–6 PM | 2 | 2.9× | 24.6× | strong |
 | Tue | 3–6 PM | 2 | 2.2× | 37.0× | strong |
 | Fri | 6–9 PM | 4 | 2.1× | 2.2× | strong |

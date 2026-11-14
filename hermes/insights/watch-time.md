@@ -20,7 +20,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 13, 6:05 PM | YouTube | Why Greece Fears Tuesday the 13th, Not Friday #shorts (https://www.youtube.com/watch?v=zCNh2GtlnsM) | 1112 | not available | 75.0 s | — |
+| Nov 13, 6:05 PM | YouTube | Why Greece Fears Tuesday the 13th, Not Friday #shorts (https://www.youtube.com/watch?v=zCNh2GtlnsM) | 1115 | not available | 75.0 s | — |
 | Nov 13, 6:01 PM | TikTok | 05_fri-nov13_istanbul_2k.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7707810271749868814?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 184 | 12.8 s | not recorded | — |
 | Nov 13, 2:46 PM | Instagram | 05_fri-nov13_istanbul_2k.mp4 (https://www.instagram.com/reel/DfshSHeCF-A/) | 137 | 13.0 s | not recorded | — |
 | Nov 13, 2:45 PM | Facebook | 05_fri-nov13_istanbul_2k.mp4 (https://www.facebook.com/reel/4575624492685348/) | 307 | 4.9 s | 74.7 s | 6.6% |
@@ -63,7 +63,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 5, 9:02 PM | Instagram | 4_cambridge.mp4 (https://www.instagram.com/reel/DfYl-ETDZ4y/) | 203 | 6.3 s | 14.0 s | 44.8% |
 | Nov 5, 9:01 PM | Facebook | 4_cambridge.mp4 (https://www.facebook.com/reel/1625482582647758/) | 81 | 2.8 s | 14.0 s | 20.0% |
 | Nov 5, 4:02 PM | TikTok | 4_cambridge.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7704811107596209421?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 142 | 3.3 s | 14.0 s | 23.3% |
-| Nov 5, 4:02 PM | YouTube | Did Newton Build This Cambridge Bridge? (Myth Busted) #shorts (https://www.youtube.com/watch?v=Szok1WjHUiQ) | 33 | not available | 15.0 s | — |
+| Nov 5, 4:02 PM | YouTube | Did Newton Build This Cambridge Bridge? (Myth Busted) #shorts (https://www.youtube.com/watch?v=Szok1WjHUiQ) | 34 | not available | 15.0 s | — |
 | Nov 4, 9:03 PM | Instagram | 3_florence.mp4 (https://www.instagram.com/reel/DfWBXoVkgDb/) | 185 | 6.3 s | 18.4 s | 34.1% |
 | Nov 4, 9:01 PM | Facebook | 3_florence.mp4 (https://www.facebook.com/reel/1111026041779662/) | 21 | 1.3 s | 18.4 s | 7.1% |
 | Nov 4, 7:02 PM | TikTok | 3_florence.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7704486333493939469?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 162 | 4.3 s | 18.4 s | 23.1% |

@@ -167,7 +167,7 @@ Every other day and time: untested (no posts there yet).
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
-| Wed | 3–6 PM | 2 | 4.4× | 526.6× | strong |
+| Wed | 3–6 PM | 2 | 4.4× | 527.5× | strong |
 | Mon | 3–6 PM | 2 | 2.9× | 24.6× | strong |
 | Fri | 6–9 PM | 4 | 2.3× | 2.2× | strong |
 | Tue | 3–6 PM | 2 | 2.2× | 37.0× | strong |

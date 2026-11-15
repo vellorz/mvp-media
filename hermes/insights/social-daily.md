@@ -1,7 +1,7 @@
 from: research
 title: Social views earned per day, 18 days recorded so far
 metric: social.views
-evidence: Mission Control daily views ledger (Buffer, Meta and YouTube running totals, snapshotted each pull); latest snapshot Sat, Nov 14, 9:18 PM Central
+evidence: Mission Control daily views ledger (Buffer, Meta and YouTube running totals, snapshotted each pull); latest snapshot Sat, Nov 14, 10:19 PM Central
 
 Views each platform earned on each day, from all posts (old and new), not just posts published that day.
 A day's number = that day's last running totals minus the day before's, post by post. Days run midnight to midnight Central.
@@ -11,7 +11,7 @@ TikTok numbers come through Buffer, which refreshes them about once a day, so Ti
 
 | Date | TikTok | Instagram | Facebook | YouTube |
 |---|---|---|---|---|
-| Sat, Nov 14 | 2,214 (so far) | 5 (so far) | 9 (so far) | 595 (so far) |
+| Sat, Nov 14 | 2,214 (so far) | 5 (so far) | 9 (so far) | 605 (so far) |
 | Fri, Nov 13 | 153 | 142 | 305 | 17,717 |
 | Thu, Nov 12 | 93 | 215 | 78 | 6,562 |
 | Wed, Nov 11 | 2,463 | 2,525 | 304 | 1,186 |

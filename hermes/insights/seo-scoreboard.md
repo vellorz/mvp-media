@@ -1,5 +1,5 @@
 from: research
-title: SEO scoreboard: better 5, measuring 58, same 225, worse 2
+title: SEO scoreboard: better 5, measuring 59, same 224, worse 2
 metric: etsy.visits
 evidence: Mission Control SEO lab (etsy-seo listing reports + weekly listing stats)
 
@@ -7,7 +7,7 @@ Edited listings compared with untouched ones over the same weeks (expected = the
 better/worse = beat or fell behind that by at least max(2 visits, 30%); measuring = no full week after the edit yet.
 Traffic is small, so single listings are noisy; look for patterns across many listings before writing a lesson.
 
-Totals: better 5, measuring 58, same 225, worse 2
+Totals: better 5, measuring 59, same 224, worse 2
 
 ## better (5)
 - Aoraki Mount Cook New Zealand Travel Poster, Alpine Mountain Landscape Print (https://www.etsy.com/listing/4571720088): edited 2026-10-30; visits 0 -> 4 (expected 0); title kept; tags +0/-0
@@ -20,7 +20,7 @@ Totals: better 5, measuring 58, same 225, worse 2
 - Oaxaca Mexico Travel Poster, Monte Alban Pyramid Wall Art Print (https://www.etsy.com/listing/4571720597): edited 2026-10-30; visits 6 -> 0 (expected 6); title kept; tags +0/-0
 - Auckland New Zealand Travel Poster, Vintage Coastal Skyline Cityscape Print (https://www.etsy.com/listing/4571701755): edited 2026-10-30; visits 2 -> 0 (expected 2); title kept; tags +0/-0
 
-## same (225)
+## same (224)
 - Lake Baikal Russia Winter Sunset Travel Poster, Ice Landscape Print (https://www.etsy.com/listing/4580086005): edited 2026-11-04; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Lake Tahoe Emerald Bay California Vintage Travel Poster, Nature Landscape Print (https://www.etsy.com/listing/4567803477): edited 2026-10-30; visits 1 -> 0 (expected 1); title kept; tags +0/-0
 - Vintage Rio de Janeiro Brazil Travel Poster, Christ the Redeemer Art Print (https://www.etsy.com/listing/4564695100): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
@@ -47,7 +47,6 @@ Totals: better 5, measuring 58, same 225, worse 2
 - Victoria Falls Travel Poster, Zambia Zimbabwe Waterfall Art Print (https://www.etsy.com/listing/4571737055): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Fez Morocco Travel Poster, Vintage Medina Architecture and Boho Cityscape Print (https://www.etsy.com/listing/4571737544): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Santiago Chile Travel Poster, Andes Mountains Skyline Print, Retro South America Decor (https://www.etsy.com/listing/4571738930): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
-- Shenandoah National Park Fall Travel Poster, Blue Ridge Mountains, Rustic Virginia Landscape Art (https://www.etsy.com/listing/4571755780): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Udaipur India Travel Poster, Lake Pichola Palace, Rajasthan Architecture Print (https://www.etsy.com/listing/4571755804): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Bukhara Uzbekistan Travel Poster, Vintage Silk Road Islamic Architecture Print (https://www.etsy.com/listing/4580078819): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Cassis France Vintage Travel Poster, French Riviera Mediterranean Coastal Town Print (https://www.etsy.com/listing/4559143636): edited 2026-10-29; visits 1 -> 0 (expected 1); title kept; tags +0/-0
@@ -61,4 +60,5 @@ Totals: better 5, measuring 58, same 225, worse 2
 - Lake Bohinj Slovenia Vintage Travel Poster, Mountain Landscape Wall Art Print (https://www.etsy.com/listing/4559143948): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Bodrum Turkey Travel Poster, Vintage Mediterranean Coastal Wall Art, Retro Aegean Print (https://www.etsy.com/listing/4559144506): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Bora Bora French Polynesia Travel Poster, Tropical Island Landscape Print (https://www.etsy.com/listing/4562069461): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
+- Petra Jordan Travel Poster, Desert Architecture Art Print (https://www.etsy.com/listing/4562069493): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 

@@ -12,7 +12,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Platform | Videos | Measured | Median watched | Median completion |
 |---|---|---|---|---|
 | TikTok | 25 | 14 | 4.1 s | 22.3% |
-| Instagram | 23 | 15 | 4.7 s | 26.8% |
+| Instagram | 24 | 15 | 4.7 s | 26.8% |
 | Facebook | 24 | 24 | 2.4 s | 12.9% |
 | YouTube | 23 | 0 | not recorded | not recorded |
 
@@ -20,15 +20,16 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 15, 2:02 PM | YouTube | Oktoberfest Started as a Wedding Party #shorts (https://www.youtube.com/watch?v=7rM6Wx_lSc0) | 3 | not available | 69.0 s | — |
-| Nov 15, 1:02 PM | Facebook | 07_sun-nov15_munich_post.mp4 (https://www.facebook.com/reel/29283033394650756/) | 231 | 6.6 s | 68.7 s | 9.6% |
+| Nov 15, 2:02 PM | YouTube | Oktoberfest Started as a Wedding Party #shorts (https://www.youtube.com/watch?v=7rM6Wx_lSc0) | 70 | not available | 69.0 s | — |
+| Nov 15, 1:04 PM | Instagram | 07_sun-nov15_munich_post.mp4 (https://www.instagram.com/reel/DfxfHkxFNAt/) | 1518 | 24.7 s | not recorded | — |
+| Nov 15, 1:02 PM | Facebook | 07_sun-nov15_munich_post.mp4 (https://www.facebook.com/reel/29283033394650756/) | 259 | 8.3 s | 68.7 s | 12.1% |
 | Nov 13, 6:05 PM | YouTube | Why Greece Fears Tuesday the 13th, Not Friday #shorts (https://www.youtube.com/watch?v=zCNh2GtlnsM) | 1281 | not available | 75.0 s | — |
 | Nov 13, 6:01 PM | TikTok | 05_fri-nov13_istanbul_2k.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7707810271749868814?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 797 | 11.2 s | not recorded | — |
 | Nov 13, 2:46 PM | Instagram | 05_fri-nov13_istanbul_2k.mp4 (https://www.instagram.com/reel/DfshSHeCF-A/) | 138 | 12.8 s | not recorded | — |
 | Nov 13, 2:45 PM | Facebook | 05_fri-nov13_istanbul_2k.mp4 (https://www.facebook.com/reel/4575624492685348/) | 307 | 4.9 s | 74.7 s | 6.6% |
 | Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2727 | 39.2 s | not recorded | — |
 | Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 287 | 21.1 s | 69.3 s | 30.4% |
-| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 24416 | not available | 70.0 s | — |
+| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 24428 | not available | 70.0 s | — |
 | Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706945601526631693?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1405 | 23.1 s | not recorded | — |
 | Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.1 s | not recorded | — |
 | Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 230 | 8.5 s | 65.4 s | 13.0% |
@@ -60,7 +61,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 6, 7:01 PM | Facebook | 7_giethoorn.mp4 (https://www.facebook.com/reel/3048891488795553/) | 99 | 1.8 s | 16.6 s | 10.8% |
 | Nov 6, 1:03 PM | TikTok | 7_giethoorn.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705135725703974157?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 71 | 3.2 s | 16.6 s | 19.1% |
 | Nov 6, 1:00 PM | YouTube | Giethoorn: the Dutch village with no roads #shorts (https://www.youtube.com/watch?v=1ugtT7vchqE) | 9 | not available | 17.0 s | — |
-| Nov 6, 12:32 PM | Instagram | 5_prague.mp4 (https://www.instagram.com/reel/DfaQa3nFBtr/) | 158 | 6.3 s | 15.1 s | 42.1% |
+| Nov 6, 12:32 PM | Instagram | 5_prague.mp4 (https://www.instagram.com/reel/DfaQa3nFBtr/) | 158 | 6.3 s | 15.1 s | 41.9% |
 | Nov 6, 12:31 PM | Facebook | 5_prague.mp4 (https://www.facebook.com/reel/1851725619161033/) | 143 | 2.1 s | 15.1 s | 13.9% |
 | Nov 5, 9:02 PM | Instagram | 4_cambridge.mp4 (https://www.instagram.com/reel/DfYl-ETDZ4y/) | 203 | 6.3 s | 14.0 s | 44.8% |
 | Nov 5, 9:01 PM | Facebook | 4_cambridge.mp4 (https://www.facebook.com/reel/1625482582647758/) | 81 | 2.8 s | 14.0 s | 20.0% |

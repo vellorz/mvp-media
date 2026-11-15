@@ -1,7 +1,7 @@
 from: research
-title: Best posting slots: Sun 12–3 PM scores 3.5× across platforms
+title: Best posting slots: Sun 12–3 PM scores 3.9× across platforms
 metric: social.views
-evidence: Mission Control Content screen, best-time heatmap; 259 posts counted over the last 90 days; 2 not counted yet (left out); posts last pulled Sun, Nov 15, 3:21 PM Central
+evidence: Mission Control Content screen, best-time heatmap; 259 posts counted over the last 90 days; 2 not counted yet (left out); posts last pulled Sun, Nov 15, 4:22 PM Central
 
 How to read this: score = a post's views ÷ that platform's usual (median) post, so 1.0× = usual.
 Each slot's score is a geometric average pulled toward 1.0× when it has few posts, so one viral post can't carry it.
@@ -10,11 +10,11 @@ Times are Central, in three-hour slots. Posts Buffer hasn't counted yet are left
 Use it to favour strong slots, avoid weak ones, and now and then test an untested slot so the ratings keep improving.
 
 ## All platforms together
-259 posts. Best slot (3+ posts): Sun 12–3 PM, 3.5× over 18 posts.
+259 posts. Best slot (3+ posts): Sun 12–3 PM, 3.9× over 18 posts.
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
-| Sun | 12–3 PM | 18 | 3.5× | 6.8× | strong |
+| Sun | 12–3 PM | 18 | 3.9× | 9.8× | strong |
 | Wed | 9 AM–12 | 1 | 2.5× | 16.5× | too few to rate |
 | Tue | 9 PM–12 | 1 | 2.4× | 14.7× | too few to rate |
 | Fri | 12–3 PM | 15 | 2.4× | 9.0× | strong |
@@ -124,11 +124,11 @@ Every other day and time: untested (no posts there yet).
 Every other day and time: untested (no posts there yet).
 
 ## Facebook
-90 posts. Best slot (3+ posts): Sun 12–3 PM, 2.6× over 8 posts.
+90 posts. Best slot (3+ posts): Sun 12–3 PM, 2.8× over 8 posts.
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
-| Sun | 12–3 PM | 8 | 2.6× | 11.3× | strong |
+| Sun | 12–3 PM | 8 | 2.8× | 11.3× | strong |
 | Sun | 9 AM–12 | 1 | 2.5× | 15.2× | too few to rate |
 | Tue | 12–3 PM | 2 | 2.4× | 8.3× | strong |
 | Fri | 12–3 PM | 7 | 2.1× | 9.0× | strong |
@@ -170,8 +170,8 @@ Every other day and time: untested (no posts there yet).
 | Wed | 3–6 PM | 2 | 3.7× | 381.8× | strong |
 | Mon | 3–6 PM | 2 | 2.4× | 17.7× | strong |
 | Fri | 6–9 PM | 4 | 2.0× | 1.6× | strong |
+| Sun | 12–3 PM | 2 | 1.9× | 6.0× | strong |
 | Tue | 3–6 PM | 2 | 1.8× | 26.7× | strong |
-| Sun | 12–3 PM | 2 | 1.3× | 1.8× | strong |
 | Tue | 9 AM–12 | 1 | 1.1× | 1.2× | too few to rate |
 | Sun | 9 AM–12 | 1 | 0.9× | 0.7× | too few to rate |
 | Thu | 6–9 PM | 1 | 0.9× | 0.6× | too few to rate |

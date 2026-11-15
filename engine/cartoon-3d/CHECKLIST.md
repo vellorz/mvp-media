@@ -197,3 +197,52 @@ Apply these with rules 1-91 to every cartoon short. Check them on stills and on 
 115. Crowds look alive: groups of 2-4 facing each other, couples, kids, walkers both ways at mixed speeds, spread across the width; never rows or single file. Festival streets have stalls both sides, rides on the skyline, garlands every 15-20 m and a used ground.
 116. Landmarks are shown whole: frame famous buildings far enough back that the silhouette reads against the sky, with people in front; never let a patterned skin fill the frame.
 117. No blank walls: every wall a shot dwells on has texture (courses, string course, niches, arches, crests), lower tower storeys included.
+
+## Rules 118-141 (owner review of NYC + Munich, Nov 14 2026)
+## Grounding and attachment
+118. Animals (elephants, camels, horses, dogs) touch the ground in EVERY frame. Check the contact point of each animal sprite against the floor height under it on every shot (NYC 0 s, 42 s, 49 s, 56 s; Munich 20 s).
+119. Structural parts (beams, cables, lamp posts, flag poles) are visibly attached at both ends to something solid. No floating beams, lamps or flags (NYC 0 s, 13 s, 30 s).
+120. Bridge and street lamps stand INSIDE the walkway on its rail or deck, never outside the parapet.
+121. Held props sit in the hand (the hand closes around the handle). No lamp hovering near a hand (NYC 0 s).
+122. Shadows fall under the body, matching the scene's single light direction. A jumping character's shadow stays under them and shrinks as they rise, never drifting off to one side (NYC mattress).
+
+## Surfaces and textures
+123. No glitching or shimmering textures. Every large surface (deck, roadway, ground, walls) is checked in a moving 2K test clip for z-fighting, moiré and swimming tiles before the full render. Coplanar layers sit at least 0.015 m apart.
+124. Floors and decks are opaque from every camera angle. Never see through a floor (NYC 68 s, 70 s).
+125. Walls read as walls: drawn brick or stone with ink lines and lighting, distinct from the water and sky. No flat unpainted building sides (NYC 49 s right-hand building).
+126. Landmark entrances and bridge approaches are drawn with full detail (the reference method: painted flat backdrop plus 3D hero props), not a bare box (NYC 7 s, 49 s, 52 s).
+
+## Characters and crowds
+127. Every on-screen person has a full face (eyes, brows, mouth). No eyeless or blank heads, even in the background (NYC 13 s).
+128. No half-body cut-offs that read as a floating torso. A character is either framed naturally by the edge of the frame or a foreground object, or shown whole.
+129. Crowds use distinct people: no visible repeats of the same face, outfit and hat within one shot, and at most 2 repeats across the video. Vary age, build, hair, hats, colours and expressions.
+130. Crowds never stand in single-file rows or columns. Use clusters, couples and diagonals, with everyone acting differently (adds to rule 115).
+131. Expression changes are motivated by the line or the action and stay in sync. A face swap must never change the sound effects or audio.
+132. Animals (dog, horses) are drawn with the same ink detail and features as the people: eyes, texture, shading. No flat blobs.
+
+## Shots and story
+133. Every shot has a clear purpose the viewer gets in 1 second. If a shot's point can't be said in one line, cut it or redesign it (NYC 7 s front-of-bridge).
+134. No shot holds longer than about 4 s without new action or a camera move; crowd beats max 3 s (NYC staircase sat for 6 s or more).
+135. The picture matches the narration. When the VO names a new subject (for example the trend tie-in), the shot shows it or a clear stand-in, never an unrelated view (NYC League of Legends line).
+136. The camera never passes through walls, floors or railings, and never swings round through the lens. Check the camera path for distance to geometry and for degrees per frame before rendering.
+137. Shot changes follow the references and Chicago: bridged dissolves that match the same object in the same spot on screen. No sudden shifts or one-frame jumps (Munich 7 s).
+138. Characters never overlap or pass through props or set pieces behind them (Munich 11 s, rule 76).
+139. Actions land where they are aimed: a stamp, brush or tool touches exactly the spot where its mark appears (Munich 37 s, rule 96).
+140. Gate 2 compares the video side by side with the references (rule 141 below). A video that only "passes the checklist" is not finished.
+
+## Reference-first method (owner, Nov 14 2026)
+Rick's reference videos are the SOLE master guide for how our cartoon shorts look and move. The 140 rules are a safety net, not the method. Chicago v21 is the house benchmark for transitions and scene flow, because it is the one built closest to the references.
+
+## Why NYC and Munich went wrong (my analysis)
+1. I built them as 3D worlds (a bridge, streets, a meadow) and checked them against the rulebook, not against the reference frames. The references use hand-painted flat backdrops on parallax cards, with 3D only for hero props. A modelled 3D bridge is exactly where the glitching textures, see-through decks, floating lamps and floating animals came from.
+2. Both were built in parallel under deadline, from the Chicago code but not with Chicago's shot grammar. Transitions and pacing drifted.
+3. QA was technical (black and frozen frames, loudness, edge density, a dropout scan), and those checks passed. Nobody watched the full video in motion next to a reference before Gate 2. Sheets of stills hide floating, texture shimmer and camera paths.
+4. The cast generator reused a small set of faces and outfits, and crowds were laid out in rows.
+5. The task prompts list the teardowns as "read if needed", 117 rules deep. The reference method got diluted by the checklist.
+
+## The method from now on (rule 141, applies to every video)
+A. Before writing shot lists: open the reference teardowns (research/reference-teardown-dragon, research/reference-teardown-bell; private, never published) and Chicago v21. Pick for every planned shot the reference shot it is modelled on, and write that in the shot list ("shot 4 = dragon shot 9: painted backdrop, close-up prop, dissolve on the jar").
+B. Build each set the reference way: a painted flat backdrop plus 3D hero props. A big modelled structure (bridge, stadium, street) is only allowed when the reference does the same thing.
+C. Every still sheet and the final video get a side-by-side page: our frame next to the matched reference frame (kept private), with a one-line verdict on detail, grounding, faces and lighting.
+D. Before Gate 2, watch the full 2K video in motion (ffmpeg contact strips every 3 frames for each shot), not just still sheets. Check grounding, attachment, textures, the camera path and the picture matching the VO.
+E. If a shot can't match its reference, redesign it. Don't ship it. Say so in the Gate 2 note.

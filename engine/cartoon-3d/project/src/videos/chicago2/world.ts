@@ -12,8 +12,9 @@ import { LIGHTS, LOOK, LightPreset } from "./lights";
 import { TONE, CHAR, LFB, twoTone, untone } from "./shade";
 import { NOINK } from "./ink";
 import { Pool, Actor, Fx, stage } from "./cast";
-import { FPS, D0, HW, SHOTS, PIECES, SPANS, pieceRange, PILE, ROAD_Z, TOWN, camAt, worldAt, truckX, shipX, V3, ShotDef, TOWER, TIER_H, T_R, towerPose, W, clamp01, isAerial, LAKE_X, SW, TRE, lift, stepsOf, STEP_H, fillTop, pipeDrop, flowPos, boatX, BOATS, arrowYaw } from "./story";
-import { buildCity, City } from "./city";
+import { FPS, D0, HW, SHOTS, PIECES, SPANS, pieceRange, PILE, ROAD_Z, TOWN, camAt, worldAt, truckX, shipX, V3, ShotDef, TOWER, TIER_H, T_R, towerPose, W, clamp01, isAerial, LAKE_X, SW, TRE, lift, cutsOf, stepsOf, STEP_H, fillTop, pipeDrop, flowPos, boatX, BOATS, arrowYaw } from "./story";
+import { buildCity, City, SIGN_LIST } from "./city";
+import { signState } from "./signcut";
 import { buildSets, SetRefs } from "./sets";
 
 const KENNEY = ["tree_oak", "tree_default", "tree_detailed", "tree_fat", "tree_cone", "tree-high-round", "tree", "plant_bushLarge", "plant_bushDetailed",
@@ -91,7 +92,7 @@ const smokeTex = () => ctex("smoke", 256, 256, (g) => {
   for (const [x, y, r, c] of [[90, 150, 60, "#8f8d96"], [150, 120, 70, "#a3a1aa"], [170, 165, 55, "#8f8d96"], [120, 100, 50, "#b4b2ba"]] as const) p.ell(x, y, r, r * 0.85, c, 0);
 });
 
-const sightLines = (place: string): Ray[] => {
+export const sightLines = (place: string): Ray[] => {
   const out: Ray[] = [];
   for (const s of SHOTS) {
     if (s.place !== place) continue;
@@ -500,7 +501,7 @@ export class World {
     const ft = fillTop(id, t); C.fill.visible = false && ft > -0.25; C.fill.position.y = D0 - 0.4; C.fill.scale.y = ft + 0.4;
     C.puddles.visible = id === 4;
     const S = this.sets;
-    S.lanterns.visible = S.depotGlow.visible = S.under.visible = id === 10;
+    S.lanterns.visible = S.depotGlow.visible = id === 10; S.under.visible = id === 10 || id === 12; // v19: the cribbing and casks under the Tremont also dress the steps shot
     S.boats.forEach((g, i) => { g.position.set(boatX(i, t), -0.25 + 0.06 * Math.sin(t * 1.4 + i), BOATS[i].z); g.rotation.set(0.015 * Math.sin(t * 1.1 + i), arrowYaw(t), 0); });
   }
   private shotSun(id: number, s: ShotDef, L: LightPreset) {
@@ -521,9 +522,33 @@ export class World {
   private actor(i: number) { while (this.actors.length <= i) this.actors.push(new Actor(this.root)); return this.actors[i]; }
   private fx(i: number) { while (this.fxs.length <= i) this.fxs.push(new Fx(this.root)); return this.fxs[i]; }
 
+  /** rule 64 (owner Nov 12): sign lettering is fully in frame or fully out. Once per cut-to-cut shot, every sign whose
+   *  board is ever cut by the frame edge during that shot shows its blank board (no letters) for the whole shot. */
+  private signCache = new Map<string, Set<THREE.Material>>();
+  private signCam = new THREE.PerspectiveCamera(40, 9 / 16, 0.1, 2000);
+  private signsFor(id: number, f: number, pre?: number) {
+    const s = SHOTS[id - 1], cuts = cutsOf(id), g = pre !== undefined ? pre - 1 : f;
+    const a = Math.max(s.a, ...cuts.filter((k) => k <= g)), b = pre !== undefined ? pre + 10 : Math.min(s.b, ...cuts.filter((k) => k > g));
+    const key = `${id}|${a}|${b}|${pre ?? ""}`;
+    let cut = this.signCache.get(key);
+    if (!cut) {
+      cut = new Set(); const C = this.signCam;
+      for (let ff = a; ff < b; ff += 2) {
+        const c = camAt(id, ff, pre !== undefined && ff >= pre ? pre : undefined);
+        C.position.set(...c.pos); C.up.set(0, 1, 0); C.lookAt(...c.look); C.rotateZ(c.roll); C.fov = c.fov; C.updateProjectionMatrix(); C.updateMatrixWorld();
+        for (const r of SIGN_LIST) {
+          if (cut.has(r.m)) continue;
+          if (signState(C, r.c, r.which ? D0 + lift(r.which, id, ff / FPS) : 0) === 2) cut.add(r.m);
+        }
+      }
+      this.signCache.set(key, cut);
+    }
+    for (const r of SIGN_LIST) { const m = r.m; m.map = cut.has(m) ? m.userData.blank : m.userData.full; }
+  }
   update(id: number, f: number, cam: THREE.PerspectiveCamera, scene: THREE.Scene, pre?: number) {
     const t = f / FPS, s = SHOTS[id - 1], L = LIGHTS[s.light], ws = worldAt(id, t);
     const c = camAt(id, f, pre);
+    this.signsFor(id, f, pre);
     cam.position.set(...c.pos); cam.up.set(0, 1, 0); cam.lookAt(...c.look); cam.rotateZ(c.roll);
     cam.fov = c.fov; cam.near = c.pos[1] > D0 + 12 ? 1.0 : 0.2; cam.far = 1500; /* aerials: 5x depth precision for far ground layers */ cam.updateProjectionMatrix(); cam.updateMatrixWorld();
     const focus = V(...c.look), dist = cam.position.distanceTo(focus);

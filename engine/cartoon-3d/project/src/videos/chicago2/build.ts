@@ -652,11 +652,16 @@ export const buildTown = (root: THREE.Object3D, kit: Kit, rays: Ray[] = []) => {
     b.add(hill, hm[i % 3], new THREE.Matrix4().compose(V(x, D0 - 2, z), new THREE.Quaternion(), V(sx, sy, sz))));
   // trees: quays, gardens, valley, hilltops
   const trees = ["tree_oak", "tree_default", "tree_detailed", "tree_fat", "tree-high-round", "tree"];
-  for (const bank of [-1, 1]) for (let x = -130; x <= 130; x += 22) if (Math.abs(x) > 12 && !(bank > 0 && Math.abs(x + 31) < 8)) prop(b, kit, pick(trees), x + r() * 4, D0, bank * 33.6, 7 + r() * 2.5, r() * 6);
+  for (const bank of [-1, 1]) for (let x = -130; x <= 130; x += 22) if (Math.abs(x) > 12 && !(bank > 0 && Math.abs(x + 31) < 8)) {
+    const nm = pick(trees), tx = x + r() * 4, ts = 7 + r() * 2.5, ty = r() * 6; // draws the same randoms either way, so later trees keep their places
+    if (!(bank < 0 && x > 80)) prop(b, kit, nm, tx, D0, bank * 33.6, ts, ty); // v19f: south-bank trees by the ending quay read as cut green balls at the frame edge
+  }
   for (let i = 0; i < 140; i++) {
     const x = (r() - 0.5) * 520, z = (r() < 0.5 ? -1 : 1) * (48 + r() * 220);
     if (inPark(x, z) || inMill(x, z) || inChurch(x, z) || inChamp(x, z) || Math.abs(x) < 16) continue;
-    prop(b, kit, pick(trees), x, D0, z, 7 + r() * 4, r() * 6);
+    const nm = pick(trees), ts = 7 + r() * 4, ty = r() * 6; // same randoms drawn either way
+    if (x > 90 && x < 165 && z > -95 && z < -30) continue; // v19f: under the ending crane (take 16) these read as cut, blurred green balls at the frame bottom
+    prop(b, kit, nm, x, D0, z, ts, ty);
   }
   for (let i = 0; i < 60; i++) {
     const a = r() * Math.PI * 2, d = 230 + r() * 160;

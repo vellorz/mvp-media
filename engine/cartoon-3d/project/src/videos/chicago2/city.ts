@@ -35,9 +35,12 @@ const signTex = (s: string, bg: string, fg: string, w = 1024, h = 192) => ctex("
 const signMat = (s: string, bg = "#2f4a3a", fg = "#f2e3b8") => {
   const key = "signM" + s + bg;
   let m = SIGNS.get(key);
-  if (!m) { m = new THREE.MeshBasicMaterial({ map: signTex(s, bg, fg) }); SIGNS.set(key, m); }
+  if (!m) { m = new THREE.MeshBasicMaterial({ map: signTex(s, bg, fg) }); m.userData.full = m.map; m.userData.blank = signTex("", bg, fg); SIGNS.set(key, m); }
   return m;
 };
+/** rule 64: every lettered sign in the world, so a shot that would crop its lettering shows the board blank instead */
+export type SignRec = { m: THREE.MeshBasicMaterial; c: [number, number, number][]; which?: "tre" | "b58" | "blk" };
+export const SIGN_LIST: SignRec[] = [];
 const SIGNS = new Map<string, THREE.MeshBasicMaterial>();
 
 // ---------------- grid ----------------
@@ -103,10 +106,12 @@ const block = (b: Batch, x0: number, x1: number, zf: number, dir: 1 | -1, d: num
   for (let fl = 1; fl < floors; fl++) b.add(boxGeo(V(x0 - 0.06, y + fl * 2.8 - 0.16, dir > 0 ? zF - 0.05 : zF - 0.2), V(x1 + 0.06, y + fl * 2.8 + 0.04, dir > 0 ? zF + 0.2 : zF + 0.05)), tm); // deeper: thin edge-on faces inked as dashes (rule 47)
   if (o.under) b.add(boxGeo(V(x0 + 0.03, y - 0.18, za + 0.03), V(x1 - 0.03, y - 0.02, zb - 0.03), 2, true), timberM()); // floor beams seen when raised
   if (o.sign) { // shop sign board over the street-floor windows (unlit so it stays readable)
-    const sw = Math.min(w - 1.2, 7.5), zz = zF + dir * 0.17, cx = (x0 + x1) / 2;
+    // v21 rule 84 (owner): the floor band (out to 0.2 m) crossed the DRY GOODS lettering; that board now stands in front of it
+    const sw = Math.min(w - 1.2, 7.5), zz = zF + dir * (o.key === "b58" ? 0.24 : 0.17), cx = (x0 + x1) / 2;
     const g = dir > 0 ? quad(V(cx - sw / 2, y + 2.5, zz), V(cx + sw / 2, y + 2.5, zz), V(cx + sw / 2, y + 3.4, zz), V(cx - sw / 2, y + 3.4, zz))
       : quad(V(cx + sw / 2, y + 2.5, zz), V(cx - sw / 2, y + 2.5, zz), V(cx - sw / 2, y + 3.4, zz), V(cx + sw / 2, y + 3.4, zz));
     b.add(g, signMat(o.sign, o.signBg));
+    SIGN_LIST.push({ m: signMat(o.sign, o.signBg), c: [[cx - sw / 2, y + 2.5, zz], [cx + sw / 2, y + 2.5, zz], [cx - sw / 2, y + 3.4, zz], [cx + sw / 2, y + 3.4, zz]], which: o.key === "b58" ? "b58" : o.key?.startsWith("blk") ? "blk" : undefined });
     // v6: the frame box stops 3 cm BEHIND the sign face on both street sides (on north-row blocks, dir -1, it used to
     // stick out in front and hide every sign behind a blank cream board with inked dashes)
     const zIn = zz - dir * 0.03;
@@ -116,10 +121,14 @@ const block = (b: Batch, x0: number, x1: number, zf: number, dir: 1 | -1, d: num
   // (the block's own cull box stops at the facade, so awnings used to block the start of S5a and S7a)
   if (o.awning && !inWayAll(x0, x1, y + 1.6, y + 2.5, Math.min(zF, zF + dir * 1.8), Math.max(zF, zF + dir * 1.8))) {
     const z0 = zF, z1 = zF + dir * 1.6, a = lam("awn" + o.awning, () => ({ color: o.awning!, side: THREE.DoubleSide }));
-    const g = dir > 0 ? quad(V(x0 + 0.4, y + 2.35, z0), V(x0 + 0.4, y + 1.95, z1), V(x1 - 0.4, y + 1.95, z1), V(x1 - 0.4, y + 2.35, z0))
-      : quad(V(x1 - 0.4, y + 2.35, z0), V(x1 - 0.4, y + 1.95, z1), V(x0 + 0.4, y + 1.95, z1), V(x0 + 0.4, y + 2.35, z0));
+    // v21 rule 86 (owner): on the Lake Street block the canopy hung across the doors (front edge 1.95 m, doors 2.4 m with
+    // their surround); there it mounts under the sign board and its lowest edge stays above the door head
+    const blk = !!o.key?.startsWith("blk"), yt = y + (blk ? 2.49 : 2.35), yf = y + (blk ? 2.43 : 1.95), vh = blk ? 0.0 : 0.2;
+    const g = dir > 0 ? quad(V(x0 + 0.4, yt, z0), V(x0 + 0.4, yf, z1), V(x1 - 0.4, yf, z1), V(x1 - 0.4, yt, z0))
+      : quad(V(x1 - 0.4, yt, z0), V(x1 - 0.4, yf, z1), V(x0 + 0.4, yf, z1), V(x0 + 0.4, yt, z0));
     b.add(g, a);
-    b.add(boxGeo(V(x0 + 0.4, y + 1.75, Math.min(z1, z1 - dir * 0.08)), V(x1 - 0.4, y + 1.95, Math.max(z1, z1 - dir * 0.08))), a);
+    if (vh > 0) b.add(boxGeo(V(x0 + 0.4, yf - vh, Math.min(z1, z1 - dir * 0.08)), V(x1 - 0.4, yf, Math.max(z1, z1 - dir * 0.08))), a);
+    else b.add(boxGeo(V(x0 + 0.4, yf - 0.02, Math.min(z1, z1 - dir * 0.08)), V(x1 - 0.4, yf + 0.06, Math.max(z1, z1 - dir * 0.08))), a);
   }
   return true;
 };
@@ -273,6 +282,7 @@ export const buildCity = (root: THREE.Object3D, kit: Kit, rays: Ray[]) => {
     // name board on the parapet + a flag
     const zz = TRE.z - 0.42;
     tb.add(quad(V(7, TRE.h + 0.2, zz), V(-7, TRE.h + 0.2, zz), V(-7, TRE.h + 1.9, zz), V(7, TRE.h + 1.9, zz)), signMat("TREMONT HOUSE", "#f4ead2", "#2b2830"));
+    SIGN_LIST.push({ m: signMat("TREMONT HOUSE", "#f4ead2", "#2b2830"), c: [[7, TRE.h + 0.2, zz], [-7, TRE.h + 0.2, zz], [-7, TRE.h + 1.9, zz], [7, TRE.h + 1.9, zz]], which: "tre" });
     tb.add(boxGeo(V(-7.2, TRE.h + 0.1, zz + 0.02), V(7.2, TRE.h + 2.0, zz + 0.25)), trimL("#8a5a3c"));
     const pole = new THREE.CylinderGeometry(0.07, 0.07, 6, 8); pole.translate(0, TRE.h + 3, TRE.z + 6); tb.add(pole, ironM());
     tb.add(boxGeo(V(0.07, TRE.h + 4.4, TRE.z + 5.98), V(2.6, TRE.h + 5.9, TRE.z + 6.02)), lam("flagRed", () => ({ color: "#c8352e", side: THREE.DoubleSide })));
@@ -296,7 +306,7 @@ export const buildCity = (root: THREE.Object3D, kit: Kit, rays: Ray[]) => {
     }
     void rr;
     // the temporary plank porch along the raised fronts (rises with the block)
-    kb.add(boxGeo(V(BLK.x0, SW - 0.22, BLK.z - 1.9), V(BLK.x1, SW, BLK.z), 2, true), plankM()); // v8 (rule 60): porch top level with the plank sidewalk, so nobody stands sunk in it
+    kb.add(boxGeo(V(BLK.x0, SW - 0.22, BLK.z - 1.9), V(BLK.x1, SW + 0.025, BLK.z), 2, true), plankM()); // v21 rule 85: 2.5 cm above the plank sidewalk (coplanar boards flickered on the pan) // v8 (rule 60): porch top level with the plank sidewalk, so nobody stands sunk in it
     kb.build(blk);
   }
   tre.position.set(0, D0, 0); b58.position.set(0, D0, 0); blk.position.set(0, D0, 0);

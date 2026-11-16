@@ -326,6 +326,16 @@ export const wallpaperInk = (key: string, paper: string, motif: string, wains: s
   g.fillStyle = wains; g.fillRect(0, wy, W, H - wy);
   mottle(g, r, 0, wy, W, H - wy, 300, 50, [shadeRGB(wains, 0.85), shadeRGB(wains, 1.15)], 0.25);
   for (let x = 24; x < W; x += 250) wobRect(g, r, x, wy + 70, 200, H - wy - 160, 5, "rgba(30,20,20,0.7)");
+  // v19f (edge floor): raised-panel bevels, carved rosettes and grain inside each wainscot panel
+  for (let x = 24; x < W; x += 250) {
+    wobRect(g, r, x + 22, wy + 92, 156, H - wy - 204, 3, shadeRGB(wains, 1.6));
+    wobRect(g, r, x + 34, wy + 104, 132, H - wy - 228, 3, "rgba(30,20,20,0.6)");
+    for (let k = 0; k < 5; k++) wob(g, r, [[x + 50 + k * 25, wy + 130], [x + 50 + k * 25 + (k % 2 ? 6 : -6), H - 160]], 2, shadeRGB(wains, 0.7), 1);
+    const cx = x + 100, cy = wy + 110 + (H - wy - 228) / 2;
+    g.fillStyle = shadeRGB(wains, 1.35); g.beginPath(); g.arc(cx, cy, 30, 0, 7); g.fill(); g.strokeStyle = HINK; g.lineWidth = 4; g.stroke();
+    for (let k = 0; k < 8; k++) { const a = k * Math.PI / 4; g.beginPath(); g.moveTo(cx, cy); g.lineTo(cx + Math.cos(a) * 26, cy + Math.sin(a) * 26); g.lineWidth = 2.5; g.stroke(); }
+  }
+  for (let x = 0; x < W; x += 40) wob(g, r, [[x, wy + 34], [x, wy + 62]], 2.5, HINK, 1); // dentil band under the dado rail
   wob(g, r, [[0, wy], [W, wy]], 10, HINK, 1); wob(g, r, [[0, wy + 30], [W, wy + 30]], 4, HINK, 1);
   wob(g, r, [[0, H - 50], [W, H - 50]], 6, HINK, 1);
 });

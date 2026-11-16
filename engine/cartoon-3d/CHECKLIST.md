@@ -246,3 +246,10 @@ B. Build each set the reference way: a painted flat backdrop plus 3D hero props.
 C. Every still sheet and the final video get a side-by-side page: our frame next to the matched reference frame (kept private), with a one-line verdict on detail, grounding, faces and lighting.
 D. Before Gate 2, watch the full 2K video in motion (ffmpeg contact strips every 3 frames for each shot), not just still sheets. Check grounding, attachment, textures, the camera path and the picture matching the VO.
 E. If a shot can't match its reference, redesign it. Don't ship it. Say so in the Gate 2 note.
+
+## Rules 142-143 (owner, Nov 16 2026, review of the Blender Venice proof)
+142. NO FLOATING PARTS. Every object is attached to, or resting on, something: statues on their plinths, ornaments on the building, lamps on their posts, props on a surface. The Venice proof had small statues and finials hanging in the air around the Salute church. Only things that really fly (birds, clouds, rain, a thrown prop mid-air) may be off the ground, and they carry the custom property `fly=1`.
+    - Check: `render/blender/check_float.py` on the first, middle and last frame of every shot before any 2K render. It must print CHECK_FLOAT PASS.
+143. HELD PROPS NEVER PASS THROUGH THE BODY. A swung tool (mallet, oar, shovel) stays in front of or beside the body on every frame of the swing; it never sweeps through the torso, head or legs, or vanishes behind the back. The Venice proof's mallet went through the worker at 4-5 s.
+    - Plan swings so the arc stays on the camera side of the body (wind-up beside the shoulder, not over and behind the head).
+    - Check: `render/blender/check_clip.py` on every frame of every swing in a fast pass before any 2K render. It must print CHECK_CLIP PASS. Then watch the swing in a workbench preview at full frame rate.

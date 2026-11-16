@@ -20,9 +20,9 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 15, 2:02 PM | YouTube | Oktoberfest Started as a Wedding Party #shorts (https://www.youtube.com/watch?v=7rM6Wx_lSc0) | 921 | not available | 69.0 s | — |
+| Nov 15, 2:02 PM | YouTube | Oktoberfest Started as a Wedding Party #shorts (https://www.youtube.com/watch?v=7rM6Wx_lSc0) | 1126 | not available | 69.0 s | — |
 | Nov 15, 1:04 PM | Instagram | 07_sun-nov15_munich_post.mp4 (https://www.instagram.com/reel/DfxfHkxFNAt/) | 1545 | 24.7 s | not recorded | — |
-| Nov 15, 1:02 PM | Facebook | 07_sun-nov15_munich_post.mp4 (https://www.facebook.com/reel/29283033394650756/) | 476 | 6.6 s | 68.7 s | 9.6% |
+| Nov 15, 1:02 PM | Facebook | 07_sun-nov15_munich_post.mp4 (https://www.facebook.com/reel/29283033394650756/) | 479 | 6.6 s | 68.7 s | 9.6% |
 | Nov 15, 11:05 AM | TikTok | 07_sun-nov15_munich_post.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7708445003273555231) | 351 | 15.4 s | not recorded | — |
 | Nov 13, 6:05 PM | YouTube | Why Greece Fears Tuesday the 13th, Not Friday #shorts (https://www.youtube.com/watch?v=zCNh2GtlnsM) | 1283 | not available | 75.0 s | — |
 | Nov 13, 6:01 PM | TikTok | 05_fri-nov13_istanbul_2k.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7707810271749868814?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 811 | 11.2 s | not recorded | — |

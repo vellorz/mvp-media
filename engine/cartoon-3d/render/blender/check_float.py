@@ -24,7 +24,9 @@ for f in frames:
         oe = o.evaluated_get(dg); m = oe.to_mesh()
         if len(m.vertices) == 0: oe.to_mesh_clear(); continue
         vs = [oe.matrix_world @ v.co for v in m.vertices]
-        trees[o.name] = (BVHTree.FromPolygons(vs, [p.vertices[:] for p in m.polygons]), vs)
+        # sample face centres too: a flat card has only 4 corners, its middle may be what touches
+        pts = vs + [oe.matrix_world @ p.center for p in m.polygons]
+        trees[o.name] = (BVHTree.FromPolygons(vs, [p.vertices[:] for p in m.polygons]), pts)
         oe.to_mesh_clear()
     for n, (t, vs) in trees.items():
         if min(v.z for v in vs) <= TOL: continue

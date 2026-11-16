@@ -14,14 +14,15 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | TikTok | 26 | 14 | 4.1 s | 22.3% |
 | Instagram | 23 | 15 | 4.7 s | 26.8% |
 | Facebook | 23 | 23 | 2.6 s | 13.0% |
-| YouTube | 23 | 0 | not recorded | not recorded |
+| YouTube | 24 | 0 | not recorded | not recorded |
 
 ## Each video
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 15, 2:02 PM | YouTube | Oktoberfest Started as a Wedding Party #shorts (https://www.youtube.com/watch?v=7rM6Wx_lSc0) | 1255 | not available | 69.0 s | — |
-| Nov 15, 1:04 PM | Instagram | 07_sun-nov15_munich_post.mp4 (https://www.instagram.com/reel/DfxfHkxFNAt/) | 1568 | 24.6 s | not recorded | — |
+| Nov 16, 4:03 PM | YouTube | Chicago Lifted a Hotel With the Guests Inside #shorts (https://www.youtube.com/watch?v=_L-TeeKM3n4) | 0 | not available | 74.0 s | — |
+| Nov 15, 2:02 PM | YouTube | Oktoberfest Started as a Wedding Party #shorts (https://www.youtube.com/watch?v=7rM6Wx_lSc0) | 1297 | not available | 69.0 s | — |
+| Nov 15, 1:04 PM | Instagram | 07_sun-nov15_munich_post.mp4 (https://www.instagram.com/reel/DfxfHkxFNAt/) | 1570 | 24.6 s | not recorded | — |
 | Nov 15, 1:02 PM | Facebook | 07_sun-nov15_munich_post.mp4 (https://www.facebook.com/reel/29283033394650756/) | 492 | 6.5 s | 68.7 s | 9.5% |
 | Nov 15, 11:05 AM | TikTok | 07_sun-nov15_munich_post.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7708445003273555231) | 351 | 15.4 s | not recorded | — |
 | Nov 13, 6:05 PM | YouTube | Why Greece Fears Tuesday the 13th, Not Friday #shorts (https://www.youtube.com/watch?v=zCNh2GtlnsM) | 1285 | not available | 75.0 s | — |
@@ -30,7 +31,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 13, 2:45 PM | Facebook | 05_fri-nov13_istanbul_2k.mp4 (https://www.facebook.com/reel/4575624492685348/) | 307 | 4.9 s | 74.7 s | 6.6% |
 | Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2728 | 39.2 s | not recorded | — |
 | Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 287 | 21.1 s | 69.3 s | 30.4% |
-| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 24458 | not available | 70.0 s | — |
+| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 24473 | not available | 70.0 s | — |
 | Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706945601526631693?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1415 | 23.2 s | not recorded | — |
 | Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.1 s | not recorded | — |
 | Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 230 | 8.5 s | 65.4 s | 13.0% |

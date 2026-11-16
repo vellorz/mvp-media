@@ -1,7 +1,7 @@
 from: research
-title: Best posting slots: Sun 12–3 PM scores 4.0× across platforms
+title: Best posting slots: Sun 12–3 PM scores 4.1× across platforms
 metric: social.views
-evidence: Mission Control Content screen, best-time heatmap; 259 posts counted over the last 90 days; 2 not counted yet (left out); posts last pulled Sun, Nov 15, 5:22 PM Central
+evidence: Mission Control Content screen, best-time heatmap; 259 posts counted over the last 90 days; 2 not counted yet (left out); posts last pulled Sun, Nov 15, 6:22 PM Central
 
 How to read this: score = a post's views ÷ that platform's usual (median) post, so 1.0× = usual.
 Each slot's score is a geometric average pulled toward 1.0× when it has few posts, so one viral post can't carry it.
@@ -10,11 +10,11 @@ Times are Central, in three-hour slots. Posts Buffer hasn't counted yet are left
 Use it to favour strong slots, avoid weak ones, and now and then test an untested slot so the ratings keep improving.
 
 ## All platforms together
-259 posts. Best slot (3+ posts): Sun 12–3 PM, 4.0× over 18 posts.
+259 posts. Best slot (3+ posts): Sun 12–3 PM, 4.1× over 18 posts.
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
-| Sun | 12–3 PM | 18 | 4.0× | 9.8× | strong |
+| Sun | 12–3 PM | 18 | 4.1× | 9.8× | strong |
 | Wed | 9 AM–12 | 1 | 2.5× | 16.5× | too few to rate |
 | Tue | 9 PM–12 | 1 | 2.4× | 14.7× | too few to rate |
 | Fri | 12–3 PM | 15 | 2.4× | 9.0× | strong |
@@ -167,9 +167,9 @@ Every other day and time: untested (no posts there yet).
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
-| Wed | 3–6 PM | 2 | 3.7× | 381.8× | strong |
+| Wed | 3–6 PM | 2 | 3.7× | 382.4× | strong |
 | Mon | 3–6 PM | 2 | 2.4× | 17.7× | strong |
-| Sun | 12–3 PM | 2 | 2.2× | 9.8× | strong |
+| Sun | 12–3 PM | 2 | 2.4× | 12.8× | strong |
 | Fri | 6–9 PM | 4 | 2.0× | 1.6× | strong |
 | Tue | 3–6 PM | 2 | 1.8× | 26.7× | strong |
 | Tue | 9 AM–12 | 1 | 1.1× | 1.2× | too few to rate |

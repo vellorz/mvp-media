@@ -1,6 +1,6 @@
 """Rule 143 check: held props never pass through the body. Run before any 2K render:
   blender -b scene.blend --python check_clip.py -- PROP BODY1,BODY2,... START END
-PROP = the held prop (its children are included, e.g. mallet handle + head).
+PROP = the held prop, or several comma-separated meshes (children are included).
 BODY = the character meshes it must never enter (torso, head, legs; leave out the holding hand).
 Tests every frame START..END (fast: no rendering). Reports frames where the prop overlaps a body
 mesh or comes closer than MIN_GAP. Exits 1 on any hit."""
@@ -13,7 +13,9 @@ def tree(o, dg):
     oe = o.evaluated_get(dg); m = oe.to_mesh()
     vs = [oe.matrix_world @ v.co for v in m.vertices]; ps = [p.vertices[:] for p in m.polygons]
     oe.to_mesh_clear(); return BVHTree.FromPolygons(vs, ps), vs
-P = bpy.data.objects[prop]; parts = [P] + [c for c in P.children_recursive if c.type == 'MESH']
+parts = []
+for n in prop.split(','):
+    P = bpy.data.objects[n]; parts += [P] + [c for c in P.children_recursive if c.type == 'MESH' and not c.name.endswith('_ink')]
 hits = []
 for f in range(s, e+1):
     bpy.context.scene.frame_set(f); dg = bpy.context.evaluated_depsgraph_get()

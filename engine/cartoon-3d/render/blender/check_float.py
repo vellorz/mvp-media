@@ -18,7 +18,7 @@ for f in frames:
     bpy.context.scene.frame_set(f)
     dg = bpy.context.evaluated_depsgraph_get()
     objs = [o for o in bpy.context.scene.objects if o.type == 'MESH' and not o.hide_render
-            and not o.name.startswith('hull_') and not root_fly(o)]
+            and not o.name.startswith('hull_') and not o.name.endswith('_ink') and not root_fly(o)]
     trees = {}
     for o in objs:
         oe = o.evaluated_get(dg); m = oe.to_mesh()

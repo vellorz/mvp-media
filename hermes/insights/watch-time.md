@@ -21,7 +21,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
 | Nov 15, 2:02 PM | YouTube | Oktoberfest Started as a Wedding Party #shorts (https://www.youtube.com/watch?v=7rM6Wx_lSc0) | 1255 | not available | 69.0 s | — |
-| Nov 15, 1:04 PM | Instagram | 07_sun-nov15_munich_post.mp4 (https://www.instagram.com/reel/DfxfHkxFNAt/) | 1566 | 24.7 s | not recorded | — |
+| Nov 15, 1:04 PM | Instagram | 07_sun-nov15_munich_post.mp4 (https://www.instagram.com/reel/DfxfHkxFNAt/) | 1568 | 24.7 s | not recorded | — |
 | Nov 15, 1:02 PM | Facebook | 07_sun-nov15_munich_post.mp4 (https://www.facebook.com/reel/29283033394650756/) | 492 | 6.5 s | 68.7 s | 9.5% |
 | Nov 15, 11:05 AM | TikTok | 07_sun-nov15_munich_post.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7708445003273555231) | 351 | 15.4 s | not recorded | — |
 | Nov 13, 6:05 PM | YouTube | Why Greece Fears Tuesday the 13th, Not Friday #shorts (https://www.youtube.com/watch?v=zCNh2GtlnsM) | 1285 | not available | 75.0 s | — |

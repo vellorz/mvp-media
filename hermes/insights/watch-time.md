@@ -20,17 +20,17 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 15, 2:02 PM | YouTube | Oktoberfest Started as a Wedding Party #shorts (https://www.youtube.com/watch?v=7rM6Wx_lSc0) | 1197 | not available | 69.0 s | — |
-| Nov 15, 1:04 PM | Instagram | 07_sun-nov15_munich_post.mp4 (https://www.instagram.com/reel/DfxfHkxFNAt/) | 1548 | 24.7 s | not recorded | — |
-| Nov 15, 1:02 PM | Facebook | 07_sun-nov15_munich_post.mp4 (https://www.facebook.com/reel/29283033394650756/) | 486 | 6.6 s | 68.7 s | 9.6% |
+| Nov 15, 2:02 PM | YouTube | Oktoberfest Started as a Wedding Party #shorts (https://www.youtube.com/watch?v=7rM6Wx_lSc0) | 1255 | not available | 69.0 s | — |
+| Nov 15, 1:04 PM | Instagram | 07_sun-nov15_munich_post.mp4 (https://www.instagram.com/reel/DfxfHkxFNAt/) | 1566 | 24.7 s | not recorded | — |
+| Nov 15, 1:02 PM | Facebook | 07_sun-nov15_munich_post.mp4 (https://www.facebook.com/reel/29283033394650756/) | 492 | 6.5 s | 68.7 s | 9.5% |
 | Nov 15, 11:05 AM | TikTok | 07_sun-nov15_munich_post.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7708445003273555231) | 351 | 15.4 s | not recorded | — |
-| Nov 13, 6:05 PM | YouTube | Why Greece Fears Tuesday the 13th, Not Friday #shorts (https://www.youtube.com/watch?v=zCNh2GtlnsM) | 1284 | not available | 75.0 s | — |
+| Nov 13, 6:05 PM | YouTube | Why Greece Fears Tuesday the 13th, Not Friday #shorts (https://www.youtube.com/watch?v=zCNh2GtlnsM) | 1285 | not available | 75.0 s | — |
 | Nov 13, 6:01 PM | TikTok | 05_fri-nov13_istanbul_2k.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7707810271749868814?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 811 | 11.2 s | not recorded | — |
 | Nov 13, 2:46 PM | Instagram | 05_fri-nov13_istanbul_2k.mp4 (https://www.instagram.com/reel/DfshSHeCF-A/) | 138 | 12.8 s | not recorded | — |
 | Nov 13, 2:45 PM | Facebook | 05_fri-nov13_istanbul_2k.mp4 (https://www.facebook.com/reel/4575624492685348/) | 307 | 4.9 s | 74.7 s | 6.6% |
 | Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2728 | 39.2 s | not recorded | — |
 | Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 287 | 21.1 s | 69.3 s | 30.4% |
-| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 24485 | not available | 70.0 s | — |
+| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 24456 | not available | 70.0 s | — |
 | Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706945601526631693?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1415 | 23.2 s | not recorded | — |
 | Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.1 s | not recorded | — |
 | Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 230 | 8.5 s | 65.4 s | 13.0% |
@@ -39,7 +39,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1162 | 36.6 s | not recorded | — |
 | Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 253 | 12.3 s | 66.2 s | 18.6% |
 | Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706326116595813645?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 151 | 18.4 s | not recorded | — |
-| Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1099 | not available | 67.0 s | — |
+| Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1102 | not available | 67.0 s | — |
 | Nov 8, 7:02 PM | YouTube | The Copenhagen Harbour Where Fairy Tales Began #shorts (https://www.youtube.com/watch?v=6T8XoSWypVI) | 21 | not available | 17.0 s | — |
 | Nov 8, 7:02 PM | Instagram | 10_ronda.mp4 (https://www.instagram.com/reel/DfgGmeAFUxG/) | 20 | 2.9 s | 12.0 s | 24.2% |
 | Nov 8, 7:02 PM | TikTok | 6_copenhagen.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705970424198286606?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 70 | 3.8 s | 16.8 s | 22.8% |
@@ -57,7 +57,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 7, 6:00 PM | YouTube | Why Dublin's bridge is called the Ha'penny #shorts (https://www.youtube.com/watch?v=eHWswQN6er0) | 5 | not available | 16.0 s | — |
 | Nov 7, 10:02 AM | TikTok | 6af3d8cbe6c868db7e9d91f5_thumbnail.webp (https://www.tiktok.com/@modernvistaprintsshop/video/7705860933783932173?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 2 | 6.0 s | not recorded | — |
 | Nov 6, 7:03 PM | TikTok | 5_prague.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705228553654160653?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 164 | 4.3 s | 15.1 s | 28.4% |
-| Nov 6, 7:03 PM | Instagram | 7_giethoorn.mp4 (https://www.instagram.com/reel/Dfa9EaSET1Y/) | 62 | 2.4 s | 16.6 s | 14.4% |
+| Nov 6, 7:03 PM | Instagram | 7_giethoorn.mp4 (https://www.instagram.com/reel/Dfa9EaSET1Y/) | 62 | 2.4 s | 16.6 s | 14.2% |
 | Nov 6, 7:02 PM | YouTube | Prague's 600-Year-Old Clock: The Legend Isn't True #shorts (https://www.youtube.com/watch?v=E4b5qICIba8) | 21 | not available | 16.0 s | — |
 | Nov 6, 7:01 PM | Facebook | 7_giethoorn.mp4 (https://www.facebook.com/reel/3048891488795553/) | 99 | 1.8 s | 16.6 s | 10.8% |
 | Nov 6, 1:03 PM | TikTok | 7_giethoorn.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705135725703974157?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 72 | 2.9 s | 16.6 s | 17.4% |

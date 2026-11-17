@@ -13,9 +13,10 @@ TINT={'S01':(1.03,1.0,0.96),'S02':(1.03,1.0,0.96),'S03':(1.04,1.0,0.95),'S04':(1
 class Reader:
     def __init__(s,shot):
         a,b=SH[shot]; s.a=a; s.n=b-a+1; s.i=0
-        mp=glob.glob(f'{SRC}/{shot}_*.mp4'); s.png=None
+        mp=sorted(glob.glob(f'{SRC}/{shot}_*.mp4')); s.png=None
         if mp:
-            s.p=subprocess.Popen(['ffmpeg','-v','error','-i',mp[0],'-vf',f'scale={W}:{H}:flags=lanczos','-f','rawvideo','-pix_fmt','rgb24','-'],stdout=subprocess.PIPE)
+            lst=f'/tmp/{shot}_list.txt'; open(lst,'w').write(''.join(f"file '{os.path.abspath(m)}'\n" for m in mp))
+            s.p=subprocess.Popen(['ffmpeg','-v','error','-f','concat','-safe','0','-i',lst,'-vf',f'scale={W}:{H}:flags=lanczos','-f','rawvideo','-pix_fmt','rgb24','-'],stdout=subprocess.PIPE)
         else: s.png=sorted(glob.glob(f'{SRC}/{shot}/f_*.png'))
     def next(s):
         s.i+=1

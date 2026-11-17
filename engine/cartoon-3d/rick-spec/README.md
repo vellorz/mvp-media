@@ -12,4 +12,4 @@ Measurement tools behind the Rick Master Guide. The guide itself and all referen
 | sheets.py frames_dir out_dir | labelled 24-frame contact sheets of every frame | for frame-by-frame review |
 
 Mix target: -14 LUFS integrated, -2 dBTP, LRA <= 3.2 (ffmpeg ebur128). Music bed about 20 dB under the VO, no ducking.
-Run all of them on the preview before Gate 2 and report the numbers next to the pass lines (proposed rule 172, awaiting owner approval).
+Run all of them on the preview before Gate 2 and report the numbers next to the pass lines (proposed rule 190, awaiting owner approval).

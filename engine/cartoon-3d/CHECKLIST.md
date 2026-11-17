@@ -11,12 +11,12 @@ Owner (Nov 8 2026) expects fewer corrections each round, so every correction bec
 3. Towns/cities look planned: houses never in roads, roads fully marked (dashes + edges), trees on lawns not pavement.
 4. Never let the sight-line culler empty a shot (high aerials cull every house): exclude that shot's rays for the town, fill every block. Empty lawns = low quality.
 11. Characters must be in frame: low camera looking slightly up, landmark whole behind them; check every still for people cut off or missing, signs half off-frame.
-5. No zoom/push into a character's body on a narration beat; use a medium shot with the face.
+5. No push into a character's BODY (torso) on a narration beat. Camera pushes land on a FACE, a hand with a prop, or the hero prop; push-ins are Rick's most common move and the camera never stops. [FIXED Nov 17 2026 (owner-approved Rick merge), see rules 182-183. Was: "No zoom/push into a character's body on a narration beat; use a medium shot with the face."]
 6. Ink lines must not flicker in pans: inset end caps on abutting boxes (boxGeo capIn), keep the ink point-on-plane test.
 7. Check crowd/bystander positions against every camera (no person 1 m from the lens).
-8. Audio spec the owner approved: Drew VO, constant bed ~15-20 dB under, SFX under VO peaks, -14 LUFS. Don't let character noises spike.
-9. Rick-style captions: 1-3 words, Montserrat 800 white with black stroke, lower third.
-10. End on the poster shown whole (border + bottom text).
+8. Audio spec: Drew VO on eleven_v4; mix -14 LUFS integrated, -2 dBTP, LRA <= 3.2; music bed constant about 20 dB under the VO from frame 0 to the last frame, no ducking/swells; SFX 8-12 dB over the bed, well under the VO. Don't let character noises spike. [FIXED Nov 17 2026 (owner-approved Rick merge), see rule 188. Was: "Audio spec the owner approved: Drew VO, constant bed ~15-20 dB under, SFX under VO peaks, -14 LUFS. Don't let character noises spike."]
+9. Captions follow rule 186 exactly (Montserrat Black class, white, 4-6 px black outline @1080 = 5-8 px @1440, +3 px shadow, cap height 2.8 % H = 72 px @2560, box bottom 71.7 % H, centred, 1-3 words, digits, hard swap 0-3 f before the word). [FIXED Nov 17 2026 (owner-approved Rick merge), see rule 186. Was: "Rick-style captions: 1-3 words, Montserrat 800 white with black stroke, lower third."]
+10. The poster appears INSIDE the final payoff scene as an in-world object, whole (border + bottom text), while the last line is spoken; video ends <= 1.2 s after the last word starts; no "on your wall" line, no end card. [FIXED Nov 17 2026 (owner-approved Rick merge), see rules 177-178. Was: "End on the poster shown whole (border + bottom text)."]
 12. No sub-second shot flashes: when remapping/retiming, never start a segment inside an in-shot cut dissolve (CUT_X window); scrub every shot change frame by frame (owner caught a pier->bus->pier flash at 7 s, Nov 9).
 **Why:** owner said "me having to correct you will decrease over time".
 **How to apply:** go through this list on stills of every shot before each full render; add new corrections here.
@@ -77,13 +77,13 @@ Engineering fixes found Nov 9 (apply in every new short): black flicker = (a) gr
 The new rules from the Chicago remake. They are owner corrections plus findings from my own reviews. Reference build: project/src/videos/chicago2 (composition ChicagoV2). QA tools: render/qa/ (edge.py, p.mjs projection, est.mjs motion, sheet17.py contact sheets, stills.mjs).
 53. No character card may cut into a wall. People working at a wall stand at least 0.4 m out from the plinth, and their card is yaw-locked parallel to the wall (cranker(..., yaw)). Check every still for half-hidden bodies at walls, tables and counters.
 54. ZERO object mistakes. That means no glitches and nothing appearing where it shouldn't (floating pencils, blobs, half bodies). It also means nothing changed by the environment when it shouldn't be (rain, fog or lights on cards), or the reverse. Held props never cross faces and stay out of the caption band (about 65-75% of the height). Before sending any sheet, review every still at full size against all rules and send a written list with the sheet.
-55. Style follows the references 100% (never their characters):
+55. Style follows the Rick Master Guide (our own characters, Rick's construction): flat drawn round head, monoline dark outline 6-10 px @1080 in MS (8-13 px @1440), simple bean/stick body, one costume cue, head 30-39 % W in MS; camera motion median >= 4.5 (metrics.py diff), never a static camera > 1.5 s. [FIXED Nov 17 2026 (owner-approved Rick merge), see rules 182, 184. Was: "Style follows the references 100% (never their characters):"]
     - About 2.9 head-heights: big head, straight-sided garment with a flat hem, short stick legs.
     - Character outline about 6-8 px at 1080.
     - One pale near-white head tone with cool shading.
     - Motion (est.mjs): median 1.2-1.5 px/f at 180 w, p90 at most 3, no lunges. Big moves become soft dissolves.
 56. In a tight insert where a prop fills the frame, nobody peeks round it. Characters at a frame edge are fully in or clearly out for the whole move (check with p.mjs). Foreground decor must read as a thing. The subject sits in the upper 55% of the frame, never under the caption.
-57. Focus blur is used only indoors. Outdoor takes use cInf 1.5. Indoor close-ups use 2.5-3.5 when the set is detailed (the drawn detail must survive).
+57. Depth: FG/MG/BG layers in every shot; foreground elements blurred, aerial haze in far shots, rack focus to the clue indoors. Drawn detail on the acting plane stays sharp. [FIXED Nov 17 2026 (owner-approved Rick merge), see master guide e (Depth). Was: "Focus blur is used only indoors. Outdoor takes use cInf 1.5. Indoor close-ups use 2.5-3.5 when the set is detailed (the drawn detail must survive)."]
 58. Every handle, strap, string or loop joins the object it belongs to: draw it first, with its ends running into the body.
 59. A held prop reads against a clear background. No post, pole, lamp, edge or card crosses or touches its silhouette at any frame. Check with p.mjs over the whole shot.
 60. Soles sit exactly on the surface under them: sidewalk, porch, platform, or raised floor plus lift. Surfaces that meet are level or visibly stepped.
@@ -222,16 +222,16 @@ Apply these with rules 1-91 to every cartoon short. Check them on stills and on 
 
 ## Shots and story
 133. Every shot has a clear purpose the viewer gets in 1 second. If a shot's point can't be said in one line, cut it or redesign it (NYC 7 s front-of-bridge).
-134. No shot holds longer than about 4 s without new action or a camera move; crowd beats max 3 s (NYC staircase sat for 6 s or more).
+134. No SHOT holds longer than about 4 s without new action or a camera move (crowd beats max 3 s), AND the camera is never static for more than 1.5 s. [FIXED Nov 17 2026 (owner-approved Rick merge), see rule 182. Was: "No shot holds longer than about 4 s without new action or a camera move; crowd beats max 3 s (NYC staircase sat for 6 s or more)."]
 135. The picture matches the narration. When the VO names a new subject (for example the trend tie-in), the shot shows it or a clear stand-in, never an unrelated view (NYC League of Legends line).
 136. The camera never passes through walls, floors or railings, and never swings round through the lens. Check the camera path for distance to geometry and for degrees per frame before rendering.
-137. Shot changes follow the references and Chicago: bridged dissolves that match the same object in the same spot on screen. No sudden shifts or one-frame jumps (Munich 7 s).
+137. Shot changes follow Rick's measured join grammar (rules 180-181): dissolves 4-14 f (default 6-12 f) or fast joins <= 3 f (max 5), bridge object at the same screen spot on >= 50 % of dissolves, joins on phrase onsets, both shots moving. No sudden shifts or one-frame jumps. Chicago v21 is no longer the benchmark. [FIXED Nov 17 2026 (owner-approved Rick merge), see rules 180-181. Was: "Shot changes follow the references and Chicago: bridged dissolves that match the same object in the same spot on screen. No sudden shifts or one-frame jumps (Munich 7 s)."]
 138. Characters never overlap or pass through props or set pieces behind them (Munich 11 s, rule 76).
 139. Actions land where they are aimed: a stamp, brush or tool touches exactly the spot where its mark appears (Munich 37 s, rule 96).
 140. Gate 2 compares the video side by side with the references (rule 141 below). A video that only "passes the checklist" is not finished.
 
 ## Reference-first method (owner, Nov 14 2026)
-Rick's reference videos are the SOLE master guide for how our cartoon shorts look and move. The 140 rules are a safety net, not the method. Chicago v21 is the house benchmark for transitions and scene flow, because it is the one built closest to the references.
+Rick's reference videos are the SOLE master guide for how our cartoon shorts look and move. The rules are a safety net, not the method. Since Nov 17 2026 the written form of that guide is research/rick-style-spec/rick-master-guide.md (read RESUME.md first); it outranks every rule here. [FIXED Nov 17 2026: was "... Chicago v21 is the house benchmark for transitions and scene flow, because it is the one built closest to the references." Chicago v21 is no longer a benchmark (rule 137 fix).]
 
 ## Why NYC and Munich went wrong (my analysis)
 1. I built them as 3D worlds (a bridge, streets, a meadow) and checked them against the rulebook, not against the reference frames. The references use hand-painted flat backdrops on parallax cards, with 3D only for hero props. A modelled 3D bridge is exactly where the glitching textures, see-through decks, floating lamps and floating animals came from.
@@ -241,7 +241,7 @@ Rick's reference videos are the SOLE master guide for how our cartoon shorts loo
 5. The task prompts list the teardowns as "read if needed", 117 rules deep. The reference method got diluted by the checklist.
 
 ## The method from now on (rule 141, applies to every video)
-A. Before writing shot lists: open the reference teardowns (research/reference-teardown-dragon, research/reference-teardown-bell; private, never published) and Chicago v21. Pick for every planned shot the reference shot it is modelled on, and write that in the shot list ("shot 4 = dragon shot 9: painted backdrop, close-up prop, dissolve on the jar").
+A. Before writing shot lists: read RESUME.md, rick-master-guide.md, the gap-report ledger and RULES_CONSOLIDATED.md in full, then open the reference teardowns (research/reference-teardown-dragon, research/reference-teardown-bell; private, never published). [FIXED Nov 17 2026: Chicago v21 removed as a reference.] Pick for every planned shot the reference shot it is modelled on, and write that in the shot list ("shot 4 = dragon shot 9: painted backdrop, close-up prop, dissolve on the jar").
 B. Build each set the reference way: a painted flat backdrop plus 3D hero props. A big modelled structure (bridge, stadium, street) is only allowed when the reference does the same thing.
 C. Every still sheet and the final video get a side-by-side page: our frame next to the matched reference frame (kept private), with a one-line verdict on detail, grounding, faces and lighting.
 D. Before Gate 2, watch the full 2K video in motion (ffmpeg contact strips every 3 frames for each shot), not just still sheets. Check grounding, attachment, textures, the camera path and the picture matching the VO.
@@ -276,3 +276,27 @@ E. If a shot can't match its reference, redesign it. Don't ship it. Say so in th
 169. BUILDINGS SIT IN THE GROUND. A building's base goes below the terrain surface, into the snow or mound, never resting on top of a curved surface with gaps (Salzburg 0:47 chapel). check_float covers objects, so also look at the base line in a low-angle still.
 170. GENERAL NOTES FROM THE SCRAPPED DRESDEN (context; the owner gives direction separately): voice, music, characters unlike Rick's references, scene choice, transitions, and pacing that was too slow.
 171. RE-RECORDS KEEP THE ANIMATION. When a VO is re-recorded, warp every keyframe through an old-to-new word-time map (salwarp.py) instead of rebuilding the scene by hand. Re-run all checks afterwards.
+
+## Rules 172-191 (Rick Master Guide, owner approved Nov 17 2026; numbers 144-152 were never assigned)
+Source: research/rick-style-spec/rick-master-guide.md (private project folder; repo copy engine/cartoon-3d/rick-spec/master-guide/). The guide OUTRANKS every older rule. Evidence for each rule is in the guide section named in brackets.
+172. **Rick Master Guide is the build spec.** Every cartoon short is planned from rick-master-guide.md, and the 16-item pre-render checklist (phase4/04_rubric-and-test.md section D) must be all YES before a 2K render. (Guide k)
+173. **Script template.** Hook = strange act or impossible rule in sentence 1, from t = 0; then "You see," world rule; a doubter with one quoted mocking line; 2-3 escalations with time markers; reveal at 50-85 % of runtime; payoff on the last word. (Guide a1, a3, g)
+174. **No date-first or place-first openings, no "did you know".** Dates live inside the story. (Guide g)
+175. **Roles, not names.** "A young priest", "the king"; a real name at most once. (Guide g)
+176. **1-4 concrete numbers per script, never a list of statistics.** (Guide g)
+177. **No "[place], on your wall" tag line or any CTA.** The last line is the payoff. (Guide a19)
+178. **Poster ending.** The poster appears inside the payoff scene as an in-world object (framed on the wall of the final room, a shop window, a station board). The final camera move lands on it with the whole poster visible (border + bottom text) while the last line is spoken. The video ends <= 1.2 s after the last word starts. (Guide a20; owner approved Nov 17: poster INSIDE the payoff scene, no separate poster beat)
+179. **VO pace.** 3.4-4.1 words/s (target 3.75); <= 3 gaps over 0.8 s and none over 1.2 s; measured with word times before building scenes. (Guide a2, f)
+180. **Join grammar.** Every join is a dissolve of 4-14 f (default 6-12 f; 10-12 f quiet/night, 6-8 f busy/comic) or a fast join <= 3 f (push-through, FG wipe, punchline cut), max 5 fast joins. Never one fixed length for every join. (Guide a4, b)
+181. **Bridge objects.** >= 50 % of dissolves put a matching shape at the same screen spot (+-5 %); each join sits on a phrase onset; both shots moving. (Guide a6, b)
+182. **Camera never stops.** No static camera over 1.5 s; preview motion median >= 4.5 (rick-spec/metrics.py "diff"). (Guide a7)
+183. **Camera hits on nouns.** Eased moves arrive on the spoken noun within +-3 f; one crash push of about 9 f on the key word of the climax. (Guide a8)
+184. **Character construction.** Our own characters, built Rick's way: flat drawn round head with a dark monoline outline 6-10 px @1080 in MS, simple bean/stick body, one costume cue, drawn face; head 30-39 % W in MS. No shaded 3D figurine heads. Characters sit in lit 3D sets with contact shadows. (Guide a9, a10, c)
+185. **Faces act.** A face change every 0.3-2 s on screen; >= 10 distinct expressions per video; blinks 1-3 f; reaction cascades staggered 2-7 f; lips move only on quoted lines. (Guide a11, c)
+186. **Caption spec.** Heavy rounded sans (Montserrat Black), white #FFFFFF, black outline 4-6 px @1080 (5-8 px @1440), shadow +3 px; cap height 2.8 % H (54 px @1920, 72 px @2560); box bottom at 71.7 % H; centred; 1-3 words; numerals as digits; hard swap 0-3 f before the word; tracking 0, single line; above every dissolve. (Guide a12, a13, d)
+187. **Grade window.** Mean luma 0.33-0.56, saturation 0.37-0.66, p2 >= 0.05, p98 >= 0.84; palette flips across each time/mood join. (Guide a14, a15, e)
+188. **Mix and music.** Mix -14 LUFS, -2 dBTP, LRA <= 3.2; light plucked/mallet loop with a soft pulse, 80-160 BPM, constant about 20 dB under the VO from frame 0 to the end, no ducking or swells; SFX 8-12 dB over the bed on moves, impacts and the payoff. (Guide a17, a18, f) Owner taste (melodic house/UK garage, punchy bass) is honoured inside this: plucked melodic loop over a soft four-on-the-floor/sub pulse.
+189. **Facts in-world.** Facts appear on in-world props (signs, certificates, boards, labels), never as overlays, arrows or date cards. (Guide a16; agrees with decision 2A)
+190. **Rubric gate.** Before Gate 2, run rick-spec metrics.py, transitions.py, dissolve_curve.py and captions.py on the preview and report the 14 dimension scores next to Rick's pass lines; any dimension below its pass line is fixed before Gate 2. (Guide k)
+191. **Dynamic angles.** At least 4 of: low angle, high angle, top-down, macro/ECU of the hero prop, through-object framing, orbit, per video; no row of characters facing the camera in a frontal stage shot. (Guide e)
+Change log for this merge: CHECKLIST_CHANGELOG_2026-11-17.md. One consolidated list: RULES_CONSOLIDATED.md.

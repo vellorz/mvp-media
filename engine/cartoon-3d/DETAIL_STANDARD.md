@@ -1,4 +1,5 @@
 # Detail standard for cartoon-3d shorts (from the Nov 10 2026 reference teardown)
+> Nov 17 2026: the Rick Master Guide (research/rick-style-spec/rick-master-guide.md) OUTRANKS this file. Items that conflicted were fixed in place and marked [FIXED Nov 17 2026, Rick merge]; see CHECKLIST_CHANGELOG_2026-11-17.md.
 
 Owner, Nov 10 2026: "These videos are way more detailed than ours, so I want ours to become as detailed as theirs."
 Source: frame-by-frame study of one 65 s reference short (private; full notes and frame sheets live only in the project folder
@@ -10,9 +11,9 @@ re-checked when more references are studied; numbers marked (consistent) also ma
 Run `python3 engine/cartoon-3d/render/detail_metrics.py <video.mp4>` on the finished render and on stills while building.
 | Metric | Reference | Our week-03 average | Target for new shorts |
 |---|---|---|---|
-| Frame-to-frame change, median | 7.0 | 2.9 | >= 5.0 |
-| Edge density (drawn detail) | 34.6 % | 26 % | >= 32 %, and NOT from repeated tiles |
-| Mean saturation | 0.41 | 0.59 | 0.40-0.48 |
+| Frame-to-frame change, median | 7.0 | 2.9 | >= 5.0 (detail_metrics); rick-spec metrics.py diff >= 4.5 (rule 182) |
+| Edge density (drawn detail) | 34.6 % | 26 % | average >= 28 % on render/qa/edge.py (rule 72, owner Nov 12, critical) and 0.20-0.35 on rick-spec metrics.py; NOT from repeated tiles [FIXED Nov 17 2026, Rick merge] was >= 32 % |
+| Mean saturation | 0.41 | 0.59 | 0.37-0.66 (rule 187) [FIXED Nov 17 2026, Rick merge] was 0.40-0.48 |
 | Hard cuts | 1 (0 in the second reference) | 2-4 | <= 1 |
 | Shots | 27 in 65 s (19 in 59.5 s in the second) | ~14-18 | 19-28 per 60-70 s, see G2 |
 | Distinct sets | 12 | 4-6 | >= 8 |
@@ -33,9 +34,9 @@ D5. VISIBLE LIGHT SOURCES (1 video). Each set shows its light: sun disc with ray
 D6. SCENE PALETTES (1 video). Each set gets one dominant temperature plus one accent colour, greyed mid-tones, saturation only on accents.
     No pure #0000ff-type sky or uniform orange ground. Character skin and clothes are tinted by the scene light (lilac at night, pink at dusk).
     At least 4 lighting moods per short (e.g. noon, golden, night, interior lamp light); revisit a main set at a different time of day.
-D7. CHARACTER SIZE (consistent). In medium shots the head is 18-22 % of frame width and the body runs out of the bottom of frame.
+D7. CHARACTER SIZE [FIXED Nov 17 2026, Rick merge] (rule 184; was 18-22 %). In medium shots the head is 30-39 % of frame width (45-85 % in CU, 8-23 % in wides) and the body runs out of the bottom of frame.
     Characters are small only in deliberate extreme wides, which last under 3 s unless the camera is travelling.
-D8. ACTING (1 video). In any shot where a character is the subject: a new face every 8-15 frames while speaking or reacting, a blink every
+D8. ACTING (1 video). In any shot where a character is the subject: a face change every 0.3-2 s on screen with bursts for shock (rule 185 [FIXED Nov 17 2026, Rick merge]; was every 8-15 frames), a blink every
     0.5-2 s, one clear gesture on the key word of each sentence, and a body reaction (lean, squash, sweat drop, jump). Background people
     react too and change expression when the mood turns.
 D9. SHOW THE MECHANISM, DON'T LABEL IT (owner decision 2A). Explain with the object itself: cutaway, x-ray, cross-section, or camera inside
@@ -52,9 +53,9 @@ D14. Existing brand rules still win: poster whole at the end, captions style, no
 
 ## C. Camera and transition recipes (frames at 30 fps)
 T1. PUSH-TO-DETAIL: 10 f smootherstep from MS to ECU of the hero prop, motion blur on the middle 2-3 f. Use inside the first second.
-T2. WHIP ARC inside one set: 16-28 f, blur on the middle third, 3-4 f overshoot settle. Camera travels past a foreground prop. Check
+T2. WHIP ARC [FIXED Nov 17 2026, Rick merge]: Rick never uses whips as a default (guide b 'Never'); at most one, inside one set. Original: 16-28 f, blur on the middle third, 3-4 f overshoot settle. Camera travels past a foreground prop. Check
     rule 35/47 (nothing blocks the lens) on every frame of the move.
-T3. CROSS-DISSOLVE at place/time jumps: 4-6 f, begins 2-4 f before the first word of the new sentence, both shots keep moving through it.
+T3. CROSS-DISSOLVE at place/time jumps: 4-14 f, default 6-12 f (rule 180 [FIXED Nov 17 2026, Rick merge]; was 4-6 f), begins 2-4 f before the first word of the new sentence, both shots keep moving through it.
     Props of the incoming shot exist from its first blended frame (rule 46).
 T4. MATCH-MOVE DOOR: fill the frame with an object (cup, cloud, window, poster, wall), then pull out of / pass through it into the next
     scene. At least 2 per short. Best one goes to the final pivot into our poster.
@@ -78,17 +79,17 @@ T9. WORD SYNC: the physical event lands on the frame of its word (ball drops on 
 Q1. Run detail_metrics.py: all Section A targets met, or the miss is explained in the Gate 2 note.
 Q2. Stills sheet of every shot: count props (>= 20 wide / >= 6 close), confirm 3 layers, a visible light source, and that the lower third is not bare.
 Q3. Tile check: no facade/ground with more than 3 identical neighbouring elements.
-Q4. Character-size check on every MS: head >= 18 % of frame width.
-Q5. Acting check: step through each character shot at 2 f intervals; fewer than 2 face changes per second = fix.
+Q4. Character-size check on every MS: head 30-39 % of frame width (rule 184 [FIXED Nov 17 2026, Rick merge]; was >= 18 %).
+Q5. Acting check: step through each character shot at 2 f intervals; any on-screen character span over 2 s without a face change = fix (rule 185 [FIXED Nov 17 2026, Rick merge]; was fewer than 2 face changes per second).
 Q6. Transition census: list every shot change with its recipe (T1-T19); more than 1 hard cut, or more than 2 dissolves without a bridge object (T10), = rework.
-Q7. Saturation check per set: mean saturation 0.40-0.48; any large flat pure-colour area (sky, ground) = repaint.
+Q7. Saturation check per set: whole-video mean saturation 0.37-0.66 (rule 187 [FIXED Nov 17 2026, Rick merge]; was 0.40-0.48 per set); any large flat pure-colour area (sky, ground) = repaint.
 Q8. More props means more z-fight risk: re-run rule 43 (grass/ground flicker routine) and the heat-map scrub after dressing each set.
 
 ## F. Owner decisions, Nov 10 2026 (answered with side-by-side pictures; these override anything softer above)
 1A. Set dressing at full reference density: >= 20 props per wide shot, >= 6 per close-up. Not a reduced version.
 2A. No arrows and no date cards. Show the mechanism instead (rule D9). This retires the calendar-on-easel device used in week 03;
     checklist rules about easels/calendars/diagram arrows now only matter if the owner asks for one again.
-3A. Greyed scene palettes like the reference (rule D6, saturation 0.40-0.48), not the old vivid pure-colour look.
+3A. Greyed scene palettes like the reference (rule D6, saturation 0.37-0.66 per rule 187 [FIXED Nov 17 2026, Rick merge]), not the old vivid pure-colour look.
 4A. Characters big and constantly acting (rules D7, D8), not a calmer version.
 5A. Small invented sight gags are allowed (rule D10) as long as they never change or contradict the facts of the story.
 6A. BACKDROPS ARE HAND-DRAWN FLAT ART. Build each set as illustrated artwork (Canvas2D paintings with their own ink lines, drawn
@@ -120,7 +121,7 @@ What both teardowns agree on is a RULE. What only one does is a CHOICE that depe
 - Transition family. CORRECTED Nov 11 after the every-frame pass of the day story (section H): both references are carried by
   bridged cross-dissolves (T10). The day story has 1 hard cut, 2 joins made by a camera move inside one set, and about 18 shape-matched
   dissolves of 4-8 f; no whip pan was found. So bridged dissolves are the default for every short. Whips (T2) stay allowed inside one
-  set but are not what the reference does. Dissolve length is the story choice: 4-8 f for a busy or comic story, 7-12 f for a quiet one.
+  set but are not what the reference does. Dissolve length is the story choice: 6-8 f for a busy or comic story, 10-12 f for a quiet one, always within 4-14 f and varied (rule 180 [FIXED Nov 17 2026, Rick merge]).
 - Shot count. 22 takes in 65 s (day; 27 when its long takes are split by subject) against 19 in 59.5 s (night). The night story has four one-take shots of 5-8.5 s that visit
   3-5 subjects each. Target is now 19-28 shots, and a shot longer than 4 s must visit at least 3 subjects.
 - Saturation and edge density. Day 0.41 / 34.6 %. Night 0.52 / 28.1 %. Night scenes are two-colour pictures: a deep blue-violet world
@@ -137,7 +138,7 @@ What both teardowns agree on is a RULE. What only one does is a CHOICE that depe
 - Deadpan contrast: in a two-character shot one acts every 1-2 f while the other is frozen except blinks and eye darts.
 - Background characters react 1-2 f AFTER the lead's line, never on the same frame.
 - A quoted in-world phrase may be mouthed by the character (5 mouth shapes, each held 2-7 f, starting 3-4 f after the word).
-- Character outline is about twice the weight of the set outline (about 6-8 px against 3-4 px at 1080 wide), fills are flat.
+- Character outline is about twice the weight of the set outline (about 6-10 px against 2-4 px at 1080 wide, rule 184 [FIXED Nov 17 2026, Rick merge]), fills are flat.
   The scene's colour grade tints the card (skin goes lilac at night); the card is never left in its daylight colours.
 
 ### G4. Dissolve-family recipes (frames at 30 fps)

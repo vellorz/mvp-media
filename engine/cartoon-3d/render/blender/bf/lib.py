@@ -246,7 +246,7 @@ def ink(skip_prefix=()):
     C_H=col('HULL'); nh=0
     for o in list(bpy.data.objects):
         if o.type!='MESH' or C_NOI in o.users_collection or o.get('chr') or o.get('noink') or len(o.data.vertices)<=4 or o.name.startswith(skip_prefix): continue
-        t_=min(0.04,0.006+0.0045*math.sqrt(max(o.dimensions)))*o.get('inkmul',1.0)
+        t_=min(0.05,0.009+0.0062*math.sqrt(max(o.dimensions)))*o.get('inkmul',1.0)
         h=o.copy(); h.name=o.name+'_ink'; C_H.objects.link(h); h.parent=o; h.matrix_parent_inverse.identity(); h.location=(0,0,0); h.rotation_euler=(0,0,0); h.scale=(1,1,1)
         if h.animation_data: h.animation_data_clear()
         if o.animation_data and o.animation_data.action and any(fc.data_path=='hide_render' for fc in o.animation_data.action.fcurves):

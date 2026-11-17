@@ -144,7 +144,7 @@ def sidewalk(W=1024,H=1024,seed=52):
     base=(196,188,176); im=wash(W,H,base,0.07,seed); d=ImageDraw.Draw(im); r=random.Random(seed); S=170
     for j in range(H//S+1):
         for i in range(W//S+1):
-            jr(d,i*S,j*S,i*S+S,j*S+S,3,(130,124,116),i*13+j,fill=mul(base,r.uniform(0.92,1.06)))
+            jr(d,i*S,j*S,i*S+S,j*S+S,7,(104,98,90),i*13+j,fill=mul(base,r.uniform(0.9,1.08)))
             if r.random()<0.25: jl(d,[(i*S+r.uniform(10,80),j*S+10),(i*S+r.uniform(60,150),j*S+r.uniform(80,160))],2,(120,112,104),i+j)
     for _ in range(60): x,y=r.uniform(0,W),r.uniform(0,H); d.ellipse([x,y,x+8,y+8],fill=(150,144,138))
     for _ in range(10): x,y=r.uniform(0,W),r.uniform(0,H); d.polygon([(x,y),(x+26,y+8),(x+10,y+22)],fill=(190,120,50))  # leaves
@@ -159,7 +159,7 @@ def sky(name,top,bot,W=1024,H=2048,seed=17,clouds=7,cloud=(250,244,236)):
             ox,oy=r.uniform(-2.2,2.2)*s,r.uniform(-0.5,0.3)*s; rr=s*r.uniform(0.5,0.9)
             bd.ellipse([cx+ox-rr,cy+oy-rr,cx+ox+rr,cy+oy+rr*0.8],fill=cloud+(255,))
         im=Image.alpha_composite(im,blob)
-        e=blob.filter(ImageFilter.FIND_EDGES); im=Image.alpha_composite(im,Image.fromarray((np.asarray(e)*np.array([0,0,0,0.5])).astype(np.uint8)))
+        e=blob.split()[3].filter(ImageFilter.FIND_EDGES).filter(ImageFilter.MaxFilter(7)); ol=Image.new('RGBA',(W,H),(70,74,96,0)); ol.putalpha(e.point(lambda v:200 if v>40 else 0)); im=Image.alpha_composite(im,ol)
     im.convert('RGB').save(T+name+'.png')
 def skyline(name,era=1950,W=4096,H=1400,seed=19,night=False):
     im=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(im); r=random.Random(seed)
@@ -222,8 +222,8 @@ def newspaper(name,head,sub,year,size=1.0,W=1024,H=1400,seed=70):
     im.save(T+name+'.png')
 def ledger(name,state,W=1536,H=1024,seed=80):  # state 0: red entries only; 1..4: black total being written; 
     im=wash(W,H,(240,234,214),0.04,seed); d=ImageDraw.Draw(im); r=random.Random(seed)
-    for y in range(80,H,40): d.line([0,y,W,y],fill=(170,200,220),width=2)
-    for x in (120,W/2-40,W/2,W-260): d.line([x,0,x,H],fill=(220,140,140),width=3)
+    for y in range(80,H,40): d.line([0,y,W,y],fill=(110,150,190),width=4)
+    for x in (120,W/2-40,W/2,W-260): d.line([x,0,x,H],fill=(200,90,90),width=5)
     d.line([W/2-4,0,W/2-4,H],fill=(160,150,130),width=10)  # spine
     text(d,(W*0.25,40),'NOVEMBER',font(FS,40),(60,50,46)); text(d,(W*0.75,40),'FRIDAY',font(FS,40),(60,50,46))
     hand=font(FS,30)
@@ -242,15 +242,15 @@ def wallpaper(name,base,motif,W=1024,H=1024,seed=90):
     for j in range(0,H,128):
         for i in range(0,W,128):
             x=i+(64 if (j//128)%2 else 0); y=j
-            d.ellipse([x+40,y+40,x+88,y+88],outline=motif,width=4); d.line([x+64,y+20,x+64,y+108],fill=motif,width=3); d.line([x+20,y+64,x+108,y+64],fill=motif,width=3)
+            d.ellipse([x+34,y+34,x+94,y+94],outline=mul(motif,0.75),width=9); d.line([x+64,y+14,x+64,y+114],fill=mul(motif,0.75),width=7); d.line([x+14,y+64,x+114,y+64],fill=mul(motif,0.75),width=7)
     d.rectangle([0,H-260,W,H],fill=mul(base,0.6));
-    for x in range(0,W,128): jr(d,x+10,H-240,x+118,H-30,3,mul(base,0.4),x)
+    for x in range(0,W,128): jr(d,x+10,H-240,x+118,H-30,7,mul(base,0.3),x)
     d.rectangle([0,H-280,W,H-260],fill=mul(base,0.45)); strokes(im,500,mul(base,0.8),seed,6,22,2,40).save(T+name+'.png')
 def woodfloor(name='wood',W=1024,H=1024,seed=95,base=(150,100,62)):
     im=wash(W,H,base,0.06,seed); d=ImageDraw.Draw(im); r=random.Random(seed)
     for j in range(0,W,64):
-        c=mul(base,r.uniform(0.85,1.12)); d.rectangle([j,0,j+62,H],fill=c); jl(d,[(j,0),(j,H)],3,mul(base,0.5),j)
-        y=r.uniform(0,H); jl(d,[(j,y),(j+62,y)],3,mul(base,0.5),j+1)
+        c=mul(base,r.uniform(0.85,1.12)); d.rectangle([j,0,j+62,H],fill=c); jl(d,[(j,0),(j,H)],7,mul(base,0.38),j)
+        y=r.uniform(0,H); jl(d,[(j,y),(j+62,y)],6,mul(base,0.38),j+1)
         for k in range(4): yy=r.uniform(0,H); d.arc([j+10,yy,j+50,yy+80],200,340,fill=mul(base,0.7),width=2)
     im.save(T+name+'.png')
 def newsstand_sign(name,town):

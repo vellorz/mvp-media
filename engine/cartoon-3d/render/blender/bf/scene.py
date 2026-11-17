@@ -261,6 +261,19 @@ def gifts(n,c,k=4,seed=1):
         b=box(f'{n}_{j}',(c[0]+rr.uniform(-0.05,0.05),c[1]+rr.uniform(-0.05,0.05),z+s_*0.4),(s_,s_*0.9,s_*0.8),flat('gift%d'%sum(col_),lin(col_),0.5),bv=0.01)
         box(f'{n}_{j}r',(b.location.x,b.location.y,b.location.z),(s_*1.01,0.04,s_*0.81),flat('ribbon',lin((250,230,120)),0.4),bv=0)
         z+=s_*0.8
+def wallframe(n,c,w,h,tex,face='-Y',col=(60,44,34)):
+    ax={'-Y':(0,-1),'+X':(1,0),'-X':(-1,0)}[face]
+    box(n,(c[0]-ax[0]*0.02,c[1]-ax[1]*0.02,c[2]),((0.05 if ax[0] else w+0.08),(0.05 if ax[1] else w+0.08),h+0.08),flat('frame%d'%sum(col),lin(col),0.5),bv=0.01)
+    plane(n+'_pic',(c[0]+ax[0]*0.006,c[1]+ax[1]*0.006,c[2]),w,h,card_mat(tex+'_pic',tex,emit=0.2),face=face)
+def shelf_items(n,c,w,seed):
+    rr=random.Random(seed); x=c[0]-w/2+0.08
+    box(n,(c[0],c[1],c[2]),(w,0.28,0.04),flat('shelfwood',lin((100,66,42)),0.6),bv=0.01)
+    while x<c[0]+w/2-0.08:
+        k=rr.random(); hh=rr.uniform(0.18,0.3); ww=rr.uniform(0.05,0.1)
+        col_=rr.choice([(150,40,40),(40,70,120),(60,110,60),(200,170,90),(90,60,110),(220,210,190)])
+        if k<0.75: box(f'{n}_b{x:.2f}',(x+ww/2,c[1],c[2]+0.02+hh/2),(ww,0.22,hh),flat('bk%d'%sum(col_),lin(col_),0.6),bv=0.006)
+        else: cyl(f'{n}_j{x:.2f}',(x+0.06,c[1],c[2]+0.02+0.08),0.05,0.16,flat('jar%d'%sum(col_),lin(col_),0.4),v=14); ww=0.1
+        x+=ww+0.012
 # ======================= SET B: precinct (X=300) =======================
 BX=300
 room('prec',BX,9,7,3.6,'precinct','lino')
@@ -277,6 +290,10 @@ box('pbench',(BX-1.2,-1.6,0.24),(1.6,0.4,0.05),flat('deskwood',lin((110,70,44)))
 for sx in(-1,1): box(f'pbenchl{sx}',(BX-1.2+sx*0.7,-1.6,0.11),(0.06,0.36,0.22),INK,bv=0)
 plane('pwanted',(BX-2.4,3.49,2.0),0.5,0.65,card_mat('paper62s','paper62',emit=0.15))
 plane('pmap',(BX+3.2,3.49,2.1),1.1,0.75,card_mat('skyline50s','skyline50',emit=0.2))
+wallframe('pph1',(BX-3.6,3.48,2.35),0.5,0.4,'fac3'); wallframe('pph2',(BX-1.75,3.48,2.6),0.35,0.45,'paper66'); wallframe('pph3',(BX+1.75,3.48,2.65),0.4,0.3,'fac5')
+box('pcork',(BX+3.2,3.47,1.25),(1.0,0.04,0.6),flat('cork',lin((176,130,84)),0.8),bv=0.01)
+for j in range(5): plane(f'pnote{j}',(BX+2.82+j*0.19,3.445,1.25+0.12*((j%2)*2-1)),0.16,0.22,card_mat('town%d_n'%(j%4),'town%d'%(j%4),emit=0.15))
+shelf_items('pshelf',(BX-3.0,3.36,1.55),1.6,5)
 # board swaps: roster -> stamped (on "off" f574) -> chalk BLACK FRIDAY letter by letter (f606-628)
 BT=[(0,573),(574,605),(606,615),(616,621),(622,627),(628,END)]
 for b_,(a_,z_) in zip(boards,BT): vis(b_,[(a_,z_)])
@@ -310,6 +327,8 @@ plane('regtag',(CX+0.6,0.89,1.2),0.3,0.1,card_mat('banner_s','banner',emit=0.3))
 phone('ophone',(CX-0.6,0.8,0.78)); gifts('ogifts',(CX-2.4,1.8,0),k=5,seed=4); gifts('ogifts2',(CX+2.6,1.6,0),k=4,seed=8)
 plane('cal61',(CX-1.6,2.98,2.0),0.45,0.56,card_mat('cal61','cal61',emit=0.2))
 box('oshelf',(CX-1.6,2.8,1.25),(1.2,0.3,0.04),flat('deskwood',lin((110,70,44))),bv=0.01)
+wallframe('oph1',(CX-0.2,2.98,2.25),0.7,0.5,'fac6'); wallframe('oph2',(CX+0.75,2.98,2.3),0.35,0.45,'fac1'); wallframe('oph3',(CX-2.7,2.98,2.2),0.45,0.6,'dept50')
+shelf_items('oshelf2',(CX+2.7,2.855,1.4),1.0,9); coatrack('orack',(CX+3.0,2.5),hats=1)
 for j in range(5): box(f'obook{j}',(CX-2.05+j*0.2,2.8,1.4),(0.12,0.24,0.26+0.03*(j%2)),flat('book%d'%(j%3),lin([(150,40,40),(40,70,120),(60,110,60)][j%3]),0.6),bv=0.01)
 s='S06'; r=SH[s]
 ow=char('S06_owner','owner',s,(CX-0.15,1.5,0),r,'neutral',arms=('arm','arm'))
@@ -415,6 +434,7 @@ box('pc_base',(FX+0.55,1.05,0.86),(0.6,0.5,0.14),beige,bv=0.02); box('pc_mon',(F
 plane('pc_screen',(FX+0.55,0.885,1.18),0.38,0.29,card_mat('screen81','screen81',emit=1.2))
 box('pc_kb',(FX+0.5,0.7,0.8),(0.5,0.18,0.04),beige,bv=0.01)
 plane('cal81',(FX+1.7,2.98,1.9),0.45,0.56,card_mat('cal81','cal81',emit=0.2))
+wallframe('fph1',(FX+0.4,2.98,2.15),0.8,0.55,'fac81_2'); wallframe('fph2',(FX-0.55,2.98,2.25),0.36,0.48,'paper70'); shelf_items('fshelf',(FX+2.6,2.855,1.6),1.1,21)
 cabinet('fcab',(FX+2.8,2.6),h=1.0); sph('plant',(FX-2.8,2.4,1.25),0.45,flat('leafy',lin((60,120,60)),0.7),sc_=(1,1,1.2)); cyl('plantpot',(FX-2.8,2.4,0.4),0.3,0.8,flat('pot81',lin((190,90,60)),0.6),v=18,r2=0.24)
 shade=lamp('flamp',(FX-0.75,1.05,0.78))
 lm=flat('lampbulb81',lin((255,226,150)),0.4,emit=0.0); bulb=sph('flamp_bulb',(FX-0.75,1.01,1.17),0.05,lm)
@@ -428,6 +448,13 @@ for fc in lp.data.animation_data.action.fcurves:
 # the ledger (open book on the desk): page swaps red entries -> black entries -> black total
 LED_Z=0.786
 box('ledger_cover',(FX-0.05,0.85,0.775),(0.66,0.46,0.02),flat('ledgercover',lin((40,60,40)),0.6),bv=0.004)
+cyl('pencup',(FX-0.6,0.75,0.86),0.06,0.16,flat('pencup',lin((40,70,120)),0.5),v=16)
+for j in range(4): cyl(f'pencil{j}',(FX-0.6+0.015*(j-1.5),0.75,0.98),0.008,0.2,flat('pencil%d'%j,lin([(240,200,60),(196,30,30),(20,20,26),(40,110,60)][j]),0.5),v=8)
+cyl('mug81',(FX+0.15,0.55,0.83),0.05,0.1,flat('mug81',lin((200,60,50)),0.4),v=16)
+for j in range(4): box(f'paperstack{j}',(FX-0.55,1.0,0.785+0.006*j),(0.3,0.4,0.005),flat('newsprint',lin((236,230,214))),bv=0)
+box('stapler',(FX-0.25,1.16,0.81),(0.06,0.18,0.05),flat('stapler',lin((40,40,44)),0.4),bv=0.01)
+box('calc81',(FX+0.85,0.68,0.795),(0.16,0.2,0.03),beige,bv=0.005)
+for j in range(12): box(f'calckey{j}',(FX+0.8+0.035*(j%4),0.62+0.035*(j//4),0.812),(0.026,0.026,0.008),flat('key81',lin((60,60,64)),0.5),bv=0.002)
 ledgers=[plane(f'ledger{i}',(FX-0.05,0.85,LED_Z),0.62,0.413,card_mat(f'ledger{i}',f'ledger{i}',emit=0.3),horiz=True) for i in range(5)]
 LT=[(0,1300),(1301,1318),(1319,1334),(1335,1376),(1377,END)]
 for l_,(a_,z_) in zip(ledgers,LT): vis(l_,[(a_,z_)])
@@ -454,7 +481,7 @@ TIPX_R,TIPX_B=FX-0.05-0.31+0.62*0.1,FX-0.05-0.31+0.62*0.9
 strokes(hand_r,1262,1300,TIPX_R,0.85+0.12,TIPX_R+0.02,0.85-0.15); strokes(hand_b,1306,1346,TIPX_B,0.85+0.15,TIPX_B,0.85-0.15)
 vis(hand_r,[(1262,1302)]); vis(hand_b,[(1306,1348)])
 kloc(hand_r,1240,(TIPX_R+0.25,0.85-0.35,LED_Z+0.002)); kloc(hand_b,1350,(TIPX_B+0.25,0.85-0.4,LED_Z+0.002))
-path(s,[(1210,(FX-0.05,0.85,2.25),(FX-0.05,0.859,LED_Z)),(1282,(FX-0.12,0.85,1.55),(FX-0.12,0.861,LED_Z)),(1319,(FX+0.06,0.85,1.6),(FX+0.06,0.861,LED_Z)),(1359,(FX+0.02,0.85,1.45),(FX+0.02,0.862,LED_Z))])
+path(s,[(1210,(FX-0.05,0.85,2.25),(FX-0.05,0.859,LED_Z)),(1282,(FX-0.12,0.85,1.75),(FX-0.12,0.861,LED_Z)),(1319,(FX+0.06,0.85,1.8),(FX+0.06,0.861,LED_Z)),(1359,(FX+0.02,0.85,1.45),(FX+0.02,0.862,LED_Z))])
 # S14: ledger total turns the books from red to black, pull back and up to the exec's wink
 s='S14'; r=SH[s]
 x14=char('S14_exec','exec81',s,(FX-0.1,1.5,0),r,'smug',arms=('arm','arm_redpen'))
@@ -505,7 +532,7 @@ W16=[(i,1648,1700,(-1 if p[0]>HX else 1)*R.uniform(0.6,1.4),0.35) for i,p in enu
 ex=crowd(s,r,sp,['mullet','perm','kid','granny','shopper','tourist','mullet','perm','fanblue','kid'],41,walkers=W16); ALL+=ex
 for i,e in enumerate(ex): faces(e,[(1640+3*i,'shock'),(1652+2*i,list(e['F'])[0]),(1690+2*i,'happy')])
 path(s,[(1556,(HX+1.2,-9.5,1.9),(HX,1.0,2.4)),(1620,(HX+0.4,-8.2,1.7),(HX-0.5,1.0,2.0)),(1646,(HX-0.4,-7.4,1.6),(HX-1.6,1.0,1.9)),(1700,(HX-2.4,-6.0,1.55),(WX,WY,1.8)),
-        (1709,(WX+0.25,-1.7,PZ),(WX,WY+0.17,PZ)),(1727,(WX+0.1,-1.15,PZ),(WX,WY+0.17,PZ)),(END,(WX+0.02,-1.02,PZ),(WX,WY+0.17,PZ))])
+        (1709,(WX+0.35,-2.3,PZ+0.1),(WX,WY+0.17,PZ-0.05)),(1727,(WX+0.15,-1.85,PZ+0.05),(WX,WY+0.17,PZ-0.05)),(END,(WX+0.05,-1.72,PZ+0.04),(WX,WY+0.17,PZ-0.05))])
 # ======================= finish =======================
 for a in ALL: finish(a)
 world_and_sun()

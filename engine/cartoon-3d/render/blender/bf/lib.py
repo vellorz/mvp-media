@@ -1,0 +1,272 @@
+# Shared Blender helpers for the Black Friday short (Rick method: painted 3D sets + flat 2D cut-out cast)
+import bpy, bmesh, math, random, json
+from mathutils import Vector
+TX='/root/bf/tex/'
+sc=None; C_SET=None; C_NOI=None; MC={}; CHRC={}; CAM={}; TGT={}
+def init(end):
+    global sc,C_SET,C_NOI
+    bpy.ops.wm.read_factory_settings(use_empty=True)
+    sc=bpy.context.scene; sc.render.fps=30; sc.frame_start=0; sc.frame_end=end
+    C_SET=col('SET'); C_NOI=col('NOINK'); return sc
+def col(n,parent=None):
+    c=bpy.data.collections.new(n); (parent or bpy.context.scene.collection).children.link(c); return c
+def put(o,c):
+    if c in o.users_collection and len(o.users_collection)==1: return o
+    for cc in list(o.users_collection): cc.objects.unlink(o)
+    c.objects.link(o); return o
+def apply(o):
+    bpy.ops.object.select_all(action='DESELECT'); bpy.context.view_layer.objects.active=o; o.select_set(True)
+    bpy.ops.object.transform_apply(location=False,rotation=True,scale=True); o.select_set(False)
+def lin(c): return tuple((v/255)**2.2 for v in c)
+def nodes(m): m.use_nodes=True; return m.node_tree.nodes,m.node_tree.links
+# ---------------- materials ----------------
+def surf(name,img,tile,rough=0.85,rot=0.0,gen=False,emit=0.0):
+    """tiled painted texture, box projected. gen=True fits the image once over the object's bounding box."""
+    key=name
+    if key in MC: return MC[key]
+    m=bpy.data.materials.new(name); N,L=nodes(m); p=N['Principled BSDF']; p.inputs['Roughness'].default_value=rough
+    p.inputs['Specular IOR Level'].default_value=0.2
+    tc=N.new('ShaderNodeTexCoord'); mp=N.new('ShaderNodeMapping')
+    if gen: L.new(tc.outputs['Generated'],mp.inputs['Vector'])
+    else:
+        L.new(tc.outputs['Object'],mp.inputs['Vector']); mp.inputs['Scale'].default_value=(1/tile[0],1/tile[1],1/tile[1]); mp.inputs['Rotation'].default_value=(0,0,rot)
+    it=N.new('ShaderNodeTexImage'); it.image=bpy.data.images.load(TX+img+'.png',check_existing=True); it.projection='BOX'; it.projection_blend=0.1
+    L.new(mp.outputs['Vector'],it.inputs['Vector']); L.new(it.outputs['Color'],p.inputs['Base Color'])
+    if emit: L.new(it.outputs['Color'],p.inputs['Emission Color']); p.inputs['Emission Strength'].default_value=emit
+    MC[key]=m; return m
+def flat(name,rgb,rough=0.7,emit=0.0,metal=0.0):
+    if name in MC: return MC[name]
+    m=bpy.data.materials.new(name); N,L=nodes(m); p=N['Principled BSDF']
+    p.inputs['Base Color'].default_value=(*rgb,1); p.inputs['Roughness'].default_value=rough; p.inputs['Metallic'].default_value=metal
+    p.inputs['Specular IOR Level'].default_value=0.3
+    if emit: p.inputs['Emission Color'].default_value=(*rgb,1); p.inputs['Emission Strength'].default_value=emit
+    MC[name]=m; return m
+def card_mat(name,img,emit=0.3,rough=1.0):
+    if name in MC: return MC[name]
+    m=bpy.data.materials.new(name); N,L=nodes(m); p=N['Principled BSDF']; p.inputs['Roughness'].default_value=rough
+    p.inputs['Specular IOR Level'].default_value=0.0
+    it=N.new('ShaderNodeTexImage'); it.image=bpy.data.images.load(img if img.startswith('/') else TX+img+'.png',check_existing=True); it.interpolation='Cubic'
+    L.new(it.outputs['Color'],p.inputs['Base Color']); L.new(it.outputs['Alpha'],p.inputs['Alpha'])
+    if emit: L.new(it.outputs['Color'],p.inputs['Emission Color']); p.inputs['Emission Strength'].default_value=emit
+    MC[name]=m; return m
+# ---------------- geometry (bmesh, no operators: fast with thousands of objects) ----------------
+from mathutils import Matrix, Euler
+def _obj(n,bm,m,coll,smooth=False):
+    me=bpy.data.meshes.new(n); bm.to_mesh(me); bm.free()
+    if smooth:
+        for f in me.polygons: f.use_smooth=True
+    o=bpy.data.objects.new(n,me); (coll or C_SET).objects.link(o); me.materials.append(m); return o
+def box(n,c,s,m,coll=None,bv=0.03,seg=2):
+    bm=bmesh.new(); bmesh.ops.create_cube(bm,size=1.0); bmesh.ops.scale(bm,vec=Vector(s),verts=bm.verts)
+    o=_obj(n,bm,m,coll); o.location=c
+    if bv: b=o.modifiers.new('bv','BEVEL'); b.width=bv; b.segments=seg; b.limit_method='ANGLE'
+    return o
+def cyl(n,c,r,d,m,v=24,coll=None,r2=None,rot=(0,0,0)):
+    bm=bmesh.new(); bmesh.ops.create_cone(bm,cap_ends=True,cap_tris=False,segments=v,radius1=r,radius2=(r if r2 is None else r2),depth=d)
+    bmesh.ops.rotate(bm,cent=(0,0,0),matrix=Euler(rot).to_matrix(),verts=bm.verts)
+    o=_obj(n,bm,m,coll,smooth=v>12); o.location=c
+    if v>12:
+        try: o.data.set_sharp_from_angle(angle=math.radians(40))
+        except Exception: pass
+    return o
+def sph(n,c,r,m,sc_=(1,1,1),coll=None,seg=16):
+    bm=bmesh.new(); bmesh.ops.create_uvsphere(bm,u_segments=seg,v_segments=max(6,seg//2),radius=r)
+    bmesh.ops.scale(bm,vec=Vector(sc_),verts=bm.verts); o=_obj(n,bm,m,coll,smooth=True); o.location=c; return o
+FACING={'-Y':0.0,'+X':math.pi/2,'+Y':math.pi,'-X':-math.pi/2}
+def plane(n,c,w,h,m,coll=None,face='-Y',horiz=False):
+    """card whose front (readable side, UV upright) faces the given axis; horiz=True lies flat, image up = +Y"""
+    me=bpy.data.meshes.new(n); vs=[(-w/2,-h/2,0),(w/2,-h/2,0),(w/2,h/2,0),(-w/2,h/2,0)]
+    me.from_pydata(vs,[],[(0,1,2,3)]); uv=me.uv_layers.new(name='UVMap')
+    for i,co in enumerate([(0,0),(1,0),(1,1),(0,1)]): uv.data[i].uv=co
+    if not horiz: me.transform(Matrix.Rotation(FACING[face],4,'Z')@Matrix.Rotation(math.pi/2,4,'X'))
+    o=bpy.data.objects.new(n,me); (coll or C_SET).objects.link(o); me.materials.append(m); o.location=c; return o
+def vis(o,ranges):
+    """hide_render keyed so the object shows only inside the given frame ranges (merged, sorted)"""
+    rs=sorted([list(r) for r in ranges if r[1]>=r[0]]); M=[]
+    for a,b in rs:
+        if M and a<=M[-1][1]+1: M[-1][1]=max(M[-1][1],b)
+        else: M.append([a,b])
+    o.hide_render=True; o.keyframe_insert('hide_render',frame=-1)
+    for a,b in M:
+        o.hide_render=False; o.keyframe_insert('hide_render',frame=a)
+        o.hide_render=True; o.keyframe_insert('hide_render',frame=b+1)
+    for fc in o.animation_data.action.fcurves:
+        if fc.data_path=='hide_render':
+            for kp in fc.keyframe_points: kp.interpolation='CONSTANT'
+    o['vis']=json.dumps(M)
+def kloc(o,f,loc,interp=None):
+    o.location=loc; o.keyframe_insert('location',frame=f)
+def krot(o,f,rot): o.rotation_euler=rot; o.keyframe_insert('rotation_euler',frame=f)
+def kscale(o,f,s): o.scale=s; o.keyframe_insert('scale',frame=f)
+def linear(o):
+    if o.animation_data and o.animation_data.action:
+        for fc in o.animation_data.action.fcurves:
+            if fc.data_path!='hide_render':
+                for kp in fc.keyframe_points: kp.interpolation='LINEAR'
+def empty(n,loc=(0,0,0),parent=None,coll=None):
+    e=bpy.data.objects.new(n,None); (coll or C_SET).objects.link(e); e.location=loc
+    if parent: e.parent=parent
+    return e
+# ---------------- cameras ----------------
+def cam(n,lens,fs=5.6):
+    cd=bpy.data.cameras.new('cam_'+n); cd.lens=lens; cd.dof.use_dof=True; cd.dof.aperture_fstop=fs; cd.clip_start=0.05; cd.clip_end=800
+    co=bpy.data.objects.new('cam_'+n,cd); sc.collection.objects.link(co); tg=bpy.data.objects.new('tgt_'+n,None); sc.collection.objects.link(tg)
+    c=co.constraints.new('TRACK_TO'); c.target=tg; c.track_axis='TRACK_NEGATIVE_Z'; c.up_axis='UP_Y'; cd.dof.focus_object=tg
+    CAM[n]=co; TGT[n]=tg; return co,tg
+def path(n,keys):
+    """keys: (frame, cam_loc, target_loc[, lens])"""
+    co,tg=CAM[n],TGT[n]
+    for k in keys:
+        f,l,t=k[:3]; kloc(co,f,l); kloc(tg,f,t)
+        if len(k)>3: co.data.lens=k[3]; co.data.keyframe_insert('lens',frame=f)
+# ---------------- 2D cut-out cast ----------------
+CI=json.load(open('/root/bf/src/cast.json'))
+GEO={'tall':(1.01,0.17,0.97),'short':(0.92,0.19,0.88),'round':(0.99,0.21,0.84)}
+ARM_W,ARM_H,ARM_OFF=0.248,0.558,0.242
+SHADOW=None
+def chr_coll(shot):
+    if shot not in CHRC: CHRC[shot]=col('CHR_'+shot)
+    return CHRC[shot]
+def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=False,camname=None):
+    c=CI[kind]; top,shx,shz=GEO[c['body']]; C=chr_coll(shot)
+    root=empty(inst,loc,coll=C); root.scale=(scale,)*3
+    bb=root.constraints.new('LOCKED_TRACK'); bb.target=CAM[camname or shot]; bb.track_axis='TRACK_NEGATIVE_Y'; bb.lock_axis='LOCK_Z'
+    bodies={}
+    for key in (['body','bodyw1','bodyw2'] if walker else ['body']):
+        b=plane(f'{inst}_{key}',(0,0,0),0.8,1.1,card_mat(f'{kind}_{key}',f'{kind}_{key}'),coll=C); b.parent=root; b.location=(0,0,0.51); bodies[key]=b
+    hp=empty(inst+'_hp',(0,0,top),root,coll=C)
+    neck=plane(inst+'_head',(0,0,0),0.16,0.16,flat('skin',lin((252,246,236)),0.9),coll=C); neck.parent=hp; neck.location=(0,0.004,0.04)
+    F={}
+    for fk in c['faces']:
+        f=plane(f'{inst}_d_{fk}',(0,0,0),0.75,0.75,card_mat(f'{kind}_h_{fk}',f'{kind}_h_{fk}',emit=0.25),coll=C); f.parent=hp; f.location=(0,-0.012,0.2535); F[fk]=f
+    A={}
+    for sx,ak in zip((-1,1),arms):
+        ap=empty(f'{inst}_ap{sx}',(sx*shx,-0.018,shz),root,coll=C); A[sx]={'piv':ap,'cards':{}}
+        keys=[ak] if isinstance(ak,str) else sorted(set(k for _,k in ak))
+        for k in keys:
+            a=plane(f'{inst}_arm{sx}_{k}',(0,0,0),ARM_W,ARM_H,card_mat(f'{kind}_{k}',f'{kind}_{k}'),coll=C); a.parent=ap; a.location=(0,0,-ARM_OFF)
+            if sx<0: a.scale=(-1,1,1)   # mirror the left arm so props face outwards
+            A[sx]['cards'][k]=a
+        A[sx]['sched']=[(rng[0],ak)] if isinstance(ak,str) else ak
+    sh=plane(inst+'_shadow',(0,0,0),1.0,0.45,card_mat('shadowblob','shadow',emit=0.0),coll=C,horiz=True); sh.parent=root; sh.location=(0,0,0.004)
+    ch=dict(inst=inst,kind=kind,root=root,hp=hp,F=F,A=A,bodies=bodies,rng=rng,faces=[],walk=[],neck=neck,shadow=sh,top=top,shot=shot)
+    if face0: ch['faces'].append((rng[0],face0))
+    for sx in (-1,1): krot(A[sx]['piv'],rng[0],(0,math.radians(-8)*sx,0))
+    return ch
+def face(ch,f,k):
+    if k not in ch['F']:
+        alt={'shock':['horror','wow','raise'],'happy':['hope','cheer','excited','grin'],'cheer':['happy','excited'],'laugh':['happy','cheer'],'sad':['deadpan','worry'],'smug':['grin','happy']}.get(k,[])
+        k=next((a for a in alt if a in ch['F']),list(ch['F'])[0])
+    ch['faces'].append((f,k))
+def faces(ch,seq):
+    for f,k in seq: face(ch,f,k)
+def arm(ch,sx,f,deg): krot(ch['A'][sx]['piv'],f,(0,math.radians(deg)*sx,0))
+def bob(ch,frames,amt=7):
+    hp=ch['hp']
+    for f in frames:
+        krot(hp,f,(0,0,0)); krot(hp,f+3,(math.radians(-amt),0,math.radians(amt*0.4))); krot(hp,f+6,(math.radians(amt*0.4),0,math.radians(-amt*0.15))); krot(hp,f+9,(0,0,0))
+def walk(ch,f0,f1,p0,p1,step=4):
+    """root moves p0->p1 linearly; body card cycles stride poses so the feet step (rule 162)"""
+    r=ch['root']; kloc(r,f0,p0); kloc(r,f1,p1)
+    for fc in r.animation_data.action.fcurves:
+        if fc.data_path=='location':
+            for kp in fc.keyframe_points:
+                if kp.co[0] in (f0,f1): kp.interpolation='LINEAR'
+    ch['walk'].append((f0,f1,step))
+    for i,f in enumerate(range(f0,f1,step*2)):
+        for sx in (-1,1): krot(ch['A'][sx]['piv'],f,(0,math.radians(-(16 if (i%2)==(sx>0) else 2))*sx,0))
+def finish(ch,blink_every=34):
+    a,b=ch['rng']
+    # faces: sorted, inside range, auto blinks so no face holds longer than ~1.3 s (rule 185), exactly one per frame (rule 168)
+    seq=sorted(ch['faces'],key=lambda x:x[0]); seq=[(max(a,f),k) for f,k in seq if f<=b]
+    if not seq: seq=[(a,list(ch['F'])[0])]
+    seq[0]=(a,seq[0][1]); ded={}
+    for f,k in seq: ded[f]=k
+    seq=sorted(ded.items())
+    out=[]
+    for i,(f,k) in enumerate(seq):
+        nx=seq[i+1][0] if i+1<len(seq) else b+1
+        out.append((f,k)); t=f+blink_every
+        if 'blink' in ch['F'] and k!='blink':
+            while t+2<nx-6: out.append((t,'blink')); out.append((t+2,k)); t+=blink_every+((t//7)%9)
+    R={}
+    for i,(f,k) in enumerate(out):
+        nx=out[i+1][0] if i+1<len(out) else b+1
+        R.setdefault(k,[]).append((f,nx-1))
+    for k,o in ch['F'].items(): vis(o,R.get(k,[]))
+    ch['face_seq']=out
+    # bodies (stride poses while walking)
+    st={}
+    for f in range(a,b+1): st[f]='body'
+    for f0,f1,step in ch['walk']:
+        for f in range(f0,min(f1,b+1)):
+            ph=((f-f0)//step)%4; st[f]=['bodyw1','body','bodyw2','body'][ph]
+    BR={}
+    cur=None
+    for f in range(a,b+1):
+        if st[f]!=cur: BR.setdefault(st[f],[]).append([f,f]); cur=st[f]
+        else: BR[cur][-1][1]=f
+    for k,o in ch['bodies'].items(): vis(o,BR.get(k,[]))
+    vis(ch['neck'],[(a,b)]); vis(ch['shadow'],[(a,b)])
+    for sx in (-1,1):
+        s=sorted(ch['A'][sx]['sched']); AR={}
+        for i,(f,k) in enumerate(s):
+            nx=s[i+1][0] if i+1<len(s) else b+1
+            AR.setdefault(k,[]).append((max(a,f),nx-1))
+        for k,o in ch['A'][sx]['cards'].items(): vis(o,AR.get(k,[]))
+    for o in [ch['root']]+list(ch['root'].children_recursive):
+        o['chr']=ch['inst']
+    return ch
+def lipsync(ch,words,f0,f1,shapes=('talkA','talkB','talkC','talkD'),rest='talkD'):
+    """mouth shapes on the quoted words only (rule 185: lips move only on quoted lines)"""
+    seq=[]
+    for w,s,e in words:
+        fs,fe=int(round((s+0.1)*30)),int(round((e+0.1)*30))
+        if fs<f0 or fs>f1: continue
+        k=0
+        for f in range(fs,max(fs+3,fe),3): seq.append((f,shapes[k%3])); k+=1
+        seq.append((max(fs+3,fe),rest))
+    for f,k in seq: face(ch,f,k)
+# ---------------- ink: camera-only inverted hulls ----------------
+def ink(skip_prefix=()):
+    hm=bpy.data.materials.new('hull'); N,L=nodes(hm)
+    for n in list(N): N.remove(n)
+    geo=N.new('ShaderNodeNewGeometry'); tr=N.new('ShaderNodeBsdfTransparent'); em=N.new('ShaderNodeEmission'); em.inputs['Color'].default_value=(0.02,0.016,0.014,1)
+    mx=N.new('ShaderNodeMixShader'); out=N.new('ShaderNodeOutputMaterial')
+    L.new(geo.outputs['Backfacing'],mx.inputs['Fac']); L.new(em.outputs[0],mx.inputs[1]); L.new(tr.outputs[0],mx.inputs[2]); L.new(mx.outputs[0],out.inputs['Surface'])
+    ng=bpy.data.node_groups.new('hullGN','GeometryNodeTree')
+    ng.interface.new_socket('Geometry',in_out='INPUT',socket_type='NodeSocketGeometry'); ng.interface.new_socket('T',in_out='INPUT',socket_type='NodeSocketFloat')
+    ng.interface.new_socket('Geometry',in_out='OUTPUT',socket_type='NodeSocketGeometry')
+    gi=ng.nodes.new('NodeGroupInput'); go=ng.nodes.new('NodeGroupOutput'); nrm=ng.nodes.new('GeometryNodeInputNormal')
+    sca=ng.nodes.new('ShaderNodeVectorMath'); sca.operation='SCALE'; sp=ng.nodes.new('GeometryNodeSetPosition'); ff=ng.nodes.new('GeometryNodeFlipFaces')
+    sm=ng.nodes.new('GeometryNodeSetMaterial'); sm.inputs['Material'].default_value=hm
+    ng.links.new(nrm.outputs['Normal'],sca.inputs[0]); ng.links.new(gi.outputs['T'],sca.inputs['Scale'])
+    ng.links.new(gi.outputs['Geometry'],sp.inputs['Geometry']); ng.links.new(sca.outputs['Vector'],sp.inputs['Offset'])
+    ng.links.new(sp.outputs['Geometry'],ff.inputs['Mesh']); ng.links.new(ff.outputs['Mesh'],sm.inputs['Geometry']); ng.links.new(sm.outputs['Geometry'],go.inputs['Geometry'])
+    C_H=col('HULL'); nh=0
+    for o in list(bpy.data.objects):
+        if o.type!='MESH' or C_NOI in o.users_collection or o.get('chr') or o.get('noink') or len(o.data.vertices)<=4 or o.name.startswith(skip_prefix): continue
+        t_=min(0.04,0.006+0.0045*math.sqrt(max(o.dimensions)))*o.get('inkmul',1.0)
+        h=o.copy(); h.name=o.name+'_ink'; C_H.objects.link(h); h.parent=o; h.matrix_parent_inverse.identity(); h.location=(0,0,0); h.rotation_euler=(0,0,0); h.scale=(1,1,1)
+        if h.animation_data: h.animation_data_clear()
+        if o.animation_data and o.animation_data.action and any(fc.data_path=='hide_render' for fc in o.animation_data.action.fcurves):
+            for fc in [fc for fc in o.animation_data.action.fcurves if fc.data_path=='hide_render']:
+                for kp in fc.keyframe_points: h.hide_render=bool(kp.co[1]); h.keyframe_insert('hide_render',frame=int(kp.co[0]))
+            for fc in h.animation_data.action.fcurves:
+                for kp in fc.keyframe_points: kp.interpolation='CONSTANT'
+        else: h.hide_render=False
+        gm_=h.modifiers.new('hull','NODES'); gm_.node_group=ng; gm_[ng.interface.items_tree['T'].identifier]=t_/(max(o.matrix_world.to_scale()) or 1)
+        h.visible_shadow=False; h.visible_diffuse=False; h.visible_glossy=False; h.visible_transmission=False; h.visible_volume_scatter=False
+        if o.get('fly'): h['fly']=1
+        nh+=1
+    return nh
+def render_setup(pct=100,samples=8):
+    r=sc.render; r.engine='CYCLES'; r.resolution_x=1440; r.resolution_y=2560; r.resolution_percentage=pct
+    cy=sc.cycles; cy.device='CPU'; cy.samples=samples; cy.use_adaptive_sampling=True; cy.adaptive_threshold=0.03; cy.use_denoising=True; cy.denoiser='OPENIMAGEDENOISE'
+    cy.max_bounces=4; cy.diffuse_bounces=2; cy.glossy_bounces=1; cy.transmission_bounces=1; cy.transparent_max_bounces=16; cy.caustics_reflective=False; cy.caustics_refractive=False
+    r.use_persistent_data=True; sc.view_settings.view_transform='AgX'; sc.view_settings.look='AgX - Punchy'
+    sc.use_nodes=True; nt=sc.node_tree; N=nt.nodes; L=nt.links
+    for n in list(N): N.remove(n)
+    rl=N.new('CompositorNodeRLayers'); comp=N.new('CompositorNodeComposite'); gl=N.new('CompositorNodeGlare'); gl.glare_type='FOG_GLOW'; gl.threshold=0.9; gl.size=8; gl.mix=-0.75; gl.quality='LOW'
+    L.new(rl.outputs['Image'],gl.inputs['Image']); L.new(gl.outputs['Image'],comp.inputs['Image'])
+    r.image_settings.file_format='PNG'; r.image_settings.compression=30

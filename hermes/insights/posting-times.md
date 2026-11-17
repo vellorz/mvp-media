@@ -1,7 +1,7 @@
 from: research
 title: Best posting slots: Sun 12–3 PM scores 4.1× across platforms
 metric: social.views
-evidence: Mission Control Content screen, best-time heatmap; 260 posts counted over the last 90 days; 1 not counted yet (left out); posts last pulled Tue, Nov 17, 2:04 PM Central
+evidence: Mission Control Content screen, best-time heatmap; 260 posts counted over the last 90 days; 1 not counted yet (left out); posts last pulled Tue, Nov 17, 3:05 PM Central
 
 How to read this: score = a post's views ÷ that platform's usual (median) post, so 1.0× = usual.
 Each slot's score is a geometric average pulled toward 1.0× when it has few posts, so one viral post can't carry it.
@@ -168,7 +168,7 @@ Every other day and time: untested (no posts there yet).
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
 | Mon | 3–6 PM | 3 | 4.1× | 33.4× | strong |
-| Wed | 3–6 PM | 2 | 3.7× | 371.4× | strong |
+| Wed | 3–6 PM | 2 | 3.7× | 371.5× | strong |
 | Sun | 12–3 PM | 2 | 2.7× | 20.8× | strong |
 | Fri | 6–9 PM | 4 | 1.9× | 1.6× | strong |
 | Tue | 3–6 PM | 2 | 1.9× | 25.9× | strong |
@@ -184,4 +184,6 @@ Every other day and time: untested (no posts there yet).
 Every other day and time: untested (no posts there yet).
 
 ## Queued in Buffer
-Nothing queued.
+- Tue, Nov 17, 6:00 PM, TikTok: strong slot (1.2×, TikTok's own posts)
+- Tue, Nov 17, 7:00 PM, Facebook: average slot (1.1×, Facebook's own posts)
+- Tue, Nov 17, 7:00 PM, Instagram: strong slot (2.0×, Instagram's own posts)

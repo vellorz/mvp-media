@@ -20,8 +20,8 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 17, 7:02 PM | Instagram | 02_tue-nov17_salzburg_2k.mp4 (https://www.instagram.com/reel/Df3Ryocgi3f/) | 269 | 13.9 s | not recorded | — |
-| Nov 17, 7:01 PM | Facebook | 02_tue-nov17_salzburg_2k.mp4 (https://www.facebook.com/reel/1130134059778348/) | 170 | 5.8 s | 52.4 s | 11.1% |
+| Nov 17, 7:02 PM | Instagram | 02_tue-nov17_salzburg_2k.mp4 (https://www.instagram.com/reel/Df3Ryocgi3f/) | 354 | 13.9 s | not recorded | — |
+| Nov 17, 7:01 PM | Facebook | 02_tue-nov17_salzburg_2k.mp4 (https://www.facebook.com/reel/1130134059778348/) | 171 | 5.8 s | 52.4 s | 11.1% |
 | Nov 17, 6:05 PM | YouTube | Silent Night Was First Played on a Guitar / Salzburg Christmas History #shorts (https://www.youtube.com/watch?v=YJx9_loe8IE) | 1 | not available | 53.0 s | — |
 | Nov 17, 6:01 PM | TikTok | 02_tue-nov17_salzburg_2k.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7709294562371505421?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 4 | 6.2 s | not recorded | — |
 | Nov 16, 7:04 PM | Instagram | 01_mon-nov16_chicago_2k.mp4 (https://www.instagram.com/reel/Df0tHrDk1k6/) | 1585 | 33.1 s | not recorded | — |

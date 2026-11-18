@@ -11,24 +11,27 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Platform | Videos | Measured | Median watched | Median completion |
 |---|---|---|---|---|
-| TikTok | 28 | 14 | 4.1 s | 21.9% |
-| Instagram | 24 | 15 | 4.7 s | 26.8% |
-| Facebook | 24 | 24 | 2.6 s | 13.2% |
-| YouTube | 24 | 0 | not recorded | not recorded |
+| TikTok | 28 | 14 | 4.1 s | 22.1% |
+| Instagram | 25 | 15 | 4.7 s | 26.8% |
+| Facebook | 25 | 24 | 2.6 s | 13.2% |
+| YouTube | 25 | 0 | not recorded | not recorded |
 
 ## Each video
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 17, 6:01 PM | TikTok | 02_tue-nov17_salzburg_2k.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7709294562371505421) | not counted yet | not counted yet | not recorded | — |
+| Nov 17, 7:02 PM | Instagram | 02_tue-nov17_salzburg_2k.mp4 (https://www.instagram.com/reel/Df3Ryocgi3f/) | not counted yet | not counted yet | not recorded | — |
+| Nov 17, 7:01 PM | Facebook | 02_tue-nov17_salzburg_2k.mp4 (https://www.facebook.com/reel/1130134059778348/) | 0 | not recorded | not recorded | — |
+| Nov 17, 6:05 PM | YouTube | Silent Night Was First Played on a Guitar / Salzburg Christmas History #shorts (https://www.youtube.com/watch?v=YJx9_loe8IE) | 0 | not available | 53.0 s | — |
+| Nov 17, 6:01 PM | TikTok | 02_tue-nov17_salzburg_2k.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7709294562371505421?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 4 | 6.2 s | not recorded | — |
 | Nov 16, 7:04 PM | Instagram | 01_mon-nov16_chicago_2k.mp4 (https://www.instagram.com/reel/Df0tHrDk1k6/) | 1584 | 33.1 s | not recorded | — |
 | Nov 16, 7:02 PM | Facebook | 01_mon-nov16_chicago_2k.mp4 (https://www.facebook.com/reel/2210181876545203/) | 244 | 9.8 s | 73.3 s | 13.4% |
-| Nov 16, 6:05 PM | TikTok | 01_mon-nov16_chicago_2k.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7708924564255837454) | 132 | 46.8 s | not recorded | — |
+| Nov 16, 6:05 PM | TikTok | 01_mon-nov16_chicago_2k.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7708924564255837454?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 135 | 45.6 s | not recorded | — |
 | Nov 16, 4:03 PM | YouTube | Chicago Lifted a Hotel With the Guests Inside #shorts (https://www.youtube.com/watch?v=_L-TeeKM3n4) | 1196 | not available | 74.0 s | — |
 | Nov 15, 2:02 PM | YouTube | Oktoberfest Started as a Wedding Party #shorts (https://www.youtube.com/watch?v=7rM6Wx_lSc0) | 1332 | not available | 69.0 s | — |
 | Nov 15, 1:04 PM | Instagram | 07_sun-nov15_munich_post.mp4 (https://www.instagram.com/reel/DfxfHkxFNAt/) | 1570 | 24.7 s | not recorded | — |
 | Nov 15, 1:02 PM | Facebook | 07_sun-nov15_munich_post.mp4 (https://www.facebook.com/reel/29283033394650756/) | 495 | 6.6 s | 68.7 s | 9.6% |
-| Nov 15, 11:05 AM | TikTok | 07_sun-nov15_munich_post.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7708445003273555231) | 894 | 16.1 s | not recorded | — |
+| Nov 15, 11:05 AM | TikTok | 07_sun-nov15_munich_post.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7708445003273555231?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 894 | 16.1 s | not recorded | — |
 | Nov 13, 6:05 PM | YouTube | Why Greece Fears Tuesday the 13th, Not Friday #shorts (https://www.youtube.com/watch?v=zCNh2GtlnsM) | 1276 | not available | 75.0 s | — |
 | Nov 13, 6:01 PM | TikTok | 05_fri-nov13_istanbul_2k.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7707810271749868814?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 827 | 11.3 s | not recorded | — |
 | Nov 13, 2:46 PM | Instagram | 05_fri-nov13_istanbul_2k.mp4 (https://www.instagram.com/reel/DfshSHeCF-A/) | 138 | 12.8 s | not recorded | — |
@@ -47,7 +50,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1103 | not available | 67.0 s | — |
 | Nov 8, 7:02 PM | YouTube | The Copenhagen Harbour Where Fairy Tales Began #shorts (https://www.youtube.com/watch?v=6T8XoSWypVI) | 21 | not available | 17.0 s | — |
 | Nov 8, 7:02 PM | Instagram | 10_ronda.mp4 (https://www.instagram.com/reel/DfgGmeAFUxG/) | 20 | 2.9 s | 12.0 s | 24.2% |
-| Nov 8, 7:02 PM | TikTok | 6_copenhagen.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705970424198286606?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 70 | 3.8 s | 16.8 s | 22.3% |
+| Nov 8, 7:02 PM | TikTok | 6_copenhagen.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705970424198286606?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 70 | 3.8 s | 16.8 s | 22.8% |
 | Nov 8, 7:01 PM | Facebook | 6_copenhagen.mp4 (https://www.facebook.com/reel/2401251877350550/) | 97 | 2.0 s | 16.8 s | 11.9% |
 | Nov 8, 1:02 PM | Facebook | 10_ronda.mp4 (https://www.facebook.com/reel/1848171839696903/) | 159 | 3.8 s | 12.0 s | 31.7% |
 | Nov 8, 1:00 PM | YouTube | The bridge that took 34 years to build #shorts (https://www.youtube.com/watch?v=yQw5w6hFZSI) | 43 | not available | 13.0 s | — |

@@ -35,6 +35,32 @@ def text(d,xy,s,f,fill,anchor='mm',stroke=0,sf=INK): d.text(xy,s,font=f,fill=fil
 # ---------------- brick building facade with a shop front ----------------
 SHOPS=[('HATS',(150,40,40),(240,220,170)),('TOYS',(40,90,140),(250,220,90)),('DRUGS',(30,100,70),(240,240,230)),('DINER',(170,60,40),(250,240,200)),
        ('RADIO & TV',(60,60,90),(250,200,90)),('SHOES',(110,70,40),(245,230,190)),('BAKERY',(200,120,60),(255,245,220)),('JEWELERS',(40,40,40),(230,200,110))]
+def picto(d,cx,cy,kind,fg,bg):
+    K=INK; w=6
+    for sx in(-1,1):   # ornaments either side
+        x=cx+sx*300; d.ellipse([x-16,cy-16,x+16,cy+16],fill=fg,outline=K,width=4); d.line([x-sx*30,cy,x-sx*170,cy],fill=fg,width=8)
+        d.polygon([(x-sx*183,cy-12),(x-sx*196,cy),(x-sx*183,cy+12),(x-sx*170,cy)],fill=fg,outline=K)
+    if kind=='HATS':
+        d.ellipse([cx-90,cy+14,cx+90,cy+44],fill=fg,outline=K,width=w); d.rounded_rectangle([cx-52,cy-46,cx+52,cy+30],14,fill=fg,outline=K,width=w); d.rectangle([cx-50,cy+4,cx+50,cy+18],fill=bg,outline=K,width=4)
+    elif kind=='TOYS':   # toy soldier drum
+        d.rounded_rectangle([cx-56,cy-30,cx+56,cy+40],12,fill=fg,outline=K,width=w); d.line([cx-56,cy-14,cx+56,cy+24],fill=bg,width=7); d.line([cx-56,cy+24,cx+56,cy-14],fill=bg,width=7)
+        d.ellipse([cx-56,cy-44,cx+56,cy-16],fill=fg,outline=K,width=w); d.line([cx-30,cy-80,cx-6,cy-40],fill=K,width=8); d.line([cx+30,cy-80,cx+6,cy-40],fill=K,width=8)
+    elif kind=='DRUGS':  # mortar and pestle
+        d.chord([cx-74,cy-40,cx+74,cy+60],0,180,fill=fg,outline=K,width=w); d.rectangle([cx-80,cy+4,cx+80,cy+14],fill=fg,outline=K,width=4); d.line([cx+10,cy+6,cx+60,cy-60],fill=K,width=16); d.line([cx+10,cy+6,cx+60,cy-60],fill=fg,width=8)
+    elif kind=='DINER':  # steaming cup
+        d.rounded_rectangle([cx-50,cy-24,cx+40,cy+44],14,fill=fg,outline=K,width=w); d.arc([cx+20,cy-10,cx+70,cy+30],270,90,fill=K,width=10); d.ellipse([cx-80,cy+36,cx+70,cy+56],fill=fg,outline=K,width=5)
+        for k in(-24,0,24): d.arc([cx+k-14,cy-80,cx+k+14,cy-30],100,260,fill=fg,width=7)
+    elif kind=='RADIO & TV':
+        d.rounded_rectangle([cx-80,cy-44,cx+80,cy+46],16,fill=fg,outline=K,width=w); d.rounded_rectangle([cx-62,cy-30,cx+20,cy+32],10,fill=bg,outline=K,width=5)
+        for k in range(2): d.ellipse([cx+34,cy-26+k*36,cx+62,cy+2+k*36],fill=bg,outline=K,width=4)
+        d.line([cx-20,cy-44,cx-50,cy-80],fill=K,width=6); d.line([cx+10,cy-44,cx+40,cy-80],fill=K,width=6)
+    elif kind=='SHOES':
+        d.polygon([(cx-80,cy+40),(cx-80,cy-40),(cx-30,cy-40),(cx-20,cy),(cx+70,cy+10),(cx+86,cy+40)],fill=fg,outline=K); d.line([cx-80,cy+30,cx+86,cy+30],fill=K,width=7)
+    elif kind=='BAKERY':  # cake with candle
+        d.rounded_rectangle([cx-76,cy-6,cx+76,cy+46],10,fill=fg,outline=K,width=w); d.rounded_rectangle([cx-56,cy-40,cx+56,cy-6],10,fill=fg,outline=K,width=w); d.line([cx-76,cy+16,cx+76,cy+16],fill=bg,width=7)
+        d.rectangle([cx-6,cy-74,cx+6,cy-40],fill=bg,outline=K,width=3); d.ellipse([cx-9,cy-96,cx+9,cy-74],fill=(250,200,60),outline=K,width=3)
+    elif kind=='JEWELERS':  # diamond
+        d.polygon([(cx-70,cy-20),(cx-40,cy-50),(cx+40,cy-50),(cx+70,cy-20),(cx,cy+52)],fill=fg,outline=K); d.line([cx-70,cy-20,cx+70,cy-20],fill=K,width=5); d.line([cx-40,cy-50,cx-20,cy-20,cx,cy+52],fill=K,width=4); d.line([cx+40,cy-50,cx+20,cy-20,cx,cy+52],fill=K,width=4)
 def facade(name,wall,shop,seed,W=1024,H=1536,floors=3,cols=3,era=1950,xmas=True):
     r=random.Random(seed); im=wash(W,H,wall,0.08,seed,0.06); d=ImageDraw.Draw(im)
     # bricks
@@ -72,7 +98,7 @@ def facade(name,wall,shop,seed,W=1024,H=1536,floors=3,cols=3,era=1950,xmas=True)
     d.rectangle([0,top,W,H],fill=mul(sc_,0.9)); jl(d,[(0,top),(W,top)],4,seed=seed+1)
     d.rectangle([30,top+20,W-30,top+130],fill=sc_); jr(d,30,top+20,W-30,top+130,4,seed=seed+2)
     fsz=96 if len(sname)<8 else 70
-    text(d,(W/2,top+76),sname,font(FS,fsz),sfg,stroke=3)
+    picto(d,W/2,top+75,sname,sfg,sc_)   # round 3 (rule 197): pictogram trade sign instead of a word, so a cropped sign never shows broken lettering
     # windows + door
     dw=170; dx=W/2-dw/2
     for (a,b) in [(40,dx-20),(dx+dw+20,W-40)]:
@@ -114,7 +140,11 @@ def dept_store(name,era=1950,W=2048,H=1536,seed=40,banner=None):
             d.rectangle([x0-10,y0+200,x0+160,y0+214],fill=mul(wall,1.15))
     # name band
     d.rectangle([0,top-120,W,top-10],fill=(30,60,50)); jr(d,0,top-120,W,top-10,4)
-    text(d,(W/2,top-64),'HARTWELL & SONS' if era<1970 else 'HARTWELL\'S',font(FS,84),(236,206,120),stroke=2)
+    # round 3 (rule 197): no lettering on the high name band (it is always cropped by the frame top); a gilt crest + scrollwork instead
+    cx_,cy_=W//2,top-64; gold=(236,206,120)
+    d.ellipse([cx_-44,cy_-44,cx_+44,cy_+44],fill=gold,outline=INK,width=6); d.ellipse([cx_-26,cy_-26,cx_+26,cy_+26],outline=INK,width=5)
+    for sx in(-1,1):
+        for k in range(6): xx=cx_+sx*(90+k*150); d.arc([xx-60,cy_-30,xx+60,cy_+30],0 if k%2 else 180,180 if k%2 else 360,fill=gold,width=8)
     # ground floor display windows (big)
     for c in range(4):
         x0=40+c*510; y0w,y1w=top+20,H-70
@@ -124,13 +154,20 @@ def dept_store(name,era=1950,W=2048,H=1536,seed=40,banner=None):
         for m in range(2):                                               # two mannequins in holiday coats
             mx=x0+110+m*200; mc=[(40,90,60),(160,40,40),(60,80,150),(200,150,40)][(c+m)%4]
             d.polygon([(mx-60,y1w-150),(mx+60,y1w-150),(mx+35,y1w-470),(mx-35,y1w-470)],fill=mc,outline=INK); d.line([(mx-60,y1w-150),(mx-35,y1w-470)],fill=INK,width=6); d.line([(mx+60,y1w-150),(mx+35,y1w-470)],fill=INK,width=6)
-            d.ellipse([mx-38,y1w-560,mx+38,y1w-470],fill=(240,232,220),outline=INK,width=6)
-            d.rectangle([mx-44,y1w-580,mx+44,y1w-560],fill=INK)
+            # headless dress form (a painted head reads as an extra face, rule 204): collar, neck post and knob
+            d.rectangle([mx-8,y1w-520,mx+8,y1w-470],fill=(120,90,60),outline=INK,width=4); d.ellipse([mx-16,y1w-540,mx+16,y1w-510],fill=(120,90,60),outline=INK,width=5)
+            d.polygon([(mx-35,y1w-470),(mx,y1w-430),(mx+35,y1w-470)],fill=mul(mc,0.7),outline=INK)
+            for bb in range(3): d.ellipse([mx-7,y1w-420+bb*60,mx+7,y1w-406+bb*60],fill=(240,220,150),outline=INK,width=3)
         for g in range(4):                                               # gift stack
             gx=x0+20+(g%2)*60+(c*37)%120; gy=y1w-150-(g//2)*70; gc=[(200,40,40),(40,110,70),(250,200,60),(60,90,170)][(g+c)%4]
             d.rectangle([gx,gy-64,gx+70,gy],fill=gc,outline=INK,width=5); d.line([gx+35,gy-64,gx+35,gy],fill=(250,240,220),width=7)
         tx=x0+380; d.polygon([(tx,y1w-520),(tx-50,y1w-150),(tx+50,y1w-150)],fill=(40,110,60),outline=INK); d.ellipse([tx-10,y1w-540,tx+10,y1w-515],fill=(250,200,60))
         for k in range(3): d.line([x0+60+k*140,y0w+20,x0+200+k*140,y0w+300],fill=(255,250,240),width=10)   # glass glints
+        # garland swag with baubles across the window top
+        for k in range(4):
+            gx0=x0+k*108; d.arc([gx0,y0w-10,gx0+108,y0w+80],10,170,fill=(40,100,56),width=16)
+            d.ellipse([gx0+46,y0w+62,gx0+64,y0w+80],fill=[(200,40,40),(250,200,60)][k%2],outline=INK,width=3)
+        for k in range(5): d.ellipse([x0+k*107-10,y0w+10,x0+k*107+10,y0w+30],fill=(200,40,40),outline=INK,width=3)
         jr(d,x0,y0w,x0+430,y1w,6,seed=c)
         d.rectangle([x0,top+20,x0+430,top+70],fill=(160,40,40) if era<1970 else (30,30,30)); 
         for k in range(0,430,40): d.polygon([(x0+k,top+70),(x0+k+40,top+70),(x0+k+20,top+100)],fill=(160,40,40) if era<1970 else (30,30,30))
@@ -239,28 +276,54 @@ def ledger(name,state,W=1536,H=1024,seed=80,figs=True):  # state 0: red entries 
     for y in range(80,H,40): d.line([0,y,W,y],fill=(110,150,190),width=4)
     for x in (120,W/2-40,W/2,W-260): d.line([x,0,x,H],fill=(200,90,90),width=5)
     d.line([W/2-4,0,W/2-4,H],fill=(160,150,130),width=10)  # spine
-    text(d,(W*0.25,40),'NOVEMBER',font(FS,40),(60,50,46)); text(d,(W*0.75,40),'FRIDAY',font(FS,40),(60,50,46))
+    text(d,(W/2-150,40),'NOVEMBER',font(FS,40),(60,50,46)); text(d,(W*0.75,40),'FRIDAY',font(FS,40),(60,50,46))
     hand=font(FS,30)
+    # round 3 (rule 198): every column adds up to its total. red 18 rows = (9,410.00); black 18 rows = + 18,240.00
+    def column(total,lo,hi,n,seed_):
+        rr=random.Random(seed_); v=[rr.randint(lo*100,hi*100) for _ in range(n-1)]; v.append(int(round(total*100))-sum(v)); return [x/100 for x in v]
+    RED=column(9410.00,180,820,18,seed+1); BLK=column(18240.00,520,1500,18,seed+2)
+    assert abs(sum(RED)-9410.00)<0.001 and abs(sum(BLK)-18240.00)<0.001 and min(RED)>0 and min(BLK)>0
     for k in range(18):
         y=100+k*40
-        d.text((140,y),r.choice(['rent','wages','stock','coal','lights','window','ads','tax','freight']),font=hand,fill=(50,46,60))
-        fig=f'({r.randint(12,980)}.{r.randint(10,99)})'
-        if figs: d.text((W/2-200,y),fig,font=hand,fill=(196,30,30))
+        if figs: d.text((W/2-200,y),f'({RED[k]:,.2f})',font=hand,fill=(196,30,30))
     for k in range(int(state*4.5)):
-        y=100+k*40; d.text((W/2+40,y),r.choice(['sales','gifts','toys','coats','hats']),font=hand,fill=(50,46,60)); d.text((W-240,y),f'{r.randint(200,4000)}.{r.randint(10,99)}',font=hand,fill=(20,20,26))
+        y=100+k*40; d.text((W/2+40,y),r.choice(['sales','gifts','toys','coats','hats']),font=hand,fill=(50,46,60)); d.text((W-240,y),f'{BLK[k]:,.2f}',font=hand,fill=(20,20,26))
     if state>=4:
         d.line([W/2+40,H-120,W-60,H-120],fill=(20,20,26),width=5); d.text((W/2+60,H-100),'TOTAL',font=font(FS,44),fill=(20,20,26)); d.text((W-330,H-100),'+ 18,240.00',font=font(FS,44),fill=(20,20,26))
-    d.line([140,H-120,W/2-60,H-120],fill=(196,30,30),width=5); d.text((150,H-100),'TOTAL',font=font(FS,44),fill=(196,30,30)); d.text((W/2-330,H-100),'(9,410.00)',font=font(FS,44),fill=(196,30,30)) if figs else None
+    d.line([140,H-120,W/2-60,H-120],fill=(196,30,30),width=5); d.text((W/2-330,H-100),'(9,410.00)',font=font(FS,44),fill=(196,30,30)) if figs else None
     im.save(T+name+'.png')
+def fleur(d,x,y,c,ink,k=1.0):
+    # fleur-de-lis: pointed centre petal, two outward-curling side petals, band, small foot (ink-outlined)
+    s=lambda v:v*k
+    cp=[(x,y-s(50))]+[(x+s(15)*math.sin(t*math.pi),y-s(50)+s(62)*t) for t in [i/8 for i in range(1,9)]][::1]
+    cp=[(x,y-s(50))]+[(x+s(16)*math.sin(math.pi*t)**0.8,y-s(50)+s(64)*t) for t in [i/10 for i in range(1,11)]]+[(x-s(16)*math.sin(math.pi*t)**0.8,y-s(50)+s(64)*t) for t in [i/10 for i in range(9,0,-1)]]
+    d.polygon(cp,fill=c,outline=ink)
+    for sx in(-1,1):
+        pts=[]
+        for i in range(13):
+            t=i/12; a=math.pi*(0.15+1.15*t); r=s(22)*(1-0.45*t)
+            pts.append((x+sx*(s(14)+r*math.sin(a)*1.0+s(10)*t), y+s(4)-r*math.cos(a)))
+        pts2=[(px-sx*s(7)*(1-i/12),py+s(4)*(1-i/12)) for i,(px,py) in enumerate(pts)][::-1]
+        d.polygon(pts+pts2,fill=c,outline=ink)
+    d.rounded_rectangle([x-s(22),y+s(14),x+s(22),y+s(22)],s(3),fill=c,outline=ink)
+    d.polygon([(x-s(9),y+s(22)),(x+s(9),y+s(22)),(x,y+s(38))],fill=c,outline=ink)
 def wallpaper(name,base,motif,W=1024,H=1024,seed=90):
-    im=wash(W,H,base,0.05,seed); d=ImageDraw.Draw(im)
-    for j in range(0,H,128):
-        for i in range(0,W,128):
-            x=i+(64 if (j//128)%2 else 0); y=j
-            d.ellipse([x+34,y+34,x+94,y+94],outline=mul(motif,0.75),width=9); d.line([x+64,y+14,x+64,y+114],fill=mul(motif,0.75),width=7); d.line([x+14,y+64,x+114,y+64],fill=mul(motif,0.75),width=7)
-    d.rectangle([0,H-260,W,H],fill=mul(base,0.6));
-    for x in range(0,W,128): jr(d,x+10,H-240,x+118,H-30,7,mul(base,0.3),x)
-    d.rectangle([0,H-280,W,H-260],fill=mul(base,0.45)); strokes(im,500,mul(base,0.8),seed,6,22,2,40).save(T+name+'.png')
+    im=wash(W,H,base,0.05,seed); d=ImageDraw.Draw(im); ink=mul(base,0.42)
+    for i in range(-H,W+H,128):
+        d.line([i,0,i+H,H],fill=mul(base,0.9),width=3); d.line([i,0,i-H,H],fill=mul(base,0.9),width=3)
+    for j in range(0,H-300,128):
+        for i in range(-64,W+64,128):
+            x=i+64+(64 if (j//128)%2 else 0); y=j+70
+            fleur(d,x,y,mul(motif,0.92),ink,1.0)
+            d.ellipse([x-64-4,y-64-4,x-64+4,y-64+4],fill=mul(motif,0.8))
+    # wainscot: panels with ink frames, chair rail, skirting
+    d.rectangle([0,H-260,W,H],fill=mul(base,0.6))
+    for x in range(0,W,128): jr(d,x+10,H-240,x+118,H-30,6,mul(base,0.3),x); jl(d,[(x+18,H-232),(x+110,H-232)],3,mul(base,0.82),x+3)
+    d.rectangle([0,H-284,W,H-260],fill=mul(base,0.45)); jl(d,[(0,H-284),(W,H-284)],5,mul(base,0.25),7); jl(d,[(0,H-260),(W,H-260)],4,mul(base,0.25),8)
+    im=strokes(im,700,mul(base,0.8),seed,6,22,2,40)
+    # soft top-down light falloff
+    g=np.linspace(1.04,0.86,H)[:,None,None]; im=Image.fromarray(np.clip(np.asarray(im,np.float32)*g,0,255).astype(np.uint8))
+    im.save(T+name+'.png')
 def woodfloor(name='wood',W=1024,H=1024,seed=95,base=(150,100,62)):
     im=wash(W,H,base,0.06,seed); d=ImageDraw.Draw(im); r=random.Random(seed)
     for j in range(0,W,64):

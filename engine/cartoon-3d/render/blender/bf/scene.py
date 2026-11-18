@@ -12,7 +12,7 @@ SH={'S01':(0,170),'S02':(163,297),'S03':(292,432),'S04':(426,528),'S05':(520,652
     'S09':(931,1013),'S10':(1008,1057),'S11':(1051,1125),'S12':(1114,1218),'S13':(1210,1359),'S14':(1352,1487),'S15':(1481,1565),'S16':(1556,END)}
 sc['shots']=json.dumps(SH)
 LENS={'S01':30,'S02':28,'S03':32,'S04':30,'S05':30,'S06':37,'S07':28,'S08':28,'S09':26,'S10':40,'S11':36,'S12':42,'S13':38,'S14':34,'S15':34,'S16':30}
-FSTOP={'S01':1.4,'S02':5.6,'S03':1.2,'S04':1.4,'S05':0.9,'S06':0.9,'S07':1.0,'S08':1.2,'S09':1.0,'S10':1.6,'S11':1.2,'S12':0.9,'S13':2.2,'S14':1.0,'S15':0.9,'S16':1.6}
+FSTOP={'S01':1.4,'S02':5.6,'S03':1.2,'S04':1.4,'S05':0.9,'S06':0.9,'S07':0.55,'S08':1.2,'S09':0.7,'S10':1.6,'S11':0.6,'S12':0.9,'S13':2.2,'S14':1.0,'S15':0.9,'S16':1.6}
 for n in SH: cam(n,LENS[n],FSTOP[n])
 STAGE=os.environ.get('STAGE','all')
 # ======================= shared props =======================
@@ -233,6 +233,7 @@ def room(n,cx,w,d,h,wall,floor,ftile=(2.5,2.5),wtile=(4,4)):
     box(n+'_crown',(cx,d/2-0.02,h-0.1),(w,0.1,0.18),flat(n+'_skirt',lin((60,44,34))),bv=0.01)
     box(n+'_ceil',(cx,0.5,h+0.1),(w+0.6,d+1,0.2),flat(n+'_ceilm',lin((226,220,204)),0.9),bv=0)
     for j in range(2): cyl(f'{n}_light{j}',(cx+(j-0.5)*w*0.4,0.4,h-0.06),0.28,0.12,flat('ceillamp',lin((255,240,210)),0.5,emit=4.0),v=20)
+    for j in range(2): glow(f'{n}_lglow{j}',(cx+(j-0.5)*w*0.4,0.1,h-0.2),1.3,(255,232,190),1.4)
 def desk(n,c,w=1.8,d=0.8,h=0.78,m=None):
     m=m or flat('deskwood',lin((110,70,44)),0.5)
     box(n+'_top',(c[0],c[1],h-0.03),(w,d,0.06),m,bv=0.015)
@@ -245,9 +246,34 @@ def desk(n,c,w=1.8,d=0.8,h=0.78,m=None):
 def phone(n,c):
     k=flat('bakelite',lin((24,22,22)),0.3); box(n,(c[0],c[1],c[2]+0.05),(0.22,0.24,0.1),k,bv=0.03); box(n+'_h',(c[0],c[1],c[2]+0.13),(0.26,0.07,0.06),k,bv=0.025)
     cyl(n+'_dial',(c[0],c[1]-0.05,c[2]+0.105),0.06,0.012,flat('dial',lin((230,226,214)),0.4),v=16,rot=(math.radians(20),0,0))
+def glow(n,c,size,rgb,strength,face='-Y',coll=None,img='glow',on=None):
+    """in-world bloom: camera-side additive glow card (rule L8: emitters get a glow + light pool), never post bloom over faces"""
+    key=f'glowm_{img}_{rgb}_{strength}'
+    m=bpy.data.materials.get(key)
+    if not m:
+        m=bpy.data.materials.new(key); N,Lk=L.nodes(m)
+        for x in list(N): N.remove(x)
+        o=N.new('ShaderNodeOutputMaterial'); it=N.new('ShaderNodeTexImage'); it.image=bpy.data.images.load(L.TX+img+'.png',check_existing=True)
+        em=N.new('ShaderNodeEmission'); em.inputs['Color'].default_value=(*lin(rgb),1); em.inputs['Strength'].default_value=strength
+        tr=N.new('ShaderNodeBsdfTransparent'); ad=N.new('ShaderNodeAddShader'); mx=N.new('ShaderNodeMixShader')
+        Lk.new(it.outputs['Alpha'],mx.inputs['Fac']); Lk.new(tr.outputs[0],mx.inputs[1]); Lk.new(em.outputs[0],ad.inputs[0]); Lk.new(tr.outputs[0],ad.inputs[1]); Lk.new(ad.outputs[0],mx.inputs[2]); Lk.new(mx.outputs[0],o.inputs['Surface'])
+    g=plane(n,c,size,size if img=='glow' else size*2.2,m,coll=coll,face=face); g['noink']=1; g.visible_shadow=False; g.visible_diffuse=False; g.visible_glossy=False
+    if on is not None: L.vis(g,[on])
+    return g
+def pool(n,c,w,h,coll=None,on=None):
+    m=bpy.data.materials.get('poolm')
+    if not m:
+        m=bpy.data.materials.new('poolm'); N,Lk=L.nodes(m); p=N['Principled BSDF']; it=N.new('ShaderNodeTexImage'); it.image=bpy.data.images.load(L.TX+'pool.png',check_existing=True)
+        Lk.new(it.outputs['Color'],p.inputs['Emission Color']); Lk.new(it.outputs['Alpha'],p.inputs['Alpha']); p.inputs['Base Color'].default_value=(0,0,0,1); p.inputs['Emission Strength'].default_value=2.4; p.inputs['Specular IOR Level'].default_value=0
+    o=plane(n,c,w,h,m,coll=coll,horiz=True); o['noink']=1; o.visible_shadow=False
+    if on is not None: L.vis(o,[on])
+    return o
 def lamp(n,c,on=None,col=(255,220,150)):
     b=flat('brass',lin((180,140,60)),0.3,metal=0.8); cyl(n+'_b',(c[0],c[1],c[2]+0.02),0.1,0.04,b,v=14); cyl(n+'_s',(c[0],c[1],c[2]+0.22),0.015,0.4,b,v=8)
     sh=cyl(n+'_shade',(c[0],c[1]-0.04,c[2]+0.45),0.16,0.14,flat(n+'_shm',lin((40,110,70)),0.5),v=16,r2=0.06)
+    rng=on if on is not None else (0,99999)
+    glow(n+'_glow',(c[0],c[1]-0.2,c[2]+0.36),0.85,(255,214,140),6.0,on=rng)          # bulb glow under the shade
+    pool(n+'_pool',(c[0]+0.05,c[1]-0.15,c[2]+0.003),0.9,0.65,on=rng)                  # warm light pool on the desk top
     return sh
 def cabinet(n,c,h=1.3):
     m=flat('cabinet',lin((110,120,110)),0.4,metal=0.3); box(n,(c[0],c[1],h/2),(0.5,0.6,h),m,bv=0.02)
@@ -290,6 +316,20 @@ desk('pdesk',(BX-3.0,1.6)); phone('pphone',(BX-3.3,1.6,0.78)); L_=lamp('plamp',(
 box('typew',(BX-2.9,1.45,0.86),(0.4,0.3,0.16),flat('typew',lin((50,56,52)),0.4),bv=0.03)
 for j in range(3): cyl(f'mug{j}',(BX-3.6+j*0.1,1.4,0.84),0.04,0.11,flat('mug',lin((230,226,214)),0.4),v=12)
 cabinet('pcab1',(BX+3.9,2.9)); cabinet('pcab2',(BX+3.3,2.9)); coatrack('prack',(BX-4.0,2.8))
+# round 3 (L9 density, >=20 props in frame): cork notice board with pinned sheets, wall clock, framed photo, shelf, radiator, wanted sheets
+cork=flat('cork',lin((176,130,84)),0.9)
+box('pnb',(BX+1.42,3.46,1.62),(0.95,0.04,1.05),cork,bv=0.01); box('pnb_fr',(BX+1.42,3.475,1.62),(1.03,0.03,1.13),flat('boardwood',lin((110,76,44))),bv=0.01)
+for j,(dx,dz,t,w_,h_,rz) in enumerate([(-0.24,0.24,'memo0',0.3,0.4,4),(0.18,0.28,'memo1',0.32,0.42,-5),(-0.22,-0.24,'memo2',0.3,0.4,-3),(0.2,-0.2,'memo0',0.3,0.36,3)]):
+    pp=plane(f'pnb_p{j}',(BX+1.42+dx,3.43,1.62+dz),w_,h_,card_mat(t+'_pin',t,emit=0.15)); pp.rotation_euler[1]=math.radians(rz)
+    sph(f'pnb_pin{j}',(BX+1.42+dx,3.42,1.62+dz+h_/2-0.04),0.018,flat('pinred',lin((200,40,40)),0.4))
+wallclock('pclock',(BX-1.25,3.46,2.78))
+wallframe('pph1',(BX-1.35,3.48,1.85),0.6,0.45,'fac0'); wallframe('pph2',(BX-1.35,3.48,1.25),0.36,0.48,'paper66')
+shelf_items('pshelf',(BX+1.4,3.36,2.5),1.1,33)
+rad=flat('radiator',lin((190,186,170)),0.5,metal=0.3)
+for j in range(9): box(f'prad{j}',(BX+1.05+j*0.09,3.38,0.42),(0.06,0.14,0.6),rad,bv=0.02)
+box('pradtop',(BX+1.41,3.38,0.73),(0.86,0.16,0.03),rad,bv=0.01)
+cyl('ppipe',(BX+0.95,3.42,1.9),0.03,3.6,rad,v=10)
+
 wallclock('pclock',(BX+2.3,3.28,2.75)); cyl('cooler',(BX+2.6,2.9,0.5),0.18,1.0,flat('cooler',lin((200,200,190)),0.4),v=16); sph('coolerjug',(BX+2.6,2.9,1.22),0.2,flat('jug',lin((150,200,230)),0.1))
 box('pbench',(BX-1.2,-1.6,0.24),(1.6,0.4,0.05),flat('deskwood',lin((110,70,44))),bv=0.01)
 for sx in(-1,1): box(f'pbenchl{sx}',(BX-1.2+sx*0.7,-1.6,0.11),(0.06,0.36,0.22),INK,bv=0)
@@ -320,7 +360,7 @@ walk(cp,586,600,(BX+0.0,1.95,0),(CH_L+0.58,3.12,0),step=3)
 walk(cp,606,628,(CH_L+0.58,3.12,0),(CH_R+0.58,3.12,0),step=3)
 walk(cp,632,652,(CH_R+0.58,3.12,0),(BX+0.98,2.62,0),step=3)
 for f,a_ in [(586,-10),(600,-82),(606,-84),(610,-80),(614,-85),(618,-80),(622,-84),(628,-82),(636,-20)]: arm(cp,-1,f,a_)
-path(s,[(520,(BX+0.35,-0.3,1.95),(BX+0.38,2.3,1.3)),(574,(BX+0.3,-0.3,1.9),(BX+0.3,2.35,1.12)),(600,(BX-0.6,0.25,1.75),(BX+0.05,3.2,1.1)),(619,(BX-0.05,0.25,1.7),(BX+0.2,3.2,1.22)),(625,(BX+0.1,0.0,1.68),(BX+0.3,3.2,1.22)),(631,(BX+0.38,-0.02,1.66),(BX+0.6,3.15,1.22)),(640,(BX+0.5,-0.05,1.65),(BX+0.5,3.1,1.22)),(652,(BX+0.5,-0.1,1.65),(BX+0.5,3.1,1.22))])
+path(s,[(520,(BX+0.35,-0.3,1.95),(BX+0.38,2.3,1.3)),(574,(BX+0.3,-0.3,1.9),(BX+0.3,2.35,1.12)),(600,(BX-0.6,0.25,1.75),(BX+0.05,3.2,1.1)),(619,(BX-0.05,0.25,1.7),(BX+0.2,3.2,1.22)),(625,(BX+0.1,0.0,1.68),(BX+0.3,3.2,1.22)),(631,(BX+0.26,0.0,1.66),(BX+0.39,3.15,1.22)),(640,(BX+0.36,-0.05,1.65),(BX+0.4,3.1,1.22)),(652,(BX+0.36,-0.1,1.65),(BX+0.4,3.1,1.22))])
 # ======================= SET C: store owners' office, 1961 (X=600) =======================
 CX=600
 room('off61',CX,7,6,3.2,'office','wood')
@@ -373,6 +413,11 @@ arm(o7,-1,775,-15); arm(o7,-1,846,-40); arm(o7,-1,858,-20)
 placard(o7,1,775,846,held=-140)
 ex=crowd(s,r,[(SX+1.1,SY+3.6,0.14),(SX-0.4,SY+5.2,0.14)],['shopper','granny'],21); ALL+=ex
 path(s,[(775,(SX+2.05,SY-1.3,1.75),(SX+0.3,SY+0.2,1.5)),(790,(SX+2.0,SY-1.2,1.75),(SX+0.3,SY+0.25,1.48)),(846,(SX+2.05,SY-1.2,1.8),(SX+0.3,SY+0.3,1.52)),(854,(SX+2.4,SY-1.45,1.82),(SX+0.3,SY+0.3,1.56)),(866,(SX+2.6,SY-1.62,1.86),(SX+0.3,SY+0.3,1.58))])
+# round 3: blurred FG mailbox at the lower right of S07 (projection-checked: x 0.6-0.75, stays in frame, no sweep; FG depth layer)
+_c7=L.chr_coll('S07'); _mx,_my=SX+1.2,SY-0.3
+box('mbS07',(_mx,_my+0.25,0.69),(0.5,0.5,1.0),flat('mailbox',lin((40,70,140)),0.5),coll=_c7,bv=0.12); box('mbS07_slot',(_mx,_my-0.005,0.95),(0.3,0.02,0.05),INK,coll=_c7,bv=0)
+for sx_ in(-1,1):
+    for sy_ in(-1,1): box(f'mbS07_leg{sx_}{sy_}',(_mx+sx_*0.12,_my+0.25+sy_*0.12,0.15),(0.06,0.06,0.3),INK,coll=_c7,bv=0)
 s='S08'; r=SH[s]
 o8=char('S08_owner','owner',s,(SX,SY,0.14),r,'hope',arms=('arm','arm'))
 c8=char('S08_cop','cop',s,(-7.65,54.0,0.14),r,'deadpan',arms=('arm','arm'),walker=True)
@@ -428,6 +473,12 @@ path(s,[(1008,(DX+0.25,-2.9,1.25),(DX,-0.2,0.95)),(1015,(DX+0.2,-2.6,1.2),(DX,-1
 EX=1200
 box('E_road',(EX,-6,-0.1),(80,10,0.2),ROADX,bv=0); box('E_walk',(EX,1.5,0.07),(80,5,0.14),WALK,bv=0.03)
 for j in range(9): building(f'bE{j}',(EX-32+j*8,4),'-Y',FAC[(j+3)%8],awn=AW[(j+3)%8])
+# round 3: the far side of the street (S11 looks along the sidewalk; no void beyond the road), curb lampposts and parked cars
+box('E_walk2',(EX,-12.5,0.07),(80,3,0.14),WALK,bv=0.03)
+for j in range(9): building(f'bEo{j}',(EX-36+j*8,-14),'+Y',FAC[(j+6)%8],awn=AW[(j+5)%8])
+for j,x in enumerate([EX-9.0,EX-17.0,EX-25.0]): lamppost(f'Elp{j}',(x,-0.9))
+for j,y in enumerate([-10.0,-2.0,6.0]): building(f'bEend{j}',(EX-42,y),'+X',FAC[(j+1)%8],awn=AW[(j+2)%8])   # closes the street vista (no void at the frame edge)
+for j,x in enumerate([EX-12.0,EX-20.5]): car(f'Ecar{j}',(x,-2.7,0.0),90.0,[(60,120,90),(200,170,80)][j])
 skE=plane('E_sky',(EX,90,40),260,140,card_mat('skygrey','sky_grey',emit=1.0),coll=L.C_NOI); skE['fly']=1
 STANDS=[]
 for j in range(4):
@@ -442,10 +493,10 @@ for j in range(4):
     STANDS.append(x)
 s='S11'; r=SH[s]
 pb=char('S11_paperboy','paperboy',s,(EX-6.2,0.05,0.14),r,'shout',arms=('arm','arm_paper'),walker=True)
-walk(pb,1051,1125,(EX-6.2,0.05,0.14),(EX+0.4,0.05,0.14),step=2)
+walk(pb,1051,1125,(EX-6.2,0.05,0.14),(EX-0.3,0.05,0.14),step=2)
 ALL.append(pb); faces(pb,[(1051,'shout'),(1068,'happy'),(1072,'shout'),(1092,'happy'),(1100,'shout')]); arm(pb,1,1051,-140); arm(pb,1,1066,-160); arm(pb,1,1080,-130); bob(pb,[1072,1100])
 ex=crowd(s,r,[(STANDS[1]+1.45,1.6,0.14),(STANDS[2]+1.5,1.5,0.14),(STANDS[3]+1.45,1.6,0.14),(STANDS[3]+2.6,1.7,0.14)],['tourist','shopper','fanblue','kid'],31); ALL+=ex
-path(s,[(1051,(EX-6.2+2.6,-1.5,1.75),(EX-6.2-0.6,0.5,1.2)),(1125,(EX+0.4+2.6,-1.5,1.75),(EX+0.4-0.6,0.5,1.2))])
+path(s,[(1051,(EX+2.85,-0.95,1.72),(EX-3.0,0.56,1.15)),(1125,(EX+2.95,-0.95,1.74),(EX-2.9,0.56,1.17))])   # round 3: near-static camera, the boy walks up to it; stands stay put on screen (signs fully in or out)
 for o_ in (L.CAM['S11'],L.TGT['S11']):
     for fc in o_.animation_data.action.fcurves:
         for kp in fc.keyframe_points:
@@ -460,11 +511,12 @@ desk('fdesk',(FX,0.9,0),w=2.0,m=flat('desk81',lin((90,64,44)),0.4))
 beige=flat('beige',lin((214,204,180)),0.5)
 box('pc_base',(FX+0.55,1.05,0.86),(0.6,0.5,0.14),beige,bv=0.02); box('pc_mon',(FX+0.55,1.1,1.16),(0.5,0.42,0.42),beige,bv=0.04)
 plane('pc_screen',(FX+0.55,0.885,1.18),0.38,0.29,card_mat('screen81','screen81',emit=1.2))
+glow('pc_glow',(FX+0.55,0.86,1.18),0.95,(150,255,190),1.6)
 box('pc_kb',(FX+0.5,0.7,0.8),(0.5,0.18,0.04),beige,bv=0.01)
-plane('cal81',(FX+1.7,2.98,1.9),0.45,0.56,card_mat('cal81','cal81',emit=0.2))
-wallframe('fph1',(FX+0.4,2.98,2.15),0.8,0.55,'fac81_2'); wallframe('fph2',(FX-0.55,2.98,2.25),0.36,0.48,'paper70'); shelf_items('fshelf',(FX+2.6,2.855,1.6),1.1,21)
+plane('cal81',(FX+1.7,2.98,1.9),0.45,0.56,card_mat('calx','calx',emit=0.2))   # round 3: no lettering (the S12 orbit sweeps it across the frame edge); the 1981 date is on the paper
+wallframe('fph1',(FX+0.4,2.98,2.15),0.8,0.55,'fac81_2'); wallframe('fph2',(FX-0.55,2.98,2.25),0.36,0.48,'fac81_1'); shelf_items('fshelf',(FX+2.6,2.855,1.6),1.1,21)
 cabinet('fcab',(FX+2.8,2.6),h=1.0); sph('plant',(FX-2.8,2.4,1.25),0.45,flat('leafy',lin((60,120,60)),0.7),sc_=(1,1,1.2)); cyl('plantpot',(FX-2.8,2.4,0.4),0.3,0.8,flat('pot81',lin((190,90,60)),0.6),v=18,r2=0.24)
-shade=lamp('flamp',(FX-0.75,1.05,0.78))
+shade=lamp('flamp',(FX-0.75,1.05,0.78),on=(1184,99999))
 lm=flat('lampbulb81',lin((255,226,150)),0.4,emit=0.0); bulb=sph('flamp_bulb',(FX-0.75,1.01,1.17),0.05,lm)
 # the lamp clicks on with "story" (f1184): bulb + warm point light keyed
 p_=bulb.active_material.node_tree.nodes['Principled BSDF']; p_.inputs['Emission Strength'].default_value=0.0; p_.inputs['Emission Strength'].keyframe_insert('default_value',frame=1183)
@@ -553,7 +605,7 @@ win=flat('bayframe',lin((40,60,46)),0.5)
 box('bay_floor',(WX,WY,0.45),(3.0,1.6,0.9),win,bv=0.03); box('bay_top',(WX,WY,3.65),(3.2,1.7,0.3),win,bv=0.03)
 for sx in(-1,1): box(f'bay_post{sx}',(WX+sx*1.5,WY-0.75,2.27),(0.14,0.14,2.46),win,bv=0.02)
 box('bay_back',(WX,WY+0.78,2.27),(2.9,0.08,2.46),surf('baywall','window81',(1.5,1.5)),bv=0)
-plane('bay_sign',(WX,WY-0.86,4.12),2.6,0.65,card_mat('banner81','banner81',emit=0.3))
+plane('bay_sign',(WX,WY-0.86,4.12),2.6,0.65,card_mat('banner81x','banner81x',emit=0.3))   # round 3: textless festive sign (the payoff push always cropped its lettering)
 PW,PH=1.0,1.5; PZ=0.9+0.12+PH/2+0.14
 easel=flat('easel',lin((120,80,50)),0.6)
 for sx in(-1,1): box(f'easel_leg{sx}',(WX+sx*0.42,WY+0.25,0.9+1.05),(0.06,0.06,2.1),easel,bv=0)
@@ -569,7 +621,10 @@ dm=flat('doors81',lin((60,70,80)),0.2,metal=0.4)
 for sx in(-1,1):
     d_=box(f'doorH{sx}',(HX+0.0+sx*0.95,2.42,1.4),(1.8,0.08,2.8),dm,bv=0.02)
     kloc(d_,1640,(HX+sx*0.95,2.42,1.4)); kloc(d_,1660,(HX+sx*2.6,2.42,1.4))
+    dp_=plane(f'doorH{sx}_face',(0,0,0),1.7,2.66,card_mat('door81','door81',emit=0.25)); dp_.parent=d_; dp_.location=(0,-0.045,0)
 plane('doorH_int',(HX,2.47,1.4),3.6,2.8,card_mat('storeint','storeint',emit=0.9))
+# round 3: depth layer beside the S15 cop (lamppost stays in frame left through the drift; no FG sweep)
+lamppost('Hlp_S15',(HX+8.28,0.04))
 s='S15'; r=SH[s]
 o15=char('S15_oldcop','oldcop',s,(HX+9.0,-0.9,0.14),r,'deadpan',arms=('arm','arm'))
 ALL.append(o15)
@@ -581,9 +636,9 @@ faces(o15,[(1481,'deadpan'),(1489,'raise'),(1505,'deadpan'),(1519,'eyeroll'),(15
 arm(o15,-1,1481,-22); arm(o15,1,1481,-22); arm(o15,1,1519,-19); arm(o15,1,1540,-22)
 path(s,[(1481,(HX+8.0,-3.6,1.3),(HX+9.0,-0.9,1.0)),(1537,(HX+8.4,-3.25,1.35),(HX+9.0,-0.9,1.08)),(1565,(HX+8.9,-3.0,1.4),(HX+9.0,-0.9,1.16))])
 s='S16'; r=SH[s]
-sp=[(HX-2.9,0.2,0.14),(HX-1.7,-1.6,0.14),(HX-0.9,0.9,0.14),(HX+0.4,-0.3,0.14),(HX+2.9,-2.4,0.14),(HX+2.0,1.1,0.14),(HX-2.6,-2.8,0.14),(HX+1.4,-1.2,0.14),(HX-0.3,-2.3,0.14),(HX+3.6,-0.4,0.14)]
+sp=[(HX-1.85,-0.01,0.14),(HX-4.20,-1.00,0.14),(HX-1.52,0.99,0.14),(HX+0.41,0.19,0.14),(HX+3.42,-1.72,0.14),(HX+2.98,0.91,0.14),(HX+2.16,-1.01,0.14),(HX-2.22,-1.00,0.14),(HX+4.18,-0.16,0.14)]   # round 3: positions from crowdopt.py (no face covered, none in the caption band)
 ordr=sorted(range(len(sp)),key=lambda i:sp[i][0]); SLOT=[(HX-2.2,1.0),(HX-1.6,1.9),(HX-1.0,0.9),(HX-0.4,1.85),(HX+0.2,0.95),(HX+0.8,1.9),(HX+1.4,0.9),(HX+2.0,1.85),(HX+2.6,1.0),(HX+3.2,1.9)]
-ex=crowd(s,r,sp,['mullet','perm','kid','granny','shopper','tourist','mullet','perm','fanblue','kid'],41); ALL+=ex
+ex=crowd(s,r,sp,['mullet','perm','kid','granny','shopper','tourist','perm','fanblue','kid'],41); ALL+=ex
 for i,e in enumerate(ex):
     bob(e,[1648+2*i,1668+3*i],amt=10); arm(e,1,1640,-20); arm(e,1,1650+2*i,-150); arm(e,1,1676+2*i,-120); arm(e,-1,1658+2*i,-130)
 for i,e in enumerate(ex): faces(e,[(1640+3*i,'shock'),(1652+2*i,list(e['F'])[0]),(1690+2*i,'happy')])

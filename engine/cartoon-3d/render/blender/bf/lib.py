@@ -268,5 +268,11 @@ def render_setup(pct=100,samples=8):
     sc.use_nodes=True; nt=sc.node_tree; N=nt.nodes; L=nt.links
     for n in list(N): N.remove(n)
     rl=N.new('CompositorNodeRLayers'); comp=N.new('CompositorNodeComposite'); gl=N.new('CompositorNodeGlare'); gl.glare_type='FOG_GLOW'; gl.threshold=0.9; gl.size=8; gl.mix=-0.75; gl.quality='LOW'
-    L.new(rl.outputs['Image'],gl.inputs['Image']); L.new(gl.outputs['Image'],comp.inputs['Image'])
+    # aerial haze (rule L8): mist pass mixes far geometry toward a warm-blue haze; starts at 14 m so interiors (rooms <= 9 m) are untouched
+    vl=sc.view_layers[0]; vl.use_pass_mist=True
+    if sc.world: sc.world.mist_settings.start=14; sc.world.mist_settings.depth=110; sc.world.mist_settings.falloff='LINEAR'
+    mx=N.new('CompositorNodeMixRGB'); mx.blend_type='MIX'; mx.inputs[2].default_value=(0.62,0.68,0.78,1)
+    mm=N.new('CompositorNodeMath'); mm.operation='MULTIPLY'; mm.inputs[1].default_value=0.42
+    L.new(rl.outputs['Mist'],mm.inputs[0]); L.new(mm.outputs[0],mx.inputs[0]); L.new(rl.outputs['Image'],mx.inputs[1])
+    L.new(mx.outputs['Image'],gl.inputs['Image']); L.new(gl.outputs['Image'],comp.inputs['Image'])
     r.image_settings.file_format='PNG'; r.image_settings.compression=30

@@ -73,6 +73,7 @@ def head(name,fk):
         for a in range(0,360,30): x=CX+380*math.cos(math.radians(a)); y=500+360*math.sin(math.radians(a))*0.95; d.ellipse([x-120,y-120,x+120,y+120],fill=hair,outline=K,width=OUT)
     skin=tuple(c.get('skin',SK[:3]))+(255,)
     d.ellipse([112,140,912,940],fill=skin,outline=K,width=OUT)
+    head_shade(im,skin); d=ImageDraw.Draw(im); d.ellipse([112,140,912,940],outline=K,width=OUT)
     if 'angryfill' in ex: 
         ov=Image.new('RGBA',(1024,1024),(0,0,0,0)); od=ImageDraw.Draw(ov); od.ellipse([130,158,894,922],fill=(170,60,170,120)); im.alpha_composite(ov); d=ImageDraw.Draw(im)
     if hs in('short','bald','bun','mullet'):
@@ -95,61 +96,158 @@ def head(name,fk):
     if c.get('nose',True): d.arc([CX-30,560,CX+30,640],-30,200,fill=K,width=10)
     extras(d,ex)
     return im
+# ---- round 3 (rule 193): Rick-style construction ----
+# slim column garment (narrower than the head), long coat/robe to the shins, hard cel shadow on the left third,
+# light rim on the right, ink detail (collar, placket, buttons, belt + buckle, hem band, fold lines),
+# stick legs with small shoes; thin sleeves with a cuff and a small hand. Drawn at 2x and downsampled (clean edges).
+SS=2; BOUT=14
+def lt(c,f=1.12): return tuple(min(255,int(v*f)) for v in c[:3])+(255,)
+GB={'tall':(80,175,215),'short':(172,180,222),'round':(102,200,238)}   # top px, shoulder half-width, hem half-width
+def _sil(kind):
+    y0,w0,w1=GB[kind]; y1=905; pts=[]
+    # left side, from hem up to the shoulder, rounded shoulder (quarter ellipse r=70)
+    for i in range(0,11): t=i/10; pts.append((400-(w1+(w0-w1)*t), y1+(y0+70-y1)*t))
+    for i in range(0,13): a=math.radians(180+i*7.5); pts.append((400-w0+70+70*math.cos(a)*1.0, y0+70+70*math.sin(a)))
+    pts.append((400-w0+70,y0)); pts.append((400+w0-70,y0))
+    for i in range(0,13): a=math.radians(270+i*7.5); pts.append((400+w0-70+70*math.cos(a), y0+70+70*math.sin(a)))
+    for i in range(0,11): t=i/10; pts.append((400+(w0+(w1-w0)*t), y0+70+(y1-y0-70)*t))
+    # hem: slight downward curve
+    for i in range(1,20): t=i/20; x=400+w1-2*w1*t; pts.append((x, y1+18*math.sin(math.pi*t)))
+    return pts,y0,w0,w1,y1
+def _S(p): return [(x*SS,y*SS) for x,y in p]
+def _hw(y,y0,w0,w1,y1): return w0+(w1-w0)*max(0,min(1,(y-y0-70)/(y1-y0-70)))
 def body(name,stride=0):
-    # stride 0 = standing; 1/2 = walk poses (legs spread, one foot lifted, alternating) for rule 162
-    c=C[name]; im,d=new(800,1100); R=tuple(c['coat'])+(255,); kind=c.get('body','tall')
-    legc=tuple(c.get('legs',(40,36,40)))+(255,)
+    c=C[name]; kind=c.get('body','tall'); R=tuple(c['coat'])+(255,); cue=c.get('cue')
+    W,H=800*SS,1100*SS; im=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(im)
+    legc=dk(tuple(c.get('legs',(40,36,40))),0.8); shoe=(34,26,22,255)
+    pts,y0,w0,w1,y1=_sil(kind); s=lambda v:int(v*SS)
+    # legs (thin sticks) + small shoes; stride poses spread the feet, one lifted
     for sx in(-1,1):
-        x=400+sx*92; fx=x+(sx*70 if stride else 0); lift=(70 if (stride==1 and sx<0) or (stride==2 and sx>0) else 0)
-        fy=1012-lift
-        d.line([x,760,fx,fy],fill=legc,width=34); d.line([x,760,fx,fy],fill=K,width=6)
-        d.ellipse([fx-78+sx*28,fy-26,fx+62+sx*28,fy+48],fill=(36,28,24,255),outline=K,width=13)
-    if kind=='tall': pts=[(250,50),(550,50),(640,820),(160,820)]
-    elif kind=='short': pts=[(220,140),(580,140),(640,800),(160,800)]
-    else: pts=None
-    if pts: d.polygon(pts,fill=R)
-    else: d.ellipse([130,70,670,860],fill=R)
-    # soft gradient (light from the right) + fabric lines
-    ov=Image.new('RGBA',im.size,(0,0,0,0)); od=ImageDraw.Draw(ov)
-    for i in range(40): od.rectangle([i*20,0,i*20+20,1100],fill=(20,10,30,int(max(0,70-i*3.2))))
-    a=im.split()[3]; im=Image.alpha_composite(im,Image.composite(ov,Image.new('RGBA',im.size,(0,0,0,0)),a)); d=ImageDraw.Draw(im)
-    for k in range(6): d.line([300+k*40,120,280+k*44,800],fill=dk(R,0.86),width=4)
-    if pts: d.line(pts+[pts[0]],fill=K,width=OUT,joint='curve')
-    else: d.ellipse([130,70,670,860],outline=K,width=OUT)
-    cue=c.get('cue')
+        x=400+sx*62; fx=x+(sx*58 if stride else 0); lift=(60 if (stride==1 and sx<0) or (stride==2 and sx>0) else 0); fy=1010-lift
+        d.line([s(x),s(880),s(fx),s(fy)],fill=K,width=s(26)); d.line([s(x),s(880),s(fx),s(fy)],fill=legc,width=s(14))
+        d.chord([s(fx-46+sx*20),s(fy-30),s(fx+46+sx*20),s(fy+34)],180,360,fill=shoe,outline=K,width=s(9)); d.line([s(fx-46+sx*20),s(fy+2),s(fx+46+sx*20),s(fy+2)],fill=K,width=s(9))
+        d.arc([s(fx-30+sx*20),s(fy-22),s(fx+14+sx*20),s(fy+6)],200,260,fill=(120,110,100,255),width=s(5))
+    # garment base
+    gm=Image.new('L',(W,H),0); ImageDraw.Draw(gm).polygon(_S(pts),fill=255)
+    base=Image.new('RGBA',(W,H),R); im.paste(base,(0,0),gm); d=ImageDraw.Draw(im)
+    L=[]   # detail layer drawn clipped to the garment
+    det=Image.new('RGBA',(W,H),(0,0,0,0)); dd=ImageDraw.Draw(det)
+    shade=dk(R,0.74); rim=lt(R,1.16); line2=dk(R,0.52)
+    # hard cel shadow: left third, slightly curved edge (light from the upper right, Rick-style)
+    sh=[(400-260,0)]+[(400-60-int(40*math.sin(math.pi*t)), int(1100*t)) for t in [i/20 for i in range(21)]]+[(400-260,1100)]
+    dd.polygon(_S(sh),fill=shade)
+    dd.polygon(_S([(400+w0-16,y0+40),(400+w0+30,y0+40),(400+w1+40,y1),(400+w1-22,y1)]),fill=rim)
+    hemh=40 if cue not in('apron',) else 0
+    if hemh: dd.polygon(_S([(0,y1-hemh),(800,y1-hemh),(800,y1+40),(0,y1+40)]),fill=dk(R,0.6))
+    beltY=y0+int((y1-y0)*0.46)
+    def belt(col=(30,24,22,255),buck=(214,180,80,255)):
+        dd.rectangle([0,s(beltY),W,s(beltY+42)],fill=col); dd.line([0,s(beltY),W,s(beltY)],fill=K,width=s(6)); dd.line([0,s(beltY+42),W,s(beltY+42)],fill=K,width=s(6))
+        dd.rectangle([s(372),s(beltY-6),s(428),s(beltY+48)],fill=buck,outline=K,width=s(6)); dd.rectangle([s(388),s(beltY+8),s(412),s(beltY+34)],fill=col)
+    def placket(x=400,top=None,bot=None): dd.line([s(x),s(top or y0+30),s(x),s(bot or y1)],fill=K,width=s(7))
+    def buttons(xs,ys,col=(214,180,80,255),r=13):
+        for x in xs:
+            for y in ys: dd.ellipse([s(x-r),s(y-r),s(x+r),s(y+r)],fill=col,outline=K,width=s(5)); dd.ellipse([s(x-r+5),s(y-r+4),s(x-r+11),s(y-r+10)],fill=(255,250,230,255))
+    def folds(n=4,ytop=None):
+        yt=ytop or beltY+60
+        for k in range(n):
+            x=400-int(_hw(y1,y0,w0,w1,y1)*0.7)+k*int(_hw(y1,y0,w0,w1,y1)*1.4/(n-1)) if n>1 else 400
+            dd.line(_S([(x,y1-30),(x+6,y1-110),(x-4,yt+80)]),fill=line2,width=s(5),joint='curve')
+        dd.arc([s(330),s(beltY+50),s(470),s(beltY+120)],20,160,fill=line2,width=s(5))
+    def lapels(col,shirt=(248,246,238,255),depth=230):
+        dd.polygon(_S([(400-90,y0-10),(400,y0+depth),(400+90,y0-10)]),fill=shirt)
+        for sx in(-1,1): dd.polygon(_S([(400+sx*92,y0-12),(400+sx*20,y0+depth-10),(400+sx*70,y0+depth-60),(400+sx*150,y0+60)]),fill=col,outline=K,width=s(7))
+    def collar(col,h=46):
+        dd.rounded_rectangle([s(400-120),s(y0-10),s(400+120),s(y0+h)],s(18),fill=col,outline=K,width=s(7))
     if cue=='cop':
-        for i in range(4): d.ellipse([385,170+i*140,415,200+i*140],fill=(220,186,80,255),outline=K,width=6)
-        d.rectangle([180,600,620,650],fill=(30,26,24,255),outline=K,width=8); d.rectangle([370,596,430,654],fill=(214,180,80,255),outline=K,width=6)
-        d.polygon([(300,230),(340,200),(360,250),(330,280)],fill=(214,180,80,255),outline=K)  # plain star-less badge
-    if cue=='bowtie': d.polygon([(330,70),(400,105),(470,70),(470,150),(400,115),(330,150)],fill=(170,30,40,255),outline=K); d.line([400,150,400,800],fill=dk(R,0.6),width=10)
-    if cue=='blazer':
-        d.polygon([(250,50),(400,320),(550,50)],fill=(250,250,245,255),outline=K); d.line([400,320,400,820],fill=K,width=10)
-        for sx in(-1,1): d.ellipse([400+sx*280-90,30,400+sx*280+90,150],fill=R,outline=K,width=OUT)  # shoulder pads
-    if cue=='stripes':
-        for y in range(120,800,70): d.line([200,y,600,y],fill=(240,240,240,255),width=26)
-        d.polygon(pts,outline=K,width=OUT) if pts else None
-    if cue=='scarf': d.rounded_rectangle([230,40,570,130],30,fill=tuple(c['scarf'])+(255,),outline=K,width=12); d.rectangle([460,110,530,380],fill=tuple(c['scarf'])+(255,),outline=K,width=10)
-    if cue=='apron': d.polygon([(290,260),(510,260),(550,790),(250,790)],fill=(246,240,228,255),outline=K)
-    if cue=='camera': d.line([300,60,500,300],fill=K,width=8)
-    if cue=='pearls':
-        for k in range(9): d.ellipse([290+k*26,90+abs(k-4)*8,312+k*26,112+abs(k-4)*8],fill=(250,250,240,255),outline=K,width=4)
-    if cue=='vest': d.polygon([(300,100),(400,300),(500,100),(520,780),(280,780)],fill=dk(R,0.7),outline=K)
-    return im
+        collar(dk(R,0.8)); placket(); belt(); buttons((360,440),[y0+110,y0+190,beltY+90,beltY+170])
+        for sx in(-1,1): dd.rounded_rectangle([s(400+sx*w0-60-(0 if sx>0 else -0)),s(y0+8),s(400+sx*w0+(-10 if sx>0 else 60)),s(y0+44)],s(10),fill=dk(R,0.6),outline=K,width=s(6))
+        dd.polygon(_S([(278,y0+120),(318,y0+100),(340,y0+150),(300,y0+178),(268,y0+150)]),fill=(214,180,80,255),outline=K)
+        dd.line(_S([(282,y0+128),(330,y0+140)]),fill=dk((214,180,80),0.6),width=s(4))
+        folds(4)
+    elif cue=='bowtie':
+        lapels(dk(R,0.7)); placket(400,y0+230); buttons((400,),[y0+290,beltY+30],col=(70,46,30,255),r=12)
+        dd.polygon(_S([(338,y0+30),(400,y0+58),(462,y0+30),(462,y0+100),(400,y0+72),(338,y0+100)]),fill=(170,30,40,255),outline=K,width=s(6)); dd.ellipse([s(388),s(y0+52),s(412),s(y0+80)],fill=(140,20,30,255),outline=K,width=s(5))
+        for sx in(-1,1): dd.rectangle([s(400+sx*150-55),s(beltY+60),s(400+sx*150+55),s(beltY+82)],fill=dk(R,0.65),outline=K,width=s(5))
+        dd.polygon(_S([(470,y0+150),(520,y0+150),(510,y0+178),(480,y0+178)]),fill=(240,236,226,255),outline=K,width=s(4))
+        folds(3)
+    elif cue=='blazer':
+        lapels(dk(R,0.72),shirt=(250,248,244,255)); placket(400,y0+230); buttons((400,),[y0+280,beltY+20],col=(230,200,110,255))
+        dd.line(_S([(400,y0+234),(400,y0+120)]),fill=(200,190,180,255),width=s(4))
+        belt(col=(28,24,26,255),buck=(230,200,110,255)); folds(3)
+    elif cue=='stripes':
+        dd.polygon(_S([(400-110,y0),(400+110,y0),(400+90,y1),(400-90,y1)]),fill=(236,234,228,255))
+        for y in range(y0+40,y1,56): dd.line([s(300),s(y),s(500),s(y)],fill=(40,40,48,255),width=s(22))
+        for sx in(-1,1): dd.line(_S([(400+sx*112,y0),(400+sx*92,y1)]),fill=K,width=s(7))
+        buttons((300,),[y0+200,beltY+40],col=(60,60,66,255),r=11); folds(3)
+    elif cue=='pearls':
+        collar(lt(R,1.08),36); placket(400,y0+40,beltY); buttons((400,),[y0+120,y0+200,y0+280],col=(246,240,226,255),r=11)
+        belt(col=dk(R,0.55),buck=(230,210,150,255))
+        for k in range(5): x=400-150+k*75; dd.line(_S([(x,beltY+60),(x+(k-2)*22,y1)]),fill=line2,width=s(5))
+        for k in range(11): dd.ellipse([s(310+k*18-9),s(y0+50+abs(k-5)*7-9),s(310+k*18+9),s(y0+50+abs(k-5)*7+9)],fill=(252,250,244,255),outline=K,width=s(3))
+    elif cue=='camera':
+        lapels(dk(R,0.7),shirt=(250,240,200,255)); placket(400,y0+230); buttons((400,),[y0+290,beltY+40],col=(90,60,30,255),r=12)
+        dd.line(_S([(290,y0+10),(470,y0+330)]),fill=(50,40,32,255),width=s(18)); dd.line(_S([(290,y0+10),(470,y0+330)]),fill=K,width=s(4))
+        dd.rounded_rectangle([s(420),s(y0+300),s(540),s(y0+380)],s(10),fill=(40,40,44,255),outline=K,width=s(7)); dd.ellipse([s(456),s(y0+312),s(512),s(y0+368)],fill=(120,140,170,255),outline=K,width=s(5))
+        for sx in(-1,1): dd.rectangle([s(400+sx*150-50),s(beltY+40),s(400+sx*150+50),s(beltY+62)],fill=dk(R,0.65),outline=K,width=s(5))
+        folds(3)
+    elif cue=='scarf':
+        placket(); buttons((370,430),[y0+140,y0+230,beltY+40,beltY+130],col=(230,220,190,255),r=12)
+        belt(col=dk(R,0.55),buck=(200,190,170,255)); folds(4)
+    elif cue=='apron':
+        collar(dk(R,0.8)); placket(); buttons((400,),[y0+110,y0+190,y0+270,beltY+60],col=(90,70,50,255),r=11)
+        dd.line(_S([(260,y0+10),(560,beltY+40)]),fill=(110,84,52,255),width=s(26)); dd.line(_S([(260,y0+10),(560,beltY+40)]),fill=K,width=s(5))
+        dd.rounded_rectangle([s(430),s(beltY+20),s(650),s(beltY+190)],s(16),fill=(214,196,150,255),outline=K,width=s(8)); dd.line([s(430),s(beltY+60),s(650),s(beltY+60)],fill=K,width=s(6))
+        for k in range(3): dd.rectangle([s(450+k*55),s(beltY+5),s(495+k*55),s(beltY+40)],fill=(240,236,222,255),outline=K,width=s(4))
+        folds(3)
+    elif cue=='vest':
+        dd.polygon(_S([(400-100,y0),(400+100,y0),(400+80,y1),(400-80,y1)]),fill=(240,238,232,255))
+        for sx in(-1,1): dd.polygon(_S([(400+sx*100,y0-10),(400+sx*20,y0+260),(400+sx*20,y1),(400+sx*260,y1),(400+sx*260,y0-10)]),fill=dk(R,0.8),outline=K,width=s(7))
+        for y in range(y0+80,y1,70): dd.line([0,s(y),s(380),s(y)],fill=K,width=s(4)); dd.line([s(420),s(y),W,s(y)],fill=K,width=s(4))
+        folds(3)
+    # clip detail to the garment, paste
+    clip=Image.new('RGBA',(W,H),(0,0,0,0)); clip.paste(det,(0,0),Image.composite(det.split()[3],Image.new('L',(W,H),0),gm))
+    im.alpha_composite(clip); d=ImageDraw.Draw(im)
+    if cue=='scarf':   # scarf sits over the coat and the shoulder line
+        sc=tuple(c['scarf'])+(255,)
+        d.rounded_rectangle([s(400-150),s(y0-24),s(400+150),s(y0+56)],s(30),fill=sc,outline=K,width=s(BOUT-4))
+        d.rounded_rectangle([s(450),s(y0+30),s(520),s(y0+330)],s(16),fill=sc,outline=K,width=s(BOUT-4))
+        for yy in (y0+110,y0+190): d.line([s(452),s(yy),s(518),s(yy)],fill=(250,250,250,255),width=s(16))
+        for k in range(5): d.line([s(458+k*14),s(y0+330),s(458+k*14),s(y0+362)],fill=sc,width=s(6))
+    d.line(_S(pts+[pts[0]]),fill=K,width=s(BOUT),joint='curve')
+    return im.resize((800,1100),Image.LANCZOS)
 def arm(name,prop=None):
-    c=C[name]; im,d=new(400,900); R=tuple(c['coat'])+(255,); skin=tuple(c.get('skin',SK[:3]))+(255,)
-    d.rounded_rectangle([150,20,250,330],48,fill=R,outline=K,width=OUT); d.line([200,300,200,690],fill=K,width=30)
-    d.ellipse([148,672,252,776],fill=skin,outline=K,width=15)
-    if prop=='whistle': pass
-    if prop=='bag': d.rectangle([90,760,310,890],fill=(200,170,120,255),outline=K,width=13); d.arc([140,700,260,820],180,360,fill=K,width=10); d.rectangle([150,790,250,830],fill=(200,40,40,255))
-    if prop=='box': d.rectangle([100,740,300,880],fill=(60,120,180,255),outline=K,width=13); d.line([200,740,200,880],fill=(250,230,120,255),width=16); d.line([100,810,300,810],fill=(250,230,120,255),width=16)
+    c=C[name]; R=tuple(c['coat'])+(255,); skin=tuple(c.get('skin',SK[:3]))+(255,)
+    W,H=400*SS,900*SS; im=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(im); s=lambda v:int(v*SS)
+    # slim tapered sleeve (shoulder 76 px -> wrist 56 px), cel shadow on the inner half, cuff band, small hand
+    sl=[(162,40),(238,40),(228,640),(172,640)]
+    d.polygon(_S(sl),fill=R); d.polygon(_S([(162,40),(196,40),(198,640),(172,640)]),fill=dk(R,0.74))
+    d.rounded_rectangle([s(158),s(14),s(242),s(110)],s(40),fill=R)
+    d.rectangle([s(168),s(600),s(232),s(648)],fill=dk(R,0.6))
+    d.line(_S([(206,260),(214,300),(204,330)]),fill=dk(R,0.5),width=s(4),joint='curve')
+    d.line(_S(sl+[sl[0]]),fill=K,width=s(13)); d.arc([s(158),s(14),s(242),s(110)],180,360,fill=K,width=s(13))
+    d.line([s(168),s(600),s(232),s(600)],fill=K,width=s(6))
+    d.line([s(200),s(648),s(200),s(684)],fill=K,width=s(22))
+    d.ellipse([s(160),s(676),s(240),s(756)],fill=skin,outline=K,width=s(12))
+    d.ellipse([s(220),s(690),s(252),s(722)],fill=skin,outline=K,width=s(9))   # thumb
+    d.ellipse([s(176),s(722),s(196),s(742)],fill=dk(skin,0.88))
+    im=im.resize((400,900),Image.LANCZOS); d=ImageDraw.Draw(im)
+    if prop=='bag': d.rectangle([90,760,310,890],fill=(200,170,120,255),outline=K,width=11); d.arc([140,700,260,820],180,360,fill=K,width=9); d.rectangle([150,790,250,830],fill=(200,40,40,255)); d.line([100,800,300,800],fill=dk((200,170,120),0.7),width=4)
+    if prop=='box': d.rectangle([100,740,300,880],fill=(60,120,180,255),outline=K,width=11); d.line([200,740,200,880],fill=(250,230,120,255),width=16); d.line([100,810,300,810],fill=(250,230,120,255),width=16); d.polygon([(100,740),(140,740),(100,780)],fill=(40,96,150,255))
     if prop=='chalk': d.rectangle([186,740,214,800],fill=(250,250,250,255),outline=K,width=6)
     if prop=='pen': d.line([200,720,200,880],fill=(20,20,24,255),width=16); d.polygon([(192,880),(208,880),(200,900)],fill=K)
     if prop=='redpen': d.line([200,720,200,880],fill=(196,30,30,255),width=16); d.polygon([(192,880),(208,880),(200,900)],fill=K)
-    if prop=='megaphone': d.polygon([(180,720),(220,720),(330,890),(70,890)],fill=(236,230,220,255),outline=K); d.ellipse([70,860,330,900],fill=(60,60,64,255),outline=K,width=8)
+    if prop=='megaphone': d.polygon([(180,720),(220,720),(330,890),(70,890)],fill=(236,230,220,255),outline=K); d.ellipse([70,860,330,900],fill=(60,60,64,255),outline=K,width=8); d.line([200,724,200,860],fill=(200,190,176,255),width=6)
     if prop=='pennant': d.line([200,600,200,120],fill=(120,80,40,255),width=12); d.polygon([(200,120),(390,180),(200,250)],fill=tuple(c.get('scarf',(40,60,140)))+(255,),outline=K)
     if prop=='camera': d.rounded_rectangle([110,720,290,840],20,fill=(40,40,44,255),outline=K,width=12); d.ellipse([160,740,240,820],fill=(120,140,170,255),outline=K,width=8)
     if prop=='paper': d.rectangle([60,640,340,860],fill=(238,232,214,255),outline=K,width=10); d.text((80,660),'BLACK\nFRIDAY',fill=K)
+    if prop in ('box','bag','paper','megaphone','camera'):   # fingers over the prop so it is held, not floating
+        d.ellipse([170,700,230,760],fill=skin,outline=K,width=8)
     return im
+def head_shade(im,skin):
+    # Rick heads: soft cel shadow crescent on the lower-left of the face disc
+    m=Image.new('L',im.size,0); md=ImageDraw.Draw(m); md.ellipse([131,159,893,921],fill=255); md.ellipse([171,99,953,881],fill=0)
+    m=m.filter(ImageFilter.GaussianBlur(10))
+    sh=Image.new('RGBA',im.size,dk(skin,0.88)); im.paste(sh,(0,0),m)
 if __name__=='__main__':
     out={}
     for n,c in C.items():

@@ -75,8 +75,23 @@ for _ in range(30):
     f=font(fs); bb=f.getbbox('H'); ch=bb[3]-bb[1]
     if abs(ch-CAP)<1: break
     fs=int(round(fs*CAP/ch))
-FNT=font(fs); BASE=int(0.7125*H); STROKE=max(1,int(round(7*K))); SHX,SHY=int(round(4*K)),int(round(5*K))
+FNT=font(fs); BASE=int(0.717*H); STROKE=max(1,int(round(7*K))); SHX,SHY=int(round(4*K)),int(round(5*K))
 WORDS=json.load(open('/mnt/project-files/modern-vista-social/experiments/2026-11-18_rick-99-test/audio/vo_trim.wav.words.json'))
+def fixwords(W_):
+    """round 3 caption text: script punctuation, not ASR punctuation (Army-Navy as one token, 'once,' + 'shoppers,', 'Big Friday!', quote marks)"""
+    o=[]; i=0
+    while i<len(W_):
+        w,s_,e=W_[i]; t=w.strip()
+        if t=='Army' and i+1<len(W_) and W_[i+1][0].strip().startswith('Navy'):
+            o.append(['Army-'+W_[i+1][0].strip(),s_,W_[i+1][2]]); i+=2; continue
+        if t=='once.' and i+1<len(W_) and W_[i+1][0].strip()=='Shoppers,': t='once,'
+        if t=='Shoppers,' and o and o[-1][0]=='once,': t='shoppers,'
+        if t=='Friday.' and o and o[-1][0]=='Big': t='Friday!'
+        if t=="Who's": t='\u201cWho\'s'
+        if t=='funeral?': t='funeral?\u201d'
+        o.append([t,s_,e]); i+=1
+    return o
+WORDS=fixwords(WORDS)
 def chunks():
     out=[]; cur=[]
     for i,(w,s,e) in enumerate(WORDS):

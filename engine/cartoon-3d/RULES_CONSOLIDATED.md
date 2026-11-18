@@ -245,3 +245,24 @@ E. If a shot can't match its reference, redesign it. Don't ship it. Say so in th
 189. **Facts in-world.** Facts appear on in-world props (signs, certificates, boards, labels), never as overlays, arrows or date cards. (Guide a16; agrees with decision 2A)
 190. **Rubric gate.** Before Gate 2, run rick-spec metrics.py, transitions.py, dissolve_curve.py and captions.py on the preview and report the 14 dimension scores next to Rick's pass lines; any dimension below its pass line is fixed before Gate 2. (Guide k)
 191. **Dynamic angles.** At least 4 of: low angle, high angle, top-down, macro/ECU of the hero prop, through-object framing, orbit, per video; no row of characters facing the camera in a frontal stage shot. (Guide e)
+
+## Rules 192-204 (Nov 18 2026, owner: "make these into respective rules", from the Black Friday 99% test, round 2)
+192. [C] **SFX never hurt the ear.** Owner caught a screech at 0:08 in round 2: a 2.9 kHz police-whistle tone, levelled by RMS, so it sounded far louder than it measured. SFX are SPARSE, about 10-12 per minute: whooshes on fast camera moves, a thud on an impact, one bigger hit on the payoff (guide). Rules for every SFX:
+    - Low-pass it at 4th order, about 2.6 kHz; no pure tones above 2 kHz. No square-wave horns, no chalk or pen scratch noise, no continuous crowd beds.
+    - Its K-weighted 400 ms momentary loudness in the mix must be at least 8 LU under the VO around it.
+    - Check: `render/blender/bf/sfxcheck.py` must print SFX_WORST PASS. Then listen to the whole mix once before delivery.
+193. [C] **Characters are built like Rick's.** Owner: "how they're made ... needs to be similar to Rick, if not identical." Characters stay our own people, but are drawn and assembled the way Rick's are (guide character section): head shape, outline weight, body build, limb style, costume cue and face drawing. Before any render:
+    - Put a side-by-side sheet of our cast next to Rick reference frames (private folder).
+    - Fix every visible construction difference.
+    - The visual verifier scores this; anything under 99 % blocks the render.
+194. [C] **Movers walk the way they face.** Our character cards always face the camera, so a walker may only walk toward the camera, or use a profile card. Never walk sideways or away while facing the lens (round 2: S11 paperboy, S16 crowd). A crowd that only gathers stands and reacts instead.
+195. **Two-sided props.** Any card prop that can turn (placards, signs, papers) has a printed back. A folded or edge-on prop never reads as a bare pole or T-bar. A stick runs between the two faces, never in front of the lettering (round 2 S07 placard).
+196. **Hero text clears the caption band.** Headlines, totals and slogans sit outside 66-73 % H whenever on screen. Check: `bf/regionprobe.py` on each hero text region (round 2 S10, S13, S15).
+197. **Hero text is shown whole.** Every hero in-world text is shown whole for at least 12 f at least once. Signs are fully in or fully out of frame during a move: no "UGS" for DRUGS, no "LACK FRIDAY". Text inside a sign or placard fits its border.
+198. **Prop figures add up and dates match the sources.** Totals on screens and ledgers are the sum of their lines. A printed date matches the cited source (round 2: monitor total, 1981 paper).
+199. [C] **No camera snaps from solver keys.** Bridge or caption solves never add a camera or target key within 10 f of an existing path key. Check: `bf/camprobe.py`; no unplanned frame with view change over 0.8 deg/f at more than 2.5x the shot median (round 2 S02 frame 252, S12 1126).
+200. **The payoff poster keeps its true colours.** The poster close-up gets its own grade with no highlight stretch. Under 2 % of poster pixels may be clipped at 250+, and greyscale similarity to the shop file must be 0.9 or higher (round 2: 62 % clipped).
+201. **Vignette is measured, not guessed.** Interiors: corner/centre luma 0.33-0.42, measured on the graded frames (post.py calibrates per shot). Daylight exteriors: light or none, ratio 0.72 or higher.
+202. **Chalk and pen reveal one letter at a time under the tool.** No 3-letter chunks, and no letters appear while the hand is off the board (round 2 S05).
+203. **GPU alpha check.** Before a full GPU render, render one frame of every alpha card type on the GPU and compare it to a CPU still. Round 2: the OptiX render drew the S03 pennant arm as an opaque black card.
+204. **No face covered.** No head may cover more than 25 % of another visible head (faceprobe OCC flag). Extras that pass behind a lead during a truck are moved or removed.

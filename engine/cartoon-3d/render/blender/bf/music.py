@@ -77,8 +77,8 @@ def noise(dur,lp=0.0,hp=0.0):
 def horn(dur=0.35,f=330):
     n=int(dur*SR); t=np.arange(n)/SR; x=(np.sign(np.sin(2*np.pi*f*t))+np.sign(np.sin(2*np.pi*f*1.26*t)))*0.3
     x=np.convolve(x,np.ones(12)/12,'same'); return x*np.minimum(1,t/0.01)*np.minimum(1,(dur-t)/0.03)
-def whistle(dur=0.5):
-    n=int(dur*SR); t=np.arange(n)/SR; vib=1+0.03*np.sign(np.sin(2*np.pi*28*t)); x=np.sin(2*np.pi*np.cumsum(2900*vib)/SR)*0.7+0.15*rng.normal(0,1,n)
+def whistle(dur=0.5,f=2900):
+    n=int(dur*SR); t=np.arange(n)/SR; vib=1+0.03*np.sign(np.sin(2*np.pi*28*t)); x=np.sin(2*np.pi*np.cumsum(f*vib)/SR)*0.7+0.15*rng.normal(0,1,n)
     return x*np.minimum(1,t/0.01)*np.minimum(1,(dur-t)/0.04)
 def whoosh(dur=0.5,up=True):
     n=int(dur*SR); t=np.arange(n)/SR; x=noise(dur,lp=1200); e=np.sin(np.pi*t/dur)**0.5; return x*e
@@ -89,18 +89,21 @@ def ding(m=88,dur=1.2): return mallet(m,dur,d=3.0)
 def chalk(dur=0.12): n=int(dur*SR); return noise(dur,hp=1)*(0.5+0.5*np.sign(np.sin(2*np.pi*35*np.arange(n)/SR)))*np.minimum(1,np.arange(n)/400)
 def crowd(dur):
     x=noise(dur,lp=700); n=len(x); return x*np.minimum(1,np.arange(n)/(0.3*SR))*np.minimum(1,(n-np.arange(n))/(0.3*SR))
+from scipy.signal import butter as _bt, sosfilt as _sf
+def soft(x,fc=2600):   # every SFX is low-passed (4th order) so nothing shrill lands in the ear's 2-5 kHz peak (owner Nov 18: the 8 s screech)
+    return _sf(_bt(4,fc,'lp',fs=SR,output='sos'),x)
+def whoosh2(dur=0.45):
+    n=int(dur*SR); t=np.arange(n)/SR; x=soft(rng.normal(0,1,n),900); e=np.sin(np.pi*t/dur)**1.5; return x/np.abs(x).max()*e
+# Rick master guide: SFX are SPARSE, in the bed bus, well under the VO: whoosh on fast camera moves, thud on impacts, a bigger hit on the payoff.
 EV=[]
-for f in (8,62,140): EV.append((f,whistle(0.45),0.55))
-for f,fr in [(20,330),(75,392),(110,294),(146,349),(156,262),(443,311),(452,370),(461,277)]: EV.append((f,horn(0.28,fr),0.5))   # horn hits 9+ f apart so they never overlap
-EV+= [(126,whoosh(0.4),0.6),(240,whoosh(0.5),0.5),(300,crowd(3.8),0.22),(355,crowd(1.6),0.3),(483,whoosh(0.25),0.55),(489,thump(240,0.12),0.45),
-      (574,thump(60,0.35),1.0),(645,whoosh(0.4),0.35),(842,whoosh(0.3),0.5),(851,ding(84,0.9),0.45),(851,ding(91,0.9),0.35),
-      (904,tone(700,180,0.6),0.35),(958,tone(1800,2400,0.25),0.15),(977,tone(1900,2600,0.25),0.15),(1116,whoosh(0.6),0.45),(1184,click(),0.9),
-      (1467,ding(96,0.5),0.5),(1471,ding(100,0.9),0.45),(1468,thump(180,0.12),0.4),(1646,crowd(2.0),0.35),(1640,noise(0.6,lp=300)*np.hanning(int(0.6*SR)),0.3),
-      (1699,whoosh(0.3),0.75),(1709,thump(90,0.25),0.6),(1727,ding(84,1.6),0.4),(1727,ding(89,1.6),0.3),(1727,ding(96,1.6),0.25)]
-EV.append((606,chalk(0.75),0.35))   # one continuous chalk scratch while the letters appear
-EV.append((1270,chalk(1.0),0.2))   # one continuous pen scribble
-EV.append((1306,chalk(1.3),0.2))
-for f in range(1010,1056,12): EV.append((f,thump(150,0.08),0.35))   # press thumps on every other beat
+EV+=[(8,soft(whistle(0.3,1700),2400),0.25),            # one short soft whistle under "Cops" (the hook's prop)
+     (124,whoosh2(0.5),0.6),                      # S01 crane up on "disaster"
+     (462,whoosh2(0.45),0.6),                     # S04 dive to the thief
+     (574,soft(thump(60,0.35),900),1.0),          # CANCELLED stamp hits the roster
+     (842,whoosh2(0.3),0.5),(851,soft(ding(84,0.9),3000),0.45),   # placard spins round to BIG FRIDAY!
+     (1402,whoosh2(0.45),0.55),                   # S14 crane pull-out
+     (1468,soft(ding(91,0.8),3000),0.45),         # "in the black"
+     (1699,whoosh2(0.35),0.7),(1709,soft(thump(90,0.25),900),0.6),(1727,soft(ding(84,1.6),3000),0.4),(1727,soft(ding(89,1.6),3000),0.3)]   # payoff push + hit
 # A6: level every SFX event against the bed under it so each lands at the same offset over the bed
 # (one common offset; mix.py then sets the global SFX gain so the median offset is +10 dB in the mix)
 BEDW=bed/np.abs(bed).max()*0.7
@@ -127,6 +130,8 @@ for it in range(12):   # overlapping tails add up: re-level every group against 
     for gr in G:
         i,w=gr['i'],gr['w']   # robust: average of three comparison spans (span, span+0.2 s, fixed 0.5 s)
         vv=[20*np.log10(pk50(S[i:i+ww])/rms(BEDW[i:i+ww])) for ww in (w,w+int(0.2*SR),int(0.5*SR))]; po=(min(vv)+max(vv))/2; gr['k']*=10**((16-po)/20*0.8)
+ATT={1468:-6.0,1727:-4.0,842:-1.5,1402:-1.5}   # tonal dings read louder than their RMS (K-weighting): keep every SFX >= 8 LU under the VO
+for gr in G: gr['k']*=10**(ATT.get(gr['f0'],0.0)/20)
 S[:]=sum(gr['tr']*gr['k'] for gr in G)
 evlog=[dict(f=gr['f0'],f1=gr['f1'],i=gr['i'],w=gr['w']) for gr in G]
 json.dump(evlog,open('/root/bf/audio/sfx_events.json','w'))

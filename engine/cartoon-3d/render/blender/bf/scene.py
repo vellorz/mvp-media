@@ -11,7 +11,7 @@ WORDS=json.load(open('/mnt/project-files/modern-vista-social/experiments/2026-11
 SH={'S01':(0,170),'S02':(163,297),'S03':(292,432),'S04':(426,528),'S05':(520,652),'S06':(643,781),'S07':(775,866),'S08':(867,938),
     'S09':(931,1013),'S10':(1008,1057),'S11':(1051,1125),'S12':(1114,1218),'S13':(1210,1359),'S14':(1352,1487),'S15':(1481,1565),'S16':(1556,END)}
 sc['shots']=json.dumps(SH)
-LENS={'S01':30,'S02':28,'S03':32,'S04':30,'S05':30,'S06':32,'S07':28,'S08':28,'S09':26,'S10':40,'S11':24,'S12':42,'S13':38,'S14':34,'S15':34,'S16':30}
+LENS={'S01':30,'S02':28,'S03':32,'S04':30,'S05':30,'S06':37,'S07':28,'S08':28,'S09':26,'S10':40,'S11':36,'S12':42,'S13':38,'S14':34,'S15':34,'S16':30}
 FSTOP={'S01':1.4,'S02':5.6,'S03':1.2,'S04':1.4,'S05':0.9,'S06':0.9,'S07':1.0,'S08':1.2,'S09':1.0,'S10':1.6,'S11':1.2,'S12':0.9,'S13':2.2,'S14':1.0,'S15':0.9,'S16':1.6}
 for n in SH: cam(n,LENS[n],FSTOP[n])
 STAGE=os.environ.get('STAGE','all')
@@ -183,7 +183,7 @@ path(s,[(0,(1.0,-2.05,0.95),(0,0.2,1.9)),(45,(0.45,-2.3,0.95),(0,0.2,1.92)),(100
 s='S02'; r=SH[s]
 sp=[];W=[]
 for i in range(26):
-    sx=-1 if i%2 else 1; y=16+2.3*(i//2); x=sx*(7.6+0.5*((i//2)%4)); sp.append((x,y,0.14))
+    sx=-1 if i%2 else 1; y=16+2.3*(i//2)+[0,0.9,-0.6,0.4,-0.9,0.7][i%6]; x=sx*(7.2+[0.0,1.3,0.5,1.8,0.9,0.2,1.5][(i*3)%7]); sp.append((x,y,0.14))
     if i%3!=2: W.append((i,163,297,0,-4.5))
 ex=crowd(s,r,sp,['shopper','tourist','fanblue','fangold','granny','kid','shopper','fanblue'],9,walkers=W); ALL+=ex
 cop2=char('S02_cop','cop',s,(0,0,0.64),r,'whistle',arms=('arm','arm')); ALL.append(cop2)
@@ -284,7 +284,7 @@ BX=300
 room('prec',BX,9,7,3.6,'precinct','lino')
 BOARD_Z=1.58
 box('board_frame',(BX,3.47,BOARD_Z),(1.68,0.08,1.58),flat('boardwood',lin((110,76,44)),0.6),bv=0.02)
-boards=[plane(f'board{i}',(BX,3.42,BOARD_Z),1.6,1.5,card_mat(f'board{i}',f'board{i}',emit=0.35)) for i in range(6)]
+boards=[plane(f'board{i}',(BX,3.42,BOARD_Z),1.6,1.5,card_mat(f'board{i}',f'board{i}',emit=0.35)) for i in range(2)]+[plane(f'boardw{n:02d}',(BX,3.42,BOARD_Z),1.6,1.5,card_mat(f'boardw{n:02d}',f'boardw{n:02d}',emit=0.35)) for n in range(1,13)]
 box('chalktray',(BX,3.36,BOARD_Z-0.77),(1.6,0.14,0.05),flat('boardwood',lin((110,76,44))),bv=0.01)
 desk('pdesk',(BX-3.0,1.6)); phone('pphone',(BX-3.3,1.6,0.78)); L_=lamp('plamp',(BX-2.5,1.8,0.78))
 box('typew',(BX-2.9,1.45,0.86),(0.4,0.3,0.16),flat('typew',lin((50,56,52)),0.4),bv=0.03)
@@ -300,7 +300,8 @@ box('pcork',(BX+3.2,3.47,1.25),(1.0,0.04,0.6),flat('cork',lin((176,130,84)),0.8)
 for j in range(5): plane(f'pnote{j}',(BX+2.82+j*0.19,3.445,1.25+0.12*((j%2)*2-1)),0.16,0.22,card_mat('town%d_n'%(j%4),'town%d'%(j%4),emit=0.15))
 shelf_items('pshelf',(BX-3.0,3.36,1.55),1.6,5)
 # board swaps: roster -> stamped (on "off" f574) -> chalk BLACK FRIDAY letter by letter (f606-628)
-BT=[(0,573),(574,605),(606,615),(616,621),(622,627),(628,END)]
+WT=[606+round(n*22/12) for n in range(1,13)]   # one letter at a time, under the chalk as the cop sidesteps (606-628)
+BT=[(0,573),(574,WT[0]-1)]+[(WT[i],(WT[i+1]-1 if i<11 else END)) for i in range(12)]
 for b_,(a_,z_) in zip(boards,BT): vis(b_,[(a_,z_)])
 s='S05'; r=SH[s]
 cp=char('S05_cop','cop',s,(BX+0.0,1.95,0),r,'neutral',arms=('arm',[(520,'arm'),(588,'arm_chalk')]),walker=True)
@@ -319,7 +320,7 @@ walk(cp,586,600,(BX+0.0,1.95,0),(CH_L+0.58,3.12,0),step=3)
 walk(cp,606,628,(CH_L+0.58,3.12,0),(CH_R+0.58,3.12,0),step=3)
 walk(cp,632,652,(CH_R+0.58,3.12,0),(BX+0.98,2.62,0),step=3)
 for f,a_ in [(586,-10),(600,-82),(606,-84),(610,-80),(614,-85),(618,-80),(622,-84),(628,-82),(636,-20)]: arm(cp,-1,f,a_)
-path(s,[(520,(BX+0.35,-0.3,1.95),(BX+0.38,2.3,1.3)),(574,(BX+0.3,0.0,1.9),(BX+0.3,2.35,1.12)),(600,(BX-0.6,0.55,1.75),(BX+0.05,3.2,1.1)),(619,(BX-0.05,0.25,1.7),(BX+0.2,3.2,1.22)),(625,(BX+0.1,0.0,1.68),(BX+0.3,3.2,1.22)),(631,(BX+0.38,-0.02,1.66),(BX+0.6,3.15,1.22)),(640,(BX+0.5,-0.05,1.65),(BX+0.5,3.1,1.22)),(652,(BX+0.5,-0.1,1.65),(BX+0.5,3.1,1.22))])
+path(s,[(520,(BX+0.35,-0.3,1.95),(BX+0.38,2.3,1.3)),(574,(BX+0.3,-0.3,1.9),(BX+0.3,2.35,1.12)),(600,(BX-0.6,0.25,1.75),(BX+0.05,3.2,1.1)),(619,(BX-0.05,0.25,1.7),(BX+0.2,3.2,1.22)),(625,(BX+0.1,0.0,1.68),(BX+0.3,3.2,1.22)),(631,(BX+0.38,-0.02,1.66),(BX+0.6,3.15,1.22)),(640,(BX+0.5,-0.05,1.65),(BX+0.5,3.1,1.22)),(652,(BX+0.5,-0.1,1.65),(BX+0.5,3.1,1.22))])
 # ======================= SET C: store owners' office, 1961 (X=600) =======================
 CX=600
 room('off61',CX,7,6,3.2,'office','wood')
@@ -328,7 +329,7 @@ plane('off61_view',(CX+1.8,2.9,1.9),1.5,1.1,card_mat('fac2v','fac2',emit=0.6))
 for j in range(2): box(f'off61_mull{j}',(CX+1.8,2.86,1.9),(0.04 if j==0 else 1.5,0.03,1.1 if j==0 else 0.04),flat('winframe',lin((240,236,220))),bv=0)
 desk('odesk',(CX,0.9,0),w=2.0)
 reg=flat('register',lin((150,120,70)),0.3,metal=0.6)
-box('register',(CX-0.75,0.9,0.95),(0.45,0.4,0.3),reg,bv=0.03); box('register_top',(CX-0.75,1.0,1.17),(0.4,0.2,0.16),reg,bv=0.02)
+box('register',(CX+0.15,0.85,0.95),(0.45,0.4,0.3),reg,bv=0.03); box('register_top',(CX+0.15,0.95,1.17),(0.4,0.2,0.16),reg,bv=0.02)
 phone('ophone',(CX+0.8,0.8,0.78)); gifts('ogifts',(CX-2.4,1.8,0),k=5,seed=4); gifts('ogifts2',(CX+2.6,1.6,0),k=4,seed=8)
 plane('cal61',(CX+0.65,2.98,2.05),0.45,0.56,card_mat('cal61','cal61',emit=0.2))
 box('oshelf',(CX-1.6,2.8,1.25),(1.2,0.3,0.04),flat('deskwood',lin((110,70,44))),bv=0.01)
@@ -336,8 +337,8 @@ wallframe('oph1',(CX-0.2,2.98,2.25),0.7,0.5,'fac6'); wallframe('oph2',(CX-1.0,2.
 shelf_items('oshelf2',(CX+2.7,2.855,1.4),1.0,9); coatrack('orack',(CX+3.0,2.5),hats=1)
 for j in range(5): box(f'obook{j}',(CX-2.05+j*0.2,2.8,1.4),(0.12,0.24,0.26+0.03*(j%2)),flat('book%d'%(j%3),lin([(150,40,40),(40,70,120),(60,110,60)][j%3]),0.6),bv=0.01)
 s='S06'; r=SH[s]
-ow=char('S06_owner','owner',s,(CX-0.15,1.5,0),r,'neutral',arms=('arm','arm'))
-gr=char('S06_partner','granny',s,(CX+0.62,1.45,0),r,'stern',arms=('arm','arm'))
+ow=char('S06_owner','owner',s,(CX-0.5,1.51,0),r,'neutral',arms=('arm','arm'))
+gr=char('S06_partner','granny',s,(CX+0.75,1.45,0),r,'stern',arms=('arm','arm'))
 ALL+=[ow,gr]
 faces(ow,[(643,'neutral'),(664,'horror'),(673,'angry'),(690,'swirl'),(700,'talkD')])
 lipsync(ow,[w for w in WORDS if 23.0<=w[1]<=25.6],700,770)
@@ -346,7 +347,7 @@ faces(gr,[(643,'stern'),(666,'shock'),(680,'stern'),(712,'shock'),(740,'stern'),
 for f,a_ in [(700,-30),(706,-125),(720,-110),(730,-140),(745,-120),(754,-150),(770,-20)]: arm(ow,1,f,a_)
 for f,a_ in [(700,-20),(712,-110),(726,-95),(742,-125),(758,-100),(772,-15)]: arm(ow,-1,f,a_)
 bob(ow,[664,673,701,710,730,754],amt=9)
-path(s,[(643,(CX-1.9,-2.5,2.7),(CX+0.3,1.3,1.0)),(690,(CX+0.23,-1.3,1.8),(CX+0.235,1.45,1.35)),(754,(CX+0.2,-1.25,1.65),(CX+0.2,1.45,1.45)),(781,(CX+0.16,-1.2,1.6),(CX+0.16,1.45,1.5))])
+path(s,[(643,(CX-2.72,-1.91,2.6),(CX-0.12,1.46,1.15)),(690,(CX-1.95,-0.99,1.95),(CX-0.12,1.46,1.3)),(754,(CX-1.89,-0.91,1.92),(CX-0.12,1.46,1.33)),(781,(CX-1.85,-0.87,1.9),(CX-0.12,1.46,1.35))])
 # ======================= S07 / S08 / S09: back in the street (set A) =======================
 # ---- S07/S08: the owner thrusts up a hand-held BIG FRIDAY! placard in front of his store (1961); nobody looks; it droops on "not once"
 def placard(ch,sx,f_up,f_open,droop=None,held=-25):
@@ -354,11 +355,13 @@ def placard(ch,sx,f_up,f_open,droop=None,held=-25):
     piv=ch['A'][sx]['piv']; C=L.chr_coll(ch['shot'])
     hold=empty(ch['inst']+'_hold',(0,0,0),coll=C); hold.parent=piv; hold.location=(0,-0.03,-0.50); hold.rotation_euler=(0,math.radians(150)*sx,0)
     stick=cyl(ch['inst']+'_stick',(0,0,0),0.022,1.0,flat('stick',lin((150,105,60)),0.7),v=8,coll=C); stick.parent=hold; stick.location=(0,0.0,0.36)
-    card=plane(ch['inst']+'_placard',(0,0,0),1.0,0.5,card_mat('placard','placard',emit=0.25),coll=C); card.parent=hold; card.location=(0,-0.02,0.86)
+    bp=empty(ch['inst']+'_bpiv',(0,0,0),coll=C); bp.parent=hold; bp.location=(0,0,0.86)
+    card=plane(ch['inst']+'_placard',(0,0,0),1.0,0.5,card_mat('placard','placard',emit=0.25),coll=C); card.parent=bp; card.location=(0,-0.032,0)
+    back=plane(ch['inst']+'_placardb',(0,0,0),1.0,0.5,card_mat('placard_back','placard_back',emit=0.2),coll=C,face='+Y'); back.parent=bp; back.location=(0,0.032,0)
     fist=plane(ch['inst']+'_fist',(0,0,0),0.15,0.15,card_mat('fist','fist',emit=0.25),coll=C); fist.parent=hold; fist.location=(0,-0.03,0.0)
-    for o in (stick,card,fist): o['chr']=ch['inst']
-    # folded flat until it is thrust up, then it snaps open on the beat
-    card.scale=(1,1,0.04); card.keyframe_insert('scale',frame=f_open-1); card.scale=(1,1,1); card.keyframe_insert('scale',frame=f_open+3)
+    for o in (stick,card,back,fist): o['chr']=ch['inst']
+    # the stick runs between the two faces (hidden); the board is held back-out (cardboard side) until the beat, then spun round to the slogan
+    krot(bp,f_open-4,(0,0,math.pi)); krot(bp,f_open+2,(0,0,0))
     arm(ch,sx,f_up,held); arm(ch,sx,f_open,-150)
     if droop: arm(ch,sx,droop[0],-150); arm(ch,sx,droop[1],-112)
     return hold
@@ -369,7 +372,7 @@ ALL.append(o7); faces(o7,[(775,'hope'),(800,'neutral'),(820,'hope'),(846,'hope')
 arm(o7,-1,775,-15); arm(o7,-1,846,-40); arm(o7,-1,858,-20)
 placard(o7,1,775,846,held=-140)
 ex=crowd(s,r,[(SX+1.1,SY+3.6,0.14),(SX-0.4,SY+5.2,0.14)],['shopper','granny'],21); ALL+=ex
-path(s,[(775,(SX+2.05,SY-1.3,1.75),(SX+0.3,SY+0.2,1.5)),(790,(SX+2.0,SY-1.2,1.75),(SX+0.3,SY+0.25,1.48)),(846,(SX+2.05,SY-1.2,1.8),(SX+0.3,SY+0.3,1.52)),(854,(SX+2.4,SY-1.45,1.82),(SX+0.3,SY+0.3,1.56)),(866,(SX+2.45,SY-1.5,1.82),(SX+0.3,SY+0.3,1.56))])
+path(s,[(775,(SX+2.05,SY-1.3,1.75),(SX+0.3,SY+0.2,1.5)),(790,(SX+2.0,SY-1.2,1.75),(SX+0.3,SY+0.25,1.48)),(846,(SX+2.05,SY-1.2,1.8),(SX+0.3,SY+0.3,1.52)),(854,(SX+2.4,SY-1.45,1.82),(SX+0.3,SY+0.3,1.56)),(866,(SX+2.6,SY-1.62,1.86),(SX+0.3,SY+0.3,1.58))])
 s='S08'; r=SH[s]
 o8=char('S08_owner','owner',s,(SX,SY,0.14),r,'hope',arms=('arm','arm'))
 c8=char('S08_cop','cop',s,(-7.65,54.0,0.14),r,'deadpan',arms=('arm','arm'),walker=True)
@@ -383,6 +386,7 @@ sp8=[(-6.55,46.0,0.14),(-7.0,51.6,0.14),(-9.2,52.4,0.14),(-7.6,55.0,0.14),(-9.0,
 W8=[(0,867,938,0,4.2),(1,867,938,0,3.4),(2,867,938,0,-2.4),(3,867,938,0,3.0),(4,867,938,0,-2.8),(5,867,938,0,2.6)]
 ex=crowd(s,r,sp8,['shopper','tourist','granny','fanblue','kid','fangold'],23,walkers=W8); ALL+=ex
 b_=flat('mailbox',lin((40,70,140)),0.5); box('mbS08',(-7.6,43.75,0.69),(0.5,0.5,1.0),b_,coll=L.chr_coll('S08'),bv=0.12)
+plane('mbS08_front',(-7.6,43.495,0.72),0.46,0.64,card_mat('mailbox_front','mailbox_front',emit=0.15),coll=L.chr_coll('S08'))
 for sx_ in(-1,1):
     for sy_ in(-1,1): box(f'mbS08_leg{sx_}{sy_}',(-7.6+sx_*0.12,43.75+sy_*0.12,0.15),(0.06,0.06,0.3),INK,coll=L.chr_coll('S08'),bv=0)
 path(s,[(867,(-7.0,42.4,1.5),(-7.95,47.7,1.6)),(904,(-6.95,42.7,1.5),(-7.95,47.9,1.6)),(938,(-6.9,43.0,1.5),(-7.95,48.1,1.6))])
@@ -398,7 +402,7 @@ path(s,[(931,(-2.2,2.4,1.35),(0,0,1.8)),(955,(-1.55,1.75,1.15),(0,0,1.86)),(977,
 # ======================= SET D: the press room (X=900) =======================
 DX=900
 room('press',DX,10,8,4.5,'precinct','lino')
-pm=flat('pressgrey',lin((70,80,86)),0.4,metal=0.5); pk=flat('pressblack',lin((30,30,34)),0.4,metal=0.4)
+pm=flat('pressgrey',lin((40,112,112)),0.4,metal=0.5); pk=flat('pressblack',lin((30,30,34)),0.4,metal=0.4)
 for sx in(-1,1): box(f'press_side{sx}',(DX+sx*1.6,1.0,1.4),(0.3,2.0,2.8),pm,bv=0.05)
 rollers=[]
 for j,(y,z,r_) in enumerate([(0.3,0.95,0.32),(1.0,1.55,0.42),(1.7,2.2,0.32),(0.6,2.35,0.22)]):
@@ -406,7 +410,7 @@ for j,(y,z,r_) in enumerate([(0.3,0.95,0.32),(1.0,1.55,0.42),(1.7,2.2,0.32),(0.6
     for f in range(1008,1060,6): rl.rotation_euler=(math.radians((f-1008)*(-24 if j%2 else 24)),math.pi/2,0); rl.keyframe_insert('rotation_euler',frame=f)
     L.linear(rl)
 web=plane('press_web',(DX,-0.6,0.612),2.6,1.8,flat('newsprint_web',lin((214,206,186)),0.9),horiz=True)
-belt=box('press_belt',(DX,-1.8,0.55),(2.0,3.0,0.12),flat('belt',lin((44,40,38)),0.8),bv=0.02)
+belt=box('press_belt',(DX,-1.8,0.55),(2.0,3.0,0.12),flat('belt',lin((150,44,36)),0.8),bv=0.02)
 for sx in(-1,1): box(f'press_beltleg{sx}',(DX+sx*0.9,-1.8,0.25),(0.1,2.6,0.5),pm,bv=0.01)
 stack=box('press_stack',(DX,-3.6,0.35),(0.9,1.2,0.7),flat('newsprint',lin((236,230,214))),bv=0.01)
 for sx in(-1,1): box(f'press_ink{sx}',(DX+sx*1.6,0.6,3.05),(0.4,0.4,0.5),flat('inkwell',lin((180,40,40)),0.5),bv=0.03)
@@ -415,8 +419,11 @@ for j in range(8):
     tex_=['paper62','paper66','paper70'][min(2,j//3)]; f0=1004+j*7
     sh_=plane(f'sheet{j}',(DX,-0.4,0.62),0.8,1.1,card_mat(tex_+'_s',tex_,emit=0.06),horiz=True)
     kloc(sh_,f0,(DX,-0.6,0.616)); kloc(sh_,f0+24,(DX,-3.1,0.616)); L.linear(sh_); vis(sh_,[(max(1008,f0),min(1057,f0+24))])
+# hero sheet: the biggest headline slides off the belt and stops whole in frame for the last beat
+shH=plane('sheetH',(DX,-0.6,0.63),0.8,1.1,card_mat('paper70_s','paper70',emit=0.06),horiz=True)
+kloc(shH,1030,(DX,-0.6,0.63)); kloc(shH,1044,(DX,-2.1,0.63)); vis(shH,[(1030,1057)])
 s='S10'
-path(s,[(1008,(DX+0.25,-2.9,1.25),(DX,-0.2,0.95)),(1015,(DX+0.2,-2.6,1.2),(DX,-1.2,0.62)),(1057,(DX-0.1,-2.9,1.55),(DX,-2.2,0.6))])
+path(s,[(1008,(DX+0.25,-2.9,1.25),(DX,-0.2,0.95)),(1015,(DX+0.2,-2.6,1.2),(DX,-1.2,0.62)),(1044,(DX-0.05,-3.0,1.85),(DX,-1.95,0.6)),(1057,(DX-0.05,-3.05,1.9),(DX,-1.95,0.6))])
 # ======================= SET E: newsstands, town to town (X=1200) =======================
 EX=1200
 box('E_road',(EX,-6,-0.1),(80,10,0.2),ROADX,bv=0); box('E_walk',(EX,1.5,0.07),(80,5,0.14),WALK,bv=0.03)
@@ -434,11 +441,11 @@ for j in range(4):
     for q in range(4): box(f'stand{j}_pile{q}',(x-0.75+q*0.5,1.35,1.24),(0.42,0.56,0.08),flat('newsprint',lin((236,230,214))),bv=0.005)
     STANDS.append(x)
 s='S11'; r=SH[s]
-pb=char('S11_paperboy','paperboy',s,(EX-7.1,0.15,0.14),r,'shout',arms=('arm','arm_paper'),walker=True)
-walk(pb,1051,1125,(EX-7.1,0.15,0.14),(EX+1.3,0.15,0.14),step=2)
+pb=char('S11_paperboy','paperboy',s,(EX-6.2,0.05,0.14),r,'shout',arms=('arm','arm_paper'),walker=True)
+walk(pb,1051,1125,(EX-6.2,0.05,0.14),(EX+0.4,0.05,0.14),step=2)
 ALL.append(pb); faces(pb,[(1051,'shout'),(1068,'happy'),(1072,'shout'),(1092,'happy'),(1100,'shout')]); arm(pb,1,1051,-140); arm(pb,1,1066,-160); arm(pb,1,1080,-130); bob(pb,[1072,1100])
-ex=crowd(s,r,[(STANDS[0]+1.45,1.05,0.14),(STANDS[1]+1.45,1.1,0.14),(STANDS[2]+1.5,1.0,0.14),(STANDS[3]+1.45,1.1,0.14),(STANDS[3]+2.6,1.4,0.14)],['granny','tourist','shopper','fanblue','kid'],31,walkers=[(4,1051,1125,-0.6,0)]); ALL+=ex
-path(s,[(1051,(EX-8.5,-1.5,2.25),(EX-5.8,1.2,1.15)),(1125,(EX-0.1,-1.5,2.25),(EX+2.6,1.2,1.15))])
+ex=crowd(s,r,[(STANDS[1]+1.45,1.6,0.14),(STANDS[2]+1.5,1.5,0.14),(STANDS[3]+1.45,1.6,0.14),(STANDS[3]+2.6,1.7,0.14)],['tourist','shopper','fanblue','kid'],31); ALL+=ex
+path(s,[(1051,(EX-6.2+2.6,-1.5,1.75),(EX-6.2-0.6,0.5,1.2)),(1125,(EX+0.4+2.6,-1.5,1.75),(EX+0.4-0.6,0.5,1.2))])
 for o_ in (L.CAM['S11'],L.TGT['S11']):
     for fc in o_.animation_data.action.fcurves:
         for kp in fc.keyframe_points:
@@ -526,12 +533,12 @@ TIPX_R,TIPX_B=pgx(630),pgx(1350)
 kloc(hand_r,1249,(TIPX_R,1.66,LED_Z+0.003)); strokes(hand_r,cov_r,1262,1300,TIPX_R,pgy(115),pgy(946)); kloc(hand_r,1305,(TIPX_R,1.7,LED_Z+0.003))
 kloc(hand_b,1299,(TIPX_B,1.66,LED_Z+0.003)); strokes(hand_b,cov_b,1306,1346,TIPX_B,pgy(115),pgy(946)); kloc(hand_b,1352,(TIPX_B,1.7,LED_Z+0.003))
 vis(card_r,[(1249,1305)]); vis(card_b,[(1299,1352)])
-path(s,[(1210,(FX-0.05,0.85,2.25),(FX-0.05,0.859,LED_Z)),(1282,(FX-0.12,0.85,1.75),(FX-0.12,0.861,LED_Z)),(1319,(FX+0.06,0.85,1.8),(FX+0.06,0.861,LED_Z)),(1359,(FX+0.02,0.85,1.45),(FX+0.02,0.862,LED_Z))])
+path(s,[(1210,(FX-0.05,0.85,2.25),(FX-0.05,0.859,LED_Z)),(1282,(FX-0.12,0.78,1.75),(FX-0.12,0.791,LED_Z)),(1319,(FX+0.06,0.77,1.8),(FX+0.06,0.781,LED_Z)),(1359,(FX+0.02,0.79,1.45),(FX+0.02,0.802,LED_Z))])
 # S14: ledger total turns the books from red to black, pull back and up to the exec's wink
 s='S14'; r=SH[s]
 x14=char('S14_exec','exec81',s,(FX-0.1,1.5,0),r,'smug',arms=('arm','arm_redpen'))
 ALL.append(x14); faces(x14,[(1352,'smug'),(1400,'talk'),(1420,'smug'),(1454,'idea'),(1468,'wink'),(1480,'laugh')]); bob(x14,[1468])
-path(s,[(1352,(FX+0.02,0.85,1.45),(FX+0.02,0.862,LED_Z)),(1400,(FX+0.1,0.72,1.5),(FX+0.08,0.88,LED_Z+0.02)),(1408,(FX+0.15,0.45,1.55),(FX+0.06,0.9,LED_Z+0.02)),(1416,(FX+0.3,-0.75,1.6),(FX-0.05,1.45,1.3)),(1440,(FX+0.35,-1.2,1.6),(FX-0.08,1.5,1.38)),(1467,(FX+0.3,-1.9,1.6),(FX-0.1,1.5,1.45)),(1487,(FX+0.2,-2.1,1.62),(FX-0.1,1.5,1.5))])
+path(s,[(1352,(FX+0.02,0.79,1.45),(FX+0.02,0.802,LED_Z)),(1400,(FX+0.1,0.72,1.5),(FX+0.08,0.88,LED_Z+0.02)),(1408,(FX+0.15,0.45,1.55),(FX+0.06,0.9,LED_Z+0.02)),(1416,(FX+0.32,-0.9,1.6),(FX-0.05,1.45,1.3)),(1440,(FX+0.35,-1.2,1.6),(FX-0.08,1.5,1.38)),(1467,(FX+0.3,-1.9,1.6),(FX-0.1,1.5,1.25)),(1487,(FX+0.2,-2.1,1.62),(FX-0.1,1.5,1.22))])
 # ======================= SET H: 1981 downtown at dawn, Hartwell's (X=1800) =======================
 HX=1800
 box('H_road',(HX,-7,-0.1),(90,10,0.2),ROADX,bv=0); box('H_walk',(HX,0,0.07),(90,5,0.14),WALK,bv=0.03)
@@ -574,10 +581,11 @@ faces(o15,[(1481,'deadpan'),(1489,'raise'),(1505,'deadpan'),(1519,'eyeroll'),(15
 arm(o15,-1,1481,-22); arm(o15,1,1481,-22); arm(o15,1,1519,-19); arm(o15,1,1540,-22)
 path(s,[(1481,(HX+8.0,-3.6,1.3),(HX+9.0,-0.9,1.0)),(1537,(HX+8.4,-3.25,1.35),(HX+9.0,-0.9,1.08)),(1565,(HX+8.9,-3.0,1.4),(HX+9.0,-0.9,1.16))])
 s='S16'; r=SH[s]
-sp=[(HX-3.0,-0.5,0.14),(HX-1.9,-1.7,0.14),(HX-0.8,-0.6,0.14),(HX+0.6,-1.0,0.14),(HX+2.9,-2.3,0.14),(HX+3.0,-0.7,0.14),(HX-2.4,-2.9,0.14),(HX+2.2,-1.6,0.14),(HX-0.2,-2.2,0.14),(HX+3.8,-1.1,0.14)]
+sp=[(HX-2.9,0.2,0.14),(HX-1.7,-1.6,0.14),(HX-0.9,0.9,0.14),(HX+0.4,-0.3,0.14),(HX+2.9,-2.4,0.14),(HX+2.0,1.1,0.14),(HX-2.6,-2.8,0.14),(HX+1.4,-1.2,0.14),(HX-0.3,-2.3,0.14),(HX+3.6,-0.4,0.14)]
 ordr=sorted(range(len(sp)),key=lambda i:sp[i][0]); SLOT=[(HX-2.2,1.0),(HX-1.6,1.9),(HX-1.0,0.9),(HX-0.4,1.85),(HX+0.2,0.95),(HX+0.8,1.9),(HX+1.4,0.9),(HX+2.0,1.85),(HX+2.6,1.0),(HX+3.2,1.9)]
-W16=[(i,1650+2*k,1690,SLOT[k][0]-sp[i][0],SLOT[k][1]-sp[i][1]) for k,i in enumerate(ordr)]   # everyone heads for the opening doors and gathers at them
-ex=crowd(s,r,sp,['mullet','perm','kid','granny','shopper','tourist','mullet','perm','fanblue','kid'],41,walkers=W16); ALL+=ex
+ex=crowd(s,r,sp,['mullet','perm','kid','granny','shopper','tourist','mullet','perm','fanblue','kid'],41); ALL+=ex
+for i,e in enumerate(ex):
+    bob(e,[1648+2*i,1668+3*i],amt=10); arm(e,1,1640,-20); arm(e,1,1650+2*i,-150); arm(e,1,1676+2*i,-120); arm(e,-1,1658+2*i,-130)
 for i,e in enumerate(ex): faces(e,[(1640+3*i,'shock'),(1652+2*i,list(e['F'])[0]),(1690+2*i,'happy')])
 path(s,[(1556,(HX+1.2,-9.5,1.9),(HX,1.0,2.4)),(1590,(HX+1.4,-5.4,2.0),(HX+0.2,0.0,1.6)),(1616,(HX+6.0,-6.4,2.6),(HX-0.6,0.4,1.5)),(1646,(HX+3.6,-6.6,2.2),(HX-1.6,0.6,1.6)),(1700,(HX-0.4,-5.8,1.7),(WX,WY,1.8)),
         (1709,(WX+0.35,-2.3,PZ+0.1),(WX,WY+0.17,PZ-0.05)),(1727,(WX+0.15,-1.85,PZ+0.05),(WX,WY+0.17,PZ-0.05)),(END,(WX+0.05,-1.72,PZ+0.04),(WX,WY+0.17,PZ-0.05))])

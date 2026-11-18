@@ -50,7 +50,7 @@ SPEC=[('S01','S02','B','podium','podium',None),
       ('S13','S14','-','ledger_cover','ledger_cover',None),
       ('S14','S15','B','S14_exec','S15_oldcop',None),
       ('S15','S16','B','S15_oldcop','S16_x3_granny',None),
-      ('S11','S12','B','S11_x2_shopper','S12_exec',None)]
+      ('S11','S12','B','S11_paperboy','S12_exec',None)]
 REP=[]
 for A,B,side,oa,obn,goalA in SPEC:
     a,b=SH[B][0],SH[A][1]; mid=(a+b)//2; fm=[a,mid,b]
@@ -69,7 +69,7 @@ for A,B,side,oa,obn,goalA in SPEC:
 for k in (184,190):
     p0,_=scr('S02','S02_cop',k)
     if p0[1]<0.40: solve('S02','S02_cop',np.array([p0[0],0.42]),[k],[k])
-for k,gx in ((198,0.30),(206,0.12),(216,-0.2),(228,-0.28),(240,-0.32),(252,-0.35)):
+for k,gx in ((198,0.30),(206,0.12),(216,-0.2),(228,-0.28)):
     p0,_=scr('S02','S02_cop',k); solve('S02','S02_cop',np.array([gx,max(0.40,p0[1])]),[k],[k])
 json.dump(REP,open('/root/bf/bridge/bridges.json','w'),indent=1)
 bpy.ops.wm.save_as_mainfile(filepath='/root/bf/blend/bf.blend'); print('BRIDGES_OK',sum(r['bridged'] for r in REP),'/14')

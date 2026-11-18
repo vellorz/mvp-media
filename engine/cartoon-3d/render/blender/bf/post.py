@@ -1,6 +1,6 @@
 # Post: per-shot grade (rule 187 window) -> dissolves (smoothstep, varied lengths) -> captions on top (rule 186) -> encode with the mix.
 # python3 post.py SRC OUT.mp4 [scale]     SRC holds <shot>_<first>_.mp4 clips (PC encode) or <shot>/f_####.png folders
-import sys, os, glob, json, subprocess, numpy as np, re
+import sys, os, glob, json, subprocess, numpy as np, re, cv2
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 SRC,OUT=sys.argv[1],sys.argv[2]; K=float(sys.argv[3]) if len(sys.argv)>3 else 1.0
 W,H=int(1440*K),int(2560*K); END=1752
@@ -13,7 +13,19 @@ TINT={'S01':(1.03,1.0,0.96),'S02':(1.03,1.0,0.96),'S03':(1.04,1.0,0.95),'S04':(1
 # per-shot brightness targets: day streets bright, lamp-lit interiors darker (Rick's film swings 0.2-0.7 across scenes)
 LT={'S01':0.50,'S02':0.52,'S03':0.50,'S04':0.48,'S05':0.39,'S06':0.40,'S07':0.48,'S08':0.50,'S09':0.50,'S10':0.37,'S11':0.46,'S12':0.38,'S13':0.40,'S14':0.38,'S15':0.44,'S16':0.47}
 # vignette strength (corner multiplier = 1-k): interiors get Rick's lantern falloff, exteriors a light one
-VIG={n:(0.70 if n in ('S05','S06','S10','S12','S13','S14') else 0.35) for n in SH}
+PAY0,PAY1=1690,1709; PAYP=(0.0,1.0,0.9,1.0,(1.06,0.97,1.0))   # S16 payoff grade (poster <1% clipped, luma ~143 vs file 117)
+INTR=('S05','S06','S10','S12','S13','S14')
+VIG={n:(0.70 if n in INTR else 0.10) for n in SH}   # start values; interiors are calibrated per shot below to corner/centre 0.38 (guide 0.33-0.42); day exteriors light only
+BLOOM=0.0   # light glow on emitters (lamps, screens, lit windows): guide L8
+def bloom(x,amt=BLOOM):
+    h,w=x.shape[:2]; sm=cv2.resize(x,(w//4,h//4),interpolation=cv2.INTER_AREA); Y=gray(sm)
+    m=np.clip((Y-0.80)/0.2,0,1)[...,None]*sm
+    g=cv2.GaussianBlur(m,(0,0),10*K)+cv2.GaussianBlur(m,(0,0),28*K)
+    g=cv2.resize(g,(w,h),interpolation=cv2.INTER_LINEAR); return np.clip(x+amt*g*(1-x),0,1)
+def vratio(x):  # verifier metric: 4 corner patches (15%W x 10%H) / centre patch (40%W x 30%H)
+    h,w=x.shape[:2]; Y=gray(x); cw,ch=int(w*0.15),int(h*0.10)
+    c=np.mean([Y[:ch,:cw].mean(),Y[:ch,-cw:].mean(),Y[-ch:,:cw].mean(),Y[-ch:,-cw:].mean()])
+    m=Y[int(h*0.35):int(h*0.65),int(w*0.3):int(w*0.7)].mean(); return c/max(m,1e-4)
 _VM={}
 def vig(x,k):
     h,w=x.shape[:2]; key=(h,w,k)
@@ -97,8 +109,16 @@ if __name__=='__main__':
         for i in range(rd.n):
             fr=rd.next()
             if i in idx: smp.append(fr[::8,::8])
-        b=solve(smp,TINT[n],LT[n],VIG[n]); P[n]=b[1]; rep[n]=dict(mean=b[2],sat=b[3],p2=b[4],p98=b[5],gamma=round(float(b[1][2]),2),satk=round(float(b[1][3]),2)); print('GRADE',n,rep[n],flush=True)
-    json.dump({'grade':rep,'captions':CAPS,'font_px':fs},open(OUT+'.post.json','w'),indent=1,default=str)
+        b=solve(smp,TINT[n],LT[n],VIG[n])
+        if n in INTR:
+            lo_,hi_=0.0,0.9
+            for _ in range(14):
+                k=(lo_+hi_)/2; r=np.mean([vratio(vig(apply(q,b[1]),k)) for q in smp])
+                if r>0.38: lo_=k
+                else: hi_=k
+            VIG[n]=round((lo_+hi_)/2,3); b=solve(smp,TINT[n],LT[n],VIG[n])
+        P[n]=b[1]; rep[n]=dict(mean=b[2],sat=b[3],p2=b[4],p98=b[5],gamma=round(float(b[1][2]),2),satk=round(float(b[1][3]),2),vig=VIG[n],vratio=round(float(np.mean([vratio(vig(apply(q,b[1]),VIG[n])) for q in smp])),3)); print('GRADE',n,rep[n],flush=True)
+    json.dump({'grade':rep,'payoff_grade':dict(from_frame=PAY0,full_at=PAY1,params=PAYP[:4]),'captions':CAPS,'font_px':fs},open(OUT+'.post.json','w'),indent=1,default=str)
     widths=[]
     R={n:Reader(n) for n in SH}; cache={}
     enc=subprocess.Popen(['ffmpeg','-y','-v','error','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r','30','-i','-','-i','/root/bf/audio/mix.wav',
@@ -106,7 +126,12 @@ if __name__=='__main__':
     ci=0; capimg=None; capkey=None
     for f in range(END+1):
         act=[n for n,(a,b) in SH.items() if a<=f<=b]
-        frames={n:vig(apply(R[n].next(),P[n]),VIG[n]) for n in act}
+        frames={}
+        for n in act:
+            raw=R[n].next(); o=apply(raw,P[n])
+            if n=='S16' and f>=PAY0:   # payoff close-up: protect the poster's real colours (no highlight stretch, gentle gamma)
+                q=apply(raw,PAYP); t=min(1.0,(f-PAY0+1)/(PAY1-PAY0+1)); t=t*t*(3-2*t); o=o*(1-t)+q*t
+            frames[n]=vig(bloom(o,BLOOM*(0.4 if n in ('S10','S13') else 1.0)),VIG[n])
         if len(act)==1: img=frames[act[0]]
         else:
             A,B=act[0],act[1]; s0,e0=SH[B][0],SH[A][1]; t=(f-s0+1)/(e0-s0+2); w_=t*t*(3-2*t); img=frames[A]*(1-w_)+frames[B]*w_

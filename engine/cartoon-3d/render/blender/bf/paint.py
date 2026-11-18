@@ -193,7 +193,7 @@ def skyline(name,era=1950,W=4096,H=1400,seed=19,night=False):
     d.line([cx,H-840,cx,H-880],fill=INK,width=6); d.line([cx,H-840,cx+30,H-840],fill=INK,width=6)
     jr(d,cx-110,H-980,cx+110,H-560,4,mul(c,0.55),3); jr(d,cx-180,H-560,cx+180,H,4,mul(c,0.55),4)
     im.save(T+name+'.png')
-def chalkboard(name,state):  # state 0 roster, 1 cancelled, 2..5 BLACK FRIDAY writing progress
+def chalkboard(name,state,nl=None):  # state 0 roster, 1 cancelled, 2..5 BLACK FRIDAY writing progress; nl = exact letter count (letter-by-letter reveal)
     W,H=1536,1440; im=wash(W,H,(46,62,54),0.10,60); d=ImageDraw.Draw(im)
     for _ in range(420): x,y=random.uniform(0,W),random.uniform(0,H); d.line([x,y,x+random.uniform(20,90),y+random.uniform(-6,6)],fill=(70,86,78),width=3)
     ch=(232,232,220); f=font(FSN,60); f2=font(FSN,44)
@@ -206,7 +206,7 @@ def chalkboard(name,state):  # state 0 roster, 1 cancelled, 2..5 BLACK FRIDAY wr
         st=Image.new('RGBA',(700,200),(0,0,0,0)); sd=ImageDraw.Draw(st); sd.rectangle([6,6,694,194],outline=(220,60,50),width=12); text(sd,(350,100),'CANCELLED',font(FS,86),(220,60,50))
         st=st.rotate(10,expand=True,resample=Image.BICUBIC); stamp=st
     if state>=2:
-        d.rectangle([60,1080,W-60,H-60],fill=(46,62,54)); s='BLACK FRIDAY'; n=min(len(s),int(len(s)*(state-1)/4)); 
+        d.rectangle([60,1080,W-60,H-60],fill=(46,62,54)); s='BLACK FRIDAY'; n=nl if nl is not None else min(len(s),int(len(s)*(state-1)/4)); 
         fb=font(FS,150); x0=W/2-d.textlength(s,font=fb)/2   # letters appear left to right where the chalk is
         if n>0: text(d,(x0,1248),s[:n],fb,(250,250,240),'lm',0)
     if state>=1: im.paste(stamp,(720,250),stamp)   # stamp stays on the roster through the chalk writing
@@ -222,7 +222,7 @@ FRI={1962:23,1966:25,1968:29,1969:28,1970:27,1971:26,1981:27}
 def newspaper(name,head,sub,year,size=1.0,W=1024,H=1400,seed=70):
     im=wash(W,H,(238,232,214),0.04,seed); d=ImageDraw.Draw(im); r=random.Random(seed)
     text(d,(W/2,70),'THE PHILADELPHIA DAILY' if 'TOWN' not in sub else sub.split('|')[1],font(FS,56),INK)
-    d.line([40,110,W-40,110],fill=INK,width=4); text(d,(W/2,135),f'FRIDAY, NOVEMBER {FRI[year]}, {year}     {"5 CENTS" if year<1965 else ("10 CENTS" if year<1975 else "25 CENTS")}',font(FSN,24),INK); d.line([40,158,W-40,158],fill=INK,width=2)
+    d.line([40,110,W-40,110],fill=INK,width=4); text(d,(W/2,135),(f'SATURDAY, NOVEMBER 28, {year}' if year==1981 else f'FRIDAY, NOVEMBER {FRI[year]}, {year}')+f'     {"5 CENTS" if year<1965 else ("10 CENTS" if year<1975 else "25 CENTS")}',font(FSN,24),INK); d.line([40,158,W-40,158],fill=INK,width=2)
     fs=int(130*size); fh=font(FS,fs)
     while d.textlength(head,font=fh)>W-60: fs-=6; fh=font(FS,fs)
     text(d,(W/2,170+fs*0.6),head,fh,INK)

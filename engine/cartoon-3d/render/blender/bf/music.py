@@ -81,7 +81,7 @@ def whistle(dur=0.5):
     n=int(dur*SR); t=np.arange(n)/SR; vib=1+0.03*np.sign(np.sin(2*np.pi*28*t)); x=np.sin(2*np.pi*np.cumsum(2900*vib)/SR)*0.7+0.15*rng.normal(0,1,n)
     return x*np.minimum(1,t/0.01)*np.minimum(1,(dur-t)/0.04)
 def whoosh(dur=0.5,up=True):
-    n=int(dur*SR); t=np.arange(n)/SR; x=noise(dur,lp=1200); e=np.sin(np.pi*t/dur)**2; return x*e
+    n=int(dur*SR); t=np.arange(n)/SR; x=noise(dur,lp=1200); e=np.sin(np.pi*t/dur)**0.5; return x*e
 def thump(f=70,dur=0.3):
     n=int(dur*SR); t=np.arange(n)/SR; return (np.sin(2*np.pi*f*t)*np.exp(-t*18)+0.6*noise(dur,hp=1)*np.exp(-t*60))
 def click(): n=int(0.03*SR); return noise(0.03,hp=1)*np.exp(-np.linspace(0,12,n))
@@ -91,17 +91,45 @@ def crowd(dur):
     x=noise(dur,lp=700); n=len(x); return x*np.minimum(1,np.arange(n)/(0.3*SR))*np.minimum(1,(n-np.arange(n))/(0.3*SR))
 EV=[]
 for f in (8,62,140): EV.append((f,whistle(0.45),0.55))
-for f,fr in [(20,330),(75,392),(110,294),(150,349),(156,262),(443,311),(449,370),(455,277)]: EV.append((f,horn(0.3,fr),0.5))
-EV+= [(128,whoosh(0.7),0.6),(240,whoosh(0.5),0.5),(300,crowd(3.8),0.22),(308,click(),0.7),(355,crowd(1.6),0.3),(483,whoosh(0.25),0.55),(489,thump(240,0.12),0.45),
+for f,fr in [(20,330),(75,392),(110,294),(146,349),(156,262),(443,311),(452,370),(461,277)]: EV.append((f,horn(0.28,fr),0.5))   # horn hits 9+ f apart so they never overlap
+EV+= [(126,whoosh(0.4),0.6),(240,whoosh(0.5),0.5),(300,crowd(3.8),0.22),(355,crowd(1.6),0.3),(483,whoosh(0.25),0.55),(489,thump(240,0.12),0.45),
       (574,thump(60,0.35),1.0),(645,whoosh(0.4),0.35),(842,whoosh(0.3),0.5),(851,ding(84,0.9),0.45),(851,ding(91,0.9),0.35),
       (904,tone(700,180,0.6),0.35),(958,tone(1800,2400,0.25),0.15),(977,tone(1900,2600,0.25),0.15),(1116,whoosh(0.6),0.45),(1184,click(),0.9),
       (1467,ding(96,0.5),0.5),(1471,ding(100,0.9),0.45),(1468,thump(180,0.12),0.4),(1646,crowd(2.0),0.35),(1640,noise(0.6,lp=300)*np.hanning(int(0.6*SR)),0.3),
       (1699,whoosh(0.3),0.75),(1709,thump(90,0.25),0.6),(1727,ding(84,1.6),0.4),(1727,ding(89,1.6),0.3),(1727,ding(96,1.6),0.25)]
-for f in range(606,628,3): EV.append((f,chalk(0.09),0.35))
-for f in range(1270,1300,4): EV.append((f,chalk(0.07),0.2))
-for f in range(1306,1346,4): EV.append((f,chalk(0.07),0.2))
-for f in range(1010,1056,6): EV.append((f,thump(150,0.08),0.35))
-for f,x,g in EV: sput(f,x,g)
+EV.append((606,chalk(0.75),0.35))   # one continuous chalk scratch while the letters appear
+EV.append((1270,chalk(1.0),0.2))   # one continuous pen scribble
+EV.append((1306,chalk(1.3),0.2))
+for f in range(1010,1056,12): EV.append((f,thump(150,0.08),0.35))   # press thumps on every other beat
+# A6: level every SFX event against the bed under it so each lands at the same offset over the bed
+# (one common offset; mix.py then sets the global SFX gain so the median offset is +10 dB in the mix)
+BEDW=bed/np.abs(bed).max()*0.7
+def rms(a): return float(np.sqrt(np.mean(a**2))+1e-9)
+# A6 levelling, measured the strict way: onsets within 8 f form one group; a group's span runs from its first onset to its
+# last onset + 0.3 s (at least 0.3 s of bed); the group's loudest 50 ms must sit 8-12 dB over the bed RMS across that span.
+def pk50(a):
+    n=int(0.05*SR); return max(rms(a[k:k+n]) for k in range(0,max(1,len(a)-n+1),n//4))
+evs=sorted(EV,key=lambda e:e[0]); G=[]
+for f,x,g in evs:
+    if G and f-G[-1]['f0']<=8: G[-1]['ev'].append((f,x,g)); G[-1]['f1']=f
+    else: G.append(dict(f0=f,f1=f,ev=[(f,x,g)]))
+for gr in G:
+    gr['i']=int(gr['f0']/30*SR); gr['w']=min(int((gr['f1']-gr['f0'])/30*SR)+int(0.3*SR),N-gr['i']); gr['k']=1.0
+    tr=np.zeros(N)
+    for f,x,g in gr['ev']:
+        # gentle 2:1 compression inside each sound so its peak and body sit close together
+        h=int(0.05*SR); n=len(x); env=np.array([rms(x[k:k+h]) for k in range(0,n,h)]); emax=env.max()
+        gk=np.clip((np.maximum(env,emax*10**(-14/20))/emax)**-0.65,1,10**(7/20)); y=x*g*np.interp(np.arange(n),np.arange(len(env))*h+h/2,gk)
+        i=int(f/30*SR); j=min(N,i+n); tr[i:j]+=y[:j-i]
+    gr['tr']=tr*rms(BEDW[gr['i']:gr['i']+gr['w']])/pk50(tr[gr['i']:gr['i']+gr['w']])*10**(16/20)
+for it in range(12):   # overlapping tails add up: re-level every group against the summed track until all sit at +16 (stem units)
+    S[:]=sum(gr['tr']*gr['k'] for gr in G)
+    for gr in G:
+        i,w=gr['i'],gr['w']   # robust: average of three comparison spans (span, span+0.2 s, fixed 0.5 s)
+        vv=[20*np.log10(pk50(S[i:i+ww])/rms(BEDW[i:i+ww])) for ww in (w,w+int(0.2*SR),int(0.5*SR))]; po=(min(vv)+max(vv))/2; gr['k']*=10**((16-po)/20*0.8)
+S[:]=sum(gr['tr']*gr['k'] for gr in G)
+evlog=[dict(f=gr['f0'],f1=gr['f1'],i=gr['i'],w=gr['w']) for gr in G]
+json.dump(evlog,open('/root/bf/audio/sfx_events.json','w'))
 def w(path,x):
     x=np.clip(x,-1,1); y=(x*32767).astype(np.int16); st=np.stack([y,y],1)
     with wave.open(path,'wb') as fh: fh.setnchannels(2); fh.setsampwidth(2); fh.setframerate(SR); fh.writeframes(st.tobytes())

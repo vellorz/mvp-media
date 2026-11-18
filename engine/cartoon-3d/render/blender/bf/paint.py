@@ -117,7 +117,21 @@ def dept_store(name,era=1950,W=2048,H=1536,seed=40,banner=None):
     text(d,(W/2,top-64),'HARTWELL & SONS' if era<1970 else 'HARTWELL\'S',font(FS,84),(236,206,120),stroke=2)
     # ground floor display windows (big)
     for c in range(4):
-        x0=40+c*510; d.rectangle([x0,top+20,x0+430,H-70],fill=(70,82,96)); jr(d,x0,top+20,x0+430,H-70,6,seed=c)
+        x0=40+c*510; y0w,y1w=top+20,H-70
+        for yy in range(y0w,y1w):   # lit display: warm glow fading to a darker floor
+            t=(yy-y0w)/(y1w-y0w); d.line([x0,yy,x0+430,yy],fill=(int(236-80*t),int(200-90*t),int(150-80*t)))
+        d.rectangle([x0,y1w-150,x0+430,y1w],fill=(120,40,46))          # display plinth (red velvet)
+        for m in range(2):                                               # two mannequins in holiday coats
+            mx=x0+110+m*200; mc=[(40,90,60),(160,40,40),(60,80,150),(200,150,40)][(c+m)%4]
+            d.polygon([(mx-60,y1w-150),(mx+60,y1w-150),(mx+35,y1w-470),(mx-35,y1w-470)],fill=mc,outline=INK); d.line([(mx-60,y1w-150),(mx-35,y1w-470)],fill=INK,width=6); d.line([(mx+60,y1w-150),(mx+35,y1w-470)],fill=INK,width=6)
+            d.ellipse([mx-38,y1w-560,mx+38,y1w-470],fill=(240,232,220),outline=INK,width=6)
+            d.rectangle([mx-44,y1w-580,mx+44,y1w-560],fill=INK)
+        for g in range(4):                                               # gift stack
+            gx=x0+20+(g%2)*60+(c*37)%120; gy=y1w-150-(g//2)*70; gc=[(200,40,40),(40,110,70),(250,200,60),(60,90,170)][(g+c)%4]
+            d.rectangle([gx,gy-64,gx+70,gy],fill=gc,outline=INK,width=5); d.line([gx+35,gy-64,gx+35,gy],fill=(250,240,220),width=7)
+        tx=x0+380; d.polygon([(tx,y1w-520),(tx-50,y1w-150),(tx+50,y1w-150)],fill=(40,110,60),outline=INK); d.ellipse([tx-10,y1w-540,tx+10,y1w-515],fill=(250,200,60))
+        for k in range(3): d.line([x0+60+k*140,y0w+20,x0+200+k*140,y0w+300],fill=(255,250,240),width=10)   # glass glints
+        jr(d,x0,y0w,x0+430,y1w,6,seed=c)
         d.rectangle([x0,top+20,x0+430,top+70],fill=(160,40,40) if era<1970 else (30,30,30)); 
         for k in range(0,430,40): d.polygon([(x0+k,top+70),(x0+k+40,top+70),(x0+k+20,top+100)],fill=(160,40,40) if era<1970 else (30,30,30))
     d.rectangle([0,H-70,W,H],fill=(120,110,100))
@@ -180,8 +194,8 @@ def skyline(name,era=1950,W=4096,H=1400,seed=19,night=False):
     jr(d,cx-110,H-980,cx+110,H-560,4,mul(c,0.55),3); jr(d,cx-180,H-560,cx+180,H,4,mul(c,0.55),4)
     im.save(T+name+'.png')
 def chalkboard(name,state):  # state 0 roster, 1 cancelled, 2..5 BLACK FRIDAY writing progress
-    W,H=1536,1024; im=wash(W,H,(46,62,54),0.10,60); d=ImageDraw.Draw(im)
-    for _ in range(300): x,y=random.uniform(0,W),random.uniform(0,H); d.line([x,y,x+random.uniform(20,90),y+random.uniform(-6,6)],fill=(70,86,78),width=3)
+    W,H=1536,1440; im=wash(W,H,(46,62,54),0.10,60); d=ImageDraw.Draw(im)
+    for _ in range(420): x,y=random.uniform(0,W),random.uniform(0,H); d.line([x,y,x+random.uniform(20,90),y+random.uniform(-6,6)],fill=(70,86,78),width=3)
     ch=(232,232,220); f=font(FSN,60); f2=font(FSN,44)
     text(d,(W/2,90),'DUTY ROSTER - FRI. NOV. 24',f,ch)
     names=['SGT. KELLY','OFC. RUIZ','OFC. BROWN','OFC. MOSS','OFC. DUNN','OFC. LEE']
@@ -192,9 +206,9 @@ def chalkboard(name,state):  # state 0 roster, 1 cancelled, 2..5 BLACK FRIDAY wr
         st=Image.new('RGBA',(700,200),(0,0,0,0)); sd=ImageDraw.Draw(st); sd.rectangle([6,6,694,194],outline=(220,60,50),width=12); text(sd,(350,100),'CANCELLED',font(FS,86),(220,60,50))
         st=st.rotate(10,expand=True,resample=Image.BICUBIC); stamp=st
     if state>=2:
-        d.rectangle([60,620,W-60,H-60],fill=(46,62,54)); s='BLACK FRIDAY'; n=min(len(s),int(len(s)*(state-1)/4)); 
+        d.rectangle([60,1080,W-60,H-60],fill=(46,62,54)); s='BLACK FRIDAY'; n=min(len(s),int(len(s)*(state-1)/4)); 
         fb=font(FS,150); x0=W/2-d.textlength(s,font=fb)/2   # letters appear left to right where the chalk is
-        if n>0: text(d,(x0,880),s[:n],fb,(250,250,240),'lm',0)
+        if n>0: text(d,(x0,1248),s[:n],fb,(250,250,240),'lm',0)
     if state>=1: im.paste(stamp,(720,250),stamp)   # stamp stays on the roster through the chalk writing
     d.rectangle([0,0,W,H],outline=(120,86,54),width=40); im.save(T+name+'.png')
 def banner(name,txt='BIG FRIDAY!',sub='NOV. 24 - 1961 - SHOP DOWNTOWN',W=2048,H=512):
@@ -208,7 +222,7 @@ FRI={1962:23,1966:25,1968:29,1969:28,1970:27,1971:26,1981:27}
 def newspaper(name,head,sub,year,size=1.0,W=1024,H=1400,seed=70):
     im=wash(W,H,(238,232,214),0.04,seed); d=ImageDraw.Draw(im); r=random.Random(seed)
     text(d,(W/2,70),'THE PHILADELPHIA DAILY' if 'TOWN' not in sub else sub.split('|')[1],font(FS,56),INK)
-    d.line([40,110,W-40,110],fill=INK,width=4); text(d,(W/2,135),f'FRIDAY, NOVEMBER {FRI[year]}, {year}     5 CENTS',font(FSN,24),INK); d.line([40,158,W-40,158],fill=INK,width=2)
+    d.line([40,110,W-40,110],fill=INK,width=4); text(d,(W/2,135),f'FRIDAY, NOVEMBER {FRI[year]}, {year}     {"5 CENTS" if year<1965 else ("10 CENTS" if year<1975 else "25 CENTS")}',font(FSN,24),INK); d.line([40,158,W-40,158],fill=INK,width=2)
     fs=int(130*size); fh=font(FS,fs)
     while d.textlength(head,font=fh)>W-60: fs-=6; fh=font(FS,fs)
     text(d,(W/2,170+fs*0.6),head,fh,INK)
@@ -220,7 +234,7 @@ def newspaper(name,head,sub,year,size=1.0,W=1024,H=1400,seed=70):
         x0=W/2+20 if col==0 else 60; ys=y if col==0 else y+400
         for k in range(26 if col==0 else 14): d.line([x0,ys+k*16,x0+(W/2-80)*r.uniform(0.8,1),ys+k*16],fill=(120,114,104),width=6)
     im.save(T+name+'.png')
-def ledger(name,state,W=1536,H=1024,seed=80):  # state 0: red entries only; 1..4: black total being written; 
+def ledger(name,state,W=1536,H=1024,seed=80,figs=True):  # state 0: red entries only; 1..4: black total being written; 
     im=wash(W,H,(240,234,214),0.04,seed); d=ImageDraw.Draw(im); r=random.Random(seed)
     for y in range(80,H,40): d.line([0,y,W,y],fill=(110,150,190),width=4)
     for x in (120,W/2-40,W/2,W-260): d.line([x,0,x,H],fill=(200,90,90),width=5)
@@ -230,12 +244,13 @@ def ledger(name,state,W=1536,H=1024,seed=80):  # state 0: red entries only; 1..4
     for k in range(18):
         y=100+k*40
         d.text((140,y),r.choice(['rent','wages','stock','coal','lights','window','ads','tax','freight']),font=hand,fill=(50,46,60))
-        d.text((W/2-200,y),f'({r.randint(12,980)}.{r.randint(10,99)})',font=hand,fill=(196,30,30))
+        fig=f'({r.randint(12,980)}.{r.randint(10,99)})'
+        if figs: d.text((W/2-200,y),fig,font=hand,fill=(196,30,30))
     for k in range(int(state*4.5)):
         y=100+k*40; d.text((W/2+40,y),r.choice(['sales','gifts','toys','coats','hats']),font=hand,fill=(50,46,60)); d.text((W-240,y),f'{r.randint(200,4000)}.{r.randint(10,99)}',font=hand,fill=(20,20,26))
     if state>=4:
         d.line([W/2+40,H-120,W-60,H-120],fill=(20,20,26),width=5); d.text((W/2+60,H-100),'TOTAL',font=font(FS,44),fill=(20,20,26)); d.text((W-330,H-100),'+ 18,240.00',font=font(FS,44),fill=(20,20,26))
-    d.line([140,H-120,W/2-60,H-120],fill=(196,30,30),width=5); d.text((150,H-100),'TOTAL',font=font(FS,44),fill=(196,30,30)); d.text((W/2-330,H-100),'(9,410.00)',font=font(FS,44),fill=(196,30,30))
+    d.line([140,H-120,W/2-60,H-120],fill=(196,30,30),width=5); d.text((150,H-100),'TOTAL',font=font(FS,44),fill=(196,30,30)); d.text((W/2-330,H-100),'(9,410.00)',font=font(FS,44),fill=(196,30,30)) if figs else None
     im.save(T+name+'.png')
 def wallpaper(name,base,motif,W=1024,H=1024,seed=90):
     im=wash(W,H,base,0.05,seed); d=ImageDraw.Draw(im)

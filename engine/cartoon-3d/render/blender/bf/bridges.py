@@ -43,25 +43,14 @@ for i,f in enumerate(range(1114,1219,13)):
 cS16=bpy.data.objects['cam_S16']; sc.frame_set(1556); hw=ob('S16_x3_granny').matrix_world.translation.copy()
 for f,d in ((1556,1.9),(1565,2.15)):
     cS16.location=hw+Vector((0.15,-d,0.05)); cS16.keyframe_insert('location',frame=f)
-# T7: S08 faces sat in the caption band (y 0.27-0.32); tilt so the crowd faces sit below it (owner face centre y 0.18)
-for k in (867,904,938):
-    p0,_=scr('S08','S08_owner',k); solve('S08','S08_owner',np.array([p0[0],0.18]),[k],[k])
-# S09 opens craned up (looking down on the cop, street behind him rather than empty sky), cranes down by f970
-c9=bpy.data.objects['cam_S09']
-for f,z in ((931,3.2),(938,3.0)):
-    sc.frame_set(f); l=c9.location.copy(); l.z=z; c9.location=l; c9.keyframe_insert('location',frame=f)
 SPEC=[('S01','S02','B','podium','podium',None),
-      ('S04','S05','AB','S04_x1_tourist','S05_sarge',(0.88,0.50)),
-      ('S06','S07','AB','S06_owner','S07_owner',(0.5,0.47)),
-      ('S08','S09','AB','S08_owner','S09_cop',(0.15,0.18)),
+      ('S04','S05','AB','S04_x1_tourist','S05_sarge',(0.70,0.52)),
+      ('S06','S07','AB','S06_owner','S07_owner',(0.30,0.46)),
+      ('S08','S09','AB','S08_cop','S09_cop',(0.66,0.50)),
       ('S13','S14','-','ledger_cover','ledger_cover',None),
       ('S14','S15','B','S14_exec','S15_oldcop',None),
       ('S15','S16','B','S15_oldcop','S16_x3_granny',None),
-      ('S11','S12','AB','S11_x2_shopper','S12_exec',(0.30,0.43))]
-# T7: S07 owner slides to the left third before the camera tilts up to the banner, so his face passes beside the caption
-for k in (800,812,826):
-    p0,_=scr('S07','S07_owner',k)
-    if -0.2<p0[1]<1.2: solve('S07','S07_owner',np.array([0.22,p0[1]]),[k],[k])
+      ('S11','S12','B','S11_x2_shopper','S12_exec',None)]
 REP=[]
 for A,B,side,oa,obn,goalA in SPEC:
     a,b=SH[B][0],SH[A][1]; mid=(a+b)//2; fm=[a,mid,b]
@@ -76,8 +65,11 @@ for A,B,side,oa,obn,goalA in SPEC:
         pa,wa=scr(A,oa,f); pb,wb=scr(B,obn,f); rows.append(dict(f=f,A=[round(x,3) for x in pa],B=[round(x,3) for x in pb],dx=round(abs(pa[0]-pb[0]),3),dy=round(abs(pa[1]-pb[1]),3),wA=round(wa,3),wB=round(wb,3)))
     REP.append(dict(join=f'{A}>{B}',A_obj=oa,B_obj=obn,meas=rows,max_err=max(max(r['dx'],r['dy']) for r in rows),bridged=all(max(r['dx'],r['dy'])<=0.05 for r in rows)))
     print('BRIDGE',REP[-1]['join'],REP[-1]['max_err'],REP[-1]['bridged'],flush=True)
-# T7: S09 cop rises from the bridge spot along the left edge, beside the caption, before sliding to centre
-for k in (944,950,956,962):
-    p0,_=scr('S09','S09_cop',k); solve('S09','S09_cop',np.array([0.14,p0[1]]),[k],[k])
+# T7: the podium cop in S02 rides above the caption band while the crane starts
+for k in (184,190):
+    p0,_=scr('S02','S02_cop',k)
+    if p0[1]<0.40: solve('S02','S02_cop',np.array([p0[0],0.42]),[k],[k])
+for k,gx in ((198,0.30),(206,0.12),(216,-0.2),(228,-0.28),(240,-0.32),(252,-0.35)):
+    p0,_=scr('S02','S02_cop',k); solve('S02','S02_cop',np.array([gx,max(0.40,p0[1])]),[k],[k])
 json.dump(REP,open('/root/bf/bridge/bridges.json','w'),indent=1)
 bpy.ops.wm.save_as_mainfile(filepath='/root/bf/blend/bf.blend'); print('BRIDGES_OK',sum(r['bridged'] for r in REP),'/14')

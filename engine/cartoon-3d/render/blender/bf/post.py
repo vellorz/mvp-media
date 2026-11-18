@@ -10,6 +10,17 @@ SH={'S01':(0,170),'S02':(163,297),'S03':(292,432),'S04':(426,528),'S05':(520,652
 TINT={'S01':(1.03,1.0,0.96),'S02':(1.03,1.0,0.96),'S03':(1.04,1.0,0.95),'S04':(1.03,1.0,0.96),'S05':(0.96,1.03,1.0),'S06':(1.06,1.0,0.9),
       'S07':(1.04,1.0,0.94),'S08':(1.0,1.0,1.02),'S09':(1.03,1.0,0.96),'S10':(0.98,1.0,1.03),'S11':(1.0,1.0,1.02),'S12':(1.05,0.98,1.0),
       'S13':(1.04,1.0,0.96),'S14':(1.05,0.98,1.0),'S15':(1.04,0.97,1.02),'S16':(1.06,0.97,1.0)}
+# per-shot brightness targets: day streets bright, lamp-lit interiors darker (Rick's film swings 0.2-0.7 across scenes)
+LT={'S01':0.50,'S02':0.52,'S03':0.50,'S04':0.48,'S05':0.39,'S06':0.40,'S07':0.48,'S08':0.50,'S09':0.50,'S10':0.37,'S11':0.46,'S12':0.38,'S13':0.40,'S14':0.38,'S15':0.44,'S16':0.47}
+# vignette strength (corner multiplier = 1-k): interiors get Rick's lantern falloff, exteriors a light one
+VIG={n:(0.70 if n in ('S05','S06','S10','S12','S13','S14') else 0.35) for n in SH}
+_VM={}
+def vig(x,k):
+    h,w=x.shape[:2]; key=(h,w,k)
+    if key not in _VM:
+        yy,xx=np.mgrid[0:h,0:w].astype(np.float32); r=np.sqrt(((xx-(w-1)/2)/(w/2))**2+((yy-(h-1)/2)/(h/2))**2)/np.sqrt(2)
+        t=np.clip((r-0.25)/0.75,0,1); _VM[key]=(1-k*t*t*(3-2*t))[...,None].astype(np.float32)
+    return x*_VM[key]
 class Reader:
     def __init__(s,shot):
         a,b=SH[shot]; s.a=a; s.n=b-a+1; s.i=0
@@ -30,17 +41,17 @@ def hsv_s(x):
     mx=x.max(-1); mn=x.min(-1); return np.where(mx>1e-4,(mx-mn)/np.maximum(mx,1e-4),0)
 def apply(x,p):
     lo,hi,g,sat,tint=p
-    y=gray(x); yn=np.clip((y-lo)/(hi-lo),0,1); y2=0.03+0.94*yn**g
+    y=gray(x); yn=np.clip((y-lo)/(hi-lo),0,1); y2=0.055+0.925*yn**g
     r=(y2/np.maximum(y,1e-4))[...,None]; z=np.clip(x*r,0,1)
     y3=gray(z)[...,None]; z=np.clip(y3+sat*(z-y3),0,1); z=np.clip(z*np.array(tint,np.float32),0,1); return z
-def solve(samples,tint):
+def solve(samples,tint,lt=0.45,vk=0.0):
     allY=np.concatenate([gray(s).ravel() for s in samples]); lo,hi=np.percentile(allY,0.8),np.percentile(allY,99.6)
     best=None
     for g in np.linspace(0.55,1.6,22):
-        for sat in np.linspace(0.8,1.6,9):
-            p=(lo,hi,g,sat,tint); o=[apply(s,p) for s in samples]; Y=np.concatenate([gray(q).ravel() for q in o])
+        for sat in np.linspace(0.8,2.4,17):
+            p=(lo,hi,g,sat,tint); o=[vig(apply(s,p),vk) for s in samples]; Y=np.concatenate([gray(q).ravel() for q in o])
             m=Y.mean(); S_=np.mean([hsv_s(q).mean() for q in o]); p2,p98=np.percentile(Y,2),np.percentile(Y,98)
-            cost=abs(m-0.45)+abs(S_-0.52)+max(0,0.07-p2)*4+max(0,0.86-p98)*4
+            cost=abs(m-lt)+abs(S_-0.52)+max(0,0.07-p2)*4+max(0,0.86-p98)*4
             if best is None or cost<best[0]: best=(cost,p,round(float(m),3),round(float(S_),3),round(float(p2),3),round(float(p98),3))
     return best
 # ---- captions ----
@@ -52,7 +63,7 @@ for _ in range(30):
     f=font(fs); bb=f.getbbox('H'); ch=bb[3]-bb[1]
     if abs(ch-CAP)<1: break
     fs=int(round(fs*CAP/ch))
-FNT=font(fs); BASE=int(0.717*H); STROKE=max(1,int(round(7*K))); SHX,SHY=int(round(4*K)),int(round(5*K))
+FNT=font(fs); BASE=int(0.7125*H); STROKE=max(1,int(round(7*K))); SHX,SHY=int(round(4*K)),int(round(5*K))
 WORDS=json.load(open('/mnt/project-files/modern-vista-social/experiments/2026-11-18_rick-99-test/audio/vo_trim.wav.words.json'))
 def chunks():
     out=[]; cur=[]
@@ -60,13 +71,14 @@ def chunks():
         cur.append((w,s,e)); punct=w.strip()[-1] in ',.?!'
         nxt=WORDS[i+1][1] if i+1<len(WORDS) else e+0.4
         dur=(nxt-cur[0][1])*30
-        if punct or len(cur)==3 or dur>=11 or (len(cur)==2 and len(''.join(x[0] for x in cur))>11):
+        if punct or len(cur)==3 or dur>=7 or (len(cur)==2 and len(''.join(x[0] for x in cur))>8):
             out.append(cur); cur=[]
     if cur: out.append(cur)
     C=[]
     for c in out:
         txt=' '.join(x[0].strip() for x in c).replace('Army Navy','Army-Navy').replace('  ',' ')
         C.append([int(round((c[0][1]+0.1)*30))-2,txt])
+    C[0][0]=0   # the hook frame carries its caption from f0
     for i in range(len(C)): C[i].append(C[i+1][0] if i+1<len(C) else END+1)
     return C
 CAPS=chunks()
@@ -85,7 +97,7 @@ if __name__=='__main__':
         for i in range(rd.n):
             fr=rd.next()
             if i in idx: smp.append(fr[::8,::8])
-        b=solve(smp,TINT[n]); P[n]=b[1]; rep[n]=dict(mean=b[2],sat=b[3],p2=b[4],p98=b[5],gamma=round(float(b[1][2]),2),satk=round(float(b[1][3]),2)); print('GRADE',n,rep[n],flush=True)
+        b=solve(smp,TINT[n],LT[n],VIG[n]); P[n]=b[1]; rep[n]=dict(mean=b[2],sat=b[3],p2=b[4],p98=b[5],gamma=round(float(b[1][2]),2),satk=round(float(b[1][3]),2)); print('GRADE',n,rep[n],flush=True)
     json.dump({'grade':rep,'captions':CAPS,'font_px':fs},open(OUT+'.post.json','w'),indent=1,default=str)
     widths=[]
     R={n:Reader(n) for n in SH}; cache={}
@@ -94,7 +106,7 @@ if __name__=='__main__':
     ci=0; capimg=None; capkey=None
     for f in range(END+1):
         act=[n for n,(a,b) in SH.items() if a<=f<=b]
-        frames={n:apply(R[n].next(),P[n]) for n in act}
+        frames={n:vig(apply(R[n].next(),P[n]),VIG[n]) for n in act}
         if len(act)==1: img=frames[act[0]]
         else:
             A,B=act[0],act[1]; s0,e0=SH[B][0],SH[A][1]; t=(f-s0+1)/(e0-s0+2); w_=t*t*(3-2*t); img=frames[A]*(1-w_)+frames[B]*w_

@@ -111,7 +111,7 @@ for nme,loc,fc,w_ in [('N',(0,170,24),'-Y',260),('S',(0,-150,24),'+Y',260),('E',
 # street furniture
 for sx in(-1,1):
     for y in range(-70,104,14):
-        if abs(y)<9 or (sx<0 and 34<y+3<62): continue
+        if abs(y)<9 or (sx<0 and 34<y+3<62) or (sx,y) in ((1,-28),(1,-14)): continue   # no lamppost sweeping across the S03/S04 lens
         lamppost(f'lp{sx}_{y}',(sx*6.6,y+3))
 for i,(x,y) in enumerate([(6.7,-8.2),(-6.8,9.0),(6.8,24),(-6.8,-30)]): hydrant(f'hyd{i}',(x,y))
 for i,(x,y) in enumerate([(-7.0,-8.6),(7.0,52)]): mailbox(f'mb{i}',(x,y))
@@ -450,7 +450,7 @@ LED_Z=0.786
 box('ledger_cover',(FX-0.05,0.85,0.775),(0.66,0.46,0.02),flat('ledgercover',lin((40,60,40)),0.6),bv=0.004)
 cyl('pencup',(FX-0.6,0.75,0.86),0.06,0.16,flat('pencup',lin((40,70,120)),0.5),v=16)
 for j in range(4): cyl(f'pencil{j}',(FX-0.6+0.015*(j-1.5),0.75,0.98),0.008,0.2,flat('pencil%d'%j,lin([(240,200,60),(196,30,30),(20,20,26),(40,110,60)][j]),0.5),v=8)
-cyl('mug81',(FX+0.15,0.55,0.83),0.05,0.1,flat('mug81',lin((200,60,50)),0.4),v=16)
+cyl('mug81',(FX+0.9,1.15,0.83),0.05,0.1,flat('mug81',lin((200,60,50)),0.4),v=16)
 for j in range(4): box(f'paperstack{j}',(FX-0.55,1.0,0.785+0.006*j),(0.3,0.4,0.005),flat('newsprint',lin((236,230,214))),bv=0)
 box('stapler',(FX-0.25,1.16,0.81),(0.06,0.18,0.05),flat('stapler',lin((40,40,44)),0.4),bv=0.01)
 box('calc81',(FX+0.85,0.68,0.795),(0.16,0.2,0.03),beige,bv=0.005)
@@ -469,17 +469,21 @@ path(s,orb)
 # S13 top-down ledger: a flat drawn hand + pen lies on the page, tip on the paper, small strokes (rule 166)
 s='S13'; r=SH[s]
 C13=L.chr_coll(s)
-hand_r=plane('S13_hand_red',(0,0,0),0.12,0.27,card_mat('exec81_arm_redpen','exec81_arm_redpen'),coll=C13,horiz=True)
-hand_b=plane('S13_hand_black',(0,0,0),0.12,0.27,card_mat('exec81_arm_pen','exec81_arm_pen'),coll=C13,horiz=True)
-for h_ in (hand_r,hand_b): h_.rotation_euler=(0,0,math.pi); h_['noink']=1
+HL=0.75
+card_r=plane('S13_hand_red',(0,0,0),0.12,HL,card_mat('exec81_writehand_red','exec81_writehand_red'),coll=C13,horiz=True)
+card_b=plane('S13_hand_black',(0,0,0),0.12,HL,card_mat('exec81_writehand_black','exec81_writehand_black'),coll=C13,horiz=True)
+hand_r=empty('S13_hand_red_piv',(0,0,0),coll=C13); hand_b=empty('S13_hand_black_piv',(0,0,0),coll=C13)
+for c_,h_ in ((card_r,hand_r),(card_b,hand_b)):
+    c_.parent=h_; c_.location=(0,HL/2,0); c_.rotation_euler=(0,0,0); c_['noink']=1
+    h_.rotation_euler=(math.radians(24),0,math.radians(18 if h_ is hand_b else -6))   # nib on the page, forearm rises toward the writer, black-pen arm angled clear of the PC
 # red-pen hand writes the red column (f1270-1300), black-pen hand the black column (f1306-1345); tips touch the page (z = page + 1 mm)
 def strokes(o,f0,f1,x0,y0,x1,y1):
     n=(f1-f0)//3
     for i in range(n+1):
-        t=i/max(1,n); f=f0+i*3; kloc(o,f,(x0+(x1-x0)*t+(0.006 if i%2 else -0.006),y0+(y1-y0)*t+0.12,LED_Z+0.002))
+        t=i/max(1,n); f=f0+i*3; kloc(o,f,(x0+(x1-x0)*t+(0.006 if i%2 else -0.006),y0+(y1-y0)*t,LED_Z+0.003))
 TIPX_R,TIPX_B=FX-0.05-0.31+0.62*0.1,FX-0.05-0.31+0.62*0.9
 strokes(hand_r,1262,1300,TIPX_R,0.85+0.12,TIPX_R+0.02,0.85-0.15); strokes(hand_b,1306,1346,TIPX_B,0.85+0.15,TIPX_B,0.85-0.15)
-vis(hand_r,[(1262,1302)]); vis(hand_b,[(1306,1348)])
+vis(card_r,[(1262,1302)]); vis(card_b,[(1306,1348)])
 kloc(hand_r,1240,(TIPX_R+0.25,0.85-0.35,LED_Z+0.002)); kloc(hand_b,1350,(TIPX_B+0.25,0.85-0.4,LED_Z+0.002))
 path(s,[(1210,(FX-0.05,0.85,2.25),(FX-0.05,0.859,LED_Z)),(1282,(FX-0.12,0.85,1.75),(FX-0.12,0.861,LED_Z)),(1319,(FX+0.06,0.85,1.8),(FX+0.06,0.861,LED_Z)),(1359,(FX+0.02,0.85,1.45),(FX+0.02,0.862,LED_Z))])
 # S14: ledger total turns the books from red to black, pull back and up to the exec's wink

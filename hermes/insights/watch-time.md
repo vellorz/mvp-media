@@ -11,10 +11,10 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Platform | Videos | Measured | Median watched | Median completion |
 |---|---|---|---|---|
-| TikTok | 28 | 14 | 4.1 s | 21.9% |
-| Instagram | 25 | 15 | 4.7 s | 26.8% |
-| Facebook | 25 | 25 | 2.6 s | 13.0% |
-| YouTube | 25 | 0 | not recorded | not recorded |
+| TikTok | 27 | 14 | 4.1 s | 21.9% |
+| Instagram | 24 | 15 | 4.7 s | 26.8% |
+| Facebook | 24 | 24 | 2.7 s | 13.2% |
+| YouTube | 24 | 0 | not recorded | not recorded |
 
 ## Each video
 
@@ -115,11 +115,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Oct 25, 12:04 PM | Instagram | 03_sun-oct25_menton.mp4 (https://www.instagram.com/reel/De7MxOZjIoE/) | 118 | 5.5 s | 20.9 s | 26.4% |
 | Oct 25, 12:02 PM | Facebook | 03_sun-oct25_menton.mp4 (https://www.facebook.com/reel/1032559319874166/) | 137 | 2.8 s | 20.9 s | 13.4% |
 | Oct 24, 10:06 AM | TikTok | 6adebac84582dd4a9550950e_thumbnail.webp (https://www.tiktok.com/@modernvistaprintsshop/video/7700250963382209806?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 59 | 2.3 s | not recorded | — |
-| Oct 23, 6:03 PM | YouTube | Picasso's paper trick, and the Antibes castle he left behind #shorts (https://www.youtube.com/watch?v=IeXFk9nUEv4) | 72 | not available | 27.0 s | — |
+| Oct 23, 6:03 PM | YouTube | Picasso's paper trick, and the Antibes castle he left behind #shorts (https://www.youtube.com/watch?v=IeXFk9nUEv4) | 73 | not available | 27.0 s | — |
 | Oct 23, 6:03 PM | TikTok | 01_fri-oct23_antibes.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7700002293374143757?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 99 | 3.5 s | 26.6 s | 13.3% |
 | Oct 23, 12:03 PM | Instagram | 01_fri-oct23_antibes.mp4 (https://www.instagram.com/reel/De2DDO8innf/) | 116 | 4.1 s | 26.6 s | 15.4% |
 | Oct 23, 12:02 PM | Facebook | 01_fri-oct23_antibes.mp4 (https://www.facebook.com/reel/1681248776901798/) | 207 | 2.1 s | 26.6 s | 7.9% |
-| Oct 20, 11:06 AM | Instagram | 6ad704e15636f989c036f514_transcoded.mp4 (https://www.instagram.com/reel/DeuN3y_AQ1P/) | 37 | 1.4 s | not recorded | — |
-| Oct 20, 11:03 AM | TikTok | 7698781219504409869?utm_campaign=tt4d_open_api&utm_source=7103819247981182978 (https://www.tiktok.com/@modernvistaprintsshop/video/7698781219504409869?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 93 | 1.5 s | not recorded | — |
-| Oct 20, 11:02 AM | Facebook | 6ad704e15636f989c036f514_transcoded.mp4 (https://www.facebook.com/reel/984261680700979/) | 12 | 2.0 s | 30.0 s | 6.7% |
-| Oct 20, 11:00 AM | YouTube | Travel Poster Wall Art That Feels Like You / Antelope Canyon, Guilin, Seville & Uluru (https://www.youtube.com/watch?v=3MjwdrQQe-A) | 38 | not available | 31.0 s | — |

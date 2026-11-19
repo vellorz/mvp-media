@@ -1,6 +1,6 @@
-265cce8afb31f5c204700cc9c785b72855fe867d9388e850a4be4ece07de88f9  ./05_gap-report.md
+892724c826db50985ffce0aed8ef75eea70931098c8adc358c99ffe005a4dda8  ./05_gap-report.md
 3e14850a7d4497791a7ec7bad883083718f79108fcb54fef15b772d1a6ff19ad  ./06_checklist-proposals.md
-2e6005c56f694953610e495b4057587f022611a503ceb0a4b5b745ee904c5dbc  ./RESUME.md
+62d7f1beeb3e517cbc1080ec31a776b53f70354add063915d63abdfec1dff97a  ./RESUME.md
 0c65f362de1f6ec64448c7f1abb25936450701609abdf94fcaa7daac4a08178a  ./VOCABULARY.md
 0c92108c1c0fbcbdb4408bddd628cbac39a76c85a3490b089df22ecf402c363c  ./frame-logs/10_GM9UKnZ6JFw_f0001-0360.md
 fdd4752fcd2a1131576d375235d56f41909eed2c66fa64e804674977c0ef3e08  ./frame-logs/10_GM9UKnZ6JFw_f0361-0720.md
@@ -26,4 +26,4 @@ a13bd2bf5a94dcfed419f7ecb449b4fd60de7c63687e9fb459f035138168ea9a  ./frame-logs/1
 bd6319fa75baa188481a5e30e1c197b38ffac6a6eb07c4d0962b01d1eb9084bf  ./prior-analysis/BRIEF.md
 7bec0ff6f0fbbc6e3d182fa83aad95cdbf8bac71a7dd7df1eb14c941b00b8b83  ./prior-analysis/STYLE_STUDY.md
 1d014f97d389d884a184154c44aeb8b45b60429cd8bcd48594b4045954e5c897  ./prior-analysis/report_A_03.md
-c96644d11abf6ab143d537d968de61705fa3c9ff397ec2ca2c91db23029dd126  ./rick-master-guide.md
+bdd58504e251a55b8f728417e37c6c0edca5d25d8729b966a226df5becfb5a04  ./rick-master-guide.md

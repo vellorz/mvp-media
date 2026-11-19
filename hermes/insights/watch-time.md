@@ -27,7 +27,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 16, 7:04 PM | Instagram | 01_mon-nov16_chicago_2k.mp4 (https://www.instagram.com/reel/Df0tHrDk1k6/) | 1585 | 33.1 s | not recorded | — |
 | Nov 16, 7:02 PM | Facebook | 01_mon-nov16_chicago_2k.mp4 (https://www.facebook.com/reel/2210181876545203/) | 244 | 9.8 s | 73.3 s | 13.4% |
 | Nov 16, 6:05 PM | TikTok | 01_mon-nov16_chicago_2k.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7708924564255837454?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 162 | 41.2 s | not recorded | — |
-| Nov 16, 4:03 PM | YouTube | Chicago Lifted a Hotel With the Guests Inside #shorts (https://www.youtube.com/watch?v=_L-TeeKM3n4) | 1202 | not available | 74.0 s | — |
+| Nov 16, 4:03 PM | YouTube | Chicago Lifted a Hotel With the Guests Inside #shorts (https://www.youtube.com/watch?v=_L-TeeKM3n4) | 1203 | not available | 74.0 s | — |
 | Nov 15, 2:02 PM | YouTube | Oktoberfest Started as a Wedding Party #shorts (https://www.youtube.com/watch?v=7rM6Wx_lSc0) | 1332 | not available | 69.0 s | — |
 | Nov 15, 1:04 PM | Instagram | 07_sun-nov15_munich_post.mp4 (https://www.instagram.com/reel/DfxfHkxFNAt/) | 1570 | 24.7 s | not recorded | — |
 | Nov 15, 1:02 PM | Facebook | 07_sun-nov15_munich_post.mp4 (https://www.facebook.com/reel/29283033394650756/) | 495 | 6.6 s | 68.7 s | 9.6% |

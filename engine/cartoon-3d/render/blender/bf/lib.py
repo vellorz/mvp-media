@@ -20,6 +20,26 @@ def apply(o):
 def lin(c): return tuple((v/255)**2.2 for v in c)
 def nodes(m): m.use_nodes=True; return m.node_tree.nodes,m.node_tree.links
 # ---------------- materials ----------------
+def _paint(m,grain=0.10,ao=0.30):
+    """round 4: painted look for set materials: low-freq brush grain (object space) + AO crease darkening (Rick's painted sets, not clean CG)."""
+    N,L=m.node_tree.nodes,m.node_tree.links; p=N['Principled BSDF']; bc=p.inputs['Base Color']
+    if bc.links: src=bc.links[0].from_socket
+    else:
+        rg=N.new('ShaderNodeRGB'); rg.outputs[0].default_value=tuple(bc.default_value); src=rg.outputs[0]
+    tc=N.new('ShaderNodeTexCoord'); nz=N.new('ShaderNodeTexNoise'); nz.inputs['Scale'].default_value=3.2; nz.inputs['Detail'].default_value=6.0; nz.inputs['Roughness'].default_value=0.62
+    L.new(tc.outputs['Object'],nz.inputs['Vector'])
+    mr=N.new('ShaderNodeMapRange'); mr.inputs['From Min'].default_value=0.3; mr.inputs['From Max'].default_value=0.7; mr.inputs['To Min'].default_value=1-grain; mr.inputs['To Max'].default_value=1+grain*0.6
+    L.new(nz.outputs['Fac'],mr.inputs['Value'])
+    a=N.new('ShaderNodeAmbientOcclusion'); a.samples=6; a.inputs['Distance'].default_value=0.35
+    ar=N.new('ShaderNodeMapRange'); ar.inputs['To Min'].default_value=1-ao; ar.inputs['To Max'].default_value=1.0
+    L.new(a.outputs['AO'],ar.inputs['Value'])
+    m1=N.new('ShaderNodeMix'); m1.data_type='RGBA'; m1.blend_type='MULTIPLY'; m1.inputs['Factor'].default_value=1.0
+    L.new(src,m1.inputs[6]); L.new(mr.outputs['Result'],m1.inputs[7])
+    m2=N.new('ShaderNodeMix'); m2.data_type='RGBA'; m2.blend_type='MULTIPLY'; m2.inputs['Factor'].default_value=1.0
+    L.new(m1.outputs[2],m2.inputs[6]); L.new(ar.outputs['Result'],m2.inputs[7])
+    L.new(m2.outputs[2],bc)
+    return m
+PAINT=True
 def surf(name,img,tile,rough=0.85,rot=0.0,gen=False,emit=0.0):
     """tiled painted texture, box projected. gen=True fits the image once over the object's bounding box."""
     key=name
@@ -33,6 +53,7 @@ def surf(name,img,tile,rough=0.85,rot=0.0,gen=False,emit=0.0):
     it=N.new('ShaderNodeTexImage'); it.image=bpy.data.images.load(TX+img+'.png',check_existing=True); it.projection='BOX'; it.projection_blend=0.1
     L.new(mp.outputs['Vector'],it.inputs['Vector']); L.new(it.outputs['Color'],p.inputs['Base Color'])
     if emit: L.new(it.outputs['Color'],p.inputs['Emission Color']); p.inputs['Emission Strength'].default_value=emit
+    if PAINT and not emit: _paint(m)
     MC[key]=m; return m
 def flat(name,rgb,rough=0.7,emit=0.0,metal=0.0):
     if name in MC: return MC[name]
@@ -40,6 +61,7 @@ def flat(name,rgb,rough=0.7,emit=0.0,metal=0.0):
     p.inputs['Base Color'].default_value=(*rgb,1); p.inputs['Roughness'].default_value=rough; p.inputs['Metallic'].default_value=metal
     p.inputs['Specular IOR Level'].default_value=0.3
     if emit: p.inputs['Emission Color'].default_value=(*rgb,1); p.inputs['Emission Strength'].default_value=emit
+    if PAINT and not emit and not metal: _paint(m)
     MC[name]=m; return m
 def card_mat(name,img,emit=0.3,rough=1.0):
     if name in MC: return MC[name]
@@ -165,7 +187,7 @@ def bob(ch,frames,amt=7):
     hp=ch['hp']
     for f in frames:
         krot(hp,f,(0,0,0)); krot(hp,f+3,(math.radians(-amt),0,math.radians(amt*0.4))); krot(hp,f+6,(math.radians(amt*0.4),0,math.radians(-amt*0.15))); krot(hp,f+9,(0,0,0))
-def walk(ch,f0,f1,p0,p1,step=4):
+def walk(ch,f0,f1,p0,p1,step=4,swing=(-1,1)):
     """root moves p0->p1 linearly; body card cycles stride poses so the feet step (rule 162)"""
     r=ch['root']; kloc(r,f0,p0); kloc(r,f1,p1)
     for fc in r.animation_data.action.fcurves:
@@ -174,7 +196,7 @@ def walk(ch,f0,f1,p0,p1,step=4):
                 if kp.co[0] in (f0,f1): kp.interpolation='LINEAR'
     ch['walk'].append((f0,f1,step))
     for i,f in enumerate(range(f0,f1,step*2)):
-        for sx in (-1,1): krot(ch['A'][sx]['piv'],f,(0,math.radians(-(16 if (i%2)==(sx>0) else 2))*sx,0))
+        for sx in swing: krot(ch['A'][sx]['piv'],f,(0,math.radians(-(16 if (i%2)==(sx>0) else 2))*sx,0))   # round 4: a working arm (chalk) is left out of the stride swing
 def finish(ch,blink_every=34):
     a,b=ch['rng']
     # faces: sorted, inside range, auto blinks so no face holds longer than ~1.3 s (rule 185), exactly one per frame (rule 168)
@@ -247,7 +269,8 @@ def ink(skip_prefix=()):
     for o in list(bpy.data.objects):
         if o.type!='MESH' or C_NOI in o.users_collection or o.get('chr') or o.get('noink') or len(o.data.vertices)<=4 or o.name.startswith(skip_prefix): continue
         t_=min(0.05,0.009+0.0062*math.sqrt(max(o.dimensions)))*o.get('inkmul',1.0)
-        h=o.copy(); h.name=o.name+'_ink'; C_H.objects.link(h); h.parent=o; h.matrix_parent_inverse.identity(); h.location=(0,0,0); h.rotation_euler=(0,0,0); h.scale=(1,1,1)
+        h=o.copy(); h.name=o.name+'_ink'; cc_=[c for c in o.users_collection if c.name.startswith('CHR_')]; (cc_[0] if cc_ else C_H).objects.link(h);  # round 4: a shot-only prop's ink hull stays in that shot's CHR_ collection (S07 mailbox hull showed as a black blob in S08)
+        h.parent=o; h.matrix_parent_inverse.identity(); h.location=(0,0,0); h.rotation_euler=(0,0,0); h.scale=(1,1,1)
         if h.animation_data: h.animation_data_clear()
         if o.animation_data and o.animation_data.action and any(fc.data_path=='hide_render' for fc in o.animation_data.action.fcurves):
             for fc in [fc for fc in o.animation_data.action.fcurves if fc.data_path=='hide_render']:

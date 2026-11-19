@@ -100,17 +100,18 @@ def head(name,fk):
 # slim column garment (narrower than the head), long coat/robe to the shins, hard cel shadow on the left third,
 # light rim on the right, ink detail (collar, placket, buttons, belt + buckle, hem band, fold lines),
 # stick legs with small shoes; thin sleeves with a cuff and a small hand. Drawn at 2x and downsampled (clean edges).
-SS=2; BOUT=14
+SS=2; BOUT=20   # round 4: body outline as heavy as the head's (verifier: thin body outlines vs heads)
 def lt(c,f=1.12): return tuple(min(255,int(v*f)) for v in c[:3])+(255,)
 GB={'tall':(80,175,215),'short':(172,180,222),'round':(102,200,238)}   # top px, shoulder half-width, hem half-width
 def _sil(kind):
     y0,w0,w1=GB[kind]; y1=905; pts=[]
     # left side, from hem up to the shoulder, rounded shoulder (quarter ellipse r=70)
-    for i in range(0,11): t=i/10; pts.append((400-(w1+(w0-w1)*t), y1+(y0+70-y1)*t))
+    BG_=52   # round 4: bean silhouette, sides bulge out (Rick's rounded bodies, not straight coat trapezoids)
+    for i in range(0,11): t=i/10; pts.append((400-(w1+(w0-w1)*t)-BG_*math.sin(math.pi*t), y1+(y0+70-y1)*t))
     for i in range(0,13): a=math.radians(180+i*7.5); pts.append((400-w0+70+70*math.cos(a)*1.0, y0+70+70*math.sin(a)))
     pts.append((400-w0+70,y0)); pts.append((400+w0-70,y0))
     for i in range(0,13): a=math.radians(270+i*7.5); pts.append((400+w0-70+70*math.cos(a), y0+70+70*math.sin(a)))
-    for i in range(0,11): t=i/10; pts.append((400+(w0+(w1-w0)*t), y0+70+(y1-y0-70)*t))
+    for i in range(0,11): t=i/10; pts.append((400+(w0+(w1-w0)*t)+BG_*math.sin(math.pi*t), y0+70+(y1-y0-70)*t))
     # hem: slight downward curve
     for i in range(1,20): t=i/20; x=400+w1-2*w1*t; pts.append((x, y1+18*math.sin(math.pi*t)))
     return pts,y0,w0,w1,y1
@@ -136,7 +137,7 @@ def body(name,stride=0):
     # hard cel shadow: left third, slightly curved edge (light from the upper right, Rick-style)
     sh=[(400-260,0)]+[(400-60-int(40*math.sin(math.pi*t)), int(1100*t)) for t in [i/20 for i in range(21)]]+[(400-260,1100)]
     dd.polygon(_S(sh),fill=shade)
-    dd.polygon(_S([(400+w0-16,y0+40),(400+w0+30,y0+40),(400+w1+40,y1),(400+w1-22,y1)]),fill=rim)
+    dd.polygon(_S([(400+w0-16,y0+40),(400+w0+30,y0+40),(400+w0+30+(w1-w0)*0.5+40,(y0+y1)/2),(400+w1+40,y1),(400+w1-22,y1),(400+(w0+w1)/2+24-19,(y0+y1)/2)]),fill=rim)   # rim follows the bulge
     hemh=40 if cue not in('apron',) else 0
     if hemh: dd.polygon(_S([(0,y1-hemh),(800,y1-hemh),(800,y1+40),(0,y1+40)]),fill=dk(R,0.6))
     beltY=y0+int((y1-y0)*0.46)

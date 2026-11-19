@@ -15,10 +15,33 @@ def vis_face(r):
     for o in faces[r.name]:
         if not o.hide_render: return o
 cache=[]
+# round 4: props, arms, poles also cover faces (crowdopt used to score face-on-face only)
+xr=tuple(r.name for r in roots)
+arms={r.name:[o for o in bpy.data.objects if o.name.startswith(r.name+'_arm') and o.type=='MESH'] for r in roots}
+OCCN=('arm','fist','stick','placard','pole','post','sign','lamp','mb','cool','bin','register','pc_')
+def is_occ(o):
+    if o.type!='MESH' or o.name.startswith(xr) or '_d_' in o.name or 'glow' in o.name or 'pool' in o.name: return False
+    return any(k in o.name.lower() for k in OCCN)
+occs=[o for o in bpy.data.objects if is_occ(o)]
+def sbox(M,bb,d=Vector((0,0,0))):
+    P=[w2c(sc,cam,M@Vector(c)+d) for c in bb]
+    if min(p.z for p in P)<0.05: return None
+    return (min(p.x for p in P),max(p.x for p in P),min(p.y for p in P),max(p.y for p in P),sum(p.z for p in P)/8)
 for f in frames:
     sc.frame_set(f)
     row={r.name:(vis_face(r).matrix_world.copy() if vis_face(r) else None) for r in roots}
-    cache.append((f,row,[o.matrix_world.copy() for o in mains if not o.hide_render]))
+    ob=[]
+    for o in occs:
+        if o.hide_render or not o.visible_get(): continue
+        b_=sbox(o.matrix_world,o.bound_box)
+        if b_ and b_[1]>0 and b_[0]<1 and b_[3]>0 and b_[2]<1 and (b_[1]-b_[0])*(b_[3]-b_[2])<0.2: ob.append(b_)
+    am={r.name:[(o.matrix_world.copy(),[Vector(c) for c in o.bound_box]) for o in arms[r.name] if not o.hide_render] for r in roots}
+    cache.append((f,row,[o.matrix_world.copy() for o in mains if not o.hide_render],ob,am))
+PO=bpy.data.objects.get('poster'); PB={}
+if PO:
+    for f in frames:
+        sc.frame_set(f); P=[w2c(sc,cam,PO.matrix_world@Vector(c)) for c in PO.bound_box]
+        PB[f]=(min(p.x for p in P),max(p.x for p in P),min(p.y for p in P),max(p.y for p in P))
 corners=[Vector(c) for c in roots[0].children[0].bound_box] if False else None
 fb={r.name:[Vector(c) for c in faces[r.name][0].bound_box] for r in roots}
 mb=[Vector(c) for c in mains[0].bound_box] if mains else []
@@ -33,7 +56,7 @@ def score(off,verbose=False):
             if dd<0.85: pen+=50*(0.85-dd)
             dx_,dy_=abs(p.x-q.x),abs(p.y-q.y)
             if ROW and dx_<2.2 and dy_<0.7: pen+=ROW*(0.7-dy_)   # rule P3: neighbours staggered in depth, no line-ups
-    for f,row,mm in cache:
+    for f,row,mm,ob,am in cache:
         sc.frame_set(f)
         boxes=[]
         for k,nm in enumerate(names):
@@ -44,6 +67,10 @@ def score(off,verbose=False):
             if min(p.z for p in P)<0.05: continue
             x0,x1=min(p.x for p in P),max(p.x for p in P); y0,y1=min(p.y for p in P),max(p.y for p in P)
             if x1<0 or x0>1 or y1<0 or y0>1: continue
+            if x0<0 or x1>1 or y0<0 or y1>1: pen+=float(os.environ.get('EDGE','0'))   # round 4: no face sliced by the frame edge
+            if PB.get(f) and f>=1686:
+                q=PB[f]; ox=min(x1,q[1])-max(x0,q[0]); oy=min(y1,q[3])-max(y0,q[2])
+                if ox>0 and oy>0: pen+=20*ox*oy/((x1-x0)*(y1-y0))+5   # round 4 E2: no head over the poster
             boxes.append((nm,x0,x1,y0,y1,sum(p.z for p in P)/8))
             # caption band (y from bottom 0.27-0.325, centre third+)
             ix=0.1*(x1-x0); iy=0.1*(y1-y0)
@@ -53,6 +80,20 @@ def score(off,verbose=False):
             P=[w2c(sc,cam,M@c) for c in mb]
             if min(p.z for p in P)<0.05: continue
             boxes.append(('main',min(p.x for p in P),max(p.x for p in P),min(p.y for p in P),max(p.y for p in P),sum(p.z for p in P)/8))
+        occb=[('occ',)+b_ for b_ in ob]
+        for k,nm in enumerate(names):
+            d=Vector((*off[k],0))
+            for M,bb in am.get(nm,[]):
+                b_=sbox(M,bb,d)
+                if b_: occb.append(('arm:'+nm,)+b_)
+        for d_ in boxes:
+            for e in occb:
+                if e[0]=='arm:'+d_[0] or e[5]>=d_[5]: continue
+                ox=min(d_[2],e[2])-max(d_[1],e[1]); oy=min(d_[4],e[4])-max(d_[3],e[3])
+                if ox>0 and oy>0:
+                    fr=ox*oy/((d_[2]-d_[1])*(d_[4]-d_[3]))
+                    if fr>0.06: pen+=2*fr
+                    if verbose and fr>0.06: print('OCCP',f,d_[0],'<',e[0],round(fr,2))
         for d_ in boxes:
             for e in boxes:
                 if e is d_ or e[5]>=d_[5]: continue

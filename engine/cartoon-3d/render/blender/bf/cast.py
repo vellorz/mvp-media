@@ -1,5 +1,6 @@
 # Flat 2D cut-out cast, Rick construction: round cream head, monoline dark outline (~2.3 % of head width), drawn face,
 # bean/stick body with one costume cue, flat colour blocks + soft gradient + fabric lines. Our own designs.
+import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 import json, math
 T='/root/bf/tex/'; K=(30,22,20,255); SK=(252,246,236,255); OUT=19   # 19 px on an 800 px disc = 2.4 %
@@ -103,17 +104,18 @@ def head(name,fk):
 SS=2; BOUT=20   # round 4: body outline as heavy as the head's (verifier: thin body outlines vs heads)
 def lt(c,f=1.12): return tuple(min(255,int(v*f)) for v in c[:3])+(255,)
 GB={'tall':(80,175,215),'short':(172,180,222),'round':(102,200,238)}   # top px, shoulder half-width, hem half-width
+HEMY={'tall':560,'short':640,'round':590}   # round 5 (B1/B2): torso ~0.86 H tall (H = head disc ~560 px), legs ~0.85 H visible
 def _sil(kind):
-    y0,w0,w1=GB[kind]; y1=905; pts=[]
-    # left side, from hem up to the shoulder, rounded shoulder (quarter ellipse r=70)
-    BG_=52   # round 4: bean silhouette, sides bulge out (Rick's rounded bodies, not straight coat trapezoids)
-    for i in range(0,11): t=i/10; pts.append((400-(w1+(w0-w1)*t)-BG_*math.sin(math.pi*t), y1+(y0+70-y1)*t))
+    y0,w0,w1=GB[kind]; y1=HEMY[kind]; pts=[]
+    w1=int(w1*0.9); rr=int(0.36*2*w1)   # rounded bottom: corner radius >= 0.35 of the torso width (Rick bean)
+    BG_=40
+    yb=y1-rr*0.55   # sides end here, then a half-ellipse closes the bottom
+    for i in range(0,11): t=i/10; pts.append((400-(w1+(w0-w1)*t)-BG_*math.sin(math.pi*t), yb+(y0+70-yb)*t))
     for i in range(0,13): a=math.radians(180+i*7.5); pts.append((400-w0+70+70*math.cos(a)*1.0, y0+70+70*math.sin(a)))
     pts.append((400-w0+70,y0)); pts.append((400+w0-70,y0))
     for i in range(0,13): a=math.radians(270+i*7.5); pts.append((400+w0-70+70*math.cos(a), y0+70+70*math.sin(a)))
-    for i in range(0,11): t=i/10; pts.append((400+(w0+(w1-w0)*t)+BG_*math.sin(math.pi*t), y0+70+(y1-y0-70)*t))
-    # hem: slight downward curve
-    for i in range(1,20): t=i/20; x=400+w1-2*w1*t; pts.append((x, y1+18*math.sin(math.pi*t)))
+    for i in range(0,11): t=i/10; pts.append((400+(w0+(w1-w0)*t)+BG_*math.sin(math.pi*t), y0+70+(yb-y0-70)*t))
+    for i in range(1,24): a=math.pi*i/24; pts.append((400+w1*math.cos(a), yb+rr*0.55*math.sin(a)))
     return pts,y0,w0,w1,y1
 def _S(p): return [(x*SS,y*SS) for x,y in p]
 def _hw(y,y0,w0,w1,y1): return w0+(w1-w0)*max(0,min(1,(y-y0-70)/(y1-y0-70)))
@@ -124,8 +126,8 @@ def body(name,stride=0):
     pts,y0,w0,w1,y1=_sil(kind); s=lambda v:int(v*SS)
     # legs (thin sticks) + small shoes; stride poses spread the feet, one lifted
     for sx in(-1,1):
-        x=400+sx*62; fx=x+(sx*58 if stride else 0); lift=(60 if (stride==1 and sx<0) or (stride==2 and sx>0) else 0); fy=1010-lift
-        d.line([s(x),s(880),s(fx),s(fy)],fill=K,width=s(26)); d.line([s(x),s(880),s(fx),s(fy)],fill=legc,width=s(14))
+        x=400+sx*62; fx=x+(sx*70 if stride else 0); lift=(70 if (stride==1 and sx<0) or (stride==2 and sx>0) else 0); fy=1040-lift
+        d.line([s(x),s(y1-40),s(fx),s(fy)],fill=K,width=s(36)); d.line([s(x),s(y1-40),s(fx),s(fy)],fill=legc,width=s(22))
         d.chord([s(fx-46+sx*20),s(fy-30),s(fx+46+sx*20),s(fy+34)],180,360,fill=shoe,outline=K,width=s(9)); d.line([s(fx-46+sx*20),s(fy+2),s(fx+46+sx*20),s(fy+2)],fill=K,width=s(9))
         d.arc([s(fx-30+sx*20),s(fy-22),s(fx+14+sx*20),s(fy+6)],200,260,fill=(120,110,100,255),width=s(5))
     # garment base
@@ -138,8 +140,8 @@ def body(name,stride=0):
     sh=[(400-260,0)]+[(400-60-int(40*math.sin(math.pi*t)), int(1100*t)) for t in [i/20 for i in range(21)]]+[(400-260,1100)]
     dd.polygon(_S(sh),fill=shade)
     dd.polygon(_S([(400+w0-16,y0+40),(400+w0+30,y0+40),(400+w0+30+(w1-w0)*0.5+40,(y0+y1)/2),(400+w1+40,y1),(400+w1-22,y1),(400+(w0+w1)/2+24-19,(y0+y1)/2)]),fill=rim)   # rim follows the bulge
-    hemh=40 if cue not in('apron',) else 0
-    if hemh: dd.polygon(_S([(0,y1-hemh),(800,y1-hemh),(800,y1+40),(0,y1+40)]),fill=dk(R,0.6))
+    hemh=34 if cue not in('apron',) else 0
+    if hemh: dd.polygon(_S([(0,y1-hemh-40),(800,y1-hemh-40),(800,y1+60),(0,y1+60)]),fill=dk(R,0.6))
     beltY=y0+int((y1-y0)*0.46)
     def belt(col=(30,24,22,255),buck=(214,180,80,255)):
         dd.rectangle([0,s(beltY),W,s(beltY+42)],fill=col); dd.line([0,s(beltY),W,s(beltY)],fill=K,width=s(6)); dd.line([0,s(beltY+42),W,s(beltY+42)],fill=K,width=s(6))
@@ -243,7 +245,17 @@ def arm(name,prop=None):
     if prop=='paper': d.rectangle([60,640,340,860],fill=(238,232,214,255),outline=K,width=10); d.text((80,660),'BLACK\nFRIDAY',fill=K)
     if prop in ('box','bag','paper','megaphone','camera'):   # fingers over the prop so it is held, not floating
         d.ellipse([170,700,230,760],fill=skin,outline=K,width=8)
-    return im
+    return elbow(im,BEND.get(prop,34))
+BEND={'pennant':0,'megaphone':20,'paper':10}
+def elbow(im,dx,ey=330,wy=640):
+    # round 5 (B4): never a dead-straight arm. Shear the forearm sideways so the elbow reads at ~165 deg (Rick hanging arms 155-175)
+    if not dx: return im
+    a=np.asarray(im); out=np.zeros_like(a); H=a.shape[0]
+    for y in range(H):
+        sh=0 if y<ey else int(round(dx*min(1.0,(y-ey)/(wy-ey))))
+        if sh: out[y,sh:]=a[y,:-sh]
+        else: out[y]=a[y]
+    return Image.fromarray(out)
 def head_shade(im,skin):
     # Rick heads: soft cel shadow crescent on the lower-left of the face disc
     m=Image.new('L',im.size,0); md=ImageDraw.Draw(m); md.ellipse([131,159,893,921],fill=255); md.ellipse([171,99,953,881],fill=0)

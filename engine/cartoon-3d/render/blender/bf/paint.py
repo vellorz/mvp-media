@@ -61,6 +61,35 @@ def picto(d,cx,cy,kind,fg,bg):
         d.rectangle([cx-6,cy-74,cx+6,cy-40],fill=bg,outline=K,width=3); d.ellipse([cx-9,cy-96,cx+9,cy-74],fill=(250,200,60),outline=K,width=3)
     elif kind=='JEWELERS':  # diamond
         d.polygon([(cx-70,cy-20),(cx-40,cy-50),(cx+40,cy-50),(cx+70,cy-20),(cx,cy+52)],fill=fg,outline=K); d.line([cx-70,cy-20,cx+70,cy-20],fill=K,width=5); d.line([cx-40,cy-50,cx-20,cy-20,cx,cy+52],fill=K,width=4); d.line([cx+40,cy-50,cx+20,cy-20,cx,cy+52],fill=K,width=4)
+
+def paintdetail(im,mask,base,seed,K=2,brick=None,neutral=False,dens=1.0):
+    """round 5 (A2-A5): fine painted detail on wall areas only (mask), at K x resolution:
+    mortar joints with a lit lip, mottled block faces, grit specks and visible mid-dark strokes."""
+    W,H=im.width*K,im.height*K; im=im.resize((W,H),Image.LANCZOS); m=mask.resize((W,H),Image.NEAREST)
+    a=np.asarray(im,np.float32); mk=(np.asarray(m)>0)[...,None]
+    rs=np.random.RandomState(seed)
+    mot=(noise(W,H,3,seed)-0.5)*0.16+(noise(W,H,9,seed+1)-0.5)*0.14
+    det=a*(1+mot[...,None])
+    ov=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(ov); r=random.Random(seed)
+    if brick:
+        bh,bw=brick[0]*K,brick[1]*K
+        for j in range(H//bh+1):
+            y=j*bh; d.line([0,y,W,y],fill=mul(base,0.5)+(235,),width=3*K//2+1); d.line([0,y+3,W,y+3],fill=mul(base,1.35)+(150,),width=2)
+            off=(j%2)*bw//2
+            for i in range(-1,W//bw+2):
+                x=i*bw+off+r.randint(-2,2); d.line([x,y,x,y+bh],fill=mul(base,0.5)+(235,),width=3*K//2+1)
+    for _ in range(int(W*H/900*dens)):   # grit specks
+        x,y=r.uniform(0,W),r.uniform(0,H); s_=r.uniform(1,2.6)
+        d.ellipse([x-s_,y-s_,x+s_,y+s_],fill=((0,0,0,r.randint(50,90)) if neutral else mul(base,r.uniform(0.6,0.8))+(r.randint(140,220),)))
+    for _ in range(int(W*H/2500*dens)):  # paint strokes, mid-dark and some light, 2-5 px
+        x,y=r.uniform(0,W),r.uniform(0,H); L=r.uniform(8,26)*K/2; an=r.uniform(-0.5,0.5)+(0 if r.random()<0.7 else math.pi/2)
+        if neutral: c=(0,0,0,r.randint(40,75)) if r.random()<0.75 else (255,255,255,r.randint(25,45))
+        else: c=(mul(base,r.uniform(0.62,0.85)) if r.random()<0.75 else mul(base,r.uniform(1.12,1.25)))+(r.randint(120,190),)
+        d.line([x,y,x+L*math.cos(an),y+L*math.sin(an)],fill=c,width=r.randint(2,4))
+    det=Image.fromarray(np.clip(det,0,255).astype(np.uint8)).convert('RGBA'); det=Image.alpha_composite(det,ov).convert('RGB')
+    out=np.where(mk,np.asarray(det,np.float32),a)
+    return Image.fromarray(np.clip(out,0,255).astype(np.uint8))
+DETAIL_K=2
 def facade(name,wall,shop,seed,W=1024,H=1536,floors=3,cols=3,era=1950,xmas=True):
     r=random.Random(seed); im=wash(W,H,wall,0.08,seed,0.06); d=ImageDraw.Draw(im)
     # bricks
@@ -70,7 +99,7 @@ def facade(name,wall,shop,seed,W=1024,H=1536,floors=3,cols=3,era=1950,xmas=True)
         for i in range(-1,W//bw+1):
             c=mul(wall,r.uniform(0.86,1.1)); x=i*bw+off; y=j*bh
             d.rectangle([x+1,y+1,x+bw-2,y+bh-2],fill=c)
-    d=ImageDraw.Draw(im)
+    d=ImageDraw.Draw(im); im0=im.copy()
     gf=int(H*0.36); top=H-gf  # ground floor height
     fh=(top-90)//floors
     for f in range(floors):
@@ -115,21 +144,29 @@ def facade(name,wall,shop,seed,W=1024,H=1536,floors=3,cols=3,era=1950,xmas=True)
         if xmas:  # Thanksgiving / holiday dressing: price cards + garland
             for k in range(int((b-a)//120)):
                 px=a+40+k*120; d.rectangle([px,top+190,px+70,top+236],fill=(250,246,230)); jr(d,px,top+190,px+70,top+236,2,seed=k)
-                text(d,(px+35,top+213),r.choice(['$1.98','$2.49','$4.95','$0.99','SALE']),font(FSN,22),(170,30,30))
+                r.choice(['$1.98','$2.49','$4.95','$0.99','SALE'])   # round 4 (rule 206): keep the random stream; draw a sale starburst instead of a price (tags were cut by the frame edge mid-pan)
+                cx_,cy_=px+35,top+213; d.polygon([(cx_+(18 if q%2==0 else 9)*math.cos(q*math.pi/8),cy_+(18 if q%2==0 else 9)*math.sin(q*math.pi/8)) for q in range(16)],fill=(200,40,36),outline=(120,20,20))
             for x in range(int(a),int(b),24): d.ellipse([x,top+150+8*math.sin(x/30),x+26,top+176+8*math.sin(x/30)],fill=(60,120,60),outline=(30,70,30))
         d.line([a,top+160,b,H-60],fill=(150,170,190),width=3)  # glass glint
         jr(d,a,top+160,b,H-60,5,seed=int(a))
     d.rectangle([dx,top+160,dx+dw,H],fill=(96,62,40)); d.rectangle([dx+20,top+190,dx+dw-20,top+440],fill=(70,84,100)); jr(d,dx,top+160,dx+dw,H,5,seed=9)
     d.ellipse([dx+dw-40,top+460,dx+dw-24,top+476],fill=(220,180,60))
     d.rectangle([0,H-60,W,H],fill=(130,120,110)); jl(d,[(0,H-60),(W,H-60)],3)
-    im=strokes(im,600,mul(wall,0.7),seed,6,22,2,45)
-    im.filter(ImageFilter.GaussianBlur(0.5)).save(T+name+'.png')
+    df=np.abs(np.asarray(im,np.int16)-np.asarray(im0,np.int16)).max(2)
+    mask=Image.fromarray(((df<1)*255).astype(np.uint8)).filter(ImageFilter.MinFilter(5))   # wall = pixels untouched since the brick stage
+    im=strokes(im,600,mul(wall,0.7),seed,6,22,2,45)   # wall area = still brick after windows/shop were drawn
+    im=im.filter(ImageFilter.GaussianBlur(0.5))
+    if DETAIL_K>1:
+        im=paintdetail(im,Image.new('L',im.size,255),wall,seed+800,DETAIL_K,neutral=True,dens=0.6)   # windows, shop, door: neutral grit + strokes
+        im=paintdetail(im,mask.resize(im.size,Image.NEAREST),wall,seed+900,1,brick=(bh*DETAIL_K,bw*DETAIL_K))
+    im.save(T+name+'.png')
 def dept_store(name,era=1950,W=2048,H=1536,seed=40,banner=None):
     wall=(214,196,166) if era<1970 else (206,190,170)
     r=random.Random(seed); im=wash(W,H,wall,0.06,seed,0.05); d=ImageDraw.Draw(im)
     for j in range(H//40):  # stone courses
         jl(d,[(0,j*40),(W,j*40)],2,mul(wall,0.75),seed+j,0.8)
         for i in range(0,W,160): x=i+(j%2)*80; jl(d,[(x,j*40),(x,j*40+40)],2,mul(wall,0.75),seed+i,0.6)
+    im0=im.copy()
     top=int(H*0.42)
     for f in range(2):
         for c in range(8):
@@ -173,7 +210,12 @@ def dept_store(name,era=1950,W=2048,H=1536,seed=40,banner=None):
         for k in range(0,430,40): d.polygon([(x0+k,top+70),(x0+k+40,top+70),(x0+k+20,top+100)],fill=(160,40,40) if era<1970 else (30,30,30))
     d.rectangle([0,H-70,W,H],fill=(120,110,100))
     if banner: pass
-    im=strokes(im,900,mul(wall,0.7),seed,6,24,2,40); im.filter(ImageFilter.GaussianBlur(0.5)).save(T+name+'.png')
+    df=np.abs(np.asarray(im,np.int16)-np.asarray(im0,np.int16)).max(2); mask=Image.fromarray(((df<1)*255).astype(np.uint8)).filter(ImageFilter.MinFilter(5))
+    im=strokes(im,900,mul(wall,0.7),seed,6,24,2,40).filter(ImageFilter.GaussianBlur(0.5))
+    if DETAIL_K>1:
+        im=paintdetail(im,Image.new('L',im.size,255),wall,seed+800,DETAIL_K,neutral=True,dens=0.6)
+        im=paintdetail(im,mask.resize(im.size,Image.NEAREST),wall,seed+900,1)
+    im.save(T+name+'.png')
 def asphalt(W=2048,H=2048,seed=50):
     im=wash(W,H,(84,82,86),0.10,seed); d=ImageDraw.Draw(im); r=random.Random(seed)
     for _ in range(140):  # cracks + patches + oil
@@ -190,7 +232,7 @@ def asphalt(W=2048,H=2048,seed=50):
         for x in range(int(W*0.1),int(W*0.9),110): d.rectangle([x,y0,x+70,y0+220],fill=(232,230,220)); jr(d,x,y0,x+70,y0+220,2,(120,118,112),x)
     for k in range(5): x,y=r.uniform(200,W-200),r.uniform(300,H-300); d.ellipse([x,y,x+90,y+90],fill=(60,58,62),outline=(30,30,30),width=4); d.line([x+10,y+45,x+80,y+45],fill=(40,40,40),width=3)
     for k in range(6): x,y=r.uniform(0,W),r.uniform(0,H); d.ellipse([x,y,x+r.uniform(80,200),y+r.uniform(30,70)],fill=(70,80,96))  # puddles
-    strokes(im,2500,(110,108,112),seed,4,16,2,50).save(T+'asphalt.png')
+    im=strokes(im,2500,(110,108,112),seed,4,16,2,50); paintdetail(im,Image.new('L',im.size,255),(110,108,112),seed+900,1).save(T+'asphalt.png')
 def sidewalk(W=1024,H=1024,seed=52):
     base=(196,188,176); im=wash(W,H,base,0.07,seed); d=ImageDraw.Draw(im); r=random.Random(seed); S=170
     for j in range(H//S+1):
@@ -199,7 +241,7 @@ def sidewalk(W=1024,H=1024,seed=52):
             if r.random()<0.25: jl(d,[(i*S+r.uniform(10,80),j*S+10),(i*S+r.uniform(60,150),j*S+r.uniform(80,160))],2,(120,112,104),i+j)
     for _ in range(60): x,y=r.uniform(0,W),r.uniform(0,H); d.ellipse([x,y,x+8,y+8],fill=(150,144,138))
     for _ in range(10): x,y=r.uniform(0,W),r.uniform(0,H); d.polygon([(x,y),(x+26,y+8),(x+10,y+22)],fill=(190,120,50))  # leaves
-    strokes(im,900,(150,144,136),seed,5,18,2,45).save(T+'sidewalk.png')
+    im=strokes(im,900,(150,144,136),seed,5,18,2,45); paintdetail(im,Image.new('L',im.size,255),(150,144,136),seed+900,1).save(T+'sidewalk.png')
 def sky(name,top,bot,W=1024,H=2048,seed=17,clouds=7,cloud=(250,244,236)):
     y=np.linspace(0,1,H)[:,None,None]; a=np.array(top,np.float32)*(1-y**0.8)+np.array(bot,np.float32)*(y**0.8); a=np.repeat(a,W,1)
     im=Image.fromarray(a.astype(np.uint8)).convert('RGBA'); r=random.Random(seed)
@@ -235,12 +277,12 @@ def chalkboard(name,state,nl=None):  # state 0 roster, 1 cancelled, 2..5 BLACK F
     for _ in range(420): x,y=random.uniform(0,W),random.uniform(0,H); d.line([x,y,x+random.uniform(20,90),y+random.uniform(-6,6)],fill=(70,86,78),width=3)
     ch=(232,232,220); f=font(FSN,60); f2=font(FSN,44)
     text(d,(W/2,90),'DUTY ROSTER - FRI. NOV. 24',f,ch)
-    names=['SGT. KELLY','OFC. RUIZ','OFC. BROWN','OFC. MOSS','OFC. DUNN','OFC. LEE']
+    names=['BEAT 1','BEAT 2','BEAT 3','BEAT 4','BEAT 5','BEAT 6']   # round 4: beats, not officer names (0 person names)
     for i,n in enumerate(names):
         y=200+i*80; text(d,(300,y),n,f2,ch,'lm'); text(d,(760,y),'DAY OFF',f2,ch,'lm')
         if state>=1: d.line([750,y,980,y],fill=(250,120,110),width=6); text(d,(1030,y),'12 HR',f2,(250,200,120),'lm')
     if state>=1: 
-        st=Image.new('RGBA',(700,200),(0,0,0,0)); sd=ImageDraw.Draw(st); sd.rectangle([6,6,694,194],outline=(220,60,50),width=12); text(sd,(350,100),'CANCELLED',font(FS,86),(220,60,50))
+        st=Image.new('RGBA',(700,200),(0,0,0,0)); sd=ImageDraw.Draw(st); sd.rectangle([6,6,694,194],outline=(220,60,50),width=12); text(sd,(350,100),'CANCELED',font(FS,86),(220,60,50))
         st=st.rotate(10,expand=True,resample=Image.BICUBIC); stamp=st
     if state>=2:
         d.rectangle([60,1080,W-60,H-60],fill=(46,62,54)); s='BLACK FRIDAY'; n=nl if nl is not None else min(len(s),int(len(s)*(state-1)/4)); 
@@ -286,10 +328,14 @@ def ledger(name,state,W=1536,H=1024,seed=80,figs=True):  # state 0: red entries 
     for k in range(18):
         y=100+k*40
         if figs: d.text((W/2-200,y),f'({RED[k]:,.2f})',font=hand,fill=(196,30,30))
+    # r5 (round-4 shots verifier: labels appeared with no pen near them): item labels, the TOTAL word and its rule are pre-printed on every state; only the figures are written by the pen
+    labs=[r.choice(['sales','gifts','toys','coats','hats']) for _ in range(18)]
+    for k in range(18): d.text((W/2+40,100+k*40),labs[k],font=hand,fill=(50,46,60))
+    d.line([W/2+40,H-120,W-60,H-120],fill=(20,20,26),width=5); d.text((W/2+60,H-100),'TOTAL',font=font(FS,44),fill=(20,20,26))
     for k in range(int(state*4.5)):
-        y=100+k*40; d.text((W/2+40,y),r.choice(['sales','gifts','toys','coats','hats']),font=hand,fill=(50,46,60)); d.text((W-240,y),f'{BLK[k]:,.2f}',font=hand,fill=(20,20,26))
+        y=100+k*40; d.text((W-240,y),f'{BLK[k]:,.2f}',font=hand,fill=(20,20,26))
     if state>=4:
-        d.line([W/2+40,H-120,W-60,H-120],fill=(20,20,26),width=5); d.text((W/2+60,H-100),'TOTAL',font=font(FS,44),fill=(20,20,26)); d.text((W-330,H-100),'+ 18,240.00',font=font(FS,44),fill=(20,20,26))
+        d.text((W-330,H-100),'+ 18,240.00',font=font(FS,44),fill=(20,20,26))
     d.line([140,H-120,W/2-60,H-120],fill=(196,30,30),width=5); d.text((W/2-330,H-100),'(9,410.00)',font=font(FS,44),fill=(196,30,30)) if figs else None
     im.save(T+name+'.png')
 def fleur(d,x,y,c,ink,k=1.0):
@@ -322,6 +368,7 @@ def wallpaper(name,base,motif,W=1024,H=1024,seed=90):
     d.rectangle([0,H-284,W,H-260],fill=mul(base,0.45)); jl(d,[(0,H-284),(W,H-284)],5,mul(base,0.25),7); jl(d,[(0,H-260),(W,H-260)],4,mul(base,0.25),8)
     im=strokes(im,700,mul(base,0.8),seed,6,22,2,40)
     # soft top-down light falloff
+    im=paintdetail(im,Image.new('L',im.size,255),base,seed+900,1)   # round 5: fine painted detail
     g=np.linspace(1.04,0.86,H)[:,None,None]; im=Image.fromarray(np.clip(np.asarray(im,np.float32)*g,0,255).astype(np.uint8))
     im.save(T+name+'.png')
 def woodfloor(name='wood',W=1024,H=1024,seed=95,base=(150,100,62)):
@@ -330,7 +377,7 @@ def woodfloor(name='wood',W=1024,H=1024,seed=95,base=(150,100,62)):
         c=mul(base,r.uniform(0.85,1.12)); d.rectangle([j,0,j+62,H],fill=c); jl(d,[(j,0),(j,H)],7,mul(base,0.38),j)
         y=r.uniform(0,H); jl(d,[(j,y),(j+62,y)],6,mul(base,0.38),j+1)
         for k in range(4): yy=r.uniform(0,H); d.arc([j+10,yy,j+50,yy+80],200,340,fill=mul(base,0.7),width=2)
-    im.save(T+name+'.png')
+    im=paintdetail(im,Image.new('L',im.size,255),base,seed+900,1); im.save(T+name+'.png')
 def newsstand_sign(name,town):
     W,H=1024,256; im=Image.new('RGB',(W,H),(40,70,120)); d=ImageDraw.Draw(im); d.rectangle([10,10,W-10,H-10],outline=(240,220,150),width=10)
     sz=96

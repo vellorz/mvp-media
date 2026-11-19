@@ -3,7 +3,7 @@
 # (no swells, no ducking). Owner taste honoured inside it: melodic house feel, rounded sub bass, shuffled garage hats.
 import numpy as np, wave, json, sys
 SR=48000; END_F=1752; DUR=END_F/30+0.6; N=int(SR*DUR); rng=np.random.default_rng(7)
-BPM=120; B=60/BPM; S16=B/4
+BPM=96; B=60/BPM; S16=B/4   # round 5 (C2): 92-100 BPM
 def mtof(m): return 440*2**((m-69)/12)
 def env(n,a=0.004,d=8.0):
     t=np.arange(n)/SR; return np.minimum(1,t/a)*np.exp(-t*d)
@@ -27,9 +27,9 @@ def put(tr,t,x,g=1.0):
     i=int(t*SR)
     if i>=N or i+len(x)<0: return
     j=min(N,i+len(x)); T[tr][i:j]+=x[:j-i]*g
-# I-vi-IV-V in F: Fmaj7, Dm7, Bbmaj7, C(sus)
-CH=[(41,[65,69,72,76]),(38,[62,65,69,72]),(46,[62,65,70,74]),(36,[60,64,67,70])]
-MEL=[[77,0,72,74,77,0,79,77],[74,0,72,69,72,74,0,72],[74,77,0,74,70,72,74,0],[72,0,76,79,76,0,74,72]]
+# round 5 (C1): D minor, i-VI-III-VII (Dm7, Bbmaj7, Fmaj7, C7): tense, sly, forward-moving
+CH=[(38,[62,65,69,72]),(34,[58,62,65,69]),(41,[60,65,69,72]),(36,[60,64,67,70])]
+MEL=[[74,0,77,76,74,0,72,74],[70,0,74,72,70,0,69,70],[72,0,69,72,77,0,76,74],[72,0,76,79,76,0,74,72]]
 bars=int(DUR/(4*B))+1
 for bi in range(bars):
     t0=bi*4*B; root,tri=CH[bi%4]; var=(bi//4)%2
@@ -55,10 +55,18 @@ n=int(0.22*SR); t=np.arange(n)/SR; KICK=np.sin(2*np.pi*(48*t+ (110-48)*(1-np.exp
 T['kick'][:]=0
 for bi in range(bars):
     for k in range(4): put('kick',bi*4*B+k*B,KICK,0.9)
-bed=T['mal']*0.9+T['plk']*0.6+T['bass']*0.55+T['kick']*0.7+T['hat']*0.35+T['pad']*1.0
+# round 5: level map from the Rick music study (section 7), dB relative to the bed median; layers thin out in dips (S6)
+MAP=[(0.0,7),(2.6,2),(5.5,0),(7.9,5),(9.7,3),(14.2,3),(14.7,7),(16.1,5),(17.4,-3),(19.4,-3),(20.5,6),(21.5,-3),(28.2,-5),(31.0,-5),(32.2,2),(34.0,4),(35.6,6),(37.2,-3),(45.1,-3),(48.4,3),(49.3,-5),(52.0,3),(57.5,8),(60.0,8)]
+tt=np.arange(N)/SR-0.1   # VO plays 0.1 s late in the mix
+mk=np.array([m[0] for m in MAP]); mv=np.array([m[1] for m in MAP],float)
+gdb=np.interp(tt,mk,mv)
+k_=int(0.7*SR); gdb=np.convolve(np.pad(gdb,(k_//2,k_-k_//2-1),mode='edge'),np.ones(k_)/k_,mode='valid')   # rides take ~0.7 s (M8)
+gl=10**(gdb/20)
+thin=np.clip((gdb+1.0)/4.0,0,1)   # melody and plucks drop out in the -3..-5 dips, return on rises
+bed=(T['mal']*0.9*thin+T['plk']*0.6*(0.4+0.6*thin)+T['bass']*0.62+T['kick']*0.7+T['pad']*1.0)*gl
 # gentle bus compression for a constant level (no pumping: slow, light)
 bed=np.tanh(bed*0.9)/0.9
-fade=np.ones(N); fo=int(0.35*SR); fade[N-fo:]=np.linspace(1,0,fo); bed*=fade
+# round 5 (S5): no fade, the bed ends with the last frame
 # ---------------- SFX ----------------
 S=np.zeros(N)
 def sput(f,x,g=1.0):
@@ -130,7 +138,7 @@ for it in range(12):   # overlapping tails add up: re-level every group against 
     for gr in G:
         i,w=gr['i'],gr['w']   # robust: average of three comparison spans (span, span+0.2 s, fixed 0.5 s)
         vv=[20*np.log10(pk50(S[i:i+ww])/rms(BEDW[i:i+ww])) for ww in (w,w+int(0.2*SR),int(0.5*SR))]; po=(min(vv)+max(vv))/2; gr['k']*=10**((16-po)/20*0.8)
-ATT={1468:-6.0,1727:-4.0,842:-1.5,1402:-1.5}   # tonal dings read louder than their RMS (K-weighting): keep every SFX >= 8 LU under the VO
+ATT={1468:-6.0,1727:-6.8,1699:-2.2,842:-1.5,1402:-1.5}   # tonal dings read louder than their RMS (K-weighting): keep every SFX >= 8 LU under the VO
 for gr in G: gr['k']*=10**(ATT.get(gr['f0'],0.0)/20)
 S[:]=sum(gr['tr']*gr['k'] for gr in G)
 evlog=[dict(f=gr['f0'],f1=gr['f1'],i=gr['i'],w=gr['w']) for gr in G]

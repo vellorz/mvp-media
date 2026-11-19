@@ -10,7 +10,7 @@ def lufs(path,extra=''):
 # A4: measure the VO as it plays in the mix (mono sent to both channels = +3 dB vs the mono file)
 subprocess.run(f'ffmpeg -y -hide_banner -loglevel error -i {VO} -af "aresample=48000,pan=stereo|c0=c0|c1=c0" {A}vo_st.wav',shell=True,check=True)
 vI,_,_=lufs(A+'vo_st.wav'); bI,_,_=lufs(A+'bed.wav'); sI,_,_=lufs(A+'sfx.wav')
-BED_UNDER=float(sys.argv[1]) if len(sys.argv)>1 else 20.0; SFX_UNDER=10.0
+BED_UNDER=float(sys.argv[1]) if len(sys.argv)>1 else 16.0; SFX_UNDER=16.0   # r5b: 10 made peaks only 2.6 LU under the VO (rule 192 needs >= 8); round 5 (M4): mean VO-music gap 14.5-17 dB
 gb=(vI-BED_UNDER)-bI
 # A6: global SFX gain so the median event sits +10 dB over the bed in the mix (events are pre-levelled in music.py)
 import numpy as np, wave
@@ -22,7 +22,7 @@ r=lambda a: float(np.sqrt(np.mean(a**2))+1e-12)
 def pk(a):
     n=2400; return max(r(a[k:k+n]) for k in range(0,max(1,len(a)-n+1),600))
 offs=[20*np.log10(pk(sfxA[e['i']:e['i']+e['w']])/r(bedA[e['i']:e['i']+e['w']])) for e in EVs]
-gs=gb+(10.0-float(np.median(offs)))   # loudest 50 ms of each event group at +10 dB over the bed RMS across its span
+gs=gb+(4.0-float(np.median(offs)))   # r5b: with the bed riding only 14-17 dB under the VO, +10 over the bed put SFX peaks 2.6 LU under the VO; +4 keeps every SFX >= 8 LU under (rule 192, guide v1.2 'both soft'); loudest 50 ms of each event group at +10 dB over the bed RMS across its span
 print('SFX raw offset median',round(float(np.median(offs)),2),'spread',round(min(offs),2),round(max(offs),2))
 print('VO',vI,'bed',bI,'->gain',round(gb,2),'sfx',sI,'->gain',round(gs,2))
 cmd=(f'ffmpeg -y -hide_banner -loglevel error -i {VO} -i {A}bed.wav -i {A}sfx.wav -filter_complex '
@@ -30,7 +30,7 @@ cmd=(f'ffmpeg -y -hide_banner -loglevel error -i {VO} -i {A}bed.wav -i {A}sfx.wa
      f'[v][b][s]amix=inputs=3:normalize=0:duration=longest,atrim=0:{END}[m]" -map "[m]" -ar 48000 {A}premix.wav')
 subprocess.run(cmd,shell=True,check=True)
 pI,pL,pT=lufs(A+'premix.wav'); g=-14.0-pI
-subprocess.run(f'ffmpeg -y -hide_banner -loglevel error -i {A}premix.wav -af "volume={g}dB,alimiter=limit=0.60:attack=2:release=60:level=disabled" -ar 48000 {A}mix.wav',shell=True,check=True)
+subprocess.run(f'ffmpeg -y -hide_banner -loglevel error -i {A}premix.wav -af "volume={g}dB,alimiter=limit=0.78:attack=2:release=60:level=disabled" -ar 48000 {A}mix.wav',shell=True,check=True)
 I,LRA,TP=lufs(A+'mix.wav'); g+=-14.0-I
-subprocess.run(f'ffmpeg -y -hide_banner -loglevel error -i {A}premix.wav -af "volume={g}dB,alimiter=limit=0.60:attack=2:release=60:level=disabled" -ar 48000 {A}mix.wav',shell=True,check=True)
+subprocess.run(f'ffmpeg -y -hide_banner -loglevel error -i {A}premix.wav -af "volume={g}dB,alimiter=limit=0.78:attack=2:release=60:level=disabled" -ar 48000 {A}mix.wav',shell=True,check=True)
 I,LRA,TP=lufs(A+'mix.wav'); print(json.dumps({'I':I,'LRA':LRA,'TP':TP,'bed_under_vo':BED_UNDER,'sfx_under_vo':SFX_UNDER}))

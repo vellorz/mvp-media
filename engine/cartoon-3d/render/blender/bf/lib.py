@@ -30,11 +30,21 @@ def _paint(m,grain=0.10,ao=0.30):
     L.new(tc.outputs['Object'],nz.inputs['Vector'])
     mr=N.new('ShaderNodeMapRange'); mr.inputs['From Min'].default_value=0.3; mr.inputs['From Max'].default_value=0.7; mr.inputs['To Min'].default_value=1-grain; mr.inputs['To Max'].default_value=1+grain*0.6
     L.new(nz.outputs['Fac'],mr.inputs['Value'])
+    # round 5 (A2/A4): fine grit in object space (~1-3 cm features) so near surfaces carry painted detail, not flat CG colour
+    nf=N.new('ShaderNodeTexNoise'); nf.inputs['Scale'].default_value=55.0; nf.inputs['Detail'].default_value=8.0; nf.inputs['Roughness'].default_value=0.75
+    L.new(tc.outputs['Object'],nf.inputs['Vector'])
+    mf=N.new('ShaderNodeMapRange'); mf.inputs['From Min'].default_value=0.35; mf.inputs['From Max'].default_value=0.65; mf.inputs['To Min'].default_value=0.86; mf.inputs['To Max'].default_value=1.06
+    L.new(nf.outputs['Fac'],mf.inputs['Value'])
+    vo=N.new('ShaderNodeTexVoronoi'); vo.inputs['Scale'].default_value=140.0; L.new(tc.outputs['Object'],vo.inputs['Vector'])
+    vr=N.new('ShaderNodeMapRange'); vr.inputs['From Min'].default_value=0.0; vr.inputs['From Max'].default_value=0.12; vr.inputs['To Min'].default_value=0.72; vr.inputs['To Max'].default_value=1.0
+    L.new(vo.outputs['Distance'],vr.inputs['Value'])
+    mg=N.new('ShaderNodeMath'); mg.operation='MULTIPLY'; L.new(mf.outputs['Result'],mg.inputs[0]); L.new(vr.outputs['Result'],mg.inputs[1])
+    mg2=N.new('ShaderNodeMath'); mg2.operation='MULTIPLY'; L.new(mg.outputs[0],mg2.inputs[0]); L.new(mr.outputs['Result'],mg2.inputs[1])
     a=N.new('ShaderNodeAmbientOcclusion'); a.samples=6; a.inputs['Distance'].default_value=0.35
     ar=N.new('ShaderNodeMapRange'); ar.inputs['To Min'].default_value=1-ao; ar.inputs['To Max'].default_value=1.0
     L.new(a.outputs['AO'],ar.inputs['Value'])
     m1=N.new('ShaderNodeMix'); m1.data_type='RGBA'; m1.blend_type='MULTIPLY'; m1.inputs['Factor'].default_value=1.0
-    L.new(src,m1.inputs[6]); L.new(mr.outputs['Result'],m1.inputs[7])
+    L.new(src,m1.inputs[6]); L.new(mg2.outputs[0],m1.inputs[7])
     m2=N.new('ShaderNodeMix'); m2.data_type='RGBA'; m2.blend_type='MULTIPLY'; m2.inputs['Factor'].default_value=1.0
     L.new(m1.outputs[2],m2.inputs[6]); L.new(ar.outputs['Result'],m2.inputs[7])
     L.new(m2.outputs[2],bc)
@@ -254,6 +264,7 @@ def ink(skip_prefix=()):
     hm=bpy.data.materials.new('hull'); N,L=nodes(hm)
     for n in list(N): N.remove(n)
     geo=N.new('ShaderNodeNewGeometry'); tr=N.new('ShaderNodeBsdfTransparent'); em=N.new('ShaderNodeEmission'); em.inputs['Color'].default_value=(0.02,0.016,0.014,1)
+    oi=N.new('ShaderNodeObjectInfo'); L.new(oi.outputs['Color'],em.inputs['Color'])   # round 5 (A1): line in the surface's own dark colour, not black
     mx=N.new('ShaderNodeMixShader'); out=N.new('ShaderNodeOutputMaterial')
     L.new(geo.outputs['Backfacing'],mx.inputs['Fac']); L.new(em.outputs[0],mx.inputs[1]); L.new(tr.outputs[0],mx.inputs[2]); L.new(mx.outputs[0],out.inputs['Surface'])
     ng=bpy.data.node_groups.new('hullGN','GeometryNodeTree')
@@ -268,8 +279,17 @@ def ink(skip_prefix=()):
     C_H=col('HULL'); nh=0
     for o in list(bpy.data.objects):
         if o.type!='MESH' or C_NOI in o.users_collection or o.get('chr') or o.get('noink') or len(o.data.vertices)<=4 or o.name.startswith(skip_prefix): continue
-        t_=min(0.05,0.009+0.0062*math.sqrt(max(o.dimensions)))*o.get('inkmul',1.0)
+        if max(o.dimensions)>25 or o.name.startswith(('road','walk','car','curb','sky')): continue   # round 5 (A1): no lines on large clean surfaces
+        t_=0.5*min(0.05,0.009+0.0062*math.sqrt(max(o.dimensions)))*o.get('inkmul',1.0)   # round 5: about half as thick (Rick 2-3 px vs our 4-8 px)
         h=o.copy(); h.name=o.name+'_ink'; cc_=[c for c in o.users_collection if c.name.startswith('CHR_')]; (cc_[0] if cc_ else C_H).objects.link(h);  # round 4: a shot-only prop's ink hull stays in that shot's CHR_ collection (S07 mailbox hull showed as a black blob in S08)
+        bc_=(0.30,0.22,0.18)
+        m_=o.active_material
+        if m_ and m_.use_nodes and 'Principled BSDF' in m_.node_tree.nodes:
+            pb_=m_.node_tree.nodes['Principled BSDF'].inputs['Base Color']
+            rgb_=[n_ for n_ in m_.node_tree.nodes if n_.type=='RGB']
+            if not pb_.is_linked: bc_=tuple(pb_.default_value)[:3]
+            elif rgb_: bc_=tuple(rgb_[0].outputs[0].default_value)[:3]
+        h.color=(bc_[0]*0.22+0.004,bc_[1]*0.22+0.004,bc_[2]*0.22+0.004,1)
         h.parent=o; h.matrix_parent_inverse.identity(); h.location=(0,0,0); h.rotation_euler=(0,0,0); h.scale=(1,1,1)
         if h.animation_data: h.animation_data_clear()
         if o.animation_data and o.animation_data.action and any(fc.data_path=='hide_render' for fc in o.animation_data.action.fcurves):

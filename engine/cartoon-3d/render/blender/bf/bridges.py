@@ -59,11 +59,21 @@ for A,B,side,oa,obn,goalA in SPEC:
         for h in holds: setkey(A,h,tgt_at(A,h))
         for k in fm: solve(A,oa,np.array(goalA),[k],[k])
     if 'B' in side:
+        # r5 (round-4 R13: the verifier judged 3/14 bridged; the shapes matched in place but not in SIZE): dolly the B camera so the bridged shape has the A side's width (within 12 %), then re-centre
+        if obn!='ledger_cover':
+            camB=bpy.data.objects['cam_'+B]
+            for _ in range(3):
+                for k in fm:
+                    wa_=scr(A,oa,k)[1]; wb_=scr(B,obn,k)[1]; rt=wb_/max(wa_,1e-4)
+                    if abs(rt-1)<0.18: continue
+                    rt=max(0.6,min(1.6,rt)); sc.frame_set(k); P_=ob(obn).matrix_world.translation.copy(); C_=camB.matrix_world.translation.copy()
+                    camB.location=P_+(C_-P_)*rt; camB.keyframe_insert('location',frame=k)
+                for k in fm: solve(B,obn,scr(A,oa,k)[0],[k],[k])
         for k in fm: solve(B,obn,scr(A,oa,k)[0],[k],[k])
     rows=[]
     for f in fm:
         pa,wa=scr(A,oa,f); pb,wb=scr(B,obn,f); rows.append(dict(f=f,A=[round(x,3) for x in pa],B=[round(x,3) for x in pb],dx=round(abs(pa[0]-pb[0]),3),dy=round(abs(pa[1]-pb[1]),3),wA=round(wa,3),wB=round(wb,3)))
-    REP.append(dict(join=f'{A}>{B}',A_obj=oa,B_obj=obn,meas=rows,max_err=max(max(r['dx'],r['dy']) for r in rows),bridged=all(max(r['dx'],r['dy'])<=0.05 for r in rows)))
+    REP.append(dict(join=f'{A}>{B}',A_obj=oa,B_obj=obn,meas=rows,max_err=max(max(r['dx'],r['dy']) for r in rows),bridged=all(max(r['dx'],r['dy'])<=0.05 and abs(r['wB']/max(r['wA'],1e-4)-1)<=0.2 for r in rows)))   # r5: size counts too
     print('BRIDGE',REP[-1]['join'],REP[-1]['max_err'],REP[-1]['bridged'],flush=True)
 # T7: the podium cop in S02 rides above the caption band while the crane starts
 for k in (184,190):

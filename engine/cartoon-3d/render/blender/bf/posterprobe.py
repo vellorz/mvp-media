@@ -6,7 +6,7 @@ for lc in vl.layer_collection.children:
     if lc.name.startswith('CHR_'): lc.exclude=(lc.name!='CHR_S16')
 cam=bpy.data.objects['cam_S16']; sc.camera=cam; po=bpy.data.objects['poster']; fr=bpy.data.objects['poster_frame']
 bad=[]
-for f in range(1640,1752):
+for f in range(1688,1752):   # r5: before 1688 the display is wrapped on purpose (poster_cover)
     sc.frame_set(f); dg=bpy.context.evaluated_depsgraph_get(); cp=cam.matrix_world.translation
     M=po.matrix_world; vs=[M@v.co for v in po.data.vertices]; o_,ex,ey=vs[0],vs[1]-vs[0],vs[3]-vs[0]
     sp=[w2c(sc,cam,fr.matrix_world@__import__('mathutils').Vector(c)) for c in fr.bound_box]

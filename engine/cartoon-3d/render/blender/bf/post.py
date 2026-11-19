@@ -13,7 +13,7 @@ TINT={'S01':(1.03,1.0,0.96),'S02':(1.03,1.0,0.96),'S03':(1.04,1.0,0.95),'S04':(1
 # per-shot brightness targets: day streets bright, lamp-lit interiors darker (Rick's film swings 0.2-0.7 across scenes)
 LT={'S01':0.50,'S02':0.52,'S03':0.50,'S04':0.48,'S05':0.39,'S06':0.40,'S07':0.48,'S08':0.50,'S09':0.50,'S10':0.37,'S11':0.46,'S12':0.38,'S13':0.40,'S14':0.38,'S15':0.44,'S16':0.47}
 # vignette strength (corner multiplier = 1-k): interiors get Rick's lantern falloff, exteriors a light one
-PAY0,PAY1=1690,1709; PAYP=(0.0,1.0,0.9,1.0,(1.06,0.97,1.0))   # S16 payoff grade (poster <1% clipped, luma ~143 vs file 117)
+PAY0,PAY1=1688,1709; PAYP=(0.0,1.0,1.0,1.0,(1.03,0.99,1.0))   # S16 payoff grade (poster <1% clipped, luma ~143 vs file 117)
 INTR=('S05','S06','S10','S12','S13','S14')
 VIG={n:(0.70 if n in INTR else 0.10) for n in SH}   # start values; interiors are calibrated per shot below to corner/centre 0.38 (guide 0.33-0.42); day exteriors light only
 BLOOM=0.0   # light glow on emitters (lamps, screens, lit windows): guide L8
@@ -87,7 +87,12 @@ def fixwords(W_):
         if t=='once.' and i+1<len(W_) and W_[i+1][0].strip()=='Shoppers,': t='once,'
         if t=='Shoppers,' and o and o[-1][0]=='once,': t='shoppers,'
         if t=='Friday.' and o and o[-1][0]=='Big': t='Friday!'
+        if t=='story,' and i+1<len(W_) and W_[i+1][0].strip()=='it': t='story.'   # round 4: script reads 'Nice story. It just wasn't'
+        if t=='it' and o and o[-1][0]=='story.': t='It'
         if t=="Who's": t='\u201cWho\'s'
+        if t=='Thanksgiving,': t='Thanksgiving'   # r5: script has no comma here (round-4 text verifier)
+        if t=='game.' and i+1<len(W_) and W_[i+1][0].strip()=='So': t='game,'
+        if t=='So' and o and o[-1][0]=='game,': t='so'
         if t=='funeral?': t='funeral?\u201d'
         o.append([t,s_,e]); i+=1
     return o
@@ -98,7 +103,7 @@ def chunks():
         cur.append((w,s,e)); punct=w.strip()[-1] in ',.?!'
         nxt=WORDS[i+1][1] if i+1<len(WORDS) else e+0.4
         dur=(nxt-cur[0][1])*30
-        if punct or len(cur)==3 or dur>=7 or (len(cur)==2 and len(''.join(x[0] for x in cur))>8):
+        if punct or len(cur)==2 or dur>=5 or (len(cur)==2 and len(''.join(x[0] for x in cur))>6):   # round 5 (T1-T3): 1-2 words per card, 162 cards, mean 0.36 s, P90 0.54 s
             out.append(cur); cur=[]
     if cur: out.append(cur)
     C=[]
@@ -116,6 +121,15 @@ def cap_layer(txt):
     sh=sh.filter(ImageFilter.GaussianBlur(2*K)); lay.alpha_composite(sh)
     ImageDraw.Draw(lay).text((x,BASE),txt,font=FNT,fill=(255,255,255,255),anchor='ls',stroke_width=STROKE,stroke_fill=(0,0,0,255))
     return lay,w/W
+PQ=json.load(open('/root/bf/bridge/posterquad.json'))
+_PF=np.asarray(Image.open('/root/bf/poster_2k.png').convert('RGB')).astype(np.float32)/255.0
+def truepost(o,q,k=0.96):
+    h,w=o.shape[:2]; ph,pw=_PF.shape[:2]
+    src=np.float32([[0,ph],[pw,ph],[pw,0],[0,0]]); dst=np.float32([[x*w,(1-y)*h] for x,y in q])
+    Mx=cv2.getPerspectiveTransform(src,dst)
+    wf=cv2.warpPerspective(_PF,Mx,(w,h),flags=cv2.INTER_AREA if (dst[1][0]-dst[0][0])<pw else cv2.INTER_LINEAR)
+    m=cv2.warpPerspective(np.ones((ph,pw),np.float32),Mx,(w,h)); m=cv2.GaussianBlur(m,(0,0),0.8*K)[...,None]
+    return o*(1-m)+np.clip(wf*k,0,1)*m
 if __name__=='__main__':
     # grade params per shot from 5 sampled frames
     P={}; rep={}
@@ -145,7 +159,9 @@ if __name__=='__main__':
         for n in act:
             raw=R[n].next(); o=apply(raw,P[n])
             if n=='S16' and f>=PAY0:   # payoff close-up: protect the poster's real colours (no highlight stretch, gentle gamma)
-                q=apply(raw,PAYP); t=min(1.0,(f-PAY0+1)/(PAY1-PAY0+1)); t=t*t*(3-2*t); o=o*(1-t)+q*t
+                q=apply(raw,PAYP); q=np.clip(q+0.7*(q-cv2.GaussianBlur(q,(0,0),1.4*K)),0,1);   # round 4: poster read soft (38 % of file sharpness): gentle unsharp on the payoff
+                t=min(1.0,(f-PAY0+1)/(PAY1-PAY0+1)); t=t*t*(3-2*t); o=o*(1-t)+q*t
+            if n=='S16' and str(f) in PQ: o=truepost(o,PQ[str(f)])   # r5 (rule 196, round-4 E5 note): the shop file's true colours on the projected poster quad
             frames[n]=vig(bloom(o,BLOOM*(0.4 if n in ('S10','S13') else 1.0)),VIG[n])
         if len(act)==1: img=frames[act[0]]
         else:

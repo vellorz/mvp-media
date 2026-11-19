@@ -104,11 +104,11 @@ def head(name,fk):
 SS=2; BOUT=20   # round 4: body outline as heavy as the head's (verifier: thin body outlines vs heads)
 def lt(c,f=1.12): return tuple(min(255,int(v*f)) for v in c[:3])+(255,)
 GB={'tall':(80,175,215),'short':(172,180,222),'round':(102,200,238)}   # top px, shoulder half-width, hem half-width
-HEMY={'tall':560,'short':640,'round':590}   # round 5 (B1/B2): torso ~0.86 H tall (H = head disc ~560 px), legs ~0.85 H visible
+HEMY={'tall':490,'short':560,'round':520}   # r6 (round-5: legs 0.64-0.90 H, Rick 0.93-1.31): shorter torso, longer legs   # round 5 (B1/B2): torso ~0.86 H tall (H = head disc ~560 px), legs ~0.85 H visible
 def _sil(kind):
     y0,w0,w1=GB[kind]; y1=HEMY[kind]; pts=[]
-    w1=int(w1*0.9); rr=int(0.36*2*w1)   # rounded bottom: corner radius >= 0.35 of the torso width (Rick bean)
-    BG_=40
+    w1=int(w1*0.74); rr=int(0.36*2*w1)   # r6: hem narrower than the middle (Rick: widest at mid-torso)   # rounded bottom: corner radius >= 0.35 of the torso width (Rick bean)
+    BG_=62
     yb=y1-rr*0.55   # sides end here, then a half-ellipse closes the bottom
     for i in range(0,11): t=i/10; pts.append((400-(w1+(w0-w1)*t)-BG_*math.sin(math.pi*t), yb+(y0+70-yb)*t))
     for i in range(0,13): a=math.radians(180+i*7.5); pts.append((400-w0+70+70*math.cos(a)*1.0, y0+70+70*math.sin(a)))
@@ -245,8 +245,21 @@ def arm(name,prop=None):
     if prop=='paper': d.rectangle([60,640,340,860],fill=(238,232,214,255),outline=K,width=10); d.text((80,660),'BLACK\nFRIDAY',fill=K)
     if prop in ('box','bag','paper','megaphone','camera'):   # fingers over the prop so it is held, not floating
         d.ellipse([170,700,230,760],fill=skin,outline=K,width=8)
-    return elbow(im,BEND.get(prop,34))
-BEND={'pennant':0,'megaphone':20,'paper':10}
+    return bend(im,BEND.get(prop,85))
+BEND={'pennant':0,'megaphone':20,'paper':25,'bag':25,'box':30,'camera':30,'chalk':45,'pen':45,'redpen':45}
+def bend(im,deg,ey=330):
+    # r6 (round-5 Rick measure: elbows 50-95 deg interior, ours 180): real elbow. The forearm (with cuff, hand and prop) swings outward about the elbow by deg; canvas 800 wide, arm still centred
+    W,H=im.size; out=Image.new('RGBA',(W*3,H),(0,0,0,0)); up=im.crop((0,0,W,ey+40)); lo=im.crop((0,ey-10,W,H))
+    if deg:
+        big=Image.new('RGBA',(W*3,H),(0,0,0,0)); big.paste(lo,(W,ey-10),lo)
+        big=big.rotate(deg,resample=Image.BICUBIC,center=(W*3//2,ey))   # PIL rotates counter-clockwise: the hand swings to +x (outward)
+        out.alpha_composite(big)
+    else: out.paste(lo,(W,ey-10),lo)
+    out.alpha_composite(up,(W,0))
+    c=im.getpixel((W//2+22,ey-60)); d=ImageDraw.Draw(out); r=30; X=W*3//2
+    d.ellipse([X-r,ey-r,X+r,ey+r],fill=c,outline=K,width=12)   # elbow cap hides the joint
+    d.ellipse([X-r+9,ey-r+9,X+r-9,ey+r-9],fill=c)
+    return out
 def elbow(im,dx,ey=330,wy=640):
     # round 5 (B4): never a dead-straight arm. Shear the forearm sideways so the elbow reads at ~165 deg (Rick hanging arms 155-175)
     if not dx: return im

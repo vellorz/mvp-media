@@ -19,7 +19,8 @@ w=int(0.4*sr); act=[];gap=[]
 for i in range(0,n-w,w):
     vv=np.sqrt(np.mean(v[i:i+w]**2)); bb=L(bk[i:i+w]); (act if vv>0.01 else gap).append((i,bb))
 d=[]
+if not gap: print('no VO gaps >= 400 ms below 0.01 RMS: ducking not measurable by windows (no gaps to duck in)')
 for i,bb in gap:
     near=[x for j,x in act if abs(j-i)<1.5*sr]
     if near: d.append(bb-np.mean(near))
-print('bed in VO gaps minus under VO (local):',round(float(np.mean(d)),2),'dB mean, max',round(float(np.max(np.abs(d))),2),'(rule 244: within 1.2 dB)')
+if d: print('bed in VO gaps minus under VO (local):',round(float(np.mean(d)),2),'dB mean, max',round(float(np.max(np.abs(d))),2),'(rule 244: within 1.2 dB)')

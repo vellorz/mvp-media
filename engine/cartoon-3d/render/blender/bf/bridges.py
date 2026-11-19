@@ -76,10 +76,10 @@ for A,B,side,oa,obn,goalA in SPEC:
     REP.append(dict(join=f'{A}>{B}',A_obj=oa,B_obj=obn,meas=rows,max_err=max(max(r['dx'],r['dy']) for r in rows),bridged=all(max(r['dx'],r['dy'])<=0.05 and abs(r['wB']/max(r['wA'],1e-4)-1)<=0.2 for r in rows)))   # r5: size counts too
     print('BRIDGE',REP[-1]['join'],REP[-1]['max_err'],REP[-1]['bridged'],flush=True)
 # T7: the podium cop in S02 rides above the caption band while the crane starts
-for k in (184,190):
+for k in ():
     p0,_=scr('S02','S02_cop',k)
     if p0[1]<0.40: solve('S02','S02_cop',np.array([p0[0],0.42]),[k],[k])
-for k,gx in ((198,0.30),(206,0.12),(216,-0.2),(228,-0.28)):
+for k,gx in ():   # r6: S02 now pans to the sidewalk rush after the bridge; no cop solve   # r6: 216/228 dropped (low sidewalk shot after the 220 cut)
     p0,_=scr('S02','S02_cop',k); solve('S02','S02_cop',np.array([gx,max(0.40,p0[1])]),[k],[k])
 json.dump(REP,open('/root/bf/bridge/bridges.json','w'),indent=1)
 bpy.ops.wm.save_as_mainfile(filepath='/root/bf/blend/bf.blend'); print('BRIDGES_OK',sum(r['bridged'] for r in REP),'/14')

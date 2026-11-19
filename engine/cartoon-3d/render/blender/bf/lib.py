@@ -33,13 +33,21 @@ def _paint(m,grain=0.10,ao=0.30):
     # round 5 (A2/A4): fine grit in object space (~1-3 cm features) so near surfaces carry painted detail, not flat CG colour
     nf=N.new('ShaderNodeTexNoise'); nf.inputs['Scale'].default_value=55.0; nf.inputs['Detail'].default_value=8.0; nf.inputs['Roughness'].default_value=0.75
     L.new(tc.outputs['Object'],nf.inputs['Vector'])
-    mf=N.new('ShaderNodeMapRange'); mf.inputs['From Min'].default_value=0.35; mf.inputs['From Max'].default_value=0.65; mf.inputs['To Min'].default_value=0.86; mf.inputs['To Max'].default_value=1.06
+    mf=N.new('ShaderNodeMapRange'); mf.inputs['From Min'].default_value=0.35; mf.inputs['From Max'].default_value=0.65; mf.inputs['To Min'].default_value=0.76; mf.inputs['To Max'].default_value=1.10   # r6: stronger grit (round-5 surface detail 17.9 vs Rick 75+)
     L.new(nf.outputs['Fac'],mf.inputs['Value'])
     vo=N.new('ShaderNodeTexVoronoi'); vo.inputs['Scale'].default_value=140.0; L.new(tc.outputs['Object'],vo.inputs['Vector'])
-    vr=N.new('ShaderNodeMapRange'); vr.inputs['From Min'].default_value=0.0; vr.inputs['From Max'].default_value=0.12; vr.inputs['To Min'].default_value=0.72; vr.inputs['To Max'].default_value=1.0
+    vr=N.new('ShaderNodeMapRange'); vr.inputs['From Min'].default_value=0.0; vr.inputs['From Max'].default_value=0.12; vr.inputs['To Min'].default_value=0.58; vr.inputs['To Max'].default_value=1.0
     L.new(vo.outputs['Distance'],vr.inputs['Value'])
     mg=N.new('ShaderNodeMath'); mg.operation='MULTIPLY'; L.new(mf.outputs['Result'],mg.inputs[0]); L.new(vr.outputs['Result'],mg.inputs[1])
-    mg2=N.new('ShaderNodeMath'); mg2.operation='MULTIPLY'; L.new(mg.outputs[0],mg2.inputs[0]); L.new(mr.outputs['Result'],mg2.inputs[1])
+    # r6: vertical brush streaks (stretched noise) + fine speckle, the painted surface marks Rick's sets carry
+    ms=N.new('ShaderNodeMapping'); ms.inputs['Scale'].default_value=(34.0,34.0,3.0); L.new(tc.outputs['Object'],ms.inputs['Vector'])
+    ns=N.new('ShaderNodeTexNoise'); ns.inputs['Scale'].default_value=1.0; ns.inputs['Detail'].default_value=10.0; ns.inputs['Roughness'].default_value=0.7; L.new(ms.outputs['Vector'],ns.inputs['Vector'])
+    rs=N.new('ShaderNodeMapRange'); rs.inputs['From Min'].default_value=0.3; rs.inputs['From Max'].default_value=0.7; rs.inputs['To Min'].default_value=0.84; rs.inputs['To Max'].default_value=1.10; L.new(ns.outputs['Fac'],rs.inputs['Value'])
+    nk=N.new('ShaderNodeTexNoise'); nk.inputs['Scale'].default_value=260.0; nk.inputs['Detail'].default_value=2.0; L.new(tc.outputs['Object'],nk.inputs['Vector'])
+    rk=N.new('ShaderNodeMapRange'); rk.inputs['From Min'].default_value=0.35; rk.inputs['From Max'].default_value=0.65; rk.inputs['To Min'].default_value=0.88; rk.inputs['To Max'].default_value=1.06; L.new(nk.outputs['Fac'],rk.inputs['Value'])
+    mg3=N.new('ShaderNodeMath'); mg3.operation='MULTIPLY'; L.new(mg.outputs[0],mg3.inputs[0]); L.new(rs.outputs['Result'],mg3.inputs[1])
+    mg4=N.new('ShaderNodeMath'); mg4.operation='MULTIPLY'; L.new(mg3.outputs[0],mg4.inputs[0]); L.new(rk.outputs['Result'],mg4.inputs[1])
+    mg2=N.new('ShaderNodeMath'); mg2.operation='MULTIPLY'; L.new(mg4.outputs[0],mg2.inputs[0]); L.new(mr.outputs['Result'],mg2.inputs[1])
     a=N.new('ShaderNodeAmbientOcclusion'); a.samples=6; a.inputs['Distance'].default_value=0.35
     ar=N.new('ShaderNodeMapRange'); ar.inputs['To Min'].default_value=1-ao; ar.inputs['To Max'].default_value=1.0
     L.new(a.outputs['AO'],ar.inputs['Value'])
@@ -154,7 +162,7 @@ def path(n,keys):
 # ---------------- 2D cut-out cast ----------------
 CI=json.load(open('/root/bf/src/cast.json'))
 GEO={'tall':(1.01,0.17,0.97),'short':(0.92,0.19,0.88),'round':(0.99,0.21,0.84)}
-ARM_W,ARM_H,ARM_OFF=0.248,0.558,0.242
+ARM_W,ARM_H,ARM_OFF=0.744,0.558,0.242   # r6: arm canvas 1200 wide (bent forearm swings outward)
 SHADOW=None
 def chr_coll(shot):
     if shot not in CHRC: CHRC[shot]=col('CHR_'+shot)

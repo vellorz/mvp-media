@@ -13,7 +13,7 @@ SH={'S01':(0,170),'S02':(163,297),'S03':(292,432),'S04':(426,528),'S05':(520,652
     'S09':(931,1013),'S10':(1008,1057),'S11':(1051,1125),'S12':(1114,1218),'S13':(1210,1359),'S14':(1352,1487),'S15':(1481,1565),'S16':(1556,END)}
 sc['shots']=json.dumps(SH)
 LENS={'S01':30,'S02':28,'S03':33.5,'S04':30,'S05':31.5,'S06':37,'S07':28,'S08':28,'S09':26,'S10':40,'S11':36,'S12':42,'S13':38,'S14':34,'S15':34,'S16':30}
-FSTOP={'S01': 2.8, 'S02': 11.2, 'S03': 2.4, 'S04': 2.8, 'S05': 1.8, 'S06': 1.8, 'S07': 1.8, 'S08': 2.4, 'S09': 1.8, 'S10': 3.2, 'S11': 1.8, 'S12': 1.8, 'S13': 4.4, 'S14': 2.0, 'S15': 1.8, 'S16': 3.2}   # round 5 (A6): about 2x deeper focus; the set must stay >= 0.35 as sharp as the head (was {'S01':1.4,'S02':5.6,'S03':1.2,'S04':1.4,'S05':0.9,'S06':0.9,'S07':0.55,'S08':1.2,'S09':0.7,'S10':1.6,'S11':0.6,'S12':0.9,'S13':2.2,'S14':1.0,'S15':0.9,'S16':1.6})
+FSTOP={k:max(9.0,v*6.0) for k,v in {'S01': 2.8, 'S02': 11.2, 'S03': 2.4, 'S04': 2.8, 'S05': 1.8, 'S06': 1.8, 'S07': 1.8, 'S08': 2.4, 'S09': 1.8, 'S10': 3.2, 'S11': 1.8, 'S12': 1.8, 'S13': 4.4, 'S14': 2.0, 'S15': 1.8, 'S16': 3.2}.items()}   # r6: round-5 measure showed DOF blur, not missing paint, kept set detail at 18 vs Rick 75+ (no-DOF test: 89). Sets stay sharp like Rick's newest videos
 for n in SH: cam(n,LENS[n],FSTOP[n])
 STAGE=os.environ.get('STAGE','all')
 # ======================= shared props =======================
@@ -202,7 +202,13 @@ cop2=char('S02_cop','cop',s,(0,0,0.64),r,'whistle',arms=('arm','arm')); ALL.appe
 faces(cop2,[(163,'whistle'),(200,'annoyed'),(236,'shout'),(270,'whistle')])
 for f,a in [(163,-150),(180,-120),(198,-160),(220,-110),(244,-155),(270,-120)]: arm(cop2,1,f,a)
 for f,a in [(163,-70),(190,-100),(230,-50),(262,-95)]: arm(cop2,-1,f,a)
-path(s,[(163,(1.0,-14,26),(0,26,0)),(251,(2.4,-4.5,5.2),(0,22,1.8)),(297,(2.6,-2.6,3.6),(0,20,2.0))])
+# r6 (owner Nov 19: the crane down onto the traffic repeated S01's background): high hold over the town pouring in, hard cut on 'whole' (f220) to a low sidewalk view of the crowd rushing at the lens (no traffic in frame)
+sp2=[];W2=[]
+for i in range(10):   # r6: the town pours down the right sidewalk at the lens (denser rush, walkers toward camera only); wide lateral stagger so no face hides another
+    sp2.append((7.55+[0.0,1.2,0.6,1.45,0.3,0.9,1.35][i%7], 19.0+2.1*i+[0,0.6,-0.4][i%3], 0.14)); W2.append((i,163,297,0,-4.5))
+ex2=crowd(s,r,sp2,['tourist','shopper','fangold','kid','granny','fanblue'],29,walkers=W2); ALL+=ex2
+path(s,[(163,(1.0,-14,26),(0,26,0)),(200,(5.0,4.0,15.0),(8.4,24,0.4)),(219,(5.8,7.5,13.0),(8.4,25,0.4)),(220,(5.3,12.5,0.95),(9.2,25,1.5)),(297,(5.5,9.8,1.0),(9.2,23,1.5))])
+hardcut('S02',220)
 # ---------- S03 (292-432): sidewalk truck past shoppers, the tourist and the football fans ----------
 s='S03'; r=SH[s]
 sho=char('S03_shopper','shopper',s,(8.2,-29.0,0.14),r,'happy',arms=('arm_bag','arm_box'))
@@ -219,8 +225,7 @@ ex=crowd(s,r,[(9.2,-31.5,0.14),(9.3,-24.0,0.14),(9.5,-16.3,0.14),(7.2,-34,0.14)]
 path(s,[(292,(5.85,-30.0,1.3),(8.3,-28.4,1.45)),(344,(5.9,-27.2,1.3),(8.4,-25.8,1.45)),(366,(5.85,-23.6,1.3),(8.2,-22.1,1.5)),(400,(5.9,-21.4,1.3),(8.2,-20.4,1.55)),(432,(5.95,-20.4,1.35),(8.3,-19.6,1.5))])
 # round 4 (L9): we ride the truck: its side mirror frames the lower left of S03 (parented to the camera, so no sweep; deep DOF blur)
 _c3=L.chr_coll('S03'); _cam3=L.CAM['S03']
-for _n,_l,_sz,_col in [('truck_mirror',(-0.13,-0.215,-0.6),(0.11,0.15,0.04),(40,40,44)),('truck_marm',(-0.17,-0.17,-0.59),(0.09,0.02,0.02),(40,40,44))]:
-    _o=box(_n,(0,0,0),_sz,flat(_n,lin(_col),0.5),coll=_c3,bv=0.006); _o.parent=_cam3; _o.matrix_parent_inverse.identity(); _o.location=_l
+# r6 (owner Nov 19): the camera-parented truck mirror read as a glitch blob in the lower left; removed
 # ---------- S04 (426-528): high over the jam, dive to the thief swiping a gift box on "thieves" (f487) ----------
 s='S04'; r=SH[s]
 sh4=char('S04_shopper','shopper',s,(8.3,-12.4,0.14),r,'happy',arms=([(426,'arm_bag'),(489,'arm')],[(426,'arm_box'),(489,'arm')]))
@@ -660,7 +665,9 @@ for f_,h_ in ((1556,False),(1687,False),(1688,True)):
 for fc_ in pcov.animation_data.action.fcurves:
     for k_ in fc_.keyframe_points: k_.interpolation='CONSTANT'
 gifts('bay_gifts',(WX-1.0,WY+0.1,0.9),k=3,seed=12); gifts('bay_gifts2',(WX+1.0,WY,0.9),k=4,seed=13)
-bpy.ops.object.light_add(type='AREA',location=(WX,WY-0.6,3.3),rotation=(math.radians(35),0,0)); bl=bpy.context.object; bl.name='bay_light'; bl.data.energy=200; bl.data.size=1.6; bl.data.color=(1,0.9,0.75)
+bpy.ops.object.light_add(type='AREA',location=(WX,WY-0.6,3.3),rotation=(math.radians(35),0,0)); bl=bpy.context.object; bl.name='bay_light'; bl.data.energy=700; bl.data.size=1.6; bl.data.color=(1,0.9,0.75)
+# r6 (round-5 R19): bright payoff - front fill on the bay so highlights reach p98 >= .84
+bpy.ops.object.light_add(type='AREA',location=(WX,WY-2.6,1.9),rotation=(math.radians(80),0,0)); fl_=bpy.context.object; fl_.name='bay_fill'; fl_.data.energy=350; fl_.data.size=2.4; fl_.data.color=(1,0.93,0.82)
 # doors of the store slide open on "became" (f1646)
 dm=flat('doors81',lin((60,70,80)),0.2,metal=0.4)
 for sx in(-1,1):
@@ -683,7 +690,7 @@ path(s,[(1481,(HX+8.0,-3.6,1.3),(HX+9.0,-0.9,1.0)),(1537,(HX+8.4,-3.25,1.35),(HX
 # round 4 (L9): blurred FG litter bin at the lower right of S15 (fgcheck.py: x 0.67-1.27, y <= 0.37 for the whole shot, no sweep)
 _c15=L.chr_coll('S15'); cyl('binS15',(HX+9.35,-1.6,0.42),0.24,0.84,flat('bin',lin((50,84,60)),0.6),v=20,coll=_c15); cyl('binS15_rim',(HX+9.35,-1.6,0.86),0.26,0.05,flat('binrim',lin((36,60,44)),0.5),v=20,coll=_c15)
 s='S16'; r=SH[s]
-sp=[(HX-0.04,-0.10,0.14),(HX-2.10,-3.30,0.14),(HX-0.85,-0.65,0.14),(HX-2.31,-0.46,0.14),(HX+2.02,-1.46,0.14),(HX+4.05,0.75,0.14),(HX+5.39,-1.39,0.14),(HX+2.75,2.15,0.14),(HX+4.63,0.02,0.14)]   # r5: crowdopt 1556-1700 (wide + crowd-surge insert), 20.3 -> 11.9
+sp=[(HX-0.04,-0.10,0.14),(HX-2.10,-3.30,0.14),(HX-0.44,-0.87,0.14),(HX-2.50,0.44,0.14),(HX+2.92,-1.51,0.14),(HX+4.23,0.64,0.14),(HX+5.83,-2.20,0.14),(HX+1.85,3.05,0.14),(HX+4.05,-0.26,0.14)]   # r6: crowdopt on the new cameras (238.8 -> 66.1)   # r5: crowdopt 1556-1700 (wide + crowd-surge insert), 20.3 -> 11.9
 ordr=sorted(range(len(sp)),key=lambda i:sp[i][0]); SLOT=[(HX-2.2,1.0),(HX-1.6,1.9),(HX-1.0,0.9),(HX-0.4,1.85),(HX+0.2,0.95),(HX+0.8,1.9),(HX+1.4,0.9),(HX+2.0,1.85),(HX+2.6,1.0),(HX+3.2,1.9)]
 ex=crowd(s,r,sp,['mullet','perm','kid','granny','shopper','tourist','perm','fanblue','kid'],41,faces_pool='glad'); ALL+=ex
 # r5 (round-4 P3/R21): no identical line-up gesture. Each extra gets its own action, offsets and timing (pointing, waving, hugging a bag, cheering, shrugging)
@@ -712,10 +719,19 @@ def _glad(e,alt=False):   # r5: S16 crowd reacts with delight, never a stern/ang
     pref=(['wow','shock','cheer','excited','happy'] if alt else ['happy','excited','cheer','wow','shock'])
     return next(f for f in pref if f in e['F'])
 for i,e in enumerate(ex): faces(e,[(1640+3*i,_glad(e,True)),(1652+2*i+(i%3)*3,_glad(e)),(1690+2*i,_glad(e,i%2==1))])
-path(s,[(1556,(HX+1.2,-9.5,1.9),(HX,1.0,2.4)),(1590,(HX+1.4,-5.4,2.0),(HX+0.2,0.0,1.6)),(1616,(HX+6.0,-6.4,2.6),(HX-0.6,0.4,1.5)),(1645,(HX+5.4,-6.2,2.1),(HX+0.4,0.4,1.5)),(1646,(HX+3.0,-6.4,1.0),(HX+3.2,0.2,1.42)),(1687,(HX+2.8,-5.9,1.04),(HX+3.2,0.2,1.46)),(1688,(WX+2.4,-4.9,1.7),(WX,WY+0.02,1.76)),
+path(s,[(1556,(HX+1.2,-9.5,1.9),(HX,1.0,2.4)),(1590,(HX+4.6,-4.9,2.0),(HX-0.6,0.2,1.55)),(1616,(HX+6.3,-4.0,2.1),(HX-1.0,0.4,1.5)),(1645,(HX+6.2,-3.5,1.95),(HX-0.8,0.4,1.5)),(1646,(HX-5.2,-4.4,1.15),(HX+2.0,0.6,1.42)),(1687,(HX-4.9,-4.1,1.2),(HX+2.0,0.6,1.46)),(1688,(WX+2.4,-4.9,1.7),(WX,WY+0.02,1.76)),
         (1718,(WX+1.5,-4.3,1.66),(WX,WY+0.06,1.7)),   # r5: hard cuts on 'became' (1646, low crowd-surge insert) and 'we' (1688, poster bay), crash push 1718-1727 on 'purpose'   # r4 K8: slow drift through 'show', crash push 1718-1727 lands on 'purpose'
        (1727,(WX+0.15,-1.85,PZ+0.05),(WX,WY+0.17,PZ-0.05)),(END,(WX+0.05,-1.72,PZ+0.04),(WX,WY+0.17,PZ-0.05))])
 hardcut('S16',1646); hardcut('S16',1688)
+# r6: the near perm shopper steps out of the 1646-1687 insert (her card covered the faces behind her): root scaled to ~0 for the insert only
+_r=bpy.data.objects[ex[1]['inst']]
+for f_,v_ in ((1645,1.0),(1646,0.0001),(1687,0.0001),(1688,1.0)): _r.scale=(v_,)*3; _r.keyframe_insert('scale',frame=f_)
+for fc_ in _r.animation_data.action.fcurves:
+    if fc_.data_path=='scale':
+        for k_ in fc_.keyframe_points: k_.interpolation='CONSTANT'
+# r6 (round-5 payoff note): shoppers crowd the window bay on "we all show up" (never in front of the poster; out of the final close-up)
+exw=crowd(s,r,[(WX-1.31,WY-1.0,0.14),(WX+1.29,WY-1.18,0.14),(WX-1.89,WY-1.92,0.14)],['shopper','kid','perm'],77,faces_pool='glad'); ALL+=exw
+for i,e in enumerate(exw): faces(e,[(1688,_glad(e,i%2==0)),(1712+3*i,_glad(e,i%2==1))]); bob(e,[1700+4*i,1722],amt=6)
 # ======================= finish =======================
 for a in ALL: finish(a)
 # round 5 (P3): arms hold poses and snap (hold, then a 2-frame change) instead of easing continuously; work arms in S05/S13 keep their strokes

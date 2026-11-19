@@ -187,3 +187,82 @@ The Black Friday thread reports its round-5 plan already targets these (21 shots
 | genre and instruments could not be heard | specify beds by measured quantities | 266 |
 
 Next ledger entry: BF round 5, same table B, measured with the same tools.
+
+
+---
+# LEDGER ENTRY 2026-11-19 (third entry of the day) — Black Friday round 5 against Rick's 5 newest videos
+
+Appended entry; nothing above this line was changed. File measured: `experiments/2026-11-18_rick-99-test/final/round5/BlackFriday_Philadelphia_round5_small.mp4` (pacing, audio) and `..._round5_2k.mp4` (look), 58.4 s, 1752 frames. Same tools and same table as entry B above (`pacing.py`, `audio.py`, rea-video stems). Evidence: `new-analysis/black-friday-round5/` (pacing.json, audio.json, joins, verification.md, DEFS.md, look/). This is the first round built from guide v1.1/v1.2 and rules 230+.
+
+How it was measured and checked: joins = the 14 dissolve ranges of the build (unchanged since round 3) plus 6 new in-shot hard cuts at frames 88, 1282, 1319, 1404, 1646, 1688, each confirmed by frame difference, by eye, and by a second measurer (7 of 7 hard cuts confirmed; 10 of 14 dissolve ranges confirmed within 2 frames, the other 4 differ in length by 3 to 5 frames under camera motion, which moves a shot boundary by at most 2.5 frames). A second measurer with its own code and no sight of the first results reproduced every pacing value (22 of 22 within 0.02) and the audio levels (mix, LRA, peak, voice stem, gap mean and minimum, level range, energy under 250 Hz, tempo: 10 of 10 within tolerance). Not reproduced: percussive-to-harmonic ratio (0.19 against 0.09) and ducking depth (the second measurer found no voice gaps to measure it in). Look fields were measured by two blind measurers on different frames under definitions written first (`DEFS.md`).
+
+## Ledger summary row
+
+| date | video | scored against | result | biggest gaps | entry |
+|---|---|---|---|---|---|
+| 2026-11-19 | Black Friday round 5 | Rick's 5 newest, same 41 measures | 22 inside, 15 outside, 4 not scored (round 3: 15 inside, 26 outside). Rubric score from the BF thread's verifiers: pending | flat set surfaces, straight arms and upright torsos, legs still short, events inside shots, caption dwell, joins on phrase starts | this entry |
+
+## I. Round 5 measure by measure
+
+| # | measure | Rick newest 5 | BF round 3 | BF round 5 | in? |
+|---|---|---|---|---|---|
+| 1 | average shot length s | 2.65 to 4.54 | 3.65 | 2.65 | in (low edge) |
+| 2 | median shot length s | 1.95 to 3.33 | 3.64 | 2.59 | in |
+| 3 | shortest shot s | 0.07 to 1.20 | 1.45 | 1.23 | OUT (by 0.03) |
+| 4 | longest shot s | 7.50 to 15.17 | 6.37 | 4.48 | OUT (no packed long take) |
+| 5 | P10 s | 0.87 to 1.52 | 2.23 | 1.41 | in |
+| 6 | shots per minute | 13.2 to 22.6 | 16.4 | 22.6 | in (top edge) |
+| 7 | share under 2 s | 0.20 to 0.53 | 0.06 | 0.23 | in |
+| 8 | share over 4 s | 0.20 to 0.26 | 0.50 | 0.18 | OUT (now slightly too few) |
+| 9 | joins per 10 s | 2.03 to 3.60 | 2.57 | 3.60 | in (top edge) |
+| 10 | first join inside 3 s | 3 of 5 | no | yes (2.93 s) | in |
+| 11 | payoff: mean visible shot time s; shots starting in the payoff s | 0.93 to 2.98; 1.57 to 5.37 | 3.00; 6.37 | 1.50; 2.12 | in |
+| 12 | payoff: cuts per min | 9.9 to 39.6 | 10.0 | 30.0 | in |
+| 13 | hard or fast joins | 0 to 19 | 1 | 7 | in |
+| 14 | dissolve median f | 6 to 8 | 8 | 8 | in |
+| 15 | character / prop / FX events per s | 1.49 to 1.78 | 1.25 | 1.27 | OUT |
+| 16 | camera events per min | 64 to 87 | 68 | 70 | in |
+| 17 | visual changes per min, no captions | 169 to 213 | 158 | 167.5 | OUT (by 1.5) |
+| 18 | camera moving share | 0.43 to 0.85 | 0.75 | 0.74 | in |
+| 19 | caption cards per word | 0.77 to 0.85 | 0.68 | 0.79 | in |
+| 20 | caption dwell mean s | 0.32 to 0.35 | 0.43 | 0.37 | OUT |
+| 21 | caption dwell P90 s | 0.53 to 0.57 | 0.70 | 0.60 | OUT |
+| 22 | words per s | 3.59 to 3.83 | 3.42 | 3.42 | OUT (locked take) |
+| 23 | cuts per sentence | 0.75 to 1.36 | 1.00 | 1.40 | OUT (by 0.04) |
+| 24 | joins within 3 f of a phrase start | 0.22 to 0.47 | 0.93 | 0.71 | OUT |
+| 25 | end after last word starts s | 0.37 to 0.87 | 0.92 | 0.92 | OUT (by 0.05) |
+| 26 | mix LUFS | -14.1 to -14.0 | -14.3 | -14.1 | in |
+| 27 | LRA LU | 2.2 to 2.9 | 2.3 | 2.6 | in |
+| 28 | true peak dBTP | -2.1 to -1.7 | -3.4 | -1.8 | in |
+| 29 | VO stem LUFS | -14.4 to -14.2 | -14.4 | -14.25 | in |
+| 30 | VO minus music, mean dB | 14.4 to 18.5 | 19.1 | 18.3 | in (far edge) |
+| 31 | closest approach dB | 5.4 to 14.3 | 14.2 | 11.5 | in |
+| 32 | bed level range dB | 7.8 to 15.0 | 5.65 | 13.8 | in |
+| 33 | ducking depth dB | -0.3 to 0.9 | 1.4 | 0.1 [second measurer: not measurable] | in |
+| 34 | key mode | [uncertain]: minor confirmed for 4 of 7 | major | both measurers' key tool reads F major (D minor second on one). That tool family confuses a minor key with its related major, and the build is written in D minor [uncertain] | not scored |
+| 35 | tempo BPM | [uncertain]: method 1 gives 92 to 100 | 120.0 | 95.7 (two tools) | not scored (inside the guidance band) |
+| 36 | energy under 250 Hz | 56 to 69 % | 42 % | 55.9 % (second measurer 55.7 %) | OUT (by 0.1 to 0.3 points) |
+| 37 | percussive : harmonic | 0.51 to 1.42 | 0.32 | 0.19 (second measurer 0.09) | OUT |
+| 38 | caption cap height / baseline | 53 to 56 px / 71.67 % | about 56 / 71.7 | not re-measured this round | not scored |
+| 39 | fine surface detail on sets (Laplacian variance, verifier method: Rick 74.6, round 3 11.05) | 75 to 142 | 11 | 17.9 and 17.85 (two measurers, 19 and 20 patches) | OUT |
+| 40 | set-edge line | median 2 px, on some edges in 8 of 20 frames | 7 px | a line in 6 of 10 and 4 of 10 frames; width 7.9 px and 3.6 px: the two measurers disagree on width [uncertain] | not scored |
+| 41 | torso height / visible legs, in head widths | 0.72 to 1.05 / 0.93 to 1.31 | 1.19 to 1.69 / 0.11 to 0.17 | torso 0.82 and 0.78 (ranges 0.63 to 0.89, 0.73 to 0.87): in. Legs 0.74 and 0.74 (ranges 0.54 to 1.01, 0.59 to 0.94): OUT | OUT (legs) |
+
+Count: 22 inside (rows 1, 2, 5, 6, 7, 9 to 14, 16, 18, 19, 26 to 33), 15 outside (3, 4, 8, 15, 17, 20 to 25, 36, 37, 39, 41), 4 not scored (34, 35, 38, 40). Six of the 15 miss by a hair (3, 8, 17, 23, 25, 36) and one is fixed by the locked voice take (22).
+
+## J. The three core findings on round 5
+
+1. SCENE TIME: closed. 23 % of shots under 2 s (Rick 20 to 53 %), 18 % over 4 s (Rick 20 to 26 %), payoff 1.50 s mean visible and 2.12 s per payoff shot. Remaining: the cut rate now sits at the very top of Rick's range (22.6 shots per minute, 3.6 joins per 10 s) and there is no long packed take; events inside shots did not rise (1.27 per s against 1.49 to 1.78).
+2. MUSIC: level findings closed. Bed 18.3 dB under the voice (edge of 14.4 to 18.5), swing 13.8 dB (7.8 to 15.0), no ducking, mix -14.1 LUFS, peak -1.8 dBTP. Remaining: the bed could sit 1 to 3 dB closer (rule 243 asks for 14.5 to 17), bass weight is at the threshold, and the low pulse is weak (percussive to harmonic 0.09 to 0.19 against 0.51 to 1.42).
+3. SETS AND BODIES: half closed. Torsos are now inside Rick's range and legs grew from 0.11 to 0.17 to about 0.74 head widths (Rick 0.93 to 1.31). Still open: set surface detail 17.9 against 75 or more (it was 11); every arm is one straight segment (minimum elbow 180 degrees in all 18 characters read by the two measurers; Rick 50 to 95) and torsos stay upright (lean 0 to 1 degree); the torso is widest at the hem in 15 of 18 (Rick: widest at the middle).
+
+## K. Lessons recorded
+
+| gap in round 5 | cause | rule |
+|---|---|---|
+| surfaces still flat (17.9) | texture detail added in round 5 is too faint after denoise and depth of field to register | 249, 250: target 100 or more on the patch measure; check with the patch tool before the full render |
+| straight arms, upright torsos | limbs are still single cards | 253 to 255 |
+| events inside shots unchanged | new cuts were added, but not new actions inside shots | 231, 237 |
+| captions still dwell a little long | cards per word fixed, dwell tail not | 241 |
+
+Next ledger entry: the next BF round, same table.

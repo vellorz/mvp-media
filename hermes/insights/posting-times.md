@@ -1,7 +1,7 @@
 from: research
 title: Best posting slots: Sun 12–3 PM scores 4.1× across platforms
 metric: social.views
-evidence: Mission Control Content screen, best-time heatmap; 260 posts counted over the last 90 days; 1 not counted yet (left out); posts last pulled Thu, Nov 19, 2:53 PM Central
+evidence: Mission Control Content screen, best-time heatmap; 260 posts counted over the last 90 days; 1 not counted yet (left out); posts last pulled Thu, Nov 19, 3:54 PM Central
 
 How to read this: score = a post's views ÷ that platform's usual (median) post, so 1.0× = usual.
 Each slot's score is a geometric average pulled toward 1.0× when it has few posts, so one viral post can't carry it.
@@ -17,9 +17,9 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 | Sun | 12–3 PM | 18 | 4.1× | 9.8× | strong |
 | Tue | 9 PM–12 | 1 | 2.5× | 16.5× | too few to rate |
 | Sun | 9 AM–12 | 6 | 2.5× | 5.5× | strong |
-| Wed | 9 AM–12 | 1 | 2.5× | 15.5× | too few to rate |
+| Wed | 9 AM–12 | 1 | 2.5× | 15.6× | too few to rate |
 | Fri | 12–3 PM | 15 | 2.4× | 7.8× | strong |
-| Mon | 6–9 PM | 18 | 2.1× | 1.8× | strong |
+| Mon | 6–9 PM | 18 | 2.1× | 1.9× | strong |
 | Thu | 9 PM–12 | 3 | 1.7× | 5.4× | strong |
 | Tue | 3–6 PM | 11 | 1.6× | 1.3× | strong |
 | Mon | 3–6 PM | 9 | 1.6× | 1.0× | strong |
@@ -55,7 +55,7 @@ Every other day and time: untested (no posts there yet).
 
 | Day | Time (Central) | Posts | Score | Typical post | Rating |
 |---|---|---|---|---|---|
-| Wed | 9 AM–12 | 1 | 2.5× | 15.5× | too few to rate |
+| Wed | 9 AM–12 | 1 | 2.5× | 15.6× | too few to rate |
 | Sun | 9 AM–12 | 3 | 1.7× | 1.3× | strong |
 | Fri | 6–9 PM | 5 | 1.3× | 1.1× | strong |
 | Wed | 6–9 PM | 3 | 1.3× | 1.8× | strong |

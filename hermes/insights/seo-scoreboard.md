@@ -1,5 +1,5 @@
 from: research
-title: SEO scoreboard: better 4, measuring 60, same 224, worse 2
+title: SEO scoreboard: better 4, measuring 59, same 225, worse 2
 metric: etsy.visits
 evidence: Mission Control SEO lab (etsy-seo listing reports + weekly listing stats)
 
@@ -7,7 +7,7 @@ Edited listings compared with untouched ones over the same weeks (expected = the
 better/worse = beat or fell behind that by at least max(2 visits, 30%); measuring = no full week after the edit yet.
 Traffic is small, so single listings are noisy; look for patterns across many listings before writing a lesson.
 
-Totals: better 4, measuring 60, same 224, worse 2
+Totals: better 4, measuring 59, same 225, worse 2
 
 ## better (4)
 - Aoraki Mount Cook New Zealand Travel Poster, Alpine Mountain Landscape Print (https://www.etsy.com/listing/4571720088): edited 2026-10-30; visits 0 -> 4 (expected 0); title kept; tags +0/-0
@@ -19,7 +19,7 @@ Totals: better 4, measuring 60, same 224, worse 2
 - Oaxaca Mexico Travel Poster, Monte Alban Pyramid Wall Art Print (https://www.etsy.com/listing/4571720597): edited 2026-10-30; visits 6 -> 0 (expected 6); title kept; tags +0/-0
 - Auckland New Zealand Travel Poster, Vintage Coastal Skyline Cityscape Print (https://www.etsy.com/listing/4571701755): edited 2026-10-30; visits 2 -> 0 (expected 2); title kept; tags +0/-0
 
-## same (224)
+## same (225)
 - Lake Baikal Russia Winter Sunset Travel Poster, Ice Landscape Print (https://www.etsy.com/listing/4580086005): edited 2026-11-04; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Lake Tahoe Emerald Bay California Vintage Travel Poster, Nature Landscape Print (https://www.etsy.com/listing/4567803477): edited 2026-10-30; visits 1 -> 0 (expected 1); title kept; tags +0/-0
 - Vintage Rio de Janeiro Brazil Travel Poster, Christ the Redeemer Art Print (https://www.etsy.com/listing/4564695100): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
@@ -32,6 +32,7 @@ Totals: better 4, measuring 60, same 224, worse 2
 - Philadelphia Independence Hall Travel Poster, Retro Pennsylvania Cityscape Print (https://www.etsy.com/listing/4567804741): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Portland Oregon St. Johns Bridge Travel Poster, Rustic PNW Nature Print (https://www.etsy.com/listing/4567804779): edited 2026-10-30; visits 0 -> 1 (expected 0); title kept; tags +0/-0
 - Queenstown New Zealand Travel Poster, Mountain Lake Landscape Print (https://www.etsy.com/listing/4567804799): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
+- Everglades National Park Travel Poster, Florida Swamp Sunset, Alligator Wildlife Art (https://www.etsy.com/listing/4567818172): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Mount Rainier National Park Washington Vintage Travel Poster, PNW Mountain Landscape Print (https://www.etsy.com/listing/4567818428): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Nara Japan Travel Poster, Vintage Deer, Kasuga Shrine Forest Art Print (https://www.etsy.com/listing/4567818488): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Sheikh Zayed Mosque Abu Dhabi UAE Travel Poster, Retro Architecture Print (https://www.etsy.com/listing/4571701573): edited 2026-10-30; visits 0 -> 0 (expected 0); title kept; tags +0/-0
@@ -59,5 +60,4 @@ Totals: better 4, measuring 60, same 224, worse 2
 - Lake Bohinj Slovenia Vintage Travel Poster, Mountain Landscape Wall Art Print (https://www.etsy.com/listing/4559143948): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Bodrum Turkey Travel Poster, Vintage Mediterranean Coastal Wall Art, Retro Aegean Print (https://www.etsy.com/listing/4559144506): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Bora Bora French Polynesia Travel Poster, Tropical Island Landscape Print (https://www.etsy.com/listing/4562069461): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
-- Petra Jordan Travel Poster, Desert Architecture Art Print (https://www.etsy.com/listing/4562069493): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 

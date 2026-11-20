@@ -109,3 +109,13 @@ The new rules from the Chicago remake. They are owner corrections plus findings 
     - Quiet close-ups and the ending may sit at 12-18, like the references, as long as the average holds.
     - Raise weak shots with more DRAWN OBJECTS that belong to the place and story (props, set dressing, drawn textures on flat surfaces such as water, sand, ceilings and plank walls), never noise.
     - Every added object passes rules 53-71.
+
+## Clone run (Nov 20 2026): Rick-style clone checks (PROPOSED; active for the 99 % test video, scheduled tasks get them only after that video passes and the owner says so)
+Source: `rick-spec/clone-run-2026-11-20/` (guide v1.3 sections w to ac, `RULES_REVISION_v1.3_clone-run.md`). Only the first four are rule-grade (two measurers, 99 % or more); the rest are build guidance.
+- [rule 280] No fingers: plain round mitten hands, about 12 % of head width.
+- [rule 281] Every moving prop and FX is animated on ones.
+- [rule 282] Captions checked by first frame (within 1 f) and text; build them on the word or 1 f before it.
+- [rule 283] Mix -14.0 to -14.1 LUFS, true peak -1.9 to -2.2 dBTP, bed mean 14.4 to 18.6 dB under the voice, bed level std 2.3 to 4.0 dB, no ducking.
+- [guidance] Cast: torso 1.00 head widths, legs 1.25 to 1.3, total 3.2 to 3.35, curved noodle arms with no fixed elbow, outline thin toward the light and about twice as thick away from it.
+- [guidance] Motion: snap in 1 to 4 f or rigid tween in 5 to 11 f, no anticipation, no overshoot, no squash and stretch; bodies hold while faces change 1.4 to 2.5 times per second.
+- [guidance] Camera moving on at least 85 % of frames; no join in the first 3 s; one crash push and one reveal pull-out every 10 to 15 s; 20 to 47 % of shots over 4 s, each packed with camera beats.

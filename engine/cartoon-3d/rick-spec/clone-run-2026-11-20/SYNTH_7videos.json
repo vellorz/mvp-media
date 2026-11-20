@@ -1,0 +1,4835 @@
+{
+ "videos": {
+  "03_7xS87iActkU": {
+   "frames": 1955,
+   "joins": {
+    "n": 14,
+    "kinds": {
+     "hard cut": 3,
+     "dissolve": 9,
+     "match dissolve": 2
+    },
+    "verified": true
+   },
+   "dissolve_len_fit_ok": {
+    "n": 9,
+    "min": 9,
+    "p10": 9,
+    "p25": 9,
+    "median": 10,
+    "p75": 10,
+    "p90": 10,
+    "max": 12,
+    "mean": 9.8
+   },
+   "dissolve_len_fit_list": [
+    9,
+    10,
+    10,
+    9,
+    9,
+    10,
+    10,
+    12,
+    9
+   ],
+   "dissolve_len_eye_A": {
+    "n": 11,
+    "min": 7,
+    "p10": 8,
+    "p25": 8,
+    "median": 9,
+    "p75": 10,
+    "p90": 12,
+    "max": 12,
+    "mean": 9.1
+   },
+   "shot_len_s": {
+    "n": 15,
+    "min": 0.7,
+    "p10": 1.47,
+    "p25": 2.73,
+    "median": 3.97,
+    "p75": 6.47,
+    "p90": 8.0,
+    "max": 8.2,
+    "mean": 4.34
+   },
+   "shot_len_list": [
+    3.73,
+    8.0,
+    1.83,
+    8.2,
+    4.47,
+    2.27,
+    2.73,
+    4.87,
+    7.93,
+    3.97,
+    6.47,
+    4.93,
+    3.6,
+    1.47,
+    0.7
+   ],
+   "first_shot_s": 3.73,
+   "last_shot_s": 0.7,
+   "share_lt2": 0.2,
+   "share_gt4": 0.467,
+   "pacing": {
+    "shots": {
+     "n": 15,
+     "asl": 4.344,
+     "median": 3.967,
+     "mode_0p5s_bin": 8.0,
+     "min": 0.7,
+     "max": 8.2,
+     "p10": 1.613,
+     "p90": 7.967,
+     "share_lt1": 0.067,
+     "share_lt2": 0.2,
+     "share_gt4": 0.467,
+     "shots_per_min": 13.81
+    },
+    "narration": {
+     "words": 219,
+     "words_per_s": 3.37,
+     "sentences": 18,
+     "end_after_last_word_start_s": 0.607,
+     "join_mid_within_3f_of_word_onset": 0.857,
+     "join_start_within_6f_of_phrase_onset": 0.643,
+     "cuts_per_sentence": 0.78
+    },
+    "captions": {
+     "swaps": 183,
+     "swaps_per_s": 2.81,
+     "dwell_s": {
+      "mean": 0.355,
+      "median": 0.367,
+      "p10": 0.1,
+      "p90": 0.567,
+      "max": 1.1
+     },
+     "caption_on_share": 1.0
+    },
+    "sections": {
+     "hook_0-3s": {
+      "window_s": [
+       0,
+       3.0
+      ],
+      "joins": 0,
+      "cuts_per_min": 0.0,
+      "seconds_per_cut": null,
+      "shots_starting_here": {
+       "n": 1,
+       "asl": 3.733,
+       "median": 3.733,
+       "mode_0p5s_bin": 3.5,
+       "min": 3.733,
+       "max": 3.733,
+       "p10": 3.733,
+       "p90": 3.733,
+       "share_lt1": 0.0,
+       "share_lt2": 0.0,
+       "share_gt4": 0.0
+      },
+      "shots_overlapping": 1,
+      "mean_visible_shot_time": 3.0
+     },
+     "3-15s": {
+      "window_s": [
+       3.0,
+       15.0
+      ],
+      "joins": 3,
+      "cuts_per_min": 15.0,
+      "seconds_per_cut": 4.0,
+      "shots_starting_here": {
+       "n": 3,
+       "asl": 6.011,
+       "median": 8.0,
+       "mode_0p5s_bin": 8.0,
+       "min": 1.833,
+       "max": 8.2,
+       "p10": 3.066,
+       "p90": 8.16,
+       "share_lt1": 0.0,
+       "share_lt2": 0.333,
+       "share_gt4": 0.667
+      },
+      "shots_overlapping": 4,
+      "mean_visible_shot_time": 3.0
+     },
+     "body": {
+      "window_s": [
+       15.0,
+       59.36
+      ],
+      "joins": 8,
+      "cuts_per_min": 10.82,
+      "seconds_per_cut": 5.545,
+      "shots_starting_here": {
+       "n": 8,
+       "asl": 4.704,
+       "median": 4.675,
+       "mode_0p5s_bin": 2.5,
+       "min": 2.267,
+       "max": 7.917,
+       "p10": 2.593,
+       "p90": 6.902,
+       "share_lt1": 0.0,
+       "share_lt2": 0.0,
+       "share_gt4": 0.625
+      },
+      "shots_overlapping": 9,
+      "mean_visible_shot_time": 4.929
+     },
+     "payoff": {
+      "window_s": [
+       59.36,
+       65.01
+      ],
+      "joins": 3,
+      "cuts_per_min": 31.86,
+      "seconds_per_cut": 1.883,
+      "shots_starting_here": {
+       "n": 3,
+       "asl": 1.922,
+       "median": 1.467,
+       "mode_0p5s_bin": 0.5,
+       "min": 0.7,
+       "max": 3.6,
+       "p10": 0.853,
+       "p90": 3.173,
+       "share_lt1": 0.333,
+       "share_lt2": 0.667,
+       "share_gt4": 0.0
+      },
+      "shots_overlapping": 4,
+      "mean_visible_shot_time": 1.413
+     },
+     "outro": {
+      "window_s": [
+       65.01,
+       65.17
+      ],
+      "joins": 0,
+      "cuts_per_min": 0.0,
+      "seconds_per_cut": null,
+      "shots_starting_here": null,
+      "shots_overlapping": 1,
+      "mean_visible_shot_time": 0.157
+     }
+    },
+    "visual": {
+     "changes_per_min_no_captions": 181.4,
+     "still_frame_share": 0.005,
+     "longest_still_run_f": 8
+    }
+   },
+   "audio_nonvocal": {
+    "mix": {
+     "I_LUFS": -14.1,
+     "LRA_LU": 3.2,
+     "true_peak_dBTP": -2.2
+    },
+    "vo": -14.22,
+    "music": -30.85,
+    "gap": {
+     "mean": 18.13,
+     "median": 18.91,
+     "min": 11.6,
+     "max": 23.83,
+     "std": 3.11
+    },
+    "stability": {
+     "std_dB": 2.84,
+     "range_dB": 11.44,
+     "max_step_per_0p5s_dB": 4.38
+    },
+    "duck": 1.25,
+    "tempo": 117.5,
+    "key": "E minor",
+    "key_score": 0.826,
+    "key_conf": "ok"
+   },
+   "audio_musiconly": {
+    "mix": {
+     "I_LUFS": -14.1,
+     "LRA_LU": 3.2,
+     "true_peak_dBTP": -2.2
+    },
+    "vo": -14.22,
+    "music": -30.85,
+    "gap": {
+     "mean": 18.13,
+     "median": 18.91,
+     "min": 11.6,
+     "max": 23.83,
+     "std": 3.11
+    },
+    "stability": {
+     "std_dB": 2.84,
+     "range_dB": 11.44,
+     "max_step_per_0p5s_dB": 4.38
+    },
+    "duck": 1.25,
+    "tempo": 117.5,
+    "key": "E minor",
+    "key_score": 0.826,
+    "key_conf": "ok"
+   },
+   "camA": {
+    "moving_share": 0.949,
+    "n_moves": 23
+   },
+   "camB": {
+    "moving_share": 0.92,
+    "n_moves": 27
+   },
+   "cam_agreement": {
+    "rate": 59.69,
+    "per_field": {
+     "hold_share": [
+      12,
+      15
+     ],
+     "n_moves": [
+      14,
+      15
+     ],
+     "start": [
+      22,
+      23
+     ],
+     "end": [
+      20,
+      23
+     ],
+     "type": [
+      17,
+      23
+     ],
+     "scale": [
+      1,
+      23
+     ],
+     "pan": [
+      5,
+      23
+     ],
+     "tilt": [
+      5,
+      23
+     ],
+     "ease": [
+      18,
+      23
+     ]
+    }
+   },
+   "cam_moves_A": {
+    "n": 65,
+    "types": {
+     "push-in": 18,
+     "orbit": 8,
+     "crane": 6,
+     "drift": 6,
+     "compound": 6,
+     "pull-out": 5,
+     "object-follow": 3,
+     "tilt": 3,
+     "hold": 3,
+     "shake": 3,
+     "pan": 2,
+     "truck-in": 1
+    },
+    "easing": {
+     "ease-in-out": 18,
+     "ease-out": 16,
+     "ease-in": 12,
+     "linear": 12,
+     "n/a": 5,
+     "[uncertain]": 1,
+     "snap": 1
+    },
+    "dur_f": {
+     "n": 65,
+     "min": 5,
+     "p10": 10,
+     "p25": 16,
+     "median": 23,
+     "p75": 34,
+     "p90": 51,
+     "max": 88,
+     "mean": 28.0
+    },
+    "scale_in": {
+     "n": 37,
+     "min": 1.0,
+     "p10": 1.01,
+     "p25": 1.07,
+     "median": 1.23,
+     "p75": 1.74,
+     "p90": 3.23,
+     "max": 4.6,
+     "mean": 1.71
+    },
+    "scale_out": {
+     "n": 20,
+     "min": 0.34,
+     "p10": 0.4,
+     "p25": 0.71,
+     "median": 0.92,
+     "p75": 0.98,
+     "p90": 1.0,
+     "max": 1.0,
+     "mean": 0.8
+    },
+    "follows": 35
+   },
+   "hold_share_per_shot_A": {
+    "n": 9,
+    "min": 0.0,
+    "p10": 0.003,
+    "p25": 0.035,
+    "median": 0.092,
+    "p75": 0.176,
+    "p90": 0.241,
+    "max": 0.301,
+    "mean": 0.11
+   },
+   "parallax_A": {
+    "n": 7,
+    "min": 1.87,
+    "p10": 2.0,
+    "p25": 2.15,
+    "median": 2.6,
+    "p75": 2.9,
+    "p90": 2.9,
+    "max": 5.4,
+    "mean": 2.79
+   },
+   "characters_n": 23,
+   "actions_n": 57,
+   "action_classes": {
+    "other": 13,
+    "hold": 10,
+    "turn": 6,
+    "stand-up": 4,
+    "reach/grab": 4,
+    "lift": 4,
+    "drop": 3,
+    "walk": 3,
+    "talk-gesture": 2,
+    "throw": 2,
+    "recoil": 1,
+    "emote": 1,
+    "strike/hit": 1,
+    "wave": 1,
+    "push": 1
+   },
+   "motion_types": {
+    "tween": 16,
+    "snap": 24,
+    "redraw": 5,
+    "none": 11,
+    "cycle": 1
+   },
+   "holds": {
+    "n": 44,
+    "min": 6,
+    "p10": 10,
+    "p25": 13,
+    "median": 24.0,
+    "p75": 39,
+    "p90": 64,
+    "max": 118,
+    "mean": 30.0
+   },
+   "hold_share_of_video": 0.684,
+   "faces_n": 136,
+   "face_swaps_per_s": 2.09,
+   "blinks_n": 9,
+   "lipsync": {
+    "runs": 2,
+    "frames_per_shape": {
+     "n": 2,
+     "min": 1.8,
+     "p10": 1.8,
+     "p25": 1.8,
+     "median": 2.15,
+     "p75": 2.5,
+     "p90": 2.5,
+     "max": 2.5,
+     "mean": 2.15
+    },
+    "share": 0.056
+   },
+   "assets_n": 58,
+   "asset_classes": {
+    "particle burst": 10,
+    "stream": 7,
+    "fall": 7,
+    "rigid translate": 6,
+    "rigid rotate": 6,
+    "cloth flap": 4,
+    "drive": 3,
+    "other: colour ramp fx": 3,
+    "swing": 2,
+    "float": 2,
+    "roll": 2,
+    "wobble": 2
+   },
+   "asset_flags": {
+    "overshoot": 0,
+    "bounce": 1,
+    "blur": 7,
+    "on_twos": 0,
+    "squash": 0
+   },
+   "falls": [
+    {
+     "object": "hammer dropped by W1",
+     "n": 11,
+     "g_screen_h_per_s2": -2.71,
+     "r2": 0.987,
+     "start": 225
+    },
+    {
+     "object": "newspaper toss, hang, tumble, land",
+     "n": 6,
+     "g_screen_h_per_s2": 3.98,
+     "r2": 0.9577,
+     "start": 1026
+    },
+    {
+     "object": "coin dropped into rail gap",
+     "n": 5,
+     "g_screen_h_per_s2": -57.46,
+     "r2": 0.9887,
+     "start": 1238
+    },
+    {
+     "object": "train falling off bridge (chain swing)",
+     "n": 9,
+     "g_screen_h_per_s2": 0.63,
+     "r2": 1.0,
+     "start": 1897
+    }
+   ],
+   "caption": {
+    "n": 178,
+    "dwell_f": {
+     "n": 178,
+     "min": 1,
+     "p10": 5,
+     "p25": 7,
+     "median": 11.0,
+     "p75": 14,
+     "p90": 16,
+     "max": 30,
+     "mean": 11.0
+    },
+    "per_s": 2.73,
+    "words": {
+     "n": 178,
+     "min": 1,
+     "p10": 1,
+     "p25": 1,
+     "median": 1.0,
+     "p75": 1,
+     "p90": 2,
+     "max": 3,
+     "mean": 1.0
+    }
+   },
+   "caption_offset_f": {
+    "n": 173,
+    "min": -8.4,
+    "p10": -6.8,
+    "p25": -5.6,
+    "median": -4.4,
+    "p75": -3.2,
+    "p90": -2.0,
+    "max": 1.4,
+    "mean": -4.3
+   },
+   "caption_offset_share_within": {
+    "pm2": 0.116,
+    "early_or_on": 0.988
+   },
+   "sound_events_per_s": 1.75
+  },
+  "12_0m6G8pDtzNs": {
+   "frames": 1815,
+   "joins": {
+    "n": 19,
+    "kinds": {
+     "match dissolve": 9,
+     "dissolve": 10
+    },
+    "verified": true
+   },
+   "dissolve_len_fit_ok": {
+    "n": 18,
+    "min": 3,
+    "p10": 5,
+    "p25": 6,
+    "median": 6.5,
+    "p75": 9,
+    "p90": 9,
+    "max": 11,
+    "mean": 6.9
+   },
+   "dissolve_len_fit_list": [
+    7,
+    8,
+    6,
+    6,
+    6,
+    5,
+    5,
+    4,
+    7,
+    9,
+    3,
+    9,
+    6,
+    11,
+    9,
+    7,
+    6,
+    10
+   ],
+   "dissolve_len_eye_A": {
+    "n": 19,
+    "min": 4,
+    "p10": 5,
+    "p25": 5,
+    "median": 7,
+    "p75": 9,
+    "p90": 10,
+    "max": 11,
+    "mean": 6.9
+   },
+   "shot_len_s": {
+    "n": 20,
+    "min": 0.87,
+    "p10": 1.33,
+    "p25": 2.03,
+    "median": 2.55,
+    "p75": 3.1,
+    "p90": 4.3,
+    "max": 10.87,
+    "mean": 3.02
+   },
+   "shot_len_list": [
+    2.47,
+    2.2,
+    3.23,
+    1.57,
+    4.3,
+    2.37,
+    1.33,
+    1.77,
+    0.87,
+    1.33,
+    4.23,
+    3.07,
+    4.63,
+    3.1,
+    3.1,
+    3.07,
+    2.63,
+    2.33,
+    2.03,
+    10.87
+   ],
+   "first_shot_s": 2.47,
+   "last_shot_s": 10.87,
+   "share_lt2": 0.25,
+   "share_gt4": 0.2,
+   "pacing": {
+    "shots": {
+     "n": 20,
+     "asl": 3.025,
+     "median": 2.55,
+     "mode_0p5s_bin": 3.0,
+     "min": 0.883,
+     "max": 10.867,
+     "p10": 1.331,
+     "p90": 4.35,
+     "share_lt1": 0.05,
+     "share_lt2": 0.25,
+     "share_gt4": 0.2,
+     "shots_per_min": 19.83
+    },
+    "narration": {
+     "words": 227,
+     "words_per_s": 3.77,
+     "sentences": 17,
+     "end_after_last_word_start_s": 0.7,
+     "join_mid_within_3f_of_word_onset": 0.737,
+     "join_start_within_6f_of_phrase_onset": 0.632,
+     "cuts_per_sentence": 1.12
+    },
+    "captions": {
+     "swaps": 182,
+     "swaps_per_s": 3.01,
+     "dwell_s": {
+      "mean": 0.329,
+      "median": 0.3,
+      "p10": 0.067,
+      "p90": 0.567,
+      "max": 1.4
+     },
+     "caption_on_share": 1.0
+    },
+    "sections": {
+     "hook_0-3s": {
+      "window_s": [
+       0,
+       3.0
+      ],
+      "joins": 1,
+      "cuts_per_min": 20.0,
+      "seconds_per_cut": 3.0,
+      "shots_starting_here": {
+       "n": 2,
+       "asl": 2.333,
+       "median": 2.333,
+       "mode_0p5s_bin": 2.0,
+       "min": 2.183,
+       "max": 2.483,
+       "p10": 2.213,
+       "p90": 2.453,
+       "share_lt1": 0.0,
+       "share_lt2": 0.0,
+       "share_gt4": 0.0
+      },
+      "shots_overlapping": 2,
+      "mean_visible_shot_time": 1.5
+     },
+     "3-15s": {
+      "window_s": [
+       3.0,
+       15.0
+      ],
+      "joins": 4,
+      "cuts_per_min": 20.0,
+      "seconds_per_cut": 3.0,
+      "shots_starting_here": {
+       "n": 4,
+       "asl": 2.871,
+       "median": 2.808,
+       "mode_0p5s_bin": 1.5,
+       "min": 1.55,
+       "max": 4.317,
+       "p10": 1.795,
+       "p90": 3.997,
+       "share_lt1": 0.0,
+       "share_lt2": 0.25,
+       "share_gt4": 0.25
+      },
+      "shots_overlapping": 5,
+      "mean_visible_shot_time": 2.4
+     },
+     "body": {
+      "window_s": [
+       15.0,
+       55.0
+      ],
+      "joins": 14,
+      "cuts_per_min": 21.0,
+      "seconds_per_cut": 2.857,
+      "shots_starting_here": {
+       "n": 14,
+       "asl": 3.168,
+       "median": 2.833,
+       "mode_0p5s_bin": 3.0,
+       "min": 0.883,
+       "max": 10.867,
+       "p10": 1.322,
+       "p90": 4.525,
+       "share_lt1": 0.071,
+       "share_lt2": 0.286,
+       "share_gt4": 0.214
+      },
+      "shots_overlapping": 15,
+      "mean_visible_shot_time": 2.667
+     },
+     "payoff": {
+      "window_s": [
+       55.0,
+       60.25
+      ],
+      "joins": 0,
+      "cuts_per_min": 0.0,
+      "seconds_per_cut": null,
+      "shots_starting_here": null,
+      "shots_overlapping": 1,
+      "mean_visible_shot_time": 5.25
+     },
+     "outro": {
+      "window_s": [
+       60.25,
+       60.5
+      ],
+      "joins": 0,
+      "cuts_per_min": 0.0,
+      "seconds_per_cut": null,
+      "shots_starting_here": null,
+      "shots_overlapping": 1,
+      "mean_visible_shot_time": 0.25
+     }
+    },
+    "visual": {
+     "changes_per_min_no_captions": 197.4,
+     "still_frame_share": 0.004,
+     "longest_still_run_f": 4
+    }
+   },
+   "audio_nonvocal": {
+    "mix": {
+     "I_LUFS": -14.1,
+     "LRA_LU": 1.8,
+     "true_peak_dBTP": -2.1
+    },
+    "vo": -14.23,
+    "music": -31.5,
+    "gap": {
+     "mean": 18.61,
+     "median": 19.06,
+     "min": 8.49,
+     "max": 22.78,
+     "std": 2.57
+    },
+    "stability": {
+     "std_dB": 2.42,
+     "range_dB": 13.9,
+     "max_step_per_0p5s_dB": 4.56
+    },
+    "duck": 0.38,
+    "tempo": 103.4,
+    "key": "D minor",
+    "key_score": 0.829,
+    "key_conf": "ok"
+   },
+   "audio_musiconly": {
+    "mix": {
+     "I_LUFS": -14.1,
+     "LRA_LU": 1.8,
+     "true_peak_dBTP": -2.1
+    },
+    "vo": -14.23,
+    "music": -31.5,
+    "gap": {
+     "mean": 18.61,
+     "median": 19.06,
+     "min": 8.49,
+     "max": 22.78,
+     "std": 2.57
+    },
+    "stability": {
+     "std_dB": 2.42,
+     "range_dB": 13.9,
+     "max_step_per_0p5s_dB": 4.56
+    },
+    "duck": 0.38,
+    "tempo": 103.4,
+    "key": "D minor",
+    "key_score": 0.829,
+    "key_conf": "ok"
+   },
+   "camA": {
+    "moving_share": 0.961,
+    "n_moves": 23
+   },
+   "camB": {
+    "moving_share": 0.947,
+    "n_moves": 22
+   },
+   "cam_agreement": {
+    "rate": 75.77,
+    "per_field": {
+     "hold_share": [
+      19,
+      20
+     ],
+     "n_moves": [
+      19,
+      20
+     ],
+     "start": [
+      22,
+      22
+     ],
+     "end": [
+      20,
+      22
+     ],
+     "type": [
+      17,
+      22
+     ],
+     "scale": [
+      6,
+      22
+     ],
+     "pan": [
+      13,
+      22
+     ],
+     "tilt": [
+      10,
+      22
+     ],
+     "ease": [
+      21,
+      22
+     ]
+    }
+   },
+   "cam_moves_A": {
+    "n": 51,
+    "types": {
+     "push-in": 19,
+     "compound": 15,
+     "pull-out": 5,
+     "drift": 4,
+     "truck": 2,
+     "tilt": 2,
+     "pov": 1,
+     "object-follow": 1,
+     "pan": 1,
+     "orbit": 1
+    },
+    "easing": {
+     "linear": 18,
+     "ease-in-out": 15,
+     "ease-out": 11,
+     "ease-in": 7
+    },
+    "dur_f": {
+     "n": 51,
+     "min": 4,
+     "p10": 11,
+     "p25": 17,
+     "median": 30,
+     "p75": 48,
+     "p90": 62,
+     "max": 78,
+     "mean": 33.0
+    },
+    "scale_in": {
+     "n": 33,
+     "min": 1.01,
+     "p10": 1.06,
+     "p25": 1.19,
+     "median": 1.47,
+     "p75": 1.83,
+     "p90": 3.64,
+     "max": 5.38,
+     "mean": 1.81
+    },
+    "scale_out": {
+     "n": 17,
+     "min": 0.13,
+     "p10": 0.25,
+     "p25": 0.41,
+     "median": 0.52,
+     "p75": 0.79,
+     "p90": 0.95,
+     "max": 1.0,
+     "mean": 0.58
+    },
+    "follows": 20
+   },
+   "hold_share_per_shot_A": {
+    "n": 16,
+    "min": 0.0,
+    "p10": 0.0,
+    "p25": 0.0,
+    "median": 0.0,
+    "p75": 0.033,
+    "p90": 0.096,
+    "max": 0.447,
+    "mean": 0.043
+   },
+   "parallax_A": {
+    "n": 5,
+    "min": -2.6,
+    "p10": -2.6,
+    "p25": 1.0,
+    "median": 1.23,
+    "p75": 2.1,
+    "p90": 5.0,
+    "max": 5.0,
+    "mean": 1.35
+   },
+   "characters_n": 21,
+   "actions_n": 55,
+   "action_classes": {
+    "walk": 9,
+    "lift": 7,
+    "turn": 7,
+    "other": 6,
+    "reach/grab": 5,
+    "drop": 4,
+    "react": 3,
+    "sit": 2,
+    "strike/hit": 1,
+    "jump": 1,
+    "other: stuck in ceiling vibrating": 1,
+    "fall": 1,
+    "stumble": 1,
+    "push": 1,
+    "other: show phone": 1
+   },
+   "motion_types": {
+    "tween": 20,
+    "snap": 18,
+    "redraw": 11,
+    "cycle": 6
+   },
+   "holds": {
+    "n": 48,
+    "min": 5,
+    "p10": 11,
+    "p25": 17,
+    "median": 24.0,
+    "p75": 36,
+    "p90": 49,
+    "max": 100,
+    "mean": 29.0
+   },
+   "hold_share_of_video": 0.778,
+   "faces_n": 133,
+   "face_swaps_per_s": 2.2,
+   "blinks_n": 5,
+   "lipsync": {
+    "runs": 4,
+    "frames_per_shape": {
+     "n": 4,
+     "min": 2.2,
+     "p10": 2.2,
+     "p25": 2.2,
+     "median": 2.25,
+     "p75": 2.3,
+     "p90": 2.5,
+     "max": 2.5,
+     "mean": 2.3
+    },
+    "share": 0.057
+   },
+   "assets_n": 35,
+   "asset_classes": {
+    "rigid rotate": 10,
+    "rigid translate": 6,
+    "scale pop": 5,
+    "fall": 5,
+    "particle burst": 4,
+    "float": 3,
+    "other": 2
+   },
+   "asset_flags": {
+    "overshoot": 2,
+    "bounce": 0,
+    "blur": 0,
+    "on_twos": 0,
+    "squash": 0
+   },
+   "falls": [
+    {
+     "object": "chair with A",
+     "n": 7,
+     "g_screen_h_per_s2": 8.79,
+     "r2": 0.9849,
+     "start": 46
+    },
+    {
+     "object": "moth (flat 2D)",
+     "n": 8,
+     "g_screen_h_per_s2": 0.56,
+     "r2": 0.9971,
+     "start": 465
+    },
+    {
+     "object": "KEN mug lowering out",
+     "n": 6,
+     "g_screen_h_per_s2": 11.4,
+     "r2": 0.9992,
+     "start": 714
+    }
+   ],
+   "caption": {
+    "n": 184,
+    "dwell_f": {
+     "n": 184,
+     "min": 2,
+     "p10": 4,
+     "p25": 6,
+     "median": 9.0,
+     "p75": 13,
+     "p90": 16,
+     "max": 24,
+     "mean": 10.0
+    },
+    "per_s": 3.04,
+    "words": {
+     "n": 184,
+     "min": 1,
+     "p10": 1,
+     "p25": 1,
+     "median": 1.0,
+     "p75": 1,
+     "p90": 2,
+     "max": 3,
+     "mean": 1.0
+    }
+   },
+   "caption_offset_f": {
+    "n": 181,
+    "min": -5.0,
+    "p10": -2.0,
+    "p25": -1.2,
+    "median": -0.2,
+    "p75": 0.8,
+    "p90": 1.2,
+    "max": 2.4,
+    "mean": -0.3
+   },
+   "caption_offset_share_within": {
+    "pm2": 0.917,
+    "early_or_on": 0.718
+   },
+   "sound_events_per_s": 1.22
+  },
+  "04_Mz72MuPgnGY": {
+   "frames": 1937,
+   "joins": {
+    "n": 16,
+    "kinds": {
+     "match dissolve": 7,
+     "dissolve": 9
+    },
+    "verified": true
+   },
+   "dissolve_len_fit_ok": {
+    "n": 12,
+    "min": 6,
+    "p10": 7,
+    "p25": 7,
+    "median": 8.5,
+    "p75": 10,
+    "p90": 11,
+    "max": 11,
+    "mean": 8.6
+   },
+   "dissolve_len_fit_list": [
+    11,
+    10,
+    10,
+    10,
+    11,
+    7,
+    7,
+    7,
+    7,
+    9,
+    6,
+    8
+   ],
+   "dissolve_len_eye_A": {
+    "n": 16,
+    "min": 4,
+    "p10": 6,
+    "p25": 7,
+    "median": 9.0,
+    "p75": 10,
+    "p90": 12,
+    "max": 16,
+    "mean": 9
+   },
+   "shot_len_s": {
+    "n": 17,
+    "min": 0.93,
+    "p10": 2.27,
+    "p25": 2.57,
+    "median": 3.63,
+    "p75": 4.33,
+    "p90": 6.03,
+    "max": 7.07,
+    "mean": 3.8
+   },
+   "shot_len_list": [
+    6.03,
+    6.83,
+    3.63,
+    2.4,
+    3.9,
+    4.33,
+    2.77,
+    0.93,
+    5.9,
+    2.27,
+    3.83,
+    7.07,
+    2.57,
+    3.53,
+    3.6,
+    1.23,
+    3.73
+   ],
+   "first_shot_s": 6.03,
+   "last_shot_s": 3.73,
+   "share_lt2": 0.118,
+   "share_gt4": 0.294,
+   "pacing": {
+    "shots": {
+     "n": 17,
+     "asl": 3.798,
+     "median": 3.633,
+     "mode_0p5s_bin": 3.5,
+     "min": 0.933,
+     "max": 7.05,
+     "p10": 1.853,
+     "p90": 6.353,
+     "share_lt1": 0.059,
+     "share_lt2": 0.118,
+     "share_gt4": 0.294,
+     "shots_per_min": 15.8
+    },
+    "narration": {
+     "words": 247,
+     "words_per_s": 3.85,
+     "sentences": 17,
+     "end_after_last_word_start_s": 0.887,
+     "join_mid_within_3f_of_word_onset": 0.625,
+     "join_start_within_6f_of_phrase_onset": 0.438,
+     "cuts_per_sentence": 0.94
+    },
+    "captions": {
+     "swaps": 194,
+     "swaps_per_s": 3.0,
+     "dwell_s": {
+      "mean": 0.332,
+      "median": 0.3,
+      "p10": 0.1,
+      "p90": 0.533,
+      "max": 1.833
+     },
+     "caption_on_share": 1.0
+    },
+    "sections": {
+     "hook_0-3s": {
+      "window_s": [
+       0,
+       3.0
+      ],
+      "joins": 0,
+      "cuts_per_min": 0.0,
+      "seconds_per_cut": null,
+      "shots_starting_here": {
+       "n": 1,
+       "asl": 6.033,
+       "median": 6.033,
+       "mode_0p5s_bin": 6.0,
+       "min": 6.033,
+       "max": 6.033,
+       "p10": 6.033,
+       "p90": 6.033,
+       "share_lt1": 0.0,
+       "share_lt2": 0.0,
+       "share_gt4": 1.0
+      },
+      "shots_overlapping": 1,
+      "mean_visible_shot_time": 3.0
+     },
+     "3-15s": {
+      "window_s": [
+       3.0,
+       15.0
+      ],
+      "joins": 2,
+      "cuts_per_min": 10.0,
+      "seconds_per_cut": 6.0,
+      "shots_starting_here": {
+       "n": 2,
+       "asl": 5.233,
+       "median": 5.233,
+       "mode_0p5s_bin": 3.5,
+       "min": 3.633,
+       "max": 6.833,
+       "p10": 3.953,
+       "p90": 6.513,
+       "share_lt1": 0.0,
+       "share_lt2": 0.0,
+       "share_gt4": 0.5
+      },
+      "shots_overlapping": 3,
+      "mean_visible_shot_time": 4.0
+     },
+     "body": {
+      "window_s": [
+       15.0,
+       60.36
+      ],
+      "joins": 13,
+      "cuts_per_min": 17.2,
+      "seconds_per_cut": 3.489,
+      "shots_starting_here": {
+       "n": 13,
+       "asl": 3.411,
+       "median": 3.533,
+       "mode_0p5s_bin": 2.5,
+       "min": 0.933,
+       "max": 7.05,
+       "p10": 1.44,
+       "p90": 5.587,
+       "share_lt1": 0.077,
+       "share_lt2": 0.154,
+       "share_gt4": 0.231
+      },
+      "shots_overlapping": 14,
+      "mean_visible_shot_time": 3.24
+     },
+     "payoff": {
+      "window_s": [
+       60.36,
+       64.13
+      ],
+      "joins": 1,
+      "cuts_per_min": 15.92,
+      "seconds_per_cut": 3.77,
+      "shots_starting_here": {
+       "n": 1,
+       "asl": 3.717,
+       "median": 3.717,
+       "mode_0p5s_bin": 3.5,
+       "min": 3.717,
+       "max": 3.717,
+       "p10": 3.717,
+       "p90": 3.717,
+       "share_lt1": 0.0,
+       "share_lt2": 0.0,
+       "share_gt4": 0.0
+      },
+      "shots_overlapping": 2,
+      "mean_visible_shot_time": 1.885
+     },
+     "outro": {
+      "window_s": [
+       64.13,
+       64.57
+      ],
+      "joins": 0,
+      "cuts_per_min": 0.0,
+      "seconds_per_cut": null,
+      "shots_starting_here": null,
+      "shots_overlapping": 1,
+      "mean_visible_shot_time": 0.437
+     }
+    },
+    "visual": {
+     "changes_per_min_no_captions": 190.5,
+     "still_frame_share": 0.0,
+     "longest_still_run_f": 0
+    }
+   },
+   "audio_nonvocal": {
+    "mix": {
+     "I_LUFS": -14.0,
+     "LRA_LU": 2.4,
+     "true_peak_dBTP": -2.1
+    },
+    "vo": -14.2,
+    "music": -31.63,
+    "gap": {
+     "mean": 18.61,
+     "median": 18.82,
+     "min": 9.88,
+     "max": 23.26,
+     "std": 2.15
+    },
+    "stability": {
+     "std_dB": 2.28,
+     "range_dB": 12.09,
+     "max_step_per_0p5s_dB": 2.74
+    },
+    "duck": -0.15,
+    "tempo": 123.0,
+    "key": "D minor",
+    "key_score": 0.773,
+    "key_conf": "ok"
+   },
+   "audio_musiconly": {
+    "mix": {
+     "I_LUFS": -14.0,
+     "LRA_LU": 2.4,
+     "true_peak_dBTP": -2.1
+    },
+    "vo": -14.2,
+    "music": -31.63,
+    "gap": {
+     "mean": 18.61,
+     "median": 18.82,
+     "min": 9.88,
+     "max": 23.26,
+     "std": 2.15
+    },
+    "stability": {
+     "std_dB": 2.28,
+     "range_dB": 12.09,
+     "max_step_per_0p5s_dB": 2.74
+    },
+    "duck": -0.15,
+    "tempo": 123.0,
+    "key": "D minor",
+    "key_score": 0.773,
+    "key_conf": "ok"
+   },
+   "camA": {
+    "moving_share": 0.949,
+    "n_moves": 26
+   },
+   "camB": {
+    "moving_share": 0.944,
+    "n_moves": 24
+   },
+   "cam_agreement": {
+    "rate": 60.64,
+    "per_field": {
+     "hold_share": [
+      13,
+      17
+     ],
+     "n_moves": [
+      13,
+      17
+     ],
+     "start": [
+      21,
+      22
+     ],
+     "end": [
+      16,
+      22
+     ],
+     "type": [
+      15,
+      22
+     ],
+     "scale": [
+      6,
+      22
+     ],
+     "pan": [
+      5,
+      22
+     ],
+     "tilt": [
+      6,
+      22
+     ],
+     "ease": [
+      19,
+      22
+     ]
+    }
+   },
+   "cam_moves_A": {
+    "n": 49,
+    "types": {
+     "push-in": 17,
+     "compound": 8,
+     "pan": 6,
+     "drift": 5,
+     "crane": 3,
+     "tilt": 3,
+     "pull-out": 2,
+     "hold": 2,
+     "compound:": 1,
+     "truck": 1,
+     "orbit": 1
+    },
+    "easing": {
+     "ease-in-out": 16,
+     "linear": 15,
+     "ease-out": 9,
+     "ease-in": 7,
+     "n/a": 2
+    },
+    "dur_f": {
+     "n": 49,
+     "min": 7,
+     "p10": 14,
+     "p25": 21,
+     "median": 30,
+     "p75": 48,
+     "p90": 61,
+     "max": 91,
+     "mean": 37.0
+    },
+    "scale_in": {
+     "n": 32,
+     "min": 1.0,
+     "p10": 1.02,
+     "p25": 1.08,
+     "median": 1.25,
+     "p75": 1.54,
+     "p90": 2.02,
+     "max": 8.11,
+     "mean": 1.75
+    },
+    "scale_out": {
+     "n": 12,
+     "min": 0.24,
+     "p10": 0.28,
+     "p25": 0.36,
+     "median": 0.69,
+     "p75": 0.94,
+     "p90": 0.97,
+     "max": 0.98,
+     "mean": 0.66
+    },
+    "follows": 30
+   },
+   "hold_share_per_shot_A": {
+    "n": 12,
+    "min": 0.0,
+    "p10": 0.0,
+    "p25": 0.013,
+    "median": 0.039,
+    "p75": 0.085,
+    "p90": 0.123,
+    "max": 0.802,
+    "mean": 0.109
+   },
+   "parallax_A": {
+    "n": 4,
+    "min": 1.2,
+    "p10": 1.2,
+    "p25": 2.5,
+    "median": 3.25,
+    "p75": 4.0,
+    "p90": 4.0,
+    "max": 4.0,
+    "mean": 2.92
+   },
+   "characters_n": 25,
+   "actions_n": 43,
+   "action_classes": {
+    "other": 7,
+    "hold": 5,
+    "react": 4,
+    "point": 4,
+    "lift": 4,
+    "walk": 3,
+    "reach/grab": 3,
+    "talk-gesture": 3,
+    "ride": 3,
+    "turn": 2,
+    "fall": 2,
+    "throw": 1,
+    "jump": 1,
+    "climb": 1
+   },
+   "motion_types": {
+    "none": 7,
+    "cycle": 6,
+    "snap": 11,
+    "redraw": 4,
+    "tween": 15
+   },
+   "holds": {
+    "n": 38,
+    "min": 6,
+    "p10": 12,
+    "p25": 17,
+    "median": 33.0,
+    "p75": 53,
+    "p90": 76,
+    "max": 171,
+    "mean": 42.0
+   },
+   "hold_share_of_video": 0.825,
+   "faces_n": 106,
+   "face_swaps_per_s": 1.64,
+   "blinks_n": 9,
+   "lipsync": {
+    "runs": 6,
+    "frames_per_shape": {
+     "n": 6,
+     "min": 1.5,
+     "p10": 1.75,
+     "p25": 1.75,
+     "median": 1.9,
+     "p75": 2.0,
+     "p90": 3.5,
+     "max": 3.5,
+     "mean": 2.09
+    },
+    "share": 0.124
+   },
+   "assets_n": 65,
+   "asset_classes": {
+    "stream": 16,
+    "particle burst": 10,
+    "scale pop": 6,
+    "rigid rotate": 5,
+    "loop cycle": 5,
+    "rigid translate": 5,
+    "float": 4,
+    "other": 4,
+    "swing": 3,
+    "drive": 2,
+    "fall": 2,
+    "crowd cycle": 1
+   },
+   "asset_flags": {
+    "overshoot": 0,
+    "bounce": 1,
+    "blur": 5,
+    "on_twos": 2,
+    "squash": 0
+   },
+   "falls": [
+    {
+     "object": "pirate (parrot hat) thrown into sea",
+     "n": 6,
+     "g_screen_h_per_s2": 4.74,
+     "r2": 0.9962,
+     "start": 1911
+    }
+   ],
+   "caption": {
+    "n": 195,
+    "dwell_f": {
+     "n": 195,
+     "min": 2,
+     "p10": 4,
+     "p25": 6,
+     "median": 10,
+     "p75": 13,
+     "p90": 16,
+     "max": 25,
+     "mean": 10.0
+    },
+    "per_s": 3.02,
+    "words": {
+     "n": 195,
+     "min": 1,
+     "p10": 1,
+     "p25": 1,
+     "median": 1,
+     "p75": 2,
+     "p90": 2,
+     "max": 3,
+     "mean": 1.0
+    }
+   },
+   "caption_offset_f": {
+    "n": 193,
+    "min": -4.0,
+    "p10": -1.8,
+    "p25": -1.2,
+    "median": -0.6,
+    "p75": 0.4,
+    "p90": 0.8,
+    "max": 1.6,
+    "mean": -0.5
+   },
+   "caption_offset_share_within": {
+    "pm2": 0.917,
+    "early_or_on": 0.829
+   },
+   "sound_events_per_s": 1.25
+  },
+  "10_GM9UKnZ6JFw": {
+   "frames": 1785,
+   "joins": {
+    "n": 17,
+    "kinds": {
+     "match dissolve": 8,
+     "push-through": 1,
+     "dissolve": 8
+    },
+    "verified": true
+   },
+   "dissolve_len_fit_ok": {
+    "n": 15,
+    "min": 5,
+    "p10": 6,
+    "p25": 8,
+    "median": 11,
+    "p75": 12,
+    "p90": 12,
+    "max": 14,
+    "mean": 9.9
+   },
+   "dissolve_len_fit_list": [
+    11,
+    14,
+    11,
+    12,
+    11,
+    12,
+    11,
+    11,
+    5,
+    8,
+    12,
+    8,
+    6,
+    8,
+    9
+   ],
+   "dissolve_len_eye_A": {
+    "n": 16,
+    "min": 5,
+    "p10": 7,
+    "p25": 9,
+    "median": 10.0,
+    "p75": 12,
+    "p90": 15,
+    "max": 15,
+    "mean": 10.2
+   },
+   "shot_len_s": {
+    "n": 18,
+    "min": 1.07,
+    "p10": 1.37,
+    "p25": 1.6,
+    "median": 2.97,
+    "p75": 4.03,
+    "p90": 6.8,
+    "max": 8.2,
+    "mean": 3.31
+   },
+   "shot_len_list": [
+    3.3,
+    6.8,
+    3.17,
+    4.03,
+    1.57,
+    3.1,
+    1.83,
+    3.47,
+    1.9,
+    8.2,
+    2.83,
+    1.1,
+    5.03,
+    1.6,
+    1.07,
+    2.33,
+    1.37,
+    6.8
+   ],
+   "first_shot_s": 3.3,
+   "last_shot_s": 6.8,
+   "share_lt2": 0.389,
+   "share_gt4": 0.278,
+   "pacing": {
+    "shots": {
+     "n": 18,
+     "asl": 3.306,
+     "median": 2.966,
+     "mode_0p5s_bin": 1.5,
+     "min": 1.067,
+     "max": 8.2,
+     "p10": 1.275,
+     "p90": 6.805,
+     "share_lt1": 0.0,
+     "share_lt2": 0.389,
+     "share_gt4": 0.278,
+     "shots_per_min": 18.15
+    },
+    "narration": {
+     "words": 220,
+     "words_per_s": 3.71,
+     "sentences": 16,
+     "end_after_last_word_start_s": 0.58,
+     "join_mid_within_3f_of_word_onset": 0.706,
+     "join_start_within_6f_of_phrase_onset": 0.471,
+     "cuts_per_sentence": 1.06
+    },
+    "captions": {
+     "swaps": 169,
+     "swaps_per_s": 2.84,
+     "dwell_s": {
+      "mean": 0.351,
+      "median": 0.333,
+      "p10": 0.167,
+      "p90": 0.577,
+      "max": 0.8
+     },
+     "caption_on_share": 0.999
+    },
+    "sections": {
+     "hook_0-3s": {
+      "window_s": [
+       0,
+       3.0
+      ],
+      "joins": 0,
+      "cuts_per_min": 0.0,
+      "seconds_per_cut": null,
+      "shots_starting_here": {
+       "n": 1,
+       "asl": 3.3,
+       "median": 3.3,
+       "mode_0p5s_bin": 3.5,
+       "min": 3.3,
+       "max": 3.3,
+       "p10": 3.3,
+       "p90": 3.3,
+       "share_lt1": 0.0,
+       "share_lt2": 0.0,
+       "share_gt4": 0.0
+      },
+      "shots_overlapping": 1,
+      "mean_visible_shot_time": 3.0
+     },
+     "3-15s": {
+      "window_s": [
+       3.0,
+       15.0
+      ],
+      "joins": 3,
+      "cuts_per_min": 15.0,
+      "seconds_per_cut": 4.0,
+      "shots_starting_here": {
+       "n": 3,
+       "asl": 4.672,
+       "median": 4.033,
+       "mode_0p5s_bin": 3.0,
+       "min": 3.167,
+       "max": 6.817,
+       "p10": 3.34,
+       "p90": 6.26,
+       "share_lt1": 0.0,
+       "share_lt2": 0.0,
+       "share_gt4": 0.667
+      },
+      "shots_overlapping": 4,
+      "mean_visible_shot_time": 3.0
+     },
+     "body": {
+      "window_s": [
+       15.0,
+       53.88
+      ],
+      "joins": 14,
+      "cuts_per_min": 21.6,
+      "seconds_per_cut": 2.777,
+      "shots_starting_here": {
+       "n": 14,
+       "asl": 3.013,
+       "median": 2.108,
+       "mode_0p5s_bin": 1.5,
+       "min": 1.067,
+       "max": 8.2,
+       "p10": 1.175,
+       "p90": 6.265,
+       "share_lt1": 0.0,
+       "share_lt2": 0.5,
+       "share_gt4": 0.214
+      },
+      "shots_overlapping": 15,
+      "mean_visible_shot_time": 2.592
+     },
+     "payoff": {
+      "window_s": [
+       53.88,
+       59.37
+      ],
+      "joins": 0,
+      "cuts_per_min": 0.0,
+      "seconds_per_cut": null,
+      "shots_starting_here": null,
+      "shots_overlapping": 1,
+      "mean_visible_shot_time": 5.49
+     },
+     "outro": {
+      "window_s": [
+       59.37,
+       59.5
+      ],
+      "joins": 0,
+      "cuts_per_min": 0.0,
+      "seconds_per_cut": null,
+      "shots_starting_here": null,
+      "shots_overlapping": 1,
+      "mean_visible_shot_time": 0.13
+     }
+    },
+    "visual": {
+     "changes_per_min_no_captions": 151.3,
+     "still_frame_share": 0.006,
+     "longest_still_run_f": 6
+    }
+   },
+   "audio_nonvocal": {
+    "mix": {
+     "I_LUFS": -14.0,
+     "LRA_LU": 2.3,
+     "true_peak_dBTP": -1.9
+    },
+    "vo": -14.25,
+    "music": -28.58,
+    "gap": {
+     "mean": 15.88,
+     "median": 17.11,
+     "min": 5.72,
+     "max": 21.94,
+     "std": 3.76
+    },
+    "stability": {
+     "std_dB": 4.03,
+     "range_dB": 16.67,
+     "max_step_per_0p5s_dB": 9.86
+    },
+    "duck": 0.69,
+    "tempo": 99.4,
+    "key": "D minor",
+    "key_score": 0.847,
+    "key_conf": "ok"
+   },
+   "audio_musiconly": {
+    "mix": {
+     "I_LUFS": -14.0,
+     "LRA_LU": 2.3,
+     "true_peak_dBTP": -1.9
+    },
+    "vo": -14.25,
+    "music": -28.58,
+    "gap": {
+     "mean": 15.88,
+     "median": 17.11,
+     "min": 5.72,
+     "max": 21.94,
+     "std": 3.76
+    },
+    "stability": {
+     "std_dB": 4.03,
+     "range_dB": 16.67,
+     "max_step_per_0p5s_dB": 9.86
+    },
+    "duck": 0.69,
+    "tempo": 99.4,
+    "key": "D minor",
+    "key_score": 0.847,
+    "key_conf": "ok"
+   },
+   "camA": {
+    "moving_share": 0.89,
+    "n_moves": 28
+   },
+   "camB": {
+    "moving_share": 0.871,
+    "n_moves": 27
+   },
+   "cam_agreement": {
+    "rate": 69.27,
+    "per_field": {
+     "hold_share": [
+      16,
+      18
+     ],
+     "n_moves": [
+      15,
+      18
+     ],
+     "start": [
+      25,
+      26
+     ],
+     "end": [
+      23,
+      26
+     ],
+     "type": [
+      22,
+      26
+     ],
+     "scale": [
+      7,
+      26
+     ],
+     "pan": [
+      11,
+      26
+     ],
+     "tilt": [
+      10,
+      26
+     ],
+     "ease": [
+      22,
+      26
+     ]
+    }
+   },
+   "cam_moves_A": {
+    "n": 44,
+    "types": {
+     "push-in": 10,
+     "drift": 8,
+     "pull-out": 7,
+     "compound:": 5,
+     "compound": 5,
+     "tilt": 3,
+     "compound:pan": 2,
+     "pan": 1,
+     "compound:pull-out": 1,
+     "compound:push-in": 1,
+     "crane": 1
+    },
+    "easing": {
+     "ease-out": 16,
+     "ease-in-out": 14,
+     "linear": 9,
+     "ease-in": 3,
+     "[uncertain]": 2
+    },
+    "dur_f": {
+     "n": 44,
+     "min": 3,
+     "p10": 9,
+     "p25": 19,
+     "median": 32.0,
+     "p75": 46,
+     "p90": 65,
+     "max": 84,
+     "mean": 35.0
+    },
+    "scale_in": {
+     "n": 25,
+     "min": 1.0,
+     "p10": 1.01,
+     "p25": 1.03,
+     "median": 1.21,
+     "p75": 2.05,
+     "p90": 4.44,
+     "max": 5.99,
+     "mean": 1.86
+    },
+    "scale_out": {
+     "n": 15,
+     "min": 0.28,
+     "p10": 0.31,
+     "p25": 0.48,
+     "median": 0.71,
+     "p75": 0.97,
+     "p90": 0.98,
+     "max": 0.98,
+     "mean": 0.68
+    },
+    "follows": 16
+   },
+   "hold_share_per_shot_A": {
+    "n": 15,
+    "min": 0.0,
+    "p10": 0.0,
+    "p25": 0.0,
+    "median": 0.009,
+    "p75": 0.071,
+    "p90": 0.358,
+    "max": 0.515,
+    "mean": 0.082
+   },
+   "parallax_A": {
+    "n": 5,
+    "min": 0.77,
+    "p10": 0.77,
+    "p25": 1.14,
+    "median": 2.7,
+    "p75": 4.1,
+    "p90": 4.8,
+    "max": 4.8,
+    "mean": 2.7
+   },
+   "characters_n": 19,
+   "actions_n": 52,
+   "action_classes": {
+    "other": 13,
+    "reach/grab": 6,
+    "react": 5,
+    "pull": 3,
+    "jump": 3,
+    "turn": 2,
+    "emote": 2,
+    "lift": 2,
+    "strike/hit": 2,
+    "other: rock": 2,
+    "push": 1,
+    "talk-gesture": 1,
+    "hold": 1,
+    "write/draw": 1,
+    "nod/shake": 1
+   },
+   "motion_types": {
+    "snap": 19,
+    "tween": 19,
+    "cycle": 3,
+    "redraw": 10,
+    "none": 1
+   },
+   "holds": {
+    "n": 40,
+    "min": 6,
+    "p10": 10,
+    "p25": 14,
+    "median": 28.0,
+    "p75": 49,
+    "p90": 62,
+    "max": 95,
+    "mean": 34.0
+   },
+   "hold_share_of_video": 0.766,
+   "faces_n": 134,
+   "face_swaps_per_s": 2.25,
+   "blinks_n": 20,
+   "lipsync": {
+    "runs": 4,
+    "frames_per_shape": {
+     "n": 4,
+     "min": 2.4,
+     "p10": 2.4,
+     "p25": 2.5,
+     "median": 2.55,
+     "p75": 2.6,
+     "p90": 3.2,
+     "max": 3.2,
+     "mean": 2.67
+    },
+    "share": 0.108
+   },
+   "assets_n": 41,
+   "asset_classes": {
+    "rigid translate": 9,
+    "stream": 8,
+    "particle burst": 6,
+    "swing": 5,
+    "scale pop": 5,
+    "fall": 3,
+    "wobble": 1,
+    "float": 1,
+    "loop cycle": 1,
+    "cloth flap": 1,
+    "rigid rotate": 1
+   },
+   "asset_flags": {
+    "overshoot": 1,
+    "bounce": 0,
+    "blur": 8,
+    "on_twos": 0,
+    "squash": 0
+   },
+   "falls": [
+    {
+     "object": "shovel falls",
+     "n": 6,
+     "g_screen_h_per_s2": 4.69,
+     "r2": 0.9375,
+     "start": 651
+    },
+    {
+     "object": "dirt clods",
+     "n": 6,
+     "g_screen_h_per_s2": 3.77,
+     "r2": 0.9994,
+     "start": 1334
+    },
+    {
+     "object": "IOU papers",
+     "n": 6,
+     "g_screen_h_per_s2": 4.39,
+     "r2": 0.9973,
+     "start": 1679
+    }
+   ],
+   "caption": {
+    "n": 170,
+    "dwell_f": {
+     "n": 170,
+     "min": 2,
+     "p10": 5,
+     "p25": 7,
+     "median": 10.0,
+     "p75": 14,
+     "p90": 17,
+     "max": 24,
+     "mean": 10.0
+    },
+    "per_s": 2.86,
+    "words": {
+     "n": 170,
+     "min": 1,
+     "p10": 1,
+     "p25": 1,
+     "median": 1.0,
+     "p75": 2,
+     "p90": 2,
+     "max": 3,
+     "mean": 1.0
+    }
+   },
+   "caption_offset_f": {
+    "n": 169,
+    "min": -3.0,
+    "p10": -1.4,
+    "p25": -0.8,
+    "median": 0.0,
+    "p75": 0.8,
+    "p90": 1.4,
+    "max": 2.6,
+    "mean": -0.0
+   },
+   "caption_offset_share_within": {
+    "pm2": 0.947,
+    "early_or_on": 0.657
+   },
+   "sound_events_per_s": 1.45
+  },
+  "14_VS1Z_Q-Klt8": {
+   "frames": 1945,
+   "joins": {
+    "n": 19,
+    "kinds": {
+     "hard cut": 1,
+     "dissolve": 10,
+     "match dissolve": 8
+    },
+    "verified": true
+   },
+   "dissolve_len_fit_ok": {
+    "n": 15,
+    "min": 5,
+    "p10": 5,
+    "p25": 6,
+    "median": 7,
+    "p75": 8,
+    "p90": 9,
+    "max": 9,
+    "mean": 6.7
+   },
+   "dissolve_len_fit_list": [
+    7,
+    7,
+    9,
+    6,
+    6,
+    5,
+    6,
+    6,
+    9,
+    8,
+    7,
+    5,
+    7,
+    8,
+    5
+   ],
+   "dissolve_len_eye_A": {
+    "n": 18,
+    "min": 5,
+    "p10": 6,
+    "p25": 6,
+    "median": 7.0,
+    "p75": 9,
+    "p90": 10,
+    "max": 11,
+    "mean": 7.7
+   },
+   "shot_len_s": {
+    "n": 20,
+    "min": 1.23,
+    "p10": 2.1,
+    "p25": 2.57,
+    "median": 2.95,
+    "p75": 3.37,
+    "p90": 4.43,
+    "max": 6.97,
+    "mean": 3.24
+   },
+   "shot_len_list": [
+    3.07,
+    4.43,
+    6.03,
+    4.33,
+    2.57,
+    2.1,
+    1.57,
+    2.83,
+    2.77,
+    2.17,
+    1.23,
+    4.17,
+    3.23,
+    3.13,
+    2.47,
+    2.57,
+    6.97,
+    2.73,
+    3.37,
+    3.1
+   ],
+   "first_shot_s": 3.07,
+   "last_shot_s": 3.1,
+   "share_lt2": 0.1,
+   "share_gt4": 0.25,
+   "pacing": {
+    "shots": {
+     "n": 20,
+     "asl": 3.242,
+     "median": 2.95,
+     "mode_0p5s_bin": 3.0,
+     "min": 1.25,
+     "max": 6.967,
+     "p10": 2.045,
+     "p90": 4.595,
+     "share_lt1": 0.0,
+     "share_lt2": 0.1,
+     "share_gt4": 0.25,
+     "shots_per_min": 18.51
+    },
+    "narration": {
+     "words": 237,
+     "words_per_s": 3.65,
+     "sentences": 21,
+     "end_after_last_word_start_s": 0.273,
+     "join_mid_within_3f_of_word_onset": 0.579,
+     "join_start_within_6f_of_phrase_onset": 0.684,
+     "cuts_per_sentence": 0.9
+    },
+    "captions": {
+     "swaps": 175,
+     "swaps_per_s": 2.7,
+     "dwell_s": {
+      "mean": 0.37,
+      "median": 0.367,
+      "p10": 0.167,
+      "p90": 0.533,
+      "max": 0.967
+     },
+     "caption_on_share": 1.0
+    },
+    "sections": {
+     "hook_0-3s": {
+      "window_s": [
+       0,
+       3.0
+      ],
+      "joins": 0,
+      "cuts_per_min": 0.0,
+      "seconds_per_cut": null,
+      "shots_starting_here": {
+       "n": 1,
+       "asl": 3.067,
+       "median": 3.067,
+       "mode_0p5s_bin": 3.0,
+       "min": 3.067,
+       "max": 3.067,
+       "p10": 3.067,
+       "p90": 3.067,
+       "share_lt1": 0.0,
+       "share_lt2": 0.0,
+       "share_gt4": 0.0
+      },
+      "shots_overlapping": 1,
+      "mean_visible_shot_time": 3.0
+     },
+     "3-15s": {
+      "window_s": [
+       3.0,
+       15.0
+      ],
+      "joins": 3,
+      "cuts_per_min": 15.0,
+      "seconds_per_cut": 4.0,
+      "shots_starting_here": {
+       "n": 3,
+       "asl": 4.939,
+       "median": 4.433,
+       "mode_0p5s_bin": 4.5,
+       "min": 4.333,
+       "max": 6.05,
+       "p10": 4.353,
+       "p90": 5.727,
+       "share_lt1": 0.0,
+       "share_lt2": 0.0,
+       "share_gt4": 1.0
+      },
+      "shots_overlapping": 4,
+      "mean_visible_shot_time": 3.0
+     },
+     "body": {
+      "window_s": [
+       15.0,
+       60.28
+      ],
+      "joins": 15,
+      "cuts_per_min": 19.88,
+      "seconds_per_cut": 3.019,
+      "shots_starting_here": {
+       "n": 15,
+       "asl": 2.923,
+       "median": 2.733,
+       "mode_0p5s_bin": 2.5,
+       "min": 1.25,
+       "max": 6.967,
+       "p10": 1.77,
+       "p90": 3.847,
+       "share_lt1": 0.0,
+       "share_lt2": 0.133,
+       "share_gt4": 0.133
+      },
+      "shots_overlapping": 16,
+      "mean_visible_shot_time": 2.83
+     },
+     "payoff": {
+      "window_s": [
+       60.28,
+       65.01
+      ],
+      "joins": 1,
+      "cuts_per_min": 12.68,
+      "seconds_per_cut": 4.73,
+      "shots_starting_here": {
+       "n": 1,
+       "asl": 3.1,
+       "median": 3.1,
+       "mode_0p5s_bin": 3.0,
+       "min": 3.1,
+       "max": 3.1,
+       "p10": 3.1,
+       "p90": 3.1,
+       "share_lt1": 0.0,
+       "share_lt2": 0.0,
+       "share_gt4": 0.0
+      },
+      "shots_overlapping": 2,
+      "mean_visible_shot_time": 2.276
+     }
+    },
+    "visual": {
+     "changes_per_min_no_captions": 169.4,
+     "still_frame_share": 0.012,
+     "longest_still_run_f": 4
+    }
+   },
+   "audio_nonvocal": {
+    "mix": {
+     "I_LUFS": -14.1,
+     "LRA_LU": 2.1,
+     "true_peak_dBTP": -2.2
+    },
+    "vo": -14.29,
+    "music": -28.58,
+    "gap": {
+     "mean": 16.26,
+     "median": 16.81,
+     "min": 6.07,
+     "max": 21.96,
+     "std": 3.79
+    },
+    "stability": {
+     "std_dB": 3.76,
+     "range_dB": 15.52,
+     "max_step_per_0p5s_dB": 8.79
+    },
+    "duck": 1.14,
+    "tempo": 95.7,
+    "key": "D minor",
+    "key_score": 0.835,
+    "key_conf": "ok"
+   },
+   "audio_musiconly": {
+    "mix": {
+     "I_LUFS": -14.1,
+     "LRA_LU": 2.1,
+     "true_peak_dBTP": -2.2
+    },
+    "vo": -14.29,
+    "music": -28.58,
+    "gap": {
+     "mean": 16.26,
+     "median": 16.81,
+     "min": 6.07,
+     "max": 21.96,
+     "std": 3.79
+    },
+    "stability": {
+     "std_dB": 3.76,
+     "range_dB": 15.52,
+     "max_step_per_0p5s_dB": 8.79
+    },
+    "duck": 1.14,
+    "tempo": 95.7,
+    "key": "D minor",
+    "key_score": 0.835,
+    "key_conf": "ok"
+   },
+   "camA": {
+    "moving_share": 0.863,
+    "n_moves": 27
+   },
+   "camB": {
+    "moving_share": 0.84,
+    "n_moves": 30
+   },
+   "cam_agreement": {
+    "rate": 68.56,
+    "per_field": {
+     "hold_share": [
+      18,
+      20
+     ],
+     "n_moves": [
+      17,
+      20
+     ],
+     "start": [
+      22,
+      27
+     ],
+     "end": [
+      25,
+      27
+     ],
+     "type": [
+      25,
+      27
+     ],
+     "scale": [
+      8,
+      27
+     ],
+     "pan": [
+      12,
+      27
+     ],
+     "tilt": [
+      8,
+      27
+     ],
+     "ease": [
+      22,
+      27
+     ]
+    }
+   },
+   "cam_moves_A": {
+    "n": 55,
+    "types": {
+     "push-in": 20,
+     "pull-out": 8,
+     "orbit": 5,
+     "tilt": 4,
+     "crane": 3,
+     "compound": 3,
+     "compound:": 3,
+     "shake": 3,
+     "drift": 2,
+     "tilt-down": 1,
+     "pan": 1,
+     "whip": 1
+    },
+    "easing": {
+     "ease-in-out": 22,
+     "linear": 15,
+     "ease-out": 12,
+     "snap": 3,
+     "ease-in": 3
+    },
+    "dur_f": {
+     "n": 55,
+     "min": 3,
+     "p10": 12,
+     "p25": 15,
+     "median": 25,
+     "p75": 38,
+     "p90": 57,
+     "max": 89,
+     "mean": 30.0
+    },
+    "scale_in": {
+     "n": 29,
+     "min": 1.03,
+     "p10": 1.03,
+     "p25": 1.06,
+     "median": 1.13,
+     "p75": 1.31,
+     "p90": 1.76,
+     "max": 4.87,
+     "mean": 1.43
+    },
+    "scale_out": {
+     "n": 25,
+     "min": 0.1,
+     "p10": 0.42,
+     "p25": 0.69,
+     "median": 0.86,
+     "p75": 0.94,
+     "p90": 0.97,
+     "max": 0.99,
+     "mean": 0.77
+    },
+    "follows": 25
+   },
+   "hold_share_per_shot_A": {
+    "n": 15,
+    "min": 0.0,
+    "p10": 0.0,
+    "p25": 0.022,
+    "median": 0.043,
+    "p75": 0.145,
+    "p90": 0.205,
+    "max": 0.231,
+    "mean": 0.08
+   },
+   "parallax_A": {
+    "n": 5,
+    "min": 1.2,
+    "p10": 1.2,
+    "p25": 2.6,
+    "median": 2.6,
+    "p75": 4.9,
+    "p90": 20,
+    "max": 20,
+    "mean": 6.26
+   },
+   "characters_n": 19,
+   "actions_n": 37,
+   "action_classes": {
+    "other": 9,
+    "turn": 5,
+    "react": 5,
+    "emote": 4,
+    "talk-gesture": 3,
+    "point": 2,
+    "fall": 2,
+    "drop": 1,
+    "lift": 1,
+    "pull": 1,
+    "stand-up": 1,
+    "jump": 1,
+    "run": 1,
+    "walk": 1
+   },
+   "motion_types": {
+    "redraw": 7,
+    "snap": 15,
+    "tween": 12,
+    "cycle": 3
+   },
+   "holds": {
+    "n": 35,
+    "min": 9,
+    "p10": 11,
+    "p25": 16,
+    "median": 23,
+    "p75": 42,
+    "p90": 55,
+    "max": 75,
+    "mean": 28.0
+   },
+   "hold_share_of_video": 0.508,
+   "faces_n": 162,
+   "face_swaps_per_s": 2.5,
+   "blinks_n": 15,
+   "lipsync": {
+    "runs": 6,
+    "frames_per_shape": {
+     "n": 6,
+     "min": 1.8,
+     "p10": 2.0,
+     "p25": 2.0,
+     "median": 2.25,
+     "p75": 2.5,
+     "p90": 3.3,
+     "max": 3.3,
+     "mean": 2.35
+    },
+    "share": 0.086
+   },
+   "assets_n": 53,
+   "asset_classes": {
+    "fall": 10,
+    "loop cycle": 9,
+    "particle burst": 9,
+    "rigid translate": 6,
+    "scale pop": 5,
+    "float": 4,
+    "stream": 3,
+    "rigid rotate": 2,
+    "swing": 2,
+    "other": 1,
+    "drive": 1,
+    "crowd cycle": 1
+   },
+   "asset_flags": {
+    "overshoot": 1,
+    "bounce": 0,
+    "blur": 7,
+    "on_twos": 0,
+    "squash": 0
+   },
+   "falls": [
+    {
+     "object": "ball (flat 2D disc, dashed outline, ghos",
+     "n": 8,
+     "g_screen_h_per_s2": 4.74,
+     "r2": 1.0,
+     "start": 119
+    },
+    {
+     "object": "gold ball from dragon mouth into frog mo",
+     "n": 9,
+     "g_screen_h_per_s2": 2.19,
+     "r2": 0.9998,
+     "start": 559
+    },
+    {
+     "object": "thrown inventor (as projectile)",
+     "n": 6,
+     "g_screen_h_per_s2": 3.52,
+     "r2": 0.9929,
+     "start": 809
+    },
+    {
+     "object": "bronze ball #1 (right dragon -> frog)",
+     "n": 10,
+     "g_screen_h_per_s2": 4.47,
+     "r2": 1.0,
+     "start": 1019
+    },
+    {
+     "object": "bronze ball #2 (left dragon -> frog)",
+     "n": 9,
+     "g_screen_h_per_s2": 2.85,
+     "r2": 1.0,
+     "start": 1043
+    },
+    {
+     "object": "palace tower topple",
+     "n": 8,
+     "g_screen_h_per_s2": 9.24,
+     "r2": 0.9918,
+     "start": 1398
+    },
+    {
+     "object": "bronze ball (diam ~115 px)",
+     "n": 10,
+     "g_screen_h_per_s2": 6.08,
+     "r2": 0.9998,
+     "start": 1717
+    }
+   ],
+   "caption": {
+    "n": 178,
+    "dwell_f": {
+     "n": 178,
+     "min": 2,
+     "p10": 5,
+     "p25": 7,
+     "median": 11.0,
+     "p75": 14,
+     "p90": 16,
+     "max": 26,
+     "mean": 11.0
+    },
+    "per_s": 2.75,
+    "words": {
+     "n": 178,
+     "min": 1,
+     "p10": 1,
+     "p25": 1,
+     "median": 1.0,
+     "p75": 2,
+     "p90": 2,
+     "max": 3,
+     "mean": 1.0
+    }
+   },
+   "caption_offset_f": {
+    "n": 177,
+    "min": -5.6,
+    "p10": -2.2,
+    "p25": -1.4,
+    "median": -0.4,
+    "p75": 0.2,
+    "p90": 0.8,
+    "max": 1.8,
+    "mean": -0.6
+   },
+   "caption_offset_share_within": {
+    "pm2": 0.893,
+    "early_or_on": 0.819
+   },
+   "sound_events_per_s": 1.23
+  },
+  "22_i4hYq1oSXTg": {
+   "frames": 2005,
+   "joins": {
+    "n": 18,
+    "kinds": {
+     "dissolve": 12,
+     "match dissolve": 6
+    },
+    "verified": true
+   },
+   "dissolve_len_fit_ok": {
+    "n": 18,
+    "min": 5,
+    "p10": 6,
+    "p25": 6,
+    "median": 7.0,
+    "p75": 10,
+    "p90": 12,
+    "max": 12,
+    "mean": 7.9
+   },
+   "dissolve_len_fit_list": [
+    8,
+    12,
+    6,
+    7,
+    10,
+    10,
+    11,
+    6,
+    7,
+    6,
+    6,
+    6,
+    5,
+    7,
+    7,
+    5,
+    12,
+    12
+   ],
+   "dissolve_len_eye_A": {
+    "n": 18,
+    "min": 4,
+    "p10": 5,
+    "p25": 5,
+    "median": 6.5,
+    "p75": 10,
+    "p90": 11,
+    "max": 12,
+    "mean": 7.2
+   },
+   "shot_len_s": {
+    "n": 19,
+    "min": 1.13,
+    "p10": 1.33,
+    "p25": 1.7,
+    "median": 1.93,
+    "p75": 4.83,
+    "p90": 7.8,
+    "max": 14.73,
+    "mean": 3.52
+   },
+   "shot_len_list": [
+    4.83,
+    1.13,
+    1.93,
+    5.13,
+    1.23,
+    14.73,
+    7.8,
+    2.3,
+    1.33,
+    3.0,
+    1.7,
+    1.77,
+    1.5,
+    2.4,
+    7.83,
+    1.73,
+    3.37,
+    1.7,
+    1.4
+   ],
+   "first_shot_s": 4.83,
+   "last_shot_s": 1.4,
+   "share_lt2": 0.526,
+   "share_gt4": 0.263,
+   "pacing": {
+    "shots": {
+     "n": 19,
+     "asl": 3.518,
+     "median": 1.933,
+     "mode_0p5s_bin": 1.5,
+     "min": 1.15,
+     "max": 14.75,
+     "p10": 1.31,
+     "p90": 7.803,
+     "share_lt1": 0.0,
+     "share_lt2": 0.526,
+     "share_gt4": 0.263,
+     "shots_per_min": 17.06
+    },
+    "narration": {
+     "words": 239,
+     "words_per_s": 3.59,
+     "sentences": 16,
+     "end_after_last_word_start_s": 0.633,
+     "join_mid_within_3f_of_word_onset": 0.722,
+     "join_start_within_6f_of_phrase_onset": 0.389,
+     "cuts_per_sentence": 1.12
+    },
+    "captions": {
+     "swaps": 188,
+     "swaps_per_s": 2.81,
+     "dwell_s": {
+      "mean": 0.35,
+      "median": 0.333,
+      "p10": 0.133,
+      "p90": 0.567,
+      "max": 0.9
+     },
+     "caption_on_share": 1.0
+    },
+    "sections": {
+     "hook_0-3s": {
+      "window_s": [
+       0,
+       3.0
+      ],
+      "joins": 0,
+      "cuts_per_min": 0.0,
+      "seconds_per_cut": null,
+      "shots_starting_here": {
+       "n": 1,
+       "asl": 4.833,
+       "median": 4.833,
+       "mode_0p5s_bin": 5.0,
+       "min": 4.833,
+       "max": 4.833,
+       "p10": 4.833,
+       "p90": 4.833,
+       "share_lt1": 0.0,
+       "share_lt2": 0.0,
+       "share_gt4": 1.0
+      },
+      "shots_overlapping": 1,
+      "mean_visible_shot_time": 3.0
+     },
+     "3-15s": {
+      "window_s": [
+       3.0,
+       15.0
+      ],
+      "joins": 5,
+      "cuts_per_min": 25.0,
+      "seconds_per_cut": 2.4,
+      "shots_starting_here": {
+       "n": 5,
+       "asl": 4.837,
+       "median": 1.933,
+       "mode_0p5s_bin": 1.0,
+       "min": 1.15,
+       "max": 14.75,
+       "p10": 1.177,
+       "p90": 10.903,
+       "share_lt1": 0.0,
+       "share_lt2": 0.6,
+       "share_gt4": 0.4
+      },
+      "shots_overlapping": 6,
+      "mean_visible_shot_time": 2.0
+     },
+     "body": {
+      "window_s": [
+       15.0,
+       63.4
+      ],
+      "joins": 11,
+      "cuts_per_min": 13.64,
+      "seconds_per_cut": 4.4,
+      "shots_starting_here": {
+       "n": 11,
+       "asl": 3.156,
+       "median": 2.3,
+       "mode_0p5s_bin": 1.5,
+       "min": 1.333,
+       "max": 7.817,
+       "p10": 1.483,
+       "p90": 7.8,
+       "share_lt1": 0.0,
+       "share_lt2": 0.455,
+       "share_gt4": 0.182
+      },
+      "shots_overlapping": 12,
+      "mean_visible_shot_time": 4.033
+     },
+     "payoff": {
+      "window_s": [
+       63.4,
+       66.65
+      ],
+      "joins": 2,
+      "cuts_per_min": 36.92,
+      "seconds_per_cut": 1.625,
+      "shots_starting_here": {
+       "n": 2,
+       "asl": 1.55,
+       "median": 1.55,
+       "mode_0p5s_bin": 1.5,
+       "min": 1.4,
+       "max": 1.7,
+       "p10": 1.43,
+       "p90": 1.67,
+       "share_lt1": 0.0,
+       "share_lt2": 1.0,
+       "share_gt4": 0.0
+      },
+      "shots_overlapping": 3,
+      "mean_visible_shot_time": 1.083
+     },
+     "outro": {
+      "window_s": [
+       66.65,
+       66.83
+      ],
+      "joins": 0,
+      "cuts_per_min": 0.0,
+      "seconds_per_cut": null,
+      "shots_starting_here": null,
+      "shots_overlapping": 1,
+      "mean_visible_shot_time": 0.183
+     }
+    },
+    "visual": {
+     "changes_per_min_no_captions": 196.6,
+     "still_frame_share": 0.0,
+     "longest_still_run_f": 0
+    }
+   },
+   "audio_nonvocal": {
+    "mix": {
+     "I_LUFS": -14.1,
+     "LRA_LU": 2.9,
+     "true_peak_dBTP": -2.0
+    },
+    "vo": -14.43,
+    "music": -27.55,
+    "gap": {
+     "mean": 14.56,
+     "median": 15.1,
+     "min": 5.72,
+     "max": 19.6,
+     "std": 3.06
+    },
+    "stability": {
+     "std_dB": 3.12,
+     "range_dB": 13.56,
+     "max_step_per_0p5s_dB": 5.78
+    },
+    "duck": -0.33,
+    "tempo": 112.3,
+    "key": "D minor",
+    "key_score": 0.589,
+    "key_conf": "[uncertain]"
+   },
+   "audio_musiconly": {
+    "mix": {
+     "I_LUFS": -14.1,
+     "LRA_LU": 2.9,
+     "true_peak_dBTP": -2.0
+    },
+    "vo": -14.43,
+    "music": -27.55,
+    "gap": {
+     "mean": 14.56,
+     "median": 15.1,
+     "min": 5.72,
+     "max": 19.6,
+     "std": 3.06
+    },
+    "stability": {
+     "std_dB": 3.12,
+     "range_dB": 13.56,
+     "max_step_per_0p5s_dB": 5.78
+    },
+    "duck": -0.33,
+    "tempo": 112.3,
+    "key": "D minor",
+    "key_score": 0.589,
+    "key_conf": "[uncertain]"
+   },
+   "camA": {
+    "moving_share": 0.922,
+    "n_moves": 31
+   },
+   "camB": {
+    "moving_share": 0.922,
+    "n_moves": 26
+   },
+   "cam_agreement": {
+    "rate": 57.75,
+    "per_field": {
+     "hold_share": [
+      13,
+      19
+     ],
+     "n_moves": [
+      14,
+      19
+     ],
+     "start": [
+      22,
+      25
+     ],
+     "end": [
+      19,
+      25
+     ],
+     "type": [
+      12,
+      25
+     ],
+     "scale": [
+      6,
+      25
+     ],
+     "pan": [
+      8,
+      25
+     ],
+     "tilt": [
+      10,
+      25
+     ],
+     "ease": [
+      19,
+      25
+     ]
+    }
+   },
+   "cam_moves_A": {
+    "n": 74,
+    "types": {
+     "push-in": 25,
+     "pull-out": 11,
+     "drift": 10,
+     "truck": 6,
+     "orbit": 5,
+     "compound": 5,
+     "tilt": 3,
+     "crane": 2,
+     "shake": 2,
+     "slow": 2,
+     "pan": 1,
+     "fly-through": 1
+    },
+    "easing": {
+     "linear": 28,
+     "ease-in-out": 18,
+     "ease-out": 11,
+     "ease-in": 11,
+     "snap": 5,
+     "[uncertain]": 1
+    },
+    "dur_f": {
+     "n": 74,
+     "min": 1,
+     "p10": 8,
+     "p25": 13,
+     "median": 23.0,
+     "p75": 31,
+     "p90": 46,
+     "max": 73,
+     "mean": 25.0
+    },
+    "scale_in": {
+     "n": 47,
+     "min": 1.01,
+     "p10": 1.02,
+     "p25": 1.04,
+     "median": 1.11,
+     "p75": 1.45,
+     "p90": 1.77,
+     "max": 3.21,
+     "mean": 1.33
+    },
+    "scale_out": {
+     "n": 26,
+     "min": 0.36,
+     "p10": 0.55,
+     "p25": 0.67,
+     "median": 0.84,
+     "p75": 0.92,
+     "p90": 0.96,
+     "max": 0.97,
+     "mean": 0.77
+    },
+    "follows": 33
+   },
+   "hold_share_per_shot_A": {
+    "n": 15,
+    "min": 0.0,
+    "p10": 0.0,
+    "p25": 0.0,
+    "median": 0.043,
+    "p75": 0.209,
+    "p90": 0.284,
+    "max": 0.298,
+    "mean": 0.087
+   },
+   "parallax_A": {
+    "n": 1,
+    "min": 2.1,
+    "p10": 2.1,
+    "p25": 2.1,
+    "median": 2.1,
+    "p75": 2.1,
+    "p90": 2.1,
+    "max": 2.1,
+    "mean": 2.1
+   },
+   "characters_n": 28,
+   "actions_n": 64,
+   "action_classes": {
+    "hold": 9,
+    "other": 9,
+    "walk": 8,
+    "turn": 5,
+    "stand-up": 4,
+    "recoil": 3,
+    "lift": 3,
+    "reach/grab": 3,
+    "react": 3,
+    "other: crank brace drill": 2,
+    "talk-gesture": 2,
+    "strike/hit": 2,
+    "emote": 2,
+    "climb": 2,
+    "ride": 1
+   },
+   "motion_types": {
+    "cycle": 10,
+    "none": 16,
+    "snap": 17,
+    "tween": 18,
+    "redraw": 3
+   },
+   "holds": {
+    "n": 40,
+    "min": 4,
+    "p10": 8,
+    "p25": 16,
+    "median": 24.0,
+    "p75": 38,
+    "p90": 65,
+    "max": 94,
+    "mean": 31.0
+   },
+   "hold_share_of_video": 0.616,
+   "faces_n": 116,
+   "face_swaps_per_s": 1.74,
+   "blinks_n": 4,
+   "lipsync": {
+    "runs": 4,
+    "frames_per_shape": {
+     "n": 4,
+     "min": 1.6,
+     "p10": 1.6,
+     "p25": 2.0,
+     "median": 3.0,
+     "p75": 4,
+     "p90": 4,
+     "max": 4,
+     "mean": 2.9
+    },
+    "share": 0.115
+   },
+   "assets_n": 64,
+   "asset_classes": {
+    "particle burst": 11,
+    "stream": 9,
+    "rigid translate": 8,
+    "fall": 8,
+    "float": 7,
+    "scale pop": 5,
+    "loop cycle": 4,
+    "rigid rotate": 3,
+    "cloth flap": 3,
+    "crowd cycle": 1,
+    "drive": 1,
+    "swing": 1
+   },
+   "asset_flags": {
+    "overshoot": 0,
+    "bounce": 0,
+    "blur": 11,
+    "on_twos": 1,
+    "squash": 0
+   },
+   "falls": [
+    {
+     "object": "helmet knocked off",
+     "n": 8,
+     "g_screen_h_per_s2": 4.58,
+     "r2": 0.8647,
+     "start": 779
+    },
+    {
+     "object": "flying helmet (knocked off by the slap a",
+     "n": 7,
+     "g_screen_h_per_s2": 0.56,
+     "r2": 0.9886,
+     "start": 803
+    },
+    {
+     "object": "single raindrop onto the commander's for",
+     "n": 6,
+     "g_screen_h_per_s2": 6.26,
+     "r2": 0.9986,
+     "start": 878
+    },
+    {
+     "object": "arrow drops back into slot",
+     "n": 6,
+     "g_screen_h_per_s2": 16.81,
+     "r2": 0.9944,
+     "start": 1717
+    }
+   ],
+   "caption": {
+    "n": 191,
+    "dwell_f": {
+     "n": 191,
+     "min": 2,
+     "p10": 4,
+     "p25": 7,
+     "median": 10,
+     "p75": 13,
+     "p90": 17,
+     "max": 26,
+     "mean": 11.0
+    },
+    "per_s": 2.86,
+    "words": {
+     "n": 191,
+     "min": 1,
+     "p10": 1,
+     "p25": 1,
+     "median": 1,
+     "p75": 1,
+     "p90": 2,
+     "max": 8,
+     "mean": 1.0
+    }
+   },
+   "caption_offset_f": {
+    "n": 190,
+    "min": -5.0,
+    "p10": -3.0,
+    "p25": -2.0,
+    "median": -1.0,
+    "p75": 0.0,
+    "p90": 0.0,
+    "max": 2.0,
+    "mean": -1.4
+   },
+   "caption_offset_share_within": {
+    "pm2": 0.774,
+    "early_or_on": 0.921
+   },
+   "sound_events_per_s": 1.35
+  },
+  "24_aD73kaL_PtY": {
+   "frames": 1783,
+   "joins": {
+    "n": 19,
+    "kinds": {
+     "dissolve": 2,
+     "match dissolve": 2,
+     "hard cut": 13,
+     "iris": 1,
+     "FG wipe": 1
+    },
+    "verified": true
+   },
+   "dissolve_len_fit_ok": {
+    "n": 3,
+    "min": 4,
+    "p10": 4,
+    "p25": 6,
+    "median": 6,
+    "p75": 7,
+    "p90": 7,
+    "max": 7,
+    "mean": 5.7
+   },
+   "dissolve_len_fit_list": [
+    7,
+    6,
+    4
+   ],
+   "dissolve_len_eye_A": {
+    "n": 4,
+    "min": 4,
+    "p10": 4,
+    "p25": 6,
+    "median": 6.0,
+    "p75": 6,
+    "p90": 9,
+    "max": 9,
+    "mean": 6.2
+   },
+   "shot_len_s": {
+    "n": 20,
+    "min": 0.37,
+    "p10": 0.97,
+    "p25": 1.77,
+    "median": 2.72,
+    "p75": 3.47,
+    "p90": 4.67,
+    "max": 9.47,
+    "mean": 2.97
+   },
+   "shot_len_list": [
+    9.47,
+    2.67,
+    5.17,
+    4.67,
+    0.93,
+    1.5,
+    2.77,
+    1.5,
+    2.6,
+    4.37,
+    1.77,
+    2.8,
+    3.23,
+    2.2,
+    3.47,
+    2.63,
+    2.87,
+    3.5,
+    0.37,
+    0.97
+   ],
+   "first_shot_s": 9.47,
+   "last_shot_s": 0.97,
+   "share_lt2": 0.3,
+   "share_gt4": 0.2,
+   "pacing": {
+    "shots": {
+     "n": 20,
+     "asl": 2.972,
+     "median": 2.725,
+     "mode_0p5s_bin": 3.0,
+     "min": 0.367,
+     "max": 9.467,
+     "p10": 0.964,
+     "p90": 4.715,
+     "share_lt1": 0.15,
+     "share_lt2": 0.3,
+     "share_gt4": 0.2,
+     "shots_per_min": 20.19
+    },
+    "narration": {
+     "words": 219,
+     "words_per_s": 3.7,
+     "sentences": 14,
+     "end_after_last_word_start_s": 0.733,
+     "join_mid_within_3f_of_word_onset": 0.895,
+     "join_start_within_6f_of_phrase_onset": 0.579,
+     "cuts_per_sentence": 1.36
+    },
+    "captions": {
+     "swaps": 184,
+     "swaps_per_s": 3.1,
+     "dwell_s": {
+      "mean": 0.319,
+      "median": 0.3,
+      "p10": 0.133,
+      "p90": 0.533,
+      "max": 1.3
+     },
+     "caption_on_share": 1.0
+    },
+    "sections": {
+     "hook_0-3s": {
+      "window_s": [
+       0,
+       3.0
+      ],
+      "joins": 0,
+      "cuts_per_min": 0.0,
+      "seconds_per_cut": null,
+      "shots_starting_here": {
+       "n": 1,
+       "asl": 9.467,
+       "median": 9.467,
+       "mode_0p5s_bin": 9.5,
+       "min": 9.467,
+       "max": 9.467,
+       "p10": 9.467,
+       "p90": 9.467,
+       "share_lt1": 0.0,
+       "share_lt2": 0.0,
+       "share_gt4": 1.0
+      },
+      "shots_overlapping": 1,
+      "mean_visible_shot_time": 3.0
+     },
+     "3-15s": {
+      "window_s": [
+       3.0,
+       15.0
+      ],
+      "joins": 2,
+      "cuts_per_min": 10.0,
+      "seconds_per_cut": 6.0,
+      "shots_starting_here": {
+       "n": 2,
+       "asl": 3.917,
+       "median": 3.917,
+       "mode_0p5s_bin": 2.5,
+       "min": 2.683,
+       "max": 5.15,
+       "p10": 2.93,
+       "p90": 4.903,
+       "share_lt1": 0.0,
+       "share_lt2": 0.0,
+       "share_gt4": 0.5
+      },
+      "shots_overlapping": 3,
+      "mean_visible_shot_time": 4.0
+     },
+     "body": {
+      "window_s": [
+       15.0,
+       54.6
+      ],
+      "joins": 14,
+      "cuts_per_min": 21.21,
+      "seconds_per_cut": 2.829,
+      "shots_starting_here": {
+       "n": 14,
+       "asl": 2.664,
+       "median": 2.7,
+       "mode_0p5s_bin": 3.0,
+       "min": 0.933,
+       "max": 4.667,
+       "p10": 1.5,
+       "p90": 4.097,
+       "share_lt1": 0.071,
+       "share_lt2": 0.286,
+       "share_gt4": 0.143
+      },
+      "shots_overlapping": 15,
+      "mean_visible_shot_time": 2.64
+     },
+     "payoff": {
+      "window_s": [
+       54.6,
+       59.15
+      ],
+      "joins": 3,
+      "cuts_per_min": 39.56,
+      "seconds_per_cut": 1.517,
+      "shots_starting_here": {
+       "n": 3,
+       "asl": 1.611,
+       "median": 0.967,
+       "mode_0p5s_bin": 0.5,
+       "min": 0.367,
+       "max": 3.5,
+       "p10": 0.487,
+       "p90": 2.993,
+       "share_lt1": 0.667,
+       "share_lt2": 0.667,
+       "share_gt4": 0.0
+      },
+      "shots_overlapping": 3,
+      "mean_visible_shot_time": 1.517
+     },
+     "outro": {
+      "window_s": [
+       59.15,
+       59.43
+      ],
+      "joins": 0,
+      "cuts_per_min": 0.0,
+      "seconds_per_cut": null,
+      "shots_starting_here": null,
+      "shots_overlapping": 1,
+      "mean_visible_shot_time": 0.283
+     }
+    },
+    "visual": {
+     "changes_per_min_no_captions": 214.0,
+     "still_frame_share": 0.006,
+     "longest_still_run_f": 7
+    }
+   },
+   "audio_nonvocal": {
+    "mix": {
+     "I_LUFS": -14.0,
+     "LRA_LU": 2.5,
+     "true_peak_dBTP": -2.1
+    },
+    "vo": -14.38,
+    "music": -27.61,
+    "gap": {
+     "mean": 14.44,
+     "median": 13.74,
+     "min": 9.75,
+     "max": 19.39,
+     "std": 3.02
+    },
+    "stability": {
+     "std_dB": 3.17,
+     "range_dB": 10.87,
+     "max_step_per_0p5s_dB": 5.09
+    },
+    "duck": 0.09,
+    "tempo": 117.5,
+    "key": "D minor",
+    "key_score": 0.738,
+    "key_conf": "ok"
+   },
+   "audio_musiconly": {
+    "mix": {
+     "I_LUFS": -14.0,
+     "LRA_LU": 2.5,
+     "true_peak_dBTP": -2.1
+    },
+    "vo": -14.38,
+    "music": -27.61,
+    "gap": {
+     "mean": 14.44,
+     "median": 13.74,
+     "min": 9.75,
+     "max": 19.39,
+     "std": 3.02
+    },
+    "stability": {
+     "std_dB": 3.17,
+     "range_dB": 10.87,
+     "max_step_per_0p5s_dB": 5.09
+    },
+    "duck": 0.09,
+    "tempo": 117.5,
+    "key": "D minor",
+    "key_score": 0.738,
+    "key_conf": "ok"
+   },
+   "camA": {
+    "moving_share": 0.895,
+    "n_moves": 34
+   },
+   "camB": {
+    "moving_share": 0.847,
+    "n_moves": 33
+   },
+   "cam_agreement": {
+    "rate": 68.8,
+    "per_field": {
+     "hold_share": [
+      12,
+      20
+     ],
+     "n_moves": [
+      14,
+      20
+     ],
+     "start": [
+      29,
+      30
+     ],
+     "end": [
+      26,
+      30
+     ],
+     "type": [
+      23,
+      30
+     ],
+     "scale": [
+      9,
+      30
+     ],
+     "pan": [
+      19,
+      30
+     ],
+     "tilt": [
+      13,
+      30
+     ],
+     "ease": [
+      27,
+      30
+     ]
+    }
+   },
+   "cam_moves_A": {
+    "n": 78,
+    "types": {
+     "push-in": 23,
+     "shake": 17,
+     "compound:": 6,
+     "pan": 6,
+     "tilt": 5,
+     "drift": 5,
+     "pull-out": 4,
+     "object-follow": 4,
+     "orbit": 3,
+     "crane": 3,
+     "truck": 2
+    },
+    "easing": {
+     "linear": 23,
+     "ease-out": 17,
+     "snap": 17,
+     "ease-in-out": 16,
+     "ease-in": 4,
+     "[uncertain]": 1
+    },
+    "dur_f": {
+     "n": 78,
+     "min": 2,
+     "p10": 5,
+     "p25": 9,
+     "median": 18.0,
+     "p75": 28,
+     "p90": 40,
+     "max": 78,
+     "mean": 21.0
+    },
+    "scale_in": {
+     "n": 54,
+     "min": 1.0,
+     "p10": 1.01,
+     "p25": 1.02,
+     "median": 1.05,
+     "p75": 1.22,
+     "p90": 1.94,
+     "max": 4.98,
+     "mean": 1.36
+    },
+    "scale_out": {
+     "n": 18,
+     "min": 0.08,
+     "p10": 0.27,
+     "p25": 0.44,
+     "median": 0.7,
+     "p75": 0.99,
+     "p90": 0.99,
+     "max": 0.99,
+     "mean": 0.68
+    },
+    "follows": 42
+   },
+   "hold_share_per_shot_A": {
+    "n": 16,
+    "min": 0.0,
+    "p10": 0.0,
+    "p25": 0.014,
+    "median": 0.058,
+    "p75": 0.16,
+    "p90": 0.43,
+    "max": 0.484,
+    "mean": 0.134
+   },
+   "parallax_A": {
+    "n": 4,
+    "min": 0.82,
+    "p10": 0.82,
+    "p25": 2.4,
+    "median": 2.45,
+    "p75": 2.5,
+    "p90": 4.5,
+    "max": 4.5,
+    "mean": 2.56
+   },
+   "characters_n": 14,
+   "actions_n": 39,
+   "action_classes": {
+    "other": 9,
+    "react": 5,
+    "turn": 5,
+    "reach/grab": 3,
+    "fall": 2,
+    "stand-up": 2,
+    "jump": 2,
+    "catch": 2,
+    "walk": 2,
+    "pull": 1,
+    "point": 1,
+    "sit": 1,
+    "hold": 1,
+    "throw": 1,
+    "strike/hit": 1
+   },
+   "motion_types": {
+    "redraw": 7,
+    "snap": 21,
+    "tween": 8,
+    "none": 1,
+    "cycle": 2
+   },
+   "holds": {
+    "n": 40,
+    "min": 6,
+    "p10": 9,
+    "p25": 11,
+    "median": 23.0,
+    "p75": 43,
+    "p90": 79,
+    "max": 122,
+    "mean": 32.0
+   },
+   "hold_share_of_video": 0.723,
+   "faces_n": 81,
+   "face_swaps_per_s": 1.36,
+   "blinks_n": 4,
+   "lipsync": {
+    "runs": 0,
+    "frames_per_shape": null,
+    "share": 0.0
+   },
+   "assets_n": 98,
+   "asset_classes": {
+    "particle burst": 17,
+    "drive": 14,
+    "rigid rotate": 11,
+    "fall": 7,
+    "swing": 7,
+    "stream": 7,
+    "other": 6,
+    "float": 5,
+    "loop cycle": 5,
+    "wobble": 4,
+    "scale pop": 4,
+    "roll": 3
+   },
+   "asset_flags": {
+    "overshoot": 8,
+    "bounce": 8,
+    "blur": 16,
+    "on_twos": 0,
+    "squash": 0
+   },
+   "falls": [
+    {
+     "object": "full-grown tree dropping from the sky",
+     "n": 7,
+     "g_screen_h_per_s2": 9.48,
+     "r2": 0.999,
+     "start": 17
+    },
+    {
+     "object": "DON'T placard on rope",
+     "n": 11,
+     "g_screen_h_per_s2": -5.03,
+     "r2": 0.999,
+     "start": 423
+    },
+    {
+     "object": "cash bundle (tracked)",
+     "n": 6,
+     "g_screen_h_per_s2": 5.86,
+     "r2": 0.9951,
+     "start": 606
+    },
+    {
+     "object": "lawn chair tip-over with tow guy",
+     "n": 7,
+     "g_screen_h_per_s2": 1.41,
+     "r2": 0.9157,
+     "start": 1047
+    },
+    {
+     "object": "cruiser topple back",
+     "n": 5,
+     "g_screen_h_per_s2": 23.3,
+     "r2": 0.9926,
+     "start": 1254
+    },
+    {
+     "object": "SUV rear pitch rise/drop/bounce (tail-li",
+     "n": 6,
+     "g_screen_h_per_s2": 6.4,
+     "r2": 0.9961,
+     "start": 1758
+    }
+   ],
+   "caption": {
+    "n": 182,
+    "dwell_f": {
+     "n": 182,
+     "min": 3,
+     "p10": 4,
+     "p25": 6,
+     "median": 9.0,
+     "p75": 12,
+     "p90": 16,
+     "max": 24,
+     "mean": 10.0
+    },
+    "per_s": 3.06,
+    "words": {
+     "n": 182,
+     "min": 1,
+     "p10": 1,
+     "p25": 1,
+     "median": 1.0,
+     "p75": 1,
+     "p90": 2,
+     "max": 3,
+     "mean": 1.0
+    }
+   },
+   "caption_offset_f": {
+    "n": 181,
+    "min": -5.0,
+    "p10": -3.0,
+    "p25": -2.0,
+    "median": -1.0,
+    "p75": 0.0,
+    "p90": 0.0,
+    "max": 1.0,
+    "mean": -1.3
+   },
+   "caption_offset_share_within": {
+    "pm2": 0.807,
+    "early_or_on": 0.956
+   },
+   "sound_events_per_s": 1.92
+  }
+ },
+ "all": {
+  "dissolve_len_fit_ok": {
+   "n": 90,
+   "min": 3,
+   "p10": 5,
+   "p25": 6,
+   "median": 8.0,
+   "p75": 10,
+   "p90": 11,
+   "max": 14,
+   "mean": 8.06
+  },
+  "dissolve_len_eye_A": {
+   "n": 102,
+   "min": 4,
+   "p10": 5,
+   "p25": 6,
+   "median": 8.0,
+   "p75": 10,
+   "p90": 11,
+   "max": 16,
+   "mean": 8.16
+  },
+  "shot_len_s": {
+   "n": 129,
+   "min": 0.37,
+   "p10": 1.33,
+   "p25": 1.83,
+   "median": 2.83,
+   "p75": 4.23,
+   "p90": 6.8,
+   "max": 14.73,
+   "mean": 3.42
+  },
+  "cam_move_dur_f": {
+   "n": 416,
+   "min": 1,
+   "p10": 9,
+   "p25": 14,
+   "median": 24.0,
+   "p75": 38,
+   "p90": 55,
+   "max": 91,
+   "mean": 28.59
+  },
+  "cam_scale_in": {
+   "n": 257,
+   "min": 1.0,
+   "p10": 1.01,
+   "p25": 1.04,
+   "median": 1.15,
+   "p75": 1.55,
+   "p90": 2.39,
+   "max": 8.11,
+   "mean": 1.57
+  },
+  "cam_ease": {
+   "n": 416,
+   "top": [
+    [
+     "linear",
+     120
+    ],
+    [
+     "ease-in-out",
+     119
+    ],
+    [
+     "ease-out",
+     92
+    ],
+    [
+     "ease-in",
+     47
+    ],
+    [
+     "snap",
+     26
+    ],
+    [
+     "n/a",
+     7
+    ],
+    [
+     "[uncertain]",
+     5
+    ]
+   ]
+  },
+  "cam_follow": {
+   "n": 416,
+   "true": 201,
+   "share": 0.483
+  },
+  "cam_scale_out": {
+   "n": 133,
+   "min": 0.08,
+   "p10": 0.31,
+   "p25": 0.52,
+   "median": 0.79,
+   "p75": 0.96,
+   "p90": 0.98,
+   "max": 1.0,
+   "mean": 0.72
+  },
+  "hold_share_A": {
+   "n": 98,
+   "min": 0.0,
+   "p10": 0.0,
+   "p25": 0.0,
+   "median": 0.03,
+   "p75": 0.12,
+   "p90": 0.24,
+   "max": 0.8,
+   "mean": 0.09
+  },
+  "parallax": {
+   "n": 31,
+   "min": -2.6,
+   "p10": 1.0,
+   "p25": 1.87,
+   "median": 2.5,
+   "p75": 4.0,
+   "p90": 4.9,
+   "max": 20,
+   "mean": 3.07
+  },
+  "B.head_aspect": {
+   "n": 109,
+   "min": 0.45,
+   "p10": 0.63,
+   "p25": 0.68,
+   "median": 0.75,
+   "p75": 0.82,
+   "p90": 0.96,
+   "max": 1.39,
+   "mean": 0.77
+  },
+  "A.torso_h_H": {
+   "n": 78,
+   "min": 0.7,
+   "p10": 0.87,
+   "p25": 0.92,
+   "median": 1.0,
+   "p75": 1.18,
+   "p90": 1.79,
+   "max": 2.28,
+   "mean": 1.13
+  },
+  "B.torso_h_H": {
+   "n": 76,
+   "min": 0.61,
+   "p10": 0.88,
+   "p25": 0.96,
+   "median": 1.0,
+   "p75": 1.49,
+   "p90": 1.96,
+   "max": 2.31,
+   "mean": 1.21
+  },
+  "A.torso_w_H": {
+   "n": 73,
+   "min": 0.56,
+   "p10": 0.64,
+   "p25": 0.69,
+   "median": 0.77,
+   "p75": 0.91,
+   "p90": 1.0,
+   "max": 1.76,
+   "mean": 0.82
+  },
+  "B.torso_w_H": {
+   "n": 71,
+   "min": 0.63,
+   "p10": 0.7,
+   "p25": 0.78,
+   "median": 0.89,
+   "p75": 1.02,
+   "p90": 1.19,
+   "max": 2.0,
+   "mean": 0.93
+  },
+  "A.leg_len_H": {
+   "n": 53,
+   "min": 0.19,
+   "p10": 0.75,
+   "p25": 0.94,
+   "median": 1.28,
+   "p75": 1.36,
+   "p90": 1.43,
+   "max": 1.54,
+   "mean": 1.14
+  },
+  "B.leg_len_H": {
+   "n": 35,
+   "min": 0.13,
+   "p10": 0.29,
+   "p25": 1.1,
+   "median": 1.25,
+   "p75": 1.41,
+   "p90": 1.78,
+   "max": 2.3,
+   "mean": 1.19
+  },
+  "A.total_h_H": {
+   "n": 52,
+   "min": 2.2,
+   "p10": 2.8,
+   "p25": 3.0,
+   "median": 3.22,
+   "p75": 3.36,
+   "p90": 3.47,
+   "max": 3.65,
+   "mean": 3.16
+  },
+  "B.total_h_H": {
+   "n": 15,
+   "min": 1.9,
+   "p10": 3.1,
+   "p25": 3.14,
+   "median": 3.34,
+   "p75": 3.42,
+   "p90": 3.53,
+   "max": 3.72,
+   "mean": 3.23
+  },
+  "A.hand_pct_H": {
+   "n": 46,
+   "min": 7,
+   "p10": 9,
+   "p25": 10,
+   "median": 12.0,
+   "p75": 13,
+   "p90": 14,
+   "max": 20,
+   "mean": 11.87
+  },
+  "A.eye_size_pct_H": {
+   "n": 56,
+   "min": 2.7,
+   "p10": 6,
+   "p25": 9,
+   "median": 12.0,
+   "p75": 15,
+   "p90": 23,
+   "max": 40,
+   "mean": 13.1
+  },
+  "B.eye_size_pct_H": {
+   "n": 70,
+   "min": 4.3,
+   "p10": 7.8,
+   "p25": 10,
+   "median": 12.95,
+   "p75": 15,
+   "p90": 24,
+   "max": 38,
+   "mean": 13.36
+  },
+  "A.eye_spacing_pct_H": {
+   "n": 58,
+   "min": 19,
+   "p10": 21,
+   "p25": 23.7,
+   "median": 27.0,
+   "p75": 29.5,
+   "p90": 32,
+   "max": 38,
+   "mean": 26.84
+  },
+  "B.eye_spacing_pct_H": {
+   "n": 70,
+   "min": 20.1,
+   "p10": 23,
+   "p25": 25,
+   "median": 27.25,
+   "p75": 28.3,
+   "p90": 30,
+   "max": 41,
+   "mean": 27.16
+  },
+  "A.H_pct_W": {
+   "n": 131,
+   "min": 1.67,
+   "p10": 8.98,
+   "p25": 13.43,
+   "median": 21.67,
+   "p75": 29.17,
+   "p90": 33.61,
+   "max": 68.33,
+   "mean": 21.98
+  },
+  "A.limb_pct_H": {
+   "n": 53,
+   "min": 2.71,
+   "p10": 4.22,
+   "p25": 4.87,
+   "median": 5.91,
+   "p75": 6.78,
+   "p90": 7.72,
+   "max": 10.13,
+   "mean": 5.9
+  },
+  "A.outline_pct_H": {
+   "n": 84,
+   "min": 0.59,
+   "p10": 2.08,
+   "p25": 2.56,
+   "median": 3.67,
+   "p75": 5.18,
+   "p90": 6.29,
+   "max": 8.13,
+   "mean": 4.0
+  },
+  "B.limb_pct_H": {
+   "n": 38,
+   "min": 3.08,
+   "p10": 4.12,
+   "p25": 4.67,
+   "median": 5.01,
+   "p75": 6.15,
+   "p90": 6.61,
+   "max": 19.15,
+   "mean": 5.6
+  },
+  "B.outline_pct_H": {
+   "n": 93,
+   "min": 1.79,
+   "p10": 2.09,
+   "p25": 2.42,
+   "median": 3.08,
+   "p75": 4.33,
+   "p90": 6.08,
+   "max": 13.77,
+   "mean": 3.72
+  },
+  "B.outline_shaded_pct_H": {
+   "n": 54,
+   "min": 2.58,
+   "p10": 3.99,
+   "p25": 5.05,
+   "median": 6.12,
+   "p75": 7.27,
+   "p90": 8.12,
+   "max": 11.22,
+   "mean": 6.2
+  },
+  "A.arm_class": {
+   "n": 149,
+   "top": [
+    [
+     "curved noodle",
+     85
+    ],
+    [
+     "hidden",
+     36
+    ],
+    [
+     "jointed 2-segment",
+     17
+    ],
+    [
+     "rigid card",
+     8
+    ],
+    [
+     "curved noodle [uncertain]",
+     1
+    ],
+    [
+     "n/a",
+     1
+    ],
+    [
+     "[uncertain]",
+     1
+    ]
+   ]
+  },
+  "A.leg_class": {
+   "n": 149,
+   "top": [
+    [
+     "rigid card",
+     55
+    ],
+    [
+     "hidden",
+     46
+    ],
+    [
+     "curved noodle",
+     33
+    ],
+    [
+     "jointed 2-segment",
+     15
+    ]
+   ]
+  },
+  "A.fingers": {
+   "n": 149,
+   "true": 2,
+   "share": 0.013
+  },
+  "A.shading": {
+   "n": 149,
+   "top": [
+    [
+     "flat",
+     32
+    ],
+    [
+     "flat fill, no cel band; takes ",
+     2
+    ],
+    [
+     "flat fill + drawn scale-mail t",
+     2
+    ],
+    [
+     "flat fill, no cel band; variab",
+     1
+    ],
+    [
+     "flat; plaid texture on shirt",
+     1
+    ],
+    [
+     "flat fill; outline 3-7 px uppe",
+     1
+    ],
+    [
+     "flat fill + flat cel shadow ba",
+     1
+    ],
+    [
+     "flat + cel band; gloss on cap ",
+     1
+    ],
+    [
+     "flat; hat gloss highlight",
+     1
+    ],
+    [
+     "flat head; 3d-shaded hat; flat",
+     1
+    ]
+   ]
+  },
+  "A.hex_head": {
+   "n": 145,
+   "top": [
+    [
+     "#fbf7f4",
+     7
+    ],
+    [
+     "#ffffff",
+     7
+    ],
+    [
+     "#f5f5f5",
+     6
+    ],
+    [
+     "#fcf8f9",
+     4
+    ],
+    [
+     "#f8f6f4",
+     4
+    ],
+    [
+     "#fcf7f5",
+     3
+    ],
+    [
+     "#fcf8f5",
+     3
+    ],
+    [
+     "#fffdff",
+     3
+    ],
+    [
+     "#fffdfb",
+     3
+    ],
+    [
+     "#fffcff",
+     3
+    ]
+   ]
+  },
+  "A.hex_outline": {
+   "n": 134,
+   "top": [
+    [
+     "#241617",
+     5
+    ],
+    [
+     "#1f1c24",
+     5
+    ],
+    [
+     "#3c2833",
+     3
+    ],
+    [
+     "#3a2a2a",
+     3
+    ],
+    [
+     "#3a2933",
+     3
+    ],
+    [
+     "#271125",
+     3
+    ],
+    [
+     "#222222",
+     3
+    ],
+    [
+     "#1c0000",
+     2
+    ],
+    [
+     "#2b1311",
+     2
+    ],
+    [
+     "#42393c",
+     2
+    ]
+   ]
+  },
+  "A.foot_pct_H": {
+   "n": 24,
+   "min": 5,
+   "p10": 8,
+   "p25": 12,
+   "median": 15.5,
+   "p75": 20,
+   "p90": 24,
+   "max": 26,
+   "mean": 15.79
+  },
+  "A.head_aspect": {
+   "n": 75,
+   "min": 0.58,
+   "p10": 0.7,
+   "p25": 0.79,
+   "median": 0.92,
+   "p75": 0.98,
+   "p90": 1.0,
+   "max": 1.07,
+   "mean": 0.88
+  },
+  "B.foot_pct_H": {
+   "n": 5,
+   "min": 23,
+   "p10": 23,
+   "p25": 24,
+   "median": 24,
+   "p75": 30,
+   "p90": 31,
+   "max": 31,
+   "mean": 26.4
+  },
+  "act.anticipation_f.tween": {
+   "n": 108,
+   "min": 0,
+   "p10": 0,
+   "p25": 0,
+   "median": 0.0,
+   "p75": 0,
+   "p90": 0,
+   "max": 16,
+   "mean": 0.24
+  },
+  "act.travel_f.tween": {
+   "n": 108,
+   "min": 0,
+   "p10": 3,
+   "p25": 5,
+   "median": 7.0,
+   "p75": 11,
+   "p90": 21,
+   "max": 50,
+   "mean": 10.38
+  },
+  "act.overshoot_f.tween": {
+   "n": 108,
+   "min": 0,
+   "p10": 0,
+   "p25": 0,
+   "median": 0.0,
+   "p75": 0,
+   "p90": 0,
+   "max": 1,
+   "mean": 0.06
+  },
+  "act.settle_f.tween": {
+   "n": 108,
+   "min": 0,
+   "p10": 0,
+   "p25": 0,
+   "median": 0.0,
+   "p75": 0,
+   "p90": 1,
+   "max": 6,
+   "mean": 0.39
+  },
+  "act.anticipation_f.snap": {
+   "n": 125,
+   "min": 0,
+   "p10": 0,
+   "p25": 0,
+   "median": 0,
+   "p75": 0,
+   "p90": 0,
+   "max": 9,
+   "mean": 0.28
+  },
+  "act.travel_f.snap": {
+   "n": 125,
+   "min": 0,
+   "p10": 1,
+   "p25": 1,
+   "median": 2,
+   "p75": 3,
+   "p90": 4,
+   "max": 6,
+   "mean": 2.09
+  },
+  "act.overshoot_f.snap": {
+   "n": 125,
+   "min": 0,
+   "p10": 0,
+   "p25": 0,
+   "median": 0,
+   "p75": 0,
+   "p90": 0,
+   "max": 1,
+   "mean": 0.01
+  },
+  "act.settle_f.snap": {
+   "n": 125,
+   "min": 0,
+   "p10": 0,
+   "p25": 0,
+   "median": 0,
+   "p75": 0,
+   "p90": 1,
+   "max": 4,
+   "mean": 0.22
+  },
+  "act.elbow_deg": {
+   "n": 51,
+   "min": 45,
+   "p10": 60,
+   "p25": 90,
+   "median": 120,
+   "p75": 170,
+   "p90": 180,
+   "max": 180,
+   "mean": 125.96
+  },
+  "act.torso_tilt_deg": {
+   "n": 106,
+   "min": -15,
+   "p10": 0,
+   "p25": 0,
+   "median": 5.0,
+   "p75": 15,
+   "p90": 35,
+   "max": 90,
+   "mean": 11.57
+  },
+  "act.anticipation_f.other": {
+   "n": 114,
+   "min": 0,
+   "p10": 0,
+   "p25": 0,
+   "median": 0.0,
+   "p75": 0,
+   "p90": 0,
+   "max": 7,
+   "mean": 0.16
+  },
+  "act.travel_f.other": {
+   "n": 114,
+   "min": 0,
+   "p10": 0,
+   "p25": 0,
+   "median": 4.0,
+   "p75": 15,
+   "p90": 34,
+   "max": 134,
+   "mean": 12.1
+  },
+  "act.overshoot_f.other": {
+   "n": 114,
+   "min": 0,
+   "p10": 0,
+   "p25": 0,
+   "median": 0.0,
+   "p75": 0,
+   "p90": 0,
+   "max": 2,
+   "mean": 0.05
+  },
+  "act.settle_f.other": {
+   "n": 114,
+   "min": 0,
+   "p10": 0,
+   "p25": 0,
+   "median": 0.0,
+   "p75": 0,
+   "p90": 0,
+   "max": 4,
+   "mean": 0.16
+  },
+  "act.knee_deg": {
+   "n": 22,
+   "min": 45,
+   "p10": 90,
+   "p25": 120,
+   "median": 140.0,
+   "p75": 150,
+   "p90": 180,
+   "max": 180,
+   "mean": 133.68
+  },
+  "act.cadence_f": {
+   "n": 23,
+   "min": 3.3,
+   "p10": 4,
+   "p25": 5,
+   "median": 7.5,
+   "p75": 13,
+   "p90": 16,
+   "max": 27,
+   "mean": 9.24
+  },
+  "act.poses_per_step": {
+   "n": 9,
+   "min": 1,
+   "p10": 2,
+   "p25": 2,
+   "median": 3,
+   "p75": 4,
+   "p90": 6,
+   "max": 11,
+   "mean": 3.78
+  },
+  "act.bob_pct_H": {
+   "n": 7,
+   "min": 0,
+   "p10": 0,
+   "p25": 2,
+   "median": 3,
+   "p75": 21,
+   "p90": 21,
+   "max": 35,
+   "mean": 10.14
+  },
+  "hold_len_f": {
+   "n": 285,
+   "min": 4,
+   "p10": 9,
+   "p25": 14,
+   "median": 24,
+   "p75": 42,
+   "p90": 64,
+   "max": 171,
+   "mean": 32.38
+  },
+  "faces_per_s": {
+   "n": 7,
+   "min": 1.36,
+   "p10": 1.64,
+   "p25": 1.74,
+   "median": 2.09,
+   "p75": 2.25,
+   "p90": 2.25,
+   "max": 2.5,
+   "mean": 1.97
+  },
+  "lip_fps": {
+   "n": 26,
+   "min": 1.5,
+   "p10": 1.8,
+   "p25": 2.0,
+   "median": 2.25,
+   "p75": 2.5,
+   "p90": 3.5,
+   "max": 4,
+   "mean": 2.4
+  },
+  "asset.overshoot": {
+   "n": 414,
+   "true": 12,
+   "share": 0.029
+  },
+  "asset.blur": {
+   "n": 414,
+   "true": 54,
+   "share": 0.13
+  },
+  "asset.on_twos": {
+   "n": 414,
+   "true": 3,
+   "share": 0.007
+  },
+  "asset.bounce": {
+   "n": 414,
+   "true": 10,
+   "share": 0.024
+  },
+  "asset.squash": {
+   "n": 414,
+   "true": 0,
+   "share": 0.0
+  },
+  "fall_g": {
+   "n": 24,
+   "min": 0.56,
+   "p10": 0.63,
+   "p25": 3.52,
+   "median": 4.88,
+   "p75": 8.79,
+   "p90": 16.81,
+   "max": 57.46,
+   "mean": 8.38
+  },
+  "cap_dwell_f": {
+   "n": 1278,
+   "min": 1,
+   "p10": 4,
+   "p25": 7,
+   "median": 10.0,
+   "p75": 13,
+   "p90": 16,
+   "max": 30,
+   "mean": 10.35
+  },
+  "cap_words": {
+   "n": 1278,
+   "min": 1,
+   "p10": 1,
+   "p25": 1,
+   "median": 1.0,
+   "p75": 1,
+   "p90": 2,
+   "max": 8,
+   "mean": 1.26
+  },
+  "cap_offset_f": {
+   "n": 1264,
+   "min": -8.4,
+   "p10": -4.0,
+   "p25": -2.0,
+   "median": -1.0,
+   "p75": 0.0,
+   "p90": 0.8,
+   "max": 2.6,
+   "mean": -1.2
+  },
+  "B.hand_pct_H": {
+   "n": 11,
+   "min": 12,
+   "p10": 12,
+   "p25": 12,
+   "median": 12,
+   "p75": 13,
+   "p90": 13,
+   "max": 15,
+   "mean": 12.45
+  },
+  "asset.loop_f": {
+   "n": 14,
+   "min": 2,
+   "p10": 2,
+   "p25": 8,
+   "median": 13.0,
+   "p75": 15,
+   "p90": 16,
+   "max": 19,
+   "mean": 10.79
+  },
+  "act.stride_H": {
+   "n": 4,
+   "min": 0,
+   "p10": 0,
+   "p25": 0.3,
+   "median": 0.43,
+   "p75": 0.55,
+   "p90": 0.57,
+   "max": 0.57,
+   "mean": 0.35
+  },
+  "act.squash_stretch": {
+   "n": 1,
+   "min": 1.18,
+   "p10": 1.18,
+   "p25": 1.18,
+   "median": 1.18,
+   "p75": 1.18,
+   "p90": 1.18,
+   "max": 1.18,
+   "mean": 1.18
+  }
+ }
+}

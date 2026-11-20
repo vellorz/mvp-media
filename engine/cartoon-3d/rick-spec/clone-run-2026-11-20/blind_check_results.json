@@ -1,0 +1,3032 @@
+{
+ "per_field": {
+  "join_out_kind": {
+   "hit": 62,
+   "n": 65,
+   "rate": 95.4
+  },
+  "n_camera_moves": {
+   "hit": 61,
+   "n": 70,
+   "rate": 87.1
+  },
+  "hold_share": {
+   "hit": 62,
+   "n": 68,
+   "rate": 91.2
+  },
+  "caption_swaps_per_s": {
+   "hit": 57,
+   "n": 70,
+   "rate": 81.4
+  },
+  "caption_max_words": {
+   "hit": 69,
+   "n": 70,
+   "rate": 98.6
+  },
+  "caption_dwell_median_f": {
+   "hit": 65,
+   "n": 70,
+   "rate": 92.9
+  },
+  "dissolve_len_f": {
+   "hit": 46,
+   "n": 53,
+   "rate": 86.8
+  }
+ },
+ "total": {
+  "hit": 422,
+  "n": 466,
+  "rate": 90.6
+ },
+ "rows": [
+  {
+   "video": "03_7xS87iActkU",
+   "idx": 0,
+   "start": 1,
+   "end": 112,
+   "actual": {
+    "join_out_kind": "hard cut",
+    "n_camera_moves": 4,
+    "hold_share": 0.003,
+    "caption_swaps_per_s": 2.41,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 13
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     7,
+     13
+    ],
+    "n_camera_moves": [
+     3,
+     6
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "03_7xS87iActkU",
+   "idx": 1,
+   "start": 113,
+   "end": 352,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 8,
+    "n_camera_moves": 8,
+    "caption_swaps_per_s": 3.0,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 9.0
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     7,
+     13
+    ],
+    "n_camera_moves": [
+     7,
+     10
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "03_7xS87iActkU",
+   "idx": 4,
+   "start": 654,
+   "end": 787,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 7,
+    "n_camera_moves": 8,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 2.91,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 11
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     7,
+     13
+    ],
+    "n_camera_moves": [
+     3,
+     6
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "03_7xS87iActkU",
+   "idx": 5,
+   "start": 788,
+   "end": 855,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 9,
+    "n_camera_moves": 2,
+    "hold_share": 0.092,
+    "caption_swaps_per_s": 2.21,
+    "caption_max_words": 3,
+    "caption_dwell_median_f": 11
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     7,
+     13
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "03_7xS87iActkU",
+   "idx": 6,
+   "start": 856,
+   "end": 937,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 9,
+    "n_camera_moves": 6,
+    "hold_share": 0.176,
+    "caption_swaps_per_s": 2.56,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 9
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     7,
+     13
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "03_7xS87iActkU",
+   "idx": 8,
+   "start": 1084,
+   "end": 1321,
+   "actual": {
+    "join_out_kind": "hard cut",
+    "n_camera_moves": 8,
+    "hold_share": 0.16,
+    "caption_swaps_per_s": 2.65,
+    "caption_max_words": 3,
+    "caption_dwell_median_f": 12
+   },
+   "predicted": {
+    "join_out_kind": "hard cut",
+    "dissolve_len_f": [
+     7,
+     13
+    ],
+    "n_camera_moves": [
+     7,
+     10
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions; x.1 3 hard cuts in #03, f1322 jump cut, x.6 end burst"
+  },
+  {
+   "video": "03_7xS87iActkU",
+   "idx": 9,
+   "start": 1322,
+   "end": 1440,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 12,
+    "n_camera_moves": 3,
+    "hold_share": 0.301,
+    "caption_swaps_per_s": 2.27,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 15
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     7,
+     13
+    ],
+    "n_camera_moves": [
+     3,
+     6
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "03_7xS87iActkU",
+   "idx": 10,
+   "start": 1441,
+   "end": 1634,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 10,
+    "n_camera_moves": 4,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 3.09,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 9.5
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     7,
+     13
+    ],
+    "n_camera_moves": [
+     5,
+     8
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "03_7xS87iActkU",
+   "idx": 13,
+   "start": 1891,
+   "end": 1934,
+   "actual": {
+    "join_out_kind": "hard cut",
+    "n_camera_moves": 2,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 3.41,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 10
+   },
+   "predicted": {
+    "join_out_kind": "hard cut",
+    "dissolve_len_f": [
+     7,
+     13
+    ],
+    "n_camera_moves": [
+     0,
+     3
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions; x.1 3 hard cuts in #03, f1322 jump cut, x.6 end burst"
+  },
+  {
+   "video": "03_7xS87iActkU",
+   "idx": 14,
+   "start": 1935,
+   "end": 1955,
+   "actual": {
+    "n_camera_moves": 1,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 1.43,
+    "caption_max_words": 1,
+    "caption_dwell_median_f": 12
+   },
+   "predicted": {
+    "join_out_kind": "hard cut",
+    "dissolve_len_f": [
+     7,
+     13
+    ],
+    "n_camera_moves": [
+     0,
+     2
+    ],
+    "hold_share": [
+     0.7,
+     1.0
+    ],
+    "caption_swaps_per_s": [
+     1.4,
+     2.9
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions; x.1 3 hard cuts in #03, f1322 jump cut, x.6 end burst; x.2 ending hold 23-86 f"
+  },
+  {
+   "video": "12_0m6G8pDtzNs",
+   "idx": 2,
+   "start": 141,
+   "end": 237,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 7,
+    "n_camera_moves": 3,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 3.71,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 8.5
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "12_0m6G8pDtzNs",
+   "idx": 3,
+   "start": 238,
+   "end": 284,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 6,
+    "n_camera_moves": 1,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 1.91,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 12
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "12_0m6G8pDtzNs",
+   "idx": 8,
+   "start": 578,
+   "end": 603,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 5,
+    "n_camera_moves": 1,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 4.62,
+    "caption_max_words": 1,
+    "caption_dwell_median_f": 9.0
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     0,
+     3
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "12_0m6G8pDtzNs",
+   "idx": 9,
+   "start": 604,
+   "end": 643,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 7,
+    "n_camera_moves": 1,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 1.5,
+    "caption_max_words": 1,
+    "caption_dwell_median_f": 15.5
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     0,
+     3
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "12_0m6G8pDtzNs",
+   "idx": 10,
+   "start": 644,
+   "end": 770,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 5,
+    "n_camera_moves": 5,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 2.6,
+    "caption_max_words": 3,
+    "caption_dwell_median_f": 13
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     3,
+     6
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "12_0m6G8pDtzNs",
+   "idx": 12,
+   "start": 863,
+   "end": 1001,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 9,
+    "n_camera_moves": 4,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 3.45,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 8.5
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     4,
+     7
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "12_0m6G8pDtzNs",
+   "idx": 13,
+   "start": 1002,
+   "end": 1094,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 6,
+    "n_camera_moves": 2,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 3.87,
+    "caption_max_words": 3,
+    "caption_dwell_median_f": 6.5
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "12_0m6G8pDtzNs",
+   "idx": 15,
+   "start": 1188,
+   "end": 1279,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 11,
+    "n_camera_moves": 2,
+    "hold_share": 0.033,
+    "caption_swaps_per_s": 2.93,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 8
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "12_0m6G8pDtzNs",
+   "idx": 17,
+   "start": 1359,
+   "end": 1428,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 8,
+    "n_camera_moves": 1,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 3.43,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 9.0
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "12_0m6G8pDtzNs",
+   "idx": 18,
+   "start": 1429,
+   "end": 1489,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 10,
+    "n_camera_moves": 3,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 3.93,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 7.0
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "04_Mz72MuPgnGY",
+   "idx": 0,
+   "start": 1,
+   "end": 181,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 10,
+    "n_camera_moves": 5,
+    "hold_share": 0.074,
+    "caption_swaps_per_s": 3.48,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 8
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     6,
+     12
+    ],
+    "n_camera_moves": [
+     4,
+     7
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions; x.2 opening one-take f1-176"
+  },
+  {
+   "video": "04_Mz72MuPgnGY",
+   "idx": 2,
+   "start": 387,
+   "end": 495,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 12,
+    "n_camera_moves": 1,
+    "hold_share": 0.082,
+    "caption_swaps_per_s": 2.75,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 10.0
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     6,
+     12
+    ],
+    "n_camera_moves": [
+     3,
+     6
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "04_Mz72MuPgnGY",
+   "idx": 3,
+   "start": 496,
+   "end": 567,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 11,
+    "n_camera_moves": 2,
+    "hold_share": 0.024,
+    "caption_swaps_per_s": 2.5,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 13.5
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     6,
+     12
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "04_Mz72MuPgnGY",
+   "idx": 4,
+   "start": 568,
+   "end": 684,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 16,
+    "n_camera_moves": 4,
+    "hold_share": 0.054,
+    "caption_swaps_per_s": 3.08,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 9.5
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     6,
+     12
+    ],
+    "n_camera_moves": [
+     3,
+     6
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "04_Mz72MuPgnGY",
+   "idx": 5,
+   "start": 685,
+   "end": 814,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 10,
+    "n_camera_moves": 5,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 2.31,
+    "caption_max_words": 3,
+    "caption_dwell_median_f": 13.5
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     6,
+     12
+    ],
+    "n_camera_moves": [
+     3,
+     6
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "04_Mz72MuPgnGY",
+   "idx": 8,
+   "start": 926,
+   "end": 1102,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 6,
+    "n_camera_moves": 5,
+    "hold_share": 0.123,
+    "caption_swaps_per_s": 2.88,
+    "caption_max_words": 3,
+    "caption_dwell_median_f": 10
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     6,
+     12
+    ],
+    "n_camera_moves": [
+     5,
+     8
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "04_Mz72MuPgnGY",
+   "idx": 9,
+   "start": 1103,
+   "end": 1170,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 8,
+    "n_camera_moves": 2,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 2.65,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 11.5
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     6,
+     12
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "04_Mz72MuPgnGY",
+   "idx": 11,
+   "start": 1286,
+   "end": 1497,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 8,
+    "n_camera_moves": 6,
+    "hold_share": 0.014,
+    "caption_swaps_per_s": 2.97,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 11
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     6,
+     12
+    ],
+    "n_camera_moves": [
+     6,
+     9
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "04_Mz72MuPgnGY",
+   "idx": 13,
+   "start": 1575,
+   "end": 1680,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 7,
+    "n_camera_moves": 2,
+    "hold_share": 0.122,
+    "caption_swaps_per_s": 3.4,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 7.5
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     6,
+     12
+    ],
+    "n_camera_moves": [
+     3,
+     6
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "04_Mz72MuPgnGY",
+   "idx": 16,
+   "start": 1826,
+   "end": 1937,
+   "actual": {
+    "n_camera_moves": 1,
+    "hold_share": 0.802,
+    "caption_swaps_per_s": 2.95,
+    "caption_max_words": 1,
+    "caption_dwell_median_f": 10
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     6,
+     12
+    ],
+    "n_camera_moves": [
+     0,
+     3
+    ],
+    "hold_share": [
+     0.62,
+     0.92
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions; x.2 ending hold 23-86 f"
+  },
+  {
+   "video": "10_GM9UKnZ6JFw",
+   "idx": 0,
+   "start": 1,
+   "end": 99,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 10,
+    "n_camera_moves": 2,
+    "hold_share": 0.011,
+    "caption_swaps_per_s": 3.33,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 10
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     8,
+     14
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions; x.2 opening dive then tilt-up"
+  },
+  {
+   "video": "10_GM9UKnZ6JFw",
+   "idx": 3,
+   "start": 399,
+   "end": 519,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 11,
+    "n_camera_moves": 3,
+    "hold_share": 0.009,
+    "caption_swaps_per_s": 2.73,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 12
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     8,
+     14
+    ],
+    "n_camera_moves": [
+     3,
+     6
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "10_GM9UKnZ6JFw",
+   "idx": 4,
+   "start": 520,
+   "end": 566,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 11,
+    "n_camera_moves": 1,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 3.19,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 7
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     8,
+     14
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "10_GM9UKnZ6JFw",
+   "idx": 5,
+   "start": 567,
+   "end": 659,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 12,
+    "n_camera_moves": 2,
+    "hold_share": 0.358,
+    "caption_swaps_per_s": 2.26,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 13
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     8,
+     14
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "10_GM9UKnZ6JFw",
+   "idx": 6,
+   "start": 660,
+   "end": 714,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 12,
+    "n_camera_moves": 1,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 2.73,
+    "caption_max_words": 3,
+    "caption_dwell_median_f": 13
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     8,
+     14
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "10_GM9UKnZ6JFw",
+   "idx": 7,
+   "start": 715,
+   "end": 818,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 15,
+    "n_camera_moves": 4,
+    "hold_share": 0.143,
+    "caption_swaps_per_s": 2.88,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 11.5
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     8,
+     14
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "10_GM9UKnZ6JFw",
+   "idx": 13,
+   "start": 1391,
+   "end": 1438,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 9,
+    "n_camera_moves": 2,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 3.12,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 7
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     8,
+     14
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "10_GM9UKnZ6JFw",
+   "idx": 14,
+   "start": 1439,
+   "end": 1470,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 7,
+    "n_camera_moves": 1,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 3.75,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 9.5
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     8,
+     14
+    ],
+    "n_camera_moves": [
+     0,
+     3
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "10_GM9UKnZ6JFw",
+   "idx": 16,
+   "start": 1541,
+   "end": 1581,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 10,
+    "n_camera_moves": 2,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 2.2,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 9
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     8,
+     14
+    ],
+    "n_camera_moves": [
+     0,
+     3
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "10_GM9UKnZ6JFw",
+   "idx": 17,
+   "start": 1582,
+   "end": 1785,
+   "actual": {
+    "n_camera_moves": 4,
+    "hold_share": 0.033,
+    "caption_swaps_per_s": 2.65,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 9.0
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     8,
+     14
+    ],
+    "n_camera_moves": [
+     6,
+     9
+    ],
+    "hold_share": [
+     0.1,
+     0.4
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions; x.2 ending hold 23-86 f"
+  },
+  {
+   "video": "14_VS1Z_Q-Klt8",
+   "idx": 0,
+   "start": 1,
+   "end": 92,
+   "actual": {
+    "join_out_kind": "hard cut",
+    "n_camera_moves": 4,
+    "hold_share": 0.231,
+    "caption_swaps_per_s": 2.93,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 12
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "14_VS1Z_Q-Klt8",
+   "idx": 1,
+   "start": 93,
+   "end": 225,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 8,
+    "n_camera_moves": 4,
+    "hold_share": 0.198,
+    "caption_swaps_per_s": 2.48,
+    "caption_max_words": 3,
+    "caption_dwell_median_f": 10
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     3,
+     6
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "14_VS1Z_Q-Klt8",
+   "idx": 2,
+   "start": 226,
+   "end": 406,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 7,
+    "n_camera_moves": 5,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 2.98,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 10.0
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     5,
+     8
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "14_VS1Z_Q-Klt8",
+   "idx": 4,
+   "start": 537,
+   "end": 613,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 5,
+    "n_camera_moves": 3,
+    "hold_share": 0.145,
+    "caption_swaps_per_s": 2.73,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 12
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "14_VS1Z_Q-Klt8",
+   "idx": 12,
+   "start": 1119,
+   "end": 1215,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 6,
+    "n_camera_moves": 2,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 2.78,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 11
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "14_VS1Z_Q-Klt8",
+   "idx": 13,
+   "start": 1216,
+   "end": 1309,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 7,
+    "n_camera_moves": 1,
+    "hold_share": 0.136,
+    "caption_swaps_per_s": 2.87,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 12
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "14_VS1Z_Q-Klt8",
+   "idx": 14,
+   "start": 1310,
+   "end": 1383,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 10,
+    "n_camera_moves": 0,
+    "caption_swaps_per_s": 2.43,
+    "caption_max_words": 3,
+    "caption_dwell_median_f": 12.0
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     0,
+     2
+    ],
+    "hold_share": [
+     0.7,
+     1.0
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions; aa 65 f hold f1307-1378"
+  },
+  {
+   "video": "14_VS1Z_Q-Klt8",
+   "idx": 15,
+   "start": 1384,
+   "end": 1460,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 6,
+    "n_camera_moves": 6,
+    "hold_share": 0.014,
+    "caption_swaps_per_s": 1.95,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 15
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "14_VS1Z_Q-Klt8",
+   "idx": 17,
+   "start": 1670,
+   "end": 1751,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 6,
+    "n_camera_moves": 2,
+    "hold_share": 0.026,
+    "caption_swaps_per_s": 2.93,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 9.5
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "14_VS1Z_Q-Klt8",
+   "idx": 19,
+   "start": 1853,
+   "end": 1945,
+   "actual": {
+    "n_camera_moves": 1,
+    "hold_share": 0.205,
+    "caption_swaps_per_s": 2.58,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 10.5
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     4,
+     10
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.3,
+     0.6
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions; x.2 ending hold 23-86 f"
+  },
+  {
+   "video": "22_i4hYq1oSXTg",
+   "idx": 1,
+   "start": 146,
+   "end": 179,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 11,
+    "n_camera_moves": 1,
+    "hold_share": 0.043,
+    "caption_swaps_per_s": 3.53,
+    "caption_max_words": 3,
+    "caption_dwell_median_f": 9.5
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     3,
+     9
+    ],
+    "n_camera_moves": [
+     0,
+     3
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "22_i4hYq1oSXTg",
+   "idx": 4,
+   "start": 392,
+   "end": 428,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 8,
+    "n_camera_moves": 2,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 2.43,
+    "caption_max_words": 8,
+    "caption_dwell_median_f": 10
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     3,
+     9
+    ],
+    "n_camera_moves": [
+     0,
+     3
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "22_i4hYq1oSXTg",
+   "idx": 9,
+   "start": 1214,
+   "end": 1303,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 5,
+    "n_camera_moves": 2,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 3.0,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 10
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     3,
+     9
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "22_i4hYq1oSXTg",
+   "idx": 10,
+   "start": 1304,
+   "end": 1354,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 5,
+    "n_camera_moves": 1,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 2.94,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 10
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     3,
+     9
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "22_i4hYq1oSXTg",
+   "idx": 11,
+   "start": 1355,
+   "end": 1407,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 5,
+    "n_camera_moves": 1,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 2.83,
+    "caption_max_words": 1,
+    "caption_dwell_median_f": 11
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     3,
+     9
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "22_i4hYq1oSXTg",
+   "idx": 13,
+   "start": 1453,
+   "end": 1524,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 7,
+    "n_camera_moves": 3,
+    "hold_share": 0.209,
+    "caption_swaps_per_s": 3.33,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 9.5
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     3,
+     9
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "22_i4hYq1oSXTg",
+   "idx": 14,
+   "start": 1525,
+   "end": 1759,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 6,
+    "n_camera_moves": 11,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 2.55,
+    "caption_max_words": 3,
+    "caption_dwell_median_f": 11.0
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     8,
+     14
+    ],
+    "n_camera_moves": [
+     7,
+     10
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions; x.1 #22 10-12 f at the end"
+  },
+  {
+   "video": "22_i4hYq1oSXTg",
+   "idx": 15,
+   "start": 1760,
+   "end": 1811,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 5,
+    "n_camera_moves": 1,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 1.73,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 17
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     8,
+     14
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions; x.1 #22 10-12 f at the end"
+  },
+  {
+   "video": "22_i4hYq1oSXTg",
+   "idx": 16,
+   "start": 1812,
+   "end": 1912,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 12,
+    "n_camera_moves": 5,
+    "hold_share": 0.01,
+    "caption_swaps_per_s": 3.56,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 10.0
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     8,
+     14
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions; x.1 #22 10-12 f at the end"
+  },
+  {
+   "video": "22_i4hYq1oSXTg",
+   "idx": 18,
+   "start": 1964,
+   "end": 2005,
+   "actual": {
+    "n_camera_moves": 2,
+    "hold_share": 0.298,
+    "caption_swaps_per_s": 1.43,
+    "caption_max_words": 1,
+    "caption_dwell_median_f": 15.0
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     8,
+     14
+    ],
+    "n_camera_moves": [
+     0,
+     3
+    ],
+    "hold_share": [
+     0.4,
+     0.7
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions; x.1 #22 10-12 f at the end; x.2 ending hold 23-86 f"
+  },
+  {
+   "video": "24_aD73kaL_PtY",
+   "idx": 0,
+   "start": 1,
+   "end": 284,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 4,
+    "n_camera_moves": 10,
+    "hold_share": 0.014,
+    "caption_swaps_per_s": 3.17,
+    "caption_max_words": 3,
+    "caption_dwell_median_f": 10.5
+   },
+   "predicted": {
+    "join_out_kind": "hard cut",
+    "dissolve_len_f": [
+     3,
+     9
+    ],
+    "n_camera_moves": [
+     8,
+     11
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions; x.2 opening one-take 10 camera phases"
+  },
+  {
+   "video": "24_aD73kaL_PtY",
+   "idx": 1,
+   "start": 285,
+   "end": 364,
+   "actual": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": 9,
+    "n_camera_moves": 4,
+    "hold_share": 0.11,
+    "caption_swaps_per_s": 1.88,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 13
+   },
+   "predicted": {
+    "join_out_kind": "dissolve",
+    "dissolve_len_f": [
+     3,
+     9
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions; x.2 \"shot f361-516\" overlaps this shot end, so a blend"
+  },
+  {
+   "video": "24_aD73kaL_PtY",
+   "idx": 5,
+   "start": 688,
+   "end": 732,
+   "actual": {
+    "join_out_kind": "hard cut",
+    "n_camera_moves": 3,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 4.0,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 8.5
+   },
+   "predicted": {
+    "join_out_kind": "hard cut",
+    "dissolve_len_f": [
+     3,
+     9
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "24_aD73kaL_PtY",
+   "idx": 6,
+   "start": 733,
+   "end": 815,
+   "actual": {
+    "join_out_kind": "hard cut",
+    "n_camera_moves": 3,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 3.25,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 9
+   },
+   "predicted": {
+    "join_out_kind": "hard cut",
+    "dissolve_len_f": [
+     3,
+     9
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "24_aD73kaL_PtY",
+   "idx": 7,
+   "start": 816,
+   "end": 860,
+   "actual": {
+    "join_out_kind": "hard cut",
+    "n_camera_moves": 3,
+    "hold_share": 0.133,
+    "caption_swaps_per_s": 3.33,
+    "caption_max_words": 1,
+    "caption_dwell_median_f": 9
+   },
+   "predicted": {
+    "join_out_kind": "hard cut",
+    "dissolve_len_f": [
+     3,
+     9
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "24_aD73kaL_PtY",
+   "idx": 8,
+   "start": 861,
+   "end": 938,
+   "actual": {
+    "join_out_kind": "hard cut",
+    "n_camera_moves": 4,
+    "hold_share": 0.077,
+    "caption_swaps_per_s": 3.08,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 9.5
+   },
+   "predicted": {
+    "join_out_kind": "hard cut",
+    "dissolve_len_f": [
+     3,
+     9
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "24_aD73kaL_PtY",
+   "idx": 10,
+   "start": 1070,
+   "end": 1122,
+   "actual": {
+    "join_out_kind": "hard cut",
+    "n_camera_moves": 2,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 3.4,
+    "caption_max_words": 1,
+    "caption_dwell_median_f": 10.5
+   },
+   "predicted": {
+    "join_out_kind": "hard cut",
+    "dissolve_len_f": [
+     3,
+     9
+    ],
+    "n_camera_moves": [
+     1,
+     4
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "24_aD73kaL_PtY",
+   "idx": 11,
+   "start": 1123,
+   "end": 1206,
+   "actual": {
+    "join_out_kind": "hard cut",
+    "n_camera_moves": 3,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 3.21,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 9
+   },
+   "predicted": {
+    "join_out_kind": "hard cut",
+    "dissolve_len_f": [
+     3,
+     9
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "24_aD73kaL_PtY",
+   "idx": 14,
+   "start": 1370,
+   "end": 1473,
+   "actual": {
+    "join_out_kind": "hard cut",
+    "n_camera_moves": 4,
+    "hold_share": 0.0,
+    "caption_swaps_per_s": 2.88,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 11.0
+   },
+   "predicted": {
+    "join_out_kind": "hard cut",
+    "dissolve_len_f": [
+     3,
+     9
+    ],
+    "n_camera_moves": [
+     2,
+     5
+    ],
+    "hold_share": [
+     0.0,
+     0.25
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions"
+  },
+  {
+   "video": "24_aD73kaL_PtY",
+   "idx": 16,
+   "start": 1553,
+   "end": 1638,
+   "actual": {
+    "join_out_kind": "hard cut",
+    "n_camera_moves": 1,
+    "hold_share": 0.43,
+    "caption_swaps_per_s": 3.14,
+    "caption_max_words": 2,
+    "caption_dwell_median_f": 11
+   },
+   "predicted": {
+    "join_out_kind": "hard cut",
+    "dissolve_len_f": [
+     3,
+     9
+    ],
+    "n_camera_moves": [
+     0,
+     3
+    ],
+    "hold_share": [
+     0.42,
+     0.72
+    ],
+    "caption_swaps_per_s": [
+     2.2,
+     3.7
+    ],
+    "caption_max_words": [
+     1,
+     3
+    ],
+    "caption_dwell_median_f": [
+     6,
+     14
+    ]
+   },
+   "basis": "x.1 per-video join mix + dissolve median; x.2 move rate 416/13225 f and hold share median 0.03/p90 0.24; x.7 captions; aa 48 f hold f1591-1638"
+  }
+ ]
+}

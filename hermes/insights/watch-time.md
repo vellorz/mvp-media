@@ -83,7 +83,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 3, 9:02 PM | Instagram | 2_ghent.mp4 (https://www.instagram.com/reel/DfTcYqdlDPo/) | 132 | 4.1 s | 17.2 s | 23.8% |
 | Nov 3, 4:03 PM | YouTube | Ghent's Unsolved Art Heist (Still Missing Since 1934) #shorts (https://www.youtube.com/watch?v=Y5hli5ikevM) | 8 | not available | 18.0 s | — |
 | Nov 3, 4:02 PM | TikTok | 2_ghent.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7704068722792615181?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 157 | 5.5 s | 17.2 s | 31.9% |
-| Nov 3, 4:02 PM | Facebook | 2_ghent.mp4 (https://www.facebook.com/reel/1438962015054698/) | 94 | 2.8 s | 17.2 s | 16.3% |
+| Nov 3, 4:02 PM | Facebook | 2_ghent.mp4 (https://www.facebook.com/reel/1438962015054698/) | 95 | 2.8 s | 17.2 s | 16.3% |
 | Nov 2, 7:04 PM | Instagram | 1_murren.mp4 (https://www.instagram.com/reel/DfQqHdNjzZ8/) | 94 | 5.6 s | 20.9 s | 26.8% |
 | Nov 2, 7:01 PM | Facebook | 1_murren.mp4 (https://www.facebook.com/reel/39948020921479338/) | 196 | 3.1 s | 20.9 s | 14.8% |
 | Nov 2, 4:03 PM | YouTube | The Bond Villain Lair Above This Swiss Village 🇨🇭 #shorts (https://www.youtube.com/watch?v=FDvXLdwiGCQ) | 33 | not available | 21.0 s | — |

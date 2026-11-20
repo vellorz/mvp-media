@@ -119,3 +119,11 @@ Source: `rick-spec/clone-run-2026-11-20/` (guide v1.3 sections w to ac, `RULES_R
 - [guidance] Cast: torso 1.00 head widths, legs 1.25 to 1.3, total 3.2 to 3.35, curved noodle arms with no fixed elbow, outline thin toward the light and about twice as thick away from it.
 - [guidance] Motion: snap in 1 to 4 f or rigid tween in 5 to 11 f, no anticipation, no overshoot, no squash and stretch; bodies hold while faces change 1.4 to 2.5 times per second.
 - [guidance] Camera moving on at least 85 % of frames; no join in the first 3 s; one crash push and one reveal pull-out every 10 to 15 s; 20 to 47 % of shots over 4 s, each packed with camera beats.
+
+## Next loop (Nov 20 2026): v1.4 build values (supersede the clone-run guidance above where they differ)
+Source: `rick-spec/next-loop-2026-11-20/RENDER_SPEC_v1.4.md` and `RULES_CLONE_v2.md`. Rule-grade facts are still only the four above.
+- [guidance] Cast: torso 1.0 head height, legs 1.1 to 1.3, total 2.9 to 3.35 (replaces 1.25 to 1.3 and 3.2 to 3.35); outline 7 to 10 px lit side, 13 to 16 px shaded side at 1080 wide.
+- [guidance] Camera moving on at least 85 % of frames, never fully still over 1 s except the ending hold; push-in 23 to 142 f, pull-out 25 to 120 f, crash push 8 to 13 f (rules 302 to 305). Scale and roll sizes are uncertain.
+- [guidance] Dissolves 5 to 12 f (median 8), smoothstep, payoff about 12 f, start on sentence starts; hard cuts allowed freely.
+- [guidance] Motion window: snap 2.5 f median, tween 6 f median, holds 26 f median; timing known to +-3 f start, +-4 f end.
+- [uncertain, soft targets only] bed swing, key, tempo 75 to 104 BPM, SFX, camera scale and roll.

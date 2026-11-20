@@ -1,0 +1,58 @@
+# RULES_CLONE_v2 — rulebook revised for the goal "clone Rick's style" (2026-11-20, DRAFT for the owner; camera section pending the camera agent)
+
+> **THE THREE CORE FINDINGS (guide v1.3, 7 Rick videos; v4 loop numbers added where they changed).**
+> 1. **SCENE TIME.** 10 to 53 % of shots under 2 s, 20 to 47 % over 4 s, median 1.93 to 3.97 s (all 7: 2.83 s). Long shots are packed one-takes of 9.5 to 14.7 s with 6 to 17 eased camera moves. Camera moving on 84 to 96 % of frames. Dissolves: consensus median 8 f (p10 5, p90 12), smoothstep curve in 91 to 95 of 102; payoff dissolves longer (median 12 f, n 6).
+> 2. **MUSIC.** Bed mean 14.4 to 18.6 dB under the voice, mix -14.0 to -14.1 LUFS, no ducking, bed level std 2.3 to 4.0 dB. The full swing is about 7 to 12 dB (p95 minus p5) or 11 to 15.5 dB (max minus min), each with about +-4 dB uncertainty from stem separation [uncertain].
+> 3. **SETS AND BODIES.** Torso about 1.0 head widths, legs 1.25 to 1.28, total 3.2 to 3.35 (vision measurers; pixel tools under-read torsos by half), curved noodle arms, mitten hands, no fingers; outline about 7 to 10 px lit side and 13 to 16 px shaded side at 1080 wide (population level); hero props heavily outlined [single].
+
+How to read this file. Status words: RULE = two independent measurers at 99 % or more; GUIDANCE = 75 to 98.9 % per item, or a population-level number with its window stated (v4 amendments M2, added after seeing results); [UNCERTAIN] = under 75 % after three methods, results shown in `new-analysis-3/*/REPORT.md`. Source rulebook: `engine/cartoon-3d/RULES_CONSOLIDATED.md` on branch claude/project-thread-c13biq at commit 63df7d7 (the Black Friday thread owns that file; this file is NOT pushed there). Nothing is erased: retired rules are listed in section 4 with their old text pointer and the reason.
+
+## 1. KEEP unchanged (quality and scene-integrity rules; not style, so Rick's evidence does not change them)
+Numbered rules 1 to 4, 6, 7, 11 to 19, 21 to 39, 43 to 54, 56 to 76, 78 to 101, 103 to 111, 113 to 161, 163 to 169, 171 to 179, 189, 191, 192, 194 to 204, 206 to 215, standing rules S1 to S8 and S10 (always-on: no floating parts, nothing passes through anything, attached props, lettering whole and outside the caption band, one face per head, crowds varied, camera never in geometry, VO never cut, SFX gentle, poster inside the payoff). Rule 5 and rule 10 keep their Nov 17 fixed text. Rules 20, 40, 68 (pose and seating details) stay until the character agent's pose evidence exists; flagged "pending Rick evidence".
+
+## 2. REVISE (new text replaces the old text; old text kept in RULES_CONSOLIDATED.md history)
+| rule | new text | evidence |
+|---|---|---|
+| 8 and 188 (audio) | Mix -14.0 to -14.1 LUFS, true peak -1.9 to -2.2 dBTP; bed mean 14.4 to 18.6 dB under the voice; bed level std 2.3 to 4.0 dB (3 s windows); no ducking, no pumping; the bed is NOT constant; SFX gentle (rule 192). The "about 20 dB constant" text is retired. | v1.3 w.2; v4 audio |
+| 9 and 186 (captions) | Keep the look spec. Timing: on the word or 0 to 1 f before it, never later than +2 f; hard swaps, no gaps; 1 word in at least 75 % of cards, 3 max; dwell median 10 f (4 to 16). Method rule-grade (3,830 of 3,834). | v1.3 x.7 |
+| 55 | Style follows the Rick guide (Rick's characters and construction). Numbers: head width about 22 to 24 % of frame width on average (medium 28 to 36 %); outline per section 3 below. Retired bullets: "about 2.9 head-heights", "short stick legs", "outline 6 to 8 px". | v4 characters M2 |
+| 77 (clean cuts) | Keep: no orphan camera key, check frame diff at every cut +-3 f. Change: shortest shot is 10 f (Rick's shortest 0.37 s = 11 f), not 18 f. | v1.3 x.1 |
+| 102 and 162 (walking) | A root that moves gets a leg cycle. Rick's walks are rare and often hidden; cadence median 7.5 f per step [uncertain, 5 of 10 agree]; bodies may slide while legs cycle and armies may march in place (Rick does). Stride-locking to the distance is no longer required. | v1.3 x.4 |
+| 134 and 182 (static camera) | Camera moving on at least 85 % of frames; no fully still run over 8 f except the ending hold of 23 to 86 f; idle drift 0.05 to 0.2 % of frame width per frame. Old limits "1.5 s static", "4 s without action" are retired; packed one-takes of 9.5 to 14.7 s are allowed when something new happens at least every 2 s. | v1.3 x.2 |
+| 137, 180, 181 (joins) | Dissolves 3 to 14 f, consensus median 8 f, per-video median 6 to 11; smoothstep curve; camera moving through them (118 of 122). Hard cuts are normal joins, no maximum of 5 (#24 has 13 of 19). About 40 % of dissolves are match dissolves with a bridge object (offsets up to 19 % of width occur); no rule above 50 %. Dissolve starts land on a sentence start 3.7 times chance (21 of 102) [guidance]; hard cuts land 0 to +2 f after a word start in action passages [uncertain: transcript and stem timing disagree]. Payoff dissolves longer (median 12 f, n 6) [guidance]. | v1.3 x.1; v4 joins |
+| 183 (camera hits) | Moves start on word starts and peak on the stressed word within 0 to 3 f [single]; crash push 9 to 25 f, x1.8 or more; see section 5 for sizes once the camera loop is merged. | v1.3 x.2 |
+| 184, 193, 205 (character construction) | Characters are built like Rick's, and our own look is retired (no copying of his named characters, frames or lines). Build per section 3. Rule 205's "slim garment column 0.65 to 0.8 H, coat to the shins, left-third cel shadow" is retired. | owner Nov 20; v1.3 x.3 |
+| 185 (faces) | 1.4 to 2.5 face events per second (median 2.1); bursts of 4 swaps in 4 f at a shock; deadpan faces may hold 83 to 191 f; blinks 1 to 3 f; mouths 2 to 2.5 f per shape (1.5 to 4) and they also move on narration and reported speech (the "only on quoted lines" clause is retired). | v1.3 x.4 |
+| 187 (grade) | Day interiors up to luma 0.76; night down to luma 0.25 to 0.33 with faces still at p98 0.86 or more; keep p2 at 0.05 or more for day. | v1.3 x.8 |
+| 42 (head forms) | Retire "varied round and 3/4 heads". Rick: flat round head cards facing the camera; turns and leans are whole-body redraws or rigid tweens. | v1.3 x.3 |
+| 200 (poster colours), 201 (vignette) | Unchanged in substance. | |
+
+## 3. Character spec (replaces S9, 184, 193, 205; GUIDANCE unless marked)
+- No fingers, mitten hands about 12 % of head width [RULE: 148 of 149].
+- Torso about 1.0 H tall (0.92 to 1.18), width 0.73 to 0.89 H; legs 1.25 to 1.28 H; total 3.2 to 3.35 H (vision measurers; the pixel tools read torsos about half too small because they stop at belts, coats and sleeves). Robes and dresses: neck to hem 1.6 to 2.2 H, legs hidden.
+- Arms: one curved noodle stroke, no fixed elbow (66 of 71 in the pixel sample, 85 of 113 in the first run); thickness 12 to 14 px at 1080 wide (about 5 to 6 % of H).
+- Head fill: flat near-white (#fbf4f1), takes the scene tint; eyes spacing about 27 % H, eye height 8 to 13 % H; head aspect about 0.72 to 0.75 [uncertain: 3 of 10 source pairs within tolerance].
+- Outline: dark plum or navy ink (#321c2a), never pure black; about 7 to 10 px lit side and 13 to 16 px shaded side and under the chin at 1080 wide (population level, window +-3 px).
+- Poses: snap in 1 to 4 f (median 2.5) or rigid tween in 5 to 11 f (median 6); overshoot 0 to 2.4 %, anticipation 0 to 3.6 %; no squash and stretch; holds median 26 f (p10 8.5, p90 67.5, 36 holds). Timing known to +-3 f (start) and +-4 f (end, travel) between the two human measurers only; tools reach 75 % only at +-8 to +-20 f.
+
+## 4. RETIRE (moved here; not erased)
+S9 (our own characters) · 170 (Dresden context note) · 42 · 205 numbers · 55's three bullets · rule 253 "jointed limbs, always bent" (reversed by evidence) · 185's "lips move only on quoted lines" · 8/188's "constant 20 dB" · 134/182's "1.5 s static" and "4 s without action" · 137/180's "max 5 fast joins" and "bridge on 50 % or more" · 230's "at most 26 % over 4 s" · 246's "never 120 BPM" (tempo is [uncertain]) · 256's "at most 3 shake moments".
+
+## 5. Proposed rules 230 to 266 and 280 to 287 after this loop
+KEEP: 231, 234, 235, 236, 238, 239, 240, 242, 244, 245, 247 (guidance only), 249, 257 to 266, 280, 281, 283. REVISE: 230 (median 1.9 to 4.0 s; 10 to 53 % under 2 s; 20 to 47 % over 4 s), 232 (no join needed in the first 3 s; one-take with 3 or more eased beats), 233 (two endings valid: burst of short shots or one long reveal take 6.8 to 10.9 s; "last shot is not the longest" withdrawn), 237 (151 to 214 visual changes per minute), 241 (2.7 to 3.1 cards per second, dwell median 10 f), 243 (std 2.3 to 4.0 dB is the check; swing is [uncertain]), 246 (key: profile tools say D minor for 6 of 7, bass tools A minor: [uncertain]; tempo [uncertain] 75 to 100 BPM by two tools), 248 (true peak -1.9 to -2.2), 250 (walls thin, hero props 5 to 30 px), 251 (night luma 0.25 to 0.33), 252 (section 3), 254 (tilt median 5 degrees, n 106), 255 (section 3 timings), 256 (impact = one-frame punch-in +3 to +7 %, 6 to 10 f ease back), 282 (on-frame method rule-grade). RETIRE: 253. Rules 267 to 279 and 288 to 294 are drafts held by the Black Friday thread and were not re-reviewed here; they are to be checked against section 3 when that thread resumes.
+
+## 6. New rules from the v4 loop (numbers continue after the Black Friday drafts, which end at 294)
+295. DISSOLVE CURVE. Dissolve weight follows a smoothstep (ease-in-out) curve; linear is the exception (91 to 95 of 102 are smoothstep). Check: blend-weight fit on our own render. [guidance]
+296. DISSOLVES START ON SENTENCES, CUTS ON WORDS. Start dissolves on a sentence start when the picture changes with the sentence (3.7 times chance); do not tie them to word starts (chance level). [guidance]
+297. PAYOFF DISSOLVES ARE LONGER. Dissolves in the last sentence run about 12 f (3 f above the video median). [guidance, n 6]
+298. STATE THE WINDOW. Every measured timing carries its window: "start known to +-3 f, end to +-4 f". A timing without its window is not a rule. [process]
+299. SEPARATION IS NOT A MEASURING INSTRUMENT FOR A QUIET BED. Bed-level swing and gap read from a vocal-removed stem carry about +-4 dB (stem leakage); on our own mixes measure the bed from our own bed stem. [process]
+300. POPULATION OR PER-ITEM. When per-item agreement is under 75 % but the independent measurers' population medians agree, publish the median with its window and label it population-level; never quote it as an item-level fact. [process]
+301. TOOLS THAT FAIL THEIR KNOWN ANSWERS ARE REPORTED, NOT USED (restates 261 with the v4 evidence: motion trackers 45 to 84 % on synthetic actions; every bed, key and SFX method fails with the voice on top).
+
+## 7. Camera rules (added after the camera loop; see camera/REPORT.md and RENDER_SPEC_v1.4.md)
+302. CAMERA MOVING. Camera moves on at least 85 % of frames (Rick 80 to 98 %); never fully still over 1 s except the ending hold (23 to 86 f). [guidance; the old "no still run over 8 f" is UNCERTAIN, trackers disagree 10 to 101 f]
+303. MOVE DURATIONS. Push-in 23 to 142 f (median 57), pull-out 25 to 120 f, orbit/truck/pan 11 to 70 f, drift 5 to 34 f, crash push 8 to 13 f, jolt 6 to 7 f. [guidance]
+304. MOVE SIZES. Pan and tilt sizes follow the recipe table (guidance, 77.6 % and 75.5 %). Scale ratio and roll are [UNCERTAIN] (70.3 %, 62.0 %); use the table's median as a soft target only. Parallax between layers cannot be measured: use the 3D scene's own parallax.
+305. EASES. Push-ins linear or ease-in-out, pull-outs ease-out. [guidance]
+Rules 134, 182, 183 now point to 302 to 305. Rules 267 to 279 and 288 to 294 still need a check against sections 3 and 7 when the Black Friday thread resumes.

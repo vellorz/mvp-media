@@ -23,6 +23,5 @@ for x in range(60,W-60,90): d.line([x,30,x+20,H-30],fill=(182,144,92,255),width=
 for (x0,y0) in ((40,40),(W-200,40),(40,H-110),(W-200,H-110)): d.rectangle([x0,y0,x0+160,y0+60],fill=(236,226,190,230),outline=(150,130,90,255),width=3)
 bk.save(T+'placard_back.png')
 f=Image.new('RGBA',(200,200),(0,0,0,0)); d=ImageDraw.Draw(f)
-d.ellipse([20,30,180,180],fill=SK,outline=K,width=12)
-for i in range(3): d.arc([40,40+i*38,170,110+i*38],200,340,fill=K,width=8)
+d.ellipse([100-35,100-35,100+35,100+35],fill=(44,22,40,255))   # r8b (Rick clone): plain dark mitten, 12 % of head width (0.0516 m = 69 px on the 0.15 m card), no fingers
 f.save(T+'fist.png'); print('PLACARD_OK')

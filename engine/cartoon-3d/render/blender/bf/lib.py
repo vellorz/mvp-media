@@ -162,8 +162,11 @@ def path(n,keys):
 # ---------------- 2D cut-out cast ----------------
 CI=json.load(open('/root/bf/src/cast.json'))
 # r7 (round-6 visual: round bodies torso 0.63, legs 0.88 head-heights; need 0.7-1.05 / 0.9-1.5): round body cards stretched 1.118x up from the feet
-BSY={'tall':1.0,'short':1.0,'round':1.118}
-GEO={'tall':(1.01,0.17,0.97),'short':(0.92,0.19,0.88),'round':(-0.04+(0.99+0.04)*1.118,0.21,-0.04+(0.84+0.04)*1.118)}
+BSY={'tall':1.0,'short':1.0,'round':1.0}   # r8b: one Rick build for every kind (cast.py GB/HEMY), no stretch
+# r8b (owner Nov 20: clone Rick's build; guide v1.3 x.3): head 0.43 m wide = H; torso 0.962->0.532 = 1.00 H; legs 0.532->-0.014 = 1.27 H;
+# head disc centre 1.167 (top 1.382): total 3.25 H. Shoulder pivots 0.95, hand (HAND_Z 0.407) at the hem.
+HS=0.43/0.586   # head card scale vs rounds 1-7 (disc 800/1024 of a 0.75 card)
+GEO={'tall':(0.996,0.17,0.95),'short':(0.996,0.19,0.95),'round':(0.996,0.21,0.95)}
 ARM_W,ARM_H,ARM_OFF=0.744,0.558,0.242   # r6: arm canvas 1200 wide (bent forearm swings outward)
 SHADOW=None
 def chr_coll(shot):
@@ -177,10 +180,10 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
     for key in (['body','bodyw1','bodyw2'] if walker else ['body']):
         sy=BSY[c['body']]; b=plane(f'{inst}_{key}',(0,0,0),0.8,1.1*sy,card_mat(f'{kind}_{key}',f'{kind}_{key}'),coll=C); b.parent=root; b.location=(0,0,-0.04+0.55*sy); bodies[key]=b
     hp=empty(inst+'_hp',(0,0,top),root,coll=C)
-    neck=plane(inst+'_head',(0,0,0),0.16,0.16,flat('skin',lin((252,246,236)),0.9),coll=C); neck.parent=hp; neck.location=(0,0.004,0.04)
+    neck=plane(inst+'_head',(0,0,0),0.16*HS,0.16*HS,flat('skin',lin((252,246,236)),0.9),coll=C); neck.parent=hp; neck.location=(0,0.004,0.04)
     F={}
     for fk in c['faces']:
-        f=plane(f'{inst}_d_{fk}',(0,0,0),0.75,0.75,card_mat(f'{kind}_h_{fk}',f'{kind}_h_{fk}',emit=0.25),coll=C); f.parent=hp; f.location=(0,-0.012,0.2535); F[fk]=f
+        f=plane(f'{inst}_d_{fk}',(0,0,0),0.75*HS,0.75*HS,card_mat(f'{kind}_h_{fk}',f'{kind}_h_{fk}',emit=0.25),coll=C); f.parent=hp; f.location=(0,-0.012,0.2535*HS); F[fk]=f
     A={}
     for sx,ak in zip((-1,1),arms):
         # r7 (rule 268): arms sit BEHIND the face disc (face -0.012) and in front of the body (0): a raised hand can never paint over its own face

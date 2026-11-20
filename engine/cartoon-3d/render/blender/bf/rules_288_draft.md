@@ -1,0 +1,8 @@
+# Draft rules 288-294 (round 8, from round-7 verifier findings). Fold into RULES_CONSOLIDATED.md with 216-229, 267-279 and 280-287 after the test passes.
+288 [C] No face disc may touch a caption box in any frame. Probe: src/capboxes.py (caption boxes from the post record) + src/capprobe.py must print CAPPROBE 0. (round 7 T7: S02 walkers under "Thanksgiving"/"the whole")
+289 [C] Hat peaks and bands end above the brow line (brows at least 30 px below the peak on the 1024 head card); brows are never drawn on a dark hat surface. (round 7 C4)
+290 At most 5 hard cuts per video. An in-shot reframe is a rigid eased camera move of 7-8 f (softcut) unless the new view cannot be reached without passing through geometry or cutting a head. (round 7 K4; guide v1.3: camera moving 84-96 % of frames)
+291 An eye-level camera puts every standing head on the horizon line: any insert with 3+ characters uses a camera at least 0.8 m above eye height, or staggers them in depth so no 3 heads share a screen row. (round 7 P3/R21)
+292 The payoff close-up gets its brightness from the set, not from post: bright frame (gilt/cream), lit bulbs, warm light; the final frames reach p98 >= 0.86 measured outside the poster quad on the raw render, and >= 0.84 on the finished video. The shop file itself tops out near 0.74, so post gain on the poster never fixes it. (round 7 R19)
+293 Camera move landings (eased stops) fall on nouns or names; an intermediate key that lands on a function word is removed. (round 7 K8)
+294 Every large plain surface in frame (ceiling, desk front, display floor) carries a painted texture (grain, tile, pattern); no flat single-colour material larger than 3 % of the frame. (round 7 must-have 3)

@@ -180,6 +180,15 @@ def hardcut(shot,f):
         for fc in o_.animation_data.action.fcurves:
             for kp in fc.keyframe_points:
                 if int(round(kp.co[0]))==f-1: kp.interpolation='CONSTANT'
+def softcut(shot,f,n=8):
+    """r8b (round-7 K4: 8 hard cuts > 5; guide v1.3: one editing style, camera moving 84-96 % of frames): the old framing's last key (f-1)
+    moves back to f-n, so the camera makes a rigid eased move of n frames that lands on the new framing at f instead of cutting"""
+    for o_ in (L.CAM[shot],L.TGT[shot]):
+        for fc in o_.animation_data.action.fcurves:
+            for kp in fc.keyframe_points:
+                if int(round(kp.co[0]))==f-1:
+                    d_=-(n-1); kp.co[0]+=d_; kp.handle_left[0]+=d_; kp.handle_right[0]+=d_; kp.interpolation='BEZIER'
+            fc.update()
 s='S01'; r=SH[s]
 cop=char('S01_cop','cop',s,(0,0,0.64),r,'whistle',arms=('arm','arm')); ALL.append(cop)
 faces(cop,[(0,'whistle'),(28,'annoyed'),(60,'grit'),(88,'shout'),(106,'annoyed'),(128,'shock'),(140,'whistle')])
@@ -190,7 +199,7 @@ ex=crowd(s,r,[(7.60,-8.20,0.14),(8.60,-7.40,0.14),(-8.30,-7.43,0.14),(-8.60,8.00
          ['shopper','fanblue','tourist','granny','fangold','kid','shopper'],5); ALL+=ex
 path(s,[(0,(1.0,-2.05,0.95),(0,0.2,1.9)),(45,(0.45,-2.3,0.95),(0,0.2,1.92)),(87,(-0.27,-2.26,0.99),(0,0.2,1.92)),(88,(0.75,-1.5,1.22),(0,0.2,1.95)),(126,(0.55,-1.62,1.26),(0,0.25,1.93)),   # r5: hard cut on 'much,' (f88) to a 3/4 punch-in
         (136,(-2.5,-6.5,4.0),(0,1.0,1.4)),(152,(-6.0,-15.0,9.5),(0,2.0,0.8)),(170,(-6.8,-17.0,10.6),(0.2,2.4,0.8))])
-hardcut('S01',88)
+softcut('S01',88,7)   # r8b: was a hard cut
 # ---------- S02 (163-297): high crane over the day-after-Thanksgiving street, the town rushes downtown ----------
 s='S02'; r=SH[s]
 sp=[];W=[]
@@ -198,6 +207,7 @@ for i in range(26):
     sx=-1 if i%2 else 1; y=16+2.3*(i//2)+[0,0.9,-0.6,0.4,-0.9,0.7][i%6]; x=sx*(7.2+[0.0,1.3,0.5,1.8,0.9,0.2,1.5][(i*3)%7]); sp.append((x,y,0.14))
     if i%3!=2: W.append((i,163,297,0,-4.5))
 for i_,x_ in ((4,7.9),(10,8.2)): sp[i_]=(x_,sp[i_][1],sp[i_][2])   # r7 (occprobe): granny out from behind the tourist, fan off the lamppost
+for i_,d_ in ((0,5.5),(2,3.0),(4,3.0)): sp[i_]=(sp[i_][0],sp[i_][1]+d_,sp[i_][2])   # r8b (round-7 T7, capprobe): these walkers' faces crossed the caption band at 197-219; 3 m further up the street
 ex=crowd(s,r,sp,['shopper','tourist','fanblue','fangold','granny','kid','shopper','fanblue'],9,walkers=W); ALL+=ex
 cop2=char('S02_cop','cop',s,(0,0,0.64),r,'whistle',arms=('arm','arm')); ALL.append(cop2)
 faces(cop2,[(163,'whistle'),(200,'annoyed'),(236,'shout'),(270,'whistle')])
@@ -208,11 +218,12 @@ sp2=[];W2=[]
 for i in range(10):   # r6: the town pours down the right sidewalk at the lens (denser rush, walkers toward camera only); wide lateral stagger so no face hides another
     sp2.append((7.55+[0.0,1.2,0.6,1.45,0.3,0.9,1.35][i%7], 19.0+2.1*i+[0,0.6,-0.4][i%3], 0.14)); W2.append((i,163,297,0,-4.5))
 sp2[4]=(9.15,sp2[4][1],sp2[4][2])   # r7 (occprobe): granny out from behind the fan
+sp2[0]=(sp2[0][0],sp2[0][1]+3.0,sp2[0][2])   # r8b (capprobe): lead tourist's face crossed the caption band at 215-219
 ex2=crowd(s,r,sp2,['tourist','shopper','fangold','kid','granny','fanblue'],29,walkers=W2,base=20); ALL+=ex2
-path(s,[(163,(1.0,-14,26),(0,26,0)),(200,(5.0,4.0,15.0),(8.4,24,0.4)),(219,(5.8,7.5,13.0),(8.4,25,0.4)),(220,(5.3,12.5,0.95),(9.2,25,1.5)),(297,(5.5,9.8,1.0),(9.2,23,1.5))])
-hardcut('S02',220)
+path(s,[(163,(1.0,-14,26),(0,26,0)),(182,(3.05,-4.75,20.4),(7.9,25,0.2)),(200,(5.0,4.0,15.0),(9.6,24,0.4)),(219,(5.8,7.5,13.0),(9.0,25,0.4)),(220,(5.3,12.5,0.95),(9.2,25,1.5)),(297,(5.5,9.8,1.0),(9.2,23,1.5))])
+hardcut('S02',220)   # r8b (capprobe): high-view target 8.4 -> 9.6/9.0 so the cop leaves the frame to the left of the caption, not through it
 # r7 (rule 204 / occprobe): in the low sidewalk view (220-297) extras whose faces sit fully behind nearer walkers leave the shot at the hard cut (they read as headless bodies)
-S02_HIDE=['S02_x4_granny','S02_x12_granny','S02_x21_shopper','S02_x22_fangold','S02_x23_kid','S02_x25_fanblue','S02_x26_tourist','S02_x6_shopper','S02_x8_shopper','S02_x2_fanblue']
+S02_HIDE=['S02_x0_shopper','S02_x10_fanblue','S02_x4_granny','S02_x12_granny','S02_x21_shopper','S02_x22_fangold','S02_x23_kid','S02_x25_fanblue','S02_x26_tourist','S02_x6_shopper','S02_x8_shopper','S02_x2_fanblue']
 for n_ in S02_HIDE:
     _r=bpy.data.objects[n_]
     for f_,v_ in ((219,1.0),(220,0.0001)): _r.scale=(v_,)*3; _r.keyframe_insert('scale',frame=f_)
@@ -262,11 +273,11 @@ def room(n,cx,w,d,h,wall,floor,ftile=(2.5,2.5),wtile=(4,4)):
     for sx in(-1,1): box(f'{n}_side{sx}',(cx+sx*(w/2+0.15),0.5,h/2),(0.3,d+1,h),surf(n+'_wall',wall,wtile),bv=0.02)
     box(n+'_base',(cx,d/2-0.02,0.08),(w,0.06,0.16),flat(n+'_skirt',lin((60,44,34)),0.6),bv=0.01)
     box(n+'_crown',(cx,d/2-0.02,h-0.1),(w,0.1,0.18),flat(n+'_skirt',lin((60,44,34))),bv=0.01)
-    box(n+'_ceil',(cx,0.5,h+0.1),(w+0.6,d+1,0.2),flat(n+'_ceilm',lin((226,220,204)),0.9),bv=0)
+    box(n+'_ceil',(cx,0.5,h+0.1),(w+0.6,d+1,0.2),surf('ceiltile','ceiltile',(1.2,1.2)),bv=0)   # r8b (must-have 3): painted acoustic tiles, not a flat ceiling
     for j in range(2): cyl(f'{n}_light{j}',(cx+(j-0.5)*w*0.4,0.4,h-0.06),0.28,0.12,flat('ceillamp',lin((255,240,210)),0.5,emit=4.0),v=20)
     for j in range(2): glow(f'{n}_lglow{j}',(cx+(j-0.5)*w*0.4,0.1,h-0.2),1.3,(255,232,190),1.4)
 def desk(n,c,w=1.8,d=0.8,h=0.78,m=None):
-    m=m or flat('deskwood',lin((110,70,44)),0.5)
+    m=m or surf('deskwood_p','wood',(0.5,0.5))   # r8b (must-have 3): painted wood grain on desks
     box(n+'_top',(c[0],c[1],h-0.03),(w,d,0.06),m,bv=0.015)
     box(n+'_pedL',(c[0]-w/2+0.25,c[1],(h-0.06)/2),(0.46,d-0.06,h-0.06),m,bv=0.015)
     box(n+'_pedR',(c[0]+w/2-0.25,c[1],(h-0.06)/2),(0.46,d-0.06,h-0.06),m,bv=0.015)
@@ -391,8 +402,8 @@ walk(cp,586,600,(BX+0.0,1.95,0),(CH_L+0.58,3.12,0),step=3)
 walk(cp,606,628,(CH_L+0.58,3.12,0),(CH_R+0.58,3.12,0),step=3,swing=(1,))   # round 4: the stride swing overrode the chalk arm (letters appeared with the arm down)
 walk(cp,632,652,(CH_R+0.58,3.12,0),(BX+0.98,2.62,0),step=3)
 for f,a_ in [(586,-10),(600,-92),(606,-95),(610,-91),(614,-96),(618,-91),(622,-95),(628,-93),(636,-20)]: arm(cp,-1,f,a_)
-path(s,[(520,(BX-0.85,-0.15,1.95),(BX+0.38,2.3,1.3)),(574,(BX-0.8,-0.15,1.9),(BX+0.02,2.35,1.12)),   # r5 (round-4 P3): camera ~25 deg off-axis so the cop and sergeant stand on a diagonal, not a frontal two-shot
-        (600,(BX-0.6,0.25,1.75),(BX+0.05,3.2,1.1)),(619,(BX-0.05,0.25,1.7),(BX+0.2,3.2,1.22)),(625,(BX+0.1,0.0,1.68),(BX+0.3,3.2,1.22)),(631,(BX+0.26,0.0,1.66),(BX+0.39,3.15,1.22)),(640,(BX+0.36,-0.05,1.65),(BX+0.4,3.1,1.22)),(652,(BX+0.36,-0.1,1.65),(BX+0.4,3.1,1.22))])
+path(s,[(520,(BX-0.85,-0.15,1.95),(BX+0.38,2.3,1.3)),(568,(BX-0.8,-0.15,1.9),(BX+0.02,2.35,1.12)),   # r8b (round-7 K8): lands on 'day' (568), not 'off'; the 600 key ('called') is gone, one move to 'Black' (619)   # r5 (round-4 P3): camera ~25 deg off-axis so the cop and sergeant stand on a diagonal, not a frontal two-shot
+        (619,(BX-0.05,0.25,1.7),(BX+0.2,3.2,1.22)),(625,(BX+0.1,0.0,1.68),(BX+0.3,3.2,1.22)),(631,(BX+0.26,0.0,1.66),(BX+0.39,3.15,1.22)),(640,(BX+0.36,-0.05,1.65),(BX+0.4,3.1,1.22)),(652,(BX+0.36,-0.1,1.65),(BX+0.4,3.1,1.22))])
 # round 4 (L9): FG water cooler at the right edge of S05 (fgcheck.py: in at x 0.77-1.1 except a smooth exit/return 592-616)
 _c5=L.chr_coll('S05'); box('coolS05',(BX+1.08,1.6,0.55),(0.32,0.32,1.1),flat('cooler',lin((220,214,200)),0.5),coll=_c5,bv=0.03); cyl('coolS05_btl',(BX+1.08,1.6,1.28),0.13,0.32,flat('coolbtl',lin((120,170,220)),0.15),v=20,coll=_c5)
 # ======================= SET C: store owners' office, 1961 (X=600) =======================
@@ -474,7 +485,7 @@ b_=flat('mailbox',lin((40,70,140)),0.5); box('mbS08',(-7.6,43.75,0.69),(0.5,0.5,
 plane('mbS08_front',(-7.6,43.495,0.72),0.46,0.64,card_mat('mailbox_front','mailbox_front',emit=0.15),coll=L.chr_coll('S08'))
 for sx_ in(-1,1):
     for sy_ in(-1,1): box(f'mbS08_leg{sx_}{sy_}',(-7.6+sx_*0.12,43.75+sy_*0.12,0.15),(0.06,0.06,0.3),INK,coll=L.chr_coll('S08'),bv=0)
-path(s,[(867,(-7.0,42.4,1.5),(-7.95,47.7,1.6)),(904,(-6.95,42.7,1.5),(-7.95,47.9,1.6)),(938,(-6.9,43.0,1.5),(-7.95,48.1,1.6))])
+path(s,[(867,(-7.0,42.4,1.5),(-7.95,47.7,1.6)),(938,(-6.9,43.0,1.5),(-7.95,48.1,1.6))])
 s='S09'; r=SH[s]
 c9=char('S09_cop','cop',s,(0,0,0.64),r,'neutral',arms=('arm','arm_megaphone'))
 ALL.append(c9); faces(c9,[(931,'neutral'),(950,'shout'),(966,'grit'),(976,'shout'),(990,'laugh'),(1002,'shout')])
@@ -547,7 +558,7 @@ room('off81',FX,7,6,3.0,'office81','lino')
 box('off81_win',(FX-1.8,2.96,1.8),(1.9,0.08,1.4),flat('winframe81',lin((210,206,196)),0.5),bv=0.02)
 plane('off81_view',(FX-1.8,2.9,1.8),1.7,1.2,card_mat('skyline_dawn_v','skyline_dawn',emit=0.7))
 for j in range(6): box(f'blind{j}',(FX-1.8,2.905,1.3+j*0.2),(1.7,0.02,0.03),flat('blind',lin((230,226,214)),0.5),bv=0)
-desk('fdesk',(FX,0.9,0),w=2.0,m=flat('desk81',lin((90,64,44)),0.4))
+desk('fdesk',(FX,0.9,0),w=2.0)   # r8b: painted wood
 beige=flat('beige',lin((214,204,180)),0.5)
 box('pc_base',(FX+0.78,1.05,0.86),(0.6,0.5,0.14),beige,bv=0.02); box('pc_mon',(FX+0.78,1.1,1.16),(0.5,0.42,0.42),beige,bv=0.04)
 plane('pc_screen',(FX+0.78,0.885,1.18),0.38,0.29,card_mat('screen81','screen81',emit=1.2))
@@ -641,7 +652,7 @@ s='S14'; r=SH[s]
 x14=char('S14_exec','exec81',s,(FX-0.1,1.5,0),r,'smug',arms=('arm','arm_redpen'))
 ALL.append(x14); faces(x14,[(1352,'smug'),(1400,'talk'),(1420,'smug'),(1454,'idea'),(1468,'wink'),(1480,'laugh')]); bob(x14,[1468])
 path(s,[(1352,(FX+0.11,0.79,1.45),(FX+0.11,0.802,LED_Z)),(1400,(FX+0.13,0.72,1.5),(FX+0.12,0.88,LED_Z+0.02)),(1403,(FX+0.13,0.70,1.5),(FX+0.12,0.885,LED_Z+0.02)),(1404,(FX+0.30,-0.62,1.6),(FX-0.04,1.44,1.3)),(1416,(FX+0.32,-0.9,1.6),(FX-0.05,1.45,1.3)),(1440,(FX+0.35,-1.2,1.6),(FX-0.08,1.5,1.38)),(1467,(FX+0.3,-1.9,1.6),(FX-0.1,1.5,1.25)),(1487,(FX+0.2,-2.1,1.62),(FX-0.1,1.5,1.22))])
-hardcut('S13',1282); hardcut('S13',1319)   # r5: hard cuts on 'red' (1282) and 'and' (1319): red-column close-up, then black column
+softcut('S13',1282,8); softcut('S13',1319,8)   # r8b: were hard cuts (K4: 8 cuts > 5)   # r5: hard cuts on 'red' (1282) and 'and' (1319): red-column close-up, then black column
 # round 4: the ledger->bookkeeper crane cut her head for 8 frames (C4); now a hard cut at 1403/1404 (CONSTANT key)
 for o_ in (L.CAM[s],L.TGT[s]):
     for fc in o_.animation_data.action.fcurves:
@@ -657,7 +668,7 @@ def nudge(shot,frames,dx,dy):
                 if int(round(kp.co[0])) in frames:
                     d_=dx if fc.array_index==0 else dy; kp.co[1]+=d_; kp.handle_left[1]+=d_; kp.handle_right[1]+=d_
             fc.update()
-NUDGE={('S13',1282):(0.016,0.0),('S13',1318):(0.016,0.0),('S13',1319):(0.0,-0.043),('S13',1344):(0.026,-0.0625),('S13',1359):(0.035,-0.055),('S14',1352):(0.051,-0.055),('S14',1400):(0.086,-0.118),('S14',1403):(0.086,-0.118)}
+NUDGE={('S13',1282):(0.016,0.0),('S13',1311):(0.016,0.0),('S13',1319):(0.0,-0.043),('S13',1344):(0.026,-0.0625),('S13',1359):(0.035,-0.055),('S14',1352):(0.051,-0.055),('S14',1400):(0.086,-0.118),('S14',1403):(0.086,-0.118)}
 for (sh_,f_),(dx_,dy_) in NUDGE.items(): nudge(sh_,[f_],dx_,dy_)
 # ======================= SET H: 1981 downtown at dawn, Hartwell's (X=1800) =======================
 HX=1800
@@ -670,7 +681,7 @@ for j,x in enumerate([HX-12,HX+5.3,HX+12]): lamppost(f'Hlp{j}',(x,-2.0))   # r7:
 # the payoff window display: a lit 3D bay in front of the left window bay, poster framed on an easel
 WX=HX-5.6; WY=1.6
 win=flat('bayframe',lin((40,60,46)),0.5)
-box('bay_floor',(WX,WY,0.45),(3.0,1.6,0.9),win,bv=0.03); box('bay_top',(WX,WY,3.65),(3.2,1.7,0.3),win,bv=0.03)
+box('bay_floor',(WX,WY,0.45),(3.0,1.6,0.9),surf('baywood','wood',(0.6,0.6)),bv=0.03); box('bay_top',(WX,WY,3.65),(3.2,1.7,0.3),surf('baywood','wood',(0.6,0.6)),bv=0.03)   # r8b (round-7 must-have 3): painted wood, not flat green
 for sx in(-1,1): box(f'bay_post{sx}',(WX+sx*1.5,WY-0.75,2.27),(0.14,0.14,2.46),win,bv=0.02)
 box('bay_back',(WX,WY+0.78,2.27),(2.9,0.08,2.46),surf('baywall','window81',(1.5,1.5)),bv=0)
 plane('bay_sign',(WX,WY-0.86,4.12),2.6,0.65,card_mat('banner81x','banner81x',emit=0.3))   # round 3: textless festive sign (the payoff push always cropped its lettering)
@@ -678,7 +689,7 @@ PW,PH=1.0,1.5; PZ=0.9+0.12+PH/2+0.14
 easel=flat('easel',lin((120,80,50)),0.6)
 for sx in(-1,1): box(f'easel_leg{sx}',(WX+sx*0.42,WY+0.25,0.9+1.05),(0.06,0.06,2.1),easel,bv=0)
 box('easel_shelf',(WX,WY+0.16,1.06),(1.2,0.2,0.06),easel,bv=0.01)
-box('poster_frame',(WX,WY+0.2,PZ),(PW+0.14,0.05,PH+0.14),flat('pframe',lin((30,24,20)),0.4),bv=0.012)
+box('poster_frame',(WX,WY+0.2,PZ),(PW+0.14,0.05,PH+0.14),flat('pframe_gilt',lin((240,214,140)),0.35,emit=0.35),bv=0.012)   # r8b (round-7 R19: final p98 0.73; the shop file itself tops out at 0.74): bright gilt frame, ~3.7 % of the close-up
 pmat=bpy.data.materials.new('poster'); N_,L_=L.nodes(pmat); pp_=N_['Principled BSDF']; it_=N_.new('ShaderNodeTexImage'); it_.image=bpy.data.images.load('/root/bf/poster_2k.png'); it_.interpolation='Cubic'
 L_.new(it_.outputs['Color'],pp_.inputs['Base Color']); L_.new(it_.outputs['Color'],pp_.inputs['Emission Color']); pp_.inputs['Emission Strength'].default_value=0.12   # r5: round-4 grey 137 vs file 117 (washed);   # round 4: 0.6 washed the poster out (grey 142 vs file 117); pp_.inputs['Roughness'].default_value=0.7; pp_.inputs['Specular IOR Level'].default_value=0.05
 poster=plane('poster',(WX,WY+0.17,PZ),PW,PH,pmat,coll=L.C_NOI); poster['noink']=1
@@ -689,6 +700,24 @@ for f_,h_ in ((1556,False),(1687,False),(1688,True)):
 for fc_ in pcov.animation_data.action.fcurves:
     for k_ in fc_.keyframe_points: k_.interpolation='CONSTANT'
 gifts('bay_gifts',(WX-1.0,WY+0.1,0.9),k=3,seed=12); gifts('bay_gifts2',(WX+1.0,WY,0.9),k=4,seed=13)
+# r8b (round-7 R19 dull payoff p98 0.78, L9 booth < 20 props, floor Laplacian 19.7): Rick's payoffs are dense and bright.
+# patterned carpet on the bay floor (3 mm above it, rule 228), marquee bulbs round the bay opening, pine trees, hat boxes, ornaments
+_bulb=flat('marqueebulb',lin((255,226,150)),0.3,emit=7.0)
+for i_ in range(17): cyl(f'bay_string{i_}',(WX-1.28+0.16*i_,WY+0.712,2.98+0.05*math.cos(i_*0.9)),0.032,0.05,_bulb,v=12,rot=(math.radians(90),0,0))   # festive bulb string on the back wall above the poster (wall face WY+0.74)
+box('bay_carpet',(WX,WY,0.906),(2.9,1.5,0.006),surf('baycarpet','baycarpet',(0.45,0.45)),bv=0)
+for i_ in range(15):
+    x_=WX-1.4+0.2*i_; cyl(f'bay_bulbT{i_}',(x_,WY-0.82,3.46),0.035,0.05,_bulb,v=12)
+for sx_ in(-1,1):
+    for j_ in range(10):
+        z_=1.05+0.25*j_; cyl(f'bay_bulb{sx_}_{j_}',(WX+sx_*1.5,WY-0.84,z_),0.032,0.05,_bulb,v=12,rot=(math.radians(90),0,0))
+_pine=flat('baypine',lin((40,110,64)),0.7); _trunk=flat('baytrunk',lin((90,60,36)),0.7)
+for sx_ in(-1,1):
+    cyl(f'bay_tree{sx_}_t',(WX+sx_*1.28,WY+0.5,0.99),0.04,0.16,_trunk,v=10)
+    for k_,(r_,z_) in enumerate(((0.22,1.17),(0.17,1.37),(0.11,1.55))): cyl(f'bay_tree{sx_}_{k_}',(WX+sx_*1.28,WY+0.5,z_),r_,0.24,_pine,v=16,r2=0.02)
+for k_,(x_,c_) in enumerate(((-0.82,(214,120,150)),(-0.66,(120,180,200)))):
+    cyl(f'bay_hatbox{k_}',(WX+x_,WY-0.45,0.909+0.07+0.15*k_),0.13-0.02*k_,0.14,flat('hatbox%d'%k_,lin(c_),0.5),v=20)
+for k_,x_ in enumerate((-0.42,-0.22,0.24,0.46,0.7,0.92)):
+    cyl(f'bay_ornF{k_}',(WX+x_,WY-0.55,0.909+0.045),0.045,0.07,flat('ornF%d'%(k_%3),lin([(200,40,50),(230,190,70),(70,140,90)][k_%3]),0.15),v=14,rot=(math.radians(90),0,0))
 bpy.ops.object.light_add(type='AREA',location=(WX,WY-0.6,3.3),rotation=(math.radians(35),0,0)); bl=bpy.context.object; bl.name='bay_light'; bl.data.energy=700; bl.data.size=1.6; bl.data.color=(1,0.9,0.75)
 # r6 (round-5 R19): bright payoff - front fill on the bay so highlights reach p98 >= .84
 bpy.ops.object.light_add(type='AREA',location=(WX,WY-2.6,1.9),rotation=(math.radians(80),0,0)); fl_=bpy.context.object; fl_.name='bay_fill'; fl_.data.energy=350; fl_.data.size=2.4; fl_.data.color=(1,0.93,0.82)
@@ -704,12 +733,12 @@ lamppost('Hlp_S15',(HX+8.28,0.04))
 s='S15'; r=SH[s]
 o15=char('S15_oldcop','oldcop',s,(HX+9.0,-0.9,0.14),r,'deadpan',arms=('armS','armS'))   # r7 (rule 271): straight arms whose hands end under the grip cards
 ALL.append(o15)
-pap=plane('S15_paper',(0,0,0),0.62,0.85,card_mat('paper81','paper81',emit=0.3),coll=L.chr_coll(s)); pap.parent=o15['root']; pap.location=(0,-0.03,0.60)   # r7: round bodies are 1.118x taller
+pap=plane('S15_paper',(0,0,0),0.50,0.685,card_mat('paper81','paper81',emit=0.3),coll=L.chr_coll(s)); pap.parent=o15['root']; pap.location=(0,-0.03,0.60)   # r8b: paper scaled to the Rick build (head 0.43 m); top edge 0.94 stays under the chin
 vis(pap,[r]); pap['chr']='S15_oldcop'
 for sx_,tx_ in ((-1,'grip_L'),(1,'grip_R')):
-    g_=plane(f'S15_grip{sx_}',(0,0,0),0.17,0.223,card_mat(tx_,tx_,emit=0.25),coll=L.chr_coll(s)); g_.parent=o15['root']; g_.location=(sx_*0.355,-0.045,0.565); g_['chr']='S15_oldcop'; vis(g_,[r])
+    g_=plane(f'S15_grip{sx_}',(0,0,0),0.17,0.223,card_mat(tx_,tx_,emit=0.25),coll=L.chr_coll(s)); g_.parent=o15['root']; g_.location=(sx_*0.27,-0.045,0.5475); g_['chr']='S15_oldcop'; vis(g_,[r])
 faces(o15,[(1481,'deadpan'),(1489,'raise'),(1505,'deadpan'),(1519,'eyeroll'),(1540,'smug'),(1552,'deadpan')]); bob(o15,[1489,1519])
-arm(o15,-1,1481,-21.4); arm(o15,1,1481,-21.4); arm(o15,1,1519,-20); arm(o15,1,1540,-21.4)   # r7: hand centre lands on the grip at (0.355,0.565) (shoulder 0.21,0.944)
+arm(o15,-1,1481,-8.48); arm(o15,1,1481,-8.48); arm(o15,1,1519,-7.2); arm(o15,1,1540,-8.48)   # r8b: shoulder (0.21,0.95), HAND_Z 0.407 -> hand on the grip (0.27,0.5475)   # r7: hand centre lands on the grip at (0.355,0.565) (shoulder 0.21,0.944)
 path(s,[(1481,(HX+8.0,-3.6,1.3),(HX+9.0,-0.9,1.0)),(1537,(HX+8.4,-3.25,1.35),(HX+9.0,-0.9,1.08)),(1565,(HX+8.9,-3.0,1.4),(HX+9.0,-0.9,1.16))])
 # round 4 (L9): blurred FG litter bin at the lower right of S15 (fgcheck.py: x 0.67-1.27, y <= 0.37 for the whole shot, no sweep)
 _c15=L.chr_coll('S15'); cyl('binS15',(HX+9.35,-1.6,0.42),0.24,0.84,flat('bin',lin((50,84,60)),0.6),v=20,coll=_c15); cyl('binS15_rim',(HX+9.35,-1.6,0.86),0.26,0.05,flat('binrim',lin((36,60,44)),0.5),v=20,coll=_c15)
@@ -743,10 +772,10 @@ def _glad(e,alt=False):   # r5: S16 crowd reacts with delight, never a stern/ang
     pref=(['wow','shock','cheer','excited','happy'] if alt else ['happy','excited','cheer','wow','shock'])
     return next(f for f in pref if f in e['F'])
 for i,e in enumerate(ex): faces(e,[(1640+3*i,_glad(e,True)),(1652+2*i+(i%3)*3,_glad(e)),(1690+2*i,_glad(e,i%2==1))])
-path(s,[(1556,(HX+1.2,-9.5,1.9),(HX,1.0,2.4)),(1590,(HX+4.6,-4.9,2.0),(HX-0.6,0.2,1.55)),(1616,(HX+6.3,-4.0,2.1),(HX-1.0,0.4,1.5)),(1645,(HX+6.2,-3.5,1.95),(HX-0.8,0.4,1.5)),(1646,(HX-5.2,-4.4,1.15),(HX+2.0,0.6,1.42)),(1687,(HX-4.9,-4.1,1.2),(HX+2.0,0.6,1.46)),(1688,(WX+2.4,-4.9,1.7),(WX,WY+0.02,1.76)),
+path(s,[(1556,(HX+1.2,-9.5,1.9),(HX,1.0,2.4)),(1590,(HX+4.6,-4.9,2.0),(HX-0.6,0.2,1.55)),(1616,(HX+6.3,-4.0,2.1),(HX-1.0,0.4,1.5)),(1645,(HX+6.2,-3.5,1.95),(HX-0.8,0.4,1.5)),(1646,(HX-5.2,-4.4,2.15),(HX+2.0,0.6,0.95)),(1687,(HX-4.9,-4.1,2.2),(HX+2.0,0.6,0.99)),(1688,(WX+2.4,-4.9,1.7),(WX,WY+0.02,1.76)),
         (1718,(WX+1.5,-4.3,1.66),(WX,WY+0.06,1.7)),   # r5: hard cuts on 'became' (1646, low crowd-surge insert) and 'we' (1688, poster bay), crash push 1718-1727 on 'purpose'   # r4 K8: slow drift through 'show', crash push 1718-1727 lands on 'purpose'
        (1727,(WX+0.15,-1.85,PZ+0.05),(WX,WY+0.17,PZ-0.05)),(END,(WX+0.05,-1.72,PZ+0.04),(WX,WY+0.17,PZ-0.05))])
-hardcut('S16',1646); hardcut('S16',1688)
+hardcut('S16',1646); hardcut('S16',1688)   # r8b (round-7 P3/R21: eye-level insert lined every head up on the horizon as a frontal row): insert camera raised to 2.15 m looking down, so depth staggers the heads
 # r6: the near perm shopper steps out of the 1646-1687 insert (her card covered the faces behind her): root scaled to ~0 for the insert only
 for _i in (1,7):   # r7: x7 fanblue also steps out of the insert (only its body showed beside the door; face fully behind the door)
     _r=bpy.data.objects[ex[_i]['inst']]
@@ -754,6 +783,15 @@ for _i in (1,7):   # r7: x7 fanblue also steps out of the insert (only its body 
     for fc_ in _r.animation_data.action.fcurves:
         if fc_.data_path=='scale':
             for k_ in fc_.keyframe_points: k_.interpolation='CONSTANT'
+# r8b (round-7 P3/R21): in the 1646-1687 insert the kid steps up near the lens on the left and the tourist hangs back by the door,
+# so the far shoppers no longer stand as one frontal row (positions hold for the insert only, CONSTANT keys)
+for _i,_p in ((8,(HX-1.3,-1.6,0.14)),(5,(HX+5.4,1.5,0.14))):
+    _r=bpy.data.objects[ex[_i]['inst']]; _o=tuple(_r.location)
+    for f_,v_ in ((1645,_o),(1646,_p),(1687,_p),(1688,_o)): _r.location=v_; _r.keyframe_insert('location',frame=f_)
+    for fc_ in _r.animation_data.action.fcurves:
+        if fc_.data_path=='location':
+            for k_ in fc_.keyframe_points:
+                if 1645<=k_.co[0]<=1688: k_.interpolation='CONSTANT'
 # r6 (round-5 payoff note): shoppers crowd the window bay on "we all show up" (never in front of the poster; out of the final close-up)
 exw=crowd(s,r,[(WX-1.31,WY-1.0,0.14),(WX+1.29,WY-1.18,0.14),(WX-1.92,WY-1.74,0.14)],['shopper','kid','perm'],77,faces_pool='glad',base=20); ALL+=exw
 for i,e in enumerate(exw): faces(e,[(1688,_glad(e,i%2==0)),(1712+3*i,_glad(e,i%2==1))]); bob(e,[1700+4*i,1722],amt=6)

@@ -3,18 +3,18 @@
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 import json, math
-T='/root/bf/tex/'; K=(30,22,20,255); SK=(252,246,236,255); OUT=19   # 19 px on an 800 px disc = 2.4 %
+T='/root/bf/tex/'; K=(44,22,40,255); SK=(255,255,255,255); OUT=27   # r8 (owner Nov 20: clone Rick's characters): pure white heads like Rick's. r8b (guide v1.3 x.3): dark plum ink, never pure black; 27 px on an 800 px disc = 3.4 % lit side
 def new(w,h): im=Image.new('RGBA',(w,h),(0,0,0,0)); return im,ImageDraw.Draw(im)
 def dk(c,f=0.75): return tuple(int(v*f) for v in c[:3])+(255,)
 CX,CY=512,540
-def eyes(d,kind,cy=520,gap=125,glasses=None):
+def eyes(d,kind,cy=520,gap=108,glasses=None):   # r8b: centres 27 % of head width apart (216 px of 800)
     for sx in(-1,1):
         x=CX+sx*gap
-        if kind=='dot': d.ellipse([x-24,cy-32,x+24,cy+32],fill=K)
+        if kind=='dot': d.ellipse([x-33,cy-50,x+33,cy+50],fill=K)   # r8b: 100 px tall = 12.5 % of head width
         elif kind=='wide': d.ellipse([x-56,cy-56,x+56,cy+56],fill=(255,255,255,255),outline=K,width=13); d.ellipse([x-20,cy-20,x+20,cy+20],fill=K)
         elif kind=='tiny': d.ellipse([x-14,cy-14,x+14,cy+14],fill=K)
-        elif kind=='up': d.ellipse([x-24,cy-44,x+24,cy+22],fill=K)
-        elif kind=='side': d.ellipse([x-6,cy-30,x+42,cy+30],fill=K)
+        elif kind=='up': d.ellipse([x-33,cy-62,x+33,cy+38],fill=K)
+        elif kind=='side': d.ellipse([x-2,cy-50,x+62,cy+50],fill=K)
         elif kind=='squeeze': d.line([x-40*sx,cy-30,x+34*sx,cy],fill=K,width=19); d.line([x+34*sx,cy,x-40*sx,cy+30],fill=K,width=19)
         elif kind=='half': d.chord([x-38,cy-38,x+38,cy+38],0,180,fill=K); d.line([x-48,cy,x+48,cy],fill=K,width=16)
         elif kind=='happy': d.arc([x-48,cy-24,x+48,cy+54],200,340,fill=K,width=18)
@@ -23,17 +23,17 @@ def eyes(d,kind,cy=520,gap=125,glasses=None):
             for rr in (44,28,12): d.arc([x-rr,cy-rr,x+rr,cy+rr],0,300,fill=K,width=8)
         elif kind=='wink':
             if sx<0: d.arc([x-44,cy-20,x+44,cy+30],200,340,fill=K,width=17)
-            else: d.ellipse([x-24,cy-32,x+24,cy+32],fill=K)
+            else: d.ellipse([x-33,cy-50,x+33,cy+50],fill=K)
         if glasses: d.ellipse([x-74,cy-66,x+74,cy+66],outline=glasses,width=12)
     if glasses: d.line([CX-51,cy-6,CX+51,cy-6],fill=glasses,width=11)
-def brows(d,kind,cy=405,gap=125):
+def brows(d,kind,cy=405,gap=108):
     for sx in(-1,1):
         x=CX+sx*gap
-        if kind=='flat': d.line([x-52,cy,x+52,cy],fill=K,width=20)
-        elif kind=='angry': d.line([x-52*sx,cy-24,x+52*sx,cy+20],fill=K,width=22)
-        elif kind=='up': d.line([x-52,cy-36,x+52,cy-36],fill=K,width=19)
-        elif kind=='worry': d.line([x-52*sx,cy+16,x+52*sx,cy-26],fill=K,width=20)
-        elif kind=='raise': yy=cy-(46 if sx>0 else 0); d.line([x-52,yy,x+52,yy-(8 if sx>0 else 0)],fill=K,width=20)
+        if kind=='flat': d.line([x-52,cy,x+52,cy],fill=K,width=30)
+        elif kind=='angry': d.line([x-52*sx,cy-24,x+52*sx,cy+20],fill=K,width=32)
+        elif kind=='up': d.line([x-52,cy-36,x+52,cy-36],fill=K,width=30)
+        elif kind=='worry': d.line([x-52*sx,cy+16,x+52*sx,cy-26],fill=K,width=30)
+        elif kind=='raise': yy=cy-(46 if sx>0 else 0); d.line([x-52,yy,x+52,yy-(8 if sx>0 else 0)],fill=K,width=30)
         elif kind=='none': pass
 def mouth(d,kind,cy=715,cx=CX):
     R=(110,28,34,255)
@@ -56,8 +56,7 @@ def mouth(d,kind,cy=715,cx=CX):
     elif kind=='whistle': d.ellipse([cx-30,cy-30,cx+30,cy+30],fill=R,outline=K,width=12); d.rounded_rectangle([cx-18,cy-10,cx+110,cy+26],10,fill=(200,200,210,255),outline=K,width=10); d.ellipse([cx+80,cy-20,cx+150,cy+46],fill=(200,200,210,255),outline=K,width=10)
 def extras(d,kind):
     if 'sweat' in kind: d.polygon([(800,320),(770,400),(830,400)],fill=(120,190,255,255)); d.ellipse([768,372,832,436],fill=(120,190,255,255),outline=K,width=8)
-    if 'blush' in kind:
-        for x in(330,694): d.ellipse([x-60,612,x+60,662],fill=(240,120,130,150))
+    if 'blush' in kind: pass   # r8: Rick's faces carry no blush
     if 'puff' in kind:
         for x in(300,724): d.ellipse([x-80,600,x+80,740],fill=(250,180,170,170))
     if 'tear' in kind: d.ellipse([370,580,410,640],fill=(120,190,255,255),outline=K,width=6)
@@ -73,8 +72,9 @@ def head(name,fk):
     if hs=='perm':
         for a in range(0,360,30): x=CX+380*math.cos(math.radians(a)); y=500+360*math.sin(math.radians(a))*0.95; d.ellipse([x-120,y-120,x+120,y+120],fill=hair,outline=K,width=OUT)
     skin=tuple(c.get('skin',SK[:3]))+(255,)
-    d.ellipse([112,140,912,940],fill=skin,outline=K,width=OUT)
-    head_shade(im,skin); d=ImageDraw.Draw(im); d.ellipse([112,140,912,940],outline=K,width=OUT)
+    # r8b (guide v1.3 x.3): ink 3.4 % of head width toward the light (upper right), 6 % away from it and under the chin
+    d.ellipse([112,140,912,940],fill=K); d.ellipse([112+48,140+27,912-27,940-48],fill=skin)
+    head_shade(im,skin); d=ImageDraw.Draw(im)
     if 'angryfill' in ex: 
         ov=Image.new('RGBA',(1024,1024),(0,0,0,0)); od=ImageDraw.Draw(ov); od.ellipse([130,158,894,922],fill=(170,60,170,120)); im.alpha_composite(ov); d=ImageDraw.Draw(im)
     if hs in('short','bald','bun','mullet'):
@@ -85,15 +85,18 @@ def head(name,fk):
         if hs=='mullet': d.chord([150,150,874,540],180,360,fill=hair,outline=K,width=OUT)
     hat=c.get('hat')
     if hat=='cop':
-        d.chord([140,90,884,470],180,360,fill=(28,36,70,255),outline=K,width=OUT); d.rectangle([150,280,874,360],fill=(28,36,70,255),outline=K,width=OUT)
-        d.chord([180,320,844,470],0,180,fill=(20,20,26,255),outline=K,width=OUT)   # peak
-        d.polygon([(CX,170),(CX+44,220),(CX+30,290),(CX-30,290),(CX-44,220)],fill=(214,180,80,255),outline=K)  # plain shield, no text
-    if hat=='flatcap': d.chord([150,140,874,520],180,360,fill=(90,90,96,255),outline=K,width=OUT); d.chord([200,330,760,470],0,180,fill=(70,70,76,255),outline=K,width=OUT)
+        d.chord([140,60,884,400],180,360,fill=(28,36,70,255),outline=K,width=OUT); d.rectangle([150,230,874,300],fill=(28,36,70,255),outline=K,width=OUT)
+        d.chord([180,270,844,400],0,180,fill=(20,20,26,255),outline=K,width=OUT)   # peak; r8b (round-7 C4: brows were drawn on the dark peak): peak ends at y 400, brows sit below it
+        d.polygon([(CX,130),(CX+44,175),(CX+30,225),(CX-30,225),(CX-44,175)],fill=(214,180,80,255),outline=K)  # plain shield, no text
+    if hat=='flatcap': d.chord([150,140,874,480],180,360,fill=(90,90,96,255),outline=K,width=OUT); d.chord([200,300,760,400],0,180,fill=(70,70,76,255),outline=K,width=OUT)
     if hat=='ladyhat': d.ellipse([60,250,964,380],fill=(150,40,60,255),outline=K,width=OUT); d.chord([230,90,794,420],180,360,fill=(150,40,60,255),outline=K,width=OUT); d.ellipse([680,150,780,250],fill=(240,200,80,255),outline=K,width=10)
     if hat=='beanie': d.chord([140,110,884,520],180,360,fill=tuple(c['scarf'])+(255,),outline=K,width=OUT); d.ellipse([462,60,562,160],fill=(250,250,250,255),outline=K,width=12)
     if hat=='fedora': d.ellipse([90,300,934,400],fill=(80,60,44,255),outline=K,width=OUT); d.rounded_rectangle([250,90,774,350],60,fill=(80,60,44,255),outline=K,width=OUT); d.rectangle([250,280,774,330],fill=(40,30,24,255))
-    eyes(d,e,glasses=(tuple(c['glasses'])+(255,)) if c.get('glasses') else None); brows(d,b if hat not in('cop','flatcap','fedora','beanie','ladyhat') or b!='up' else 'flat'); mouth(d,m)
-    if c.get('mustache'): d.chord([CX-120,640,CX+120,720],180,360,fill=tuple(c['mustache'])+(255,),outline=K,width=10)
+    eyes(d,e,glasses=(tuple(c['glasses'])+(255,)) if c.get('glasses') else None); brows(d,b if hat not in('cop','flatcap','fedora','beanie','ladyhat') or b!='up' else 'flat',cy=438 if hat in('cop','flatcap') else 405); mouth(d,m)
+    if c.get('mustache'):   # r8: Rick's bushy two-lobe mustache
+        mc=tuple(c['mustache'])+(255,)
+        for sx in(-1,1): d.ellipse([CX+sx*80-95,605,CX+sx*80+95,705],fill=mc,outline=K,width=12)
+        d.ellipse([CX-70,610,CX+70,690],fill=mc)
     if c.get('nose',True): d.arc([CX-30,560,CX+30,640],-30,200,fill=K,width=10)
     extras(d,ex)
     return im
@@ -103,8 +106,8 @@ def head(name,fk):
 # stick legs with small shoes; thin sleeves with a cuff and a small hand. Drawn at 2x and downsampled (clean edges).
 SS=2; BOUT=20   # round 4: body outline as heavy as the head's (verifier: thin body outlines vs heads)
 def lt(c,f=1.12): return tuple(min(255,int(v*f)) for v in c[:3])+(255,)
-GB={'tall':(80,175,215),'short':(172,180,222),'round':(102,200,238)}   # top px, shoulder half-width, hem half-width
-HEMY={'tall':490,'short':560,'round':520}   # r6 (round-5: legs 0.64-0.90 H, Rick 0.93-1.31): shorter torso, longer legs   # round 5 (B1/B2): torso ~0.86 H tall (H = head disc ~560 px), legs ~0.85 H visible
+GB={'tall':(98,175,215),'short':(98,180,222),'round':(98,200,238)}   # r8b: one build for all (guide v1.3 x.3: torso 1.00 H, legs 1.25-1.3 H, total 3.2-3.35 H); kinds differ in width only   # top px, shoulder half-width, hem half-width
+HEMY={'tall':528,'short':528,'round':528}   # r8b: torso 430 px = 1.00 H (head 0.43 m), legs 528->1074 = 1.27 H   # r6 (round-5: legs 0.64-0.90 H, Rick 0.93-1.31): shorter torso, longer legs   # round 5 (B1/B2): torso ~0.86 H tall (H = head disc ~560 px), legs ~0.85 H visible
 def _sil(kind):
     y0,w0,w1=GB[kind]; y1=HEMY[kind]; pts=[]
     w1=int(w1*0.74); rr=int(0.36*2*w1)   # r6: hem narrower than the middle (Rick: widest at mid-torso)   # rounded bottom: corner radius >= 0.35 of the torso width (Rick bean)
@@ -125,11 +128,16 @@ def body(name,stride=0):
     legc=dk(tuple(c.get('legs',(40,36,40))),0.8); shoe=(34,26,22,255)
     pts,y0,w0,w1,y1=_sil(kind); s=lambda v:int(v*SS)
     # legs (thin sticks) + small shoes; stride poses spread the feet, one lifted
+    # r8 (Rick clone): legs are one dark noodle line each (6.5 % of head width, no taper), knee bowed outward ~156 deg, small dark stub feet <= 0.12 H
+    # r8b (guide v1.3 x.3): one smooth noodle curve per leg (no knee joint), 5.5 % H thick; foot oval ~15 % H wide
+    LW=24
     for sx in(-1,1):
-        x=400+sx*62; fx=x+(sx*70 if stride else 0); lift=(70 if (stride==1 and sx<0) or (stride==2 and sx>0) else 0); fy=1040-lift
-        d.line([s(x),s(y1-40),s(fx),s(fy)],fill=K,width=s(36)); d.line([s(x),s(y1-40),s(fx),s(fy)],fill=legc,width=s(22))
-        d.chord([s(fx-46+sx*20),s(fy-30),s(fx+46+sx*20),s(fy+34)],180,360,fill=shoe,outline=K,width=s(9)); d.line([s(fx-46+sx*20),s(fy+2),s(fx+46+sx*20),s(fy+2)],fill=K,width=s(9))
-        d.arc([s(fx-30+sx*20),s(fy-22),s(fx+14+sx*20),s(fy+6)],200,260,fill=(120,110,100,255),width=s(5))
+        x=400+sx*62; fx=x+sx*20+(sx*60 if stride else 0); lift=(70 if (stride==1 and sx<0) or (stride==2 and sx>0) else 0); fy=1056-lift
+        y_0=y1-60; cx_=(x+fx)/2+sx*30; cy_=(y_0+fy)/2
+        P=[((1-t)**2*x+2*(1-t)*t*cx_+t*t*fx,(1-t)**2*y_0+2*(1-t)*t*cy_+t*t*fy) for t in [i/24 for i in range(25)]]
+        d.line(_S(P),fill=K,width=s(LW),joint='curve')
+        for p_ in (P[0],P[-1]): d.ellipse([s(p_[0]-LW/2),s(p_[1]-LW/2),s(p_[0]+LW/2),s(p_[1]+LW/2)],fill=K)
+        d.ellipse([s(fx-30+sx*16),s(fy-14),s(fx+34+sx*16),s(fy+18)],fill=K)
     # garment base
     gm=Image.new('L',(W,H),0); ImageDraw.Draw(gm).polygon(_S(pts),fill=255)
     base=Image.new('RGBA',(W,H),R); im.paste(base,(0,0),gm); d=ImageDraw.Draw(im)
@@ -219,21 +227,12 @@ def body(name,stride=0):
     d.line(_S(pts+[pts[0]]),fill=K,width=s(BOUT),joint='curve')
     return im.resize((800,1100),Image.LANCZOS)
 def arm(name,prop=None,straight=None):
-    c=C[name]; R=tuple(c['coat'])+(255,); skin=tuple(c.get('skin',SK[:3]))+(255,)
-    W,H=400*SS,900*SS; im=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(im); s=lambda v:int(v*SS)
-    # slim tapered sleeve (shoulder 76 px -> wrist 56 px), cel shadow on the inner half, cuff band, small hand
-    sl=[(162,40),(238,40),(228,640),(172,640)]
-    d.polygon(_S(sl),fill=R); d.polygon(_S([(162,40),(196,40),(198,640),(172,640)]),fill=dk(R,0.74))
-    d.rounded_rectangle([s(158),s(14),s(242),s(110)],s(40),fill=R)
-    d.rectangle([s(168),s(600),s(232),s(648)],fill=dk(R,0.6))
-    d.line(_S([(206,260),(214,300),(204,330)]),fill=dk(R,0.5),width=s(4),joint='curve')
-    d.line(_S(sl+[sl[0]]),fill=K,width=s(13)); d.arc([s(158),s(14),s(242),s(110)],180,360,fill=K,width=s(13))
-    d.line([s(168),s(600),s(232),s(600)],fill=K,width=s(6))
-    d.line([s(200),s(648),s(200),s(684)],fill=K,width=s(22))
-    d.ellipse([s(160),s(676),s(240),s(756)],fill=skin,outline=K,width=s(12))
-    d.ellipse([s(220),s(690),s(252),s(722)],fill=skin,outline=K,width=s(9))   # thumb
-    d.ellipse([s(176),s(722),s(196),s(742)],fill=dk(skin,0.88))
-    im=im.resize((400,900),Image.LANCZOS); d=ImageDraw.Draw(im)
+    # r8b (guide v1.3 x.3, rule 253 reversed): ONE smooth noodle stroke, no elbow joint, 5.5 % of head width thick (38 px; head 0.43 m = 694 arm px),
+    # ending in a plain round mitten 12 % of head width (83 px), no thumb, no fingers. Drawn straight here; noodle() curves it.
+    c=C[name]
+    im=Image.new('RGBA',(400,900),(0,0,0,0)); d=ImageDraw.Draw(im)
+    def mitt(): d.ellipse([158,670,242,754],fill=K)
+    mitt()
     if prop=='bag': d.rectangle([90,760,310,890],fill=(200,170,120,255),outline=K,width=11); d.arc([140,700,260,820],180,360,fill=K,width=9); d.rectangle([150,790,250,830],fill=(200,40,40,255)); d.line([100,800,300,800],fill=dk((200,170,120),0.7),width=4)
     if prop=='box': d.rectangle([100,740,300,880],fill=(60,120,180,255),outline=K,width=11); d.line([200,740,200,880],fill=(250,230,120,255),width=16); d.line([100,810,300,810],fill=(250,230,120,255),width=16); d.polygon([(100,740),(140,740),(100,780)],fill=(40,96,150,255))
     if prop=='chalk': d.rectangle([186,740,214,800],fill=(250,250,250,255),outline=K,width=6)
@@ -243,23 +242,23 @@ def arm(name,prop=None,straight=None):
     if prop=='pennant': d.line([200,600,200,120],fill=(120,80,40,255),width=12); d.polygon([(200,120),(390,180),(200,250)],fill=tuple(c.get('scarf',(40,60,140)))+(255,),outline=K)
     if prop=='camera': d.rounded_rectangle([110,720,290,840],20,fill=(40,40,44,255),outline=K,width=12); d.ellipse([160,740,240,820],fill=(120,140,170,255),outline=K,width=8)
     if prop=='paper': d.rectangle([60,640,340,860],fill=(238,232,214,255),outline=K,width=10); d.text((80,660),'BLACK\nFRIDAY',fill=K)
-    if prop in ('box','bag','paper','megaphone','camera'):   # fingers over the prop so it is held, not floating
-        d.ellipse([170,700,230,760],fill=skin,outline=K,width=8)
-    return bend(im,BEND.get(prop,18) if straight is None else straight)
-# r7 (owner Nov 19: forearms stuck out sideways and swung across faces): natural hang 18 deg (Rick hanging elbows 155-175); 'armS' = straight card for raised and gripping arms
+    if prop in ('box','bag','paper','megaphone','camera'): mitt()   # the mitten sits over the prop so it is held, not floating
+    return noodle(im,BEND.get(prop,18) if straight is None else straight)
+# r7 (owner Nov 19: forearms stuck out sideways and swung across faces): natural hang 18 deg; 'armS' = straight card for raised and gripping arms
 BEND={'pennant':0,'megaphone':15,'paper':20,'bag':20,'box':25,'camera':25,'chalk':30,'pen':30,'redpen':30}
-def bend(im,deg,ey=330):
-    # r6 (round-5 Rick measure: elbows 50-95 deg interior, ours 180): real elbow. The forearm (with cuff, hand and prop) swings outward about the elbow by deg; canvas 800 wide, arm still centred
-    W,H=im.size; out=Image.new('RGBA',(W*3,H),(0,0,0,0)); up=im.crop((0,0,W,ey+40)); lo=im.crop((0,ey-10,W,H))
-    if deg:
-        big=Image.new('RGBA',(W*3,H),(0,0,0,0)); big.paste(lo,(W,ey-10),lo)
-        big=big.rotate(deg,resample=Image.BICUBIC,center=(W*3//2,ey))   # PIL rotates counter-clockwise: the hand swings to +x (outward)
-        out.alpha_composite(big)
-    else: out.paste(lo,(W,ey-10),lo)
-    out.alpha_composite(up,(W,0))
-    c=im.getpixel((W//2+22,ey-60)); d=ImageDraw.Draw(out); r=30; X=W*3//2
-    d.ellipse([X-r,ey-r,X+r,ey+r],fill=c,outline=K,width=12)   # elbow cap hides the joint
-    d.ellipse([X-r+9,ey-r+9,X+r-9,ey+r-9],fill=c)
+AW=38
+def noodle(hand,deg,ey=330):
+    # the hand (with its prop) swings outward by deg about a point 330 px down; the arm is one quadratic curve from the shoulder to the hand
+    W,H=hand.size; out=Image.new('RGBA',(W*3,H),(0,0,0,0)); X=W*3//2
+    lay=Image.new('RGBA',(W*3,H),(0,0,0,0)); lay.paste(hand,(W,0),hand)
+    if deg: lay=lay.rotate(deg,resample=Image.BICUBIC,center=(X,ey))   # PIL rotates counter-clockwise: the hand swings to +x (outward)
+    a=math.radians(deg); hx=X+(712-ey)*math.sin(a); hy=ey+(712-ey)*math.cos(a)
+    sx0,sy0=X,40; cxp,cyp=X,(sy0+hy)/2+40   # control point straight below the shoulder: leaves the shoulder down, bends smoothly into the hand
+    P=[((1-t)**2*sx0+2*(1-t)*t*cxp+t*t*hx,(1-t)**2*sy0+2*(1-t)*t*cyp+t*t*hy) for t in [i/40 for i in range(41)]]
+    big=Image.new('RGBA',(W*3*SS,H*SS),(0,0,0,0)); bd=ImageDraw.Draw(big)
+    bd.line([(x*SS,y*SS) for x,y in P],fill=K,width=AW*SS,joint='curve')
+    for x,y in (P[0],P[-1]): bd.ellipse([(x-AW/2)*SS,(y-AW/2)*SS,(x+AW/2)*SS,(y+AW/2)*SS],fill=K)
+    out.alpha_composite(big.resize((W*3,H),Image.LANCZOS)); out.alpha_composite(lay)
     return out
 def elbow(im,dx,ey=330,wy=640):
     # round 5 (B4): never a dead-straight arm. Shear the forearm sideways so the elbow reads at ~165 deg (Rick hanging arms 155-175)
@@ -272,8 +271,10 @@ def elbow(im,dx,ey=330,wy=640):
     return Image.fromarray(out)
 def head_shade(im,skin):
     # Rick heads: soft cel shadow crescent on the lower-left of the face disc
-    m=Image.new('L',im.size,0); md=ImageDraw.Draw(m); md.ellipse([131,159,893,921],fill=255); md.ellipse([171,99,953,881],fill=0)
+    m=Image.new('L',im.size,0); md=ImageDraw.Draw(m); md.ellipse([160,167,885,892],fill=255); md.ellipse([200,107,945,852],fill=0)
     m=m.filter(ImageFilter.GaussianBlur(10))
+    cl=Image.new('L',im.size,0); ImageDraw.Draw(cl).ellipse([160,167,885,892],fill=255)   # r8b: shade stays inside the ink
+    from PIL import ImageChops; m=ImageChops.multiply(m,cl)
     sh=Image.new('RGBA',im.size,dk(skin,0.88)); im.paste(sh,(0,0),m)
 if __name__=='__main__':
     out={}

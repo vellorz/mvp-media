@@ -116,7 +116,7 @@ for nme,loc,fc,w_ in [('N',(0,170,24),'-Y',260),('S',(0,-150,24),'+Y',260),('E',
 # street furniture
 for sx in(-1,1):
     for y in range(-70,104,14):
-        if abs(y)<9 or (sx<0 and 34<y+3<62) or (sx,y) in ((1,-28),(1,-14)): continue   # no lamppost sweeping across the S03/S04 lens
+        if abs(y)<9 or (sx<0 and 34<y+3<62) or (sx,y) in ((1,-28),(1,-14),(1,14)): continue   # r7: (1,14) stood between the S02 sidewalk lens and the walkers' faces   # no lamppost sweeping across the S03/S04 lens
         lamppost(f'lp{sx}_{y}',(sx*6.6,y+3))
 for i,(x,y) in enumerate([(6.7,-8.2),(-6.8,9.0),(6.8,24),(-6.8,-30)]): hydrant(f'hyd{i}',(x,y))
 for i,(x,y) in enumerate([(-7.0,-8.6),(7.0,52)]): mailbox(f'mb{i}',(x,y))
@@ -152,14 +152,14 @@ cars.append(car('carX2',(3.4,-3.3,0),300,COLS[6],taxi=True))
 cars.append(car('carX3',(-3.4,-3.8,0),40,COLS[1]))
 print('SET A ok, cars',len(cars))
 # ======================= CAST + CAMERAS, set A shots =======================
-def crowd(shot,rng,spots,kinds,seed,walkers=None,faces_pool=None,camname=None):
+def crowd(shot,rng,spots,kinds,seed,walkers=None,faces_pool=None,camname=None,base=0):
     """extras: spots=[(x,y,z)], walkers: list of (i, f0, f1, dx, dy)"""
     rr=random.Random(seed); out=[]
     for i,p in enumerate(spots):
         kd=kinds[i%len(kinds)]; wk=bool(walkers and any(w[0]==i for w in walkers))
         props=CI_PROPS.get(kd,[])
         arms_=('arm','arm_'+props[0]) if props and rr.random()<0.6 else ('arm','arm')
-        ch=char(f'{shot}_x{i}_{kd}',kd,shot,p,rng,arms=arms_,walker=wk,camname=camname)
+        ch=char(f'{shot}_x{i+base}_{kd}',kd,shot,p,rng,arms=arms_,walker=wk,camname=camname)   # r7: base keeps a second crowd's names unique (no .001 duplicates)
         fl=list(L.CI[kd]['faces']); fl=[f for f in fl if f!='blink']
         if faces_pool=='glad': fl=[f for f in fl if f not in ('angry','stern','frown','push','lost')] or fl   # r5: a delighted crowd never shows a stern/angry card
         f0=rng[0]; seq=[]
@@ -183,7 +183,7 @@ def hardcut(shot,f):
 s='S01'; r=SH[s]
 cop=char('S01_cop','cop',s,(0,0,0.64),r,'whistle',arms=('arm','arm')); ALL.append(cop)
 faces(cop,[(0,'whistle'),(28,'annoyed'),(60,'grit'),(88,'shout'),(106,'annoyed'),(128,'shock'),(140,'whistle')])
-for f,a in [(0,-150),(14,-160),(24,-120),(46,-155),(70,-95),(90,-160),(118,-140),(136,-165)]: arm(cop,1,f,a)
+for f,a in [(0,-140),(14,-146),(24,-120),(46,-142),(70,-95),(90,-146),(118,-132),(136,-146)]: arm(cop,1,f,a)   # r7 (rule 268): raised whistle-hand stays out beside the head (armprobe), was -165 over the face
 for f,a in [(0,-60),(30,-90),(60,-40),(96,-95),(140,-70)]: arm(cop,-1,f,a)
 bob(cop,[8,30,62,90,128])
 ex=crowd(s,r,[(7.60,-8.20,0.14),(8.60,-7.40,0.14),(-8.30,-7.43,0.14),(-8.60,8.00,0.14),(8.60,8.10,0.14),(9.00,-9.00,0.14),(-9.20,-8.80,0.14)],   # r4 pass3: prop-aware crowdopt
@@ -197,6 +197,7 @@ sp=[];W=[]
 for i in range(26):
     sx=-1 if i%2 else 1; y=16+2.3*(i//2)+[0,0.9,-0.6,0.4,-0.9,0.7][i%6]; x=sx*(7.2+[0.0,1.3,0.5,1.8,0.9,0.2,1.5][(i*3)%7]); sp.append((x,y,0.14))
     if i%3!=2: W.append((i,163,297,0,-4.5))
+for i_,x_ in ((4,7.9),(10,8.2)): sp[i_]=(x_,sp[i_][1],sp[i_][2])   # r7 (occprobe): granny out from behind the tourist, fan off the lamppost
 ex=crowd(s,r,sp,['shopper','tourist','fanblue','fangold','granny','kid','shopper','fanblue'],9,walkers=W); ALL+=ex
 cop2=char('S02_cop','cop',s,(0,0,0.64),r,'whistle',arms=('arm','arm')); ALL.append(cop2)
 faces(cop2,[(163,'whistle'),(200,'annoyed'),(236,'shout'),(270,'whistle')])
@@ -206,9 +207,18 @@ for f,a in [(163,-70),(190,-100),(230,-50),(262,-95)]: arm(cop2,-1,f,a)
 sp2=[];W2=[]
 for i in range(10):   # r6: the town pours down the right sidewalk at the lens (denser rush, walkers toward camera only); wide lateral stagger so no face hides another
     sp2.append((7.55+[0.0,1.2,0.6,1.45,0.3,0.9,1.35][i%7], 19.0+2.1*i+[0,0.6,-0.4][i%3], 0.14)); W2.append((i,163,297,0,-4.5))
-ex2=crowd(s,r,sp2,['tourist','shopper','fangold','kid','granny','fanblue'],29,walkers=W2); ALL+=ex2
+sp2[4]=(9.15,sp2[4][1],sp2[4][2])   # r7 (occprobe): granny out from behind the fan
+ex2=crowd(s,r,sp2,['tourist','shopper','fangold','kid','granny','fanblue'],29,walkers=W2,base=20); ALL+=ex2
 path(s,[(163,(1.0,-14,26),(0,26,0)),(200,(5.0,4.0,15.0),(8.4,24,0.4)),(219,(5.8,7.5,13.0),(8.4,25,0.4)),(220,(5.3,12.5,0.95),(9.2,25,1.5)),(297,(5.5,9.8,1.0),(9.2,23,1.5))])
 hardcut('S02',220)
+# r7 (rule 204 / occprobe): in the low sidewalk view (220-297) extras whose faces sit fully behind nearer walkers leave the shot at the hard cut (they read as headless bodies)
+S02_HIDE=['S02_x4_granny','S02_x12_granny','S02_x21_shopper','S02_x22_fangold','S02_x23_kid','S02_x25_fanblue','S02_x26_tourist','S02_x6_shopper','S02_x8_shopper','S02_x2_fanblue']
+for n_ in S02_HIDE:
+    _r=bpy.data.objects[n_]
+    for f_,v_ in ((219,1.0),(220,0.0001)): _r.scale=(v_,)*3; _r.keyframe_insert('scale',frame=f_)
+    for fc_ in _r.animation_data.action.fcurves:
+        if fc_.data_path=='scale':
+            for k_ in fc_.keyframe_points: k_.interpolation='CONSTANT'
 # ---------- S03 (292-432): sidewalk truck past shoppers, the tourist and the football fans ----------
 s='S03'; r=SH[s]
 sho=char('S03_shopper','shopper',s,(8.2,-29.0,0.14),r,'happy',arms=('arm_bag','arm_box'))
@@ -415,23 +425,28 @@ path(s,[(643,(CX-2.72,-1.91,2.6),(CX-0.12,1.46,1.15)),(690,(CX-1.95,-0.99,1.95),
 # ======================= S07 / S08 / S09: back in the street (set A) =======================
 # ---- S07/S08: the owner thrusts up a hand-held BIG FRIDAY! placard in front of his store (1961); nobody looks; it droops on "not once"
 def placard(ch,sx,f_up,f_open,droop=None,held=-25):
-    """placard on a stick, held in the raised hand: an empty at the hand, counter-rotated so the stick is upright at -150 deg"""
+    """r7 (owner Nov 19: 'limbs detached, not holding the sign'; rules 270-271): the grip sits exactly on the straight arm card's hand
+    (0.407 below the shoulder pivot), the fist card covers the hand + stick, and the stick is counter-rotated every frame so it
+    tilts outward (board clear of the face) while carried low and stands upright above the head once raised"""
     piv=ch['A'][sx]['piv']; C=L.chr_coll(ch['shot'])
-    hold=empty(ch['inst']+'_hold',(0,0,0),coll=C); hold.parent=piv; hold.location=(0,-0.03,-0.50); hold.rotation_euler=(0,math.radians(150)*sx,0)
+    hold=empty(ch['inst']+'_hold',(0,0,0),coll=C); hold.parent=piv; hold.location=(0,-0.03,-HAND_Z)
     stick=cyl(ch['inst']+'_stick',(0,0,0),0.022,1.0,flat('stick',lin((150,105,60)),0.7),v=8,coll=C); stick.parent=hold; stick.location=(0,0.0,0.36)
     bp=empty(ch['inst']+'_bpiv',(0,0,0),coll=C); bp.parent=hold; bp.location=(0,0,0.86)
     card=plane(ch['inst']+'_placard',(0,0,0),1.0,0.5,card_mat('placard','placard',emit=0.25),coll=C); card.parent=bp; card.location=(0,-0.032,0)
     back=plane(ch['inst']+'_placardb',(0,0,0),1.0,0.5,card_mat('placard_back','placard_back',emit=0.2),coll=C,face='+Y'); back.parent=bp; back.location=(0,0.032,0)
     fist=plane(ch['inst']+'_fist',(0,0,0),0.15,0.15,card_mat('fist','fist',emit=0.25),coll=C); fist.parent=hold; fist.location=(0,-0.03,0.0)
     for o in (stick,card,back,fist): o['chr']=ch['inst']
-    # the stick runs between the two faces (hidden); the board is held back-out (cardboard side) until the beat, then spun round to the slogan
     krot(bp,f_open-4,(0,0,math.pi)); krot(bp,f_open+2,(0,0,0))
     arm(ch,sx,f_up,held); arm(ch,sx,f_open,-150)
-    if droop: arm(ch,sx,droop[0],-150); arm(ch,sx,droop[1],-112)
+    if droop: arm(ch,sx,droop[0],-150); arm(ch,sx,droop[1],-130)
+    tilt=[(ch['rng'][0],35),(f_up,35),(f_up+4,0)]+([(droop[0],0),(droop[1],14)] if droop else [])
+    COUNTER.append((hold,piv,sx,ch['rng'],tilt))
     return hold
+COUNTER=[]
+HAND_Z=0.407   # straight arm card: hand centre 0.407 below the shoulder pivot (cast.arm hand at canvas y 716 of 900, card 0.558 tall, offset 0.242)
 SX=-8.6; SY=47.6   # the owner's spot on the sidewalk in front of Hartwell & Sons
 s='S07'; r=SH[s]
-o7=char('S07_owner','owner',s,(SX,SY,0.14),r,'hope',arms=('arm','arm'))
+o7=char('S07_owner','owner',s,(SX,SY,0.14),r,'hope',arms=('arm','armS'))
 ALL.append(o7); faces(o7,[(775,'hope'),(800,'neutral'),(820,'hope'),(846,'hope'),(856,'hope')]); bob(o7,[790,846,856])
 arm(o7,-1,775,-15); arm(o7,-1,846,-40); arm(o7,-1,858,-20)
 arm(o7,1,775,-30); arm(o7,1,812,-35); placard(o7,1,836,846,held=-140)   # r5 (rule 219): raised on 'name' (836) so the blank back shows <= 8 f before the spin; round 4: board carried low, raised on 'tried', spun to the slogan on 'Big' (was a blank back up for 2 s)
@@ -443,7 +458,7 @@ box('mbS07',(_mx,_my+0.25,0.69),(0.5,0.5,1.0),flat('mailbox',lin((40,70,140)),0.
 for sx_ in(-1,1):
     for sy_ in(-1,1): box(f'mbS07_leg{sx_}{sy_}',(_mx+sx_*0.12,_my+0.25+sy_*0.12,0.15),(0.06,0.06,0.3),INK,coll=_c7,bv=0)
 s='S08'; r=SH[s]
-o8=char('S08_owner','owner',s,(SX,SY,0.14),r,'hope',arms=('arm','arm'))
+o8=char('S08_owner','owner',s,(SX,SY,0.14),r,'hope',arms=('arm','armS'))
 c8=char('S08_cop','cop',s,(-7.0,54.0,0.14),r,'deadpan',arms=('arm','arm'),walker=True)
 ALL+=[o8,c8]
 faces(o8,[(867,'hope'),(884,'neutral'),(897,'sad'),(910,'horror'),(925,'sad')]); bob(o8,[884,910])
@@ -477,7 +492,7 @@ for sx in(-1,1): box(f'press_side{sx}',(DX+sx*1.6,1.0,1.4),(0.3,2.0,2.8),pm,bv=0
 rollers=[]
 for j,(y,z,r_) in enumerate([(0.3,0.95,0.32),(1.0,1.55,0.42),(1.7,2.2,0.32),(0.6,2.35,0.22)]):
     rl=cyl(f'roller{j}',(DX,y,z),r_,3.0,pk if j%2 else pm,v=32,rot=(0,math.pi/2,0)); rollers.append(rl)
-    for f in range(1008,1060,6): rl.rotation_euler=(math.radians((f-1008)*(-24 if j%2 else 24)),math.pi/2,0); rl.keyframe_insert('rotation_euler',frame=f)
+    for f in range(1008,1060,6): rl.rotation_euler=(math.radians((f-1008)*(-24 if j%2 else 24)),0,0); rl.keyframe_insert('rotation_euler',frame=f)
     L.linear(rl)
 web=plane('press_web',(DX,-0.6,0.612),2.6,1.8,flat('newsprint_web',lin((214,206,186)),0.9),horiz=True)
 belt=box('press_belt',(DX,-1.8,0.55),(2.0,3.0,0.12),flat('belt',lin((150,44,36)),0.8),bv=0.02)
@@ -493,7 +508,7 @@ for j in range(8):
 shH=plane('sheetH',(DX,-0.6,0.63),0.8,1.1,card_mat('paper70_s','paper70',emit=0.06),horiz=True)
 kloc(shH,1030,(DX,-1.05,0.63)); kloc(shH,1044,(DX,-2.1,0.63)); vis(shH,[(1030,1057)])
 s='S10'
-path(s,[(1008,(DX+0.25,-2.9,1.25),(DX,-0.2,0.95)),(1015,(DX+0.2,-2.6,1.2),(DX,-1.2,0.62)),(1044,(DX-0.05,-3.0,1.85),(DX,-1.95,0.6)),(1057,(DX-0.05,-3.05,1.9),(DX,-1.95,0.6))])
+path(s,[(1008,(DX+1.35,-3.5,2.35),(DX,0.7,1.25)),(1024,(DX+0.8,-3.3,2.05),(DX,-0.7,0.85)),(1044,(DX-0.05,-3.0,1.85),(DX,-1.95,0.6)),(1057,(DX-0.05,-3.05,1.9),(DX,-1.95,0.6))])   # r7 (round-6 visual: S10 washed out, all white paper): opens wide on the red belt, rollers and press frame, then settles on the hero sheet
 # ======================= SET E: newsstands, town to town (X=1200) =======================
 EX=1200
 box('E_road',(EX,-6,-0.1),(80,10,0.2),ROADX,bv=0); box('E_walk',(EX,1.5,0.07),(80,5,0.14),WALK,bv=0.03)
@@ -580,7 +595,7 @@ cov_r=ledger_cover('ledger_cover_red',420,775,ledgers[0]); cov_b=ledger_cover('l
 vis(cov_r,[(0,1300)]); vis(cov_b,[(1301,1347)])
 s='S12'; r=SH[s]
 x8=char('S12_exec','exec81',s,(FX-0.1,1.5,0),r,'smug',arms=('arm','arm_pen'))
-ALL.append(x8); faces(x8,[(1114,'smug'),(1150,'talk'),(1166,'smug'),(1184,'idea'),(1200,'laugh')]); bob(x8,[1184,1200]); arm(x8,1,1170,-30); arm(x8,1,1184,-150); arm(x8,1,1200,-40)
+ALL.append(x8); faces(x8,[(1114,'smug'),(1150,'talk'),(1166,'smug'),(1184,'idea'),(1200,'laugh')]); bob(x8,[1184,1200]); arm(x8,1,1170,-30); arm(x8,1,1184,-135); arm(x8,1,1200,-40)   # r7: pen hand beside the head, not over it
 import math as _m
 orb=[]
 # round 4: orbit step 9 -> 4.5 deg (its last 12 f put the monitor over her face)
@@ -603,14 +618,23 @@ def strokes(o,cov,f0,f1,x0,y0,y1):
     for i in range(n+1):
         t=i/max(1,n); f=f0+i*3; y=y0+(y1-y0)*t; kloc(o,f,(x0+(0.006 if i%2 else -0.006),y,LED_Z+0.003))
         cov.scale=(1,max(0.001,y-pgy(1024)),1); cov.keyframe_insert('scale',frame=f)
-    cov.scale=(1,pgy(95)-pgy(1024),1); cov.keyframe_insert('scale',frame=f0-1)
+    cov.scale=(1,pgy(84)-pgy(1024),1); cov.keyframe_insert('scale',frame=f0-1)
     for fc in cov.animation_data.action.fcurves:
         for kp in fc.keyframe_points: kp.interpolation='LINEAR'
 TIPX_R,TIPX_B=pgx(630),pgx(1350)
 # each hand slides in from beyond the top of the frame (the writer's side), writes its column top to bottom incl. the total, then slides out
-kloc(hand_r,1249,(TIPX_R,1.66,LED_Z+0.003)); strokes(hand_r,cov_r,1262,1300,TIPX_R,pgy(115),pgy(946)); kloc(hand_r,1302,(TIPX_R,pgy(946),LED_Z+0.003)); kloc(hand_r,1308,(TIPX_R,1.7,LED_Z+0.003))   # r5: the pen rests on the total 4 f before it leaves
-kloc(hand_b,1299,(TIPX_B,1.66,LED_Z+0.003)); strokes(hand_b,cov_b,1306,1345,TIPX_B,pgy(115),pgy(946)); kloc(hand_b,1349,(TIPX_B,pgy(946),LED_Z+0.003)); kloc(hand_b,1354,(TIPX_B,1.7,LED_Z+0.003))
+kloc(hand_r,1249,(TIPX_R,1.66,LED_Z+0.003)); strokes(hand_r,cov_r,1262,1300,TIPX_R,pgy(112),pgy(992)); kloc(hand_r,1302,(TIPX_R,pgy(992),LED_Z+0.003)); kloc(hand_r,1308,(TIPX_R,1.7,LED_Z+0.003))   # r5: the pen rests on the total 4 f before it leaves
+kloc(hand_b,1299,(TIPX_B,1.66,LED_Z+0.003)); strokes(hand_b,cov_b,1306,1345,TIPX_B,pgy(112),pgy(992)); kloc(hand_b,1349,(TIPX_B,pgy(992),LED_Z+0.003)); kloc(hand_b,1354,(TIPX_B,1.7,LED_Z+0.003))
 vis(card_r,[(1249,1308)]); vis(card_b,[(1299,1354)])
+# r7 (round-6 L9: no foreground in the S13 ledger insert): desk objects near the lens, one per camera set-up, each fixed in its corner for its whole set-up (corners.py)
+DZ=0.7815   # r7: 1.5 mm above the desk top (no coplanar contact, rule 228)
+def pencup(n,x,y,col):
+    cyl(n,(x,y,DZ+0.06),0.042,0.12,flat(n+'_m',lin(col),0.45),v=20,coll=C13); cyl(n+'_rim',(x,y,DZ+0.121),0.044,0.008,INK,v=20,coll=C13)
+    for j,(dx,dy,c_) in enumerate([(-0.014,0.008,(240,200,60)),(0.012,-0.01,(196,30,30)),(0.0,0.016,(40,110,60)),(0.016,0.012,(20,20,26))]):
+        pc=cyl(f'{n}_p{j}',(x+dx,y+dy,DZ+0.16+0.012*j),0.006,0.2,flat(f'{n}_pc{j}',lin(c_),0.5),v=8,coll=C13); pc.rotation_euler=(math.radians(8*(j-1.5)),math.radians(6*(1.5-j)),0)
+cyl('S13_cup',(FX-0.30,1.24,DZ+0.05),0.05,0.1,flat('cup13',lin((236,232,220)),0.35),v=24,coll=C13); cyl('S13_coffee',(FX-0.30,1.24,DZ+0.098),0.043,0.006,flat('coffee',lin((70,40,24)),0.2),v=24,coll=C13)
+cyl('S13_saucer',(FX-0.30,1.24,DZ+0.004),0.085,0.008,flat('cup13',lin((236,232,220)),0.35),v=24,coll=C13)
+pencup('S13_pencupL',FX-0.23,0.56,(60,90,140)); pencup('S13_pencupR',FX+0.27,0.55,(150,60,50))
 path(s,[(1210,(FX-0.05,0.85,2.25),(FX-0.05,0.859,LED_Z)),(1281,(FX-0.11,0.79,1.78),(FX-0.11,0.80,LED_Z)),(1282,(FX-0.13,0.60,1.42),(FX-0.13,0.70,LED_Z)),(1318,(FX-0.13,0.61,1.40),(FX-0.13,0.70,LED_Z)),(1319,(FX+0.15,0.785,1.51),(FX+0.15,0.796,LED_Z)),(1344,(FX+0.11,0.79,1.45),(FX+0.11,0.802,LED_Z)),(1359,(FX+0.11,0.79,1.45),(FX+0.11,0.802,LED_Z))])   # round 4: totals whole in frame or fully out (rule 206)
 # S14: ledger total turns the books from red to black, pull back and up to the exec's wink
 s='S14'; r=SH[s]
@@ -642,7 +666,7 @@ building('deptH',(HX,2.5),'-Y','dept81',w=16,h=12,d=10,side='dept81',cap=(90,80,
 for j,x in enumerate([HX-16,HX-24,HX+16,HX+24,HX-32,HX+32]): building(f'bH{j}',(x+(4 if x>HX else -4),2.5),'-Y',f'fac81_{j%4}',awn=AW[j],side=f'fac81_{j%4}')
 skH=plane('H_sky',(HX,120,50),300,170,card_mat('skydawn','sky_dawn',emit=1.0),coll=L.C_NOI); skH['fly']=1
 slH=plane('H_skyline',(HX,100,18),240,240*1400/4096,card_mat('skyline_dawn','skyline_dawn',emit=0.6),coll=L.C_NOI); slH['fly']=1
-for j,x in enumerate([HX-12,HX+4.5,HX+12]): lamppost(f'Hlp{j}',(x,-2.0))
+for j,x in enumerate([HX-12,HX+5.3,HX+12]): lamppost(f'Hlp{j}',(x,-2.0))   # r7: pole moved off the payoff crowd's faces (occprobe)
 # the payoff window display: a lit 3D bay in front of the left window bay, poster framed on an easel
 WX=HX-5.6; WY=1.6
 win=flat('bayframe',lin((40,60,46)),0.5)
@@ -678,19 +702,19 @@ plane('doorH_int',(HX,2.47,1.4),3.6,2.8,card_mat('storeint','storeint',emit=0.9)
 # round 3: depth layer beside the S15 cop (lamppost stays in frame left through the drift; no FG sweep)
 lamppost('Hlp_S15',(HX+8.28,0.04))
 s='S15'; r=SH[s]
-o15=char('S15_oldcop','oldcop',s,(HX+9.0,-0.9,0.14),r,'deadpan',arms=('arm','arm'))
+o15=char('S15_oldcop','oldcop',s,(HX+9.0,-0.9,0.14),r,'deadpan',arms=('armS','armS'))   # r7 (rule 271): straight arms whose hands end under the grip cards
 ALL.append(o15)
-pap=plane('S15_paper',(0,0,0),0.62,0.85,card_mat('paper81','paper81',emit=0.3),coll=L.chr_coll(s)); pap.parent=o15['root']; pap.location=(0,-0.03,0.52)
+pap=plane('S15_paper',(0,0,0),0.62,0.85,card_mat('paper81','paper81',emit=0.3),coll=L.chr_coll(s)); pap.parent=o15['root']; pap.location=(0,-0.03,0.60)   # r7: round bodies are 1.118x taller
 vis(pap,[r]); pap['chr']='S15_oldcop'
 for sx_,tx_ in ((-1,'grip_L'),(1,'grip_R')):
-    g_=plane(f'S15_grip{sx_}',(0,0,0),0.17,0.223,card_mat(tx_,tx_,emit=0.25),coll=L.chr_coll(s)); g_.parent=o15['root']; g_.location=(sx_*0.355,-0.045,0.47); g_['chr']='S15_oldcop'; vis(g_,[r])
+    g_=plane(f'S15_grip{sx_}',(0,0,0),0.17,0.223,card_mat(tx_,tx_,emit=0.25),coll=L.chr_coll(s)); g_.parent=o15['root']; g_.location=(sx_*0.355,-0.045,0.565); g_['chr']='S15_oldcop'; vis(g_,[r])
 faces(o15,[(1481,'deadpan'),(1489,'raise'),(1505,'deadpan'),(1519,'eyeroll'),(1540,'smug'),(1552,'deadpan')]); bob(o15,[1489,1519])
-arm(o15,-1,1481,-22); arm(o15,1,1481,-22); arm(o15,1,1519,-19); arm(o15,1,1540,-22)
+arm(o15,-1,1481,-21.4); arm(o15,1,1481,-21.4); arm(o15,1,1519,-20); arm(o15,1,1540,-21.4)   # r7: hand centre lands on the grip at (0.355,0.565) (shoulder 0.21,0.944)
 path(s,[(1481,(HX+8.0,-3.6,1.3),(HX+9.0,-0.9,1.0)),(1537,(HX+8.4,-3.25,1.35),(HX+9.0,-0.9,1.08)),(1565,(HX+8.9,-3.0,1.4),(HX+9.0,-0.9,1.16))])
 # round 4 (L9): blurred FG litter bin at the lower right of S15 (fgcheck.py: x 0.67-1.27, y <= 0.37 for the whole shot, no sweep)
 _c15=L.chr_coll('S15'); cyl('binS15',(HX+9.35,-1.6,0.42),0.24,0.84,flat('bin',lin((50,84,60)),0.6),v=20,coll=_c15); cyl('binS15_rim',(HX+9.35,-1.6,0.86),0.26,0.05,flat('binrim',lin((36,60,44)),0.5),v=20,coll=_c15)
 s='S16'; r=SH[s]
-sp=[(HX-0.04,-0.10,0.14),(HX-2.10,-3.30,0.14),(HX-0.44,-0.87,0.14),(HX-2.50,0.44,0.14),(HX+2.92,-1.51,0.14),(HX+4.23,0.64,0.14),(HX+5.83,-2.20,0.14),(HX+1.85,3.05,0.14),(HX+4.05,-0.26,0.14)]   # r6: crowdopt on the new cameras (238.8 -> 66.1)   # r5: crowdopt 1556-1700 (wide + crowd-surge insert), 20.3 -> 11.9
+sp=[(HX+0.01,0.13,0.14),(HX-2.10,-3.30,0.14),(HX+6.80,-5.60,0.14),(HX-2.69,0.79,0.14),(HX+3.75,-1.41,0.14),(HX+4.29,0.65,0.14),(HX+5.83,-2.20,0.14),(HX+1.34,3.44,0.14),(HX+4.03,-0.19,0.14)]   # r7: crowdopt 1576-1686 on the taller round bodies (74.7 -> 49.1); x2 kid moved out of the shot (its near head covered three faces in every candidate spot)   # r6: crowdopt on the new cameras (238.8 -> 66.1)   # r5: crowdopt 1556-1700 (wide + crowd-surge insert), 20.3 -> 11.9
 ordr=sorted(range(len(sp)),key=lambda i:sp[i][0]); SLOT=[(HX-2.2,1.0),(HX-1.6,1.9),(HX-1.0,0.9),(HX-0.4,1.85),(HX+0.2,0.95),(HX+0.8,1.9),(HX+1.4,0.9),(HX+2.0,1.85),(HX+2.6,1.0),(HX+3.2,1.9)]
 ex=crowd(s,r,sp,['mullet','perm','kid','granny','shopper','tourist','perm','fanblue','kid'],41,faces_pool='glad'); ALL+=ex
 # r5 (round-4 P3/R21): no identical line-up gesture. Each extra gets its own action, offsets and timing (pointing, waving, hugging a bag, cheering, shrugging)
@@ -724,16 +748,16 @@ path(s,[(1556,(HX+1.2,-9.5,1.9),(HX,1.0,2.4)),(1590,(HX+4.6,-4.9,2.0),(HX-0.6,0.
        (1727,(WX+0.15,-1.85,PZ+0.05),(WX,WY+0.17,PZ-0.05)),(END,(WX+0.05,-1.72,PZ+0.04),(WX,WY+0.17,PZ-0.05))])
 hardcut('S16',1646); hardcut('S16',1688)
 # r6: the near perm shopper steps out of the 1646-1687 insert (her card covered the faces behind her): root scaled to ~0 for the insert only
-_r=bpy.data.objects[ex[1]['inst']]
-for f_,v_ in ((1645,1.0),(1646,0.0001),(1687,0.0001),(1688,1.0)): _r.scale=(v_,)*3; _r.keyframe_insert('scale',frame=f_)
-for fc_ in _r.animation_data.action.fcurves:
-    if fc_.data_path=='scale':
-        for k_ in fc_.keyframe_points: k_.interpolation='CONSTANT'
+for _i in (1,7):   # r7: x7 fanblue also steps out of the insert (only its body showed beside the door; face fully behind the door)
+    _r=bpy.data.objects[ex[_i]['inst']]
+    for f_,v_ in ((1645,1.0),(1646,0.0001),(1687,0.0001),(1688,1.0)): _r.scale=(v_,)*3; _r.keyframe_insert('scale',frame=f_)
+    for fc_ in _r.animation_data.action.fcurves:
+        if fc_.data_path=='scale':
+            for k_ in fc_.keyframe_points: k_.interpolation='CONSTANT'
 # r6 (round-5 payoff note): shoppers crowd the window bay on "we all show up" (never in front of the poster; out of the final close-up)
-exw=crowd(s,r,[(WX-1.31,WY-1.0,0.14),(WX+1.29,WY-1.18,0.14),(WX-1.89,WY-1.92,0.14)],['shopper','kid','perm'],77,faces_pool='glad'); ALL+=exw
+exw=crowd(s,r,[(WX-1.31,WY-1.0,0.14),(WX+1.29,WY-1.18,0.14),(WX-1.92,WY-1.74,0.14)],['shopper','kid','perm'],77,faces_pool='glad',base=20); ALL+=exw
 for i,e in enumerate(exw): faces(e,[(1688,_glad(e,i%2==0)),(1712+3*i,_glad(e,i%2==1))]); bob(e,[1700+4*i,1722],amt=6)
-# ======================= finish =======================
-for a in ALL: finish(a)
+# r7: arm snaps first, then finish() (it reads the final arm angles to pick straight cards)
 # round 5 (P3): arms hold poses and snap (hold, then a 2-frame change) instead of easing continuously; work arms in S05/S13 keep their strokes
 for o_ in bpy.data.objects:
     if not re.search(r'_ap-?1$',o_.name) or o_.name.startswith(('S05_','S13_')) or not o_.animation_data or not o_.animation_data.action: continue
@@ -746,6 +770,17 @@ for o_ in bpy.data.objects:
         fc_.update()
         _P3N=globals().get('_P3N',0)+1; globals()['_P3N']=_P3N
 print('P3 curves',globals().get('_P3N',0))
+# r7: placard sticks counter-rotated per frame against the final (snapped) arm angle
+for hold_,piv_,sx_,rng_,tilt_ in COUNTER:
+    fc_=next(c for c in piv_.animation_data.action.fcurves if c.data_path=='rotation_euler' and c.array_index==1)
+    for g in range(rng_[0],rng_[1]+1):
+        w_=tilt_[0][1]
+        for (fa,wa),(fb,wb) in zip(tilt_,tilt_[1:]):
+            if fa<=g<=fb: w_=wa+(wb-wa)*((g-fa)/max(1,fb-fa)); break
+            if g>fb: w_=wb
+        krot(hold_,g,(0,math.radians(w_)*sx_-fc_.evaluate(g),0))
+# ======================= finish =======================
+for a in ALL: finish(a)
 world_and_sun()
 # indoor fill lights (sets are far apart; area lights only reach their own set)
 for x,e_ in [(BX,1100),(CX,900),(DX,1000),(FX,850)]:

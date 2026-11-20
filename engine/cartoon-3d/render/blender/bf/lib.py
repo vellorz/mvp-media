@@ -161,7 +161,9 @@ def path(n,keys):
         if len(k)>3: co.data.lens=k[3]; co.data.keyframe_insert('lens',frame=f)
 # ---------------- 2D cut-out cast ----------------
 CI=json.load(open('/root/bf/src/cast.json'))
-GEO={'tall':(1.01,0.17,0.97),'short':(0.92,0.19,0.88),'round':(0.99,0.21,0.84)}
+# r7 (round-6 visual: round bodies torso 0.63, legs 0.88 head-heights; need 0.7-1.05 / 0.9-1.5): round body cards stretched 1.118x up from the feet
+BSY={'tall':1.0,'short':1.0,'round':1.118}
+GEO={'tall':(1.01,0.17,0.97),'short':(0.92,0.19,0.88),'round':(-0.04+(0.99+0.04)*1.118,0.21,-0.04+(0.84+0.04)*1.118)}
 ARM_W,ARM_H,ARM_OFF=0.744,0.558,0.242   # r6: arm canvas 1200 wide (bent forearm swings outward)
 SHADOW=None
 def chr_coll(shot):
@@ -173,7 +175,7 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
     bb=root.constraints.new('LOCKED_TRACK'); bb.target=CAM[camname or shot]; bb.track_axis='TRACK_NEGATIVE_Y'; bb.lock_axis='LOCK_Z'
     bodies={}
     for key in (['body','bodyw1','bodyw2'] if walker else ['body']):
-        b=plane(f'{inst}_{key}',(0,0,0),0.8,1.1,card_mat(f'{kind}_{key}',f'{kind}_{key}'),coll=C); b.parent=root; b.location=(0,0,0.51); bodies[key]=b
+        sy=BSY[c['body']]; b=plane(f'{inst}_{key}',(0,0,0),0.8,1.1*sy,card_mat(f'{kind}_{key}',f'{kind}_{key}'),coll=C); b.parent=root; b.location=(0,0,-0.04+0.55*sy); bodies[key]=b
     hp=empty(inst+'_hp',(0,0,top),root,coll=C)
     neck=plane(inst+'_head',(0,0,0),0.16,0.16,flat('skin',lin((252,246,236)),0.9),coll=C); neck.parent=hp; neck.location=(0,0.004,0.04)
     F={}
@@ -181,11 +183,13 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
         f=plane(f'{inst}_d_{fk}',(0,0,0),0.75,0.75,card_mat(f'{kind}_h_{fk}',f'{kind}_h_{fk}',emit=0.25),coll=C); f.parent=hp; f.location=(0,-0.012,0.2535); F[fk]=f
     A={}
     for sx,ak in zip((-1,1),arms):
-        ap=empty(f'{inst}_ap{sx}',(sx*shx,-0.018,shz),root,coll=C); A[sx]={'piv':ap,'cards':{}}
+        # r7 (rule 268): arms sit BEHIND the face disc (face -0.012) and in front of the body (0): a raised hand can never paint over its own face
+        ap=empty(f'{inst}_ap{sx}',(sx*shx,-0.006,shz),root,coll=C); A[sx]={'piv':ap,'cards':{}}
         keys=[ak] if isinstance(ak,str) else sorted(set(k for _,k in ak))
+        if 'armS' not in keys: keys=keys+['armS']   # r7: straight card swapped in automatically while the arm is raised past 70 deg
         for k in keys:
-            a=plane(f'{inst}_arm{sx}_{k}',(0,0,0),ARM_W,ARM_H,card_mat(f'{kind}_{k}',f'{kind}_{k}'),coll=C); a.parent=ap; a.location=(0,0,-ARM_OFF)
-            if sx<0: a.scale=(-1,1,1)   # mirror the left arm so props face outwards
+            tk=f'{kind}_{k}'+('_L' if sx<0 else '')   # r7 (rule 272): mirrored texture, never a negative scale
+            a=plane(f'{inst}_arm{sx}_{k}',(0,0,0),ARM_W,ARM_H,card_mat(tk,tk),coll=C); a.parent=ap; a.location=(0,0,-ARM_OFF)
             A[sx]['cards'][k]=a
         A[sx]['sched']=[(rng[0],ak)] if isinstance(ak,str) else ak
     sh=plane(inst+'_shadow',(0,0,0),1.0,0.45,card_mat('shadowblob','shadow',emit=0.0),coll=C,horiz=True); sh.parent=root; sh.location=(0,0,0.004)
@@ -249,11 +253,25 @@ def finish(ch,blink_every=34):
     for k,o in ch['bodies'].items(): vis(o,BR.get(k,[]))
     vis(ch['neck'],[(a,b)]); vis(ch['shadow'],[(a,b)])
     for sx in (-1,1):
-        s=sorted(ch['A'][sx]['sched']); AR={}
+        s=sorted(ch['A'][sx]['sched'])
+        cur={}
         for i,(f,k) in enumerate(s):
             nx=s[i+1][0] if i+1<len(s) else b+1
-            AR.setdefault(k,[]).append((max(a,f),nx-1))
-        for k,o in ch['A'][sx]['cards'].items(): vis(o,AR.get(k,[]))
+            for g in range(max(a,f),min(nx,b+1)): cur[g]=k
+        # r7 (rule 269): a raised arm (|angle| > 70 deg) shows the straight card so the bent forearm never folds over the head
+        piv=ch['A'][sx]['piv']; fc=None
+        if piv.animation_data and piv.animation_data.action:
+            fc=next((c for c in piv.animation_data.action.fcurves if c.data_path=='rotation_euler' and c.array_index==1),None)
+        if fc and not ch.get('keep_arm_cards'):
+            for g in range(a,b+1):
+                if cur.get(g)=='arm' and abs(fc.evaluate(g))>math.radians(70): cur[g]='armS'
+        AR={}; prev=None
+        for g in range(a,b+1):
+            k=cur.get(g,prev)
+            if k!=prev or not AR.get(k) or AR[k][-1][1]!=g-1: AR.setdefault(k,[]).append([g,g])
+            else: AR[k][-1][1]=g
+            prev=k
+        for k,o in ch['A'][sx]['cards'].items(): vis(o,[tuple(r) for r in AR.get(k,[])])
     for o in [ch['root']]+list(ch['root'].children_recursive):
         o['chr']=ch['inst']
     return ch

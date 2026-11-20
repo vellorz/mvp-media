@@ -22,6 +22,13 @@ def bloom(x,amt=BLOOM):
     m=np.clip((Y-0.80)/0.2,0,1)[...,None]*sm
     g=cv2.GaussianBlur(m,(0,0),10*K)+cv2.GaussianBlur(m,(0,0),28*K)
     g=cv2.resize(g,(w,h),interpolation=cv2.INTER_LINEAR); return np.clip(x+amt*g*(1-x),0,1)
+HIFLOOR=('S11','S15','S16')
+def hifloor(x,target=0.88,gmax=1.28):
+    """r7: per-frame highlight floor. Round 6 measured p98 0.73-0.80 over 1548-1751 (R19 needs >= 0.84): lift by gain to p98 target, soft knee above 0.9"""
+    Y=gray(x[::6,::6]); p=float(np.percentile(Y,98))
+    if p>=target: return x
+    g=min(gmax,target/max(p,1e-3)); z=x*g; k=0.9
+    return np.where(z>k,k+(z-k)/(1+(z-k)/0.1),z).astype(np.float32)
 def vratio(x):  # verifier metric: 4 corner patches (15%W x 10%H) / centre patch (40%W x 30%H)
     h,w=x.shape[:2]; Y=gray(x); cw,ch=int(w*0.15),int(h*0.10)
     c=np.mean([Y[:ch,:cw].mean(),Y[:ch,-cw:].mean(),Y[-ch:,:cw].mean(),Y[-ch:,-cw:].mean()])
@@ -161,6 +168,7 @@ if __name__=='__main__':
             if n=='S16' and f>=PAY0:   # payoff close-up: protect the poster's real colours (no highlight stretch, gentle gamma)
                 q=apply(raw,PAYP); q=np.clip(q+0.7*(q-cv2.GaussianBlur(q,(0,0),1.4*K)),0,1);   # round 4: poster read soft (38 % of file sharpness): gentle unsharp on the payoff
                 t=min(1.0,(f-PAY0+1)/(PAY1-PAY0+1)); t=t*t*(3-2*t); o=o*(1-t)+q*t
+            if n in HIFLOOR: o=hifloor(o)   # r7 (rule 274): bright ending and S11 highlights (p98 >= 0.86 before the poster's true colours go on)
             if n=='S16' and str(f) in PQ: o=truepost(o,PQ[str(f)])   # r5 (rule 196, round-4 E5 note): the shop file's true colours on the projected poster quad
             frames[n]=vig(bloom(o,BLOOM*(0.4 if n in ('S10','S13') else 1.0)),VIG[n])
         if len(act)==1: img=frames[act[0]]

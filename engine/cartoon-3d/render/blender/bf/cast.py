@@ -218,7 +218,7 @@ def body(name,stride=0):
         for k in range(5): d.line([s(458+k*14),s(y0+330),s(458+k*14),s(y0+362)],fill=sc,width=s(6))
     d.line(_S(pts+[pts[0]]),fill=K,width=s(BOUT),joint='curve')
     return im.resize((800,1100),Image.LANCZOS)
-def arm(name,prop=None):
+def arm(name,prop=None,straight=None):
     c=C[name]; R=tuple(c['coat'])+(255,); skin=tuple(c.get('skin',SK[:3]))+(255,)
     W,H=400*SS,900*SS; im=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(im); s=lambda v:int(v*SS)
     # slim tapered sleeve (shoulder 76 px -> wrist 56 px), cel shadow on the inner half, cuff band, small hand
@@ -245,8 +245,9 @@ def arm(name,prop=None):
     if prop=='paper': d.rectangle([60,640,340,860],fill=(238,232,214,255),outline=K,width=10); d.text((80,660),'BLACK\nFRIDAY',fill=K)
     if prop in ('box','bag','paper','megaphone','camera'):   # fingers over the prop so it is held, not floating
         d.ellipse([170,700,230,760],fill=skin,outline=K,width=8)
-    return bend(im,BEND.get(prop,85))
-BEND={'pennant':0,'megaphone':20,'paper':25,'bag':25,'box':30,'camera':30,'chalk':45,'pen':45,'redpen':45}
+    return bend(im,BEND.get(prop,18) if straight is None else straight)
+# r7 (owner Nov 19: forearms stuck out sideways and swung across faces): natural hang 18 deg (Rick hanging elbows 155-175); 'armS' = straight card for raised and gripping arms
+BEND={'pennant':0,'megaphone':15,'paper':20,'bag':20,'box':25,'camera':25,'chalk':30,'pen':30,'redpen':30}
 def bend(im,deg,ey=330):
     # r6 (round-5 Rick measure: elbows 50-95 deg interior, ours 180): real elbow. The forearm (with cuff, hand and prop) swings outward about the elbow by deg; canvas 800 wide, arm still centred
     W,H=im.size; out=Image.new('RGBA',(W*3,H),(0,0,0,0)); up=im.crop((0,0,W,ey+40)); lo=im.crop((0,ey-10,W,H))
@@ -280,7 +281,12 @@ if __name__=='__main__':
         for fk in c['faces']: head(n,fk).save(f'{T}{n}_h_{fk}.png')
         body(n).save(f'{T}{n}_body.png'); body(n,1).save(f'{T}{n}_bodyw1.png'); body(n,2).save(f'{T}{n}_bodyw2.png')
         for p in c.get('props',[None]): arm(n,p).save(f'{T}{n}_arm{"_"+p if p else ""}.png')
-        arm(n).save(f'{T}{n}_arm.png')
+        arm(n).save(f'{T}{n}_arm.png'); arm(n,straight=4).save(f'{T}{n}_armS.png')
+        # r7 (rule 272): left arms get their own mirrored texture, never a negative object scale (the PC GPU drew a mirrored card as a black box)
+        import glob as _g
+        for fp in _g.glob(f'{T}{n}_arm*.png'):
+            if fp.endswith('_L.png'): continue
+            Image.open(fp).transpose(Image.FLIP_LEFT_RIGHT).save(fp[:-4]+'_L.png')
     # preview
     pv=Image.new('RGBA',(300*len(C),700),(236,230,218,255))
     for i,n in enumerate(C):

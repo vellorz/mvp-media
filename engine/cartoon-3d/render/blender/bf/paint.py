@@ -313,30 +313,32 @@ def newspaper(name,head,sub,year,size=1.0,W=1024,H=1400,seed=70):
         x0=W/2+20 if col==0 else 60; ys=y if col==0 else y+400
         for k in range(26 if col==0 else 14): d.line([x0,ys+k*16,x0+(W/2-80)*r.uniform(0.8,1),ys+k*16],fill=(120,114,104),width=6)
     im.save(T+name+'.png')
-def ledger(name,state,W=1536,H=1024,seed=80,figs=True):  # state 0: red entries only; 1..4: black total being written; 
+def ledger(name,state,W=1536,H=1024,seed=80,figs=True):  # state 0: red entries only; 1..4: black total being written;
+    # r7 (owner Nov 19: "text inside the lines of the paper"; rule 273): ruled every 40 px from y=80; every entry sits on a ruled line
+    # (baseline 11 px above the line, cap tops >= 8 px below the line above); the totals sit in the band 960-1000 under a heavy rule at 960
     im=wash(W,H,(240,234,214),0.04,seed); d=ImageDraw.Draw(im); r=random.Random(seed)
     for y in range(80,H,40): d.line([0,y,W,y],fill=(110,150,190),width=4)
     for x in (120,W/2-40,W/2,W-260): d.line([x,0,x,H],fill=(200,90,90),width=5)
     d.line([W/2-4,0,W/2-4,H],fill=(160,150,130),width=10)  # spine
-    text(d,(W/2-150,40),'NOVEMBER',font(FS,40),(60,50,46)); text(d,(W*0.75,40),'FRIDAY',font(FS,40),(60,50,46))
-    hand=font(FS,30)
-    # round 3 (rule 198): every column adds up to its total. red 18 rows = (9,410.00); black 18 rows = + 18,240.00
+    text(d,(W/2-150,40),'NOVEMBER',font(FS,30),(60,50,46)); text(d,(W*0.75,40),'FRIDAY',font(FS,30),(60,50,46))
+    hand=font(FS,26)
     def column(total,lo,hi,n,seed_):
         rr=random.Random(seed_); v=[rr.randint(lo*100,hi*100) for _ in range(n-1)]; v.append(int(round(total*100))-sum(v)); return [x/100 for x in v]
     RED=column(9410.00,180,820,18,seed+1); BLK=column(18240.00,520,1500,18,seed+2)
     assert abs(sum(RED)-9410.00)<0.001 and abs(sum(BLK)-18240.00)<0.001 and min(RED)>0 and min(BLK)>0
+    BL=lambda k: 120+40*k-11         # baseline of row k: 11 px above the ruled line at 120+40k so descenders stay off it
     for k in range(18):
-        y=100+k*40
-        if figs: d.text((W/2-200,y),f'({RED[k]:,.2f})',font=hand,fill=(196,30,30))
-    # r5 (round-4 shots verifier: labels appeared with no pen near them): item labels, the TOTAL word and its rule are pre-printed on every state; only the figures are written by the pen
+        if figs: d.text((W/2-200,BL(k)),f'({RED[k]:,.2f})',font=hand,fill=(196,30,30),anchor='ls')
     labs=[r.choice(['sales','gifts','toys','coats','hats']) for _ in range(18)]
-    for k in range(18): d.text((W/2+40,100+k*40),labs[k],font=hand,fill=(50,46,60))
-    d.line([W/2+40,H-120,W-60,H-120],fill=(20,20,26),width=5); d.text((W/2+60,H-100),'TOTAL',font=font(FS,44),fill=(20,20,26))
+    for k in range(18): d.text((W/2+40,BL(k)),labs[k],font=hand,fill=(50,46,60),anchor='ls')
+    tot=font(FS,28)
+    d.line([W/2+40,960,W-60,960],fill=(20,20,26),width=7); d.text((W/2+60,990),'TOTAL',font=tot,fill=(20,20,26),anchor='ls')
     for k in range(int(state*4.5)):
-        y=100+k*40; d.text((W-240,y),f'{BLK[k]:,.2f}',font=hand,fill=(20,20,26))
+        d.text((W-240,BL(k)),f'{BLK[k]:,.2f}',font=hand,fill=(20,20,26),anchor='ls')
     if state>=4:
-        d.text((W-330,H-100),'+ 18,240.00',font=font(FS,44),fill=(20,20,26))
-    d.line([140,H-120,W/2-60,H-120],fill=(196,30,30),width=5); d.text((W/2-330,H-100),'(9,410.00)',font=font(FS,44),fill=(196,30,30)) if figs else None
+        d.text((W-252,990),'+18,240.00',font=tot,fill=(20,20,26),anchor='ls')
+    d.line([140,960,W/2-60,960],fill=(196,30,30),width=7)
+    if figs: d.text((W/2-330,990),'(9,410.00)',font=tot,fill=(196,30,30),anchor='ls')
     im.save(T+name+'.png')
 def fleur(d,x,y,c,ink,k=1.0):
     # fleur-de-lis: pointed centre petal, two outward-curling side petals, band, small foot (ink-outlined)

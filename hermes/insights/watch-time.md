@@ -12,7 +12,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Platform | Videos | Measured | Median watched | Median completion |
 |---|---|---|---|---|
 | TikTok | 28 | 14 | 4.1 s | 21.9% |
-| Instagram | 24 | 15 | 4.7 s | 26.8% |
+| Instagram | 25 | 15 | 4.7 s | 26.8% |
 | Facebook | 25 | 25 | 2.8 s | 13.4% |
 | YouTube | 24 | 0 | not recorded | not recorded |
 
@@ -20,11 +20,12 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
+| Nov 21, 12:03 PM | Instagram | bf13_blackfriday_2k.mp4 (https://www.instagram.com/reel/DgA0_t4gE9F/) | 159 | not recorded | not recorded | — |
 | Nov 21, 10:03 AM | TikTok | bf13_blackfriday_2k.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7710655478522596622) | not counted yet | not counted yet | not recorded | — |
-| Nov 21, 10:01 AM | Facebook | bf13_blackfriday_2k.mp4 (https://www.facebook.com/reel/2189755435225304/) | 101 | 14.1 s | 58.4 s | 24.1% |
+| Nov 21, 10:01 AM | Facebook | bf13_blackfriday_2k.mp4 (https://www.facebook.com/reel/2189755435225304/) | 225 | 7.9 s | 58.4 s | 13.5% |
 | Nov 17, 7:02 PM | Instagram | 02_tue-nov17_salzburg_2k.mp4 (https://www.instagram.com/reel/Df3Ryocgi3f/) | 792 | 18.2 s | not recorded | — |
 | Nov 17, 7:01 PM | Facebook | 02_tue-nov17_salzburg_2k.mp4 (https://www.facebook.com/reel/1130134059778348/) | 181 | 5.7 s | 52.4 s | 10.9% |
-| Nov 17, 6:05 PM | YouTube | Silent Night Was First Played on a Guitar / Salzburg Christmas History #shorts (https://www.youtube.com/watch?v=YJx9_loe8IE) | 54 | not available | 53.0 s | — |
+| Nov 17, 6:05 PM | YouTube | Silent Night Was First Played on a Guitar / Salzburg Christmas History #shorts (https://www.youtube.com/watch?v=YJx9_loe8IE) | 55 | not available | 53.0 s | — |
 | Nov 17, 6:01 PM | TikTok | 02_tue-nov17_salzburg_2k.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7709294562371505421?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 133 | 9.4 s | not recorded | — |
 | Nov 16, 7:04 PM | Instagram | 01_mon-nov16_chicago_2k.mp4 (https://www.instagram.com/reel/Df0tHrDk1k6/) | 1585 | 33.1 s | not recorded | — |
 | Nov 16, 7:02 PM | Facebook | 01_mon-nov16_chicago_2k.mp4 (https://www.facebook.com/reel/2210181876545203/) | 244 | 9.8 s | 73.3 s | 13.4% |

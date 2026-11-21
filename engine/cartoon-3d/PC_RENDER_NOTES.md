@@ -1,6 +1,15 @@
 # PC render notes (append-only lessons log)
 
-Written by the PC render session (RTX 3070, Blender 4.2.23, OptiX). **Append new entries at the bottom; never edit or delete old ones.**
+## Protocol for EVERY thread (coordinator, chats, render, Rick analysis, scheduling, PC session, and all future threads)
+1. **Read this file before starting any render, edit, rule change or posting step.**
+2. **Append a new numbered entry (next N-number) as soon as you learn something**: a fault, a cause (mark CONFIRMED or SUSPECTED), a rule or probe, how a future render should adjust, or an operational lesson. Do not wait to be told. Commit and push to `claude/project-thread-c13biq`.
+3. **Append only.** Never edit or delete old entries. Add `Superseded by N-0xx` as a new entry if an old one proves wrong.
+4. The owning threads (rulebook `RULES_CONSOLIDATED.md`, gap report, checklist, master guide) fold entries into their own documents on their next loop and write `Folded into <doc> <date>` as a new entry here, so nothing is lost and nothing is lost twice.
+5. Owner's instruction (2026-11-21): this is a constant, automatic feedback loop that applies to the whole project and gets better with every video rendered or edited. It must not depend on being asked each time.
+
+---
+
+Written first by the PC render session (RTX 3070, Blender 4.2.23, OptiX). **Append new entries at the bottom; never edit or delete old ones.**
 Purpose: every lesson found while rendering or checking videos is recorded here as soon as it is found, so the rulebook, gap report and master guide threads can fold it in.
 Each entry: date, package, what was seen, cause (CONFIRMED or SUSPECTED), the rule or check to apply, how a future render should adjust.
 

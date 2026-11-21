@@ -31,22 +31,22 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 15, 2:02 PM | YouTube | Oktoberfest Started as a Wedding Party #shorts (https://www.youtube.com/watch?v=7rM6Wx_lSc0) | 1330 | not available | 69.0 s | — |
 | Nov 15, 1:04 PM | Instagram | 07_sun-nov15_munich_post.mp4 (https://www.instagram.com/reel/DfxfHkxFNAt/) | 1570 | 24.7 s | not recorded | — |
 | Nov 15, 1:02 PM | Facebook | 07_sun-nov15_munich_post.mp4 (https://www.facebook.com/reel/29283033394650756/) | 495 | 6.6 s | 68.7 s | 9.6% |
-| Nov 15, 11:05 AM | TikTok | 07_sun-nov15_munich_post.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7708445003273555231?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 935 | 16.2 s | not recorded | — |
+| Nov 15, 11:05 AM | TikTok | 07_sun-nov15_munich_post.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7708445003273555231?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 983 | 16.0 s | not recorded | — |
 | Nov 13, 6:05 PM | YouTube | Why Greece Fears Tuesday the 13th, Not Friday #shorts (https://www.youtube.com/watch?v=zCNh2GtlnsM) | 1275 | not available | 75.0 s | — |
-| Nov 13, 6:01 PM | TikTok | 05_fri-nov13_istanbul_2k.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7707810271749868814?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 837 | 11.2 s | not recorded | — |
+| Nov 13, 6:01 PM | TikTok | 05_fri-nov13_istanbul_2k.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7707810271749868814?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 841 | 11.2 s | not recorded | — |
 | Nov 13, 2:46 PM | Instagram | 05_fri-nov13_istanbul_2k.mp4 (https://www.instagram.com/reel/DfshSHeCF-A/) | 138 | 12.8 s | not recorded | — |
 | Nov 13, 2:45 PM | Facebook | 05_fri-nov13_istanbul_2k.mp4 (https://www.facebook.com/reel/4575624492685348/) | 308 | 4.9 s | 74.7 s | 6.6% |
 | Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2729 | 39.2 s | not recorded | — |
 | Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 287 | 21.1 s | 69.3 s | 30.4% |
 | Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 24577 | not available | 70.0 s | — |
-| Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706945601526631693?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1442 | 22.0 s | not recorded | — |
+| Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706945601526631693?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1485 | 22.0 s | not recorded | — |
 | Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.1 s | not recorded | — |
 | Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 231 | 8.5 s | 65.4 s | 13.0% |
 | Nov 10, 6:03 PM | TikTok | 02_tue_eiffel-tower.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706697475796602126?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1219 | 22.9 s | not recorded | — |
 | Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 1702 | not available | 66.0 s | — |
 | Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1162 | 36.6 s | not recorded | — |
 | Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 253 | 12.3 s | 66.2 s | 18.6% |
-| Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706326116595813645?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 154 | 15.6 s | not recorded | — |
+| Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706326116595813645?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 155 | 15.6 s | not recorded | — |
 | Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1103 | not available | 67.0 s | — |
 | Nov 8, 7:02 PM | YouTube | The Copenhagen Harbour Where Fairy Tales Began #shorts (https://www.youtube.com/watch?v=6T8XoSWypVI) | 21 | not available | 17.0 s | — |
 | Nov 8, 7:02 PM | Instagram | 10_ronda.mp4 (https://www.instagram.com/reel/DfgGmeAFUxG/) | 20 | 2.9 s | 12.0 s | 24.2% |

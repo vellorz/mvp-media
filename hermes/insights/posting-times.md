@@ -1,7 +1,7 @@
 from: research
 title: Best posting slots: Sun 12–3 PM scores 4.1× across platforms
 metric: social.views
-evidence: Mission Control Content screen, best-time heatmap; 257 posts counted over the last 90 days; 1 not counted yet (left out); posts last pulled Sat, Nov 21, 9:38 AM Central
+evidence: Mission Control Content screen, best-time heatmap; 257 posts counted over the last 90 days; 2 not counted yet (left out); posts last pulled Sat, Nov 21, 10:38 AM Central
 
 How to read this: score = a post's views ÷ that platform's usual (median) post, so 1.0× = usual.
 Each slot's score is a geometric average pulled toward 1.0× when it has few posts, so one viral post can't carry it.
@@ -45,8 +45,8 @@ Use it to favour strong slots, avoid weak ones, and now and then test an unteste
 | Wed | 12–3 PM | 5 | 0.7× | 0.7× | weak |
 | Sat | 3–6 PM | 5 | 0.6× | 0.3× | weak |
 | Thu | 12–3 AM | 2 | 0.5× | 0.3× | weak |
-| Thu | 12–3 PM | 8 | 0.4× | 0.4× | weak |
 | Sat | 9 AM–12 | 9 | 0.4× | 0.5× | weak |
+| Thu | 12–3 PM | 8 | 0.4× | 0.4× | weak |
 | Mon | 9 PM–12 | 4 | 0.3× | 0.1× | weak |
 Every other day and time: untested (no posts there yet).
 
@@ -157,9 +157,9 @@ Every other day and time: untested (no posts there yet).
 | Thu | 6–9 PM | 3 | 0.5× | 0.0× | weak |
 | Thu | 12–3 AM | 1 | 0.5× | 0.0× | too few to rate |
 | Thu | 12–3 PM | 4 | 0.3× | 0.0× | weak |
+| Sat | 9 AM–12 | 3 | 0.3× | 0.1× | weak |
 | Mon | 9 PM–12 | 2 | 0.3× | 0.0× | weak |
 | Sun | 9 PM–12 | 2 | 0.3× | 0.0× | weak |
-| Sat | 9 AM–12 | 3 | 0.3× | 0.0× | weak |
 Every other day and time: untested (no posts there yet).
 
 ## YouTube
@@ -183,6 +183,4 @@ Every other day and time: untested (no posts there yet).
 Every other day and time: untested (no posts there yet).
 
 ## Queued in Buffer
-- Sat, Nov 21, 10:00 AM, TikTok: weak slot (0.6×, TikTok's own posts)
-- Sat, Nov 21, 10:00 AM, Facebook: weak slot (0.3×, Facebook's own posts)
 - Sat, Nov 21, 12:00 PM, Instagram: weak slot (0.8×, all platforms)

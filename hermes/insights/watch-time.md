@@ -11,7 +11,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Platform | Videos | Measured | Median watched | Median completion |
 |---|---|---|---|---|
-| TikTok | 27 | 14 | 4.1 s | 21.9% |
+| TikTok | 28 | 14 | 4.1 s | 21.9% |
 | Instagram | 24 | 15 | 4.7 s | 26.8% |
 | Facebook | 25 | 24 | 2.7 s | 13.2% |
 | YouTube | 24 | 0 | not recorded | not recorded |
@@ -20,7 +20,8 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 21, 10:01 AM | Facebook | Why the day after Thanksgiving is called Black Friday: the Philadelphia police story and t (https://www.facebook.com/reel/2189755435225304/) | 0 | not recorded | 58.4 s | — |
+| Nov 21, 10:03 AM | TikTok | bf13_blackfriday_2k.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7710655478522596622) | not counted yet | not counted yet | not recorded | — |
+| Nov 21, 10:01 AM | Facebook | bf13_blackfriday_2k.mp4 (https://www.facebook.com/reel/2189755435225304/) | 6 | not recorded | 58.4 s | — |
 | Nov 17, 7:02 PM | Instagram | 02_tue-nov17_salzburg_2k.mp4 (https://www.instagram.com/reel/Df3Ryocgi3f/) | 792 | 18.2 s | not recorded | — |
 | Nov 17, 7:01 PM | Facebook | 02_tue-nov17_salzburg_2k.mp4 (https://www.facebook.com/reel/1130134059778348/) | 181 | 5.7 s | 52.4 s | 10.9% |
 | Nov 17, 6:05 PM | YouTube | Silent Night Was First Played on a Guitar / Salzburg Christmas History #shorts (https://www.youtube.com/watch?v=YJx9_loe8IE) | 54 | not available | 53.0 s | — |

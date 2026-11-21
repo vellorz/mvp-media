@@ -38,7 +38,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 13, 2:45 PM | Facebook | 05_fri-nov13_istanbul_2k.mp4 (https://www.facebook.com/reel/4575624492685348/) | 308 | 4.9 s | 74.7 s | 6.6% |
 | Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2729 | 39.2 s | not recorded | — |
 | Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 287 | 21.1 s | 69.3 s | 30.4% |
-| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 24573 | not available | 70.0 s | — |
+| Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 24577 | not available | 70.0 s | — |
 | Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706945601526631693?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1442 | 22.0 s | not recorded | — |
 | Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.1 s | not recorded | — |
 | Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 231 | 8.5 s | 65.4 s | 13.0% |
@@ -86,7 +86,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 3, 4:02 PM | Facebook | 2_ghent.mp4 (https://www.facebook.com/reel/1438962015054698/) | 95 | 2.8 s | 17.2 s | 16.3% |
 | Nov 2, 7:04 PM | Instagram | 1_murren.mp4 (https://www.instagram.com/reel/DfQqHdNjzZ8/) | 94 | 5.6 s | 20.9 s | 26.8% |
 | Nov 2, 7:01 PM | Facebook | 1_murren.mp4 (https://www.facebook.com/reel/39948020921479338/) | 196 | 3.1 s | 20.9 s | 14.8% |
-| Nov 2, 4:03 PM | YouTube | The Bond Villain Lair Above This Swiss Village 🇨🇭 #shorts (https://www.youtube.com/watch?v=FDvXLdwiGCQ) | 33 | not available | 21.0 s | — |
+| Nov 2, 4:03 PM | YouTube | The Bond Villain Lair Above This Swiss Village 🇨🇭 #shorts (https://www.youtube.com/watch?v=FDvXLdwiGCQ) | 34 | not available | 21.0 s | — |
 | Nov 2, 12:11 PM | TikTok | 1_murren.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7703636893233106189?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 283 | 4.4 s | 20.9 s | 21.2% |
 | Nov 1, 6:02 PM | TikTok | 03_kirkjufell_sun-nov1.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7703357508211051789?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 103 | 4.1 s | 13.5 s | 30.4% |
 | Nov 1, 6:02 PM | YouTube | You've seen this mountain on TV #shorts (https://www.youtube.com/watch?v=AWB7WhkiIw0) | 5 | not available | 14.0 s | — |

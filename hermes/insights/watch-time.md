@@ -20,7 +20,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 21, 12:03 PM | Instagram | bf13_blackfriday_2k.mp4 (https://www.instagram.com/reel/DgA0_t4gE9F/) | 219 | not recorded | not recorded | — |
+| Nov 21, 12:03 PM | Instagram | bf13_blackfriday_2k.mp4 (https://www.instagram.com/reel/DgA0_t4gE9F/) | 472 | not recorded | not recorded | — |
 | Nov 21, 10:03 AM | TikTok | bf13_blackfriday_2k.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7710655478522596622) | 399 | 20.0 s | not recorded | — |
 | Nov 21, 10:01 AM | Facebook | bf13_blackfriday_2k.mp4 (https://www.facebook.com/reel/2189755435225304/) | 227 | 7.9 s | 58.4 s | 13.5% |
 | Nov 17, 7:02 PM | Instagram | 02_tue-nov17_salzburg_2k.mp4 (https://www.instagram.com/reel/Df3Ryocgi3f/) | 792 | 18.2 s | not recorded | — |
@@ -48,7 +48,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 10, 6:03 PM | TikTok | 02_tue_eiffel-tower.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706697475796602126?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1219 | 22.9 s | not recorded | — |
 | Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 1702 | not available | 66.0 s | — |
 | Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1162 | 36.6 s | not recorded | — |
-| Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 254 | 12.3 s | 66.2 s | 18.6% |
+| Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 254 | 12.2 s | 66.2 s | 18.4% |
 | Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706326116595813645?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 155 | 15.6 s | not recorded | — |
 | Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1103 | not available | 67.0 s | — |
 | Nov 8, 7:02 PM | YouTube | The Copenhagen Harbour Where Fairy Tales Began #shorts (https://www.youtube.com/watch?v=6T8XoSWypVI) | 21 | not available | 17.0 s | — |

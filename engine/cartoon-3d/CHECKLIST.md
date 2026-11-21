@@ -127,3 +127,6 @@ Source: `rick-spec/next-loop-2026-11-20/RENDER_SPEC_v1.4.md` and `RULES_CLONE_v2
 - [guidance] Dissolves 5 to 12 f (median 8), smoothstep, payoff about 12 f, start on sentence starts; hard cuts allowed freely.
 - [guidance] Motion window: snap 2.5 f median, tween 6 f median, holds 26 f median; timing known to +-3 f start, +-4 f end.
 - [uncertain, soft targets only] bed swing, key, tempo 75 to 104 BPM, SFX, camera scale and roll.
+
+## Loop 3 (Nov 21 2026): no build value changes except the motion window
+Source: `rick-spec/loop3-2026-11-21/`. The 3D camera solve did not reach 75 % on any field, so camera sizes stay as in the v1.4 section above (soft targets). [guidance] Action timing window is now +-2 f (items two labellers both found); face change about 3 f, gesture about 4 f, mouth change about 4.5 f.

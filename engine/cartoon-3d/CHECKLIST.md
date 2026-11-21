@@ -130,3 +130,10 @@ Source: `rick-spec/next-loop-2026-11-20/RENDER_SPEC_v1.4.md` and `RULES_CLONE_v2
 
 ## Loop 3 (Nov 21 2026): no build value changes except the motion window
 Source: `rick-spec/loop3-2026-11-21/`. The 3D camera solve did not reach 75 % on any field, so camera sizes stay as in the v1.4 section above (soft targets). [guidance] Action timing window is now +-2 f (items two labellers both found); face change about 3 f, gesture about 4 f, mouth change about 4.5 f.
+
+## Loop 4 (Nov 21 2026): named actions and music (build values; supersede earlier where they differ)
+Source: `rick-spec/loop4-2026-11-21/RENDER_SPEC_v1.5.md`.
+- [guidance] Motion by named action (frames): turn 4.5, react 5, point 5, lift 6, sit 6.5, stand 7.25, throw 8 (anticipation first), pull 9, fall 10.5 (ease-in, no bounce), push 13.5; two people agree start+end within 2 f on 80.7 % of items. Rigid cutout parts, no squash and stretch.
+- [inferred] sneak, run, stumble, carry, catch, wave: recipes in `INFERRED_RECIPES.md`; durations about 70 % reliable, easing a guess.
+- [inferred] Music: loop-based minor bed, 80 to 100 BPM, 6 to 11 s loops, louder into the payoff; the owner brief (melodic house / UK garage) wins.
+- [uncertain] camera scale, roll, layers, parallax (failed twice); joint angles, stride, cadence.

@@ -1,0 +1,68 @@
+0a1,6
+> <!-- VERSION 1.6 TOP BLOCK, added 2026-11-21. Version 1.5 follows this block byte for byte (sha256 dbcc1587c490286938d9372cf806adddde68a58595479ce3c2e8c39c6af81c1d, 144,024 bytes). The v1.6 addendum (sections av to bc: named actions, body mechanics, asset physics, camera layers retry, music inference) is at the end of the file. -->
+> > **THE THREE CORE FINDINGS, as of v1.6 (must be in every document).** Owner direction: CLONE Rick's style; 99 % = rule, 75 % or more = guidance with the rate printed, [INFERRED] = soft build target from analogy, below 75 % = uncertain.
+> > 1. **SCENE TIME.** 10 to 53 % of shots under 2 s, 20 to 47 % over 4 s, median 2.83 s; one-takes of 9.5 to 14.7 s; camera moving on 80 to 98 % of frames; dissolves median 8 f. Named actions are quick: turn 4.5 f, react and point 5, lift 6, throw 8, fall 10.5 (two labellers agree on start within 2 f on 94 %).
+> > 2. **MUSIC.** Bed 14.4 to 18.6 dB under the voice, -14.0 to -14.1 LUFS, no ducking, bed std 2.3 to 4.0 dB; the bed is louder into the payoff in 6 of 7 videos; tempo, key, mood and genre stay inferred (80 to 100 BPM, 6 to 11 s loops, minor).
+> > 3. **SETS AND BODIES.** Torso about 1.0 head height, legs 1.1 to 1.3, total 2.9 to 3.35, noodle arms, mitten hands, no fingers (rule-grade), outline 7 to 10 px lit and 13 to 16 px shaded at 1080 wide (population level). Cutout bodies, no squash and stretch.
+> > The camera scale, roll and layer solve failed twice (two solvers agree scale 53 %, pan 27 %): camera sizes stay screen-space guidance from loop 2.
+1162a1169,1228
+> 
+> ---
+> # VERSION 1.6 ADDENDUM — 2026-11-21 — loop 4: motion by named action, body mechanics, asset physics, camera layers retry, music choice and mood (definitions v6, written before measuring)
+> 
+> Owner order 2026-11-20 6:43 PM CT; owner decision 8:30 PM CT: no listening sheet, infer instead. Appended only; v1.5 above is unchanged byte for byte. Files: `research/rick-style-spec/new-analysis-5/` (`_agent-prompts/definitions_v6_2026-11-20.md`, `inventory/REPORT.md`, `motion/REPORT.md`, `motion/INFERRED_RECIPES.md`, `camera/REPORT.md`, `music/REPORT.md`, `music/MUSIC_INFERENCE.md`, `RENDER_SPEC_v1.5.md`). New status word: **[INFERRED]** = built by analogy or from tools that failed their known-answer test; a soft build target, never guidance.
+> 
+> ## av. Results in one table
+> | field | result | status |
+> |---|---|---|
+> | actions in the 7 videos (inventory, 36-entry spot check 91.7 %) | sneak 0 (absent); run, stumble, carry, catch, wave 1 to 2 each (thin); the rest evident (talk 39, turn 32, walk 28, react 26, lift 21, stand 12, hold 10, emote 10, point 9, pull 8, fall 7, throw 6, recoil 4, push 3, drop 3, sit 3) | counts from the first-measurer logs |
+> | action start within 2 f, A vs B (176 items) | 94.3 %; end 84.7 %; start AND end 80.7 % | GUIDANCE (start near rule, not 99) |
+> | action travel within 2 f | 79.5 % | GUIDANCE |
+> | action word, easing class | 58.0 %, 68.2 % | UNCERTAIN |
+> | construction, squash/stretch, anticipation, overshoot, feet (yes/no fields) | 78.4, 92.6, 97.2, 94.9, 94.9 % | GUIDANCE |
+> | limb set exact / overlap 0.5 or more | 39.2 / 91.5 % | UNCERTAIN / GUIDANCE |
+> | arm curvature within 0.1 (101 pairs) | 89.1 % | GUIDANCE |
+> | joint angles, stride, cadence, loop length | too few readable pairs (neck 4, hip 7, knee 5, stride 2, cadence 7, loop 6) | UNCERTAIN, not measurable from strips |
+> | assets: start and end within 2 f (124 items) | 65.3 % (within 4 f 77.4 %) | UNCERTAIN (GUIDANCE at +-4 f, post-hoc) |
+> | assets: type 79.0, behaviour overlap 93.5, bounce count 96.0, parallax class 81.5 | | GUIDANCE |
+> | asset gravity, rotation, scale pop numbers | 6, 9, 4 usable pairs | UNCERTAIN |
+> | inferred recipes held-out test (10 hidden actions) | duration 7 of 10, limbs 7 of 10, easing 3 of 10 | [INFERRED] |
+> | camera, two solvers on 192 moves (v6) | scale 53.1, roll 43.2, pan 27.1, tilt 27.6, layer ranking 12.0, parallax 49.5 (20 % tolerance) | UNCERTAIN (second attempt, no field passed) |
+> | camera up to 30 f moves | scale 78.8, roll 72.7, pan 45.5, tilt 51.5 | UNCERTAIN (scale only above 75, post-hoc split) |
+> | locked regions inside shots | median locked share 0; tools fail their test | UNCERTAIN, indicative |
+> | music tempo T3 vs TC / loop L1 vs L3 / beat-energy EA vs EB | 4/7, 5/7, 5/7 | UNCERTAIN |
+> | music key, mood, genre, instruments, beat density | fail known answers (key 70.8 % with voice) | UNCERTAIN; see [INFERRED] values in section az |
+> Rule-grade facts remain four.
+> 
+> ## aw. Named actions (motion/REPORT.md, inventory/REPORT.md)
+> - 300 blind packs (176 actions, 124 assets), two blind passes (A on full+crop sheets, B adds difference sheets), a third pass on 34 disputed actions. Consensus (two of three within 2 f): 164 of 176. Caveat: labellers repeatedly lost images from context; several items were labelled from notes or memory (listed in the report); the third labeller's first 16 items were labelled from memory.
+> - Timing per named action (consensus items; frames, ms = f x 33.3; window cap 48 f): lift 6 f (200 ms), turn 4.5 (150), react 5 (167), point 5 (167), stand 7.25 (242), talk 7.5 (250), emote 7 (233), fall 10.5 (350, ease-in), throw 8 (267, anticipation in all labels), pull 9 (300), recoil 9.75 (325, snap), sit 6.5, drop 13.5 (ease-in), push 13.5, catch 3.25, walk 14 (linear, capped). Most are ease-out; all read as 2D cutout (rigid card parts) with squash and stretch rare. n is 3 to 12 per action: small-n guidance.
+> - Missing actions: recipes by analogy in `motion/INFERRED_RECIPES.md` (sneak, run, stumble, carry, catch, wave, push, drop). The inference test says durations and limbs are about 70 % right and easing is a guess.
+> 
+> ## ax. Body mechanics and asset physics
+> - Measurable: arm curvature (89.1 % pair agreement), no squash and stretch in most actions, anticipation only for throws, overshoot rare, feet move in walk/stand/fall. Not measurable from strips: joint angles, stride length, cadence, loop length, hair and clothing motion (clothing 46 %). Earlier cadence (7.5 f per step, uncertain) stands.
+> - Assets: durations by behaviour (frames median): drifts 28.5, particle bursts 14.25, falls 12.5 (ease-in 13 of 20), rotates 9.5, slides 19.25, flows 29, loops 38, sways 25 (ease-in-out). Bounces are rare (9 items, 7 in one video). Gravity reference stays 4.7 to 5.1 screen heights per s^2 (loop 3 tools). Inferred recipes for cloth, animals, crowds in the same file.
+> 
+> ## ay. Camera and layers, second attempt (camera/REPORT.md)
+> - Harder known-answer set (64 moves, 100 to 300 f, whip pans, cuts, moving characters): S1 and S2 failed most marks (S2 tilt 95.3 % passes); whip pans broke both solvers; the character plane was only 6 to 11 % of the frame. On 192 real moves the solvers agree scale 53.1, roll 43.2, pan 27.1, tilt 27.6, layer ranking 12.0; focal length self-calibration worked on synthetic clips (8 of 8) but found no usable segment in Rick's videos, which may mean his camera is not a single pinhole camera (untested reading). Parallax and layer shifts remain unmeasured. Use the loop-2 screen-space numbers and the v1.4/v1.5 duration recipes; scale ratios stay soft (push-in about 1.3 to 1.4, pull-out about 0.6 to 0.8).
+> - Nothing stays locked on screen inside a Rick shot (median locked share 0, indicative).
+> 
+> ## az. Music choice and mood ([INFERRED]; music/MUSIC_INFERENCE.md)
+> No tool passed its known-answer test for key, mood, genre, instruments or beat density (24 own beds under narration). Tempo and loop tools pass but agree on only 4 and 5 of 7 videos (exact 3:2 and 2x ratios). The owner declined a listening sheet, so best inference: beat level 80 to 100 BPM (two beat levels per video, one pulse), loops 6 to 11 s, minor mode with D as the most frequent tonic, playful bed with an edge, loop-based electronic bed (soft pads and plucks, bass line, light percussion, no vocals) consistent with the owner's melodic house / UK garage brief (the owner's brief wins); bed gets louder into the payoff in 6 of 7 videos (+3 to +10 dB). All [INFERRED].
+> 
+> ## ba. Corrections to earlier versions
+> | where | old | new |
+> |---|---|---|
+> | v1.5 as (motion window) | +-2 f for items both people found | confirmed for actions: start 94.3 %, start and end 80.7 % at +-2 f |
+> | v1.4 ag camera scale | push-in about 1.28 to 1.38, pull-out 0.56 to 0.79 | S1 1.43 and S2 1.13 (push-in), S1 0.81 and S2 0.68 (pull-out): still soft |
+> | v1.4 az / x.9 key and tempo | D minor 5 of 7 [uncertain]; tempo 75.6 to 104 | unchanged; now explicitly [INFERRED] for the build |
+> | inventory | first-measurer vocabulary | labellers' action words differ from the logs (match 34 %): "how often" from the logs, "how long" from the labels |
+> 
+> ## bb. Blind check on this version
+> Not run in this loop (no new numeric build values beyond the tables above).
+> 
+> ## bc. Disclosures
+> - Models: Opus built packs, tools and ran the camera, music and inventory tracks; Sonnet did all labelling (about 36 labeller runs, many lost images, listed in the track reports); orchestrator scored and adjudicated. The platform may substitute models.
+> - Amendments: camera A1 to A3 (dev clips only), music A1 (genre mapping before scoring) written before test or real data; all labelled post-hoc; no pass mark or tolerance changed.
+> - Limits: the answer to "how do joints, strides and loops look" is mostly unavailable from frame strips; the camera layers question remains open after two attempts; music mood and genre are inference only.
+> - Next loop: use higher-resolution crops per action and a labeller panel with a fixed one-image-per-call protocol; model the camera as a multi-layer 2.5D rig instead of one pinhole camera; hand-built music reference clips to test mood tools.

@@ -20,10 +20,10 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 21, 4:04 PM | YouTube | Why It's Called Black Friday / Philadelphia History #shorts (https://www.youtube.com/watch?v=UisxvhkaUH8) | 24 | not available | 59.0 s | — |
-| Nov 21, 12:03 PM | Instagram | bf13_blackfriday_2k.mp4 (https://www.instagram.com/reel/DgA0_t4gE9F/) | 1479 | 28.0 s | not recorded | — |
+| Nov 21, 4:04 PM | YouTube | Why It's Called Black Friday / Philadelphia History #shorts (https://www.youtube.com/watch?v=UisxvhkaUH8) | 517 | not available | 59.0 s | — |
+| Nov 21, 12:03 PM | Instagram | bf13_blackfriday_2k.mp4 (https://www.instagram.com/reel/DgA0_t4gE9F/) | 1818 | 28.0 s | not recorded | — |
 | Nov 21, 10:03 AM | TikTok | bf13_blackfriday_2k.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7710655478522596622) | 399 | 20.0 s | not recorded | — |
-| Nov 21, 10:01 AM | Facebook | bf13_blackfriday_2k.mp4 (https://www.facebook.com/reel/2189755435225304/) | 228 | 7.9 s | 58.4 s | 13.5% |
+| Nov 21, 10:01 AM | Facebook | bf13_blackfriday_2k.mp4 (https://www.facebook.com/reel/2189755435225304/) | 229 | 7.8 s | 58.4 s | 13.4% |
 | Nov 17, 7:02 PM | Instagram | 02_tue-nov17_salzburg_2k.mp4 (https://www.instagram.com/reel/Df3Ryocgi3f/) | 792 | 18.2 s | not recorded | — |
 | Nov 17, 7:01 PM | Facebook | 02_tue-nov17_salzburg_2k.mp4 (https://www.facebook.com/reel/1130134059778348/) | 181 | 5.7 s | 52.4 s | 10.9% |
 | Nov 17, 6:05 PM | YouTube | Silent Night Was First Played on a Guitar / Salzburg Christmas History #shorts (https://www.youtube.com/watch?v=YJx9_loe8IE) | 55 | not available | 53.0 s | — |

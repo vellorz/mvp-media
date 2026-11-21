@@ -362,3 +362,66 @@ THE THREE CORE FINDINGS (guide v1.6 top block): scene time (shots, camera moving
 Gaps still open: camera scale, roll, layers and parallax; joint angles and strides; asset gravity/rotation numbers; mood, genre and key by ear.
 Corrections: none to earlier ledger rows beyond the v1.6 addendum table ba.
 Black Friday: paused; nothing rebuilt. Next ledger entry: Black Friday round 8 against v1.6.
+
+---
+## R. Ledger entry 2026-11-21: Black Friday round 9 (bf13, first Rick-clone build) against guide v1.6
+THE THREE CORE FINDINGS (guide v1.6 top block): scene time (shots, camera moving 80 to 98 %, dissolves 8 f, quick named actions), music (bed 14.4 to 18.6 dB under voice, -14 LUFS, std 2.3 to 4.0 dB, louder at the payoff), sets and bodies (torso 1.0 H, legs 1.1 to 1.3, noodle arms, mitten hands, no fingers, cutout bodies).
+Video: final/round9/bf_r9_2k.mp4 (sha256 ebb5d072d345ce44eb67731233c513da0583d28ac3e763956671bcf1bb096ddb), render package mvp-media 18bece2 (bf.blend sha256 4512abde...), clips a62d910. Measured by an independent measurer with the round-5 tools (pacing.py, audio.py) plus cam4_track, camstats, transitions.py, dissolve_curve.py, captions.py, au_bed.py, au_keytempo.py and camstill.py. Full method notes: final/round9/verify/ledger_report.md. Narration timed on word times +0.1 s (the mix delays the VO 100 ms); rows 11, 12, 24, 25 also give the unshifted values there.
+| ledger entry | build | Rick range | result | still open | evidence |
+|---|---|---|---|---|---|
+| 2026-11-21 | Black Friday round 9 | 7 videos, latest guide ranges (v1.3-v1.6) where one exists, else section I | 24 inside, 12 outside, 5 not scored (round 5: 22 / 15 / 4). Five-verifier rubric: 105 PASS, 11 FAIL, 1 not scored of 117 rows; visual closeness about 72 % | long packed take, events inside shots, flat plain set surfaces, caption dwell, weak low pulse | this entry |
+
+| # | measure | Rick range [source] | R5 | R9 | in? |
+|---|---|---|---|---|---|
+| 1 | average shot s | 2.65-4.54 [I] | 2.65 | 2.92 | in |
+| 2 | median shot s | 1.93-3.97 [v1.3] | 2.59 | 2.62 | in |
+| 3 | shortest s | 0.07-1.20 [I] | 1.23 | 1.40 | OUT |
+| 4 | longest s | one-takes 9.5-14.7 [v1.3] | 4.48 | 5.57 | OUT |
+| 5 | P10 s | 0.87-1.52 [I] | 1.41 | 1.585 | OUT (hair) |
+| 6 | shots/min | 13.2-22.6 [I] | 22.6 | 20.55 | in |
+| 7 | share <2 s | 0.10-0.53 [v1.3] | 0.23 | 0.20 | in |
+| 8 | share >4 s | 0.20-0.47 [v1.3] | 0.18 | 0.25 | in |
+| 9 | joins/10 s | 2.03-3.60 [I] | 3.60 | 3.25 | in |
+| 10 | first join in 3 s | none (6 of 7) [v1.3] | yes | no (5.57 s) | in |
+| 11 | payoff visible / starting s | 0.93-2.98 / 1.57-5.37 [I] | 1.50 / 2.12 | 2.00 / 1.77 | in |
+| 12 | payoff cuts/min | 9.9-39.6 [I] | 30.0 | 20.0 | in |
+| 13 | hard/fast joins | 0-19 [I] | 7 | 5 | in |
+| 14 | dissolve median f | 8 (5-12) [v1.4] | 8 | 8 / 8.5 visible | in |
+| 15 | events/s | 1.49-1.78 [I] | 1.27 | 1.16 | OUT |
+| 16 | camera events/min | 64-87 [I] | 70 | 58.6 (v1.4 tracker moves/min 24.7 / 26.7: inside 18.6-28.3) | OUT |
+| 17 | visual changes/min | 169-213 [I] | 167.5 | 147.9 | OUT |
+| 18 | camera moving share | 0.80-0.98 [v1.4] | 0.74 | 0.897 / 0.882 | in |
+| 19 | cards/word | 0.77-0.85 [I] | 0.79 | 0.773 (build 0.81) | in (edge) |
+| 20 | dwell mean s | 0.32-0.35 [I] | 0.37 | 0.376 | OUT |
+| 21 | dwell P90 s | 0.53-0.57 [I] | 0.60 | 0.63 | OUT |
+| 22 | words/s | 3.37-3.85 [v1.3] | 3.42 | 3.42 | in |
+| 23 | cuts/sentence | 0.78-1.36 [v1.3] | 1.40 | 1.27 | in |
+| 24 | joins within 3 f of phrase | 0.22-0.47 [I] | 0.71 | 0.42 (unshifted 0.74) | in |
+| 25 | end after last word s | 0.27-0.89 [v1.3] | 0.92 | 0.82 | in |
+| 26 | mix LUFS | -14.0 to -14.1 [v1.3] | -14.1 | -14.0 | in |
+| 27 | LRA | 2.2-2.9 [I] | 2.6 | 2.5 | in |
+| 28 | true peak | -1.9 to -2.2 [v1.3] | -1.8 | -2.0 | in |
+| 29 | VO stem LUFS | -14.2 to -14.4 [v1.3] | -14.25 | -13.99 [method differs] | OUT (hair) |
+| 30 | VO-music mean dB | 14.4-18.6 [v1.3] | 18.3 | 17.27 | in |
+| 31 | closest approach | [uncertain] | 11.5 | 9.29 / p5 11.8 | not scored |
+| 32 | bed range | [uncertain] | 13.8 | 12.31 | not scored |
+| 33 | ducking dB | -0.3 to +1.3 [v1.3] | 0.1 | -0.09 | in |
+| 34 | key | [uncertain] | F maj | F maj (tool), D minor build | not scored |
+| 35 | tempo | [uncertain] | 95.7 | 95.7 / 96 | not scored |
+| 36 | energy <250 Hz | 56-69 % [I] | 55.9 % | 61.9 % | in |
+| 37 | perc:harm | 0.51-1.42 [I] | 0.19 | 0.222 | OUT |
+| 38 | caption cap / baseline | 53-56 px / 71.67 % [I] | not measured | 56 px / 71.7 % | in |
+| 39 | surface detail | 75-142 [I] | 17.9 | 14.2 [method differs] (visual verifier, other patches: median 104 overall, plain walls/floors 31) | OUT |
+| 40 | set-edge line | [uncertain] | [uncertain] | not re-measured | not scored |
+| 41 | torso / legs H | 1.0 / 1.1-1.3 [v1.6] | 0.80 / 0.74 | 1.02 / 1.32 [one measurer] | OUT (legs, hair) |
+Count: 24 inside, 12 outside (3, 4, 5, 15, 16, 17, 20, 21, 29, 37, 39, 41), 5 not scored (31, 32, 34, 35, 40). Misses by a hair: 5, 29, 41. Rows 31-32 were "in" in round 5 and are now unscored because v1.3+ classes bed extremes and swing as [uncertain]; the rule-grade replacement (bed std 2.79 dB) is inside 2.3-4.0.
+
+Render-spec scorecard (RENDER_SPEC_v1.4 G + v1.5 G): 13 PASS, 1 FAIL, 1 [uncertain], 2 N/A. FAIL: still run over 1 s: Rick's trackers read 54 f near-still in S11 1055-1120 (drift about 0.04 % W/f vs 0.05 threshold) while the Blender probe says the camera never holds over 30 f (longest 10 f): the two methods disagree. [uncertain]: key (tools read F major, build D minor).
+
+Three core findings on round 9:
+1. SCENE TIME: mostly closed (shares, median, dissolves, moving share inside). Open: no packed long take (5.57 s vs 9.5-14.7), events inside shots 1.16/s, S11 slow drift reads as still to Rick's trackers, caption dwell long.
+2. MUSIC: closed on every rule and guidance number (17.3 dB under VO, std 2.79 dB, no ducking, +7.7 dB at payoff, 10 s loop, 96 BPM). Open: weak low pulse (perc:harm 0.22); key [uncertain].
+3. SETS AND BODIES: bodies nearly closed (torso 1.02, legs 1.32, no fingers, plum ink; on screen low cameras stretch legs to 1.35-1.70 per the visual verifier; ink drifts to magenta/crimson in S03/S05/S09-S14; most arms near-straight). Sets open: plain walls and floors flat (detail 14-31 vs 75+).
+Lessons: (a) bedcheck.py/sfxcheck.py downmix stereo stems with -ac 1 and read 3.01 dB hot; measure channel 0 or average channels (audio verifier). (b) softcuts of 7-8 f are not seen as joins by either cut scan. (c) slow drifts under 0.05 % W/f count as still on Rick's trackers; use the tracker threshold, not Blender motion, for the still-run rule.
+Corrections: none to earlier ledger rows.
+Next ledger entry: Black Friday round 10 against v1.6 (or later).

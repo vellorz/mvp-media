@@ -20,9 +20,9 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
-| Nov 21, 12:03 PM | Instagram | bf13_blackfriday_2k.mp4 (https://www.instagram.com/reel/DgA0_t4gE9F/) | 159 | not recorded | not recorded | — |
-| Nov 21, 10:03 AM | TikTok | bf13_blackfriday_2k.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7710655478522596622) | not counted yet | not counted yet | not recorded | — |
-| Nov 21, 10:01 AM | Facebook | bf13_blackfriday_2k.mp4 (https://www.facebook.com/reel/2189755435225304/) | 225 | 7.9 s | 58.4 s | 13.5% |
+| Nov 21, 12:03 PM | Instagram | bf13_blackfriday_2k.mp4 (https://www.instagram.com/reel/DgA0_t4gE9F/) | 219 | not recorded | not recorded | — |
+| Nov 21, 10:03 AM | TikTok | bf13_blackfriday_2k.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7710655478522596622) | 399 | 20.0 s | not recorded | — |
+| Nov 21, 10:01 AM | Facebook | bf13_blackfriday_2k.mp4 (https://www.facebook.com/reel/2189755435225304/) | 227 | 7.9 s | 58.4 s | 13.5% |
 | Nov 17, 7:02 PM | Instagram | 02_tue-nov17_salzburg_2k.mp4 (https://www.instagram.com/reel/Df3Ryocgi3f/) | 792 | 18.2 s | not recorded | — |
 | Nov 17, 7:01 PM | Facebook | 02_tue-nov17_salzburg_2k.mp4 (https://www.facebook.com/reel/1130134059778348/) | 181 | 5.7 s | 52.4 s | 10.9% |
 | Nov 17, 6:05 PM | YouTube | Silent Night Was First Played on a Guitar / Salzburg Christmas History #shorts (https://www.youtube.com/watch?v=YJx9_loe8IE) | 55 | not available | 53.0 s | — |
@@ -34,7 +34,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 15, 2:02 PM | YouTube | Oktoberfest Started as a Wedding Party #shorts (https://www.youtube.com/watch?v=7rM6Wx_lSc0) | 1330 | not available | 69.0 s | — |
 | Nov 15, 1:04 PM | Instagram | 07_sun-nov15_munich_post.mp4 (https://www.instagram.com/reel/DfxfHkxFNAt/) | 1570 | 24.7 s | not recorded | — |
 | Nov 15, 1:02 PM | Facebook | 07_sun-nov15_munich_post.mp4 (https://www.facebook.com/reel/29283033394650756/) | 495 | 6.6 s | 68.7 s | 9.6% |
-| Nov 15, 11:05 AM | TikTok | 07_sun-nov15_munich_post.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7708445003273555231?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 983 | 16.0 s | not recorded | — |
+| Nov 15, 11:05 AM | TikTok | 07_sun-nov15_munich_post.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7708445003273555231?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 985 | 15.9 s | not recorded | — |
 | Nov 13, 6:05 PM | YouTube | Why Greece Fears Tuesday the 13th, Not Friday #shorts (https://www.youtube.com/watch?v=zCNh2GtlnsM) | 1275 | not available | 75.0 s | — |
 | Nov 13, 6:01 PM | TikTok | 05_fri-nov13_istanbul_2k.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7707810271749868814?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 841 | 11.2 s | not recorded | — |
 | Nov 13, 2:46 PM | Instagram | 05_fri-nov13_istanbul_2k.mp4 (https://www.instagram.com/reel/DfshSHeCF-A/) | 138 | 12.8 s | not recorded | — |
@@ -42,13 +42,13 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 11, 7:07 PM | Instagram | 03_wed_leaning-tower-pisa.mp4 (https://www.instagram.com/reel/Dfn1ToKj87h/) | 2729 | 39.2 s | not recorded | — |
 | Nov 11, 7:03 PM | Facebook | 03_wed_leaning-tower-pisa.mp4 (https://www.facebook.com/reel/1029676933488974/) | 287 | 21.1 s | 69.3 s | 30.4% |
 | Nov 11, 4:04 PM | YouTube | How They Saved the Leaning Tower of Pisa (Without Straightening It) (https://www.youtube.com/watch?v=NKTWOVAK7u8) | 24577 | not available | 70.0 s | — |
-| Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706945601526631693?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1485 | 22.0 s | not recorded | — |
+| Nov 11, 10:06 AM | TikTok | 03_wed_leaning-tower-pisa.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706945601526631693?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1492 | 22.0 s | not recorded | — |
 | Nov 10, 7:03 PM | Instagram | 02_tue_eiffel-tower.mp4 (https://www.instagram.com/reel/DflQRLigaxI/) | 1351 | 31.1 s | not recorded | — |
 | Nov 10, 7:01 PM | Facebook | 02_tue_eiffel-tower.mp4 (https://www.facebook.com/reel/1794849335981931/) | 231 | 8.5 s | 65.4 s | 13.0% |
 | Nov 10, 6:03 PM | TikTok | 02_tue_eiffel-tower.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706697475796602126?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 1219 | 22.9 s | not recorded | — |
 | Nov 10, 4:04 PM | YouTube | Paris Almost Tore Down the Eiffel Tower / Paris History Short (https://www.youtube.com/watch?v=ArVSiqEj_yM) | 1702 | not available | 66.0 s | — |
 | Nov 9, 7:03 PM | Instagram | 01_mon_london-bridge-arizona.mp4 (https://www.instagram.com/reel/Dfirhi3iCvf/) | 1162 | 36.6 s | not recorded | — |
-| Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 253 | 12.3 s | 66.2 s | 18.6% |
+| Nov 9, 7:01 PM | Facebook | 01_mon_london-bridge-arizona.mp4 (https://www.facebook.com/reel/28979696908346482/) | 254 | 12.3 s | 66.2 s | 18.6% |
 | Nov 9, 6:02 PM | TikTok | 01_mon_london-bridge-arizona.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7706326116595813645?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 155 | 15.6 s | not recorded | — |
 | Nov 9, 4:04 PM | YouTube | Why London Bridge Is in Arizona #shorts (https://www.youtube.com/watch?v=51pRhmJp_UE) | 1103 | not available | 67.0 s | — |
 | Nov 8, 7:02 PM | YouTube | The Copenhagen Harbour Where Fairy Tales Began #shorts (https://www.youtube.com/watch?v=6T8XoSWypVI) | 21 | not available | 17.0 s | — |
@@ -67,11 +67,11 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Nov 7, 6:01 PM | Facebook | 8_dublin.mp4 (https://www.facebook.com/reel/1142952334762526/) | 175 | 1.5 s | 15.7 s | 9.6% |
 | Nov 7, 6:00 PM | YouTube | Why Dublin's bridge is called the Ha'penny #shorts (https://www.youtube.com/watch?v=eHWswQN6er0) | 5 | not available | 16.0 s | — |
 | Nov 7, 10:02 AM | TikTok | 6af3d8cbe6c868db7e9d91f5_thumbnail.webp (https://www.tiktok.com/@modernvistaprintsshop/video/7705860933783932173?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 3 | 5.0 s | not recorded | — |
-| Nov 6, 7:03 PM | TikTok | 5_prague.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705228553654160653?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 164 | 4.3 s | 15.1 s | 28.4% |
+| Nov 6, 7:03 PM | TikTok | 5_prague.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705228553654160653?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 165 | 4.3 s | 15.1 s | 28.4% |
 | Nov 6, 7:03 PM | Instagram | 7_giethoorn.mp4 (https://www.instagram.com/reel/Dfa9EaSET1Y/) | 62 | 2.4 s | 16.6 s | 14.2% |
 | Nov 6, 7:02 PM | YouTube | Prague's 600-Year-Old Clock: The Legend Isn't True #shorts (https://www.youtube.com/watch?v=E4b5qICIba8) | 21 | not available | 16.0 s | — |
 | Nov 6, 7:01 PM | Facebook | 7_giethoorn.mp4 (https://www.facebook.com/reel/3048891488795553/) | 99 | 1.8 s | 16.6 s | 10.8% |
-| Nov 6, 1:03 PM | TikTok | 7_giethoorn.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705135725703974157?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 75 | 2.9 s | 16.6 s | 17.2% |
+| Nov 6, 1:03 PM | TikTok | 7_giethoorn.mp4 (https://www.tiktok.com/@modernvistaprintsshop/video/7705135725703974157?utm_campaign=tt4d_open_api&utm_source=7103819247981182978) | 76 | 2.9 s | 16.6 s | 17.2% |
 | Nov 6, 1:00 PM | YouTube | Giethoorn: the Dutch village with no roads #shorts (https://www.youtube.com/watch?v=1ugtT7vchqE) | 9 | not available | 17.0 s | — |
 | Nov 6, 12:32 PM | Instagram | 5_prague.mp4 (https://www.instagram.com/reel/DfaQa3nFBtr/) | 158 | 6.3 s | 15.1 s | 41.9% |
 | Nov 6, 12:31 PM | Facebook | 5_prague.mp4 (https://www.facebook.com/reel/1851725619161033/) | 143 | 2.1 s | 15.1 s | 13.9% |

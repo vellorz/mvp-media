@@ -432,7 +432,7 @@ faces(gr,[(643,'stern'),(666,'shock'),(680,'stern'),(712,'shock'),(740,'stern'),
 for f,a_ in [(700,-30),(706,-125),(720,-110),(730,-140),(745,-120),(754,-150),(770,-20)]: arm(ow,1,f,a_)
 for f,a_ in [(700,-20),(712,-110),(726,-95),(742,-125),(758,-100),(772,-15)]: arm(ow,-1,f,a_)
 bob(ow,[664,673,701,710,730,754],amt=9)
-path(s,[(643,(CX-2.72,-1.91,2.6),(CX-0.12,1.46,1.15)),(690,(CX-1.95,-0.99,1.95),(CX-0.12,1.46,1.3)),(754,(CX-1.89,-0.91,1.92),(CX-0.12,1.46,1.33)),(781,(CX-1.85,-0.87,1.9),(CX-0.12,1.46,1.35))])
+path(s,[(643,(CX-2.72,-1.91,2.6),(CX-0.12,1.46,1.15)),(690,(CX-1.95,-0.99,1.95),(CX-0.12,1.46,1.3)),(754,(CX-1.62,-0.58,1.86),(CX-0.12,1.46,1.33)),(781,(CX-1.52,-0.47,1.84),(CX-0.12,1.46,1.35))])   # r9 (rule 302: never still > 1 s): slow push-in 690-781
 # ======================= S07 / S08 / S09: back in the street (set A) =======================
 # ---- S07/S08: the owner thrusts up a hand-held BIG FRIDAY! placard in front of his store (1961); nobody looks; it droops on "not once"
 def placard(ch,sx,f_up,f_open,droop=None,held=-25):
@@ -462,7 +462,8 @@ ALL.append(o7); faces(o7,[(775,'hope'),(800,'neutral'),(820,'hope'),(846,'hope')
 arm(o7,-1,775,-15); arm(o7,-1,846,-40); arm(o7,-1,858,-20)
 arm(o7,1,775,-30); arm(o7,1,812,-35); placard(o7,1,836,846,held=-140)   # r5 (rule 219): raised on 'name' (836) so the blank back shows <= 8 f before the spin; round 4: board carried low, raised on 'tried', spun to the slogan on 'Big' (was a blank back up for 2 s)
 ex=crowd(s,r,[(SX+1.1,SY+3.6,0.14),(SX-0.4,SY+5.2,0.14)],['shopper','granny'],21); ALL+=ex
-path(s,[(775,(SX+2.05,SY-1.3,1.75),(SX+0.3,SY+0.2,1.5)),(790,(SX+2.0,SY-1.2,1.75),(SX+0.3,SY+0.25,1.48)),(846,(SX+2.05,SY-1.2,1.8),(SX+0.3,SY+0.3,1.52)),(854,(SX+2.4,SY-1.45,1.82),(SX+0.3,SY+0.3,1.56)),(866,(SX+2.6,SY-1.62,1.86),(SX+0.3,SY+0.3,1.58))])
+# r9 (rule 302): S07 790-846 slow push-in on the placard instead of a held frame
+path(s,[(775,(SX+2.05,SY-1.3,1.75),(SX+0.3,SY+0.2,1.5)),(790,(SX+2.0,SY-1.2,1.75),(SX+0.3,SY+0.25,1.48)),(846,(SX+1.78,SY-0.98,1.77),(SX+0.3,SY+0.3,1.52)),(854,(SX+2.4,SY-1.45,1.82),(SX+0.3,SY+0.3,1.56)),(866,(SX+2.6,SY-1.62,1.86),(SX+0.3,SY+0.3,1.58))])
 # round 3: blurred FG mailbox at the lower right of S07 (projection-checked: x 0.6-0.75, stays in frame, no sweep; FG depth layer)
 _c7=L.chr_coll('S07'); _mx,_my=SX+1.2,SY-0.3
 box('mbS07',(_mx,_my+0.25,0.69),(0.5,0.5,1.0),flat('mailbox',lin((40,70,140)),0.5),coll=_c7,bv=0.12); box('mbS07_slot',(_mx,_my-0.005,0.95),(0.3,0.02,0.05),INK,coll=_c7,bv=0)
@@ -547,7 +548,7 @@ pb=char('S11_paperboy','paperboy',s,(EX-6.2,0.05,0.14),r,'shout',arms=('arm','ar
 walk(pb,1051,1125,(EX-6.2,0.05,0.14),(EX-0.3,0.05,0.14),step=2)
 ALL.append(pb); faces(pb,[(1051,'shout'),(1068,'happy'),(1072,'shout'),(1092,'happy'),(1100,'shout')]); arm(pb,1,1051,-140); arm(pb,1,1066,-160); arm(pb,1,1080,-130); bob(pb,[1072,1100])
 ex=crowd(s,r,[(STANDS[1]+1.45,1.6,0.14),(STANDS[2]+1.5,1.5,0.14),(STANDS[3]+1.45,1.6,0.14),(STANDS[3]+2.6,1.7,0.14)],['tourist','shopper','fanblue','kid'],31); ALL+=ex
-path(s,[(1051,(EX+2.85,-0.95,1.72),(EX-3.0,0.56,1.15)),(1125,(EX+2.95,-0.95,1.74),(EX-2.9,0.56,1.17))])   # round 3: near-static camera, the boy walks up to it; stands stay put on screen (signs fully in or out)
+path(s,[(1051,(EX+2.85,-0.95,1.72),(EX-3.0,0.56,1.15)),(1125,(EX+2.85,-0.95,1.96),(EX-2.9,0.56,1.21))])   # r9 (rule 302): slow push-in instead of a static frame   # round 3: near-static camera, the boy walks up to it; stands stay put on screen (signs fully in or out)
 for o_ in (L.CAM['S11'],L.TGT['S11']):
     for fc in o_.animation_data.action.fcurves:
         for kp in fc.keyframe_points:
@@ -736,9 +737,9 @@ ALL.append(o15)
 pap=plane('S15_paper',(0,0,0),0.50,0.685,card_mat('paper81','paper81',emit=0.3),coll=L.chr_coll(s)); pap.parent=o15['root']; pap.location=(0,-0.03,0.60)   # r8b: paper scaled to the Rick build (head 0.43 m); top edge 0.94 stays under the chin
 vis(pap,[r]); pap['chr']='S15_oldcop'
 for sx_,tx_ in ((-1,'grip_L'),(1,'grip_R')):
-    g_=plane(f'S15_grip{sx_}',(0,0,0),0.17,0.223,card_mat(tx_,tx_,emit=0.25),coll=L.chr_coll(s)); g_.parent=o15['root']; g_.location=(sx_*0.27,-0.045,0.5475); g_['chr']='S15_oldcop'; vis(g_,[r])
+    g_=plane(f'S15_grip{sx_}',(0,0,0),0.17,0.223,card_mat(tx_,tx_,emit=0.25),coll=L.chr_coll(s)); g_.parent=o15['root']; g_.location=(sx_*0.27,-0.045,0.561); g_['chr']='S15_oldcop'; vis(g_,[r])
 faces(o15,[(1481,'deadpan'),(1489,'raise'),(1505,'deadpan'),(1519,'eyeroll'),(1540,'smug'),(1552,'deadpan')]); bob(o15,[1489,1519])
-arm(o15,-1,1481,-8.48); arm(o15,1,1481,-8.48); arm(o15,1,1519,-7.2); arm(o15,1,1540,-8.48)   # r8b: shoulder (0.21,0.95), HAND_Z 0.407 -> hand on the grip (0.27,0.5475)   # r7: hand centre lands on the grip at (0.355,0.565) (shoulder 0.21,0.944)
+arm(o15,-1,1481,-17.15); arm(o15,1,1481,-17.15); arm(o15,1,1519,-15.8); arm(o15,1,1540,-17.15)   # r9: shoulder (0.151,0.95), HAND_Z 0.407 -> hand on the grip (0.27,0.561)   # r7: hand centre lands on the grip at (0.355,0.565) (shoulder 0.21,0.944)
 path(s,[(1481,(HX+8.0,-3.6,1.3),(HX+9.0,-0.9,1.0)),(1537,(HX+8.4,-3.25,1.35),(HX+9.0,-0.9,1.08)),(1565,(HX+8.9,-3.0,1.4),(HX+9.0,-0.9,1.16))])
 # round 4 (L9): blurred FG litter bin at the lower right of S15 (fgcheck.py: x 0.67-1.27, y <= 0.37 for the whole shot, no sweep)
 _c15=L.chr_coll('S15'); cyl('binS15',(HX+9.35,-1.6,0.42),0.24,0.84,flat('bin',lin((50,84,60)),0.6),v=20,coll=_c15); cyl('binS15_rim',(HX+9.35,-1.6,0.86),0.26,0.05,flat('binrim',lin((36,60,44)),0.5),v=20,coll=_c15)
@@ -803,8 +804,11 @@ for o_ in bpy.data.objects:
         if fc_.data_path!='rotation_euler': continue
         ks_=sorted((k.co[0],k.co[1]) for k in fc_.keyframe_points)
         for (f0_,v0_),(f1_,v1_) in zip(ks_,ks_[1:]):
-            if f1_-f0_>4 and abs(v1_-v0_)>0.05: fc_.keyframe_points.insert(f1_-2,v0_,options={'FAST'})
+            if f1_-f0_>6 and abs(v1_-v0_)>0.05: fc_.keyframe_points.insert(f1_-5,v0_,options={'FAST'})   # r9 (RENDER_SPEC_v1.5 A: point 5 f, lift 6, react 5, ease-out): hold, then a 5 f ease-out move
         for k in fc_.keyframe_points: k.interpolation='LINEAR'
+        hk_=set(int(round(f1_-5)) for (f0_,v0_),(f1_,v1_) in zip(ks_,ks_[1:]) if f1_-f0_>6 and abs(v1_-v0_)>0.05)
+        for k in fc_.keyframe_points:
+            if int(round(k.co[0])) in hk_: k.interpolation='QUAD'; k.easing='EASE_OUT'
         fc_.update()
         _P3N=globals().get('_P3N',0)+1; globals()['_P3N']=_P3N
 print('P3 curves',globals().get('_P3N',0))

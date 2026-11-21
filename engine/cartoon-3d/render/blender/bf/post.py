@@ -116,7 +116,7 @@ def chunks():
     C=[]
     for c in out:
         txt=' '.join(x[0].strip() for x in c).replace('Army Navy','Army-Navy').replace('  ',' ')
-        C.append([int(round((c[0][1]+0.1)*30))-2,txt])
+        C.append([int((c[0][1]+0.1)*30),txt])   # r9 (rule 9/186 revised: on the word or 0-1 f before, never later than +2): floor of the audible onset frame (round 7 ran 1.7-3.1 f early)
     C[0][0]=0   # the hook frame carries its caption from f0
     for i in range(len(C)): C[i].append(C[i+1][0] if i+1<len(C) else END+1)
     return C

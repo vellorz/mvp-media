@@ -279,3 +279,110 @@ E. If a shot can't match its reference, redesign it. Don't ship it. Say so in th
 213. **Foreground layers are placed with a projection check.** A foreground object must stay in its corner for the whole shot (proj.py), never sweep across, never enter mid-shot, and carry no lettering facing the camera.
 214. **Crowd shots are searched before render.** Run crowdopt.py on crowd shots: no face covered more than 15 % by a nearer face, no face in the caption band, extras at least 0.85 m apart.
 215. **Distance haze outdoors and stronger background blur in medium shots.** Mist pass mixed toward a cool haze from 14 m; medium-shot f-stop 0.55-0.7 so the background reads soft as in Rick's frames.
+
+
+## Rick-clone revision (folded Nov 21 2026, round 9; owner direction Nov 20: clone Rick's style completely, Rick wins where we differ)
+Source: research/rick-style-spec/new-analysis-3/RULES_CLONE_v2.md with RENDER_SPEC_v1.4 / v1.5 and guide v1.6 (sha256 81da3999...). Where a rule above conflicts with this section, this section wins. Retired rules are listed at the end with the date; nothing above is erased (pre-revision copy: RULES_CONSOLIDATED_backup_2026-11-21_pre-rick-clone.md).
+v1.6 changes on top of RULES_CLONE_v2: legs 1.1 to 1.3 H, total 2.9 to 3.35 H; mitten hands 10 to 12 % H; ink #321c2a; named-action timings (RENDER_SPEC_v1.5 section A); asset physics durations (section D); bed louder into the payoff (+3 to +10 dB, guidance direction, size uncertain); music loop-based minor 80 to 100 BPM, loops 6 to 11 s [inferred], owner brief wins; camera never fully still over 1 s except the ending hold.
+
+### K. Keep
+## 1. KEEP unchanged (quality and scene-integrity rules; not style, so Rick's evidence does not change them)
+Numbered rules 1 to 4, 6, 7, 11 to 19, 21 to 39, 43 to 54, 56 to 76, 78 to 101, 103 to 111, 113 to 161, 163 to 169, 171 to 179, 189, 191, 192, 194 to 204, 206 to 215, standing rules S1 to S8 and S10 (always-on: no floating parts, nothing passes through anything, attached props, lettering whole and outside the caption band, one face per head, crowds varied, camera never in geometry, VO never cut, SFX gentle, poster inside the payoff). Rule 5 and rule 10 keep their Nov 17 fixed text. Rules 20, 40, 68 (pose and seating details) stay until the character agent's pose evidence exists; flagged "pending Rick evidence".
+
+### R. Revise
+## 2. REVISE (new text replaces the old text; old text kept in RULES_CONSOLIDATED.md history)
+| rule | new text | evidence |
+|---|---|---|
+| 8 and 188 (audio) | Mix -14.0 to -14.1 LUFS, true peak -1.9 to -2.2 dBTP; bed mean 14.4 to 18.6 dB under the voice; bed level std 2.3 to 4.0 dB (3 s windows); no ducking, no pumping; the bed is NOT constant; SFX gentle (rule 192). The "about 20 dB constant" text is retired. | v1.3 w.2; v4 audio |
+| 9 and 186 (captions) | Keep the look spec. Timing: on the word or 0 to 1 f before it, never later than +2 f; hard swaps, no gaps; 1 word in at least 75 % of cards, 3 max; dwell median 10 f (4 to 16). Method rule-grade (3,830 of 3,834). | v1.3 x.7 |
+| 55 | Style follows the Rick guide (Rick's characters and construction). Numbers: head width about 22 to 24 % of frame width on average (medium 28 to 36 %); outline per section 3 below. Retired bullets: "about 2.9 head-heights", "short stick legs", "outline 6 to 8 px". | v4 characters M2 |
+| 77 (clean cuts) | Keep: no orphan camera key, check frame diff at every cut +-3 f. Change: shortest shot is 10 f (Rick's shortest 0.37 s = 11 f), not 18 f. | v1.3 x.1 |
+| 102 and 162 (walking) | A root that moves gets a leg cycle. Rick's walks are rare and often hidden; cadence median 7.5 f per step [uncertain, 5 of 10 agree]; bodies may slide while legs cycle and armies may march in place (Rick does). Stride-locking to the distance is no longer required. | v1.3 x.4 |
+| 134 and 182 (static camera) | Camera moving on at least 85 % of frames; no fully still run over 8 f except the ending hold of 23 to 86 f; idle drift 0.05 to 0.2 % of frame width per frame. Old limits "1.5 s static", "4 s without action" are retired; packed one-takes of 9.5 to 14.7 s are allowed when something new happens at least every 2 s. | v1.3 x.2 |
+| 137, 180, 181 (joins) | Dissolves 3 to 14 f, consensus median 8 f, per-video median 6 to 11; smoothstep curve; camera moving through them (118 of 122). Hard cuts are normal joins, no maximum of 5 (#24 has 13 of 19). About 40 % of dissolves are match dissolves with a bridge object (offsets up to 19 % of width occur); no rule above 50 %. Dissolve starts land on a sentence start 3.7 times chance (21 of 102) [guidance]; hard cuts land 0 to +2 f after a word start in action passages [uncertain: transcript and stem timing disagree]. Payoff dissolves longer (median 12 f, n 6) [guidance]. | v1.3 x.1; v4 joins |
+| 183 (camera hits) | Moves start on word starts and peak on the stressed word within 0 to 3 f [single]; crash push 9 to 25 f, x1.8 or more; see section 5 for sizes once the camera loop is merged. | v1.3 x.2 |
+| 184, 193, 205 (character construction) | Characters are built like Rick's, and our own look is retired (no copying of his named characters, frames or lines). Build per section 3. Rule 205's "slim garment column 0.65 to 0.8 H, coat to the shins, left-third cel shadow" is retired. | owner Nov 20; v1.3 x.3 |
+| 185 (faces) | 1.4 to 2.5 face events per second (median 2.1); bursts of 4 swaps in 4 f at a shock; deadpan faces may hold 83 to 191 f; blinks 1 to 3 f; mouths 2 to 2.5 f per shape (1.5 to 4) and they also move on narration and reported speech (the "only on quoted lines" clause is retired). | v1.3 x.4 |
+| 187 (grade) | Day interiors up to luma 0.76; night down to luma 0.25 to 0.33 with faces still at p98 0.86 or more; keep p2 at 0.05 or more for day. | v1.3 x.8 |
+| 42 (head forms) | Retire "varied round and 3/4 heads". Rick: flat round head cards facing the camera; turns and leans are whole-body redraws or rigid tweens. | v1.3 x.3 |
+| 200 (poster colours), 201 (vignette) | Unchanged in substance. | |
+
+### C. Character spec (v1.6 numbers win: legs 1.1 to 1.3 H, total 2.9 to 3.35 H, mittens 10 to 12 % H)
+## 3. Character spec (replaces S9, 184, 193, 205; GUIDANCE unless marked)
+- No fingers, mitten hands about 12 % of head width [RULE: 148 of 149].
+- Torso about 1.0 H tall (0.92 to 1.18), width 0.73 to 0.89 H; legs 1.25 to 1.28 H; total 3.2 to 3.35 H (vision measurers; the pixel tools read torsos about half too small because they stop at belts, coats and sleeves). Robes and dresses: neck to hem 1.6 to 2.2 H, legs hidden.
+- Arms: one curved noodle stroke, no fixed elbow (66 of 71 in the pixel sample, 85 of 113 in the first run); thickness 12 to 14 px at 1080 wide (about 5 to 6 % of H).
+- Head fill: flat near-white (#fbf4f1), takes the scene tint; eyes spacing about 27 % H, eye height 8 to 13 % H; head aspect about 0.72 to 0.75 [uncertain: 3 of 10 source pairs within tolerance].
+- Outline: dark plum or navy ink (#321c2a), never pure black; about 7 to 10 px lit side and 13 to 16 px shaded side and under the chin at 1080 wide (population level, window +-3 px).
+- Poses: snap in 1 to 4 f (median 2.5) or rigid tween in 5 to 11 f (median 6); overshoot 0 to 2.4 %, anticipation 0 to 3.6 %; no squash and stretch; holds median 26 f (p10 8.5, p90 67.5, 36 holds). Timing known to +-3 f (start) and +-4 f (end, travel) between the two human measurers only; tools reach 75 % only at +-8 to +-20 f.
+
+### Proposed rules 230-266 and 280-287 after the clone loop
+## 5. Proposed rules 230 to 266 and 280 to 287 after this loop
+KEEP: 231, 234, 235, 236, 238, 239, 240, 242, 244, 245, 247 (guidance only), 249, 257 to 266, 280, 281, 283. REVISE: 230 (median 1.9 to 4.0 s; 10 to 53 % under 2 s; 20 to 47 % over 4 s), 232 (no join needed in the first 3 s; one-take with 3 or more eased beats), 233 (two endings valid: burst of short shots or one long reveal take 6.8 to 10.9 s; "last shot is not the longest" withdrawn), 237 (151 to 214 visual changes per minute), 241 (2.7 to 3.1 cards per second, dwell median 10 f), 243 (std 2.3 to 4.0 dB is the check; swing is [uncertain]), 246 (key: profile tools say D minor for 6 of 7, bass tools A minor: [uncertain]; tempo [uncertain] 75 to 100 BPM by two tools), 248 (true peak -1.9 to -2.2), 250 (walls thin, hero props 5 to 30 px), 251 (night luma 0.25 to 0.33), 252 (section 3), 254 (tilt median 5 degrees, n 106), 255 (section 3 timings), 256 (impact = one-frame punch-in +3 to +7 %, 6 to 10 f ease back), 282 (on-frame method rule-grade). RETIRE: 253. Rules 267 to 279 and 288 to 294 are drafts held by the Black Friday thread and were not re-reviewed here; they are to be checked against section 3 when that thread resumes.
+
+### New rules 295-301
+## 6. New rules from the v4 loop (numbers continue after the Black Friday drafts, which end at 294)
+295. DISSOLVE CURVE. Dissolve weight follows a smoothstep (ease-in-out) curve; linear is the exception (91 to 95 of 102 are smoothstep). Check: blend-weight fit on our own render. [guidance]
+296. DISSOLVES START ON SENTENCES, CUTS ON WORDS. Start dissolves on a sentence start when the picture changes with the sentence (3.7 times chance); do not tie them to word starts (chance level). [guidance]
+297. PAYOFF DISSOLVES ARE LONGER. Dissolves in the last sentence run about 12 f (3 f above the video median). [guidance, n 6]
+298. STATE THE WINDOW. Every measured timing carries its window: "start known to +-3 f, end to +-4 f". A timing without its window is not a rule. [process]
+299. SEPARATION IS NOT A MEASURING INSTRUMENT FOR A QUIET BED. Bed-level swing and gap read from a vocal-removed stem carry about +-4 dB (stem leakage); on our own mixes measure the bed from our own bed stem. [process]
+300. POPULATION OR PER-ITEM. When per-item agreement is under 75 % but the independent measurers' population medians agree, publish the median with its window and label it population-level; never quote it as an item-level fact. [process]
+301. TOOLS THAT FAIL THEIR KNOWN ANSWERS ARE REPORTED, NOT USED (restates 261 with the v4 evidence: motion trackers 45 to 84 % on synthetic actions; every bed, key and SFX method fails with the voice on top).
+
+### Camera rules 302-305
+## 7. Camera rules (added after the camera loop; see camera/REPORT.md and RENDER_SPEC_v1.4.md)
+302. CAMERA MOVING. Camera moves on at least 85 % of frames (Rick 80 to 98 %); never fully still over 1 s except the ending hold (23 to 86 f). [guidance; the old "no still run over 8 f" is UNCERTAIN, trackers disagree 10 to 101 f]
+303. MOVE DURATIONS. Push-in 23 to 142 f (median 57), pull-out 25 to 120 f, orbit/truck/pan 11 to 70 f, drift 5 to 34 f, crash push 8 to 13 f, jolt 6 to 7 f. [guidance]
+304. MOVE SIZES. Pan and tilt sizes follow the recipe table (guidance, 77.6 % and 75.5 %). Scale ratio and roll are [UNCERTAIN] (70.3 %, 62.0 %); use the table's median as a soft target only. Parallax between layers cannot be measured: use the 3D scene's own parallax.
+305. EASES. Push-ins linear or ease-in-out, pull-outs ease-out. [guidance]
+Rules 134, 182, 183 now point to 302 to 305. Rules 267 to 279 and 288 to 294 still need a check against sections 3 and 7 when the Black Friday thread resumes.
+
+### Black Friday drafts 216-229 (rounds 3-5), checked against the clone spec
+216. Ink hulls live in their source object's shot collection (CHR_<shot>), never in a global collection. Check: no hull renders in a shot whose source object is excluded (round 3: S07 mailbox hull showed as a black blob in S08).
+217. A walk cycle never overrides a working arm: walk(..., swing=) keys only the free arms (round 3: chalk arm swung away from the board in S05).
+218. Face occlusion probe (occprobe.py) on every shot before every render: no face covered > 8 % by any object, prop, arm or other character (MINW 0.06 for tiny background heads). Props count, not only faces (round 4: drooping placard covered three faces in S08).
+219. Nothing is shown back-out or blank for more than 12 frames as a placeholder before its reveal (round 3: blank placard back up for 2 s).
+220. Moving or blurred prints (running presses, flying sheets) carry no legible fake text: blurred paper textures only.
+221. Lettering probe covers ledger totals and every on-screen figure, not only signs (signprobe rect lists).
+222. A crane or rise that would reveal a seated head from behind objects becomes a hard cut (CONSTANT key) instead.
+223. Every FG depth layer is placed with fgcheck.py: its screen range stays in frame, never sweeps across a face.
+224. After every rebuild, confirm both "SCENE_OK all" and "BRIDGES_OK 8 /14"; rebuild.sh hides crashes and early exits (round 5: a misplaced block made scene.py exit at stage A and the old blend was silently reused).
+225. The payoff crash push lands on the payoff noun (+-2 f), preceded by a slow drift, never a push that settles on a filler word.
+226. Bodies are rounded bean silhouettes (side bulge), not straight coat trapezoids; set materials carry painted grain + crease (AO) darkening, not clean CG shading.
+227. Crowd extras are placed by crowdopt.py and then re-checked with occprobe (crowdopt only scores face-on-face; props and arms need the probe).
+228. Overlap check (coplanar.py) before every render: no two boxes share a face plane where they overlap. Overlapping coplanar surfaces self-shadow to solid black in Cycles (BF rounds 1-3: every sidewalk corner was a black void in the overhead shots and no verifier caught it) or flicker (caps, corner facades, picture planes). Fix by removing the redundant piece or offsetting >= 3 mm.
+229. Overhead and top-down stills get a "black void" scan: any flat pure-black area > 1 % of the frame that is not an intended shadow or ink line is a defect.
+Check (Nov 21): all kept. 222 stays valid (hard cuts are free). 226 now reads "bodies follow the character spec (section C); sets carry painted grain + AO".
+
+### Black Friday drafts 267-279 (round 7), checked against the clone spec
+267. **Every owner note becomes a probe.** Each glitch the owner reports gets an automated check that would have caught it, and that check runs before every render from then on (round 6: five glitches, none caught by the probes of the time).
+268. **[C] Hands never pass through faces.** Arm cards sit behind the face disc and in front of the body (y -0.006 vs face -0.012), so a hand can never paint over its own face. A raised hand stays outside its own head disc. armprobe.py samples the hand and mid-forearm of every visible arm card every 2 frames against every head disc (own and others', nearer arms only) and must report 0 before a render (round 6: the S01 cop's whistle hand crossed his face for most of the shot, and other characters did the same).
+269. **Elbows like Rick's, never a forearm sticking out.** Hanging arms bend 15-20 deg at the elbow (Rick's hanging elbows 155-175 deg). Any arm raised past 70 deg switches automatically to a straight card, so a bent forearm never folds over the head. Prop arms bend 15-30 deg (round 6 used 85 deg: forearms stuck out sideways and read as detached limbs at 26 s and 49 s).
+270. **[C] A held prop is attached at the hand.** The grip point is the computed hand centre of the arm card (HAND_Z 0.407 below the shoulder for the straight card), a fist card covers the hand and handle, and the prop is counter-rotated every frame against the final (snapped) arm angle. While carried low, a sign on a stick tilts away from the head; when raised it stands upright with the board fully above the head (round 6: the grip sat 0.1 m past the hand, so the placard floated beside a detached arm at 26 s).
+271. **Two-hand holds are solved, not posed by eye.** For a prop held in both hands (newspaper, ledger, box), the arm angle is solved from the shoulder position and arm length so each hand centre lands within 0.02 m of its grip card (S15 cop: 21.4 deg to grips at x 0.355, z 0.47).
+272. **[C] No negative-scale cards.** Mirrored arms, props and signs get their own mirrored texture; no object ever carries a negative scale. Before a GPU render, the PC renders the first, middle and last frame of every shot and they are compared with CPU stills (extends 203; round 6: the PC GPU drew the granny's mirrored arm as a solid black box for 0.6 s at 17 s, while the CPU render of the same file was clean).
+273. **Writing sits inside the ruled lines.** Ledger, notebook and form entries sit on a ruled line with descenders clear of it and cap tops clear of the line above; totals sit in their own band under a heavy rule; no entry straddles a vertical column rule. ledgercheck.py measures every glyph box against every rule and must report 0 crossings (round 6: ledger figures were struck through by the ruled lines).
+## From my own round-6 checks
+274. **Highlight floor on bright scenes.** Daylight exteriors and the ending get a per-frame highlight floor in post (p98 lifted to 0.86-0.88 with a soft knee above 0.9, gain <= 1.28), applied before the poster's true colours go on (round 6: p98 0.73-0.80 over 1548-1751, R19 needs >= 0.84).
+275. **Unique names for every extra.** A second crowd in the same shot takes a name base (x20+), so no object gets a ".001" duplicate name that probes and bridges can confuse.
+276. **[C] Face-cover probe at 0 before a render.** occprobe.py MIN=0.08 must report nothing. Extras whose faces sit fully behind nearer walkers leave at a hard cut (scale to 0 on the cut frame), and set dressing (lampposts) moves off faces rather than the faces dodging it (round 6 shipped 12 S02 walkers and 5 S16 shoppers with covered faces).
+277. **Body proportions are measured in 3D.** Torso 0.7-1.05 and legs 0.9-1.5 head-heights for every body type, checked on the cards before render; round bodies are stretched 1.118x up from the feet (round 6: round bodies torso 0.63, legs 0.88).
+278. **No shot opens on a blank surface.** A shot whose first frames are mostly one flat colour (white paper, sky, wall) opens wider on the set and its machinery first (round 6 S10: all white paper, luma 0.60, saturation 0.24).
+279. **Foreground per camera set-up.** Each camera set-up of an insert gets its own near object fixed in a corner for that set-up (corners.py / fgcheck.py), on the real surface (round 6: no foreground in the S13 ledger insert).
+Check (Nov 21): kept 267, 268, 270, 272, 273, 275, 276, 278, 279. REVISED: 269 -> "Arms are one curved noodle stroke with no elbow (rule 253 retired); hanging arms curve 15-20 deg; an arm raised past 70 deg uses the near-straight card so the hand never folds over the head." 271 -> numbers now 8.48 deg to grips at x 0.27, z 0.5475 (round 8 build). 274 -> brightness comes from the set first (rule 292); post highlight floor only as a backstop. 277 -> torso 1.0 H, legs 1.1 to 1.3 H, total 2.9 to 3.35 H, one build for every body kind; the 1.118 stretch is retired.
+
+### Black Friday drafts 288-294 (round 8), checked against the clone spec
+288 [C] No face disc may touch a caption box in any frame. Probe: src/capboxes.py (caption boxes from the post record) + src/capprobe.py must print CAPPROBE 0. (round 7 T7: S02 walkers under "Thanksgiving"/"the whole")
+289 [C] Hat peaks and bands end above the brow line (brows at least 30 px below the peak on the 1024 head card); brows are never drawn on a dark hat surface. (round 7 C4)
+290 At most 5 hard cuts per video. An in-shot reframe is a rigid eased camera move of 7-8 f (softcut) unless the new view cannot be reached without passing through geometry or cutting a head. (round 7 K4; guide v1.3: camera moving 84-96 % of frames)
+291 An eye-level camera puts every standing head on the horizon line: any insert with 3+ characters uses a camera at least 0.8 m above eye height, or staggers them in depth so no 3 heads share a screen row. (round 7 P3/R21)
+292 The payoff close-up gets its brightness from the set, not from post: bright frame (gilt/cream), lit bulbs, warm light; the final frames reach p98 >= 0.86 measured outside the poster quad on the raw render, and >= 0.84 on the finished video. The shop file itself tops out near 0.74, so post gain on the poster never fixes it. (round 7 R19)
+293 Camera move landings (eased stops) fall on nouns or names; an intermediate key that lands on a function word is removed. (round 7 K8)
+294 Every large plain surface in frame (ceiling, desk front, display floor) carries a painted texture (grain, tile, pattern); no flat single-colour material larger than 3 % of the frame. (round 7 must-have 3)
+Check (Nov 21): kept 288, 289, 291, 292, 293, 294. 290 REVISED: "Hard cuts are free (no maximum). An in-shot reframe may be a 7-8 f rigid eased camera move (softcut) when it keeps the camera moving (rule 302)."
+
+### Retired (Nov 21 2026, Rick-clone revision)
+## 4. RETIRE (moved here; not erased)
+S9 (our own characters) · 170 (Dresden context note) · 42 · 205 numbers · 55's three bullets · rule 253 "jointed limbs, always bent" (reversed by evidence) · 185's "lips move only on quoted lines" · 8/188's "constant 20 dB" · 134/182's "1.5 s static" and "4 s without action" · 137/180's "max 5 fast joins" and "bridge on 50 % or more" · 230's "at most 26 % over 4 s" · 246's "never 120 BPM" (tempo is [uncertain]) · 256's "at most 3 shake moments".
+Also retired from the Black Friday drafts: 269's "real elbow 15-30 deg bend" wording, 277's "torso 0.7-1.05 / legs 0.9-1.5 and 1.118 stretch", 290's "at most 5 hard cuts".

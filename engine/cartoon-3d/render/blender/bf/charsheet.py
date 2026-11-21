@@ -3,7 +3,7 @@ import json, math, sys
 from PIL import Image
 T='/root/bf/tex/'; C=json.load(open('/root/bf/src/cast.json'))
 BSY={'tall':1.0,'short':1.0,'round':1.0}
-GEO={'tall':(0.996,0.17,0.95),'short':(0.996,0.19,0.95),'round':(0.996,0.21,0.95)}; HS=0.43/0.586
+GEO={'tall':(0.996,0.126,0.95),'short':(0.996,0.142,0.95),'round':(0.996,0.151,0.95)}; HS=0.43/0.586
 PPM=500   # px per metre
 def comp(kind,face=None,ang=-8):
     c=C[kind]; top,shx,shz=GEO[c['body']]; sy=BSY[c['body']]

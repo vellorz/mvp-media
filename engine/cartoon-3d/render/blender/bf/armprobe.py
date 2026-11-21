@@ -6,7 +6,7 @@ from bpy_extras.object_utils import world_to_camera_view as w2c
 sc=bpy.context.scene; SH=json.loads(sc['shots']); STEP=int(os.environ.get('STEP','2'))
 only=[s for s in os.environ.get('SHOTS','').split(',') if s]
 BEND={'arm':18,'armS':4,'pennant':0,'megaphone':15,'paper':20,'bag':20,'box':25,'camera':25,'chalk':30,'pen':30,'redpen':30}
-ARM_W,ARM_H=0.744,0.558; HEAD_R=0.28
+ARM_W,ARM_H=0.744,0.558; HEAD_R=0.215   # r9: head disc radius of the Rick build (0.43 m wide); was 0.28 for the rounds 1-7 head
 if os.environ.get('BENDS'): BEND.update(json.loads(os.environ['BENDS']))
 def card_pts(o):
     k=o.name.split('_',)[-1]; m=re.search(r'_arm-?1_(.+)$',o.name); key=m.group(1) if m else 'arm'

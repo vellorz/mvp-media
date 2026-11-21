@@ -3,7 +3,7 @@
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 import json, math
-T='/root/bf/tex/'; K=(44,22,40,255); SK=(255,255,255,255); OUT=27   # r8 (owner Nov 20: clone Rick's characters): pure white heads like Rick's. r8b (guide v1.3 x.3): dark plum ink, never pure black; 27 px on an 800 px disc = 3.4 % lit side
+T='/root/bf/tex/'; K=(50,28,42,255); SK=(251,244,241,255); OUT=27   # r8 (owner Nov 20: clone Rick's characters): pure white heads like Rick's. r8b (guide v1.3 x.3): dark plum ink, never pure black; 27 px on an 800 px disc = 3.4 % lit side
 def new(w,h): im=Image.new('RGBA',(w,h),(0,0,0,0)); return im,ImageDraw.Draw(im)
 def dk(c,f=0.75): return tuple(int(v*f) for v in c[:3])+(255,)
 CX,CY=512,540
@@ -75,14 +75,17 @@ def head(name,fk):
     # r8b (guide v1.3 x.3): ink 3.4 % of head width toward the light (upper right), 6 % away from it and under the chin
     d.ellipse([112,140,912,940],fill=K); d.ellipse([112+48,140+27,912-27,940-48],fill=skin)
     head_shade(im,skin); d=ImageDraw.Draw(im)
+    # r9 (RENDER_SPEC_v1.4 A: eyes centred ~69 % up the head): hair and hats are drawn on their own layer and squashed to the top 40 % of the
+    # head (x0.6 from the top), the face features on a layer moved up 105 px (eyes at 65.6 % up)
     if 'angryfill' in ex: 
         ov=Image.new('RGBA',(1024,1024),(0,0,0,0)); od=ImageDraw.Draw(ov); od.ellipse([130,158,894,922],fill=(170,60,170,120)); im.alpha_composite(ov); d=ImageDraw.Draw(im)
-    if hs in('short','bald','bun','mullet'):
-        if hs=='short': d.chord([150,150,874,560],180,360,fill=hair,outline=K,width=OUT)
-        if hs=='bun': d.chord([150,150,874,520],180,360,fill=hair,outline=K,width=OUT)
+    if hs in('short','bald','bun','mullet'):   # r9: hairlines raised with the features (hair ends ~285, brows at 300)
+        if hs=='short': d.chord([150,150,874,420],180,360,fill=hair,outline=K,width=OUT)
+        if hs=='bun': d.chord([150,150,874,410],180,360,fill=hair,outline=K,width=OUT)
         if hs=='bald':
-            for sx in(-1,1): d.chord([CX+sx*390-100,400,CX+sx*390+100,680],90 if sx>0 else 270,270 if sx>0 else 450,fill=hair)
-        if hs=='mullet': d.chord([150,150,874,540],180,360,fill=hair,outline=K,width=OUT)
+            for sx in(-1,1): d.chord([CX+sx*390-100,300,CX+sx*390+100,580],90 if sx>0 else 270,270 if sx>0 else 450,fill=hair)
+        if hs=='mullet': d.chord([150,150,874,420],180,360,fill=hair,outline=K,width=OUT)
+    base=im; im,d=new(1024,1024)   # hats on their own layer, squashed x0.6 from the top (peaks end <= 245)
     hat=c.get('hat')
     if hat=='cop':
         d.chord([140,60,884,400],180,360,fill=(28,36,70,255),outline=K,width=OUT); d.rectangle([150,230,874,300],fill=(28,36,70,255),outline=K,width=OUT)
@@ -90,15 +93,18 @@ def head(name,fk):
         d.polygon([(CX,130),(CX+44,175),(CX+30,225),(CX-30,225),(CX-44,175)],fill=(214,180,80,255),outline=K)  # plain shield, no text
     if hat=='flatcap': d.chord([150,140,874,480],180,360,fill=(90,90,96,255),outline=K,width=OUT); d.chord([200,300,760,400],0,180,fill=(70,70,76,255),outline=K,width=OUT)
     if hat=='ladyhat': d.ellipse([60,250,964,380],fill=(150,40,60,255),outline=K,width=OUT); d.chord([230,90,794,420],180,360,fill=(150,40,60,255),outline=K,width=OUT); d.ellipse([680,150,780,250],fill=(240,200,80,255),outline=K,width=10)
-    if hat=='beanie': d.chord([140,110,884,520],180,360,fill=tuple(c['scarf'])+(255,),outline=K,width=OUT); d.ellipse([462,60,562,160],fill=(250,250,250,255),outline=K,width=12)
+    if hat=='beanie': d.chord([140,110,884,460],180,360,fill=tuple(c['scarf'])+(255,),outline=K,width=OUT); d.ellipse([462,60,562,160],fill=(250,250,250,255),outline=K,width=12)
     if hat=='fedora': d.ellipse([90,300,934,400],fill=(80,60,44,255),outline=K,width=OUT); d.rounded_rectangle([250,90,774,350],60,fill=(80,60,44,255),outline=K,width=OUT); d.rectangle([250,280,774,330],fill=(40,30,24,255))
-    eyes(d,e,glasses=(tuple(c['glasses'])+(255,)) if c.get('glasses') else None); brows(d,b if hat not in('cop','flatcap','fedora','beanie','ladyhat') or b!='up' else 'flat',cy=438 if hat in('cop','flatcap') else 405); mouth(d,m)
+    top=im.resize((1024,int(1024*0.6)),Image.LANCZOS); im=base; im.alpha_composite(top,(0,0)); top=None
+    feat,d=new(1024,1024)
+    eyes(d,e,glasses=(tuple(c['glasses'])+(255,)) if c.get('glasses') else None); brows(d,b if hat not in('cop','flatcap','fedora','beanie','ladyhat') or b!='up' else 'flat'); mouth(d,m)
     if c.get('mustache'):   # r8: Rick's bushy two-lobe mustache
         mc=tuple(c['mustache'])+(255,)
         for sx in(-1,1): d.ellipse([CX+sx*80-95,605,CX+sx*80+95,705],fill=mc,outline=K,width=12)
         d.ellipse([CX-70,610,CX+70,690],fill=mc)
     if c.get('nose',True): d.arc([CX-30,560,CX+30,640],-30,200,fill=K,width=10)
     extras(d,ex)
+    im.alpha_composite(feat.crop((0,105,1024,1024)),(0,0))
     return im
 # ---- round 3 (rule 193): Rick-style construction ----
 # slim column garment (narrower than the head), long coat/robe to the shins, hard cel shadow on the left third,
@@ -108,10 +114,12 @@ SS=2; BOUT=20   # round 4: body outline as heavy as the head's (verifier: thin b
 def lt(c,f=1.12): return tuple(min(255,int(v*f)) for v in c[:3])+(255,)
 GB={'tall':(98,175,215),'short':(98,180,222),'round':(98,200,238)}   # r8b: one build for all (guide v1.3 x.3: torso 1.00 H, legs 1.25-1.3 H, total 3.2-3.35 H); kinds differ in width only   # top px, shoulder half-width, hem half-width
 HEMY={'tall':528,'short':528,'round':528}   # r8b: torso 430 px = 1.00 H (head 0.43 m), legs 528->1074 = 1.27 H   # r6 (round-5: legs 0.64-0.90 H, Rick 0.93-1.31): shorter torso, longer legs   # round 5 (B1/B2): torso ~0.86 H tall (H = head disc ~560 px), legs ~0.85 H visible
+WK={'tall':0.74,'short':0.745,'round':0.72}
 def _sil(kind):
     y0,w0,w1=GB[kind]; y1=HEMY[kind]; pts=[]
+    k_=WK[kind]; w0=int(w0*k_); w1=int(w1*k_)   # r9 (RENDER_SPEC_v1.4 A: torso width 0.73-0.89 H): widths x0.72-0.745
     w1=int(w1*0.74); rr=int(0.36*2*w1)   # r6: hem narrower than the middle (Rick: widest at mid-torso)   # rounded bottom: corner radius >= 0.35 of the torso width (Rick bean)
-    BG_=62
+    BG_=int(62*k_)
     yb=y1-rr*0.55   # sides end here, then a half-ellipse closes the bottom
     for i in range(0,11): t=i/10; pts.append((400-(w1+(w0-w1)*t)-BG_*math.sin(math.pi*t), yb+(y0+70-yb)*t))
     for i in range(0,13): a=math.radians(180+i*7.5); pts.append((400-w0+70+70*math.cos(a)*1.0, y0+70+70*math.sin(a)))

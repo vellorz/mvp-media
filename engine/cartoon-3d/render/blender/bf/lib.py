@@ -166,7 +166,7 @@ BSY={'tall':1.0,'short':1.0,'round':1.0}   # r8b: one Rick build for every kind 
 # r8b (owner Nov 20: clone Rick's build; guide v1.3 x.3): head 0.43 m wide = H; torso 0.962->0.532 = 1.00 H; legs 0.532->-0.014 = 1.27 H;
 # head disc centre 1.167 (top 1.382): total 3.25 H. Shoulder pivots 0.95, hand (HAND_Z 0.407) at the hem.
 HS=0.43/0.586   # head card scale vs rounds 1-7 (disc 800/1024 of a 0.75 card)
-GEO={'tall':(0.996,0.17,0.95),'short':(0.996,0.19,0.95),'round':(0.996,0.21,0.95)}
+GEO={'tall':(0.996,0.126,0.95),'short':(0.996,0.142,0.95),'round':(0.996,0.151,0.95)}   # r9: shoulders follow the narrower torso (0.73-0.89 H)
 ARM_W,ARM_H,ARM_OFF=0.744,0.558,0.242   # r6: arm canvas 1200 wide (bent forearm swings outward)
 SHADOW=None
 def chr_coll(shot):

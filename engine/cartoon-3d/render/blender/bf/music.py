@@ -1,5 +1,5 @@
 # Music bed + SFX for the Black Friday short (all synthesized here, nothing licensed).
-# Bed (rule 188): light plucked/mallet loop with a soft four-on-the-floor pulse, 120 BPM, constant from frame 0 to the end
+# Bed (rules 8/188 revised Nov 21): loop-based D-minor garage bed, 96 BPM, 4-bar loop = 10 s (Rick 6-11 s), level rides the MAP (not constant), louder into the payoff
 # (no swells, no ducking). Owner taste honoured inside it: melodic house feel, rounded sub bass, shuffled garage hats.
 import numpy as np, wave, json, sys
 SR=48000; END_F=1752; DUR=END_F/30+0.6; N=int(SR*DUR); rng=np.random.default_rng(7)
@@ -56,7 +56,7 @@ T['kick'][:]=0
 for bi in range(bars):
     for k in range(4): put('kick',bi*4*B+k*B,KICK,0.9)
 # round 5: level map from the Rick music study (section 7), dB relative to the bed median; layers thin out in dips (S6)
-MAP=[(0.0,7),(2.6,2),(5.5,0),(7.9,5),(9.7,3),(14.2,3),(14.7,7),(16.1,5),(17.4,-3),(19.4,-3),(20.5,6),(21.5,-3),(28.2,-5),(31.0,-5),(32.2,2),(34.0,4),(35.6,6),(37.2,-3),(45.1,-3),(48.4,3),(49.3,-5),(52.0,3),(57.5,8),(60.0,8)]
+MAP=[(0.0,1),(2.6,0),(5.5,-1),(7.9,2),(9.7,1),(14.2,1),(14.7,3),(16.1,2),(17.4,-2),(19.4,-2),(20.5,3),(21.5,-2),(28.2,-3),(31.0,-3),(32.2,1),(34.0,2),(35.6,3),(37.2,-2),(45.1,-2),(48.4,1),(49.3,-2),(52.0,3),(54.5,6),(57.5,8),(60.0,8)]   # r9 (RENDER_SPEC_v1.5 F/G: bed louder into the payoff than at the start, std 2.3-4.0 dB): softer open, smaller dips, +8 at the payoff
 tt=np.arange(N)/SR-0.1   # VO plays 0.1 s late in the mix
 mk=np.array([m[0] for m in MAP]); mv=np.array([m[1] for m in MAP],float)
 gdb=np.interp(tt,mk,mv)

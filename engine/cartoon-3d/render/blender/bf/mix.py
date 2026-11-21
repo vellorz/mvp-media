@@ -1,4 +1,4 @@
-# Mix (rule 188): VO studio-clean, bed constant ~20 dB under the VO, SFX 8-12 dB over the bed; master -14 LUFS, -2 dBTP, LRA <= 3.2
+# Mix (rules 8/188 revised Nov 21): VO studio-clean, bed 14.4-18.6 dB under the VO riding its level map (std 2.3-4.0 dB, no ducking), SFX gentle (rule 192); master -14 LUFS, -1.9 to -2.2 dBTP
 import subprocess, re, json, sys
 A='/root/bf/audio/'; VO='/mnt/project-files/modern-vista-social/experiments/2026-11-18_rick-99-test/audio/vo_trim.wav'
 END=1752/30

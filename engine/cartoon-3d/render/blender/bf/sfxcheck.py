@@ -2,7 +2,11 @@
 import numpy as np, json, subprocess, re
 from scipy.signal import lfilter, butter, sosfilt
 sr=48000
-def rd(p): return np.frombuffer(subprocess.run(['ffmpeg','-v','error','-i',p,'-ac','1','-ar',str(sr),'-f','f32le','-'],capture_output=True).stdout,np.float32).astype(np.float64)
+def _mono_filter(p):
+    # r9 lesson: ffmpeg -ac 1 SUMS stereo at 0.707 per channel (+3.01 dB vs a mono stem); average the channels instead, and leave true mono files alone
+    n=int(subprocess.run(['ffprobe','-v','error','-select_streams','a:0','-show_entries','stream=channels','-of','csv=p=0',p],capture_output=True).stdout.split()[0])
+    return 'pan=mono|c0=0.5*c0+0.5*c1' if n==2 else 'pan=mono|c0=c0'
+def rd(p): return np.frombuffer(subprocess.run(['ffmpeg','-v','error','-i',p,'-af',_mono_filter(p),'-ar',str(sr),'-f','f32le','-'],capture_output=True).stdout,np.float32).astype(np.float64)
 s=rd('/root/bf/audio/sfx.wav'); v=rd('/mnt/project-files/modern-vista-social/experiments/2026-11-18_rick-99-test/audio/vo_trim.wav')
 d=int(0.1*sr); v=np.concatenate([np.zeros(d),v]); v=np.pad(v,(0,max(0,len(s)-len(v))))[:len(s)]
 gs=float(re.findall(r"sfx \S+ ->gain (\S+)",subprocess.run(['python3','-c','print(open("/root/bf/audio/mixlog.txt").read())'],capture_output=True,text=True).stdout or 'sfx 0 ->gain -14.56')[0]) if False else None

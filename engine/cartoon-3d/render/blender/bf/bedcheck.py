@@ -2,7 +2,11 @@
 import numpy as np, json, subprocess, sys
 from scipy.signal import lfilter
 sr=48000
-def rd(p): return np.frombuffer(subprocess.run(['ffmpeg','-v','error','-i',p,'-ac','1','-ar',str(sr),'-f','f32le','-'],capture_output=True).stdout,np.float32).astype(np.float64)
+def _mono_filter(p):
+    # r9 lesson: ffmpeg -ac 1 SUMS stereo at 0.707 per channel (+3.01 dB vs a mono stem); average the channels instead, and leave true mono files alone
+    n=int(subprocess.run(['ffprobe','-v','error','-select_streams','a:0','-show_entries','stream=channels','-of','csv=p=0',p],capture_output=True).stdout.split()[0])
+    return 'pan=mono|c0=0.5*c0+0.5*c1' if n==2 else 'pan=mono|c0=c0'
+def rd(p): return np.frombuffer(subprocess.run(['ffmpeg','-v','error','-i',p,'-af',_mono_filter(p),'-ar',str(sr),'-f','f32le','-'],capture_output=True).stdout,np.float32).astype(np.float64)
 gb=float(sys.argv[1]); b=rd('/root/bf/audio/bed.wav')*10**(gb/20)
 v=rd('/mnt/project-files/modern-vista-social/experiments/2026-11-18_rick-99-test/audio/vo_trim.wav'); v=np.concatenate([np.zeros(int(0.1*sr)),v])
 n=min(len(b),int(58.4*sr)); b=b[:n]; v=np.pad(v,(0,max(0,n-len(v))))[:n]

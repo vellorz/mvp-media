@@ -528,14 +528,14 @@ path(s,[(1726,(HX-1.2,-0.4,1.4),(HX-1.5,1.6,1.15)),(1800,(HX-0.6,-1.5,1.6),(HX-0
 s='S20'; r=S(s)
 F=[]
 for i,(x,k) in enumerate([(-1.3,'grandT'),(-0.7,'momT'),(-0.05,'dadT'),(0.55,'kidT')]):
-    c_=char_on(f'S20_{k}',k,s,(TX+x,1.5,0),r,'happy',arms=('arm',{'grandT':'arm','momT':'arm_plate','dadT':'arm_fork','kidT':'arm_fork'}[k])); F.append(c_)
+    c_=char_on(f'S20_{k}',k,s,(TX+x,1.5,0),r,'happy',arms=('arm',{'grandT':'arm','momT':'arm_plate','dadT':'arm_fork','kidT':'arm_fork'}[k]),scale=(0.8 if k=='kidT' else 1.0)); F.append(c_)   # CAST GATE: the child stands 0.8 of an adult [INFERRED]
     drift_faces(c_,1886,1980,['happy','grin','excited','proud'],200+i,(14,26)); bob(c_,[1910+i*8,1950+i*5])
 for f in range(1890,1980,10): arm(F[2],1,f,-70); arm(F[2],1,f+5,-45)
 arm(F[3],1,1934,-120); arm(F[3],1,1944,-50)
 path(s,[(1886,(TX-1.3,-1.4,1.5),(TX-0.9,1.4,1.0)),(1980,(TX-0.2,-1.45,1.5),(TX+0.0,1.4,1.0))])
 # ---- S21 (1974-2086): all because one woman would not stop writing: past her framed letter, the camera lands on the poster on "writing" ----
 s='S21'; r=S(s)
-k21=char_on('S21_kid','kidT',s,(TX+0.55,1.5,0),r,'happy',arms=('arm','arm_fork')); faces(k21,[(1974,'happy'),(1999,'grin')])
+k21=char_on('S21_kid','kidT',s,(TX+0.55,1.5,0),r,'happy',arms=('arm','arm_fork'),scale=0.8); faces(k21,[(1974,'happy'),(1999,'grin')])
 path(s,[(1974,(TX+0.3,-1.2,1.5),(TX+0.55,1.6,1.15)),(2012,(TX+0.75,-0.5,1.65),(TX+0.75,3.0,1.8)),(2054,(PXP+0.05,PY-2.25,1.53),(PXP,PY,PZ-0.21)),(END,(PXP+0.03,PY-2.05,1.52),(PXP,PY,PZ-0.21))])
 # ======================= foreground layers (rule 311): one near object per shot over 60 f, low in a corner, never over a face or the poster =======================
 def campos(n,f):

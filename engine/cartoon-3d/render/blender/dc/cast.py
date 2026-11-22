@@ -123,7 +123,20 @@ def head(name,fk):
         d.rectangle([210,320,820,385],fill=dk(hc,0.7),outline=K,width=10); d.chord([170,340,600,470],180,360,fill=(24,22,26,255),outline=K,width=OUT)
     top=im.resize((1024,int(1024*0.6)),Image.LANCZOS); im=base; im.alpha_composite(top,(0,0)); top=None
     feat,d=new(1024,1024)
-    eyes(d,e,glasses=(tuple(c['glasses'])+(255,)) if c.get('glasses') else None); brows(d,b if hat not in('cop','flatcap','fedora','beanie','ladyhat','capotain','tricorn','knit','cap','sunhat','visor','kepi') or b!='up' else 'flat'); mouth(d,m)
+    # CAST GATE v2 (run coordinator, Nov 22: Rick's features are big and readable, refs 10#0587 14#0219 14#0695): each eye, brow and the mouth is drawn
+    # on its own layer and scaled about its own centre, so the eye spacing (27 % of head width) stays the same
+    def _big(drawfn,boxes,f):
+        lay,ld=new(1024,1024); drawfn(ld)
+        for (bx,by,r) in boxes:
+            cr=lay.crop((bx-r,by-r,bx+r,by+r)); n=int(2*r*f); cr=cr.resize((n,n),Image.LANCZOS); feat.alpha_composite(cr,(int(bx-n/2),int(by-n/2)))
+    EF=1.9 if e=='wide' else 1.6; EY=545
+    _big(lambda dd: eyes(dd,e,cy=EY),[(CX-108,EY,105),(CX+108,EY,105)],EF)
+    if c.get('glasses'):   # rims drawn at their own size around the enlarged eyes (scaling them with the eyes made them overlap)
+        gc=tuple(c['glasses'])+(255,)
+        for sx in(-1,1): d.ellipse([CX+sx*112-90,EY-84,CX+sx*112+90,EY+84],outline=gc,width=13)
+        d.line([CX-24,EY-10,CX+24,EY-10],fill=gc,width=12)
+    _big(lambda dd: brows(dd,b if hat not in('cop','flatcap','fedora','beanie','ladyhat','capotain','tricorn','knit','cap','sunhat','visor','kepi') or b!='up' else 'flat',cy=EY-125),[(CX-108,EY-125,64),(CX+108,EY-125,64)],1.45)
+    _big(lambda dd: mouth(dd,m,cy=770),[(CX,790,130)],1.65)
     if c.get('stubble'):   # D3 light stubble (rule 326a): pale translucent shade over the jaw
         ov=Image.new('RGBA',(1024,1024),(0,0,0,0)); ImageDraw.Draw(ov).chord([150,420,874,860],0,180,fill=(120,110,110,70)); feat.alpha_composite(ov); d=ImageDraw.Draw(feat)
     if c.get('mustache'):   # dc (rule 326, Nov 22): one slim mustache only; the bushy two-lobe mustache is retired
@@ -300,6 +313,20 @@ def body(name,stride=0):
         for yy in (y0+110,y0+190): d.line([s(452),s(yy),s(518),s(yy)],fill=(250,250,250,255),width=s(16))
         for k in range(5): d.line([s(458+k*14),s(y0+330),s(458+k*14),s(y0+362)],fill=sc,width=s(6))
     d.line(_S(pts+[pts[0]]),fill=K,width=s(BOUT),joint='curve')
+    if cue=='dress':   # CAST GATE (rule 329, Rick refs 10#0587/#0757: long garments reach the ankles): 1860s full skirt from the waistband to the ankles, only the shoes show
+        gma=np.asarray(gm)>0; ys_=beltY+24; row=np.where(gma[s(ys_)])[0]; xl,xr=row[0]/SS,row[-1]/SS
+        yb_=1028; fl=70+stride*0   # flare beyond the bean at the bottom
+        SK=[(xl,ys_)]+[(xl-fl*t**1.6,ys_+(yb_-ys_)*t) for t in [i/12 for i in range(1,13)]]
+        SK+=[(400+(xl-fl-400)*math.cos(math.pi*i/2/12)*1.0,yb_+18*math.sin(math.pi*i/12)) for i in range(0,1)]
+        SK+=[(xr+fl*t**1.6,ys_+(yb_-ys_)*t) for t in [i/12 for i in range(12,0,-1)]]+[(xr,ys_)]
+        d.polygon(_S(SK),fill=dk(R,0.9))
+        sh2=[(p_[0],p_[1]) for p_ in SK if p_[0]<400]; 
+        d.polygon(_S([(xl,ys_),(xl-fl*0.5,yb_),(xl+(xr-xl)*0.3,yb_),(xl+(xr-xl)*0.22,ys_)]),fill=dk(R,0.68))
+        for k in range(6):
+            t=(k+0.5)/6; xt=xl+(xr-xl)*t; xb=xl-fl+(xr-xl+2*fl)*t
+            d.line(_S([(xt,ys_+20),(xb,yb_-10)]),fill=dk(R,0.5),width=s(6))
+        d.rectangle([s(xl),s(ys_-24),s(xr),s(ys_)],fill=dk(R,0.62))
+        d.line(_S(SK+[SK[0]]),fill=K,width=s(BOUT),joint='curve')
     return im.resize((800,1100),Image.LANCZOS)
 def arm(name,prop=None,straight=None):
     # r8b (guide v1.3 x.3, rule 253 reversed): ONE smooth noodle stroke, no elbow joint, 5.5 % of head width thick (38 px; head 0.43 m = 694 arm px),
@@ -337,7 +364,7 @@ def arm(name,prop=None,straight=None):
     return noodle(im,BEND.get(prop,18) if straight is None else straight)
 # r7 (owner Nov 19: forearms stuck out sideways and swung across faces): natural hang 18 deg; 'armS' = straight card for raised and gripping arms
 BEND={'letter':22,'stamp':18,'sack':20,'plate':24,'pie':24,'fork':28,'musket':0,'shovel':6,'spyglass':25,'quill':30,'bow':4,'cane':10,'basket':22,'oar':0,'lantern':18,'phone':28,'pennant':0,'megaphone':15,'paper':20,'bag':20,'box':25,'camera':25,'chalk':30,'pen':30,'redpen':30}
-AW=38
+AW=46   # CAST GATE v2: arm line 6.7 % H (was 5.5 %), coordinator: arms read thinner than Rick's in scene
 def noodle(hand,deg,ey=330):
     # the hand (with its prop) swings outward by deg about a point 330 px down; the arm is one quadratic curve from the shoulder to the hand
     W,H=hand.size; out=Image.new('RGBA',(W*3,H),(0,0,0,0)); X=W*3//2

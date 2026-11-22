@@ -12,7 +12,10 @@
 # Face recipe = [eyes, brows, mouth, extras]; extras is a '+'-joined string (e.g. 'sweat+blushR').
 
 import math
-from PIL import Image, ImageDraw, ImageFilter
+try:
+    from PIL import Image, ImageDraw, ImageFilter
+except ImportError:   # Blender's Python has no PIL; lib.py only needs LIBRARY/FAMILY/expand/alternates (det, Nov 22)
+    Image=ImageDraw=ImageFilter=ImageChops=None
 
 CX = 512
 CLEAR = (0, 0, 0, 0)

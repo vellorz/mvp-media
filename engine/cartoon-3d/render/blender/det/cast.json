@@ -32,9 +32,9 @@
   ],
   "faces": {
    "grin": [
-    "happy",
-    "up",
-    "grin"
+    "dot",
+    "none",
+    "toothy"
    ],
    "talkA": [
     "dot",
@@ -57,37 +57,39 @@
     "smile"
    ],
    "smug": [
-    "half",
-    "raise",
+    "lid",
+    "none",
     "smirk"
    ],
    "shock": [
-    "wide",
-    "up",
-    "O",
-    "sweat"
+    "pin",
+    "Lup",
+    "O"
    ],
    "wink": [
     "wink",
-    "raise",
+    "none",
     "smirk"
    ],
    "blink": [
     "closed",
-    "flat",
-    "smile"
+    "Lflat",
+    "line"
    ],
    "deadpan": [
-    "half",
-    "flat",
+    "lid",
+    "none",
     "line"
    ],
    "idea": [
-    "wide",
-    "up",
-    "grin"
+    "ring",
+    "Lup",
+    "toothy"
    ]
-  }
+  },
+  "turn": 0.35,
+  "mouth_side": 1,
+  "hat_tilt": 10
  },
  "seller": {
   "coat": [
@@ -115,22 +117,22 @@
   "faces": {
    "happy": [
     "happy",
-    "up",
+    "none",
     "smile"
    ],
    "wow": [
-    "wide",
-    "up",
-    "O"
+    "ring",
+    "Lup",
+    "o"
    ],
    "blink": [
     "closed",
-    "flat",
-    "smile"
+    "Lflat",
+    "line"
    ],
    "deadpan": [
-    "half",
-    "flat",
+    "lid",
+    "none",
     "line"
    ]
   },
@@ -138,7 +140,10 @@
    150,
    140,
    130
-  ]
+  ],
+  "turn": -0.3,
+  "mouth_side": -1,
+  "hat_tilt": -8
  },
  "lion": {
   "coat": [
@@ -171,37 +176,39 @@
   ],
   "faces": {
    "grit": [
-    "squeeze",
-    "angry",
+    "squint",
+    "Langryhv",
     "grit"
    ],
    "sad": [
     "dot",
-    "worry",
-    "frown",
-    "sweat"
+    "Lworry",
+    "frown"
    ],
    "shock": [
-    "wide",
-    "up",
+    "pin",
+    "Lup",
     "O"
    ],
    "cheer": [
     "happy",
-    "up",
+    "Lup",
     "laugh"
    ],
    "blink": [
     "closed",
-    "flat",
+    "Lflat",
     "line"
    ],
    "deadpan": [
-    "half",
-    "flat",
+    "lid",
+    "none",
     "line"
    ]
-  }
+  },
+  "turn": 0.25,
+  "mouth_side": 1,
+  "hat_tilt": 0
  },
  "lion2": {
   "coat": [
@@ -234,32 +241,34 @@
   ],
   "faces": {
    "grit": [
-    "squeeze",
-    "angry",
+    "squint",
+    "Langryhv",
     "grit"
    ],
    "sad": [
     "dot",
-    "worry",
+    "Lworry",
     "frown"
    ],
    "shock": [
-    "wide",
-    "up",
-    "O",
-    "sweat"
+    "pin",
+    "Lup",
+    "O"
    ],
    "cheer": [
     "happy",
-    "up",
+    "Lup",
     "laugh"
    ],
    "blink": [
     "closed",
-    "flat",
+    "Lflat",
     "line"
    ]
-  }
+  },
+  "turn": -0.4,
+  "mouth_side": -1,
+  "hat_tilt": 0
  },
  "bear": {
   "coat": [
@@ -297,26 +306,29 @@
   ],
   "faces": {
    "smug": [
-    "half",
-    "raise",
+    "lid",
+    "none",
     "smirk"
    ],
    "grit": [
-    "squeeze",
-    "angry",
+    "squint",
+    "Langryhv",
     "grit"
    ],
    "cheer": [
     "happy",
-    "up",
+    "Lup",
     "laugh"
    ],
    "blink": [
     "closed",
-    "flat",
-    "smirk"
+    "Lflat",
+    "line"
    ]
-  }
+  },
+  "turn": 0.3,
+  "mouth_side": 1,
+  "hat_tilt": 0
  },
  "fanman": {
   "coat": [
@@ -355,35 +367,38 @@
   "faces": {
    "cheer": [
     "happy",
-    "up",
+    "Lup",
     "laugh"
    ],
    "shout": [
     "squeeze",
-    "angry",
-    "wide"
+    "Langryhv",
+    "shout"
    ],
    "happy": [
     "happy",
-    "up",
+    "none",
     "smile"
    ],
    "sad": [
     "dot",
-    "worry",
+    "Lworry",
     "frown"
    ],
    "shock": [
-    "wide",
-    "up",
+    "pin",
+    "Lup",
     "O"
    ],
    "blink": [
     "closed",
-    "flat",
+    "Lflat",
     "line"
    ]
-  }
+  },
+  "turn": -0.25,
+  "mouth_side": -1,
+  "hat_tilt": -10
  },
  "fanlady": {
   "coat": [
@@ -416,30 +431,33 @@
   "faces": {
    "cheer": [
     "happy",
-    "up",
+    "Lup",
     "laugh"
    ],
    "happy": [
     "happy",
-    "up",
+    "none",
     "smile"
    ],
    "shock": [
-    "wide",
-    "up",
+    "pin",
+    "Lup",
     "O"
    ],
    "sad": [
     "dot",
-    "worry",
+    "Lworry",
     "frown"
    ],
    "blink": [
     "closed",
-    "flat",
-    "smile"
+    "Lflat",
+    "line"
    ]
-  }
+  },
+  "turn": 0.4,
+  "mouth_side": 1,
+  "hat_tilt": 6
  },
  "fanold": {
   "coat": [
@@ -479,27 +497,27 @@
   "faces": {
    "cheer": [
     "happy",
-    "up",
+    "Lup",
     "laugh"
    ],
    "deadpan": [
-    "half",
-    "flat",
+    "lid",
+    "none",
     "line"
    ],
    "shout": [
     "squeeze",
-    "angry",
-    "wide"
+    "Langryhv",
+    "shout"
    ],
    "blink": [
     "closed",
-    "flat",
+    "Lflat",
     "line"
    ],
    "sad": [
     "dot",
-    "worry",
+    "Lworry",
     "frown"
    ]
   },
@@ -507,7 +525,10 @@
    220,
    220,
    224
-  ]
+  ],
+  "turn": -0.35,
+  "mouth_side": -1,
+  "hat_tilt": -8
  },
  "newsboy": {
   "coat": [
@@ -535,20 +556,23 @@
   "faces": {
    "shout": [
     "squeeze",
-    "angry",
-    "wide"
+    "Langryhv",
+    "shout"
    ],
    "happy": [
     "happy",
-    "up",
+    "none",
     "smile"
    ],
    "blink": [
     "closed",
-    "flat",
+    "Lflat",
     "line"
    ]
-  }
+  },
+  "turn": 0.35,
+  "mouth_side": 1,
+  "hat_tilt": 8
  },
  "dad34": {
   "coat": [
@@ -575,35 +599,37 @@
   "faces": {
    "happy": [
     "happy",
-    "up",
+    "none",
     "smile"
    ],
    "deadpan": [
-    "half",
-    "flat",
+    "lid",
+    "none",
     "line"
    ],
    "shrug": [
-    "dot",
-    "up",
+    "pin",
+    "none",
     "wavy"
    ],
    "cheer": [
     "happy",
-    "up",
+    "Lup",
     "laugh"
    ],
    "blink": [
     "closed",
-    "flat",
-    "smile"
+    "Lflat",
+    "line"
    ],
    "wow": [
-    "wide",
-    "up",
-    "O"
+    "ring",
+    "Lup",
+    "o"
    ]
-  }
+  },
+  "turn": -0.3,
+  "mouth_side": -1
  },
  "mom34": {
   "coat": [
@@ -630,30 +656,32 @@
   "faces": {
    "happy": [
     "happy",
-    "up",
+    "none",
     "smile"
    ],
    "deadpan": [
-    "half",
-    "flat",
+    "lid",
+    "none",
     "line"
    ],
    "wow": [
-    "wide",
-    "up",
-    "O"
+    "ring",
+    "Lup",
+    "o"
    ],
    "cheer": [
     "happy",
-    "up",
+    "Lup",
     "laugh"
    ],
    "blink": [
     "closed",
-    "flat",
-    "smile"
+    "Lflat",
+    "line"
    ]
-  }
+  },
+  "turn": 0.25,
+  "mouth_side": 1
  },
  "gramps": {
   "coat": [
@@ -684,28 +712,28 @@
   ],
   "faces": {
    "deadpan": [
-    "half",
-    "flat",
+    "lid",
+    "none",
     "line"
    ],
    "eyeroll": [
-    "up",
-    "flat",
-    "wavy"
+    "sideR",
+    "none",
+    "smirkR"
    ],
    "shock": [
-    "wide",
-    "up",
+    "pin",
+    "Lup",
     "O"
    ],
    "cheer": [
     "happy",
-    "up",
+    "Lup",
     "laugh"
    ],
    "blink": [
     "closed",
-    "flat",
+    "Lflat",
     "line"
    ],
    "talkA": [
@@ -733,7 +761,9 @@
    230,
    230,
    232
-  ]
+  ],
+  "turn": -0.4,
+  "mouth_side": -1
  },
  "kid34": {
   "coat": [
@@ -761,25 +791,28 @@
   "faces": {
    "happy": [
     "happy",
-    "up",
+    "none",
     "smile"
    ],
    "wow": [
-    "wide",
-    "up",
-    "O"
+    "ring",
+    "Lup",
+    "o"
    ],
    "cheer": [
     "happy",
-    "up",
+    "Lup",
     "laugh"
    ],
    "blink": [
     "closed",
-    "flat",
-    "smile"
+    "Lflat",
+    "line"
    ]
-  }
+  },
+  "turn": 0.3,
+  "mouth_side": 1,
+  "hat_tilt": 8
  },
  "operator": {
   "coat": [
@@ -807,13 +840,13 @@
   "faces": {
    "happy": [
     "happy",
-    "up",
+    "none",
     "smile"
    ],
    "wow": [
-    "wide",
-    "up",
-    "O"
+    "ring",
+    "Lup",
+    "o"
    ],
    "talkA": [
     "dot",
@@ -827,10 +860,12 @@
    ],
    "blink": [
     "closed",
-    "flat",
-    "smile"
+    "Lflat",
+    "line"
    ]
-  }
+  },
+  "turn": -0.25,
+  "mouth_side": -1
  },
  "clerk": {
   "coat": [
@@ -863,21 +898,23 @@
   "faces": {
    "happy": [
     "happy",
-    "up",
-    "grin"
+    "none",
+    "smile"
    ],
    "wow": [
-    "wide",
-    "up",
-    "O",
-    "sweat"
+    "ring",
+    "Lup",
+    "o"
    ],
    "blink": [
     "closed",
-    "flat",
-    "smile"
+    "Lflat",
+    "line"
    ]
-  }
+  },
+  "turn": 0.4,
+  "mouth_side": 1,
+  "hat_tilt": -7
  },
  "dadM": {
   "coat": [
@@ -905,41 +942,42 @@
   "faces": {
    "cheer": [
     "happy",
-    "up",
+    "Lup",
     "laugh"
    ],
    "shout": [
     "squeeze",
-    "angry",
-    "wide"
+    "Langryhv",
+    "shout"
    ],
    "shock": [
-    "wide",
-    "up",
-    "O",
-    "sweat"
+    "pin",
+    "Lup",
+    "O"
    ],
    "deadpan": [
-    "half",
-    "flat",
+    "lid",
+    "none",
     "line"
    ],
    "happy": [
     "happy",
-    "up",
+    "none",
     "smile"
    ],
    "blink": [
     "closed",
-    "flat",
-    "smile"
+    "Lflat",
+    "line"
    ]
   },
   "stache_small": [
    70,
    46,
    30
-  ]
+  ],
+  "turn": -0.35,
+  "mouth_side": -1
  },
  "momM": {
   "coat": [
@@ -966,30 +1004,32 @@
   "faces": {
    "cheer": [
     "happy",
-    "up",
+    "Lup",
     "laugh"
    ],
    "happy": [
     "happy",
-    "up",
+    "none",
     "smile"
    ],
    "wow": [
-    "wide",
-    "up",
-    "O"
+    "ring",
+    "Lup",
+    "o"
    ],
    "deadpan": [
-    "half",
-    "flat",
+    "lid",
+    "none",
     "line"
    ],
    "blink": [
     "closed",
-    "flat",
-    "smile"
+    "Lflat",
+    "line"
    ]
-  }
+  },
+  "turn": 0.35,
+  "mouth_side": 1
  },
  "kidM": {
   "coat": [
@@ -1016,25 +1056,27 @@
   "faces": {
    "cheer": [
     "happy",
-    "up",
+    "Lup",
     "laugh"
    ],
    "wow": [
-    "wide",
-    "up",
-    "O"
+    "ring",
+    "Lup",
+    "o"
    ],
    "happy": [
     "happy",
-    "up",
+    "none",
     "smile"
    ],
    "blink": [
     "closed",
-    "flat",
-    "smile"
+    "Lflat",
+    "line"
    ]
-  }
+  },
+  "turn": -0.3,
+  "mouth_side": -1
  },
  "grandmaM": {
   "coat": [
@@ -1066,24 +1108,26 @@
   "faces": {
    "cheer": [
     "happy",
-    "up",
+    "Lup",
     "laugh"
    ],
    "happy": [
     "happy",
-    "up",
+    "none",
     "smile"
    ],
    "deadpan": [
-    "half",
-    "flat",
+    "lid",
+    "none",
     "line"
    ],
    "blink": [
     "closed",
-    "flat",
-    "smile"
+    "Lflat",
+    "line"
    ]
-  }
+  },
+  "turn": 0.25,
+  "mouth_side": 1
  }
 }

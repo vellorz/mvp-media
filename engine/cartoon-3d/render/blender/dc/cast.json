@@ -1,0 +1,1619 @@
+{
+"editor": {
+"coat": [
+112,
+52,
+92
+],
+"legs": [
+60,
+40,
+56
+],
+"cue": "dress",
+"body": "round",
+"hair": [
+70,
+44,
+32
+],
+"hairstyle": "bun",
+"props": [
+"quill",
+"letter"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+],
+"determined": [
+"dot",
+"angry",
+"smirk"
+],
+"talkA": [
+"half",
+"up",
+"open"
+],
+"talkB": [
+"half",
+"up",
+"o"
+],
+"talkC": [
+"half",
+"up",
+"wide"
+],
+"talkD": [
+"half",
+"up",
+"line"
+]
+}
+},
+"clerk": {
+"coat": [
+176,
+150,
+110
+],
+"legs": [
+50,
+46,
+44
+],
+"hat": "visor",
+"cue": "vest",
+"body": "tall",
+"hair": [
+110,
+80,
+50
+],
+"hairstyle": "short",
+"mustache": [
+110,
+80,
+50
+],
+"props": [
+"letter"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+],
+"talkA": [
+"dot",
+"worry",
+"open"
+],
+"talkB": [
+"dot",
+"worry",
+"o"
+],
+"talkC": [
+"dot",
+"worry",
+"wide"
+],
+"talkD": [
+"dot",
+"worry",
+"frown"
+],
+"groan": [
+"closed",
+"worry",
+"frown",
+"sweat"
+],
+"annoyed": [
+"half",
+"angry",
+"frown"
+]
+}
+},
+"presA": {
+"coat": [
+44,
+44,
+52
+],
+"legs": [
+36,
+34,
+40
+],
+"cue": "frock",
+"body": "round",
+"hair": [
+226,
+224,
+220
+],
+"hairstyle": "white",
+"props": [
+"letter"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+],
+"meh": [
+"half",
+"flat",
+"wavy"
+]
+}
+},
+"presB": {
+"coat": [
+58,
+44,
+36
+],
+"legs": [
+40,
+34,
+30
+],
+"cue": "frock",
+"body": "tall",
+"hair": [
+60,
+44,
+34
+],
+"hairstyle": "bald",
+"mustache": [
+60,
+44,
+34
+],
+"props": [
+"letter"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+],
+"meh": [
+"half",
+"flat",
+"wavy"
+]
+}
+},
+"presC": {
+"coat": [
+30,
+42,
+60
+],
+"legs": [
+30,
+30,
+40
+],
+"cue": "frock",
+"body": "round",
+"hair": [
+150,
+104,
+60
+],
+"hairstyle": "short",
+"glasses": [
+60,
+50,
+40
+],
+"props": [
+"letter"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+],
+"meh": [
+"half",
+"flat",
+"wavy"
+]
+}
+},
+"presD": {
+"coat": [
+64,
+58,
+50
+],
+"legs": [
+40,
+36,
+34
+],
+"cue": "frock",
+"body": "tall",
+"hair": [
+200,
+196,
+190
+],
+"hairstyle": "mullet",
+"props": [
+"letter"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+],
+"meh": [
+"half",
+"flat",
+"wavy"
+]
+}
+},
+"presE": {
+"coat": [
+28,
+26,
+30
+],
+"legs": [
+30,
+28,
+30
+],
+"cue": "bowtie",
+"body": "tall",
+"hair": [
+40,
+30,
+26
+],
+"hairstyle": "short",
+"props": [
+"letter",
+"stamp"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+]
+}
+},
+"printer": {
+"coat": [
+90,
+96,
+110
+],
+"legs": [
+44,
+40,
+40
+],
+"hat": "cap",
+"hatc": [
+70,
+70,
+80
+],
+"cue": "apron",
+"body": "round",
+"hair": [
+90,
+60,
+40
+],
+"hairstyle": "short",
+"props": [],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+]
+}
+},
+"mailman": {
+"coat": [
+60,
+70,
+100
+],
+"legs": [
+40,
+40,
+48
+],
+"hat": "cap",
+"hatc": [
+50,
+60,
+90
+],
+"cue": "scarf",
+"scarf": [
+170,
+60,
+40
+],
+"body": "tall",
+"hair": [
+80,
+56,
+36
+],
+"hairstyle": "short",
+"props": [
+"sack",
+"letter"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+]
+}
+},
+"blueA": {
+"coat": [
+44,
+62,
+118
+],
+"legs": [
+40,
+50,
+90
+],
+"hat": "kepi",
+"hatc": [
+44,
+62,
+118
+],
+"cue": "uniform",
+"body": "tall",
+"hair": [
+90,
+60,
+40
+],
+"hairstyle": "short",
+"props": [
+"plate"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+]
+}
+},
+"blueB": {
+"coat": [
+44,
+62,
+118
+],
+"legs": [
+40,
+50,
+90
+],
+"hat": "kepi",
+"hatc": [
+44,
+62,
+118
+],
+"cue": "uniform",
+"body": "round",
+"hair": [
+200,
+150,
+80
+],
+"hairstyle": "short",
+"mustache": [
+200,
+150,
+80
+],
+"props": [
+"plate"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+]
+}
+},
+"greyA": {
+"coat": [
+132,
+132,
+128
+],
+"legs": [
+90,
+90,
+90
+],
+"hat": "kepi",
+"hatc": [
+132,
+132,
+128
+],
+"cue": "uniform",
+"body": "tall",
+"hair": [
+60,
+40,
+30
+],
+"hairstyle": "short",
+"props": [
+"plate"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+]
+}
+},
+"greyB": {
+"coat": [
+132,
+132,
+128
+],
+"legs": [
+90,
+90,
+90
+],
+"hat": "kepi",
+"hatc": [
+132,
+132,
+128
+],
+"cue": "uniform",
+"body": "round",
+"hair": [
+130,
+90,
+50
+],
+"hairstyle": "short",
+"mustache": [
+130,
+90,
+50
+],
+"props": [
+"plate"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+]
+}
+},
+"townW": {
+"coat": [
+150,
+90,
+60
+],
+"legs": [
+70,
+50,
+40
+],
+"cue": "dress",
+"body": "round",
+"hair": [
+150,
+100,
+50
+],
+"hairstyle": "bun",
+"props": [
+"pie"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+]
+}
+},
+"momT": {
+"coat": [
+200,
+110,
+60
+],
+"legs": [
+60,
+70,
+110
+],
+"cue": "scarf",
+"scarf": [
+230,
+200,
+120
+],
+"body": "round",
+"hair": [
+80,
+50,
+30
+],
+"hairstyle": "long",
+"props": [
+"plate"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+]
+}
+},
+"dadT": {
+"coat": [
+70,
+100,
+80
+],
+"legs": [
+50,
+60,
+90
+],
+"cue": "stripes",
+"body": "tall",
+"hair": [
+60,
+40,
+30
+],
+"hairstyle": "short",
+"glasses": [
+40,
+40,
+50
+],
+"props": [
+"fork"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+]
+}
+},
+"kidT": {
+"coat": [
+220,
+80,
+70
+],
+"legs": [
+50,
+60,
+110
+],
+"cue": "blazer",
+"body": "round",
+"hair": [
+150,
+96,
+50
+],
+"hairstyle": "short",
+"props": [
+"fork"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+]
+}
+},
+"grandT": {
+"coat": [
+120,
+90,
+150
+],
+"legs": [
+70,
+60,
+80
+],
+"cue": "pearls",
+"body": "round",
+"hair": [
+230,
+230,
+228
+],
+"hairstyle": "perm",
+"glasses": [
+150,
+120,
+80
+],
+"props": [
+"pie"
+],
+"faces": {
+"neutral": [
+"dot",
+"flat",
+"line"
+],
+"blink": [
+"closed",
+"flat",
+"line"
+],
+"happy": [
+"happy",
+"up",
+"smile"
+],
+"shock": [
+"wide",
+"up",
+"O"
+],
+"worry": [
+"dot",
+"worry",
+"wavy"
+],
+"grin": [
+"happy",
+"up",
+"grin"
+],
+"deadpan": [
+"half",
+"flat",
+"line"
+],
+"proud": [
+"half",
+"raise",
+"smirk"
+],
+"excited": [
+"wide",
+"up",
+"open"
+],
+"grit": [
+"squeeze",
+"angry",
+"grit",
+"sweat"
+],
+"sneaky": [
+"side",
+"raise",
+"smirk"
+]
+}
+}
+}

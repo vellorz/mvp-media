@@ -118,7 +118,8 @@
    "wink_grin",
    "worried"
   ],
-  "mouth_side": 1
+  "mouth_side": 1,
+  "turn": 0.5
  },
  "clerk": {
   "coat": [
@@ -131,7 +132,7 @@
    46,
    44
   ],
-  "hat": "visor",
+  "hat": null,
   "cue": "vest",
   "body": "tall",
   "hair": [
@@ -232,11 +233,6 @@
     "frown"
    ]
   },
-  "mustache": [
-   110,
-   80,
-   50
-  ],
   "look": "D2",
   "library": [
    "dazed",
@@ -246,7 +242,15 @@
    "skeptical"
   ],
   "mouth_side": -1,
-  "hat_tilt": 5
+  "hat_tilt": 5,
+  "turn": -0.5,
+  "hat3d": "visor3d",
+  "fhaircol": [
+   110,
+   80,
+   50
+  ],
+  "fhair": "chevron"
  },
  "presA": {
   "coat": [
@@ -339,7 +343,8 @@
    "skeptical",
    "smug"
   ],
-  "mouth_side": 1
+  "mouth_side": 0,
+  "turn": 0
  },
  "presB": {
   "coat": [
@@ -426,18 +431,20 @@
     "wavy"
    ]
   },
-  "mustache": [
-   60,
-   44,
-   34
-  ],
   "look": "D2",
   "library": [
    "side_eye",
    "skeptical",
    "smug"
   ],
-  "mouth_side": -1
+  "mouth_side": -1,
+  "turn": -0.5,
+  "fhaircol": [
+   60,
+   44,
+   34
+  ],
+  "fhair": "curled"
  },
  "presC": {
   "coat": [
@@ -536,7 +543,8 @@
    "skeptical",
    "smug"
   ],
-  "mouth_side": 1
+  "mouth_side": 1,
+  "turn": 0.5
  },
  "presD": {
   "coat": [
@@ -631,7 +639,8 @@
    "stunned",
    "worried"
   ],
-  "mouth_side": -1
+  "mouth_side": 0,
+  "turn": 0
  },
  "presE": {
   "coat": [
@@ -719,7 +728,8 @@
    "look_down",
    "open_smile"
   ],
-  "mouth_side": 1
+  "mouth_side": 1,
+  "turn": 0.5
  },
  "printer": {
   "coat": [
@@ -814,12 +824,13 @@
   ],
   "mouth_side": -1,
   "hat_tilt": -11,
-  "hat3d": "flatcap3d",
+  "hat3d": "beanie3d",
   "hatcol": [
-   96,
-   86,
-   74
-  ]
+   150,
+   48,
+   40
+  ],
+  "turn": -0.5
  },
  "mailman": {
   "coat": [
@@ -832,7 +843,7 @@
    40,
    48
   ],
-  "hat": "cap",
+  "hat": null,
   "hatc": [
    50,
    60,
@@ -922,7 +933,20 @@
    "worried"
   ],
   "mouth_side": 1,
-  "hat_tilt": 10
+  "hat_tilt": 10,
+  "turn": 0.5,
+  "hat3d": "kepi3d",
+  "hatcol": [
+   70,
+   60,
+   50
+  ],
+  "fhair": "pencil",
+  "fhaircol": [
+   70,
+   50,
+   36
+  ]
  },
  "blueA": {
   "coat": [
@@ -935,7 +959,7 @@
    50,
    90
   ],
-  "hat": "kepi",
+  "hat": null,
   "hatc": [
    44,
    62,
@@ -1016,7 +1040,14 @@
    "laugh"
   ],
   "mouth_side": 1,
-  "hat_tilt": 7
+  "hat_tilt": 7,
+  "turn": 0.5,
+  "hat3d": "kepi3d",
+  "hatcol": [
+   44,
+   62,
+   118
+  ]
  },
  "blueB": {
   "coat": [
@@ -1029,7 +1060,7 @@
    50,
    90
   ],
-  "hat": "kepi",
+  "hat": null,
   "hatc": [
    44,
    62,
@@ -1104,14 +1135,22 @@
     "smirk"
    ]
   },
-  "mustache": [
+  "look": "D2",
+  "mouth_side": -1,
+  "hat_tilt": -6,
+  "turn": -0.5,
+  "hat3d": "kepi3d",
+  "hatcol": [
+   44,
+   62,
+   118
+  ],
+  "fhaircol": [
    200,
    150,
    80
   ],
-  "look": "D2",
-  "mouth_side": -1,
-  "hat_tilt": -6
+  "fhair": "walrus"
  },
  "greyA": {
   "coat": [
@@ -1124,7 +1163,7 @@
    90,
    90
   ],
-  "hat": "kepi",
+  "hat": null,
   "hatc": [
    132,
    132,
@@ -1206,7 +1245,14 @@
    "laugh"
   ],
   "mouth_side": -1,
-  "hat_tilt": -7
+  "hat_tilt": -7,
+  "turn": -0.5,
+  "hat3d": "kepi3d",
+  "hatcol": [
+   120,
+   120,
+   124
+  ]
  },
  "greyB": {
   "coat": [
@@ -1219,7 +1265,7 @@
    90,
    90
   ],
-  "hat": "kepi",
+  "hat": null,
   "hatc": [
    132,
    132,
@@ -1294,17 +1340,25 @@
     "smirk"
    ]
   },
-  "mustache": [
-   130,
-   90,
-   50
-  ],
   "look": "D2",
   "library": [
    "content"
   ],
   "mouth_side": 1,
-  "hat_tilt": 6
+  "hat_tilt": 6,
+  "turn": 0.5,
+  "hat3d": "kepi3d",
+  "hatcol": [
+   120,
+   120,
+   124
+  ],
+  "fhaircol": [
+   130,
+   90,
+   50
+  ],
+  "fhair": "droop"
  },
  "townW": {
   "coat": [
@@ -1392,7 +1446,15 @@
    "look_up",
    "smile"
   ],
-  "mouth_side": -1
+  "mouth_side": -1,
+  "turn": -0.5,
+  "hat3d": "beanie3d",
+  "hatcol": [
+   60,
+   110,
+   130
+  ],
+  "hat_tilt": 6
  },
  "momT": {
   "coat": [
@@ -1485,7 +1547,8 @@
    "laugh",
    "open_smile"
   ],
-  "mouth_side": 1
+  "mouth_side": 1,
+  "turn": 0.5
  },
  "dadT": {
   "coat": [
@@ -1579,7 +1642,8 @@
    "cry_laugh",
    "laugh"
   ],
-  "mouth_side": -1
+  "mouth_side": -1,
+  "turn": -0.5
  },
  "kidT": {
   "coat": [
@@ -1667,7 +1731,15 @@
    "open_smile",
    "wink_grin"
   ],
-  "mouth_side": 1
+  "mouth_side": 1,
+  "turn": 0.5,
+  "hat3d": "beanie3d",
+  "hatcol": [
+   220,
+   170,
+   50
+  ],
+  "hat_tilt": -8
  },
  "grandT": {
   "coat": [
@@ -1760,6 +1832,7 @@
    "laugh",
    "open_smile"
   ],
-  "mouth_side": -1
+  "mouth_side": -1,
+  "turn": -0.5
  }
 }

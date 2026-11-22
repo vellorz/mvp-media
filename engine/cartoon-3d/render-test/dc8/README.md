@@ -1,0 +1,6 @@
+# dc8: Washington DC Thanksgiving short, round 6 PC package: rig round 2 (v7vnb2 16bb1d7) + rules 333a/333b: 16 of 18 characters turned with matching off-centre mouths (presA/presD stay front for the doubter beat), every hat a tilted perspective prop (kepi3d/visor3d DC-drawn, beanie3d), owner-approved Rick mustaches (chevron, curled, walrus, droop, pencil). Cast gate v5: castcheck 18/18, armprobe 0, facecheck PASS, rule-333a scan PASS. Supersedes dc6 and dc7 (never rendered)
+- dc.blend (packed, all textures inside), sha256 in dc.blend.sha256, 89085547 bytes. 21 shots, 2,199 frames (overlaps are dissolves; the timeline is 2,087 frames).
+- Test frames first: `cd /d D:\AI\MVP-render\dc8` first (never write to C:), then `blender.exe -b dc.blend --python pctest.py -- D:\AI\MVP-render\dc8\test S05:455 S11:1200 S21:2060`
+- Full render: `blender.exe -b dc.blend --python pcrender.py -- frames` (resume-safe, per shot, OptiX 8 spp)
+- Encode: `blender.exe -b --python pcencode.py -- frames clips` then push clips/ and test/ to render-test/dc8/ on claude/project-thread-z0l0eh.
+- Sources: engine/cartoon-3d/render/blender/dc/ (scene_dc.py builds the blend; post_dc.py, music_dc.py, mix_dc.py run in the cloud).

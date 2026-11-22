@@ -140,19 +140,20 @@ def head(name,fk):
 SS=2; BOUT=20   # round 4: body outline as heavy as the head's (verifier: thin body outlines vs heads)
 def lt(c,f=1.12): return tuple(min(255,int(v*f)) for v in c[:3])+(255,)
 GB={'tall':(98,175,215),'short':(98,180,222),'round':(98,200,238)}   # r8b: one build for all (guide v1.3 x.3: torso 1.00 H, legs 1.25-1.3 H, total 3.2-3.35 H); kinds differ in width only   # top px, shoulder half-width, hem half-width
-HEMY={'tall':528,'short':528,'round':528}   # r8b: torso 430 px = 1.00 H (head 0.43 m), legs 528->1074 = 1.27 H   # r6 (round-5: legs 0.64-0.90 H, Rick 0.93-1.31): shorter torso, longer legs   # round 5 (B1/B2): torso ~0.86 H tall (H = head disc ~560 px), legs ~0.85 H visible
-WK={'tall':0.74,'short':0.745,'round':0.72}
+HEMY={'tall':545,'short':545,'round':545}   # r6det (rule 329, Rick f606/f771: torso ~1.05 H capsule): hem lower   # r8b: torso 430 px = 1.00 H (head 0.43 m), legs 528->1074 = 1.27 H   # r6 (round-5: legs 0.64-0.90 H, Rick 0.93-1.31): shorter torso, longer legs   # round 5 (B1/B2): torso ~0.86 H tall (H = head disc ~560 px), legs ~0.85 H visible
+WK={'tall':0.86,'short':0.87,'round':0.84}   # r6det (rule 329, Rick f606: torso ~0.85-0.9 H wide): was 0.72-0.745
 def _sil(kind):
     y0,w0,w1=GB[kind]; y1=HEMY[kind]; pts=[]
     k_=WK[kind]; w0=int(w0*k_); w1=int(w1*k_)   # r9 (RENDER_SPEC_v1.4 A: torso width 0.73-0.89 H): widths x0.72-0.745
-    w1=int(w1*0.74); rr=int(0.36*2*w1)   # r6: hem narrower than the middle (Rick: widest at mid-torso)   # rounded bottom: corner radius >= 0.35 of the torso width (Rick bean)
-    BG_=int(62*k_)
+    w1=int(w0*1.10); rr=int(0.36*2*w1)   # r6det (rule 329): Rick's bean is widest near the hem (pear), sides near-straight   # r6det (rule 329): near-straight sides like Rick's capsule torso (was hem x0.74 = egg)   # r6: hem narrower than the middle (Rick: widest at mid-torso)   # rounded bottom: corner radius >= 0.35 of the torso width (Rick bean)
+    BG_=int(18*k_)   # r6det: small side bulge (was 62)
+    R_=int(w0*0.85)   # r7det (rule 329, Rick f606: capsule top is fully rounded and sits behind the head, no square shoulders): was 70
     yb=y1-rr*0.55   # sides end here, then a half-ellipse closes the bottom
-    for i in range(0,11): t=i/10; pts.append((400-(w1+(w0-w1)*t)-BG_*math.sin(math.pi*t), yb+(y0+70-yb)*t))
-    for i in range(0,13): a=math.radians(180+i*7.5); pts.append((400-w0+70+70*math.cos(a)*1.0, y0+70+70*math.sin(a)))
-    pts.append((400-w0+70,y0)); pts.append((400+w0-70,y0))
-    for i in range(0,13): a=math.radians(270+i*7.5); pts.append((400+w0-70+70*math.cos(a), y0+70+70*math.sin(a)))
-    for i in range(0,11): t=i/10; pts.append((400+(w0+(w1-w0)*t)+BG_*math.sin(math.pi*t), y0+70+(yb-y0-70)*t))
+    for i in range(0,11): t=i/10; pts.append((400-(w1+(w0-w1)*t)-BG_*math.sin(math.pi*t), yb+(y0+R_-yb)*t))
+    for i in range(0,13): a=math.radians(180+i*7.5); pts.append((400-w0+R_+R_*math.cos(a), y0+R_+R_*math.sin(a)))
+    pts.append((400-w0+R_,y0)); pts.append((400+w0-R_,y0))
+    for i in range(0,13): a=math.radians(270+i*7.5); pts.append((400+w0-R_+R_*math.cos(a), y0+R_+R_*math.sin(a)))
+    for i in range(0,11): t=i/10; pts.append((400+(w0+(w1-w0)*t)+BG_*math.sin(math.pi*t), y0+R_+(yb-y0-R_)*t))
     for i in range(1,24): a=math.pi*i/24; pts.append((400+w1*math.cos(a), yb+rr*0.55*math.sin(a)))
     return pts,y0,w0,w1,y1
 def _S(p): return [(x*SS,y*SS) for x,y in p]
@@ -165,12 +166,13 @@ def body(name,stride=0):
     # legs (thin sticks) + small shoes; stride poses spread the feet, one lifted
     # r8 (Rick clone): legs are one dark noodle line each (6.5 % of head width, no taper), knee bowed outward ~156 deg, small dark stub feet <= 0.12 H
     # r8b (guide v1.3 x.3): one smooth noodle curve per leg (no knee joint), 5.5 % H thick; foot oval ~15 % H wide
-    LW=24
+    LW=34   # r6det (rule 329, Rick legs 6-7.5 % H filled tubes): ink tube 34 px with a trouser fill inside
     for sx in(-1,1):
         x=400+sx*62; fx=x+sx*20+(sx*60 if stride else 0); lift=(70 if (stride==1 and sx<0) or (stride==2 and sx>0) else 0); fy=1056-lift
         y_0=y1-60; cx_=(x+fx)/2+sx*30; cy_=(y_0+fy)/2
         P=[((1-t)**2*x+2*(1-t)*t*cx_+t*t*fx,(1-t)**2*y_0+2*(1-t)*t*cy_+t*t*fy) for t in [i/24 for i in range(25)]]
         d.line(_S(P),fill=K,width=s(LW),joint='curve')
+        d.line(_S(P),fill=legc,width=s(LW-16),joint='curve')   # r6det: filled tube (trouser colour) inside the ink
         for p_ in (P[0],P[-1]): d.ellipse([s(p_[0]-LW/2),s(p_[1]-LW/2),s(p_[0]+LW/2),s(p_[1]+LW/2)],fill=K)
         d.ellipse([s(fx-30+sx*16),s(fy-14),s(fx+34+sx*16),s(fy+18)],fill=K)
     # garment base
@@ -284,7 +286,7 @@ def arm(name,prop=None,straight=None):
     # ending in a plain round mitten 12 % of head width (83 px), no thumb, no fingers. Drawn straight here; noodle() curves it.
     c=C[name]
     im=Image.new('RGBA',(400,900),(0,0,0,0)); d=ImageDraw.Draw(im)
-    def mitt(): d.ellipse([158,670,242,754],fill=K)
+    def mitt(): d.ellipse([150,662,250,762],fill=K)   # r6det: mitten 100 px (was 84)
     mitt()
     if prop=='bag': d.rectangle([90,760,310,890],fill=(200,170,120,255),outline=K,width=11); d.arc([140,700,260,820],180,360,fill=K,width=9); d.rectangle([150,790,250,830],fill=(200,40,40,255)); d.line([100,800,300,800],fill=dk((200,170,120),0.7),width=4)
     if prop=='box': d.rectangle([100,740,300,880],fill=(60,120,180,255),outline=K,width=11); d.line([200,740,200,880],fill=(250,230,120,255),width=16); d.line([100,810,300,810],fill=(250,230,120,255),width=16); d.polygon([(100,740),(140,740),(100,780)],fill=(40,96,150,255))
@@ -311,7 +313,7 @@ def arm(name,prop=None,straight=None):
     return noodle(im,BEND.get(prop,18) if straight is None else straight)
 # r7 (owner Nov 19: forearms stuck out sideways and swung across faces): natural hang 18 deg; 'armS' = straight card for raised and gripping arms
 BEND={'phone':30,'money':20,'marker':25,'mic':25,'ball':25,'hotdog':20,'fork':25,'plate':25,'plug':25,'sign':0,'remote':25,'drumstick':25,'pennant':0,'megaphone':15,'paper':20,'bag':20,'box':25,'camera':25,'chalk':30,'pen':30,'redpen':30}
-AW=38
+AW=52   # r6det (rule 329, Rick arms 5.5-6 % H): was 38
 def noodle(hand,deg,ey=330):
     # the hand (with its prop) swings outward by deg about a point 330 px down; the arm is one quadratic curve from the shoulder to the hand
     W,H=hand.size; out=Image.new('RGBA',(W*3,H),(0,0,0,0)); X=W*3//2

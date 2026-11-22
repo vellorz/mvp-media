@@ -269,7 +269,8 @@ def body(name,stride=0):
     clip=Image.new('RGBA',(W,H),(0,0,0,0)); clip.paste(det,(0,0),Image.composite(det.split()[3],Image.new('L',(W,H),0),gm))
     im.alpha_composite(clip); d=ImageDraw.Draw(im)
     if cue=='pilgrim':   # cc: plain white falling collar over the shoulders
-        d.chord([s(400-215),s(y0-70),s(400+215),s(y0+150)],0,180,fill=(248,246,238,255),outline=K,width=s(8)); d.line([s(400),s(y0+40),s(400),s(y0+148)],fill=K,width=s(6))
+        cw_=min(215,w0-45)   # r4 (castcheck shoulder join, Detroit b54a72c): the collar stays inside the torso outline so the arm grows out of the side
+        d.chord([s(400-cw_),s(y0-70),s(400+cw_),s(y0+150)],0,180,fill=(248,246,238,255),outline=K,width=s(8)); d.line([s(400),s(y0+40),s(400),s(y0+148)],fill=K,width=s(6))
     if cue=='scarf':   # scarf sits over the coat and the shoulder line
         sc=tuple(c['scarf'])+(255,)
         d.rounded_rectangle([s(400-150),s(y0-24),s(400+150),s(y0+56)],s(30),fill=sc,outline=K,width=s(BOUT-4))

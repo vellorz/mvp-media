@@ -166,7 +166,7 @@ BSY={'tall':1.0,'short':1.0,'round':1.0}   # r8b: one Rick build for every kind 
 # r8b (owner Nov 20: clone Rick's build; guide v1.3 x.3): head 0.43 m wide = H; torso 0.962->0.532 = 1.00 H; legs 0.532->-0.014 = 1.27 H;
 # head disc centre 1.167 (top 1.382): total 3.25 H. Shoulder pivots 0.95, hand (HAND_Z 0.407) at the hem.
 HS=0.43/0.586   # head card scale vs rounds 1-7 (disc 800/1024 of a 0.75 card)
-GEO={'tall':(0.966,0.126,0.92),'short':(0.966,0.142,0.92),'round':(0.966,0.151,0.92)}   # r4 (rule 329, from Detroit e1ed5d1: head overlaps the capsule top): 0.03 lower; was 0.996/0.95
+GEO={'tall':(0.966,0.141,0.86),'short':(0.966,0.156,0.86),'round':(0.966,0.165,0.86)}   # r4 (from Detroit b54a72c, owner 'arm issue?'): shoulder pivot on the torso side outline, 0.92 -> 0.86
 #   # r9: shoulders follow the narrower torso (0.73-0.89 H)
 ARM_W,ARM_H,ARM_OFF=0.744,0.558,0.242   # r6: arm canvas 1200 wide (bent forearm swings outward)
 SHADOW=None
@@ -194,6 +194,7 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
         for k in keys:
             tk=f'{kind}_{k}'+('_L' if sx<0 else '')   # r7 (rule 272): mirrored texture, never a negative scale
             a=plane(f'{inst}_arm{sx}_{k}',(0,0,0),ARM_W,ARM_H,card_mat(tk,tk),coll=C); a.parent=ap; a.location=(0,0,-ARM_OFF)
+            a.visible_shadow=False   # r4 (from Detroit b54a72c): no arm-card shadow notch on the torso
             A[sx]['cards'][k]=a
         A[sx]['sched']=[(rng[0],ak)] if isinstance(ak,str) else ak
     sh=plane(inst+'_shadow',(0,0,0),1.0,0.45,card_mat('shadowblob','shadow',emit=0.0),coll=C,horiz=True); sh.parent=root; sh.location=(0,0,0.004)

@@ -3,11 +3,14 @@
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 import json, math
+import expressions as X   # Rick-style expression library (opt-in per character via cast.json "library")
 T='/root/det/tex/'; K=(50,28,42,255); SK=(251,244,241,255); OUT=27   # r8 (owner Nov 20: clone Rick's characters): pure white heads like Rick's. r8b (guide v1.3 x.3): dark plum ink, never pure black; 27 px on an 800 px disc = 3.4 % lit side
 def new(w,h): im=Image.new('RGBA',(w,h),(0,0,0,0)); return im,ImageDraw.Draw(im)
 def dk(c,f=0.75): return tuple(int(v*f) for v in c[:3])+(255,)
 CX,CY=512,540
 def eyes(d,kind,cy=520,gap=108,glasses=None):   # r8b: centres 27 % of head width apart (216 px of 800)
+    if kind in X.EYES:
+        X.eyes(d,kind,K,cy,gap); kind='_lib'
     for sx in(-1,1):
         x=CX+sx*gap
         if kind=='dot': d.ellipse([x-33,cy-50,x+33,cy+50],fill=K)   # r8b: 100 px tall = 12.5 % of head width
@@ -27,6 +30,7 @@ def eyes(d,kind,cy=520,gap=108,glasses=None):   # r8b: centres 27 % of head widt
         if glasses: d.ellipse([x-74,cy-66,x+74,cy+66],outline=glasses,width=12)
     if glasses: d.line([CX-51,cy-6,CX+51,cy-6],fill=glasses,width=11)
 def brows(d,kind,cy=405,gap=108):
+    if kind in X.BROWS: return X.brows(d,kind,K,cy,gap)
     for sx in(-1,1):
         x=CX+sx*gap
         if kind=='flat': d.line([x-52,cy,x+52,cy],fill=K,width=30)
@@ -36,6 +40,7 @@ def brows(d,kind,cy=405,gap=108):
         elif kind=='raise': yy=cy-(46 if sx>0 else 0); d.line([x-52,yy,x+52,yy-(8 if sx>0 else 0)],fill=K,width=30)
         elif kind=='none': pass
 def mouth(d,kind,cy=715,cx=CX):
+    if kind in X.MOUTHS: return X.mouth(d,kind,K,cy,cx)
     R=(110,28,34,255)
     if kind=='line': d.line([cx-52,cy,cx+52,cy],fill=K,width=17)
     elif kind=='smile': d.arc([cx-82,cy-64,cx+82,cy+44],25,155,fill=K,width=17)
@@ -61,7 +66,8 @@ def extras(d,kind):
         for x in(300,724): d.ellipse([x-80,600,x+80,740],fill=(250,180,170,170))
     if 'tear' in kind: d.ellipse([370,580,410,640],fill=(120,190,255,255),outline=K,width=6)
     if 'angryfill' in kind: pass
-C=json.load(open('/root/det/src/cast.json'))
+    X.extras(d,kind,K)   # library extras: tears, tear1, blushR, vein, zzz, shades, sweat2
+C=X.expand(json.load(open('/root/det/src/cast.json')))
 def head(name,fk):
     c=C[name]; e,b,m=c['faces'][fk][:3]; ex=c['faces'][fk][3] if len(c['faces'][fk])>3 else ''
     im,d=new(1024,1024); hair=tuple(c.get('hair',(60,40,30)))+(255,)
@@ -82,6 +88,7 @@ def head(name,fk):
     # head (x0.6 from the top), the face features on a layer moved up 105 px (eyes at 65.6 % up)
     if 'angryfill' in ex: 
         ov=Image.new('RGBA',(1024,1024),(0,0,0,0)); od=ImageDraw.Draw(ov); od.ellipse([130,158,894,922],fill=(170,60,170,120)); im.alpha_composite(ov); d=ImageDraw.Draw(im)
+    if 'gloom' in ex or 'redglow' in ex: X.pre(im,ex); d=ImageDraw.Draw(im)   # library: rage gloom on the head top
     if hs in('short','bald','bun','mullet'):   # r9: hairlines raised with the features (hair ends ~285, brows at 300)
         if hs=='short': d.chord([150,150,874,420],180,360,fill=hair,outline=K,width=OUT)
         if hs=='bun': d.chord([150,150,874,410],180,360,fill=hair,outline=K,width=OUT)

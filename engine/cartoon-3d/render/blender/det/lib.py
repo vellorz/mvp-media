@@ -165,7 +165,8 @@ def path(n,keys):
         kloc(co,f,l); kloc(tg,f,t)
         if len(k)>3: co.data.lens=k[3]; co.data.keyframe_insert('lens',frame=f)
 # ---------------- 2D cut-out cast ----------------
-CI=json.load(open('/root/det/src/cast.json'))
+import expressions as XL   # Rick-style expression library: adds LIBRARY faces to characters with "library" in cast.json
+CI=XL.expand(json.load(open('/root/det/src/cast.json')))
 # r7 (round-6 visual: round bodies torso 0.63, legs 0.88 head-heights; need 0.7-1.05 / 0.9-1.5): round body cards stretched 1.118x up from the feet
 BSY={'tall':0.91,'short':0.91,'round':0.91}   # det r4: body cards z 0.91 about the feet (torso/legs were 1.10/1.36 head widths)
 BSY0=1.0   # r8b: one Rick build for every kind (cast.py GB/HEMY), no stretch
@@ -211,6 +212,7 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
 def face(ch,f,k):
     if k not in ch['F']:
         alt={'shock':['horror','wow','raise'],'happy':['hope','cheer','excited','grin'],'cheer':['happy','excited'],'laugh':['happy','cheer'],'sad':['deadpan','worry'],'smug':['grin','happy']}.get(k,[])
+        alt=alt+XL.alternates(k)   # library: same-family fallback before the first face
         k=next((a for a in alt if a in ch['F']),list(ch['F'])[0])
     ch['faces'].append((f,k))
 def faces(ch,seq):

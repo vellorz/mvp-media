@@ -1,0 +1,1068 @@
+{
+ "radioman": {
+  "coat": [
+   66,
+   70,
+   84
+  ],
+  "legs": [
+   50,
+   52,
+   62
+  ],
+  "hat": "fedora",
+  "hatcol": [
+   96,
+   96,
+   104
+  ],
+  "cue": "bowtie",
+  "body": "round",
+  "hair": [
+   60,
+   44,
+   34
+  ],
+  "hairstyle": "short",
+  "props": [
+   "phone",
+   "money",
+   "marker",
+   "mic"
+  ],
+  "faces": {
+   "grin": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "talkA": [
+    "dot",
+    "raise",
+    "open"
+   ],
+   "talkB": [
+    "dot",
+    "raise",
+    "o"
+   ],
+   "talkC": [
+    "dot",
+    "raise",
+    "wide"
+   ],
+   "talkD": [
+    "dot",
+    "raise",
+    "smile"
+   ],
+   "smug": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O",
+    "sweat"
+   ],
+   "wink": [
+    "wink",
+    "raise",
+    "smirk"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "smile"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "idea": [
+    "wide",
+    "up",
+    "grin"
+   ]
+  }
+ },
+ "seller": {
+  "coat": [
+   120,
+   100,
+   70
+  ],
+  "legs": [
+   70,
+   60,
+   50
+  ],
+  "hat": "flatcap",
+  "cue": "vest",
+  "body": "tall",
+  "hair": [
+   150,
+   140,
+   130
+  ],
+  "hairstyle": "short",
+  "mustache": [
+   150,
+   140,
+   130
+  ],
+  "props": [
+   "money"
+  ],
+  "faces": {
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "wow": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "smile"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ]
+  }
+ },
+ "lion": {
+  "coat": [
+   92,
+   118,
+   150
+  ],
+  "legs": [
+   206,
+   186,
+   146
+  ],
+  "hat": "leather",
+  "hatcol": [
+   120,
+   78,
+   44
+  ],
+  "cue": "jersey",
+  "num": "7",
+  "body": "tall",
+  "hair": [
+   60,
+   40,
+   30
+  ],
+  "hairstyle": "short",
+  "props": [
+   "ball"
+  ],
+  "faces": {
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit"
+   ],
+   "sad": [
+    "dot",
+    "worry",
+    "frown",
+    "sweat"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "cheer": [
+    "happy",
+    "up",
+    "laugh"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ]
+  }
+ },
+ "lion2": {
+  "coat": [
+   92,
+   118,
+   150
+  ],
+  "legs": [
+   206,
+   186,
+   146
+  ],
+  "hat": "leather",
+  "hatcol": [
+   110,
+   70,
+   40
+  ],
+  "cue": "jersey",
+  "num": "22",
+  "body": "round",
+  "hair": [
+   30,
+   24,
+   20
+  ],
+  "hairstyle": "short",
+  "props": [
+   "ball"
+  ],
+  "faces": {
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit"
+   ],
+   "sad": [
+    "dot",
+    "worry",
+    "frown"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O",
+    "sweat"
+   ],
+   "cheer": [
+    "happy",
+    "up",
+    "laugh"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ]
+  }
+ },
+ "bear": {
+  "coat": [
+   52,
+   46,
+   52
+  ],
+  "legs": [
+   190,
+   176,
+   150
+  ],
+  "hat": "leather",
+  "hatcol": [
+   60,
+   44,
+   36
+  ],
+  "cue": "jersey",
+  "num": "3",
+  "stripe": [
+   210,
+   120,
+   40
+  ],
+  "body": "round",
+  "hair": [
+   40,
+   30,
+   20
+  ],
+  "hairstyle": "short",
+  "props": [
+   "ball"
+  ],
+  "faces": {
+   "smug": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit"
+   ],
+   "cheer": [
+    "happy",
+    "up",
+    "laugh"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "smirk"
+   ]
+  }
+ },
+ "fanman": {
+  "coat": [
+   150,
+   118,
+   80
+  ],
+  "legs": [
+   70,
+   60,
+   54
+  ],
+  "hat": "fedora",
+  "hatcol": [
+   80,
+   60,
+   44
+  ],
+  "cue": "scarf",
+  "scarf": [
+   180,
+   50,
+   40
+  ],
+  "body": "tall",
+  "hair": [
+   90,
+   60,
+   40
+  ],
+  "hairstyle": "short",
+  "props": [
+   "pennant",
+   "hotdog"
+  ],
+  "faces": {
+   "cheer": [
+    "happy",
+    "up",
+    "laugh"
+   ],
+   "shout": [
+    "squeeze",
+    "angry",
+    "wide"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "sad": [
+    "dot",
+    "worry",
+    "frown"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ]
+  }
+ },
+ "fanlady": {
+  "coat": [
+   70,
+   120,
+   96
+  ],
+  "legs": [
+   220,
+   200,
+   186
+  ],
+  "hat": "cloche",
+  "hatcol": [
+   160,
+   50,
+   60
+  ],
+  "cue": "pearls",
+  "body": "tall",
+  "hair": [
+   120,
+   70,
+   40
+  ],
+  "hairstyle": "long",
+  "props": [
+   "pennant"
+  ],
+  "faces": {
+   "cheer": [
+    "happy",
+    "up",
+    "laugh"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "sad": [
+    "dot",
+    "worry",
+    "frown"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "smile"
+   ]
+  }
+ },
+ "fanold": {
+  "coat": [
+   100,
+   90,
+   110
+  ],
+  "legs": [
+   60,
+   56,
+   64
+  ],
+  "hat": "flatcap",
+  "cue": "scarf",
+  "scarf": [
+   220,
+   170,
+   40
+  ],
+  "body": "round",
+  "hair": [
+   210,
+   210,
+   214
+  ],
+  "hairstyle": "short",
+  "mustache": [
+   220,
+   220,
+   224
+  ],
+  "glasses": [
+   60,
+   50,
+   40
+  ],
+  "props": [
+   "pennant",
+   "hotdog"
+  ],
+  "faces": {
+   "cheer": [
+    "happy",
+    "up",
+    "laugh"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "shout": [
+    "squeeze",
+    "angry",
+    "wide"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "sad": [
+    "dot",
+    "worry",
+    "frown"
+   ]
+  }
+ },
+ "newsboy": {
+  "coat": [
+   150,
+   110,
+   70
+  ],
+  "legs": [
+   70,
+   60,
+   50
+  ],
+  "hat": "flatcap",
+  "cue": "apron",
+  "body": "short",
+  "hair": [
+   200,
+   120,
+   60
+  ],
+  "hairstyle": "short",
+  "props": [
+   "paper"
+  ],
+  "faces": {
+   "shout": [
+    "squeeze",
+    "angry",
+    "wide"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ]
+  }
+ },
+ "dad34": {
+  "coat": [
+   120,
+   60,
+   50
+  ],
+  "legs": [
+   60,
+   56,
+   60
+  ],
+  "cue": "vest",
+  "body": "tall",
+  "hair": [
+   110,
+   70,
+   40
+  ],
+  "hairstyle": "short",
+  "props": [
+   "fork"
+  ],
+  "faces": {
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "shrug": [
+    "dot",
+    "up",
+    "wavy"
+   ],
+   "cheer": [
+    "happy",
+    "up",
+    "laugh"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "smile"
+   ],
+   "wow": [
+    "wide",
+    "up",
+    "O"
+   ]
+  }
+ },
+ "mom34": {
+  "coat": [
+   200,
+   150,
+   70
+  ],
+  "legs": [
+   220,
+   200,
+   186
+  ],
+  "cue": "apron",
+  "body": "tall",
+  "hair": [
+   150,
+   80,
+   40
+  ],
+  "hairstyle": "bun",
+  "props": [
+   "plate"
+  ],
+  "faces": {
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "wow": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "cheer": [
+    "happy",
+    "up",
+    "laugh"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "smile"
+   ]
+  }
+ },
+ "gramps": {
+  "coat": [
+   90,
+   96,
+   80
+  ],
+  "legs": [
+   60,
+   56,
+   50
+  ],
+  "cue": "bowtie",
+  "body": "round",
+  "hair": [
+   220,
+   220,
+   224
+  ],
+  "hairstyle": "bald",
+  "mustache": [
+   230,
+   230,
+   232
+  ],
+  "glasses": [
+   60,
+   50,
+   40
+  ],
+  "props": [
+   "fork"
+  ],
+  "faces": {
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "eyeroll": [
+    "up",
+    "flat",
+    "wavy"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "cheer": [
+    "happy",
+    "up",
+    "laugh"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ]
+  }
+ },
+ "kid34": {
+  "coat": [
+   60,
+   110,
+   70
+  ],
+  "legs": [
+   90,
+   70,
+   50
+  ],
+  "hat": "flatcap",
+  "cue": "stripes",
+  "body": "short",
+  "hair": [
+   230,
+   180,
+   90
+  ],
+  "hairstyle": "short",
+  "props": [
+   "ball"
+  ],
+  "faces": {
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "wow": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "cheer": [
+    "happy",
+    "up",
+    "laugh"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "smile"
+   ]
+  }
+ },
+ "operator": {
+  "coat": [
+   80,
+   110,
+   140
+  ],
+  "legs": [
+   220,
+   200,
+   186
+  ],
+  "cue": "pearls",
+  "body": "tall",
+  "hair": [
+   60,
+   40,
+   30
+  ],
+  "hairstyle": "bun",
+  "headset": true,
+  "props": [
+   "plug"
+  ],
+  "faces": {
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "wow": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "talkA": [
+    "dot",
+    "raise",
+    "open"
+   ],
+   "talkB": [
+    "dot",
+    "raise",
+    "o"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "smile"
+   ]
+  }
+ },
+ "clerk": {
+  "coat": [
+   140,
+   60,
+   60
+  ],
+  "legs": [
+   60,
+   50,
+   50
+  ],
+  "hat": "visor",
+  "cue": "vest",
+  "body": "round",
+  "hair": [
+   90,
+   70,
+   56
+  ],
+  "hairstyle": "bald",
+  "glasses": [
+   40,
+   30,
+   26
+  ],
+  "props": [
+   "sign"
+  ],
+  "faces": {
+   "happy": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "wow": [
+    "wide",
+    "up",
+    "O",
+    "sweat"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "smile"
+   ]
+  }
+ },
+ "dadM": {
+  "coat": [
+   70,
+   100,
+   80
+  ],
+  "legs": [
+   60,
+   70,
+   100
+  ],
+  "cue": "hoodie",
+  "body": "round",
+  "hair": [
+   70,
+   46,
+   30
+  ],
+  "hairstyle": "short",
+  "beard": [
+   70,
+   46,
+   30
+  ],
+  "props": [
+   "remote",
+   "drumstick"
+  ],
+  "faces": {
+   "cheer": [
+    "happy",
+    "up",
+    "laugh"
+   ],
+   "shout": [
+    "squeeze",
+    "angry",
+    "wide"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O",
+    "sweat"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "smile"
+   ]
+  }
+ },
+ "momM": {
+  "coat": [
+   200,
+   90,
+   70
+  ],
+  "legs": [
+   50,
+   56,
+   70
+  ],
+  "cue": "sweater",
+  "body": "tall",
+  "hair": [
+   60,
+   36,
+   24
+  ],
+  "hairstyle": "long",
+  "props": [
+   "plate"
+  ],
+  "faces": {
+   "cheer": [
+    "happy",
+    "up",
+    "laugh"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "wow": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "smile"
+   ]
+  }
+ },
+ "kidM": {
+  "coat": [
+   240,
+   200,
+   70
+  ],
+  "legs": [
+   60,
+   80,
+   140
+  ],
+  "cue": "sweater",
+  "body": "short",
+  "hair": [
+   140,
+   90,
+   50
+  ],
+  "hairstyle": "short",
+  "props": [
+   "ball"
+  ],
+  "faces": {
+   "cheer": [
+    "happy",
+    "up",
+    "laugh"
+   ],
+   "wow": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "smile"
+   ]
+  }
+ },
+ "grandmaM": {
+  "coat": [
+   150,
+   110,
+   170
+  ],
+  "legs": [
+   200,
+   180,
+   170
+  ],
+  "cue": "sweater",
+  "body": "round",
+  "hair": [
+   226,
+   226,
+   230
+  ],
+  "hairstyle": "perm",
+  "glasses": [
+   90,
+   70,
+   60
+  ],
+  "props": [
+   "plate"
+  ],
+  "faces": {
+   "cheer": [
+    "happy",
+    "up",
+    "laugh"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "smile"
+   ]
+  }
+ }
+}

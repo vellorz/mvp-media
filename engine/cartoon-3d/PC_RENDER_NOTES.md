@@ -80,3 +80,8 @@ Each entry: date, package, what was seen, cause (CONFIRMED or SUSPECTED), the ru
 - Slowest shot S09 (247 frames, 2.2 s/frame); S14 fastest.
 - Encode gave 43 clips, 0.3-8.6 MB each, so 100 MB limit is no issue. Clip names are SHOT_STARTFRAME_.mp4 (chunks of 60 frames).
 - RAM free was 6.7 GB at start; Blender peak ~2.8 GB. No errors in stderr.
+
+## Cape Cod r2 (cc2) - 2026-11-22, RTX 3070
+- Package at 9dae92c (cc.blend sha 929bca37...). First attempt was held: another Blender job (Detroit det3) was using RAM (3.9 GB free), so r2 waited until it finished; always check for a running blender.exe before the memory check.
+- 4-frame test passed: S01:118 sign readable, S16:1540 wharf on piles at right, S14:1430 rock with 1620 carving.
+- Full render 1936 PNGs, 4512 s Blender time = 2.33 s/frame; encode 43 clips (max 9.8 MB); pushed as render-test/cc1/clips_r2 (7f7e824). No errors.

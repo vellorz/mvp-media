@@ -162,18 +162,19 @@ def path(n,keys):
 # ---------------- 2D cut-out cast ----------------
 CI=json.load(open('/root/dc/src/cast.json'))
 # r7 (round-6 visual: round bodies torso 0.63, legs 0.88 head-heights; need 0.7-1.05 / 0.9-1.5): round body cards stretched 1.118x up from the feet
-BSY={'tall':1.0,'short':1.0,'round':1.0}   # r8b: one Rick build for every kind (cast.py GB/HEMY), no stretch
+BSY={'tall':0.91,'short':0.91,'round':0.91}   # rule 329 (Detroit e1ed5d1): body cards z 0.91 about the feet
 # r8b (owner Nov 20: clone Rick's build; guide v1.3 x.3): head 0.43 m wide = H; torso 0.962->0.532 = 1.00 H; legs 0.532->-0.014 = 1.27 H;
 # head disc centre 1.167 (top 1.382): total 3.25 H. Shoulder pivots 0.95, hand (HAND_Z 0.407) at the hem.
 HS=0.43/0.586   # head card scale vs rounds 1-7 (disc 800/1024 of a 0.75 card)
-GEO={'tall':(0.996,0.126,0.95),'short':(0.996,0.142,0.95),'round':(0.996,0.151,0.95)}   # r9: shoulders follow the narrower torso (0.73-0.89 H)
+GEO={'tall':(0.966,0.126,0.92),'short':(0.966,0.142,0.92),'round':(0.966,0.151,0.92)}   # rule 329 (Detroit e1ed5d1): head overlaps the capsule top; was 0.996/0.95
+#   # r9: shoulders follow the narrower torso (0.73-0.89 H)
 ARM_W,ARM_H,ARM_OFF=0.744,0.558,0.242   # r6: arm canvas 1200 wide (bent forearm swings outward)
 SHADOW=None
 def chr_coll(shot):
     if shot not in CHRC: CHRC[shot]=col('CHR_'+shot)
     return CHRC[shot]
 def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=False,camname=None):
-    c=CI[kind]; top,shx,shz=GEO[c['body']]; C=chr_coll(shot)
+    c=CI[kind]; top,shx,shz=GEO[c['body']]; _q=BSY[c['body']]; top=-0.04+(top+0.04)*_q; shz=-0.04+(shz+0.04)*_q; C=chr_coll(shot)
     root=empty(inst,loc,coll=C); root.scale=(scale,)*3
     bb=root.constraints.new('LOCKED_TRACK'); bb.target=CAM[camname or shot]; bb.track_axis='TRACK_NEGATIVE_Y'; bb.lock_axis='LOCK_Z'
     bodies={}

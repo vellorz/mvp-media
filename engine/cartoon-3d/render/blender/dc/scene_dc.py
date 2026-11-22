@@ -443,7 +443,7 @@ path(s,[(626,(PX+0.2,-0.6,1.05),(PX,0.9,0.9)),(672,(PX+0.15,-0.35,1.02),(PX+0.05
 s='S08'; r=S(s)
 ed8=char_on('S08_ed','editor',s,(PX+0.55,2.3,0),r,'determined',arms=('arm','arm'))
 faces(ed8,[(666,'determined'),(700,'happy'),(719,'proud'),(746,'excited'),(782,'happy'),(800,'proud')])
-for f,a in [(666,20),(700,60),(712,110),(722,100),(740,40),(782,120),(796,40)]: arm(ed8,-1,f,a)
+for f,a in [(666,20),(700,60),(712,88),(722,82),(740,40),(782,90),(796,40)]: arm(ed8,-1,f,a)   # cast gate v3: raise capped below the face (armprobe S08 712)
 bob(ed8,[719,782])
 fx('S08_spark','fx_spark',(PX-0.35,2.9,2.0),797,14,0.6,C(s),grow=1.5)
 path(s,[(666,(PX+0.35,0.3,1.6),(PX+0.15,3.0,1.6)),(720,(PX+0.25,0.1,1.62),(PX+0.05,3.0,1.62)),(782,(PX-0.1,-1.0,1.6),(PX-0.05,3.0,1.6)),(808,(PX-0.2,-1.15,1.6),(PX-0.1,3.0,1.6))])
@@ -530,7 +530,7 @@ F=[]
 for i,(x,k) in enumerate([(-1.3,'grandT'),(-0.7,'momT'),(-0.05,'dadT'),(0.55,'kidT')]):
     c_=char_on(f'S20_{k}',k,s,(TX+x,1.5,0),r,'happy',arms=('arm',{'grandT':'arm','momT':'arm_plate','dadT':'arm_fork','kidT':'arm_fork'}[k]),scale=(0.8 if k=='kidT' else 1.0)); F.append(c_)   # CAST GATE: the child stands 0.8 of an adult [INFERRED]
     drift_faces(c_,1886,1980,['happy','grin','excited','proud'],200+i,(14,26)); bob(c_,[1910+i*8,1950+i*5])
-for f in range(1890,1980,10): arm(F[2],1,f,-70); arm(F[2],1,f+5,-45)
+for f in range(1890,1980,10): arm(F[2],1,f,-50); arm(F[2],1,f+5,-30)   # cast gate v3: the shorter child's face sat under dad's fork hand at -70
 arm(F[3],1,1934,-120); arm(F[3],1,1944,-50)
 path(s,[(1886,(TX-1.3,-1.4,1.5),(TX-0.9,1.4,1.0)),(1980,(TX-0.2,-1.45,1.5),(TX+0.0,1.4,1.0))])
 # ---- S21 (1974-2086): all because one woman would not stop writing: past her framed letter, the camera lands on the poster on "writing" ----

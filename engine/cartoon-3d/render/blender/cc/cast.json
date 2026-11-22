@@ -116,11 +116,6 @@
    28
   ],
   "hairstyle": "short",
-  "mustache": [
-   60,
-   40,
-   28
-  ],
   "props": [
    "musket",
    "shovel",
@@ -184,7 +179,12 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "stache_small": [
+   60,
+   40,
+   28
+  ]
  },
  "pilgrimC": {
   "coat": [
@@ -295,11 +295,6 @@
    150
   ],
   "hairstyle": "short",
-  "mustache": [
-   180,
-   170,
-   160
-  ],
   "props": [
    "musket",
    "quill",
@@ -362,7 +357,12 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "stache_small": [
+   180,
+   170,
+   160
+  ]
  },
  "master": {
   "coat": [
@@ -384,11 +384,6 @@
    40
   ],
   "hairstyle": "short",
-  "mustache": [
-   80,
-   56,
-   40
-  ],
   "props": [
    "spyglass"
   ],
@@ -449,7 +444,12 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "stache_small": [
+   80,
+   56,
+   40
+  ]
  },
  "sailorA": {
   "coat": [
@@ -593,11 +593,6 @@
    26
   ],
   "hairstyle": "short",
-  "mustache": [
-   40,
-   30,
-   26
-  ],
   "props": [
    "oar"
   ],
@@ -678,7 +673,12 @@
     "angry",
     "line"
    ]
-  }
+  },
+  "stache_small": [
+   40,
+   30,
+   26
+  ]
  },
  "nausetA": {
   "coat": [
@@ -698,7 +698,7 @@
    24,
    24
   ],
-  "hairstyle": "tied",
+  "hairstyle": "short",
   "props": [
    "bow"
   ],
@@ -779,7 +779,7 @@
    22,
    22
   ],
-  "hairstyle": "tied",
+  "hairstyle": "short",
   "props": [
    "bow"
   ],
@@ -860,7 +860,7 @@
    28,
    26
   ],
-  "hairstyle": "tied",
+  "hairstyle": "short",
   "props": [
    "bow",
    "basket"

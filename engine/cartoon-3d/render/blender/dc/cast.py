@@ -72,6 +72,8 @@ def head(name,fk):
     c=C[name]; e,b,m=c['faces'][fk][:3]; ex=c['faces'][fk][3] if len(c['faces'][fk])>3 else ''
     im,d=new(1024,1024); hair=tuple(c.get('hair',(60,40,30)))+(255,)
     hs=c.get('hairstyle','short')
+    HD=c.get('hairdo'); TD=X.turn_dx(c,ex)   # round 2 (v7vnb2 16bb1d7): TD = face slide toward the turned side; hairdo = Rick hairstyles (326a revision pending owner pick)
+    if HD: hs='_hairdo'; X.hairdo_back(d,HD,hair,K)
     if hs=='bun': d.ellipse([382,40,642,280],fill=hair,outline=K,width=OUT)
     if hs=='long': d.rounded_rectangle([100,260,924,980],200,fill=hair,outline=K,width=OUT)
     if hs=='bob': d.rounded_rectangle([62,170,962,800],230,fill=hair,outline=K,width=OUT)   # M1 side-part bob (rule 326a)
@@ -100,6 +102,7 @@ def head(name,fk):
         if hs=='mullet': d.chord([150,150,874,420],180,360,fill=hair,outline=K,width=OUT)
         if hs=='tied': d.chord([150,150,874,420],180,360,fill=hair,outline=K,width=OUT)
         if hs=='white': d.chord([200,160,824,380],180,360,fill=hair,outline=K,width=OUT)
+    if HD: X.hairdo(d,HD,hair,K,dx=TD//3)
     base=im; im,d=new(1024,1024)   # hats on their own layer, squashed x0.6 from the top (peaks end <= 245)
     hat=c.get('hat')
     if hat=='cop':
@@ -128,14 +131,21 @@ def head(name,fk):
         hc=tuple(c.get('hatc',(44,62,118)))+(255,)
         d.polygon([(220,380),(250,80),(800,40),(810,380)],fill=hc,outline=K); d.line([(220,380),(250,80),(800,40),(810,380)],fill=K,width=OUT)
         d.rectangle([210,320,820,385],fill=dk(hc,0.7),outline=K,width=10); d.chord([170,340,600,470],180,360,fill=(24,22,26,255),outline=K,width=OUT)
-    top=im.resize((1024,int(1024*0.6)),Image.LANCZOS); im=base; im.alpha_composite(top,(0,0)); top=None
+    top=im.resize((1024,int(1024*0.6)),Image.LANCZOS); im=base
+    if c.get('hat_tilt') or TD:   # round 2 (owner Nov 22 5:11 PM CT): hats sit tilted at an angle and slide with the turn (Rick #24 trucker, #03 bowler)
+        tl=Image.new('RGBA',(1024,1024),(0,0,0,0)); tl.alpha_composite(top,(0,0)); top=tl.rotate(-c.get('hat_tilt',0),resample=Image.BICUBIC,center=(CX,180),translate=(TD//2,int(abs(c.get('hat_tilt',0))*4)))   # dc: drop the hat 4 px per degree so the raised corner stays inside the texture
+    im.alpha_composite(top,(0,0)); top=None
+    if c.get('hat3d'):   # dc: squashed x0.6 from the top like every other DC hat, so the brim stays above the enlarged brows
+        h3=X.hat3d(c['hat3d'],c.get('hatcol',(80,60,44)),K,tilt=c.get('hat_tilt',0),dx=TD//2,col2=c.get('hatcol2')).resize((1024,int(1024*0.6)),Image.LANCZOS); im.alpha_composite(h3,(0,0)); h3=None
+    if c.get('fhair'): X.fhair(im,c['fhair'],c.get('fhaircol',c.get('hair',(60,40,30))),K,dx=TD)   # round 2: Rick facial hair (326a revision pending owner pick)
     feat,d=new(1024,1024)
     # CAST GATE v2 (run coordinator, Nov 22: Rick's features are big and readable, refs 10#0587 14#0219 14#0695): each eye, brow and the mouth is drawn
     # on its own layer and scaled about its own centre, so the eye spacing (27 % of head width) stays the same
-    def _big(drawfn,boxes,f):
+    def _big(drawfn,boxes,f,dst=None):
+        dst=feat if dst is None else dst
         lay,ld=new(1024,1024); drawfn(ld)
         for (bx,by,r) in boxes:
-            cr=lay.crop((bx-r,by-r,bx+r,by+r)); n=int(2*r*f); cr=cr.resize((n,n),Image.LANCZOS); feat.alpha_composite(cr,(int(bx-n/2),int(by-n/2)))
+            cr=lay.crop((bx-r,by-r,bx+r,by+r)); n=int(2*r*f); cr=cr.resize((n,n),Image.LANCZOS); dst.alpha_composite(cr,(int(bx-n/2),int(by-n/2)))
     EF=1.9 if e=='wide' else 1.6; EY=545
     _big(lambda dd: eyes(dd,e,cy=EY),[(CX-108,EY,106),(CX+108,EY,106)],EF)
     if c.get('glasses'):   # rims drawn at their own size around the enlarged eyes (scaling them with the eyes made them overlap)
@@ -143,7 +153,13 @@ def head(name,fk):
         for sx in(-1,1): d.ellipse([CX+sx*112-90,EY-84,CX+sx*112+90,EY+84],outline=gc,width=13)
         d.line([CX-24,EY-10,CX+24,EY-10],fill=gc,width=12)
     _big(lambda dd: brows(dd,b if hat not in('cop','flatcap','fedora','beanie','ladyhat','capotain','tricorn','knit','cap','sunhat','visor','kepi') or b!='up' else 'flat',cy=EY-125),[(CX-108,EY-125,64),(CX+108,EY-125,64)],1.45)
-    _big(lambda dd: mouth(dd,m,cy=770),[(CX,790,150)],1.65)
+    MSIDE=c.get('mouth_side',0)
+    if MSIDE:   # round 2 (owner Nov 22 5:11 PM CT): Rick's off-centre, lopsided mouths. DC scales the mouth 1.65x first, then shifts it
+        # toward the side and tilts it so that corner rides up (round mouths only shift), same as X.mouth_layer
+        ml,_=new(1024,1024); _big(lambda dd: mouth(dd,m,cy=770),[(CX,790,150)],1.65,dst=ml)
+        ang=0 if m in('O','o','sigh','shout','whistleo','whistle') else X.MOUTH_TILT*MSIDE
+        ml=ml.rotate(ang,resample=Image.BICUBIC,center=(CX,790)); feat.alpha_composite(ml,(int(round(X.MOUTH_SHIFT*1.3*MSIDE)),0)); d=ImageDraw.Draw(feat)
+    else: _big(lambda dd: mouth(dd,m,cy=770),[(CX,790,150)],1.65)
     if c.get('stubble'):   # D3 light stubble (rule 326a): pale translucent shade over the jaw
         ov=Image.new('RGBA',(1024,1024),(0,0,0,0)); ImageDraw.Draw(ov).chord([150,420,874,860],0,180,fill=(120,110,110,70)); feat.alpha_composite(ov); d=ImageDraw.Draw(feat)
     if c.get('mustache'):   # dc (rule 326, Nov 22): one slim mustache only; the bushy two-lobe mustache is retired
@@ -151,7 +167,7 @@ def head(name,fk):
         d.rounded_rectangle([CX-115,632,CX+115,668],18,fill=mc,outline=K,width=8)
     if c.get('nose',True): d.arc([CX-30,560,CX+30,640],-30,200,fill=K,width=10)
     extras(d,ex)
-    im.alpha_composite(feat.crop((0,105,1024,1024)),(0,0))
+    im.alpha_composite(feat.crop((0,105,1024,1024)),(TD,0))
     return im
 # ---- round 3 (rule 193): Rick-style construction ----
 # slim column garment (narrower than the head), long coat/robe to the shins, hard cel shadow on the left third,

@@ -275,3 +275,178 @@ def pre(im, kind):
     od.rectangle([0, 0, 1024, 1024], fill=(120, 50, 150, 170))
     from PIL import ImageChops
     ov.putalpha(ImageChops.multiply(ov.getchannel('A'), m)); im.alpha_composite(ov)
+
+# =================================================================== round 2 (owner Nov 22 5:11 PM CT)
+# Off-centre mouths and turned faces, Rick-style facial hair, hairstyles and perspective hats.
+# Studied on 394 head crops sampled every 2.5 s from all 24 Rick videos (research/rick-style-spec/expression-library/round2/).
+# All coordinates below are FINAL head-texture coordinates (head disc 112..912 x 140..940, centre 512,540).
+import random as _random
+
+def turn_dx(c, ex=''):
+    """horizontal shift of eyes/nose/mouth: Rick turns a head by sliding the whole face toward the side it faces (8-12 % of head width)"""
+    t = c.get('turn', 0)
+    ks = (ex or '').split('+')
+    if 'turnL' in ks: t = -1
+    if 'turnR' in ks: t = 1
+    if 'front' in ks: t = 0
+    return int(round(t * 62))
+
+MOUTH_TILT = 9      # degrees: one corner higher than the other
+MOUTH_SHIFT = 46    # px past the turn shift: the mouth sits off the face's centre line
+def mouth_layer(draw_fn, kind, side, cy=715):
+    """draw a mouth on its own layer and give it Rick's lopsided set: shifted toward `side`, tilted so that side's corner rides up"""
+    lay = Image.new('RGBA', (1024, 1024), CLEAR); d = ImageDraw.Draw(lay)
+    draw_fn(d, kind, cy=cy, cx=CX)
+    if not side: return lay
+    if kind in ('O', 'o', 'sigh', 'shout', 'whistleo'): ang = 0      # round mouths only shift
+    else: ang = MOUTH_TILT * side
+    lay = lay.rotate(ang, resample=Image.BICUBIC, center=(CX, cy))
+    out = Image.new('RGBA', (1024, 1024), CLEAR); out.alpha_composite(lay, (int(MOUTH_SHIFT * side), 0))
+    return out
+
+# ------------------------------------------------------------------ facial hair (fhair)
+FHAIR = ['pencil', 'chevron', 'curled', 'walrus', 'toothbrush', 'droop', 'goatee', 'king', 'fullbeard', 'whitebeard', 'stubbledots', 'sideburns']
+def fhair(im, name, col, K, dx=0):
+    d = ImageDraw.Draw(im); cx = CX + dx; col = tuple(col)[:3] + (255,); hi = tuple(min(255, int(v * 1.35) + 20) for v in col[:3]) + (255,)
+    if name == 'pencil':      # thin line, tips lifted (#05, #23 bowtie men)
+        for sx in (-1, 1): d.line([(cx + sx * 8, 568), (cx + sx * 60, 566), (cx + sx * 96, 552)], fill=col, width=15, joint='curve')
+    elif name == 'chevron':   # thick push-broom, wider at the bottom, combed notches (#07 cowboy, #11, #24 sheriff)
+        pts = [(cx - 96, 540), (cx + 96, 540), (cx + 128, 604), (cx - 128, 604)]
+        d.polygon(pts, fill=col); d.line(pts + [pts[0]], fill=K, width=10, joint='curve')
+        for x in (-70, -24, 24, 70): d.line([cx + x, 584, cx + x + (6 if x > 0 else -6), 604], fill=K, width=7)
+    elif name == 'curled':    # handlebar with curls at the tips (#23 top-hat tycoon)
+        for sx in (-1, 1):
+            d.chord([cx + sx * 70 - 76, 528, cx + sx * 70 + 76, 612], 180, 360, fill=col)
+            d.ellipse([cx + sx * 70 - 76, 540, cx + sx * 70 + 76, 600], fill=col, outline=K, width=9)
+            ex_ = cx + sx * 150; d.arc([ex_ - 34, 520, ex_ + 34, 588], 90 if sx > 0 else 0, 360 if sx > 0 else 270, fill=K, width=14)
+        d.ellipse([cx - 44, 534, cx + 44, 590], fill=col)
+    elif name == 'walrus':    # two rounded lobes drooping over the lip, fringe lines (#04 captain)
+        for sx in (-1, 1):
+            d.ellipse([cx + sx * 66 - 88, 528, cx + sx * 66 + 88, 628], fill=col, outline=K, width=11)
+        d.ellipse([cx - 60, 534, cx + 60, 616], fill=col)
+        for x in (-110, -66, -22, 22, 66, 110): d.line([cx + x, 590, cx + x * 1.06, 622], fill=dk_(col), width=8)
+    elif name == 'toothbrush':
+        d.rounded_rectangle([cx - 46, 542, cx + 46, 590], 12, fill=col, outline=K, width=9)
+    elif name == 'droop':     # thin long ends hanging past the mouth (#14 emperor)
+        for sx in (-1, 1): d.line([(cx + sx * 10, 566), (cx + sx * 70, 572), (cx + sx * 104, 612), (cx + sx * 110, 690)], fill=col, width=14, joint='curve')
+    elif name in ('goatee', 'king'):   # small chin tuft (#17 king, #25 samurai)
+        d.polygon([(cx - 40, 760), (cx + 40, 760), (cx + 8, 850), (cx - 6, 852)], fill=col); d.line([(cx - 40, 760), (cx - 6, 852), (cx + 8, 850), (cx + 40, 760)], fill=K, width=8)
+        if name == 'king':
+            for sx in (-1, 1): d.line([(cx + sx * 10, 566), (cx + sx * 70, 570), (cx + sx * 92, 556)], fill=col, width=12, joint='curve')
+    elif name == 'fullbeard':  # hugs the jaw: high at the sideburns, dips under the mouth, mouth stays on skin (#13, #22)
+        m = Image.new('L', (1024, 1024), 0); md = ImageDraw.Draw(m)
+        md.ellipse([118, 146, 906, 990], fill=255)
+        top = [(0, 0), (1024, 0), (1024, 640)] + [(x, 640 + 110 * math.sin(math.pi * (x - 112) / 800) ** 2) for x in range(912, 111, -40)] + [(0, 640)]
+        md.polygon(top, fill=0)
+        lay = Image.new('RGBA', (1024, 1024), col); dd = ImageDraw.Draw(lay)
+        for x in range(170, 860, 52): dd.arc([x - 26, 820 + (x % 3) * 24, x + 26, 870 + (x % 3) * 24], 20, 160, fill=dk_(col), width=7)
+        im.paste(lay, (0, 0), m); d = ImageDraw.Draw(im)
+        # Rick #22: the beard hangs past the chin outline onto the chest, textured with short strokes
+        bib = [(cx - 300, 760), (cx - 230, 930), (cx - 120, 1010), (cx, 1022), (cx + 120, 1010), (cx + 230, 930), (cx + 300, 760)]
+        d.polygon(bib, fill=col); d.line(bib, fill=K, width=14, joint='curve')
+        for i, x in enumerate(range(-220, 240, 44)): d.line([cx + x, 860 + (i % 2) * 30, cx + x * 0.9, 930 + (i % 2) * 30], fill=dk_(col), width=8)
+        d.line([(x, 640 + 110 * math.sin(math.pi * (x - 112) / 800) ** 2) for x in range(150, 880, 20)], fill=K, width=10, joint='curve')
+        d.arc([118, 146, 906, 990], 18, 162, fill=K, width=16)
+        for sx in (-1, 1): d.line([(cx + sx * 8, 566), (cx + sx * 70, 570), (cx + sx * 110, 600)], fill=col, width=26, joint='curve')
+    elif name == 'whitebeard':  # long pointed beard (#17 wizard)
+        pts = [(cx - 230, 600), (cx - 120, 840), (cx, 1010), (cx + 120, 840), (cx + 230, 600), (cx + 120, 700), (cx, 720), (cx - 120, 700)]
+        d.polygon(pts, fill=col); d.line(pts + [pts[0]], fill=K, width=11, joint='curve')
+        for x in (-80, 0, 80): d.line([cx + x, 760, cx + x * 0.5, 940], fill=dk_(col), width=6)
+    elif name == 'stubbledots':  # dotted stubble on the jaw (#14 emperor, #17)
+        r = _random.Random(7)
+        for _ in range(110):
+            a = r.uniform(0.15, 0.85) * math.pi; rr = r.uniform(250, 370)
+            x, y = cx + rr * math.cos(a) * 1.0, 560 + rr * math.sin(a) * 0.9
+            if y > 900: continue
+            d.ellipse([x - 4, y - 4, x + 4, y + 4], fill=col)
+    elif name == 'sideburns':
+        for sx in (-1, 1): d.polygon([(CX + sx * 370, 300), (CX + sx * 395, 330), (CX + sx * 380, 560), (CX + sx * 330, 540), (CX + sx * 330, 300)], fill=col)
+def dk_(c, f=0.7): return tuple(int(v * f) for v in c[:3]) + (255,)
+
+# ------------------------------------------------------------------ hairstyles (hairdo)
+HAIRDO = ['sidepart', 'spiky', 'curly', 'messy', 'cowlick', 'topknot', 'bowl', 'afro', 'bangs']
+def hairdo_back(d, name, col, K):
+    col = tuple(col)[:3] + (255,)
+    if name == 'afro': d.ellipse([70, 50, 954, 700], fill=col, outline=K, width=26)
+    if name == 'bangs': d.rounded_rectangle([92, 170, 932, 800], 260, fill=col, outline=K, width=26)
+def hairdo(d, name, col, K, dx=0):
+    col = tuple(col)[:3] + (255,); hl = tuple(min(255, int(v * 1.5) + 40) for v in col[:3]) + (255,)
+    if name == 'sidepart':   # slick helmet with a side-swept fringe and highlight streaks (#12, #21, #25)
+        d.chord([140, 136, 884, 470], 180, 360, fill=col, outline=K, width=26)
+        d.pieslice([120, 150, 760, 560], 180, 300, fill=col, outline=K, width=22)
+        for i in range(3): d.arc([260 + i * 60, 170 + i * 10, 760 + i * 30, 420], 200, 250, fill=hl, width=10)
+    elif name == 'spiky':    # a few tall flame tufts leaning one way (#08 ginger, #11 quiff)
+        tufts = [(250, 40, 170), (380, 10, 210), (510, 0, 250), (640, 20, 230), (770, 60, 190)]
+        for x, lean, h in tufts:
+            pts = [(x - 80, 270), (x + lean - 10, 250 - h), (x + 30, 190), (x + 80, 270)]
+            d.polygon(pts, fill=col); d.line(pts, fill=K, width=16, joint='curve')
+        d.chord([150, 120, 874, 420], 180, 360, fill=col, outline=K, width=26)
+    elif name == 'curly':    # bubbles along the crown (#02 orange curls)
+        for x in range(180, 860, 84):
+            d.ellipse([x - 62, 120 + (x % 3) * 12, x + 62, 244 + (x % 3) * 12], fill=col, outline=K, width=16)
+        for x in range(220, 820, 110): d.ellipse([x - 70, 70, x + 70, 200], fill=col, outline=K, width=16)
+        d.chord([160, 150, 864, 380], 180, 360, fill=col)
+    elif name == 'messy':    # short dark mop, jagged fringe (#21, #22 headband men)
+        d.chord([140, 130, 884, 440], 180, 360, fill=col, outline=K, width=26)
+        pts = [(160, 285)] + [(200 + i * 70, 285 + (40 if i % 2 else 0)) for i in range(10)] + [(864, 285), (864, 200), (160, 200)]
+        d.polygon(pts, fill=col); d.line(pts[:12], fill=K, width=14, joint='curve')
+    elif name == 'cowlick':  # bare crown, one curled strand (#11, #13 kid)
+        d.arc([CX - 20, 40, CX + 120, 170], 120, 330, fill=K, width=16)
+        d.arc([CX - 60, 70, CX + 60, 170], 180, 300, fill=K, width=14)
+    elif name == 'topknot':  # samurai chonmage: shaved crown band, tied knot on top (#25)
+        d.chord([180, 150, 844, 360], 180, 360, fill=col, outline=K, width=22)
+        d.rounded_rectangle([CX - 40, 40, CX + 40, 170], 30, fill=col, outline=K, width=16); d.line([CX - 44, 140, CX + 44, 140], fill=(200, 50, 50, 255), width=14)
+    elif name == 'bowl':     # brown bowl cut with a straight fringe and side panels (#09 boy)
+        d.chord([132, 130, 892, 520], 180, 360, fill=col, outline=K, width=26)
+        for sx in (-1, 1): d.rounded_rectangle([CX + sx * 345 - 50, 300, CX + sx * 345 + 50, 500], 30, fill=col, outline=K, width=18)
+        d.rectangle([150, 300, 874, 330], fill=col); d.line([180, 330, 844, 330], fill=K, width=14)
+    elif name == 'afro':
+        for x in range(200, 840, 80): d.arc([x - 50, 110, x + 50, 210], 180, 360, fill=dk_(col), width=8)
+    elif name == 'bangs':    # woman: dark bob with a heavy fringe over one eye (#06)
+        d.chord([140, 136, 884, 470], 180, 360, fill=col, outline=K, width=26)
+        d.polygon([(180, 300), (700, 260), (760, 420), (520, 360), (300, 420)], fill=col); d.line([(300, 420), (520, 360), (760, 420)], fill=K, width=14)
+
+# ------------------------------------------------------------------ perspective hats (hat3d), drawn upright then tilted
+HAT3D = ['trucker', 'bowler3d', 'tophat3d', 'cowboy3d', 'flatcap3d', 'beanie3d']
+def hat3d(name, col, K, tilt=0, dx=0, col2=None):
+    """returns a 1024 RGBA layer. Rick's hats are small 3D props: the brim is an ellipse seen from slightly below and to one side,
+    the band curves with it, the crown carries a lit and a shaded side, and the whole hat sits tilted (#24 cool-shades trucker, #03 bowler)."""
+    lay = Image.new('RGBA', (1024, 1024), CLEAR); d = ImageDraw.Draw(lay)
+    col = tuple(col)[:3] + (255,); sh = dk_(col, 0.72); hi = tuple(min(255, int(v * 1.25) + 25) for v in col[:3]) + (255,)
+    W = 22
+    if name == 'trucker':   # mesh-back cap, white front panel, brim jutting toward the facing side
+        c2 = tuple(col2 or (245, 245, 245))[:3] + (255,)
+        d.chord([150, 60, 874, 420], 180, 360, fill=col, outline=K, width=W)
+        d.chord([300, 70, 724, 400], 180, 360, fill=c2, outline=K, width=16)
+        d.line([CX, 70, CX, 240], fill=dk_(c2), width=8); d.ellipse([CX - 22, 52, CX + 22, 92], fill=col, outline=K, width=8)
+        d.polygon([(250, 236), (780, 236), (900, 300), (700, 330), (300, 300)], fill=sh); d.line([(250, 236), (780, 236), (900, 300), (700, 330), (300, 300), (250, 236)], fill=K, width=W, joint='curve')
+        d.rectangle([150, 214, 874, 240], fill=dk_(col, 0.5))
+    elif name == 'bowler3d':
+        d.ellipse([150, 230, 874, 320], fill=sh, outline=K, width=W)
+        d.chord([210, 40, 814, 470], 180, 360, fill=col, outline=K, width=W)
+        d.rectangle([222, 206, 802, 250], fill=dk_(col, 0.45)); d.line([222, 250, 802, 250], fill=K, width=12)
+        d.arc([300, 70, 720, 360], 200, 250, fill=hi, width=16)
+    elif name == 'tophat3d':
+        d.ellipse([150, 270, 874, 350], fill=sh, outline=K, width=W)
+        d.rectangle([270, 40, 754, 300], fill=col); d.rectangle([700, 60, 750, 290], fill=sh)
+        d.line([270, 40, 270, 300], fill=K, width=W); d.line([754, 40, 754, 300], fill=K, width=W)
+        d.rectangle([272, 220, 752, 280], fill=dk_(col, 0.45))
+        d.ellipse([270, 10, 754, 80], fill=hi, outline=K, width=W)
+    elif name == 'cowboy3d':
+        d.ellipse([40, 210, 984, 340], fill=sh, outline=K, width=W)
+        d.arc([40, 150, 200, 300], 90, 200, fill=K, width=W); d.arc([824, 150, 984, 300], 340, 90, fill=K, width=W)
+        d.chord([250, 40, 774, 420], 180, 360, fill=col, outline=K, width=W); d.line([CX - 60, 60, CX, 100, CX + 60, 60], fill=sh, width=14)
+        d.rectangle([262, 200, 762, 240], fill=dk_(col, 0.45))
+    elif name == 'flatcap3d':
+        d.chord([140, 100, 884, 440], 180, 360, fill=col, outline=K, width=W)
+        d.polygon([(220, 250), (820, 250), (860, 300), (180, 300)], fill=sh); d.line([(220, 250), (820, 250), (860, 300), (180, 300), (220, 250)], fill=K, width=16)
+        for x in (330, 460, 590, 720): d.arc([x - 120, 110, x + 120, 330], 220, 300, fill=sh, width=8)
+    elif name == 'beanie3d':
+        d.chord([140, 60, 884, 470], 180, 360, fill=col, outline=K, width=W)
+        d.rounded_rectangle([140, 200, 884, 280], 30, fill=sh, outline=K, width=16)
+        for x in range(200, 840, 50): d.line([x, 205, x, 275], fill=dk_(col, 0.55), width=6)
+    # Rick's hats sit low and big on the crown (brim about a third of the way down the head): scale 1.08 about the crown, drop 40 px
+    lay = lay.resize((1106, 1106), Image.LANCZOS).crop((41, 0, 1065, 1024))
+    lay = lay.rotate(-tilt, resample=Image.BICUBIC, center=(CX, 300))
+    out = Image.new('RGBA', (1024, 1024), CLEAR); out.alpha_composite(lay, (int(dx), 40))
+    return out

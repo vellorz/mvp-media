@@ -117,7 +117,8 @@
    "stern",
    "wink_grin",
    "worried"
-  ]
+  ],
+  "mouth_side": 1
  },
  "clerk": {
   "coat": [
@@ -243,7 +244,9 @@
    "panic",
    "sigh",
    "skeptical"
-  ]
+  ],
+  "mouth_side": -1,
+  "hat_tilt": 5
  },
  "presA": {
   "coat": [
@@ -335,7 +338,8 @@
    "side_eye",
    "skeptical",
    "smug"
-  ]
+  ],
+  "mouth_side": 1
  },
  "presB": {
   "coat": [
@@ -432,7 +436,8 @@
    "side_eye",
    "skeptical",
    "smug"
-  ]
+  ],
+  "mouth_side": -1
  },
  "presC": {
   "coat": [
@@ -530,7 +535,8 @@
    "side_eye",
    "skeptical",
    "smug"
-  ]
+  ],
+  "mouth_side": 1
  },
  "presD": {
   "coat": [
@@ -624,7 +630,8 @@
    "smug",
    "stunned",
    "worried"
-  ]
+  ],
+  "mouth_side": -1
  },
  "presE": {
   "coat": [
@@ -711,7 +718,8 @@
   "library": [
    "look_down",
    "open_smile"
-  ]
+  ],
+  "mouth_side": 1
  },
  "printer": {
   "coat": [
@@ -724,7 +732,7 @@
    40,
    40
   ],
-  "hat": "cap",
+  "hat": null,
   "hatc": [
    70,
    70,
@@ -803,6 +811,14 @@
    "manic_grin",
    "squint",
    "whistle"
+  ],
+  "mouth_side": -1,
+  "hat_tilt": -11,
+  "hat3d": "flatcap3d",
+  "hatcol": [
+   96,
+   86,
+   74
   ]
  },
  "mailman": {
@@ -904,7 +920,9 @@
    "open_smile",
    "whistle",
    "worried"
-  ]
+  ],
+  "mouth_side": 1,
+  "hat_tilt": 10
  },
  "blueA": {
   "coat": [
@@ -996,7 +1014,9 @@
   "library": [
    "content",
    "laugh"
-  ]
+  ],
+  "mouth_side": 1,
+  "hat_tilt": 7
  },
  "blueB": {
   "coat": [
@@ -1089,7 +1109,9 @@
    150,
    80
   ],
-  "look": "D2"
+  "look": "D2",
+  "mouth_side": -1,
+  "hat_tilt": -6
  },
  "greyA": {
   "coat": [
@@ -1182,7 +1204,9 @@
   "library": [
    "content",
    "laugh"
-  ]
+  ],
+  "mouth_side": -1,
+  "hat_tilt": -7
  },
  "greyB": {
   "coat": [
@@ -1278,7 +1302,9 @@
   "look": "D2",
   "library": [
    "content"
-  ]
+  ],
+  "mouth_side": 1,
+  "hat_tilt": 6
  },
  "townW": {
   "coat": [
@@ -1365,7 +1391,8 @@
    "laugh",
    "look_up",
    "smile"
-  ]
+  ],
+  "mouth_side": -1
  },
  "momT": {
   "coat": [
@@ -1457,7 +1484,8 @@
    "cry_laugh",
    "laugh",
    "open_smile"
-  ]
+  ],
+  "mouth_side": 1
  },
  "dadT": {
   "coat": [
@@ -1550,7 +1578,8 @@
    "content",
    "cry_laugh",
    "laugh"
-  ]
+  ],
+  "mouth_side": -1
  },
  "kidT": {
   "coat": [
@@ -1637,7 +1666,8 @@
    "cry_laugh",
    "open_smile",
    "wink_grin"
-  ]
+  ],
+  "mouth_side": 1
  },
  "grandT": {
   "coat": [
@@ -1729,6 +1759,7 @@
    "cry_laugh",
    "laugh",
    "open_smile"
-  ]
+  ],
+  "mouth_side": -1
  }
 }

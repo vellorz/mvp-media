@@ -1,5 +1,5 @@
 # Shared Blender helpers for the Black Friday short (Rick method: painted 3D sets + flat 2D cut-out cast)
-import bpy, bmesh, math, random, json
+import bpy, bmesh, math, random, json, os
 from mathutils import Vector
 TX='/root/det/tex/'
 sc=None; C_SET=None; C_NOI=None; MC={}; CHRC={}; CAM={}; TGT={}
@@ -153,16 +153,22 @@ def cam(n,lens,fs=5.6):
     co=bpy.data.objects.new('cam_'+n,cd); sc.collection.objects.link(co); tg=bpy.data.objects.new('tgt_'+n,None); sc.collection.objects.link(tg)
     c=co.constraints.new('TRACK_TO'); c.target=tg; c.track_axis='TRACK_NEGATIVE_Z'; c.up_axis='UP_Y'; cd.dof.focus_object=tg
     CAM[n]=co; TGT[n]=tg; return co,tg
+TILT=json.load(open('/root/det/src/tilt.json')) if os.path.exists('/root/det/src/tilt.json') else {}
 def path(n,keys):
     """keys: (frame, cam_loc, target_loc[, lens])"""
     co,tg=CAM[n],TGT[n]
     for k in keys:
-        f,l,t=k[:3]; kloc(co,f,l); kloc(tg,f,t)
+        f,l,t=k[:3]
+        dv=TILT.get(n,0)   # det r4 (text T1): tilt down so faces clear the 71.7 % caption band (tiltcalc.py writes tilt.json)
+        if dv:
+            ln=k[3] if len(k)>3 else co.data.lens; dist=math.dist(l,t); t=(t[0],t[1],t[2]-dv*36.0/ln*dist)
+        kloc(co,f,l); kloc(tg,f,t)
         if len(k)>3: co.data.lens=k[3]; co.data.keyframe_insert('lens',frame=f)
 # ---------------- 2D cut-out cast ----------------
 CI=json.load(open('/root/det/src/cast.json'))
 # r7 (round-6 visual: round bodies torso 0.63, legs 0.88 head-heights; need 0.7-1.05 / 0.9-1.5): round body cards stretched 1.118x up from the feet
-BSY={'tall':1.0,'short':1.0,'round':1.0}   # r8b: one Rick build for every kind (cast.py GB/HEMY), no stretch
+BSY={'tall':0.91,'short':0.91,'round':0.91}   # det r4: body cards z 0.91 about the feet (torso/legs were 1.10/1.36 head widths)
+BSY0=1.0   # r8b: one Rick build for every kind (cast.py GB/HEMY), no stretch
 # r8b (owner Nov 20: clone Rick's build; guide v1.3 x.3): head 0.43 m wide = H; torso 0.962->0.532 = 1.00 H; legs 0.532->-0.014 = 1.27 H;
 # head disc centre 1.167 (top 1.382): total 3.25 H. Shoulder pivots 0.95, hand (HAND_Z 0.407) at the hem.
 HS=0.43/0.586   # head card scale vs rounds 1-7 (disc 800/1024 of a 0.75 card)
@@ -173,7 +179,7 @@ def chr_coll(shot):
     if shot not in CHRC: CHRC[shot]=col('CHR_'+shot)
     return CHRC[shot]
 def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=False,camname=None):
-    c=CI[kind]; top,shx,shz=GEO[c['body']]; C=chr_coll(shot)
+    c=CI[kind]; top,shx,shz=GEO[c['body']]; _q=BSY[c['body']]; top=-0.04+(top+0.04)*_q; shz=-0.04+(shz+0.04)*_q; C=chr_coll(shot)
     root=empty(inst,loc,coll=C); root.scale=(scale,)*3
     bb=root.constraints.new('LOCKED_TRACK'); bb.target=CAM[camname or shot]; bb.track_axis='TRACK_NEGATIVE_Y'; bb.lock_axis='LOCK_Z'
     bodies={}
@@ -192,7 +198,7 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
         if 'armS' not in keys: keys=keys+['armS']   # r7: straight card swapped in automatically while the arm is raised past 70 deg
         for k in keys:
             tk=f'{kind}_{k}'+('_L' if sx<0 else '')   # r7 (rule 272): mirrored texture, never a negative scale
-            a=plane(f'{inst}_arm{sx}_{k}',(0,0,0),ARM_W,ARM_H,card_mat(tk,tk),coll=C); a.parent=ap; a.location=(0,0,-ARM_OFF)
+            a=plane(f'{inst}_arm{sx}_{k}',(0,0,0),ARM_W*_q,ARM_H*_q,card_mat(tk,tk),coll=C); a.parent=ap; a.location=(0,0,-ARM_OFF*_q)
             A[sx]['cards'][k]=a
         A[sx]['sched']=[(rng[0],ak)] if isinstance(ak,str) else ak
     sh=plane(inst+'_shadow',(0,0,0),1.0,0.45,card_mat('shadowblob','shadow',emit=0.0),coll=C,horiz=True); sh.parent=root; sh.location=(0,0,0.004)

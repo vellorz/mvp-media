@@ -14,7 +14,7 @@ TINT={'S01':_T['now'],'S02':_T['lamp'],'S03':_T['lamp'],'S04':_T['day'],'S05':_T
 # per-shot brightness targets: day exteriors and today bright, lamp-lit 1934 interiors darker (Rick swings 0.2-0.7 across scenes)
 LT={'S01':0.52,'S02':0.44,'S03':0.45,'S04':0.50,'S05':0.50,'S06':0.47,'S07':0.48,'S08':0.45,'S09':0.44,'S10':0.43,'S11':0.44,'S12':0.40,'S13':0.50,'S14':0.48,
     'S15':0.42,'S16':0.47,'S17':0.44,'S18':0.44,'S19':0.42,'S20':0.52,'S21':0.54}
-PAY0,PAY1=1593,1605; PAYP=(0.0,1.0,1.0,1.0,(1.02,1.0,0.99))   # S21 payoff grade: protect the poster's true colours from the landing on
+PAY0,PAY1=1598,1610; PAYP=(0.0,1.0,1.0,1.0,(1.02,1.0,0.99))   # S21 payoff grade: protect the poster's true colours from the landing on   # r3: PAY0/PAY1 moved with "turkey" (1607)
 INTR=('S02','S03','S08','S09','S10','S11','S12','S15','S17','S18')
 VIG={n:(0.70 if n in INTR else 0.10) for n in SH}
 BLOOM=0.0   # light glow on emitters (lamps, screens, lit windows): guide L8
@@ -123,6 +123,14 @@ def fixwords(W_):
         if t=='and' and pv=='home.': t='And'
         if t=='lost' and pv=='Lions': t='lost,'
         if t in ('19-16','19-16.'): t='19-16,'
+        if t=='19' and nx(i)=='to' and i+2<len(W_) and W_[i+2][0].strip().startswith('16'):
+            o.append(['19-16,',s_,W_[i+2][2]]); i+=3; continue
+        # r3 (text verifier rule 212 round 2: six punctuation differences from the script)
+        t={'1934,':'1934','eat.':'eat!”','NBC.':'NBC,','NBC:':'NBC,','stations':'stations,','coast.':'coast,','years,':'years'}.get(t,t)
+        if t=='out.' and pv=='sold': t='out,'
+        if t=='lost.' and pv=='Lions': t='lost,'
+        if t=='Bears' and pv=='Chicago': t='Bears,'
+        if t=='The' and pv=='coast,': t='the'
         o.append([t,s_,e]); i+=1
     return o
 WORDS=fixwords(WORDS)
@@ -141,36 +149,21 @@ def chunks():
         txt=' '.join(x[0].strip() for x in c).replace('  ',' ')
         C.append([int((c[0][1]+0.1)*30),txt]); EN.append(int((c[-1][2]+0.1)*30)+3)   # Detroit (rule 314): a card leaves 3 f after its last word ends, not at the next card   # r9 (rule 9/186 revised: on the word or 0-1 f before, never later than +2): floor of the audible onset frame (round 7 ran 1.7-3.1 f early)
     C[0][0]=0   # the hook frame carries its caption from f0
-    for i in range(len(C)): C[i].append((C[i+1][0] if C[i+1][0]-max(C[i][0]+3,EN[i])<=12 else max(C[i][0]+3,EN[i])) if i+1<len(C) else min(END+1,EN[i]+6))   # r2 (T5b): a gap of 12 f or less is bridged by the card before it
+    for i in range(len(C)): C[i].append((C[i+1][0] if C[i+1][0]-max(C[i][0]+3,EN[i])<=15 else max(C[i][0]+3,EN[i])) if i+1<len(C) else min(END+1,EN[i]+6))   # r2 (T5b): a gap of 12 f or less is bridged by the card before it
     return C
 CAPS=chunks()
 # r2 (text verifier T7 [C]: captions on faces in S05, S06, S11, S14, S17, S18): pre-pass over the raw clips at 360x640 finds the face cards
 # (near-white, low-saturation round blobs) per frame; each card then takes the first baseline whose box clears every face it is shown over.
 FW,FH=360,640
 def face_masks():
-    M={}
-    for n,(a,b) in SH.items():
-        mp=sorted(glob.glob(f'{SRC}/{n}_*.mp4'))
-        if not mp: continue
-        lst=f'/tmp/{n}_flist.txt'; open(lst,'w').write(''.join(f"file '{os.path.abspath(m)}'\n" for m in mp))
-        pr=subprocess.Popen(['ffmpeg','-v','error','-f','concat','-safe','0','-i',lst,'-vf',f'scale={FW}:{FH}','-f','rawvideo','-pix_fmt','rgb24','-'],stdout=subprocess.PIPE)
-        for f in range(a,b+1):
-            buf=pr.stdout.read(FW*FH*3)
-            if len(buf)<FW*FH*3: break
-            x=np.frombuffer(buf,np.uint8).reshape(FH,FW,3); hsv=cv2.cvtColor(x,cv2.COLOR_RGB2HSV)
-            m=((hsv[...,2]>205)&(hsv[...,1]<55)).astype(np.uint8); m=cv2.morphologyEx(m,cv2.MORPH_OPEN,np.ones((3,3),np.uint8))
-            k,lab,st,_=cv2.connectedComponentsWithStats(m); out=np.zeros((FH,FW),bool)
-            for i in range(1,k):
-                x0,y0,w,h,ar=st[i]
-                if ar>=40 and 0.55<w/h<1.7 and ar/(w*h)>0.5 and ar<0.2*FW*FH: out[max(0,y0-2):y0+h+2,max(0,x0-2):x0+w+2]=True
-            M[f]=M.get(f,np.zeros((FH,FW),bool))|out
-        pr.stdout.close(); pr.wait()
-    return M
+    # r3 (text verifier T7 round 2: the pixel detector missed lamp-lit and shaded faces): exact face discs projected from the blend
+    # (facebox.py -> /root/det/bridge/faceboxes.json, fractions of the frame, y from the top)
+    R=json.load(open('/root/det/bridge/faceboxes.json')); return {int(k):v for k,v in R.items()}
 def cap_box(txt,base):
     l,t,r,b=FNT.getbbox(txt,anchor='ls',stroke_width=STROKE); w=r-l
     x0=(W-w)/2-12*K; x1=(W+w)/2+12*K; y0=base+t-10*K; y1=base+b+SHY+8*K
     return int(x0/W*FW),int(y0/H*FH),int(np.ceil(x1/W*FW)),int(np.ceil(y1/H*FH))
-BASES=(BASE,int(0.765*H),int(0.655*H),int(0.60*H),int(0.785*H))   # normal band, then just below, just above, higher, lowest (all clear of the top 12 % / bottom 20 % UI zones)
+BASES=(BASE,int(0.765*H),int(0.655*H),int(0.60*H),int(0.785*H),int(0.52*H),int(0.45*H),int(0.38*H))   # r3: higher fall-backs for close-ups   # normal band, then just below, just above, higher, lowest (all clear of the top 12 % / bottom 20 % UI zones)
 def pick_bases(FM):
     out=[]
     for c0,txt,c1 in CAPS:
@@ -178,7 +171,8 @@ def pick_bases(FM):
         if any(str(f) in PQ and min(p[1] for p in PQ[str(f)])<0.33 for f in fr): out.append(int(0.195*H)); continue   # S21: above the poster for the whole card (no 1-frame jump)
         best=None
         for bs in BASES:
-            x0,y0,x1,y1=cap_box(txt,bs); hit=sum(int(FM[f][max(0,y0):y1,max(0,x0):x1].sum()) for f in fr if f in FM)
+            x0,y0,x1,y1=cap_box(txt,bs); x0,x1,y0,y1=x0/FW,x1/FW,y0/FH,y1/FH
+            hit=sum(max(0,min(x1,q[2])-max(x0,q[0]))*max(0,min(y1,q[3])-max(y0,q[1])) for f in fr for q in FM.get(f,[]))
             if best is None or hit<best[1]: best=(bs,hit)
             if hit==0: break
         out.append(best[0])

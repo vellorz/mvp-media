@@ -61,9 +61,21 @@ for ch in CH:
     head_c=max(f.matrix_world.translation.z for f in ch['F'].values()); head_bot=head_c-H/2; head_top=head_c+H/2
     sc_=ch['root'].scale[0]
     torso=(head_bot-zrow(crotch))/H; legs=(zrow(crotch)-zrow(bot_r))/H; total=(head_top-zrow(bot_r))/H
+    # r7b shoulder-join check (owner Nov 22 'arm issue?': arm roots stood inside the outline as a second line, or poked above the shoulder):
+    # each shoulder pivot must sit on the torso's side outline (|pivot x - outline x| <= 0.020 m, about one arm half-width plus ink) at a height where the outline is a side, not the top curve
+    bw=b.dimensions.x if b.dimensions.x>0 else 0.8; bx=b.matrix_world.translation.x; sj=[]
+    for sx_,AP in ch['A'].items():
+        lp=b.matrix_world.inverted()@AP['piv'].matrix_world.translation   # body-card local space (the root carries the kind's scale)
+        r=int(round((0.5-lp.y/bh)*h)) if abs(lp.z)<1e-6 and abs(lp.y)>1e-6 else int(round((0.5-lp.z/bh)*h))
+        cols=np.nonzero(A[r]>0.5)[0] if 0<=r<h else []
+        if len(cols)==0: sj.append(f'{sx_:+d} above torso'); continue
+        ex=bw*((cols[-1] if sx_>0 else cols[0])/w-0.5); d_=abs(lp.x-ex)
+        slope=abs(np.nonzero(A[max(0,r-15)]>0.5)[0][[0,-1]][1 if sx_>0 else 0]-(cols[-1] if sx_>0 else cols[0])) if (A[max(0,r-15)]>0.5).any() else 99
+        if d_>0.020 or slope>6: sj.append(f'{sx_:+d} off {d_*1000:.0f}mm slope {slope}px')
+    if sj: miss.append('shoulder join '+'; '.join(sj))
     ok=not miss and 0.85<=torso<=1.2 and 1.1<=legs<=1.3 and 2.9<=total<=3.35
     allok&=ok
-    rep.append(f"{k:10s} {'PASS' if ok else 'FAIL'} torso {torso:.2f} legs {legs:.2f} total {total:.2f} H  limbs: head, torso, arm_L, arm_R (mitten in card), legs x{nlegs}, feet{skirt_note}{'' if not miss else '  MISSING: '+', '.join(miss)}")
+    rep.append(f"{k:10s} {'PASS' if ok else 'FAIL'} torso {torso:.2f} legs {legs:.2f} total {total:.2f} H  limbs: head, torso, arm_L, arm_R (mitten in card), legs x{nlegs}, feet, shoulder joins{skirt_note}{'' if not miss else '  MISSING: '+', '.join(miss)}")
 w_=bpy.data.worlds.new('w'); sc.world=w_; w_.use_nodes=True; bg_=w_.node_tree.nodes['Background']; bg_.inputs['Color'].default_value=(0.83,0.80,0.75,1); bg_.inputs['Strength'].default_value=1.0
 bpy.ops.object.light_add(type='SUN',rotation=(math.radians(50),0,math.radians(25))); bpy.context.object.data.energy=2.0
 cam.data.ortho_scale=3.6; sc.render.resolution_x=400; sc.render.resolution_y=900

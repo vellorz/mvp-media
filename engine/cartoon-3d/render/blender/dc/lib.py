@@ -193,7 +193,8 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
         if 'armS' not in keys: keys=keys+['armS']   # r7: straight card swapped in automatically while the arm is raised past 70 deg
         for k in keys:
             tk=f'{kind}_{k}'+('_L' if sx<0 else '')   # r7 (rule 272): mirrored texture, never a negative scale
-            a=plane(f'{inst}_arm{sx}_{k}',(0,0,0),ARM_W,ARM_H,card_mat(tk,tk),coll=C); a.parent=ap; a.location=(0,0,-ARM_OFF)
+            a=plane(f'{inst}_arm{sx}_{k}',(0,0,0),ARM_W*_q,ARM_H*_q,card_mat(tk,tk),coll=C); a.parent=ap; a.location=(0,0,-ARM_OFF*_q)   # dc5b: arm cards follow BSY like Detroit b54a72c
+            a.visible_shadow=False   # Detroit b54a72c (owner 'arm issue?'): no arm-card shadow notch on the torso
             A[sx]['cards'][k]=a
         A[sx]['sched']=[(rng[0],ak)] if isinstance(ak,str) else ak
     sh=plane(inst+'_shadow',(0,0,0),1.0,0.45,card_mat('shadowblob','shadow',emit=0.0),coll=C,horiz=True); sh.parent=root; sh.location=(0,0,0.004)

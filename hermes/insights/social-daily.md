@@ -1,7 +1,7 @@
 from: research
 title: Social views earned per day, 26 days recorded so far
 metric: social.views
-evidence: Mission Control daily views ledger (Buffer, Meta and YouTube running totals, snapshotted each pull); latest snapshot Sun, Nov 22, 1:19 AM Central
+evidence: Mission Control daily views ledger (Buffer, Meta and YouTube running totals, snapshotted each pull); latest snapshot Sun, Nov 22, 2:20 AM Central
 
 Views each platform earned on each day, from all posts (old and new), not just posts published that day.
 A day's number = that day's last running totals minus the day before's, post by post. Days run midnight to midnight Central.

@@ -10,12 +10,6 @@
    52,
    62
   ],
-  "hat": "fedora",
-  "hatcol": [
-   96,
-   96,
-   104
-  ],
   "cue": "bowtie",
   "body": "round",
   "hair": [
@@ -87,9 +81,31 @@
     "toothy"
    ]
   },
-  "turn": 0.35,
+  "turn": 0.45,
   "mouth_side": 1,
-  "hat_tilt": 10
+  "hat_tilt": 10,
+  "library": [
+   "deadpan",
+   "grin",
+   "happy",
+   "neutral",
+   "open_smile",
+   "panic",
+   "side_eye",
+   "skeptical",
+   "smile",
+   "smug",
+   "smug_grin",
+   "startle",
+   "surprise",
+   "worried"
+  ],
+  "hat": "fedora",
+  "hatcol": [
+   96,
+   96,
+   104
+  ]
  },
  "seller": {
   "coat": [
@@ -102,7 +118,6 @@
    60,
    50
   ],
-  "hat": "flatcap",
   "cue": "vest",
   "body": "tall",
   "hair": [
@@ -141,9 +156,23 @@
    140,
    130
   ],
-  "turn": -0.3,
+  "turn": -0.4,
   "mouth_side": -1,
-  "hat_tilt": -8
+  "hat_tilt": -8,
+  "library": [
+   "deadpan",
+   "grin",
+   "laugh",
+   "neutral",
+   "open_smile",
+   "shock",
+   "side_eye",
+   "skeptical",
+   "smile",
+   "surprise",
+   "worried"
+  ],
+  "hat": "flatcap"
  },
  "lion": {
   "coat": [
@@ -206,9 +235,27 @@
     "line"
    ]
   },
-  "turn": 0.25,
+  "turn": 0.35,
   "mouth_side": 1,
-  "hat_tilt": 0
+  "hat_tilt": 5,
+  "library": [
+   "angry",
+   "annoyed",
+   "deadpan",
+   "frown",
+   "grin",
+   "happy",
+   "laugh",
+   "neutral",
+   "panic",
+   "side_eye",
+   "sigh",
+   "skeptical",
+   "startle",
+   "stern",
+   "surprise",
+   "worried"
+  ]
  },
  "lion2": {
   "coat": [
@@ -266,9 +313,26 @@
     "line"
    ]
   },
-  "turn": -0.4,
+  "turn": -0.5,
   "mouth_side": -1,
-  "hat_tilt": 0
+  "hat_tilt": -5,
+  "library": [
+   "angry",
+   "annoyed",
+   "deadpan",
+   "frown",
+   "grin",
+   "happy",
+   "laugh",
+   "panic",
+   "side_eye",
+   "sigh",
+   "skeptical",
+   "startle",
+   "stern",
+   "surprise",
+   "worried"
+  ]
  },
  "bear": {
   "coat": [
@@ -326,9 +390,23 @@
     "line"
    ]
   },
-  "turn": 0.3,
+  "turn": 0.4,
   "mouth_side": 1,
-  "hat_tilt": 0
+  "hat_tilt": 5,
+  "library": [
+   "angry",
+   "annoyed",
+   "deadpan",
+   "grin",
+   "happy",
+   "laugh",
+   "side_eye",
+   "skeptical",
+   "smug_grin",
+   "stern",
+   "surprise",
+   "worried"
+  ]
  },
  "fanman": {
   "coat": [
@@ -340,12 +418,6 @@
    70,
    60,
    54
-  ],
-  "hat": "fedora",
-  "hatcol": [
-   80,
-   60,
-   44
   ],
   "cue": "scarf",
   "scarf": [
@@ -396,9 +468,33 @@
     "line"
    ]
   },
-  "turn": -0.25,
+  "turn": -0.35,
   "mouth_side": -1,
-  "hat_tilt": -10
+  "hat_tilt": -10,
+  "library": [
+   "angry",
+   "angry_squint",
+   "annoyed",
+   "deadpan",
+   "frown",
+   "grin",
+   "happy",
+   "laugh",
+   "panic",
+   "side_eye",
+   "sigh",
+   "skeptical",
+   "smile",
+   "startle",
+   "surprise",
+   "worried"
+  ],
+  "hat": "fedora",
+  "hatcol": [
+   80,
+   60,
+   44
+  ]
  },
  "fanlady": {
   "coat": [
@@ -410,12 +506,6 @@
    220,
    200,
    186
-  ],
-  "hat": "cloche",
-  "hatcol": [
-   160,
-   50,
-   60
   ],
   "cue": "pearls",
   "body": "tall",
@@ -455,9 +545,30 @@
     "line"
    ]
   },
-  "turn": 0.4,
+  "turn": 0.5,
   "mouth_side": 1,
-  "hat_tilt": 6
+  "hat_tilt": 7,
+  "library": [
+   "deadpan",
+   "frown",
+   "grin",
+   "happy",
+   "laugh",
+   "panic",
+   "side_eye",
+   "sigh",
+   "skeptical",
+   "smile",
+   "startle",
+   "surprise",
+   "worried"
+  ],
+  "hat": "cloche",
+  "hatcol": [
+   160,
+   50,
+   60
+  ]
  },
  "fanold": {
   "coat": [
@@ -470,7 +581,6 @@
    56,
    64
   ],
-  "hat": "flatcap",
   "cue": "scarf",
   "scarf": [
    220,
@@ -526,9 +636,26 @@
    220,
    224
   ],
-  "turn": -0.35,
+  "turn": -0.45,
   "mouth_side": -1,
-  "hat_tilt": -8
+  "hat_tilt": -8,
+  "library": [
+   "angry",
+   "angry_squint",
+   "annoyed",
+   "deadpan",
+   "frown",
+   "grin",
+   "happy",
+   "laugh",
+   "neutral",
+   "side_eye",
+   "sigh",
+   "skeptical",
+   "surprise",
+   "worried"
+  ],
+  "hat": "flatcap"
  },
  "newsboy": {
   "coat": [
@@ -541,7 +668,6 @@
    60,
    50
   ],
-  "hat": "flatcap",
   "cue": "apron",
   "body": "short",
   "hair": [
@@ -570,9 +696,23 @@
     "line"
    ]
   },
-  "turn": 0.35,
+  "turn": 0.45,
   "mouth_side": 1,
-  "hat_tilt": 8
+  "hat_tilt": 8,
+  "library": [
+   "angry",
+   "angry_squint",
+   "annoyed",
+   "deadpan",
+   "grin",
+   "laugh",
+   "side_eye",
+   "skeptical",
+   "smile",
+   "surprise",
+   "worried"
+  ],
+  "hat": "flatcap"
  },
  "dad34": {
   "coat": [
@@ -628,8 +768,22 @@
     "o"
    ]
   },
-  "turn": -0.3,
-  "mouth_side": -1
+  "turn": -0.4,
+  "mouth_side": -1,
+  "library": [
+   "deadpan",
+   "grin",
+   "happy",
+   "laugh",
+   "neutral",
+   "open_smile",
+   "shock",
+   "side_eye",
+   "skeptical",
+   "smile",
+   "surprise",
+   "worried"
+  ]
  },
  "mom34": {
   "coat": [
@@ -680,8 +834,22 @@
     "line"
    ]
   },
-  "turn": 0.25,
-  "mouth_side": 1
+  "turn": 0.35,
+  "mouth_side": 1,
+  "library": [
+   "deadpan",
+   "grin",
+   "happy",
+   "laugh",
+   "neutral",
+   "open_smile",
+   "shock",
+   "side_eye",
+   "skeptical",
+   "smile",
+   "surprise",
+   "worried"
+  ]
  },
  "gramps": {
   "coat": [
@@ -762,8 +930,21 @@
    230,
    232
   ],
-  "turn": -0.4,
-  "mouth_side": -1
+  "turn": -0.5,
+  "mouth_side": -1,
+  "library": [
+   "deadpan",
+   "grin",
+   "happy",
+   "laugh",
+   "neutral",
+   "panic",
+   "side_eye",
+   "skeptical",
+   "startle",
+   "surprise",
+   "worried"
+  ]
  },
  "kid34": {
   "coat": [
@@ -776,7 +957,6 @@
    70,
    50
   ],
-  "hat": "flatcap",
   "cue": "stripes",
   "body": "short",
   "hair": [
@@ -810,9 +990,23 @@
     "line"
    ]
   },
-  "turn": 0.3,
+  "turn": 0.4,
   "mouth_side": 1,
-  "hat_tilt": 8
+  "hat_tilt": 8,
+  "library": [
+   "deadpan",
+   "grin",
+   "happy",
+   "laugh",
+   "open_smile",
+   "shock",
+   "side_eye",
+   "skeptical",
+   "smile",
+   "surprise",
+   "worried"
+  ],
+  "hat": "flatcap"
  },
  "operator": {
   "coat": [
@@ -864,8 +1058,20 @@
     "line"
    ]
   },
-  "turn": -0.25,
-  "mouth_side": -1
+  "turn": -0.35,
+  "mouth_side": -1,
+  "library": [
+   "deadpan",
+   "grin",
+   "laugh",
+   "open_smile",
+   "shock",
+   "side_eye",
+   "skeptical",
+   "smile",
+   "surprise",
+   "worried"
+  ]
  },
  "clerk": {
   "coat": [
@@ -878,7 +1084,6 @@
    50,
    50
   ],
-  "hat": "visor",
   "cue": "vest",
   "body": "round",
   "hair": [
@@ -912,9 +1117,22 @@
     "line"
    ]
   },
-  "turn": 0.4,
+  "turn": 0.5,
   "mouth_side": 1,
-  "hat_tilt": -7
+  "hat_tilt": 6,
+  "library": [
+   "deadpan",
+   "grin",
+   "laugh",
+   "open_smile",
+   "shock",
+   "side_eye",
+   "skeptical",
+   "smile",
+   "surprise",
+   "worried"
+  ],
+  "hat": "visor"
  },
  "dadM": {
   "coat": [
@@ -976,8 +1194,25 @@
    46,
    30
   ],
-  "turn": -0.35,
-  "mouth_side": -1
+  "turn": -0.45,
+  "mouth_side": -1,
+  "library": [
+   "angry",
+   "angry_squint",
+   "annoyed",
+   "deadpan",
+   "grin",
+   "happy",
+   "laugh",
+   "neutral",
+   "panic",
+   "side_eye",
+   "skeptical",
+   "smile",
+   "startle",
+   "surprise",
+   "worried"
+  ]
  },
  "momM": {
   "coat": [
@@ -1028,8 +1263,22 @@
     "line"
    ]
   },
-  "turn": 0.35,
-  "mouth_side": 1
+  "turn": 0.45,
+  "mouth_side": 1,
+  "library": [
+   "deadpan",
+   "grin",
+   "happy",
+   "laugh",
+   "neutral",
+   "open_smile",
+   "shock",
+   "side_eye",
+   "skeptical",
+   "smile",
+   "surprise",
+   "worried"
+  ]
  },
  "kidM": {
   "coat": [
@@ -1075,8 +1324,21 @@
     "line"
    ]
   },
-  "turn": -0.3,
-  "mouth_side": -1
+  "turn": -0.4,
+  "mouth_side": -1,
+  "library": [
+   "deadpan",
+   "grin",
+   "happy",
+   "laugh",
+   "open_smile",
+   "shock",
+   "side_eye",
+   "skeptical",
+   "smile",
+   "surprise",
+   "worried"
+  ]
  },
  "grandmaM": {
   "coat": [
@@ -1127,7 +1389,19 @@
     "line"
    ]
   },
-  "turn": 0.25,
-  "mouth_side": 1
+  "turn": 0.35,
+  "mouth_side": 1,
+  "library": [
+   "deadpan",
+   "grin",
+   "happy",
+   "laugh",
+   "neutral",
+   "side_eye",
+   "skeptical",
+   "smile",
+   "surprise",
+   "worried"
+  ]
  }
 }

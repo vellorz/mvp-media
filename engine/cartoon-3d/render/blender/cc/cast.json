@@ -32,64 +32,16 @@
    "quill",
    "oar"
   ],
-  "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ]
-  }
+  "faces": {},
+  "library": "all",
+  "mouth_side": 1,
+  "hat_tilt": 7,
+  "fhair": "stubbledots",
+  "fhaircol": [
+   90,
+   60,
+   36
+  ]
  },
  "pilgrimB": {
   "coat": [
@@ -122,65 +74,12 @@
    "basket",
    "oar"
   ],
-  "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ]
-  },
-  "stache_small": [
+  "faces": {},
+  "library": "all",
+  "mouth_side": -1,
+  "hat_tilt": -6,
+  "fhair": "chevron",
+  "fhaircol": [
    60,
    40,
    28
@@ -211,64 +110,10 @@
    "basket",
    "oar"
   ],
-  "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ]
-  }
+  "faces": {},
+  "library": "all",
+  "mouth_side": 1,
+  "hairdo": "sidepart"
  },
  "pilgrimD": {
   "coat": [
@@ -300,65 +145,12 @@
    "quill",
    "oar"
   ],
-  "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ]
-  },
-  "stache_small": [
+  "faces": {},
+  "library": "all",
+  "mouth_side": -1,
+  "hat_tilt": 9,
+  "fhair": "whitebeard",
+  "fhaircol": [
    180,
    170,
    160
@@ -387,65 +179,12 @@
   "props": [
    "spyglass"
   ],
-  "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ]
-  },
-  "stache_small": [
+  "faces": {},
+  "library": "all",
+  "mouth_side": 1,
+  "hat_tilt": -8,
+  "fhair": "walrus",
+  "fhaircol": [
    80,
    56,
    40
@@ -462,7 +201,6 @@
    90,
    120
   ],
-  "hat": "knit",
   "hatc": [
    150,
    40,
@@ -485,62 +223,6 @@
    "oar"
   ],
   "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ],
    "talkA": [
     "dot",
     "angry",
@@ -561,7 +243,16 @@
     "angry",
     "line"
    ]
-  }
+  },
+  "library": "all",
+  "mouth_side": -1,
+  "hatcol": [
+   150,
+   40,
+   40
+  ],
+  "hat3d": "beanie3d",
+  "hat_tilt": -6
  },
  "sailorB": {
   "coat": [
@@ -574,7 +265,6 @@
    80,
    60
   ],
-  "hat": "knit",
   "hatc": [
    40,
    80,
@@ -597,62 +287,6 @@
    "oar"
   ],
   "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ],
    "talkA": [
     "dot",
     "angry",
@@ -674,7 +308,17 @@
     "line"
    ]
   },
-  "stache_small": [
+  "library": "all",
+  "mouth_side": 1,
+  "hatcol": [
+   40,
+   80,
+   130
+  ],
+  "hat3d": "beanie3d",
+  "hat_tilt": 8,
+  "fhair": "curled",
+  "fhaircol": [
    40,
    30,
    26
@@ -702,69 +346,14 @@
   "props": [
    "bow"
   ],
-  "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ]
-  },
+  "faces": {},
   "skin": [
    206,
    160,
    122
-  ]
+  ],
+  "library": "all",
+  "mouth_side": -1
  },
  "nausetB": {
   "coat": [
@@ -788,69 +377,14 @@
   "props": [
    "bow"
   ],
-  "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ]
-  },
+  "faces": {},
   "skin": [
    188,
    140,
    104
-  ]
+  ],
+  "library": "all",
+  "mouth_side": 1
  },
  "nausetC": {
   "coat": [
@@ -875,69 +409,14 @@
    "bow",
    "basket"
   ],
-  "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ]
-  },
+  "faces": {},
   "skin": [
    220,
    176,
    138
-  ]
+  ],
+  "library": "all",
+  "mouth_side": -1
  },
  "elder": {
   "coat": [
@@ -963,62 +442,6 @@
    "cane"
   ],
   "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ],
    "talkA": [
     "half",
     "up",
@@ -1039,7 +462,10 @@
     "up",
     "line"
    ]
-  }
+  },
+  "library": "all",
+  "mouth_side": 1,
+  "hat_tilt": 6
  },
  "townA": {
   "coat": [
@@ -1064,64 +490,16 @@
   "props": [
    "shovel"
   ],
-  "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ]
-  }
+  "faces": {},
+  "library": "all",
+  "mouth_side": -1,
+  "hat_tilt": -7,
+  "fhair": "pencil",
+  "fhaircol": [
+   90,
+   64,
+   40
+  ]
  },
  "townB": {
   "coat": [
@@ -1145,64 +523,9 @@
   "props": [
    "shovel"
   ],
-  "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ]
-  }
+  "faces": {},
+  "library": "all",
+  "mouth_side": 1
  },
  "tourA": {
   "coat": [
@@ -1228,64 +551,10 @@
    "phone",
    "camera"
   ],
-  "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ]
-  }
+  "faces": {},
+  "library": "all",
+  "mouth_side": -1,
+  "hat_tilt": 5
  },
  "tourB": {
   "coat": [
@@ -1298,7 +567,6 @@
    190,
    170
   ],
-  "hat": "cap",
   "hatc": [
    200,
    60,
@@ -1315,63 +583,15 @@
   "props": [
    "phone"
   ],
-  "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ]
-  }
+  "faces": {},
+  "library": "all",
+  "mouth_side": 1,
+  "hatcol": [
+   200,
+   60,
+   50
+  ],
+  "hat_tilt": -6,
+  "hat": "cap"
  }
 }

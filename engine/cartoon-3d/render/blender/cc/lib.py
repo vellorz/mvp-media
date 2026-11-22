@@ -160,7 +160,8 @@ def path(n,keys):
         f,l,t=k[:3]; kloc(co,f,l); kloc(tg,f,t)
         if len(k)>3: co.data.lens=k[3]; co.data.keyframe_insert('lens',frame=f)
 # ---------------- 2D cut-out cast ----------------
-CI=json.load(open('/root/cc/src/cast.json'))
+import expressions as XL   # Rick-style expression library: adds LIBRARY faces to characters with "library" in cast.json
+CI=XL.expand(json.load(open('/root/cc/src/cast.json')))
 # r7 (round-6 visual: round bodies torso 0.63, legs 0.88 head-heights; need 0.7-1.05 / 0.9-1.5): round body cards stretched 1.118x up from the feet
 BSY={'tall':1.0,'short':1.0,'round':1.0}   # r8b: one Rick build for every kind (cast.py GB/HEMY), no stretch
 # r8b (owner Nov 20: clone Rick's build; guide v1.3 x.3): head 0.43 m wide = H; torso 0.962->0.532 = 1.00 H; legs 0.532->-0.014 = 1.27 H;
@@ -202,9 +203,12 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
     if face0: ch['faces'].append((rng[0],face0))
     for sx in (-1,1): krot(A[sx]['piv'],rng[0],(0,math.radians(-8)*sx,0))
     return ch
+FMAP={'worry':'worried','sneaky':'side_eye','grit':'angry_squint','wow':'surprise','cheer':'laugh','excited':'open_smile'}   # cc r4: scene names -> expression library (library thread mapping)
 def face(ch,f,k):
+    if k not in ch['F'] and FMAP.get(k) in ch['F']: k=FMAP[k]
     if k not in ch['F']:
         alt={'shock':['horror','wow','raise'],'happy':['hope','cheer','excited','grin'],'cheer':['happy','excited'],'laugh':['happy','cheer'],'sad':['deadpan','worry'],'smug':['grin','happy']}.get(k,[])
+        alt=alt+XL.alternates(k)   # library: same-family fallback before the first face
         k=next((a for a in alt if a in ch['F']),list(ch['F'])[0])
     ch['faces'].append((f,k))
 def faces(ch,seq):

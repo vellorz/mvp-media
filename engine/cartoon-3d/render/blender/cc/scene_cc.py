@@ -393,7 +393,7 @@ for f,a in [(0,-20),(40,-30),(100,-60)]: arm(pa,-1,f,a)
 bob(pa,[14,48,80])
 t1=char_on('S01_tourA','tourA',s,(-1.6,1.5,0.08),r,'happy',arms=('arm',[(0,'arm_phone'),(90,'arm')]))
 t2=char_on('S01_tourB','tourB',s,(-2.6,6.4,0.06),r,'excited',arms=('arm_phone','arm'))   # r3: further back so the face stays above the caption band during the swing (T7/288 at f97-104 in r2). r4: off the sign's line of sight (C4 32 % behind the sign 112-126) and further back (caption contact f98-100)
-drift_faces(t1,0,123,['happy','excited','grin'],3); drift_faces(t2,0,123,['excited','happy','grin','shock'],4)
+drift_faces(t1,0,123,['happy','laugh','grin'],3); drift_faces(t2,0,123,['excited','happy','grin','surprise'],4)   # r4e: library faces (rule 332)
 for f,a in [(0,-120),(30,-128),(60,-118),(90,-20)]: arm(t1,1,f,a)
 for f,a in [(0,96),(40,104),(80,98),(98,80)]: arm(t2,-1,f,a)   # r4: noodle phone arm cleared of the face (armprobe)
 path(s,[(0,(-0.6,-2.0,1.5),(-0.2,4.1,1.6)),(60,(-0.4,1.2,1.75),(-0.2,4.1,1.95)),(84,(0.0,1.5,1.8),(0.0,4.0,1.95)),(114,(1.4,0.2,1.7),(2.7,2.2,1.72)),(127,(1.22,-0.06,1.74),(2.72,2.2,1.74))])
@@ -415,7 +415,7 @@ path(s,[(207,(IX+0.7,0.2,2.0),(IX+2.6,-2.4,1.0)),(278,(IX+1.15,-0.3,1.75),(IX+2.
 # ---- S04 (271-392): sandbars and bad winds; the ship heels through the breakers, then the camera rises and turns to the Cape tip ----
 s='S04'; r=S(s)
 sA=onship(char_on('S04_sailA','sailorA',s,(SX-1.5,9.5,2.32),r,'shock')); sB=onship(char_on('S04_sailB','sailorB',s,(SX+1.6,8.0,2.32),r,'grit'))
-faces(sA,[(271,'shock'),(300,'grit'),(330,'shock'),(356,'worry'),(380,'happy')]); faces(sB,[(271,'grit'),(296,'shock'),(322,'grit'),(350,'shock'),(378,'worry')])
+faces(sA,[(271,'shock'),(300,'grit'),(330,'shock'),(356,'nervous'),(380,'happy')]); faces(sB,[(271,'grit'),(296,'shock'),(322,'determined'),(350,'shock'),(378,'worry')])
 for f,a in [(271,-150),(290,-120),(310,-160),(332,-100)]: arm(sA,1,f,a)
 for f,a in [(275,95),(294,80),(314,100),(336,70)]: arm(sB,-1,f,a)   # armprobe r1: sailB forearm crossed his face at 150-160 deg
 bob(sA,[284,318,344]); bob(sB,[290,326])
@@ -431,7 +431,7 @@ cyl('S05_acable',(0,0,0.62+2.0),0.025,4.0,flat('cable',lin((120,92,60)),0.8),v=6
 kloc(anc,385,(AX,14.8,3.4)); kloc(anc,419,(AX,14.8,3.4)); fall(anc,420,12,(AX,14.8,3.4),(AX,15.0,-1.2)); kloc(anc,433,(AX,15.0,-1.2)); onone(anc)
 fx('S05_splash','fx_splash',(AX,15.1,0.4),432,18,1.4,C(s),face='+X',grow=1.6,rise=0.3)
 pf=onship(char_on('S05_pil','pilgrimC',s,(SX+1.2,9.8,3.82),r,'happy')); pB=onship(char_on('S05_pilB','pilgrimB',s,(SX-2.6,8.0,3.82),r,'deadpan'))   # r4 (C4): was hidden behind S05_pil 466-492   # footprobe r1: were past the deck end at y 11.5
-faces(pf,[(385,'happy'),(420,'excited'),(452,'happy'),(470,'grin'),(488,'shock'),(500,'worry')]); faces(pB,[(385,'deadpan'),(440,'neutral'),(486,'grit'),(498,'deadpan')])
+faces(pf,[(385,'happy'),(420,'excited'),(452,'happy'),(470,'grin'),(488,'shock'),(500,'worry')]); faces(pB,[(385,'deadpan'),(440,'skeptical'),(486,'grit'),(498,'deadpan')])
 for f,a in [(385,-20),(430,-55),(470,-65),(486,-35)]: arm(pf,1,f,a)   # armprobe r3: a raised forearm crossed the other Pilgrim's face
 for f,a in [(470,-10),(484,-60),(492,-55)]: arm(pB,1,f,a)
 kloc(pf['root'],458,(1.2,9.8,3.8)); kloc(pf['root'],470,(1.05,10.25,3.8)); kloc(pf['root'],488,(1.05,10.25,3.8)); kloc(pf['root'],494,(1.1,10.05,4.05)); kloc(pf['root'],500,(1.2,9.8,3.8))   # r2: a hop back, not a 4 f glide. r4: shorter lean toward the lens (head cut by the right edge 480-488)
@@ -460,26 +460,26 @@ path(s,[(576,(DX-11.2,-9.6,dune(DX-11.2,-9.6)+1.6),(DX-11.8,-5.8,dune(DX-11.8,-5
 # ---- S08 (654-765): on deck, the sailors gripe; lips move on the quoted line ----
 s='S08'; r=S(s)
 s8a=onship(char_on('S08_sailA','sailorA',s,(SX-1.2,2.0,2.32),r,'deadpan')); s8b=onship(char_on('S08_sailB','sailorB',s,(SX+0.9,2.6,2.32),r,'grit'))
-faces(s8a,[(654,'deadpan'),(676,'grit'),(694,'deadpan')]); lipsync(s8a,WORDS[75:85],700,766)
-faces(s8b,[(654,'grit'),(700,'sneaky'),(730,'grin'),(752,'deadpan')])
+faces(s8a,[(654,'deadpan'),(676,'annoyed'),(694,'deadpan')]); lipsync(s8a,WORDS[75:85],700,766)
+faces(s8b,[(654,'grit'),(700,'smug'),(730,'grin'),(752,'deadpan')])
 for f,a in [(654,-20),(700,-140),(712,-110),(730,-150),(750,-60)]: arm(s8a,1,f,a)
 for f,a in [(654,-30),(705,-60),(740,-100)]: arm(s8b,-1,f,a)
 bob(s8a,[703,732,756]); bob(s8b,[716,744])
-p8=onship(char_on('S08_pil','pilgrimB',s,(SX+0.3,0.6,2.32),r,'worry')); faces(p8,[(654,'worry'),(712,'shock'),(740,'worry')])
+p8=onship(char_on('S08_pil','pilgrimB',s,(SX+0.3,0.6,2.32),r,'worry')); faces(p8,[(654,'worry'),(712,'shock'),(740,'sigh')])
 path(s,[(654,(SX-2.4,4.0,3.0),(SX-0.6,2.0,2.75)),(700,(SX-1.9,3.95,2.95),(SX-1.0,2.0,2.8)),(765,(SX-0.7,5.3,2.95),(SX-1.0,2.0,2.8))])   # r4 (rule 306): ends further out than it starts (no push after S07's track)   # r2: closer on the speaking sailor (C6), lateral truck   # r2 (rule 306): lateral truck, no push after S07
 # ---- S09 (766-1012): the packed long take on Corn Hill: climb, dig, the corn basket, take it, give it back, the name ----
 s='S09'; r=S(s); hz=lambda x,y:dune(x,y)
 cA=char_on('S09_dig','pilgrimC',s,(DX-0.9,11.0,hz(DX-0.9,11.0)),r,'neutral',arms=('arm',[(766,'arm_shovel'),(822,'arm')]),walker=True)
 gwalk(cA,766,796,(DX-4.5,8.0,hz(DX-4.5,8.0)),(DX-0.9,11.0,hz(DX-0.9,11.0)),hz,step=4)
 for f,a in [(800,-60),(804,-20),(808,-60),(812,-20),(822,-150),(832,-140),(846,-155)]: arm(cA,1,f,a)
-faces(cA,[(766,'neutral'),(800,'grit'),(816,'shock'),(824,'excited'),(850,'grin'),(880,'sneaky'),(900,'happy'),(930,'worry'),(960,'happy'),(990,'proud')])
+faces(cA,[(766,'neutral'),(800,'grit'),(816,'shock'),(824,'excited'),(850,'grin'),(880,'sneaky'),(900,'happy'),(930,'look_down'),(960,'happy'),(990,'proud')])
 cB=char_on('S09_carry','pilgrimA',s,(DX+0.6,10.7,hz(DX+0.6,10.7)),r,'neutral',arms=('arm',[(766,'arm_musket'),(899,'arm_basket'),(936,'arm')]),walker=True)
 gwalk(cB,766,800,(DX-1.6,8.8,hz(DX-1.6,8.8)),(DX+0.6,10.7,hz(DX+0.6,10.7)),hz,step=4)
 faces(cB,[(766,'neutral'),(816,'excited'),(836,'grin'),(870,'proud'),(899,'sneaky'),(918,'worry'),(940,'happy'),(970,'grin')])
 for f,a in [(899,-20),(905,-25)]: arm(cB,1,f,a)
 gwalk(cB,903,918,(DX+0.6,10.7,hz(DX+0.6,10.7)),(DX+2.3,10.0,hz(DX+2.3,10.0)),hz,step=3)
 cC=char_on('S09_look','pilgrimB',s,(DX-1.4,12.8,hz(DX-1.4,12.8)),r,'worry')   # r4 (C4/T7/288): swept the lens 923-958 at 89 % W; now behind the dig, off the camera path   # r3: was beside the camera path and swept the lens at 786-792
-faces(cC,[(766,'worry'),(830,'shock'),(846,'worry'),(870,'deadpan'),(900,'shock'),(930,'neutral'),(980,'proud')])
+faces(cC,[(766,'worry'),(830,'shock'),(846,'worry'),(870,'skeptical'),(900,'shock'),(930,'neutral'),(980,'proud')])
 bob(cC,[830,900,980])
 # basket follows the carrier's hand from the lift (899) until the hand-back (936), then sits in the Wampanoag man's arms
 for f,z in [(898,bz+0.05),(899,bz+0.15)]: kloc(bsk,f,(DX,12,z))
@@ -506,7 +506,7 @@ s='S11'; r=S(s)
 P11=[]
 for i,(x,y,k) in enumerate([(-1.6,1.6,'pilgrimA'),(0.2,1.2,'pilgrimB'),(1.8,1.6,'pilgrimC')]):
     c_=char_on(f'S11_p{i}',k,s,(EX+x,y,eb(EX+x,y)),r,'neutral',arms=('arm','arm_musket')); P11.append(c_)
-    faces(c_,[(1141,'worry'),(1158+i*2,'shock'),(1176,'grit'),(1198+i*3,'grit'),(1222,'worry'),(1236+i*2,'happy'),(1246,'grin')])
+    faces(c_,[(1141,'worry'),(1158+i*2,'shock'),(1176,'grit'),(1198+i*3,'determined'),(1222,'worry'),(1236+i*2,'happy'),(1246,'grin')])
     for f,a in [(1141,-20),(1186,-70),(1194,-85),(1226,-20)]: arm(c_,1,f+i*2,a)
     bob(c_,[1160+i*2,1230+i*3])
 path(s,[(1141,(EX+0.4,4.6,1.75),(EX,0.8,1.15)),(1180,(EX+0.2,4.2,1.7),(EX,0.8,1.2)),(1252,(EX-0.4,3.9,1.65),(EX,1.0,1.2))])
@@ -516,7 +516,7 @@ path(s,[(1244,(EX+14.2,-9.6,1.65),(EX+14,-12,1.6)),(1330,(EX+15.8,-5.0,2.6),(EX+
 # ---- S13 (1322-1412): the shallop crosses the bay to Plymouth ----
 s='S13'; r=S(s)
 for i,(y,k,xo,zo) in enumerate([(-2.6,'pilgrimA',-0.5,0.7),(0.9,'pilgrimB',0.5,0.55)]):   # r2 (P3): staggered across the boat and in height, not a row   # r4 (C4: heads covered faces 1322-1412 in r3): two rowers far apart, not three
-    c_=char_on(f'S13_r{i}',k,s,(SX+70,40+y,0.5),r,'neutral',arms=('arm_oar','arm')); drift_faces(c_,1322,1412,['neutral','grit','happy','proud'],40+i,(14,26))
+    c_=char_on(f'S13_r{i}',k,s,(SX+70,40+y,0.5),r,'neutral',arms=('arm_oar','arm')); drift_faces(c_,1322,1412,['neutral','determined','happy','proud'],40+i,(14,26))
     c_['root'].parent=SHAL; c_['root'].location=(xo,y,zo)   # seated in the shallop, hull hides the legs
     for f in range(1322,1412,14): arm(c_,1,f,-40); arm(c_,1,f+7,-75)
 path(s,[(1322,(SX+77.0,35.4,2.4),(SX+70,40,1.2)),(1412,(SX+86.0,35.2,2.5),(SX+80.5,40,1.3))])   # r3 (C4): wider angle so no head covers another   # r2: three-quarter from the bow, so the crew stack in depth
@@ -542,11 +542,11 @@ s='S17'; r=S(s)
 el=char_on('S17_elder','elder',s,(-1.8,0.6,0.1),r,'deadpan',arms=('arm_cane','arm'),walker=True)
 gwalk(el,1567,1612,(-4.6,-0.6,rb(-4.6,-0.6)),(-1.8,0.6,rb(-1.8,0.6)),rb,step=5)
 for f,a in [(1612,-30),(1624,-95),(1640,-100),(1700,-90)]: arm(el,1,f,a)   # r2: the free arm, toward the stone (was the cane side, pointing away)
-faces(el,[(1567,'deadpan'),(1600,'proud'),(1624,'excited'),(1660,'proud')]); lipsync(el,WORDS[194:197],1686,1712)
+faces(el,[(1567,'deadpan'),(1600,'proud'),(1624,'laugh'),(1660,'proud')]); lipsync(el,WORDS[194:197],1686,1712)
 T17=[]
 for i,(x,y,k) in enumerate([(2.6,1.0,'townA'),(3.4,-0.4,'townB'),(1.2,-1.4,'townA')]):
     c_=char_on(f'S17_t{i}',k,s,(x,y,0.12),r,'neutral'); T17.append(c_)
-    faces(c_,[(1567,'neutral'),(1600,'deadpan'),(1626+i*2,'shock'),(1640,'excited'),(1676,'worry'),(1700+i,'shock')])
+    faces(c_,[(1567,'neutral'),(1600,'deadpan'),(1626+i*2,'shock'),(1640,'excited'),(1676,'surprise'),(1700+i,'shock')])
     bob(c_,[1628+i*2,1700]); arm(c_,1,1628,-150-10*i); arm(c_,1,1650,-30)
 path(s,[(1567,(-5.0,-4.4,1.6),(-3.6,0.0,1.4)),(1612,(-3.4,-3.2,1.6),(-1.6,0.8,1.35)),(1640,(-2.4,-3.7,1.6),(-1.3,1.3,1.2)),(1662,(-1.8,-2.9,1.55),(-1.3,1.1,1.3)),(1686,(-1.0,-1.8,1.5),(-1.7,0.7,1.4)),(1712,(-1.1,-1.5,1.48),(-1.75,0.7,1.42))])
 # ---- S18 (1702-1758): today: the rock with 1620 carved, tourists, the posing Pilgrim again; slow pull-out ----
@@ -554,12 +554,12 @@ s='S18'; r=S(s)
 p18=char_on('S18_pil','pilgrimA',s,(-0.2,4.1,0.88),r,'proud'); faces(p18,[(1702,'proud'),(1726,'grin'),(1746,'proud')])
 for f,a in [(1702,-150),(1730,-158)]: arm(p18,1,f,a)
 q1=char_on('S18_tourA','tourA',s,(-2.4,0.4,0.08),r,'happy',arms=('arm','arm_phone')); q2=char_on('S18_tourB','tourB',s,(2.1,0.0,0.06),r,'excited',arms=('arm_phone','arm'))
-arm(q1,1,1702,-122); arm(q2,-1,1702,122); drift_faces(q1,1702,1758,['happy','grin'],60); drift_faces(q2,1702,1758,['excited','happy'],61)
+arm(q1,1,1702,-122); arm(q2,-1,1702,122); drift_faces(q1,1702,1758,['happy','laugh','grin'],60); drift_faces(q2,1702,1758,['excited','happy'],61)
 path(s,[(1702,(0.1,1.3,1.75),(-0.2,4.1,1.9)),(1758,(0.0,-1.0,1.6),(-0.1,4.0,1.2))])   # r3: the 1620 carving stays in frame at the end
 # ---- S19 (1759-1816): payoff, the dune-top print shop; push lands on the poster on "first" (1793) ----
 s='S19'; r=S(s)
 g1=char_on('S19_a','tourA',s,(HX-2.0,HY-1.6,gd(HX-2.0,HY-1.6)),r,'happy'); g2=char_on('S19_b','tourB',s,(HX+2.0,HY-1.7,gd(HX+2.0,HY-1.7)),r,'excited')
-faces(g1,[(1759,'happy'),(1780,'excited'),(1798,'grin')]); faces(g2,[(1759,'excited'),(1784,'happy'),(1800,'grin')])
+faces(g1,[(1759,'happy'),(1780,'excited'),(1798,'grin')]); faces(g2,[(1759,'excited'),(1784,'cool_shades'),(1800,'grin')])
 arm(g1,1,1782,-120); arm(g2,-1,1786,110)
 path(s,[(1759,(HX+0.4,HY-7.5,1.75),(HX,PY,1.45)),(1793,(HX+0.05,HY-2.25,1.575),(HX,PY,PZ-0.165)),(1816,(HX+0.03,HY-2.05,1.565),(HX,PY,PZ-0.165))])   # r2 (rule T7): poster sits above the caption band (bottom >= 34 % H from the frame bottom)
 # ---- ground snap (footprobe r1: tourists sank 0.11 m into the beach mesh; analytic dune heights differ from the grid by up to 0.06 m) ----

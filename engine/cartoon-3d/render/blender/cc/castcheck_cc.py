@@ -18,7 +18,7 @@ tg.location=((N-1)*SP/2,0,0.75)
 for c_ in list(cam.constraints): cam.constraints.remove(c_)
 CH=[]
 for i,k in enumerate(kinds):
-    f0=list(C[k]['faces'])[0]
+    f0=(list(C[k]['faces']) or ['neutral'])[0]   # cc r4e: library-only casts have no own faces
     ch=L.char(f'K{i}_{k}','%s'%k,'SHEET',(i*SP,0,0),(0,20),f0,arms=('arm','arm')); CH.append(ch)
     for sx in(-1,1): L.arm(ch,sx,0,-14)
 for ch in CH: L.finish(ch)

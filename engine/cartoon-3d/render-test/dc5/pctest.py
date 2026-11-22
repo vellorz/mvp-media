@@ -1,7 +1,7 @@
 # GPU alpha check (rule 203): render single test frames on the GPU before the full run.
 # blender.exe -b cc.blend --python pctest.py -- OUTDIR S03:330 S16:1660 ...   -> OUTDIR/test_<shot>_<frame>.png
 import bpy, sys, json, os
-a=sys.argv[sys.argv.index('--')+1:]; out=a[0]; os.makedirs(out,exist_ok=True)
+a=sys.argv[sys.argv.index('--')+1:]; out=os.path.abspath(a[0]); os.makedirs(out,exist_ok=True)
 pr=bpy.context.preferences.addons['cycles'].preferences
 for dev in ('OPTIX','CUDA'):
     try:

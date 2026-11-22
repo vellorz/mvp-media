@@ -1,7 +1,7 @@
 # Render all shots on the PC GPU, resume-safe.  blender.exe -b cc.blend --python pcrender.py -- OUTDIR [shot ...]
 # Each shot renders with only its own CHR_<shot> collection enabled (other shots' cast are excluded) and its own camera.
 import bpy, sys, json, os, time
-a=sys.argv[sys.argv.index('--')+1:]; out=a[0]; only=a[1:]
+a=sys.argv[sys.argv.index('--')+1:]; out=os.path.abspath(a[0]); only=a[1:]   # dc5: absolute path (a relative 'test' landed in C:\test)
 pr=bpy.context.preferences.addons['cycles'].preferences
 for dev in ('OPTIX','CUDA'):
     try:

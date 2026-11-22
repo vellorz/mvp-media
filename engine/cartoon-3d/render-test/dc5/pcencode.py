@@ -1,7 +1,7 @@
 # Encode each shot's PNG frames into near-lossless MP4 chunks of <= 60 frames (each file stays well under GitHub's 100 MB limit).
 # blender.exe -b --python pcencode.py -- FRAMEDIR OUTDIR      -> OUTDIR/<shot>_<firstframe>_.mp4
 import bpy, sys, os, glob
-a=sys.argv[sys.argv.index('--')+1:]; fr,out=a[0],a[1]; os.makedirs(out,exist_ok=True)
+a=sys.argv[sys.argv.index('--')+1:]; fr,out=os.path.abspath(a[0]),os.path.abspath(a[1]); os.makedirs(out,exist_ok=True)
 for n in sorted(os.listdir(fr)):
     fs=sorted(glob.glob(os.path.join(fr,n,'f_*.png')))
     for c in range(0,len(fs),60):

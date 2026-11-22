@@ -1,5 +1,5 @@
 from: research
-title: SEO scoreboard: better 4, measuring 47, same 236, worse 2
+title: SEO scoreboard: better 4, measuring 45, same 238, worse 2
 metric: etsy.visits
 evidence: Mission Control SEO lab (etsy-seo listing reports + weekly listing stats)
 
@@ -7,7 +7,7 @@ Edited listings compared with untouched ones over the same weeks (expected = the
 better/worse = beat or fell behind that by at least max(2 visits, 30%); measuring = no full week after the edit yet.
 Traffic is small, so single listings are noisy; look for patterns across many listings before writing a lesson.
 
-Totals: better 4, measuring 47, same 236, worse 2
+Totals: better 4, measuring 45, same 238, worse 2
 
 ## better (4)
 - Aoraki Mount Cook New Zealand Travel Poster, Alpine Mountain Landscape Print (https://www.etsy.com/listing/4571720088): edited 2026-10-30; visits 0 -> 4 (expected 0); title kept; tags +0/-0
@@ -19,10 +19,12 @@ Totals: better 4, measuring 47, same 236, worse 2
 - Oaxaca Mexico Travel Poster, Monte Alban Pyramid Wall Art Print (https://www.etsy.com/listing/4571720597): edited 2026-10-30; visits 6 -> 0 (expected 6); title kept; tags +0/-0
 - Auckland New Zealand Travel Poster, Vintage Coastal Skyline Cityscape Print (https://www.etsy.com/listing/4571701755): edited 2026-10-30; visits 2 -> 0 (expected 2); title kept; tags +0/-0
 
-## same (236)
+## same (238)
 - Kathmandu Nepal Travel Poster, Boudhanath Stupa Print, Spiritual Boho Decor (https://www.etsy.com/listing/4580080169): edited 2026-11-13; visits 1 -> 0 (expected 1); title kept; tags +1/-1
 - Great Barrier Reef Australia Vintage Travel Poster, Heart Reef Ocean Print (https://www.etsy.com/listing/4571703301): edited 2026-11-12; visits 0 -> 0 (expected 0); title kept; tags +0/-0
+- Lille France Travel Poster, Flemish Architecture, Vintage French Cityscape Print (https://www.etsy.com/listing/4589302368): edited 2026-11-12; visits 0 -> 0 (expected 0); title kept; tags +1/-1
 - Kerala India Travel Poster, Tropical Backwaters Houseboat Sunset Print (https://www.etsy.com/listing/4580085869): edited 2026-11-11; visits 1 -> 0 (expected 1); title kept; tags +1/-1
+- Bristol Clifton Suspension Bridge Vintage Travel Poster, UK Landscape Art Print (https://www.etsy.com/listing/4589210221): edited 2026-11-11; visits 0 -> 0 (expected 0); title kept; tags +1/-1
 - Lake Baikal Russia Winter Sunset Travel Poster, Ice Landscape Print (https://www.etsy.com/listing/4580086005): edited 2026-11-04; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Bratislava Slovakia Travel Poster, Castle Over Danube River, European Cityscape Art (https://www.etsy.com/listing/4589210167): edited 2026-11-04; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Lake Tahoe Emerald Bay California Vintage Travel Poster, Nature Landscape Print (https://www.etsy.com/listing/4567803477): edited 2026-10-30; visits 1 -> 0 (expected 1); title kept; tags +0/-0
@@ -58,6 +60,4 @@ Totals: better 4, measuring 47, same 236, worse 2
 - Mykonos Greece Travel Poster, Vintage Greek Island Mediterranean Wall Art (https://www.etsy.com/listing/4557146250): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Eilean Donan Castle Scotland Travel Poster, Vintage Scottish Landscape Wall Art (https://www.etsy.com/listing/4557146308): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 - Geirangerfjord Norway Vintage Travel Poster, Scenic Fjord Landscape Wall Art Print (https://www.etsy.com/listing/4557146320): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
-- Marrakech Morocco Travel Poster Canvas Print | Vintage Moroccan City Landscape Wall Art Décor (https://www.etsy.com/listing/4559121045): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
-- Kirkjufell Iceland Vintage Travel Poster, Nordic Waterfall Mountain Wall Art Print (https://www.etsy.com/listing/4559121177): edited 2026-10-29; visits 0 -> 0 (expected 0); title kept; tags +0/-0
 

@@ -1,6 +1,6 @@
 # Mix (rules 8/188 revised Nov 21): VO studio-clean, bed 14.4-18.6 dB under the VO riding its level map (std 2.3-4.0 dB, no ducking), SFX gentle (rule 192); master -14 LUFS, -1.9 to -2.2 dBTP
 import subprocess, re, json, sys
-A='/root/det/audio/'; VO='/root/det/audio3/vo_final.wav'
+A='/root/det/audio/'; VO='/root/det/audio_r2/vo_final.wav'
 import os
 END=int(os.environ.get('END_F','1940'))/30
 def lufs(path,extra=''):
@@ -12,7 +12,7 @@ def lufs(path,extra=''):
 subprocess.run(f'ffmpeg -y -hide_banner -loglevel error -i {VO} -af "aresample=48000,pan=stereo|c0=c0|c1=c0" {A}vo_st.wav',shell=True,check=True)
 vI,_,_=lufs(A+'vo_st.wav'); bI,_,_=lufs(A+'bed.wav'); sI,_,_=lufs(A+'sfx.wav')
 BED_UNDER=float(sys.argv[1]) if len(sys.argv)>1 else 16.0; SFX_UNDER=16.0   # r5b: 10 made peaks only 2.6 LU under the VO (rule 192 needs >= 8); round 5 (M4): mean VO-music gap 14.5-17 dB
-gb=(vI-BED_UNDER)-bI
+gb=float(os.environ["BED_GAIN"]) if os.environ.get("BED_GAIN") else (vI-BED_UNDER)-bI
 # A6: global SFX gain so the median event sits +10 dB over the bed in the mix (events are pre-levelled in music.py)
 import numpy as np, wave
 def rd(p):
@@ -23,7 +23,7 @@ r=lambda a: float(np.sqrt(np.mean(a**2))+1e-12)
 def pk(a):
     n=2400; return max(r(a[k:k+n]) for k in range(0,max(1,len(a)-n+1),600))
 offs=[20*np.log10(pk(sfxA[e['i']:e['i']+e['w']])/r(bedA[e['i']:e['i']+e['w']])) for e in EVs]
-gs=gb+(4.0-float(np.median(offs)))   # r5b: with the bed riding only 14-17 dB under the VO, +10 over the bed put SFX peaks 2.6 LU under the VO; +4 keeps every SFX >= 8 LU under (rule 192, guide v1.2 'both soft'); loudest 50 ms of each event group at +10 dB over the bed RMS across its span
+gs=float(os.environ["SFX_GAIN"]) if os.environ.get("SFX_GAIN") else gb+(4.0-float(np.median(offs)))   # r5b: with the bed riding only 14-17 dB under the VO, +10 over the bed put SFX peaks 2.6 LU under the VO; +4 keeps every SFX >= 8 LU under (rule 192, guide v1.2 'both soft'); loudest 50 ms of each event group at +10 dB over the bed RMS across its span
 print('SFX raw offset median',round(float(np.median(offs)),2),'spread',round(min(offs),2),round(max(offs),2))
 print('VO',vI,'bed',bI,'->gain',round(gb,2),'sfx',sI,'->gain',round(gs,2))
 cmd=(f'ffmpeg -y -hide_banner -loglevel error -i {VO} -i {A}bed.wav -i {A}sfx.wav -filter_complex '

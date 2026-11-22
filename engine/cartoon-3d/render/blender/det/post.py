@@ -14,7 +14,7 @@ TINT={'S01':_T['now'],'S02':_T['lamp'],'S03':_T['lamp'],'S04':_T['day'],'S05':_T
 # per-shot brightness targets: day exteriors and today bright, lamp-lit 1934 interiors darker (Rick swings 0.2-0.7 across scenes)
 LT={'S01':0.52,'S02':0.44,'S03':0.45,'S04':0.50,'S05':0.50,'S06':0.47,'S07':0.48,'S08':0.45,'S09':0.44,'S10':0.43,'S11':0.44,'S12':0.40,'S13':0.50,'S14':0.48,
     'S15':0.42,'S16':0.47,'S17':0.44,'S18':0.44,'S19':0.42,'S20':0.52,'S21':0.54}
-PAY0,PAY1=1595,1606; PAYP=(0.0,1.0,1.0,1.0,(1.02,1.0,0.99))   # S21 payoff grade: protect the poster's true colours from the landing on
+PAY0,PAY1=1593,1605; PAYP=(0.0,1.0,1.0,1.0,(1.02,1.0,0.99))   # S21 payoff grade: protect the poster's true colours from the landing on
 INTR=('S02','S03','S08','S09','S10','S11','S12','S15','S17','S18')
 VIG={n:(0.70 if n in INTR else 0.10) for n in SH}
 BLOOM=0.0   # light glow on emitters (lamps, screens, lit windows): guide L8
@@ -84,7 +84,7 @@ for _ in range(30):
     if abs(ch-CAP)<1: break
     fs=int(round(fs*CAP/ch))
 FNT=font(fs); BASE=int(0.717*H); STROKE=max(1,int(round(7*K))); SHX,SHY=int(round(4*K)),int(round(5*K))
-WORDS=json.load(open('/root/det/audio3/vo_final.wav.words.json'))
+WORDS=json.load(open('/root/det/audio_r2/vo_final.wav.words.json'))
 def mergesplit(W_):
     # whisper splits 'small -town', '8 ,000', 'coast -to -coast,', '26 ,000', '19 -16,': glue a piece that starts with - or , onto the word before
     o=[]
@@ -117,8 +117,12 @@ def fixwords(W_):
         if t=='out,' and pv=='sold': t='out.'
         if t=='holiday' and nx(i)=='with': t='holiday,'
         if t=='lost,' and pv=='Lions': t='lost.'
-        if t=='19-16,': t='19-16.'
-        if t=='on' and pv=='19-16.': t='On'
+        if t.startswith('$8,000'): t='8,000'
+        if t=='champ,': t='champs,'
+        if t=='home,' and nx(i)=='and': t='home.'
+        if t=='and' and pv=='home.': t='And'
+        if t=='lost' and pv=='Lions': t='lost,'
+        if t in ('19-16','19-16.'): t='19-16,'
         o.append([t,s_,e]); i+=1
     return o
 WORDS=fixwords(WORDS)
@@ -149,13 +153,31 @@ def cap_layer(txt,base=None):
     return lay,w/W
 PQ=json.load(open('/root/det/bridge/posterquad.json'))
 _PF=np.asarray(Image.open('/root/det/poster_2k.png').convert('RGB')).astype(np.float32)/255.0
-def truepost(o,q,k=0.96):
+def truepost(o,q,k=1.09):   # rule 320: paste gain lifted (shop file p98 0.867 -> 0.945, under the 0.95 cap)
     h,w=o.shape[:2]; ph,pw=_PF.shape[:2]
     src=np.float32([[0,ph],[pw,ph],[pw,0],[0,0]]); dst=np.float32([[x*w,(1-y)*h] for x,y in q])
     Mx=cv2.getPerspectiveTransform(src,dst)
     wf=cv2.warpPerspective(_PF,Mx,(w,h),flags=cv2.INTER_AREA if (dst[1][0]-dst[0][0])<pw else cv2.INTER_LINEAR)
     m=cv2.warpPerspective(np.ones((ph,pw),np.float32),Mx,(w,h)); m=cv2.GaussianBlur(m,(0,0),0.8*K)[...,None]
     return o*(1-m)+np.clip(wf*k,0,1)*m
+
+# rule 308 [C] (round-1 Detroit post probe: ink read (130-159, 38-59, 75-98) in lamp-lit shots and (43-60, 5-23, 21-35) sat 0.8-0.9 in daylight):
+# key the rendered card ink by its plum hue and set it to one dull plum inside the rule's window; soft edges keep the anti-aliasing.
+INKT=np.float32([58,34,50])/255
+def inkfix(o,raw,excl=None):
+    # r2 (visual + shots verifiers: S17/S18 ink stayed magenta (198,31,102) because the warm grade pushed it past the value cap):
+    # the ink is keyed on the RAW render, where it is still a dark dull plum, and then set to INKT on the graded frame.
+    hsv=cv2.cvtColor((np.clip(raw,0,1)*255).astype(np.uint8),cv2.COLOR_RGB2HSV).astype(np.float32)
+    h,s_,v=hsv[...,0],hsv[...,1]/255,hsv[...,2]/255
+    hd=np.minimum(np.abs(h-165),180-np.abs(h-165))
+    a=np.clip((15-hd)/5,0,1)*np.clip((s_-0.16)/0.08,0,1)*np.clip((0.52-v)/0.06,0,1)*np.clip((v-0.035)/0.03,0,1)
+    a=cv2.GaussianBlur(a,(0,0),0.6*K)
+    if excl is not None: a=a*(1-excl)
+    a=a[...,None]; return o*(1-a)+INKT*a
+def quadmask(q,h,w,grow):
+    mk=np.zeros((h,w),np.uint8); cv2.fillConvexPoly(mk,np.int32([[x*w,(1-y)*h] for x,y in q]),1)
+    return cv2.dilate(mk,np.ones((grow,grow),np.uint8)).astype(np.float32)
+BAYDIM=0.88   # rule 320: dim the payoff bay around the poster (feathered), ramped in with the payoff grade
 if __name__=='__main__':
     # grade params per shot from 5 sampled frames
     P={}; rep={}
@@ -189,16 +211,23 @@ if __name__=='__main__':
                 t=min(1.0,(f-PAY0+1)/(PAY1-PAY0+1)); t=t*t*(3-2*t); o=o*(1-t)+q*t
             if n in HIFLOOR: o=hifloor(o)   # r7 (rule 274): bright ending and S11 highlights (p98 >= 0.86 before the poster's true colours go on)
             if n=='S21' and str(f) in PQ: o=truepost(o,PQ[str(f)])   # r5 (rule 196, round-4 E5 note): the shop file's true colours on the projected poster quad
-            frames[n]=vig(bloom(o,BLOOM),VIG[n])
+            ex=None
+            if n=='S21' and str(f) in PQ:
+                qm=quadmask(PQ[str(f)],H,W,int(9*K)); ex=qm
+                if f>=PAY0:
+                    t2=min(1.0,(f-PAY0+1)/(PAY1-PAY0+1)); t2=t2*t2*(3-2*t2)
+                    fe=cv2.GaussianBlur(quadmask(PQ[str(f)],H,W,int(61*K)),(0,0),40*K)[...,None]
+                    o=o*(1-(1-BAYDIM)*t2*(1-fe))
+            frames[n]=inkfix(vig(bloom(o,BLOOM),VIG[n]),raw,ex)
         if len(act)==1: img=frames[act[0]]
         else:
             A,B=act[0],act[1]; s0,e0=SH[B][0],SH[A][1]; t=(f-s0+1)/(e0-s0+2); w_=t*t*(3-2*t); img=frames[A]*(1-w_)+frames[B]*w_
         im=Image.fromarray((img*255+0.5).astype(np.uint8)).convert('RGBA')
         cur=[c for c in CAPS if c[0]<=f<c[2]]
         if cur:
-            low=str(f) in PQ and min(p[1] for p in PQ[str(f)])<0.33   # S21: the poster's bottom edge (with MICHIGAN) would sit under the caption band
+            low=str(f) in PQ and min(p[1] for p in PQ[str(f)])<0.33   # S21: the poster covers the normal caption band, so the caption goes ABOVE the poster (baseline 19.5 % H: clear of the top 12 % UI zone and of the poster top at >= 22.8 % H), not into the bottom UI zone
             key=(cur[0][1],low)
-            if capkey!=key: capimg,wd=cap_layer(cur[0][1],int(0.90*H) if low else None); capkey=key; widths.append(wd)
+            if capkey!=key: capimg,wd=cap_layer(cur[0][1],int(0.195*H) if low else None); capkey=key; widths.append(wd)
             im.alpha_composite(capimg)
         enc.stdin.write(np.asarray(im.convert('RGB')).tobytes())
         if f%100==0: print('POST',f,flush=True)

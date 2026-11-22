@@ -711,6 +711,26 @@
     "closed",
     "flat",
     "line"
+   ],
+   "talkA": [
+    "half",
+    "raise",
+    "open"
+   ],
+   "talkB": [
+    "half",
+    "raise",
+    "o"
+   ],
+   "talkC": [
+    "half",
+    "raise",
+    "wide"
+   ],
+   "talkD": [
+    "half",
+    "raise",
+    "smile"
    ]
   }
  },

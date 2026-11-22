@@ -160,7 +160,8 @@ def path(n,keys):
         f,l,t=k[:3]; kloc(co,f,l); kloc(tg,f,t)
         if len(k)>3: co.data.lens=k[3]; co.data.keyframe_insert('lens',frame=f)
 # ---------------- 2D cut-out cast ----------------
-CI=json.load(open('/root/dc/src/cast.json'))
+import expressions as XL   # Rick-style expression library
+CI=XL.expand(json.load(open('/root/dc/src/cast.json')))
 # r7 (round-6 visual: round bodies torso 0.63, legs 0.88 head-heights; need 0.7-1.05 / 0.9-1.5): round body cards stretched 1.118x up from the feet
 BSY={'tall':0.91,'short':0.91,'round':0.91}   # rule 329 (Detroit e1ed5d1): body cards z 0.91 about the feet
 # r8b (owner Nov 20: clone Rick's build; guide v1.3 x.3): head 0.43 m wide = H; torso 0.962->0.532 = 1.00 H; legs 0.532->-0.014 = 1.27 H;
@@ -205,6 +206,7 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
 def face(ch,f,k):
     if k not in ch['F']:
         alt={'shock':['horror','wow','raise'],'happy':['hope','cheer','excited','grin'],'cheer':['happy','excited'],'laugh':['happy','cheer'],'sad':['deadpan','worry'],'smug':['grin','happy']}.get(k,[])
+        alt=alt+XL.alternates(k)   # library: same-family fallback before the first face
         k=next((a for a in alt if a in ch['F']),list(ch['F'])[0])
     ch['faces'].append((f,k))
 def faces(ch,seq):

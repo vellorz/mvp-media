@@ -105,7 +105,19 @@
     "line"
    ]
   },
-  "look": "M3"
+  "look": "M3",
+  "library": [
+   "content",
+   "open_smile",
+   "sad",
+   "side_eye",
+   "sigh",
+   "smug",
+   "squint",
+   "stern",
+   "wink_grin",
+   "worried"
+  ]
  },
  "clerk": {
   "coat": [
@@ -224,7 +236,14 @@
    80,
    50
   ],
-  "look": "D2"
+  "look": "D2",
+  "library": [
+   "dazed",
+   "nervous",
+   "panic",
+   "sigh",
+   "skeptical"
+  ]
  },
  "presA": {
   "coat": [
@@ -311,7 +330,12 @@
     "wavy"
    ]
   },
-  "look": "D1"
+  "look": "D1",
+  "library": [
+   "side_eye",
+   "skeptical",
+   "smug"
+  ]
  },
  "presB": {
   "coat": [
@@ -403,7 +427,12 @@
    44,
    34
   ],
-  "look": "D2"
+  "look": "D2",
+  "library": [
+   "side_eye",
+   "skeptical",
+   "smug"
+  ]
  },
  "presC": {
   "coat": [
@@ -496,7 +525,12 @@
    ]
   },
   "stubble": 1,
-  "look": "D3"
+  "look": "D3",
+  "library": [
+   "side_eye",
+   "skeptical",
+   "smug"
+  ]
  },
  "presD": {
   "coat": [
@@ -583,7 +617,14 @@
     "wavy"
    ]
   },
-  "look": "D1"
+  "look": "D1",
+  "library": [
+   "side_eye",
+   "skeptical",
+   "smug",
+   "stunned",
+   "worried"
+  ]
  },
  "presE": {
   "coat": [
@@ -666,7 +707,11 @@
     "smirk"
    ]
   },
-  "look": "D1"
+  "look": "D1",
+  "library": [
+   "look_down",
+   "open_smile"
+  ]
  },
  "printer": {
   "coat": [
@@ -753,7 +798,12 @@
    ]
   },
   "stubble": 1,
-  "look": "D3"
+  "look": "D3",
+  "library": [
+   "manic_grin",
+   "squint",
+   "whistle"
+  ]
  },
  "mailman": {
   "coat": [
@@ -847,7 +897,14 @@
     "smirk"
    ]
   },
-  "look": "D1"
+  "look": "D1",
+  "library": [
+   "look_up",
+   "nervous",
+   "open_smile",
+   "whistle",
+   "worried"
+  ]
  },
  "blueA": {
   "coat": [
@@ -935,7 +992,11 @@
     "smirk"
    ]
   },
-  "look": "D1"
+  "look": "D1",
+  "library": [
+   "content",
+   "laugh"
+  ]
  },
  "blueB": {
   "coat": [
@@ -1117,7 +1178,11 @@
    ]
   },
   "stubble": 1,
-  "look": "D3"
+  "look": "D3",
+  "library": [
+   "content",
+   "laugh"
+  ]
  },
  "greyB": {
   "coat": [
@@ -1210,7 +1275,10 @@
    90,
    50
   ],
-  "look": "D2"
+  "look": "D2",
+  "library": [
+   "content"
+  ]
  },
  "townW": {
   "coat": [
@@ -1292,7 +1360,12 @@
     "smirk"
    ]
   },
-  "look": "M2"
+  "look": "M2",
+  "library": [
+   "laugh",
+   "look_up",
+   "smile"
+  ]
  },
  "momT": {
   "coat": [
@@ -1379,7 +1452,12 @@
     "smirk"
    ]
   },
-  "look": "M2"
+  "look": "M2",
+  "library": [
+   "cry_laugh",
+   "laugh",
+   "open_smile"
+  ]
  },
  "dadT": {
   "coat": [
@@ -1467,7 +1545,12 @@
    ]
   },
   "stubble": 1,
-  "look": "D3"
+  "look": "D3",
+  "library": [
+   "content",
+   "cry_laugh",
+   "laugh"
+  ]
  },
  "kidT": {
   "coat": [
@@ -1549,7 +1632,12 @@
     "smirk"
    ]
   },
-  "look": "D1"
+  "look": "D1",
+  "library": [
+   "cry_laugh",
+   "open_smile",
+   "wink_grin"
+  ]
  },
  "grandT": {
   "coat": [
@@ -1636,6 +1724,11 @@
     "smirk"
    ]
   },
-  "look": "M1"
+  "look": "M1",
+  "library": [
+   "cry_laugh",
+   "laugh",
+   "open_smile"
+  ]
  }
 }

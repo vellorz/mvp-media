@@ -3,11 +3,14 @@
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 import json, math
+import expressions as X   # Rick-style expression library (opt-in per character via cast.json "library")
 T='/root/det/tex/'; K=(50,28,42,255); SK=(251,244,241,255); OUT=27   # r8 (owner Nov 20: clone Rick's characters): pure white heads like Rick's. r8b (guide v1.3 x.3): dark plum ink, never pure black; 27 px on an 800 px disc = 3.4 % lit side
 def new(w,h): im=Image.new('RGBA',(w,h),(0,0,0,0)); return im,ImageDraw.Draw(im)
 def dk(c,f=0.75): return tuple(int(v*f) for v in c[:3])+(255,)
 CX,CY=512,540
 def eyes(d,kind,cy=520,gap=108,glasses=None):   # r8b: centres 27 % of head width apart (216 px of 800)
+    if kind in X.EYES:
+        X.eyes(d,kind,K,cy,gap); kind='_lib'
     for sx in(-1,1):
         x=CX+sx*gap
         if kind=='dot': d.ellipse([x-33,cy-50,x+33,cy+50],fill=K)   # r8b: 100 px tall = 12.5 % of head width
@@ -27,6 +30,7 @@ def eyes(d,kind,cy=520,gap=108,glasses=None):   # r8b: centres 27 % of head widt
         if glasses: d.ellipse([x-74,cy-66,x+74,cy+66],outline=glasses,width=12)
     if glasses: d.line([CX-51,cy-6,CX+51,cy-6],fill=glasses,width=11)
 def brows(d,kind,cy=405,gap=108):
+    if kind in X.BROWS: return X.brows(d,kind,K,cy,gap)
     for sx in(-1,1):
         x=CX+sx*gap
         if kind=='flat': d.line([x-52,cy,x+52,cy],fill=K,width=30)
@@ -36,6 +40,7 @@ def brows(d,kind,cy=405,gap=108):
         elif kind=='raise': yy=cy-(46 if sx>0 else 0); d.line([x-52,yy,x+52,yy-(8 if sx>0 else 0)],fill=K,width=30)
         elif kind=='none': pass
 def mouth(d,kind,cy=715,cx=CX):
+    if kind in X.MOUTHS: return X.mouth(d,kind,K,cy,cx)
     R=(110,28,34,255)
     if kind=='line': d.line([cx-52,cy,cx+52,cy],fill=K,width=17)
     elif kind=='smile': d.arc([cx-82,cy-64,cx+82,cy+44],25,155,fill=K,width=17)
@@ -61,11 +66,14 @@ def extras(d,kind):
         for x in(300,724): d.ellipse([x-80,600,x+80,740],fill=(250,180,170,170))
     if 'tear' in kind: d.ellipse([370,580,410,640],fill=(120,190,255,255),outline=K,width=6)
     if 'angryfill' in kind: pass
-C=json.load(open('/root/det/src/cast.json'))
+    X.extras(d,kind,K)   # library extras: tears, tear1, blushR, vein, zzz, shades, sweat2
+C=X.expand(json.load(open('/root/det/src/cast.json')))
 def head(name,fk):
     c=C[name]; e,b,m=c['faces'][fk][:3]; ex=c['faces'][fk][3] if len(c['faces'][fk])>3 else ''
     im,d=new(1024,1024); hair=tuple(c.get('hair',(60,40,30)))+(255,)
     hs=c.get('hairstyle','short')
+    HD=c.get('hairdo'); TD=X.turn_dx(c,ex)   # round 2: Rick hairstyles replace the old ones; TD = face slide toward the turned side
+    if HD: hs='_hairdo'; X.hairdo_back(d,HD,hair,K)
     if hs=='bun': d.ellipse([382,40,642,280],fill=hair,outline=K,width=OUT)
     if hs=='long': d.rounded_rectangle([100,260,924,980],200,fill=hair,outline=K,width=OUT)
     if hs=='mullet': d.rounded_rectangle([170,320,854,1010],140,fill=hair,outline=K,width=OUT)   # back hair, crown to shoulders
@@ -82,6 +90,7 @@ def head(name,fk):
     # head (x0.6 from the top), the face features on a layer moved up 105 px (eyes at 65.6 % up)
     if 'angryfill' in ex: 
         ov=Image.new('RGBA',(1024,1024),(0,0,0,0)); od=ImageDraw.Draw(ov); od.ellipse([130,158,894,922],fill=(170,60,170,120)); im.alpha_composite(ov); d=ImageDraw.Draw(im)
+    if 'gloom' in ex or 'redglow' in ex: X.pre(im,ex); d=ImageDraw.Draw(im)   # library: rage gloom on the head top
     if hs in('short','bald','bun','mullet'):   # r9: hairlines raised with the features (hair ends ~285, brows at 300)
         if hs=='short': d.chord([150,150,874,420],180,360,fill=hair,outline=K,width=OUT)
         if hs=='bun': d.chord([150,150,874,410],180,360,fill=hair,outline=K,width=OUT)
@@ -93,6 +102,7 @@ def head(name,fk):
         if hs=='topbun': d.ellipse([392,30,632,250],fill=hair,outline=K,width=OUT)
         d.chord([150,150,874,440],180,360,fill=hair,outline=K,width=OUT)
         if hs=='bob': d.chord([150,150,640,520],180,330,fill=hair,outline=K,width=OUT-8)   # side-swept fringe, part on the right
+    if HD: X.hairdo(d,HD,hair,K,dx=TD//3)
     if c.get('hat')=='leather':
         HC=tuple(c.get('hatcol',(80,60,44)))+(255,)
         for sx in(-1,1): d.rounded_rectangle([CX+sx*400-70,330,CX+sx*400+70,660],50,fill=HC,outline=K,width=OUT-6)
@@ -116,9 +126,17 @@ def head(name,fk):
     if hat=='fedora': d.ellipse([90,300,934,400],fill=HC,outline=K,width=OUT); d.rounded_rectangle([250,90,774,350],60,fill=HC,outline=K,width=OUT); d.rectangle([250,280,774,330],fill=dk(HC,0.5)); d.line([400,110,512,150,624,110],fill=dk(HC,0.7),width=12)
     if hat=='cloche': d.chord([150,70,874,470],180,360,fill=HC,outline=K,width=OUT); d.ellipse([150,240,874,330],fill=HC,outline=K,width=OUT-6); d.rectangle([160,250,864,290],fill=dk(HC,0.6)); d.ellipse([690,200,770,280],fill=(240,220,170,255),outline=K,width=9)
     if hat=='visor': d.chord([170,270,854,420],180,360,fill=(60,140,90,200),outline=K,width=OUT); d.rectangle([170,330,854,350],fill=K)
-    top=im.resize((1024,int(1024*0.6)),Image.LANCZOS); im=base; im.alpha_composite(top,(0,0)); top=None
+    top=im.resize((1024,int(1024*0.6)),Image.LANCZOS); im=base
+    if c.get('hat_tilt') or TD:   # round 2: hats sit tilted and slide a little with the turn (Rick #24 trucker, #03 bowler)
+        tl=Image.new('RGBA',(1024,1024),(0,0,0,0)); tl.alpha_composite(top,(0,0)); top=tl.rotate(-c.get('hat_tilt',0),resample=Image.BICUBIC,center=(CX,180),translate=(TD//2,0))
+    im.alpha_composite(top,(0,0)); top=None
+    if c.get('hat3d'): im.alpha_composite(X.hat3d(c['hat3d'],c.get('hatcol',(80,60,44)),K,tilt=c.get('hat_tilt',0),dx=TD//2,col2=c.get('hatcol2')))
+    if c.get('fhair'): X.fhair(im,c['fhair'],c.get('fhaircol',c.get('hair',(60,40,30))),K,dx=TD)   # round 2: Rick facial hair (rule 326a revision pending owner pick)
     feat,d=new(1024,1024)
-    eyes(d,e,glasses=(tuple(c['glasses'])+(255,)) if c.get('glasses') else None); brows(d,b if hat not in('cop','flatcap','fedora','beanie','ladyhat','leather','cloche','visor') or b!='up' else 'flat'); mouth(d,m)
+    eyes(d,e,glasses=(tuple(c['glasses'])+(255,)) if c.get('glasses') else None); brows(d,b if hat not in('cop','flatcap','fedora','beanie','ladyhat','leather','cloche','visor') or b!='up' else 'flat')
+    MSIDE=c.get('mouth_side',0)
+    if MSIDE: feat.alpha_composite(X.mouth_layer(mouth,m,MSIDE)); d=ImageDraw.Draw(feat)   # round 2: Rick's off-centre, lopsided mouths
+    else: mouth(d,m)
     if c.get('mustache'):   # r8: Rick's bushy two-lobe mustache
         mc=tuple(c['mustache'])+(255,)
         for sx in(-1,1): d.ellipse([CX+sx*80-95,605,CX+sx*80+95,705],fill=mc,outline=K,width=12)
@@ -131,7 +149,7 @@ def head(name,fk):
         bc=tuple(c['beard'])+(255,); d.chord([CX-300,560,CX+300,900],0,180,fill=bc,outline=K,width=12); d.chord([CX-90,640,CX+90,760],0,180,fill=(251,244,241,255))
     if c.get('nose',True): d.arc([CX-30,560,CX+30,640],-30,200,fill=K,width=10)
     extras(d,ex)
-    im.alpha_composite(feat.crop((0,105,1024,1024)),(0,0))
+    im.alpha_composite(feat.crop((0,105,1024,1024)),(TD,0))
     return im
 # ---- round 3 (rule 193): Rick-style construction ----
 # slim column garment (narrower than the head), long coat/robe to the shins, hard cel shadow on the left third,

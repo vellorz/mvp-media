@@ -165,7 +165,8 @@ def path(n,keys):
         kloc(co,f,l); kloc(tg,f,t)
         if len(k)>3: co.data.lens=k[3]; co.data.keyframe_insert('lens',frame=f)
 # ---------------- 2D cut-out cast ----------------
-CI=json.load(open('/root/det/src/cast.json'))
+import expressions as XL   # Rick-style expression library: adds LIBRARY faces to characters with "library" in cast.json
+CI=XL.expand(json.load(open('/root/det/src/cast.json')))
 # r7 (round-6 visual: round bodies torso 0.63, legs 0.88 head-heights; need 0.7-1.05 / 0.9-1.5): round body cards stretched 1.118x up from the feet
 BSY={'tall':0.91,'short':0.91,'round':0.91}   # det r4: body cards z 0.91 about the feet (torso/legs were 1.10/1.36 head widths)
 BSY0=1.0   # r8b: one Rick build for every kind (cast.py GB/HEMY), no stretch
@@ -211,6 +212,7 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
 def face(ch,f,k):
     if k not in ch['F']:
         alt={'shock':['horror','wow','raise'],'happy':['hope','cheer','excited','grin'],'cheer':['happy','excited'],'laugh':['happy','cheer'],'sad':['deadpan','worry'],'smug':['grin','happy']}.get(k,[])
+        alt=alt+XL.alternates(k)   # library: same-family fallback before the first face
         k=next((a for a in alt if a in ch['F']),list(ch['F'])[0])
     ch['faces'].append((f,k))
 def faces(ch,seq):
@@ -238,6 +240,32 @@ def finish(ch,blink_every=34):
     seq[0]=(a,seq[0][1]); ded={}
     for f,k in seq: ded[f]=k
     seq=sorted(ded.items())
+    # det r9 (rule 332 b/c, Nov 22): a featured face never holds a long beat; long non-talk holds cycle through same-family library faces
+    # (each piece 0.9-1.5 s) so no face but blink/deadpan passes ~25 % of a character's screen time and faces change every 0.3-2 s
+    SAFE={'laugh':['happy','grin','open_smile'],'cheer':['laugh','happy','grin'],'happy':['smile','grin','laugh'],'grin':['smug_grin','happy','smile'],
+          'smug':['side_eye','skeptical','smug_grin'],'wink':['smug','grin'],'shock':['surprise','panic','startle'],'wow':['surprise','shock','open_smile'],
+          'surprise':['shock','startle','look_up'],'shout':['angry','angry_squint','annoyed'],'grit':['angry','annoyed','stern'],'angry_squint':['angry','stern','annoyed'],
+          'sad':['sigh','frown','worried'],'worried':['nervous','wince','sad'],'idea':['open_smile','grin','surprise'],'manic_grin':['grin','open_smile'],
+          'shrug':['skeptical','side_eye'],'stunned':['startle','surprise'],'deadpan':['skeptical','neutral','side_eye']}
+    if not ch.get('novary'):
+        hh=sum(map(ord,ch['inst'])); v=[]
+        seq=[p for i,p in enumerate(seq) if i==0 or p[1]!=seq[i-1][1]]   # merge repeats of the same face into one hold
+        for i,(f,k) in enumerate(seq):
+            nx=seq[i+1][0] if i+1<len(seq) else b+1
+            pool=[k]+[x for x in SAFE.get(k,[]) if x in ch['F']]
+            if k.startswith('talk') or k=='blink' or len(pool)<2 or nx-f<40: v.append((f,k)); continue
+            t=f; j=0
+            while t<nx:
+                v.append((t,pool[1+((j//2+hh)%(len(pool)-1))] if j%2 else k)); j+=1; t+=22+((hh+j*7)%15)
+                if nx-t<18: break
+        seq=v
+        # a face that comes back later in the shot returns as its next family alternate (cheer, wow, cheer -> cheer, wow, laugh)
+        cnt={}; w=[]
+        for f,k in seq:
+            pool=[k]+[x for x in SAFE.get(k,[]) if x in ch['F']]
+            if k.startswith('talk') or k=='blink' or len(pool)<2: w.append((f,k)); continue
+            n=cnt.get(k,0); cnt[k]=n+1; w.append((f,pool[n%len(pool)]))
+        seq=w
     out=[]
     for i,(f,k) in enumerate(seq):
         nx=seq[i+1][0] if i+1<len(seq) else b+1

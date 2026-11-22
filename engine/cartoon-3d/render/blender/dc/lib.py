@@ -166,7 +166,7 @@ BSY={'tall':0.91,'short':0.91,'round':0.91}   # rule 329 (Detroit e1ed5d1): body
 # r8b (owner Nov 20: clone Rick's build; guide v1.3 x.3): head 0.43 m wide = H; torso 0.962->0.532 = 1.00 H; legs 0.532->-0.014 = 1.27 H;
 # head disc centre 1.167 (top 1.382): total 3.25 H. Shoulder pivots 0.95, hand (HAND_Z 0.407) at the hem.
 HS=0.43/0.586   # head card scale vs rounds 1-7 (disc 800/1024 of a 0.75 card)
-GEO={'tall':(0.966,0.126,0.92),'short':(0.966,0.142,0.92),'round':(0.966,0.151,0.92)}   # rule 329 (Detroit e1ed5d1): head overlaps the capsule top; was 0.996/0.95
+GEO={'tall':(0.966,0.163,0.868),'short':(0.966,0.170,0.868),'round':(0.966,0.178,0.868)}   # dc shoulder fix (owner 22:33Z: arm stubs above the shoulders, arm crossing the coat): pivots on the capsule's side outline at z 0.79 (after BSY), 0.01 m outside the torso edge measured from the body alpha   # rule 329 (Detroit e1ed5d1): head overlaps the capsule top; was 0.996/0.95
 #   # r9: shoulders follow the narrower torso (0.73-0.89 H)
 ARM_W,ARM_H,ARM_OFF=0.744,0.558,0.242   # r6: arm canvas 1200 wide (bent forearm swings outward)
 SHADOW=None

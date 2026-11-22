@@ -68,7 +68,7 @@ def grass(n,c,s=1.0,seed=0,coll=None,col=None):
 def ship(n,loc,heading=0.0,coll=None,detail=True,sails=True,scale=1.0):
     """our own 17th-century merchant ship: lofted hull, raised castles, three masts with square sails, rigging lines"""
     e=empty(n,loc,coll=coll); e.rotation_euler=(0,0,math.radians(heading)); e.scale=(scale,)*3
-    HULL=surf('hull','hull',(3,3)); DECK=surf('deckm','deck',(3,3)); SAIL=surf('sailm','sail',(6,6),gen=True)
+    HULL=surf('hull','hull',(3,3),emit=0.35); DECK=surf('deckm','deck',(3,3)); SAIL=surf('sailm','sail',(6,6),gen=True)   # r3 (visual verifier: hull a near-black mass, 5.3 % of the frame at f324)
     Lh,Wd,Dp=26.0,7.2,4.6
     bm=bmesh.new(); rings=[]; ns=22; nr=9
     for i in range(ns):
@@ -193,8 +193,8 @@ def skycard(n,loc,face_,w,h,img,coll=None):
 # ======================= SET R: Plymouth shore (x=0): the rock; dressed for today (S01, S14, S18) and for 1741 (S16, S17) =======================
 SAND=surf('sand','sand',(4,4)); WET=surf('sandwet','sand_wet',(4,4)); WAT=surf('water','water',(8,8),rough=0.25)
 grid('R_beach',0,-10,90,60,(60,40),lambda x,y:0.25*noise2(x,y,1.0)+0.02*(y+20)*0 - max(0,(y-6))*0.06,SAND)
-grid('R_wet',0,14,90,12,(40,8),lambda x,y:-0.25-(y-8)*0.05,WET)
-ocean('R_sea',0,60,160,90,WAT,amp=0.10)
+grid('R_wet',0,14,90,12,(40,8),lambda x,y:-0.25-(y-8)*0.05,SAND)   # r3: the wet-sand band read as a flat black stripe at the waterline (S01, S18)
+ocean('R_sea',0,50,160,110,WAT,amp=0.10); bpy.data.objects['R_sea'].location.z=-0.3   # r3: near edge moved under the sand (it showed as a dark stripe at the waterline)
 skydome('R_sky',(0,0),240,170,'sky_cape')
 sf=plane('R_shore',(0,118,3.5),300,70,card_mat('shore_far','shore_far',emit=0.5),coll=L.C_NOI,face='-Y'); sf['fly']=1
 ROCK=surf('rockm','rock',(1.6,1.6))
@@ -209,7 +209,7 @@ TODAY=shared('R_today',['S01','S14','S18'])
 for c__ in list(plate.users_collection): c__.objects.unlink(plate)
 TODAY.objects.link(plate)   # r2 (text verifier): the 1620 date was carved in 1880, so it must not show in the 1741 shots
 cyl('R_post',(2.7,2.2,1.1),0.08,2.2,surf('wharfm','wharf',(1,1)),v=10,coll=TODAY)
-sg=plane('R_sign',(2.62,1.98,1.75),1.3,0.65,card_mat('sign_route','sign_route',emit=0.12),coll=TODAY,face='-Y'); sg.rotation_euler=(0,0,math.radians(-30))   # r2: was tipped flat (x 90 on an upright card); faces the S01 end camera
+sg=plane('R_sign',(2.65,2.113,1.75),1.3,0.65,card_mat('sign_route','sign_route',emit=0.12),coll=TODAY,face='-Y'); sg.rotation_euler=(0,0,math.radians(-30))   # r2: was tipped flat (x 90 on an upright card); faces the S01 end camera
 for i,ad in enumerate([200,220,240,300,320,340]):   # r2: posts at 260/280 deg cut the 1620 carving
     a=math.radians(ad); cyl(f'R_rp{i}',(math.cos(a)*2.6,4+math.sin(a)*2.0,0.45),0.06,0.9,flat('ropepost',lin((176,150,110)),0.8),v=8,coll=TODAY)
 # 1741 dressing (S16, S17): a wharf being built toward the rock
@@ -307,7 +307,7 @@ bz=dune(DX,12)
 for f,z in [(766,bz-0.5),(812,bz-0.5),(816,bz-0.05),(818,bz+0.1),(820,bz+0.05)]: kloc(bsk,f,(DX,12,z))
 onone(bsk)
 cyl('D_signpost',(DX+3.2,10.5,dune(DX+3.2,10.5)+0.8),0.07,1.7,surf('wharfm','wharf',(1,1)),v=8,coll=C9)
-s9=plane('D_sign',(DX+3.12,10.36,dune(DX+3.2,10.5)+1.45),1.1,0.41,card_mat('sign_cornhill','sign_cornhill',emit=0.15),coll=C9,face='-Y'); s9.rotation_euler=(0,0,math.radians(-29))   # r2: was tipped flat; faces the S09 end camera
+s9=plane('D_sign',(DX+3.152,10.41,dune(DX+3.2,10.5)+1.45),1.1,0.41,card_mat('sign_cornhill','sign_cornhill',emit=0.15),coll=C9,face='-Y'); s9.rotation_euler=(0,0,math.radians(-29))   # r2: was tipped flat; faces the S09 end camera
 fx('D_spray1','fx_sand',(DX-0.3,11.5,bz+0.5),804,14,1.0,C9,grow=1.8,rise=0.4); fx('D_spray2','fx_sand',(DX+0.3,11.6,bz+0.5),811,12,0.8,C9,grow=1.7,rise=0.3)
 fx('D_spark','fx_spark',(DX,11.4,bz+0.6),818,14,0.9,C9,grow=1.4)
 # ======================= SET E: dawn beach, the First Encounter (x=1200) =======================
@@ -392,7 +392,7 @@ for f,a in [(0,-150),(10,-158),(30,-140),(60,-155),(96,-150),(102,-40)]: arm(pa,
 for f,a in [(0,-20),(40,-30),(100,-60)]: arm(pa,-1,f,a)
 bob(pa,[14,48,80])
 t1=char_on('S01_tourA','tourA',s,(-1.6,1.5,0.08),r,'happy',arms=('arm',[(0,'arm_phone'),(90,'arm')]))
-t2=char_on('S01_tourB','tourB',s,(1.9,3.7,0.06),r,'excited',arms=('arm_phone','arm'))   # r2: moved off the swing line to the sign
+t2=char_on('S01_tourB','tourB',s,(2.8,5.0,0.06),r,'excited',arms=('arm_phone','arm'))   # r3: further back so the face stays above the caption band during the swing (T7/288 at f97-104 in r2)
 drift_faces(t1,0,123,['happy','excited','grin'],3); drift_faces(t2,0,123,['excited','happy','grin','shock'],4)
 for f,a in [(0,-120),(30,-128),(60,-118),(90,-20)]: arm(t1,1,f,a)
 for f,a in [(0,120),(40,128),(80,116),(98,80)]: arm(t2,-1,f,a)
@@ -411,7 +411,7 @@ mB=char_on('S03_master','master',s,(IX+2.6,-3.15,0.0),r,'proud',arms=('arm','arm
 for f,a in [(207,-30),(222,-62),(238,-70),(256,-58),(270,-66)]: arm(mB,1,f,a)
 faces(mB,[(207,'proud'),(230,'grin'),(252,'proud'),(266,'happy')])
 pg2=char_on('S03_pil','pilgrimD',s,(IX+3.7,-2.5,0.0),r,'neutral'); drift_faces(pg2,207,278,['neutral','happy','proud'],12); bob(pg2,[236])
-path(s,[(207,(IX+0.9,-0.1,2.05),(IX+2.6,-2.3,0.85)),(278,(IX+1.35,-0.6,1.75),(IX+2.5,-2.25,0.85))])   # r2 (C4, head 37 % W cut by the frame): wider
+path(s,[(207,(IX+0.7,0.2,2.0),(IX+2.6,-2.4,1.0)),(278,(IX+1.15,-0.3,1.75),(IX+2.5,-2.35,1.0))])   # r2 (C4, head 37 % W cut by the frame): wider
 # ---- S04 (271-392): sandbars and bad winds; the ship heels through the breakers, then the camera rises and turns to the Cape tip ----
 s='S04'; r=S(s)
 sA=onship(char_on('S04_sailA','sailorA',s,(SX-1.5,9.5,2.32),r,'shock')); sB=onship(char_on('S04_sailB','sailorB',s,(SX+1.6,8.0,2.32),r,'grit'))
@@ -466,7 +466,7 @@ for f,a in [(654,-20),(700,-140),(712,-110),(730,-150),(750,-60)]: arm(s8a,1,f,a
 for f,a in [(654,-30),(705,-60),(740,-100)]: arm(s8b,-1,f,a)
 bob(s8a,[703,732,756]); bob(s8b,[716,744])
 p8=onship(char_on('S08_pil','pilgrimB',s,(SX+0.3,0.6,2.32),r,'worry')); faces(p8,[(654,'worry'),(712,'shock'),(740,'worry')])
-path(s,[(654,(SX-2.4,4.0,3.0),(SX-0.6,2.0,2.75)),(700,(SX-1.9,3.95,2.95),(SX-1.0,2.0,2.8)),(765,(SX-1.1,4.0,2.9),(SX-1.0,2.0,2.8))])   # r2: closer on the speaking sailor (C6), lateral truck   # r2 (rule 306): lateral truck, no push after S07
+path(s,[(654,(SX-2.4,4.0,3.0),(SX-0.6,2.0,2.75)),(700,(SX-1.9,3.95,2.95),(SX-1.0,2.0,2.8)),(765,(SX-0.9,4.6,2.9),(SX-1.0,2.0,2.8))])   # r2: closer on the speaking sailor (C6), lateral truck   # r2 (rule 306): lateral truck, no push after S07
 # ---- S09 (766-1012): the packed long take on Corn Hill: climb, dig, the corn basket, take it, give it back, the name ----
 s='S09'; r=S(s); hz=lambda x,y:dune(x,y)
 cA=char_on('S09_dig','pilgrimC',s,(DX-0.9,11.0,hz(DX-0.9,11.0)),r,'neutral',arms=('arm',[(766,'arm_shovel'),(822,'arm')]),walker=True)
@@ -474,11 +474,11 @@ gwalk(cA,766,796,(DX-4.5,8.0,hz(DX-4.5,8.0)),(DX-0.9,11.0,hz(DX-0.9,11.0)),hz,st
 for f,a in [(800,-60),(804,-20),(808,-60),(812,-20),(822,-150),(832,-140),(846,-155)]: arm(cA,1,f,a)
 faces(cA,[(766,'neutral'),(800,'grit'),(816,'shock'),(824,'excited'),(850,'grin'),(880,'sneaky'),(900,'happy'),(930,'worry'),(960,'happy'),(990,'proud')])
 cB=char_on('S09_carry','pilgrimA',s,(DX+0.6,10.7,hz(DX+0.6,10.7)),r,'neutral',arms=('arm',[(766,'arm_musket'),(899,'arm_basket'),(936,'arm')]),walker=True)
-gwalk(cB,766,800,(DX-3.0,7.0,hz(DX-3.0,7.0)),(DX+0.6,10.7,hz(DX+0.6,10.7)),hz,step=4)
+gwalk(cB,766,800,(DX-1.6,8.8,hz(DX-1.6,8.8)),(DX+0.6,10.7,hz(DX+0.6,10.7)),hz,step=4)
 faces(cB,[(766,'neutral'),(816,'excited'),(836,'grin'),(870,'proud'),(899,'sneaky'),(918,'worry'),(940,'happy'),(970,'grin')])
 for f,a in [(899,-20),(905,-25)]: arm(cB,1,f,a)
 gwalk(cB,903,918,(DX+0.6,10.7,hz(DX+0.6,10.7)),(DX+2.3,10.0,hz(DX+2.3,10.0)),hz,step=3)
-cC=char_on('S09_look','pilgrimB',s,(DX-2.6,8.0,hz(DX-2.6,8.0)),r,'worry')
+cC=char_on('S09_look','pilgrimB',s,(DX+1.7,8.4,hz(DX+1.7,8.4)),r,'worry')   # r3: was beside the camera path and swept the lens at 786-792
 faces(cC,[(766,'worry'),(830,'shock'),(846,'worry'),(870,'deadpan'),(900,'shock'),(930,'neutral'),(980,'proud')])
 bob(cC,[830,900,980])
 # basket follows the carrier's hand from the lift (899) until the hand-back (936), then sits in the Wampanoag man's arms
@@ -515,11 +515,11 @@ s='S12'; r=S(s)
 path(s,[(1244,(EX+14.2,-9.6,1.65),(EX+14,-12,1.6)),(1330,(EX+15.8,-5.0,2.6),(EX+14,-12,1.4))])
 # ---- S13 (1322-1412): the shallop crosses the bay to Plymouth ----
 s='S13'; r=S(s)
-for i,(y,k,xo,zo) in enumerate([(-2.0,'pilgrimA',-0.35,0.75),(0.0,'pilgrimB',0.3,0.45),(-1.0,'sailorA',0.05,0.55)]):   # r2 (P3): staggered across the boat and in height, not a row
+for i,(y,k,xo,zo) in enumerate([(-2.2,'pilgrimA',-0.6,0.75),(0.3,'pilgrimB',0.55,0.5),(-1.0,'sailorA',0.0,0.6)]):   # r2 (P3): staggered across the boat and in height, not a row
     c_=char_on(f'S13_r{i}',k,s,(SX+70,40+y,0.5),r,'neutral',arms=('arm_oar','arm')); drift_faces(c_,1322,1412,['neutral','grit','happy','proud'],40+i,(14,26))
     c_['root'].parent=SHAL; c_['root'].location=(xo,y,zo)   # seated in the shallop, hull hides the legs
     for f in range(1322,1412,14): arm(c_,1,f,-40); arm(c_,1,f+7,-75)
-path(s,[(1322,(SX+77.6,36.4,2.4),(SX+70,40,1.2)),(1412,(SX+86.6,36.2,2.5),(SX+80.5,40,1.3))])   # r2: three-quarter from the bow, so the crew stack in depth
+path(s,[(1322,(SX+77.0,35.4,2.4),(SX+70,40,1.2)),(1412,(SX+86.0,35.2,2.5),(SX+80.5,40,1.3))])   # r3 (C4): wider angle so no head covers another   # r2: three-quarter from the bow, so the crew stack in depth
 # ---- S14 (1413-1443): "And the famous rock?" crash push on today's rock ----
 s='S14'; r=S(s)
 path(s,[(1413,(0.0,-4.5,1.4),(0,3.8,0.5)),(1428,(0.0,-1.6,1.1),(0,3.6,0.45)),(1443,(0.05,-1.3,1.05),(0,3.6,0.45))])
@@ -529,7 +529,7 @@ s='S15'; r=S(s)
 wr=char_on('S15_writer','pilgrimD',s,(IX-3.4,3.35,0.0),r,'neutral',arms=('arm',[(1436,'arm_quill')]))
 for f,a in [(1436,-50),(1450,-58),(1466,-46),(1480,-56),(1496,-44)]: arm(wr,1,f,a)
 faces(wr,[(1436,'neutral'),(1460,'deadpan'),(1486,'proud'),(1504,'deadpan')])
-path(s,[(1436,(IX-4.4,1.25,1.6),(IX-3.6,2.6,0.85)),(1480,(IX-3.6,1.2,1.55),(IX-3.25,2.6,0.85)),(1516,(IX-2.8,1.2,1.55),(IX-3.0,2.6,0.88))])   # r2: wider (head was 53 % W) and a truck, no push after S14
+path(s,[(1436,(IX-4.4,1.25,1.6),(IX-3.6,2.6,0.85)),(1480,(IX-3.6,1.2,1.55),(IX-3.25,2.6,0.85)),(1516,(IX-2.6,0.9,1.6),(IX-3.0,2.6,0.88))])   # r2: wider (head was 53 % W) and a truck, no push after S14
 # ---- S16 (1509-1574): 1741, a wharf going up beside the rock; hammers ----
 s='S16'; r=S(s)
 for i,(x,y,k) in enumerate([(3.8,2.6,'townA'),(6.0,2.4,'townB'),(-2.4,0.4,'townA')]):
@@ -548,14 +548,14 @@ for i,(x,y,k) in enumerate([(2.6,1.0,'townA'),(3.4,-0.4,'townB'),(1.2,-1.4,'town
     c_=char_on(f'S17_t{i}',k,s,(x,y,0.12),r,'neutral'); T17.append(c_)
     faces(c_,[(1567,'neutral'),(1600,'deadpan'),(1626+i*2,'shock'),(1640,'excited'),(1676,'worry'),(1700+i,'shock')])
     bob(c_,[1628+i*2,1700]); arm(c_,1,1628,-150-10*i); arm(c_,1,1650,-30)
-path(s,[(1567,(-5.0,-4.4,1.6),(-3.6,0.0,1.4)),(1612,(-3.4,-3.2,1.6),(-1.6,0.8,1.35)),(1640,(-1.9,-3.4,1.6),(-0.9,1.6,1.2)),(1662,(-1.5,-2.6,1.55),(-1.2,1.2,1.3)),(1686,(-1.0,-1.8,1.5),(-1.7,0.7,1.4)),(1712,(-1.1,-1.5,1.48),(-1.75,0.7,1.42))])
+path(s,[(1567,(-5.0,-4.4,1.6),(-3.6,0.0,1.4)),(1612,(-3.4,-3.2,1.6),(-1.6,0.8,1.35)),(1640,(-2.4,-3.7,1.6),(-1.3,1.3,1.2)),(1662,(-1.8,-2.9,1.55),(-1.3,1.1,1.3)),(1686,(-1.0,-1.8,1.5),(-1.7,0.7,1.4)),(1712,(-1.1,-1.5,1.48),(-1.75,0.7,1.42))])
 # ---- S18 (1702-1758): today: the rock with 1620 carved, tourists, the posing Pilgrim again; slow pull-out ----
 s='S18'; r=S(s)
 p18=char_on('S18_pil','pilgrimA',s,(-0.2,4.1,0.88),r,'proud'); faces(p18,[(1702,'proud'),(1726,'grin'),(1746,'proud')])
 for f,a in [(1702,-150),(1730,-158)]: arm(p18,1,f,a)
 q1=char_on('S18_tourA','tourA',s,(-2.4,0.4,0.08),r,'happy',arms=('arm','arm_phone')); q2=char_on('S18_tourB','tourB',s,(2.1,0.0,0.06),r,'excited',arms=('arm_phone','arm'))
 arm(q1,1,1702,-122); arm(q2,-1,1702,122); drift_faces(q1,1702,1758,['happy','grin'],60); drift_faces(q2,1702,1758,['excited','happy'],61)
-path(s,[(1702,(0.1,1.3,1.75),(-0.2,4.1,1.9)),(1758,(0.0,-1.0,1.6),(-0.1,4.0,1.5))])
+path(s,[(1702,(0.1,1.3,1.75),(-0.2,4.1,1.9)),(1758,(0.0,-1.0,1.6),(-0.1,4.0,1.2))])   # r3: the 1620 carving stays in frame at the end
 # ---- S19 (1759-1816): payoff, the dune-top print shop; push lands on the poster on "first" (1793) ----
 s='S19'; r=S(s)
 g1=char_on('S19_a','tourA',s,(HX-2.0,HY-1.6,gd(HX-2.0,HY-1.6)),r,'happy'); g2=char_on('S19_b','tourB',s,(HX+2.0,HY-1.7,gd(HX+2.0,HY-1.7)),r,'excited')
@@ -626,6 +626,8 @@ fgobj('S17','grass',1,1.4,0.7,f=1686,lat=0.8)   # r2: placed from the end framin
 def world_and_sun():
     w=bpy.data.worlds.new('w'); sc.world=w; w.use_nodes=True; bg=w.node_tree.nodes['Background']; bg.inputs['Color'].default_value=(*lin((160,196,226)),1); bg.inputs['Strength'].default_value=1.0
     bpy.ops.object.light_add(type='SUN',rotation=(math.radians(52),0,math.radians(40))); sun=bpy.context.object; sun.name='sun'; sun.data.energy=4.6; sun.data.color=(1.0,0.93,0.82); sun.data.angle=math.radians(3)   # preview r1: sun moved to camera-right. r2 (visual verifier, black hull/props): an inline comment had swallowed the sun setup, so the sun rendered at the default strength 1 instead of 4.6
+# r3: the sea's near-edge ink hull drew a flat black stripe at the waterline (S01, S18); no ink on shore terrain edges or open water
+for n_ in ('R_wet','R_beach','R_sea','D_bay','E_sea','G_sea'): bpy.data.objects[n_]['noink']=1
 world_and_sun()
 for a in ALL: finish(a)
 print('hulls',L.ink())

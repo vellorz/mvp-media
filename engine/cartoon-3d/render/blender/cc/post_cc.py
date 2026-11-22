@@ -65,11 +65,12 @@ def apply(x,p):
     y=gray(x); yn=np.clip((y-lo)/(hi-lo),0,1); y2=0.055+0.925*yn**g
     r=(y2/np.maximum(y,1e-4))[...,None]; z=np.clip(x*r,0,1)
     y3=gray(z)[...,None]; z=np.clip(y3+sat*(z-y3),0,1); z=np.clip(z*np.array(tint,np.float32),0,1); return z
-CLAR=0.45; CLS=24.0   # r2 (visual verifier L5/R20: edge density 22.9 % vs >= 28 %): painted-surface local contrast, sigma 24 px at 2K
+CLAR=0.8; CLS=24.0; PLUM=np.array([46,28,54],np.float32)/255   # r2 (visual verifier L5/R20: edge density 22.9 % vs >= 28 %): painted-surface local contrast, sigma 24 px at 2K
 def finish(o):
-    o=np.clip(o+CLAR*(o-cv2.GaussianBlur(o,(0,0),CLS*K)),0,1)
-    y=gray(o)[...,None]; w=np.clip((0.30-y)/0.15,0,1)   # r2 (rule 308, ink saturation ~1.0 vs Rick's low-chroma plum): darks keep 40 % of their chroma
-    return np.clip(y+(o-y)*(1-0.6*w),0,1)
+    y=gray(o)[...,None]; mid=np.clip(4*y*(1-y),0,1)   # r3: local contrast on midtones only (r2 crushed ink and coats to RGB 0)
+    o=np.clip(o+CLAR*mid*(o-cv2.GaussianBlur(o,(0,0),CLS*K)),0,1)
+    y=gray(o)[...,None]; w=np.clip((0.22-y)/0.14,0,1)*0.75   # r3 (rule 308 / R19): darks go to Rick's dull plum ink (46,28,54), floor about luma 0.12, never black
+    return np.clip(o*(1-w)+PLUM*w,0,1)
 def solve(samples,tint,lt=0.45,vk=0.0):
     allY=np.concatenate([gray(s).ravel() for s in samples]); lo,hi=np.percentile(allY,0.8),np.percentile(allY,99.6)
     best=None
@@ -129,6 +130,8 @@ def chunks():
     for i in range(len(C)): C[i].append(C[i+1][0] if i+1<len(C) else END+1)
     return C
 CAPS=chunks()
+DWMAX=17   # r2 (text verifier: dwell mean 0.374 s / P90 0.663 s vs Rick 0.32-0.35 / 0.53-0.57): a card leaves after at most 17 f (0.57 s); a gap shows no caption until the next word
+CAPS=[[a,t,min(b,a+DWMAX)] for a,t,b in CAPS]
 def cap_layer(txt):
     l,t,r,b=FNT.getbbox(txt,anchor='ls',stroke_width=STROKE); w=r-l
     lay=Image.new('RGBA',(W,H),(0,0,0,0)); sh=Image.new('RGBA',(W,H),(0,0,0,0))

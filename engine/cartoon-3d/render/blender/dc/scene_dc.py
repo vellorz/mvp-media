@@ -405,7 +405,7 @@ path(s,[(64,(OX+0.2,-1.1,1.25),(OX+0.75,1.0,0.75)),(162,(OX+1.35,-1.0,1.3),(OX+0
 s='S03'; r=S(s)
 cl3=char_on('S03_clerk','clerk',s,(WX-1.45,1.95,0),r,'neutral',arms=('arm','arm'))
 faces(cl3,[(156,'neutral'),(190,'deadpan'),(230,'grin'),(262,'shock'),(286,'annoyed')])
-for f,a in [(156,20),(196,95),(214,80),(240,100),(262,70),(290,20)]: arm(cl3,-1,f,a)
+for f,a in [(156,20),(196,95),(214,80),(240,100),(262,70),(290,20)]: arm(cl3,-1,f,-a)   # dc5: point OUTWARD up at the board (positive swung the arm across his chest)
 bob(cl3,[214,264,293])
 path(s,[(156,(WX-0.7,-0.6,1.75),(WX-1.2,3.0,1.75)),(230,(WX-1.3,-0.5,1.75),(WX-1.6,3.0,1.75)),(302,(WX-1.9,-0.45,1.7),(WX-1.9,3.0,1.72))])
 # ---- S04 (296-410): mail piles up; the mailman dumps a sack; the clerk groans (crane up / pull out) ----
@@ -443,7 +443,7 @@ path(s,[(626,(PX+0.2,-0.6,1.05),(PX,0.9,0.9)),(672,(PX+0.15,-0.35,1.02),(PX+0.05
 s='S08'; r=S(s)
 ed8=char_on('S08_ed','editor',s,(PX+0.55,2.3,0),r,'determined',arms=('arm','arm'))
 faces(ed8,[(666,'determined'),(700,'happy'),(719,'proud'),(746,'excited'),(782,'happy'),(800,'proud')])
-for f,a in [(666,20),(700,60),(712,88),(722,82),(740,40),(782,90),(796,40)]: arm(ed8,-1,f,a)   # cast gate v3: raise capped below the face (armprobe S08 712)
+for f,a in [(666,20),(700,60),(712,88),(722,82),(740,40),(782,90),(796,40)]: arm(ed8,-1,f,-a)   # dc5: raise OUTWARD toward the page (positive swung the arm across her chest)   # cast gate v3: raise capped below the face (armprobe S08 712)
 bob(ed8,[719,782])
 fx('S08_spark','fx_spark',(PX-0.35,2.9,2.0),797,14,0.6,C(s),grow=1.5)
 path(s,[(666,(PX+0.35,0.3,1.6),(PX+0.15,3.0,1.6)),(720,(PX+0.25,0.1,1.62),(PX+0.05,3.0,1.62)),(782,(PX-0.1,-1.0,1.6),(PX-0.05,3.0,1.6)),(808,(PX-0.2,-1.15,1.6),(PX-0.1,3.0,1.6))])

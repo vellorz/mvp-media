@@ -28,11 +28,13 @@ cam.data.type='ORTHO'; cam.data.ortho_scale=1.9; sc.camera=cam
 sc.render.resolution_x=600; sc.render.resolution_y=900; sc.render.resolution_percentage=100; sc.render.film_transparent=True
 sc.cycles.samples=16
 sun=next(o for o in bpy.data.objects if o.type=='LIGHT' and o.data.type=='SUN')
+# sheet lighting: a soft key from the camera side so card colours read true (round-4b sheet read grey: the sun hit the cards from behind)
+key=bpy.data.objects.new('sheetkey',bpy.data.lights.new('sheetkey','AREA')); key.data.energy=900; key.data.size=6; sc.collection.objects.link(key)
 done={}
 ORIG={o.name:o.hide_render for o in bpy.data.objects}
 for k,r in pick.items():
     inst=r.name; shot=r.users_collection[0].name.replace('CHR_','')
-    keep={o.name for o in bpy.data.objects if o.name==inst or o.name.startswith(inst+'_')}|{'sheetcam',sun.name}
+    keep={o.name for o in bpy.data.objects if o.name==inst or o.name.startswith(inst+'_')}|{'sheetcam','sheetkey',sun.name}
     mute_all_vis(keep)
     f0,f1=SH[shot]
     # scene pose: a frame in the shot where the arm pivots are rotated the most (a real action pose)
@@ -58,6 +60,7 @@ for k,r in pick.items():
         bpy.context.view_layer.update()
         # aim exactly at the body centre
         d=(base+Vector((0,0,0.72*s_)))-cam.location; cam.rotation_euler=d.to_track_quat('-Z','Y').to_euler()
+        key.location=cam.location+Vector((0.8,0,1.0)); key.rotation_euler=((base+Vector((0,0,0.72*s_)))-key.location).to_track_quat('-Z','Y').to_euler()
         sc.render.filepath=f'{OUT}/{k}_{tag}.png'; bpy.ops.render.render(write_still=True)
     for p in pa:
         ad=p.animation_data

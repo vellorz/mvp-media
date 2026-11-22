@@ -682,21 +682,21 @@
  },
  "nausetA": {
   "coat": [
-   104,
-   72,
-   48
+   150,
+   108,
+   70
   ],
   "legs": [
-   120,
+   118,
    84,
    56
   ],
   "cue": "mantle",
   "body": "tall",
   "hair": [
-   30,
-   24,
-   24
+   28,
+   22,
+   20
   ],
   "hairstyle": "short",
   "props": [
@@ -759,27 +759,32 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "skin": [
+   206,
+   160,
+   122
+  ]
  },
  "nausetB": {
   "coat": [
-   96,
-   66,
-   44
+   92,
+   64,
+   46
   ],
   "legs": [
-   110,
-   78,
-   52
+   96,
+   70,
+   50
   ],
   "cue": "mantle",
   "body": "round",
   "hair": [
-   26,
    22,
-   22
+   18,
+   18
   ],
-  "hairstyle": "short",
+  "hairstyle": "bun",
   "props": [
    "bow"
   ],
@@ -840,25 +845,30 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "skin": [
+   188,
+   140,
+   104
+  ]
  },
  "nausetC": {
   "coat": [
-   112,
-   80,
-   54
+   178,
+   138,
+   94
   ],
   "legs": [
-   124,
-   90,
-   60
+   128,
+   94,
+   62
   ],
   "cue": "mantle",
   "body": "short",
   "hair": [
    34,
-   28,
-   26
+   26,
+   22
   ],
   "hairstyle": "short",
   "props": [
@@ -922,7 +932,12 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "skin": [
+   220,
+   176,
+   138
+  ]
  },
  "elder": {
   "coat": [

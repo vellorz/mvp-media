@@ -85,3 +85,8 @@ Each entry: date, package, what was seen, cause (CONFIRMED or SUSPECTED), the ru
 - Package at 9dae92c (cc.blend sha 929bca37...). First attempt was held: another Blender job (Detroit det3) was using RAM (3.9 GB free), so r2 waited until it finished; always check for a running blender.exe before the memory check.
 - 4-frame test passed: S01:118 sign readable, S16:1540 wharf on piles at right, S14:1430 rock with 1620 carving.
 - Full render 1936 PNGs, 4512 s Blender time = 2.33 s/frame; encode 43 clips (max 9.8 MB); pushed as render-test/cc1/clips_r2 (7f7e824). No errors.
+
+## Cape Cod r3 (cc3) - 2026-11-22, RTX 3070
+- Package at 0469d75 (cc.blend sha 178332ce...). Waited about 20 min for Detroit det4's Blender to exit (poll every 2 min, require two clear checks); then memory 6.4 GB RAM / 18.1 GB commit.
+- 4-frame test passed: S01:40 no black waterline stripe, S01:100 tourist small and high, S04:324 ship hull brown wood. Note S01:40 pilgrim costume still reads very dark/black.
+- Full render 1936 PNGs, 4498 s = 2.32 s/frame, 43 clips (max 9.8 MB), pushed as clips_r3 (1d60477). No errors.

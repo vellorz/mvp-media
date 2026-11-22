@@ -1,5 +1,5 @@
 # Music bed + SFX for the Cape Cod Pilgrims short (all synthesized here, nothing licensed). Built on the BF music.py engine; new key, tempo, chords, melody, level map and SFX list.
-# Bed (rules 8/188 revised Nov 21): loop-based D-minor garage bed, 96 BPM, 4-bar loop = 10 s (Rick 6-11 s), level rides the MAP (not constant), louder into the payoff
+# Bed (rules 8/188 revised Nov 21): loop-based E-minor garage bed, 92 BPM, 4-bar loop = 10.4 s (Rick 6-11 s), level rides the MAP (not constant), louder into the payoff
 # (no swells, no ducking). Owner taste honoured inside it: melodic house feel, rounded sub bass, shuffled garage hats.
 import numpy as np, wave, json, sys
 SR=48000; END_F=1816; DUR=END_F/30+0.6; N=int(SR*DUR); rng=np.random.default_rng(7)
@@ -57,12 +57,14 @@ T['kick'][:]=0
 for bi in range(bars):
     for k in range(4): put('kick',bi*4*B+k*B,KICK,0.9)
 # round 5: level map from the Rick music study (section 7), dB relative to the bed median; layers thin out in dips (S6)
-MAP=[(0.0,0),(3.8,1),(4.2,-1),(9.2,2),(13.4,-2),(17.0,1),(19.4,-1),(22.0,2),(25.5,-2),(30.0,1),(33.0,-1),(37.5,3),(40.5,1),(44.2,-2),(47.0,2),(49.5,-2),(52.0,1),(55.6,3),(57.2,6),(59.0,8),(61.0,8)]   # cc: bed louder into the payoff (+8), dips under the quoted lines, std target 2.3-4.0 dB
+MAP=[(0.0,3),(3.0,3.7),(4.5,-1.0),(9.5,3.3),(13.1,-3.2),(17.1,2.1),(19.2,-2.4),(23.2,1.9),(25.5,-2.0),(30.6,0.8),(33.0,-2.4),(36.9,3.8),(38.7,0.4),(43.8,-2.8),(47.1,2.2),(48.5,-2.8),(52.1,0.6),(55.6,3.5),(57.2,6),(59.0,8),(61.0,8)]   # cc r2: map times/levels searched so |r| VO vs bed <= 0.15 at 0.2-0.5 s windows; open lift +3 for 0-3 s (bedcheck +2..+6), swings x1.25 for std >= 2.3, bed louder into the payoff (+8), dips under the quoted lines, std target 2.3-4.0 dB
 tt=np.arange(N)/SR-0.1   # VO plays 0.1 s late in the mix
 mk=np.array([m[0] for m in MAP]); mv=np.array([m[1] for m in MAP],float)
 gdb=np.interp(tt,mk,mv)
 k_=int(0.7*SR); gdb=np.convolve(np.pad(gdb,(k_//2,k_-k_//2-1),mode='edge'),np.ones(k_)/k_,mode='valid')   # rides take ~0.7 s (M8)
 gl=10**(gdb/20)
+# cc r2: stop-time on the payoff hit (mix time 59.74-60.10 s, ding at f1793): the bed drops 12 dB for the ding with 40 ms ramps, then returns at full payoff level (rule 319 payoff >= +6 over the local bed while rule 192 keeps it >= 8 LU under the VO)
+_tm=np.arange(N)/SR; _r=0.04; _st=np.clip(np.minimum((_tm-59.74)/_r,(60.10-_tm)/_r),0,1); gl=gl*10**(-12*_st/20)
 thin=np.clip((gdb+1.0)/4.0,0,1)   # melody and plucks drop out in the -3..-5 dips, return on rises
 bed=(T['mal']*0.9*thin+T['plk']*0.6*(0.4+0.6*thin)+T['bass']*0.62+T['kick']*0.7+T['pad']*1.0)*gl
 # gentle bus compression for a constant level (no pumping: slow, light)

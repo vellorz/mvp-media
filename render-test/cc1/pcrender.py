@@ -20,6 +20,9 @@ sc.render.use_overwrite=False; sc.render.use_placeholder=True; sc.render.resolut
 for n in order:
     for lc in vl.layer_collection.children:
         if lc.name.startswith('CHR_'): lc.exclude=(lc.name!='CHR_'+n)
+    for lc in vl.layer_collection.children:   # cc r2: re-enable shared dressing (R_1741, R_today); excluding a parent leaves its children flagged excluded, so shared sets vanished in every shot after the first
+        if lc.name=='CHR_'+n:
+            for ch_ in lc.children: ch_.exclude=False
     f0,f1=SH[n]; sc.camera=bpy.data.objects['cam_'+n]; sc.frame_start=f0; sc.frame_end=f1
     os.makedirs(f'{out}/{n}',exist_ok=True)
     sc.render.filepath=f'{out}/{n}/f_'; t=time.time()

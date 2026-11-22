@@ -22,6 +22,9 @@ for item in (only or list(SH)):
     if rg: f0,f1=map(int,rg.split('-'))
     for lc in vl.layer_collection.children:
         if lc.name.startswith('CHR_'): lc.exclude=(lc.name!='CHR_'+n)
+    for lc in vl.layer_collection.children:   # cc r2: re-enable shared dressing (R_1741, R_today); excluding a parent leaves its children flagged excluded, so shared sets vanished in every shot after the first
+        if lc.name=='CHR_'+n:
+            for ch_ in lc.children: ch_.exclude=False
     sc.camera=bpy.data.objects['cam_'+n]; sc.frame_set(f0); cx=sc.camera.matrix_world.translation.x
     hid=0
     for nm,x in ctr.items():

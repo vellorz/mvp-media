@@ -310,7 +310,7 @@ def ink(skip_prefix=()):
         if o.type!='MESH' or C_NOI in o.users_collection or o.get('chr') or o.get('noink') or len(o.data.vertices)<=4 or o.name.startswith(skip_prefix): continue
         if max(o.dimensions)>25 or o.name.startswith(('road','walk','car','curb','sky')): continue   # round 5 (A1): no lines on large clean surfaces
         t_=0.5*min(0.05,0.009+0.0062*math.sqrt(max(o.dimensions)))*o.get('inkmul',1.0)   # round 5: about half as thick (Rick 2-3 px vs our 4-8 px)
-        h=o.copy(); h.name=o.name+'_ink'; cc_=[c for c in o.users_collection if c.name.startswith('CHR_')]; (cc_[0] if cc_ else C_H).objects.link(h);  # round 4: a shot-only prop's ink hull stays in that shot's CHR_ collection (S07 mailbox hull showed as a black blob in S08)
+        h=o.copy(); h.name=o.name+'_ink'; cc_=[c for c in o.users_collection if c.name.startswith('CHR_') or any(c.name in p_.children for p_ in bpy.data.collections if p_.name.startswith('CHR_'))];   (cc_[0] if cc_ else C_H).objects.link(h);  # round 4: a shot-only prop's ink hull stays in that shot's CHR_ collection (S07 mailbox hull showed as a black blob in S08)   # cc r2: hulls of shared shot dressing (R_1741, R_today) stay in that collection (1741 wharf hulls showed as dark blocks in S01/S14)
         bc_=(0.30,0.22,0.18)
         m_=o.active_material
         if m_ and m_.use_nodes and 'Principled BSDF' in m_.node_tree.nodes:

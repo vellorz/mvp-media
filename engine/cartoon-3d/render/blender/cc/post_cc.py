@@ -4,7 +4,7 @@ import sys, os, glob, json, subprocess, numpy as np, re, cv2
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 SRC,OUT=sys.argv[1],sys.argv[2]; K=float(sys.argv[3]) if len(sys.argv)>3 else 1.0
 W,H=int(1440*K),int(2560*K); END=1816
-SH={'S01':(0,123),'S02':(116,214),'S03':(207,278),'S04':(271,392),'S05':(385,510),'S06':(502,583),'S07':(576,662),'S08':(654,765),
+SH={'S01':(0,127),'S02':(120,214),'S03':(207,278),'S04':(271,392),'S05':(385,510),'S06':(502,583),'S07':(576,662),'S08':(654,765),
     'S09':(766,1012),'S10':(1005,1140),'S11':(1141,1252),'S12':(1244,1330),'S13':(1322,1412),'S14':(1413,1443),'S15':(1436,1516),
     'S16':(1509,1574),'S17':(1567,1712),'S18':(1702,1758),'S19':(1759,END)}
 # palette per era/mood (multipliers R,G,B): flips across each time/mood join (rule 187)
@@ -65,6 +65,11 @@ def apply(x,p):
     y=gray(x); yn=np.clip((y-lo)/(hi-lo),0,1); y2=0.055+0.925*yn**g
     r=(y2/np.maximum(y,1e-4))[...,None]; z=np.clip(x*r,0,1)
     y3=gray(z)[...,None]; z=np.clip(y3+sat*(z-y3),0,1); z=np.clip(z*np.array(tint,np.float32),0,1); return z
+CLAR=0.45; CLS=24.0   # r2 (visual verifier L5/R20: edge density 22.9 % vs >= 28 %): painted-surface local contrast, sigma 24 px at 2K
+def finish(o):
+    o=np.clip(o+CLAR*(o-cv2.GaussianBlur(o,(0,0),CLS*K)),0,1)
+    y=gray(o)[...,None]; w=np.clip((0.30-y)/0.15,0,1)   # r2 (rule 308, ink saturation ~1.0 vs Rick's low-chroma plum): darks keep 40 % of their chroma
+    return np.clip(y+(o-y)*(1-0.6*w),0,1)
 def solve(samples,tint,lt=0.45,vk=0.0):
     allY=np.concatenate([gray(s).ravel() for s in samples]); lo,hi=np.percentile(allY,0.8),np.percentile(allY,99.6)
     best=None
@@ -167,7 +172,7 @@ if __name__=='__main__':
         act=[n for n,(a,b) in SH.items() if a<=f<=b]
         frames={}
         for n in act:
-            raw=R[n].next(); o=apply(raw,P[n])
+            raw=R[n].next(); o=finish(apply(raw,P[n]))
             if n=='S19' and f>=PAY0:   # payoff close-up: protect the poster's real colours (no highlight stretch, gentle gamma)
                 q=apply(raw,PAYP); q=np.clip(q+0.7*(q-cv2.GaussianBlur(q,(0,0),1.4*K)),0,1);   # round 4: poster read soft (38 % of file sharpness): gentle unsharp on the payoff
                 t=min(1.0,(f-PAY0+1)/(PAY1-PAY0+1)); t=t*t*(3-2*t); o=o*(1-t)+q*t

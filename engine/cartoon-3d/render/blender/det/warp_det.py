@@ -13,7 +13,7 @@ def m(f):
     if f<XO[0]: return float(XN[0]+(f-XO[0]))
     if f>XO[-1]: return float(XN[-1]+(f-XO[-1]))
     return float(np.interp(f,XO,XN))
-ADJ={'S03':(0,8),'S04':(8,0),'S09':(0,-14),'S10':(-14,0),'S15':(0,-16),'S16':(-16,0)}   # round 2: 5 of 21 shots over 4 s by join midpoints (S03 4.3, S10 4.3, S11, S16 4.2, S18), Rick 20-47 %
+ADJ={'S03':(0,8),'S04':(8,0),'S09':(0,-14),'S10':(-14,0),'S15':(0,-16),'S16':(-16,0),'S20':(2,0)}   # r3: S19/S20 dissolve 13 f -> 11 (K5 5-12)   # round 2: 5 of 21 shots over 4 s by join midpoints (S03 4.3, S10 4.3, S11, S16 4.2, S18), Rick 20-47 %
 def new_shots(SH):
     SH2={n:[int(round(m(a))),int(round(m(b)))] for n,(a,b) in SH.items()}
     names=list(SH)
@@ -41,6 +41,58 @@ def shot_of(ob):
         if c.name.startswith('CHR_'): return c.name[4:]
     if ob.name.startswith(('cam_','tgt_')): return ob.name[4:]
     return None
+
+# r3 (shots verifier C4 round 2: S08 grandpa showed 2 face cards at f555/564/569): the warp bumps a CONSTANT hide_render key by +1 when two
+# keys of one card round onto the same frame, so two alternative cards (faces, arm cards, stride bodies) could both show for a frame.
+# After warping, every group of mutually exclusive cards is re-keyed from its per-frame state: where more than one shows, the card
+# whose show-key is the most recent wins; where the group showed exactly one or none, nothing changes.
+def _hr(o):
+    ad=o.animation_data
+    if not ad or not ad.action: return None
+    for fc in ad.action.fcurves:
+        if fc.data_path=='hide_render': return fc
+    return None
+def exclusive_groups():
+    G={}
+    for o in bpy.data.objects:
+        n=o.name; par=o.parent.name if o.parent else None
+        if par is None: continue
+        if '_d_' in n: G.setdefault(('F',par),[]).append(o)
+        elif '_arm-1_' in n or '_arm1_' in n: G.setdefault(('A',par),[]).append(o)
+        elif n.endswith(('_body','_bodyw1','_bodyw2')): G.setdefault(('B',par),[]).append(o)
+    return [g for g in G.values() if len(g)>1]
+def sanitize():
+    fixed=0
+    for g in exclusive_groups():
+        F={o.name:_hr(o) for o in g}
+        if any(fc is None for fc in F.values()): continue
+        lo=min(int(fc.keyframe_points[0].co[0]) for fc in F.values()); hi=max(int(fc.keyframe_points[-1].co[0]) for fc in F.values())
+        lastshow={o.name:-10**6 for o in g}; state={}; bad=0
+        for f in range(lo,hi+1):
+            vis_=[]
+            for o in g:
+                fc=F[o.name]
+                for kp in fc.keyframe_points:
+                    if int(round(kp.co[0]))==f and kp.co[1]<0.5: lastshow[o.name]=f
+                if fc.evaluate(f)<0.5: vis_.append(o.name)
+            if len(vis_)>1:
+                bad+=1; win=max(vis_,key=lambda n:lastshow[n]); vis_=[win]
+            state[f]=set(vis_)
+        if not bad: continue
+        fixed+=bad
+        for o in g:
+            fc=F[o.name]; pts=fc.keyframe_points
+            while len(pts): pts.remove(pts[0])
+            prev=None
+            for f in range(lo,hi+1):
+                v=o.name in state[f]
+                if v!=prev:
+                    pts.insert(f,0.0 if v else 1.0); prev=v
+            pts.insert(hi+1,1.0)
+            for kp in pts: kp.interpolation='CONSTANT'
+            fc.update()
+    print('SANITIZE fixed frames',fixed)
+    return fixed
 def run(SH):
     SH2=new_shots(SH)
     snap={}
@@ -58,6 +110,7 @@ def run(SH):
                 done.add(ad.action.name); warp_action(ad.action,fn_for(shot_of(ob)),snap)
     for act in bpy.data.actions:   # anything not reached through an object (materials, node trees)
         if act.name not in done: done.add(act.name); warp_action(act,m,snap)
+    sanitize()
     sc=bpy.context.scene; sc['shots']=json.dumps(SH2); sc.frame_start=0; sc.frame_end=NEND
     json.dump(SH2,open('/root/det/bridge/shots.json','w'))
     print('WARP_OK end',NEND,SH2)

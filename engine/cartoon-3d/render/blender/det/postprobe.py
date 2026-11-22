@@ -4,17 +4,19 @@ import sys, json, subprocess, numpy as np, cv2
 V=sys.argv[1]; STEP=int(sys.argv[2]) if len(sys.argv)>2 else 6
 SH=json.load(open('/root/det/bridge/shots.json')); PQ=json.load(open('/root/det/bridge/posterquad.json'))
 W,H=720,1280
+TOTAL=int(subprocess.run(['ffprobe','-v','error','-count_packets','-select_streams','v:0','-show_entries','stream=nb_read_packets','-of','csv=p=0',V],capture_output=True,text=True).stdout.strip())   # r3 (payoff verifier round 2): rule 320 is judged on the TRUE last 10 frames, not every 6th
 p=subprocess.Popen(['ffmpeg','-v','error','-i',V,'-vf',f'scale={W}:{H}','-f','rawvideo','-pix_fmt','rgb24','-'],stdout=subprocess.PIPE)
 f=0; black=[]; ink={}; post=[]
 k5=cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(7,7))
 while True:
     b=p.stdout.read(W*H*3)
     if len(b)<W*H*3: break
-    if f%STEP==0:
+    LASTN=(f>=TOTAL-10)
+    if f%STEP==0 or (LASTN and str(f) in PQ):
         x=np.frombuffer(b,np.uint8).reshape(H,W,3).astype(np.float32)/255; Y=x[...,0]*0.299+x[...,1]*0.587+x[...,2]*0.114
         dark=(Y<0.07).astype(np.uint8); flat=cv2.morphologyEx(dark,cv2.MORPH_OPEN,k5)   # thin ink lines removed, flat dark areas kept
         cap=np.zeros_like(flat); cap[int(0.62*H):int(0.75*H)]=1; flat=flat*(1-cap)   # caption band outlines excluded
-        shot=[n for n,(a,e) in SH.items() if a<=f<=e][0]
+        shot=([n for n,(a,e) in SH.items() if a<=f<=e] or [list(SH)[-1]])[0]
         black.append((f,shot,float(flat.mean())))
         # ink: thin dark structures (black-hat) that are dark and not grey-neutral black text
         bh=cv2.morphologyEx((Y*255).astype(np.uint8),cv2.MORPH_BLACKHAT,cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(9,9)))
@@ -34,5 +36,5 @@ for s,v in ink.items():
     print('INK',s,'rgb',(int(r),int(g),int(b_)),'sat',round(sat,2),'ok' if ok else 'OUT')
 print('INK_OUT',allbad)
 if post:
-    last=post[-10:]; pm=np.mean([a[1] for a in last]); rm=np.mean([a[2] for a in last]); p98=np.max([a[3] for a in last]); gm=np.mean([a[4] for a in last])
+    last=[a for a in post if a[0]>=TOTAL-10]; pm=np.mean([a[1] for a in last]); rm=np.mean([a[2] for a in last]); p98=np.max([a[3] for a in last]); gm=np.mean([a[4] for a in last])
     print('POSTER last frames: poster mean',round(pm,3),'rest',round(rm,3),'poster p98',round(p98,3),'frame ring',round(gm,3),'PASS' if pm>=rm and p98<=0.95 else 'FAIL')

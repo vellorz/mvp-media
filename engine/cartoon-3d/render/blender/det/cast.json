@@ -478,7 +478,8 @@
   ],
   "props": [
    "pennant",
-   "hotdog"
+   "hotdog",
+   "marker"
   ],
   "faces": {
    "cheer": [

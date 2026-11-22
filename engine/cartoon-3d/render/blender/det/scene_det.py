@@ -145,22 +145,23 @@ bpy.ops.object.light_add(type='AREA',location=(PX,PY-1.4,2.5),rotation=(math.rad
 bpy.ops.object.light_add(type='AREA',location=(LX-1,-2.5,2.4),rotation=(math.radians(70),0,0)); a_=bpy.context.object; a_.data.energy=900; a_.data.size=5; a_.data.color=(1.0,0.93,0.84)
 # ---------- S01 (0-112): hook. Family yelling at the game from the couch; the TV back in the foreground; on 'lost' they all go deadpan ----------
 s='S01'; r=SH[s]
-dad=char('S01_dad','dadM',s,(LX-1.6,1.45,0),r,'cheer',arms=('arm','arm_remote')); mom=char('S01_mom','momM',s,(LX-0.75,1.78,0),r,'happy',arms=('arm','arm'))
-kid=char('S01_kid','kidM',s,(LX-2.45,0.95,0),r,'cheer',arms=('arm_ball','arm'),scale=0.8); gm=char('S01_gma','grandmaM',s,(LX+0.25,1.2,0),r,'happy',arms=('arm','arm'))
+# r3 (visual P3/R21 round 2: heads 15.6/17.2 % W, the stagger did not read; 4th member cut): dad close in front of the coffee table, three behind it at depth
+dad=char('S01_dad','dadM',s,(LX-1.55,0.5,0),r,'cheer',arms=('arm','arm_remote')); mom=char('S01_mom','momM',s,(LX-0.85,1.65,0),r,'happy',arms=('arm','arm'))
+kid=char('S01_kid','kidM',s,(LX-2.27,1.55,0),r,'cheer',arms=('arm_ball','arm'),scale=0.8); gm=char('S01_gma','grandmaM',s,(LX-0.3,1.8,0),r,'happy',arms=('arm','arm'))
 ALL+=[dad,mom,kid,gm]
 faces(dad,[(0,'cheer'),(20,'shout'),(44,'cheer'),(70,'shout'),(98,'shock'),(104,'deadpan')]); faces(mom,[(0,'happy'),(24,'cheer'),(60,'wow'),(99,'deadpan')])
 faces(kid,[(0,'cheer'),(30,'wow'),(56,'cheer'),(100,'wow')]); faces(gm,[(0,'happy'),(36,'cheer'),(101,'deadpan')])
-cheer(dad,4,90,1,up=(-140,-120),side=-1); cheer(kid,10,92,2,up=(-140,-120),side=-1); cheer(mom,24,88,3,up=(-138,-120),side=1); cheer(gm,40,90,4,up=(-135,-118),side=1)
+[arm(dad,1,f_,a_) for f_ in range(8,90,14) for f_,a_ in ((f_,-35),(f_+7,-15))]   # r3 armprobe: the front dad pumps the remote low (a raised arm crossed the faces behind him); cheer(kid,10,92,2,up=(-140,-120),side=-1); cheer(mom,24,88,3,up=(-166,-152),side=-1)   # r3 armprobe: mom's raised arm goes behind dad, not across gma; cheer(gm,40,90,4,up=(-135,-118),side=1)
 for c_,f_ in ((dad,98),(mom,99),(kid,100),(gm,101)):
     for sx in(-1,1): arm(c_,sx,f_,-12)
 bob(dad,[20,44,70]); bob(kid,[30,56]); bob(mom,[60]); bob(gm,[36])
-path(s,[(0,(LX-1.55,-2.4,1.15),(LX-1.25,2.0,1.05)),(53,(LX-1.4,-1.95,1.12),(LX-1.25,2.0,1.08)),(93,(LX-1.3,-1.55,1.1),(LX-1.2,2.0,1.1)),(112,(LX-1.42,-1.6,1.1),(LX-1.25,2.0,1.1))])   # ends on a sideways drift (rule 306: S02 opens on a push)
+path(s,[(0,(LX-1.6,-2.4,1.15),(LX-1.35,2.0,1.05)),(53,(LX-1.55,-1.95,1.12),(LX-1.35,2.0,1.08)),(93,(LX-1.45,-1.85,1.1),(LX-1.3,2.0,1.1)),(112,(LX-1.5,-1.9,1.1),(LX-1.32,2.0,1.1))])   # r3: whole family in frame   # ends on a sideways drift (rule 306: S02 opens on a push)
 # ============== SET STU: radio studio 1934 (X=300) ==============
 UX=300.0
 room('stu',UX,6.0,5.0,2.9,'studiowall','dwood',ftile=(2.0,2.0))
-ona=[plane(f'onair{i}',(UX+0.9,2.47,2.3),0.72,0.24,card_mat(f'onair{i}',f'onair{i}',emit=(0.3 if i==0 else 2.0))) for i in range(2)]
+ona=[plane(f'onair{i}',(UX+0.3,2.47,2.3),0.72,0.24,card_mat(f'onair{i}',f'onair{i}',emit=(0.3 if i==0 else 2.0))) for i in range(2)]
 vis(ona[0],[(0,136)]); vis(ona[1],[(137,END)])
-g_on=glow('onair_glow',(UX+0.9,2.4,2.3),1.1,(255,80,60),2.0,on=(137,END))
+g_on=glow('onair_glow',(UX+0.3,2.4,2.3),1.1,(255,80,60),2.0,on=(137,END))
 box('stu_win',(UX-1.3,2.47,1.6),(1.6,0.06,1.0),flat('winframe2',lin((90,60,40)),0.5),bv=0.02); plane('stu_glass',(UX-1.3,2.43,1.6),1.45,0.85,flat('ctrlglass',lin((60,80,90)),0.1))
 for k in range(3): box(f'stu_dial{k}',(UX-1.75+k*0.45,2.44,1.35),(0.3,0.04,0.2),flat('dialpanel',lin((50,52,56)),0.4),bv=0.01); glow(f'stu_dg{k}',(UX-1.75+k*0.45,2.40,1.38),0.2,(255,210,120),3.0)
 mic=flat('micchrome',(0.7,0.7,0.72),0.25,metal=0.9)
@@ -169,7 +170,7 @@ cyl('mic_base',(MX_,0.95,0.03),0.22,0.06,mic,v=20); cyl('mic_pole',(MX_,0.95,0.6
 box('mic_head',(MX_,0.9,1.3),(0.14,0.06,0.2),mic,bv=0.05,seg=3); box('mic_ring',(MX_,0.9,1.3),(0.2,0.03,0.28),flat('micring',lin((40,40,44)),0.4),bv=0.02)
 box('stu_piano',(UX+2.2,1.9,0.6),(1.4,0.6,1.2),flat('piano',lin((40,28,24)),0.3),bv=0.03); box('stu_keys',(UX+2.2,1.55,0.78),(1.3,0.18,0.05),flat('keys',lin((246,244,236)),0.4),bv=0.005)
 for k in range(2): cyl(f'stu_score{k}',(UX+1.9+k*0.5,1.65,1.25),0.12,0.02,flat('sheet',lin((246,240,220)),0.6),v=4,rot=(math.radians(80),0,0))
-wclk=cyl('stu_clock',(UX-0.1,2.46,2.35),0.25,0.05,flat('clockrim',lin((70,48,34)),0.5),v=24,rot=(math.pi/2,0,0)); cyl('stu_clockf',(UX-0.1,2.43,2.35),0.22,0.01,flat('clockface',lin((246,240,226)),0.6),v=24,rot=(math.pi/2,0,0))
+wclk=cyl('stu_clock',(UX-0.8,2.46,2.45),0.25,0.05,flat('clockrim',lin((70,48,34)),0.5),v=24,rot=(math.pi/2,0,0)); cyl('stu_clockf',(UX-0.8,2.43,2.45),0.22,0.01,flat('clockface',lin((246,240,226)),0.6),v=24,rot=(math.pi/2,0,0))
 chair('stu_chair',(UX-2.2,1.6)); box('stu_stand',(UX+1.2,1.3,0.55),(0.08,0.08,1.1),INK,bv=0); box('stu_standtop',(UX+1.2,1.27,1.12),(0.4,0.04,0.3),flat('standwood',lin((110,74,48)),0.5),bv=0.01)
 bpy.ops.object.light_add(type='AREA',location=(UX,-2.0,2.5),rotation=(math.radians(65),0,0)); a_=bpy.context.object; a_.data.energy=800; a_.data.size=4; a_.data.color=(1.0,0.92,0.82)
 # ---------- S02 (113-196): "In 1934, a radio man named George Richards" - the ON AIR sign lights on 'In', he leans into the mic ----------
@@ -201,7 +202,7 @@ money=[box(f'omoney{k}',(DX-0.05,DY-0.2,desk_h+0.02+0.03*k),(0.28,0.14,0.03),fla
 for k,m_ in enumerate(money): vis(m_,[(-9,-8)])   # r2: the cash travels in the hands (arm_money), not as a stack sliding by itself
 # back wall: calendar (left), door (far left), map (right), switchboard under the map
 CALX,CALZ=OX-1.25,1.55
-cal_names=['cal1934a','cal1934']+[f'cal{y}' for y in range(1935,1946)]+['cal2026']
+cal_names=['cal1934a','cal1934']   # r3: swap at 866 while the camera is on the door, so the circle is there when we arrive+[f'cal{y}' for y in range(1935,1946)]+['cal2026']
 cals=[plane(f'cal_{n}',(CALX,2.97,CALZ),0.48,0.64,card_mat(n,n,emit=0.25)) for n in cal_names]
 door=box('odoor',(OX-2.65,2.6,1.1),(0.95,0.06,2.2),flat('doorwood',lin((110,74,48)),0.5),bv=0.02); box('odoor_fr',(OX-2.65,2.99,1.15),(1.1,0.04,2.32),flat('doorfr',lin((70,48,34)),0.5),bv=0.01)
 plane('odoor_dark',(OX-2.65,2.965,1.1),0.92,2.18,flat('hallway',lin((60,50,44)),0.9))
@@ -225,12 +226,12 @@ cyl('ofan',(OX+2.9,2.4,1.45),0.18,0.06,flat('fanm',lin((60,70,64)),0.4,metal=0.5
 bpy.ops.object.light_add(type='AREA',location=(OX,-2.6,2.7),rotation=(math.radians(62),0,0)); a_=bpy.context.object; a_.data.energy=1000; a_.data.size=6; a_.data.color=(1.0,0.93,0.84)
 # ---------- S03 (197-330): he buys a small-town team from Ohio: cash across the desk to the seller ----------
 s='S03'; r=SH[s]
-rm3=char('S03_rich','radioman',s,(DX+0.35,DY+0.75,0),r,'grin',arms=('arm',[(197,'arm'),(250,'arm_money'),(300,'arm')]))
-sel=char('S03_seller','seller',s,(DX-0.9,DY-0.75,0),r,'deadpan',arms=('arm',[(197,'arm'),(300,'arm_money')]))
+rm3=char('S03_rich','radioman',s,(DX+0.35,DY+0.75,0),r,'grin',arms=('arm',[(197,'arm_money')]))   # r3: he holds the cash up the whole shot
+sel=char('S03_seller','seller',s,(DX-0.72,DY-0.75,0),r,'deadpan',arms=('arm','arm'))   # r3: no cash pop into his hand (shots F3); in frame
 ALL+=[rm3,sel]
 faces(rm3,[(197,'grin'),(224,'talkA'),(232,'talkB'),(240,'talkC'),(250,'smug'),(294,'wink'),(316,'grin')]); faces(sel,[(197,'deadpan'),(236,'happy'),(294,'wow'),(306,'happy')])
-for f,a in [(197,-15),(250,-20),(256,-75),(294,-80),(300,-20)]: arm(rm3,-1,f,a)
-for f,a in [(197,-12),(296,-70),(302,-25)]: arm(sel,1,f,a)
+for f,a in [(197,-30),(250,-35),(256,-120),(294,-130),(304,-60)]: arm(rm3,-1,f,a)   # r3: fans the cash up on 'eight thousand'
+for f,a in [(197,-12),(296,-55),(304,-20)]: arm(sel,1,f,a)   # r3: a handshake reach
 bob(sel,[236,294]); bob(rm3,[250,294])
 
 fg3=box('S03_fgbooks',(DX+1.05,DY-1.05,(desk_h+0.3)/2),(0.34,0.3,desk_h+0.3),flat('booksfg',lin((96,62,40)),0.6),bv=0.01,coll=L.chr_coll(s))
@@ -270,7 +271,7 @@ def truck(n,loc,heading,col=(90,40,36)):
 # LIONS banner painted letter by letter on the facade above the shop (on 'called it the Lions')
 BANX,BANZ=SX+4,5.2
 ban=[plane(f'lionsban{n}',(BANX,2.47,BANZ),5.0,1.25,card_mat(f'lions{n}',f'lions{n}',emit=0.3)) for n in range(6)]
-LT_=[366,371,376,381,386,390]
+LT_=[352,356,360,364,396,400]   # r3: L-I-O-N lettered before the camera arrives; the S is brushed on at 396 right beside the painter's hand (round 2: no brush, all lettered when seen)
 for n,b_ in enumerate(ban): vis(b_,[((331 if n==0 else LT_[n-1]),(LT_[n]-1 if n<5 else END))])
 lad=flat('ladder',lin((150,110,70)),0.6)
 for sx in(-1,1): box(f'ladder{sx}',(BANX+1.6+sx*0.25,2.3,1.75),(0.07,0.07,3.5),lad,bv=0)
@@ -287,12 +288,12 @@ for i,(dx,kd) in enumerate([(-0.9,'lion'),(0.0,'lion2'),(0.9,'lion')]):
     pl.append(ch)
 ALL+=pl
 for i,ch in enumerate(pl): faces(ch,[(331,'grit'),(360+i*4,'cheer'),(390+i*2,'shock')]); cheer(ch,340+i*5,388,10+i,up=(-140,-120),side=(-1,1,1)[i])
-pnt=char('S04_painter','fanold',s,(BANX+1.6,2.25,3.4),r,'deadpan',arms=('arm',[(331,'arm')])); ALL.append(pnt)   # r2: brush reaches the banner
+pnt=char('S04_painter','fanold',s,(BANX+1.6,2.25,3.4),r,'deadpan',arms=('arm',[(331,'arm_marker')])); ALL.append(pnt)   # r2: brush reaches the banner
 faces(pnt,[(331,'deadpan'),(366,'shout'),(392,'cheer')])
-for k,f in enumerate(range(362,392,5)): arm(pnt,-1,f,-158-10*(k%2))
+for k,f in enumerate(range(380,412,4)): arm(pnt,-1,f,-158-10*(k%2))
 ex4=crowd(s,r,[(SX+11.5,1.2,0.14),(SX+13.5,0.8,0.14),(SX+7,1.4,0.14),(SX+9.5,0.9,0.14)],['fanman','fanlady','newsboy','fanold'],44); ALL+=ex4
 for e in ex4: faces(e,[(392,'cheer')]); cheer(e,394,414,hash(e['inst'])%97)
-path(s,[(331,(SX-15.5,-11.6,2.0),(SX-15.0,-5,1.45)),(345,(SX-11.5,-11.8,2.0),(SX-11.6,-5,1.5)),(360,(SX-7.5,-11.6,2.0),(SX-7.2,-5,1.5)),(390,(SX+1,-12.4,2.4),(SX+2.8,0,3.3)),(414,(SX+1.5,-12.6,2.55),(SX+3.1,0,3.5))])
+path(s,[(331,(SX-15.5,-11.6,2.0),(SX-15.0,-5,1.45)),(345,(SX-11.5,-11.8,2.0),(SX-11.6,-5,1.5)),(360,(SX-7.5,-11.6,2.0),(SX-7.2,-5,1.5)),(378,(SX+1,-12.4,2.4),(SX+2.8,0,3.3)),(414,(SX+1.6,-12.6,2.6),(SX+3.1,0,3.55))])   # r3: on the banner from 378
 # ---------- S05 (415-494): "Detroit was a baseball town" - the crowd pours into the ballpark gate ----------
 GX=SX+30
 gate=flat('gatebrick',lin((150,80,60)),0.7)
@@ -309,7 +310,7 @@ path(s,[(415,(GX+0.8,-6.5,1.5),(GX,1.0,1.8)),(452,(GX+0.4,-8.2,3.2),(GX,2.0,3.2)
 # ---------- S06 (495-547): newsstand: TIGERS WIN PENNANT, push-in on the paper ----------
 NX=SX-20
 box('kiosk',(NX,1.2,1.1),(2.2,1.0,2.2),flat('kiosk',lin((60,90,70)),0.6),bv=0.04); box('kiosk_roof',(NX,1.0,2.27),(2.6,1.5,0.15),flat('kroof',lin((140,50,40)),0.6),bv=0.04)
-for k in range(4): plane(f'kpaper{k}',(NX-0.9+k*0.6,0.697,0.95),0.4,0.55,card_mat('paperTigers_k','paperTigers',emit=0.2))
+for k,x_ in enumerate((-0.75,0.3,0.85)): plane(f'kpaper{k}',(NX+x_,0.697,0.95),0.4,0.55,card_mat('paperTigers_k','paperTigers',emit=0.2))
 s='S06'; r=SH[s]
 nb=char('S06_newsboy','newsboy',s,(NX+0.2,0.0,0.14),r,'shout',arms=('arm','armS'),scale=0.8); ALL.append(nb)
 faces(nb,[(495,'shout'),(518,'happy'),(530,'shout')]); arm(nb,1,495,-150); arm(nb,1,520,-160); arm(nb,-1,500,-40); arm(nb,-1,525,-70)
@@ -344,7 +345,10 @@ cyl('waterjug',(BENX+1.9,3.8,0.3),0.2,0.6,flat('jug2',lin((200,60,40)),0.5),v=16
 BX_=TX+60
 box('booth',(BX_,2.0,1.3),(2.4,1.6,2.6),flat('boothbody',lin((180,60,50)),0.6),bv=0.04); box('booth_roof',(BX_,1.9,2.7),(2.8,2.0,0.2),flat('broof',lin((60,60,70)),0.6),bv=0.04)
 bth=[plane(f'booth{i}',(BX_,1.18,1.35),2.3,2.3,card_mat(f'booth{i}',f'booth{i}',emit=0.25)) for i in range(2)]
-vis(bth[0],[(0,1244)]); vis(bth[1],[(1245,END)])
+# r3 (shots round 2: SOLD OUT popped in 1 frame, the clerk's hand away): SOLD OUT rolls down like a blind from the booth top (1240-1247), the clerk's raised hand pulls it
+bth[1].location=(BX_,1.17,1.35); blind=empty('booth_blind',(BX_,1.17,2.5)); bth[1].parent=blind; bth[1].location=(0,0,-1.15)
+kscale(blind,1239,(1,1,0.02)); kscale(blind,1247,(1,1,1.0))
+vis(bth[0],[(0,1247)]); vis(bth[1],[(1240,END)])
 box('booth_ground',(BX_,0,-0.1),(50,30,0.2),surf('dwalk','dsidewalk',(2.6,2.6)),bv=0)
 box('booth_wall',(BX_,6,2.5),(40,0.5,5.0),surf('stadwall','stadwall',(3,3)),bv=0.02)
 for k in range(6): pn=plane(f'bpen{k}',(BX_-5+k*2,5.747,4.6),0.8,0.45,flat('pen%d'%(k%3),lin([(200,60,40),(240,200,60),(60,90,160)][k%3]),0.6))
@@ -382,8 +386,8 @@ ex19=crowd(s,r,[(SBX-1.5,14.9,1.4),(SBX+3.2,15.8,2.3),(SBX-0.2,16.7,3.2),(SBX+2.
 path(s,[(1718,(SBX+0.5,11.0,2.85),(SBX+0.9,14.9,2.55)),(1760,(SBX+0.85,12.3,2.75),(SBX+1.0,14.9,2.55)),(1795,(SBX+0.95,12.8,2.72),(SBX+1.0,14.9,2.55))])
 # ---------- S13 (1227-1276): ticket booth: the clerk slaps up SOLD OUT on 'sold' ----------
 s='S13'; r=SH[s]
-clk=char('S13_clerk','clerk',s,(BX_+0.72,-0.25,0.0),r,'happy',arms=('arm','arm')); ALL.append(clk)
-faces(clk,[(1227,'happy'),(1245,'wow'),(1258,'happy')]); arm(clk,1,1238,-40); arm(clk,1,1243,-150); arm(clk,1,1250,-30); bob(clk,[1245])
+clk=char('S13_clerk','clerk',s,(BX_+0.6,-0.25,0.0),r,'happy',arms=('arm','arm')); ALL.append(clk)
+faces(clk,[(1227,'happy'),(1245,'wow'),(1258,'happy')]); arm(clk,-1,1232,-40); arm(clk,-1,1239,-160); arm(clk,-1,1247,-120); arm(clk,-1,1254,-30)   # r3: hand up at the blind's top edge, pulls it down; bob(clk,[1245])
 ex13=crowd(s,r,[(BX_-0.75,-1.2,0),(BX_-2.6,-1.3,0),(BX_+1.8,-1.0,0),(BX_-3.6,-0.6,0)],['fanman','fanlady','fanold','kid34'],97,faces_pool=('shock','sad','shout','wow')); ALL+=ex13
 for e in ex13: faces(e,[(1248,'shock')])
 path(s,[(1227,(BX_+0.15,-3.15,1.45),(BX_+0.35,1.2,1.5)),(1245,(BX_-0.05,-3.45,1.42),(BX_+0.25,1.2,1.5)),(1276,(BX_-0.3,-3.8,1.4),(BX_+0.1,1.2,1.45))])   # pull-back reveal (rule 306: S12 ends on a push)
@@ -407,17 +411,18 @@ bpy.ops.object.light_add(type='AREA',location=(NX2,-2.2,2.5),rotation=(math.radi
 bpy.ops.object.light_add(type='POINT',location=(NX2,0.6,1.9)); a_=bpy.context.object; a_.data.energy=60; a_.data.color=(1.0,0.85,0.6)
 # ---------- S08 (598-716): "Football on a holiday? Everybody figured folks would stay home and eat." ----------
 s='S08'; r=SH[s]
-d8=char('S08_dad','dad34',s,(NX2-1.3,0.55,0),r,'deadpan',arms=('arm','arm_fork')); m8=char('S08_mom','mom34',s,(NX2+0.4,1.2,0),r,'happy',arms=('arm_plate','arm'))
-g8=char('S08_gramps','gramps',s,(NX2+1.5,1.55,0),r,'deadpan',arms=('arm','arm_fork')); k8=char('S08_kid','kid34',s,(NX2-1.55,0.35,0),r,'wow',arms=('arm_ball','arm'),scale=0.8)
+# r3 (visual P3 round 2: frontal table stage): high diagonal camera from the table's end; gramps (the speaker) in the foreground, mom, dad, kid at depth along the table
+d8=char('S08_dad','dad34',s,(NX2-1.1,1.0,0),r,'deadpan',arms=('arm','arm_fork')); m8=char('S08_mom','mom34',s,(NX2+0.0,1.45,0),r,'happy',arms=('arm_plate','arm'))
+g8=char('S08_gramps','gramps',s,(NX2+1.3,0.2,0),r,'deadpan',arms=('arm','arm_fork')); k8=char('S08_kid','kid34',s,(NX2-1.5,0.6,0),r,'wow',arms=('arm_ball','arm'),scale=0.8)
 ALL+=[d8,m8,g8,k8]
 faces(d8,[(598,'deadpan'),(626,'shrug'),(650,'deadpan'),(684,'happy'),(700,'cheer')]); faces(m8,[(598,'happy'),(626,'deadpan'),(660,'happy'),(692,'wow')])
-faces(g8,[(598,'deadpan'),(626,'eyeroll'),(660,'deadpan'),(700,'cheer')]); faces(k8,[(598,'wow'),(626,'happy'),(690,'wow')])
+faces(g8,[(598,'deadpan'),(709,'eyeroll')])   # r3 C4: no face keys inside the lip-sync (they collided into 1-frame double faces); faces(k8,[(598,'wow'),(626,'happy'),(690,'wow')])
 for c_,sx in ((d8,1),(g8,1)):
     for f in range(684,716,10): arm(c_,sx,f,-60); arm(c_,sx,f+5,-85)
-arm(d8,-1,626,-110); arm(d8,-1,634,-100); arm(d8,-1,650,-15); arm(g8,-1,626,-160); arm(g8,-1,640,-20); arm(k8,-1,612,-140); arm(k8,-1,640,-60)
+arm(d8,1,626,-150); arm(d8,1,634,-140); arm(d8,1,650,-60); arm(g8,-1,626,-160); arm(g8,-1,640,-20); arm(k8,-1,612,-140); arm(k8,-1,640,-60)
 bob(d8,[626,700]); bob(g8,[626]); bob(m8,[692]); bob(k8,[612])
-lipsync(g8,[w for w in WORDS if 20.4<=w[1]<=23.9],600,716)   # r2 C6: the doubter's line is spoken by gramps
-path(s,[(598,(NX2+0.9,-3.4,2.0),(NX2,1.0,1.15)),(626,(NX2+0.6,-3.2,1.95),(NX2,1.0,1.17)),(684,(NX2+0.1,-2.9,1.9),(NX2,1.0,1.18)),(716,(NX2-0.15,-2.8,1.88),(NX2,1.0,1.18))])
+lipsync(g8,[w for w in WORDS if 19.9<=w[1]<=23.6],598,716)   # r3 C6: from 'Football' to 'eat'   # r2 C6: the doubter's line is spoken by gramps
+path(s,[(598,(NX2+2.95,-1.85,2.42),(NX2-0.3,0.9,1.0)),(650,(NX2+2.75,-1.95,2.4),(NX2-0.32,0.9,1.02)),(716,(NX2+2.5,-2.05,2.38),(NX2-0.35,0.92,1.04))])   # r3: sideways drift (rule 306: S09 opens on a push)
 # ---------- S12 (1171-1226): 'the whole country could hear': a family leans in to the radio ----------
 s='S12'; r=SH[s]
 d12=char('S12_dad','dad34',s,(NX2+1.35,1.4,0),r,'wow',arms=('arm','arm')); k12=char('S12_kid','kid34',s,(NX2+1.95,1.0,0),r,'wow',arms=('arm','arm'),scale=0.8); g12=char('S12_gramps','gramps',s,(NX2+2.55,1.2,0),r,'shock',arms=('arm','arm'))
@@ -432,13 +437,13 @@ path(s,[(1350,(NX2-0.5,-1.6,1.45),(NX2,0.6,0.95)),(1409,(NX2-0.2,-1.0,1.3),(NX2,
 s='S09'; r=SH[s]
 rm9=char('S09_rich','radioman',s,(DX+0.35,DY+0.75,0),r,'deadpan',arms=('arm','arm')); ALL.append(rm9)
 faces(rm9,[(717,'deadpan'),(732,'idea'),(749,'grin'),(765,'wink'),(781,'grin')]); arm(rm9,1,732,-140); arm(rm9,1,748,-120); arm(rm9,-1,749,-60); arm(rm9,-1,765,-20); bob(rm9,[732,749,765],amt=9)
-path(s,[(717,(DX+0.5,DY-1.9,1.45),(DX+0.35,DY+0.75,1.2)),(745,(DX+0.45,DY-1.6,1.44),(DX+0.35,DY+0.75,1.22)),(765,(DX+0.4,DY-0.85,1.4),(DX+0.35,DY+0.75,1.25)),(794,(DX+0.38,DY-0.75,1.4),(DX+0.35,DY+0.75,1.25))])
+path(s,[(717,(DX+0.62,DY-1.9,1.45),(DX+0.62,DY+0.75,1.2)),(745,(DX+0.6,DY-1.6,1.44),(DX+0.6,DY+0.75,1.22)),(765,(DX+0.56,DY-0.85,1.4),(DX+0.55,DY+0.75,1.25)),(794,(DX+0.55,DY-0.75,1.4),(DX+0.54,DY+0.75,1.25))])   # r3 G6: calendar fully out of frame
 # ---------- S10 (795-931): he books the champs on the phone; a Bears player fills the doorway; he circles Thanksgiving on the calendar ----------
 s='S10'; r=SH[s]
 rm10=char('S10_rich','radioman',s,(DX-0.3,DY+0.8,0),r,'talkD',arms=([(795,'arm_phone')],[(795,'arm'),(880,'arm_marker')]),)
 br10=char('S10_bear','bear',s,(OX-2.65,2.75,0),r,'smug',arms=('arm','arm')); ALL+=[rm10,br10]
 lipsync(rm10,[w for w in WORDS if 26.3<=w[1]<=30.5],795,915); faces(rm10,[(843,'grin'),(856,'talkA')])
-arm(rm10,-1,795,-150); arm(rm10,1,880,-25); arm(rm10,1,890,-100); arm(rm10,1,898,-112); arm(rm10,1,906,-100); arm(rm10,1,914,-112)
+arm(rm10,-1,795,-150); arm(rm10,1,880,-25); arm(rm10,1,892,-95)   # r3: he points the marker at the circled date (no drawing shown)
 kloc(br10['root'],795,(OX-2.65,2.75,0))   # r2: always there, hidden behind the closed door until it slides open   # r2: stands behind the closed door, revealed as it slides
 for fc in br10['root'].animation_data.action.fcurves:
     for kp in fc.keyframe_points: kp.interpolation='CONSTANT'
@@ -448,13 +453,13 @@ path(s,[(795,(DX-0.3,DY-1.5,1.38),(DX-0.3,DY+0.8,1.2)),(843,(DX-0.8,DY-1.95,1.42
 # ---------- S11 (932-1180): ONE PACKED LONG TAKE: favors on two phones, the operator plugs in, the map lights up coast to coast ----------
 s='S11'; r=SH[s]
 rm11=char('S11_rich','radioman',s,(DX+0.2,DY+0.8,0),r,'talkD',arms=([(932,'arm_phone')],[(932,'arm'),(992,'arm_phone')]))
-op=char('S11_op','operator',s,(MAPX+0.2,2.1,0),r,'happy',arms=('arm_plug','arm_plug')); ALL+=[rm11,op]
+op=char('S11_op','operator',s,(MAPX+0.2,2.1,0),r,'happy',arms=('arm','arm'))   # r3: no plugs (shots round 2: never in a jack); ALL+=[rm11,op]
 lipsync(rm11,[w for w in WORDS if 30.9<=w[1]<=33.7],932,1020)
 faces(rm11,[(1020,'grin'),(1054,'idea'),(1084,'wink'),(1109,'grin'),(1150,'smug')])
 for f,a in [(932,-150),(968,-140),(1000,-150)]: arm(rm11,-1,f,a)
 for f,a in [(932,-20),(984,-60),(992,-150),(1040,-140)]: arm(rm11,1,f,a)
 faces(op,[(932,'happy'),(990,'talkA'),(996,'talkB'),(1002,'talkA'),(1013,'wow'),(1054,'happy'),(1084,'wow'),(1109,'happy')])
-for k,f in enumerate(range(1000,1150,12)): arm(op,(-1 if k%2 else 1),f,-138+6*(k%3)); arm(op,(-1 if k%2 else 1),f+6,-122)   # r2: plugs land on the panel above his shoulders
+for k,f in enumerate(range(1000,1150,24)): arm(op,1,f,-95); arm(op,1,f+12,-110)   # r3: hand to the headset as each call connects
 for i,l_ in enumerate(lamps_sw): vis(l_,[(1000+i*12,1180)])
 MAPT=[(0,1012),(1013,1053),(1054,1083),(1084,1108),(1109,END)]
 for m_,rg in zip(maps,MAPT): vis(m_,[rg])
@@ -470,18 +475,21 @@ s='S18'; r=SH[s]
 hand=char('S18_rich','radioman',s,(CALX+0.75,2.3,0),r,'grin',arms=('arm','arm')); ALL.append(hand)
 faces(hand,[(1559,'grin'),(1639,'deadpan'),(1681,'grin'),(1702,'wink')])
 FL=[1589,1600,1612,1621,1639,1645,1651,1657,1663,1670,1681,1702]   # 1935..1938, 1939-1944 grey (no game), 1945, then 2026 on 'stopped'
-CR=[(0,897),(898,FL[0]-1)]+[(FL[i],(FL[i+1]-1 if i+1<len(FL) else END)) for i in range(len(FL))]
+CR=[(0,865),(866,FL[0]-1)]+[(FL[i],(FL[i+1]-1 if i+1<len(FL) else END)) for i in range(len(FL))]
 for c_,rg in zip(cals,CR): vis(c_,[rg])
-for k,f in enumerate(FL): arm(hand,-1,f-4,-100); arm(hand,-1,f,-130); arm(hand,-1,f+3,-60)
-path(s,[(1559,(CALX+0.55,0.3,1.45),(CALX+0.35,2.8,1.4)),(1621,(CALX+0.45,0.5,1.45),(CALX+0.3,2.8,1.42)),(1670,(CALX+0.35,0.7,1.45),(CALX+0.25,2.8,1.45)),(1702,(CALX+0.25,0.95,1.47),(CALX+0.2,2.8,1.47)),(1729,(CALX+0.22,1.0,1.47),(CALX+0.2,2.8,1.47))])
+for k,f in enumerate(FL[:5]+FL[-2:]): arm(hand,-1,f-4,-100); arm(hand,-1,f,-130); arm(hand,-1,f+3,-60)   # r3: no arm pump on the fast grey-year flips
+path(s,[(1559,(CALX+0.55,0.3,1.45),(CALX+0.4,2.8,1.4)),(1621,(CALX+0.5,0.5,1.45),(CALX+0.4,2.8,1.42)),(1670,(CALX+0.46,0.7,1.45),(CALX+0.38,2.8,1.45)),(1702,(CALX+0.42,0.95,1.47),(CALX+0.36,2.8,1.47)),(1729,(CALX+0.4,1.0,1.47),(CALX+0.35,2.8,1.47))])   # r3 G5: radio man stays in frame
 # ---------- S20 (1784-1863): today: 'became the one game' - the family jumps for the TV ----------
 s='S20'; r=SH[s]
-d20=char('S20_dad','dadM',s,(LX-1.6,1.45,0),r,'cheer',arms=('arm_drumstick','arm_remote')); m20=char('S20_mom','momM',s,(LX-0.55,1.78,0),r,'cheer',arms=('arm','arm'))
-k20=char('S20_kid','kidM',s,(LX-2.45,0.95,0),r,'cheer',arms=('arm_ball','arm'),scale=0.8); g20=char('S20_gma','grandmaM',s,(LX+0.25,1.2,0),r,'cheer',arms=('arm','arm_plate'))
+d20=char('S20_dad','dadM',s,(LX-1.45,0.5,0),r,'cheer',arms=('arm_drumstick','arm_remote')); m20=char('S20_mom','momM',s,(LX-0.85,1.65,0),r,'cheer',arms=('arm','arm'))   # r3: same depth staging as S01
+k20=char('S20_kid','kidM',s,(LX-2.12,1.55,0),r,'cheer',arms=('arm_ball','arm'),scale=0.8); g20=char('S20_gma','grandmaM',s,(LX-0.35,1.8,0),r,'cheer',arms=('arm','arm_plate'))
 ALL+=[d20,m20,k20,g20]
-for i,c_ in enumerate((d20,m20,k20,g20)): cheer(c_,1784+i*3,1863,120+i,up=((-152,-138) if i==0 else (-140,-120)),side=(1,-1,-1,1)[i]); bob(c_,[1793+i*4,1819+i*3,1844])
+for i,c_ in enumerate((d20,m20,k20,g20)):
+    if i==0: [arm(c_,1,f_,a_) for f_ in range(1786,1863,14) for f_,a_ in ((f_,-35),(f_+7,-15))]   # r3 armprobe: front dad pumps low
+    else: cheer(c_,1784+i*3,1863,120+i,up=((-166,-152) if i==1 else (-140,-120)),side=(-1,-1,-1,1)[i])
+    bob(c_,[1793+i*4,1819+i*3,1844])
 faces(d20,[(1784,'cheer'),(1810,'shout'),(1834,'cheer')]); faces(m20,[(1784,'cheer'),(1820,'wow'),(1844,'cheer')]); faces(k20,[(1784,'cheer'),(1815,'wow')]); faces(g20,[(1784,'happy'),(1810,'cheer')])
-path(s,[(1784,(LX-1.0,-1.7,1.05),(LX-1.2,2.0,1.1)),(1819,(LX-1.4,-1.9,1.1),(LX-1.25,2.0,1.12)),(1863,(LX-1.75,-2.2,1.14),(LX-1.3,2.0,1.14))])
+path(s,[(1784,(LX-1.2,-2.0,1.05),(LX-1.22,2.0,1.1)),(1819,(LX-1.3,-2.1,1.1),(LX-1.25,2.0,1.12)),(1863,(LX-1.42,-2.25,1.14),(LX-1.28,2.0,1.14))])   # r3: shorter drift keeps the whole family in frame
 # ---------- S21 (1852-1920): payoff: push past the turkey onto the Detroit poster ('turkey' 1876); ending hold ----------
 s='S21'; r=SH[s]
 m21=char('S21_mom','momM',s,(PX-0.95,PY-0.75,0),r,'happy',arms=('arm_plate','arm')); k21=char('S21_kid','kidM',s,(PX+0.95,PY-0.7,0),r,'wow',arms=('arm','arm'),scale=0.8)

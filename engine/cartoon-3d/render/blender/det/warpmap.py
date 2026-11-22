@@ -1,6 +1,6 @@
 # Detroit retime (take 3 VO): old->new frame map from aligned word onsets (difflib on normalised tokens), piecewise linear.
 import json, difflib, re, numpy as np
-O=json.load(open('/root/det/audio/vo_trim.wav.words.json')); N=json.load(open('/root/det/audio_r2/vo_final.wav.words.json'))
+O=json.load(open('/root/det/audio/vo_trim.wav.words.json')); N=json.load(open('/root/det/audio_r3/vo_final.wav.words.json'))
 norm=lambda w: re.sub(r'[^a-z0-9]','',w.lower())
 a=[norm(w[0]) for w in O]; b=[norm(w[0]) for w in N]
 sm=difflib.SequenceMatcher(None,a,b,autojunk=False); P=[]

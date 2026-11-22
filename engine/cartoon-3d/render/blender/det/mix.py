@@ -1,6 +1,6 @@
 # Mix (rules 8/188 revised Nov 21): VO studio-clean, bed 14.4-18.6 dB under the VO riding its level map (std 2.3-4.0 dB, no ducking), SFX gentle (rule 192); master -14 LUFS, -1.9 to -2.2 dBTP
 import subprocess, re, json, sys
-A='/root/det/audio/'; VO='/root/det/audio_r2/vo_final.wav'
+A='/root/det/audio/'; VO='/root/det/audio_r3/vo_final.wav'
 import os
 END=int(os.environ.get('END_F','1940'))/30
 def lufs(path,extra=''):
@@ -28,7 +28,7 @@ print('SFX raw offset median',round(float(np.median(offs)),2),'spread',round(min
 print('VO',vI,'bed',bI,'->gain',round(gb,2),'sfx',sI,'->gain',round(gs,2))
 cmd=(f'ffmpeg -y -hide_banner -loglevel error -i {VO} -i {A}bed.wav -i {A}sfx.wav -filter_complex '
      f'"[0:a]aresample=48000,pan=stereo|c0=c0|c1=c0,adelay=100|100,apad=whole_dur={END}[v];[1:a]volume={gb}dB[b];[2:a]volume={gs}dB[s];'
-     f'[v][b][s]amix=inputs=3:normalize=0:duration=longest,atrim=0:{END}[m]" -map "[m]" -ar 48000 {A}premix.wav')
+     f'[v][b][s]amix=inputs=3:normalize=0:duration=longest,atrim=0:{END},afade=t=out:st={END-0.4:.3f}:d=0.4[m]" -map "[m]" -ar 48000 {A}premix.wav')
 subprocess.run(cmd,shell=True,check=True)
 pI,pL,pT=lufs(A+'premix.wav'); g=-14.0-pI
 subprocess.run(f'ffmpeg -y -hide_banner -loglevel error -i {A}premix.wav -af "volume={g}dB,alimiter=limit=0.78:attack=2:release=60:level=disabled" -ar 48000 {A}mix.wav',shell=True,check=True)

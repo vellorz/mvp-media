@@ -84,7 +84,7 @@ for _ in range(30):
     if abs(ch-CAP)<1: break
     fs=int(round(fs*CAP/ch))
 FNT=font(fs); BASE=int(0.717*H); STROKE=max(1,int(round(7*K))); SHX,SHY=int(round(4*K)),int(round(5*K))
-WORDS=json.load(open('/root/det/audio_r2/vo_final.wav.words.json'))
+WORDS=json.load(open('/root/det/audio_r3/vo_final.wav.words.json'))
 def mergesplit(W_):
     # whisper splits 'small -town', '8 ,000', 'coast -to -coast,', '26 ,000', '19 -16,': glue a piece that starts with - or , onto the word before
     o=[]
@@ -141,9 +141,48 @@ def chunks():
         txt=' '.join(x[0].strip() for x in c).replace('  ',' ')
         C.append([int((c[0][1]+0.1)*30),txt]); EN.append(int((c[-1][2]+0.1)*30)+3)   # Detroit (rule 314): a card leaves 3 f after its last word ends, not at the next card   # r9 (rule 9/186 revised: on the word or 0-1 f before, never later than +2): floor of the audible onset frame (round 7 ran 1.7-3.1 f early)
     C[0][0]=0   # the hook frame carries its caption from f0
-    for i in range(len(C)): C[i].append(min(C[i+1][0],max(C[i][0]+3,EN[i])) if i+1<len(C) else min(END+1,EN[i]+6))
+    for i in range(len(C)): C[i].append((C[i+1][0] if C[i+1][0]-max(C[i][0]+3,EN[i])<=12 else max(C[i][0]+3,EN[i])) if i+1<len(C) else min(END+1,EN[i]+6))   # r2 (T5b): a gap of 12 f or less is bridged by the card before it
     return C
 CAPS=chunks()
+# r2 (text verifier T7 [C]: captions on faces in S05, S06, S11, S14, S17, S18): pre-pass over the raw clips at 360x640 finds the face cards
+# (near-white, low-saturation round blobs) per frame; each card then takes the first baseline whose box clears every face it is shown over.
+FW,FH=360,640
+def face_masks():
+    M={}
+    for n,(a,b) in SH.items():
+        mp=sorted(glob.glob(f'{SRC}/{n}_*.mp4'))
+        if not mp: continue
+        lst=f'/tmp/{n}_flist.txt'; open(lst,'w').write(''.join(f"file '{os.path.abspath(m)}'\n" for m in mp))
+        pr=subprocess.Popen(['ffmpeg','-v','error','-f','concat','-safe','0','-i',lst,'-vf',f'scale={FW}:{FH}','-f','rawvideo','-pix_fmt','rgb24','-'],stdout=subprocess.PIPE)
+        for f in range(a,b+1):
+            buf=pr.stdout.read(FW*FH*3)
+            if len(buf)<FW*FH*3: break
+            x=np.frombuffer(buf,np.uint8).reshape(FH,FW,3); hsv=cv2.cvtColor(x,cv2.COLOR_RGB2HSV)
+            m=((hsv[...,2]>205)&(hsv[...,1]<55)).astype(np.uint8); m=cv2.morphologyEx(m,cv2.MORPH_OPEN,np.ones((3,3),np.uint8))
+            k,lab,st,_=cv2.connectedComponentsWithStats(m); out=np.zeros((FH,FW),bool)
+            for i in range(1,k):
+                x0,y0,w,h,ar=st[i]
+                if ar>=40 and 0.55<w/h<1.7 and ar/(w*h)>0.5 and ar<0.2*FW*FH: out[max(0,y0-2):y0+h+2,max(0,x0-2):x0+w+2]=True
+            M[f]=M.get(f,np.zeros((FH,FW),bool))|out
+        pr.stdout.close(); pr.wait()
+    return M
+def cap_box(txt,base):
+    l,t,r,b=FNT.getbbox(txt,anchor='ls',stroke_width=STROKE); w=r-l
+    x0=(W-w)/2-12*K; x1=(W+w)/2+12*K; y0=base+t-10*K; y1=base+b+SHY+8*K
+    return int(x0/W*FW),int(y0/H*FH),int(np.ceil(x1/W*FW)),int(np.ceil(y1/H*FH))
+BASES=(BASE,int(0.765*H),int(0.655*H),int(0.60*H),int(0.785*H))   # normal band, then just below, just above, higher, lowest (all clear of the top 12 % / bottom 20 % UI zones)
+def pick_bases(FM):
+    out=[]
+    for c0,txt,c1 in CAPS:
+        fr=range(c0,max(c0+1,c1))
+        if any(str(f) in PQ and min(p[1] for p in PQ[str(f)])<0.33 for f in fr): out.append(int(0.195*H)); continue   # S21: above the poster for the whole card (no 1-frame jump)
+        best=None
+        for bs in BASES:
+            x0,y0,x1,y1=cap_box(txt,bs); hit=sum(int(FM[f][max(0,y0):y1,max(0,x0):x1].sum()) for f in fr if f in FM)
+            if best is None or hit<best[1]: best=(bs,hit)
+            if hit==0: break
+        out.append(best[0])
+    return out
 def cap_layer(txt,base=None):
     l,t,r,b=FNT.getbbox(txt,anchor='ls',stroke_width=STROKE); w=r-l
     lay=Image.new('RGBA',(W,H),(0,0,0,0)); sh=Image.new('RGBA',(W,H),(0,0,0,0))
@@ -151,9 +190,9 @@ def cap_layer(txt,base=None):
     sh=sh.filter(ImageFilter.GaussianBlur(2*K)); lay.alpha_composite(sh)
     ImageDraw.Draw(lay).text((x,B_),txt,font=FNT,fill=(255,255,255,255),anchor='ls',stroke_width=STROKE,stroke_fill=(0,0,0,255))
     return lay,w/W
-PQ=json.load(open('/root/det/bridge/posterquad.json'))
+PQ=json.load(open('/root/det/bridge/posterquad.json')); PQ0=min(map(int,PQ))
 _PF=np.asarray(Image.open('/root/det/poster_2k.png').convert('RGB')).astype(np.float32)/255.0
-def truepost(o,q,k=1.09):   # rule 320: paste gain lifted (shop file p98 0.867 -> 0.945, under the 0.95 cap)
+def truepost(o,q,k=1.12):   # r3 (payoff verifier round 2: poster 0.578 < rest 0.581 over the true last 10 frames)   # rule 320: paste gain lifted (shop file p98 0.867 -> 0.945, under the 0.95 cap)
     h,w=o.shape[:2]; ph,pw=_PF.shape[:2]
     src=np.float32([[0,ph],[pw,ph],[pw,0],[0,0]]); dst=np.float32([[x*w,(1-y)*h] for x,y in q])
     Mx=cv2.getPerspectiveTransform(src,dst)
@@ -177,7 +216,7 @@ def inkfix(o,raw,excl=None):
 def quadmask(q,h,w,grow):
     mk=np.zeros((h,w),np.uint8); cv2.fillConvexPoly(mk,np.int32([[x*w,(1-y)*h] for x,y in q]),1)
     return cv2.dilate(mk,np.ones((grow,grow),np.uint8)).astype(np.float32)
-BAYDIM=0.88   # rule 320: dim the payoff bay around the poster (feathered), ramped in with the payoff grade
+BAYDIM=0.86   # rule 320: dim the payoff bay around the poster (feathered), ramped in with the payoff grade
 if __name__=='__main__':
     # grade params per shot from 5 sampled frames
     P={}; rep={}
@@ -200,6 +239,8 @@ if __name__=='__main__':
     R={n:Reader(n) for n in SH}; cache={}
     enc=subprocess.Popen(['ffmpeg','-y','-v','error','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r','30','-i','-','-i','/root/det/audio/mix.wav',
         '-c:v','libx264','-preset','slow','-crf','14' if K==1 else '20','-pix_fmt','yuv420p','-c:a','aac','-b:a','320k','-shortest','-movflags','+faststart',OUT],stdin=subprocess.PIPE)
+    FM=face_masks(); CB=pick_bases(FM); print('CAPBASE moved',sum(1 for b in CB if b!=BASE),'of',len(CB),flush=True)
+    json.dump([[c[0],c[1],c[2],b/H] for c,b in zip(CAPS,CB)],open(OUT+'.capbase.json','w'))
     ci=0; capimg=None; capkey=None
     for f in range(END+1):
         act=[n for n,(a,b) in SH.items() if a<=f<=b]
@@ -210,7 +251,8 @@ if __name__=='__main__':
                 q=apply(raw,PAYP); q=np.clip(q+0.7*(q-cv2.GaussianBlur(q,(0,0),1.4*K)),0,1);   # round 4: poster read soft (38 % of file sharpness): gentle unsharp on the payoff
                 t=min(1.0,(f-PAY0+1)/(PAY1-PAY0+1)); t=t*t*(3-2*t); o=o*(1-t)+q*t
             if n in HIFLOOR: o=hifloor(o)   # r7 (rule 274): bright ending and S11 highlights (p98 >= 0.86 before the poster's true colours go on)
-            if n=='S21' and str(f) in PQ: o=truepost(o,PQ[str(f)])   # r5 (rule 196, round-4 E5 note): the shop file's true colours on the projected poster quad
+            if n=='S21' and str(f) in PQ:   # r2 (payoff verifier D1): the true-colour paste fades in over 10 f with the payoff grade, never a 1-frame colour jump
+                tp=min(1.0,(f-PQ0+1)/10.0); tp=tp*tp*(3-2*tp); o=o*(1-tp)+truepost(o,PQ[str(f)])*tp   # r5 (rule 196, round-4 E5 note): the shop file's true colours on the projected poster quad
             ex=None
             if n=='S21' and str(f) in PQ:
                 qm=quadmask(PQ[str(f)],H,W,int(9*K)); ex=qm
@@ -225,9 +267,8 @@ if __name__=='__main__':
         im=Image.fromarray((img*255+0.5).astype(np.uint8)).convert('RGBA')
         cur=[c for c in CAPS if c[0]<=f<c[2]]
         if cur:
-            low=str(f) in PQ and min(p[1] for p in PQ[str(f)])<0.33   # S21: the poster covers the normal caption band, so the caption goes ABOVE the poster (baseline 19.5 % H: clear of the top 12 % UI zone and of the poster top at >= 22.8 % H), not into the bottom UI zone
-            key=(cur[0][1],low)
-            if capkey!=key: capimg,wd=cap_layer(cur[0][1],int(0.195*H) if low else None); capkey=key; widths.append(wd)
+            key=CAPS.index(cur[0])   # one layer per card; baseline chosen per card by pick_bases (r2 T7)
+            if capkey!=key: capimg,wd=cap_layer(cur[0][1],CB[CAPS.index(cur[0])]); capkey=key; widths.append(wd)
             im.alpha_composite(capimg)
         enc.stdin.write(np.asarray(im.convert('RGB')).tobytes())
         if f%100==0: print('POST',f,flush=True)

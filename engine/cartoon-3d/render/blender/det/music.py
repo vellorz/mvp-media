@@ -62,7 +62,7 @@ import json as _js
 _WM=_js.load(open('/root/det/bridge/warpmap.json')); _wm=lambda f: float(np.interp(f,_WM['old'],_WM['new']))
 MAP=[(_wm(t*30)/30,v) for t,v in MAP if t<63.0]   # take-3 retime (old payoff points dropped, rebuilt below)
 _mu=np.mean([v for t,v in MAP]); MAP=[(t,_mu+1.6*(v-_mu)) for t,v in MAP]   # r2 (audio A4): swing x1.6 -> bed std inside 2.3-4.0 dB
-_LW=_js.load(open('/root/det/audio_r2/vo_final.wav.words.json'))[-1]; _te=_LW[2]+0.1   # last word end in mix time
+_LW=_js.load(open('/root/det/audio_r3/vo_final.wav.words.json'))[-1]; _te=_LW[2]+0.1   # last word end in mix time
 MAP=[(t,v) for t,v in MAP if t<_te-1.2]+[(_te-1.2,MAP[-1][1] if MAP else 2),(_te+0.05,MAP[-1][1] if MAP else 2),(_te+0.45,9.0),(END_F/30+1,9.0)]   # r2: +9 lift after 'around.' so the payoff hit on 'turkey' sits under a quiet bed
 tt=np.arange(N)/SR-0.1   # VO plays 0.1 s late in the mix
 mk=np.array([m[0] for m in MAP]); mv=np.array([m[1] for m in MAP],float)
@@ -70,7 +70,7 @@ gdb=np.interp(tt,mk,mv)
 # Detroit (rule 244, no ducking): the level map only moves UNDER speech; in VO gaps >= 0.3 s it holds the level of the speech before it,
 # so the bed is never louder in the gaps than under the words around them.
 import subprocess as _sp
-_v=np.frombuffer(_sp.run(['ffmpeg','-v','error','-i','/root/det/audio_r2/vo_final.wav','-af','pan=mono|c0=c0','-ar',str(SR),'-f','f32le','-'],capture_output=True).stdout,np.float32)
+_v=np.frombuffer(_sp.run(['ffmpeg','-v','error','-i','/root/det/audio_r3/vo_final.wav','-af','pan=mono|c0=c0','-ar',str(SR),'-f','f32le','-'],capture_output=True).stdout,np.float32)
 _v=np.concatenate([np.zeros(int(0.1*SR)),_v]); _v=np.pad(_v,(0,max(0,N-len(_v))))[:N]
 _w=int(0.1*SR); _act=np.repeat([np.sqrt(np.mean(_v[i:i+_w]**2))>0.01 for i in range(0,N,_w)],_w)[:N]
 _i=0
@@ -132,17 +132,17 @@ def roar(dur):
     x=noise(dur,lp=900); n=len(x); return x*np.minimum(1,np.arange(n)/(0.25*SR))*np.minimum(1,(n-np.arange(n))/(0.5*SR))
 EV+=[(10,soft(whistle(0.35,1800),2400),0.3),          # S01 referee whistle on the TV (hook; 1.8 kHz, low-passed)
      (137,soft(click(),2000),1.0),                    # S02 ON AIR light clicks on
-     (298,whoosh2(0.3),0.5),                          # S03 the cash changes hands
      (422,soft(roar(0.8),1500),0.6),                  # S05 short crowd swell at the gate (no continuous crowd bed)
-     (755,whoosh2(0.35),0.6),(765,soft(thump(70,0.3),900),0.9),   # S09 crash push + landing
+     (758,whoosh2(0.35),0.6),(765,soft(thump(70,0.3),900),0.9),   # S09 crash push + landing (r3: one group, onsets 7 f apart)
      (856,soft(thump(55,0.35),800),1.0),              # S10 the Bears player in the doorway
-     (1109,soft(ding(84,1.2),1800),0.4),              # S11 the map is lit coast to coast (one ding)
-     (1245,soft(thump(90,0.25),900),0.9),             # S13 SOLD OUT slapped on
-     (1279,soft(roar(0.9),1600),0.7),                 # S14 packed stands (short swell)
+     (1109,soft(ding(72,1.2),1500),0.4),              # S11 the map is lit coast to coast (one ding; r3: an octave lower so rule 192's K-weighted cap leaves room for rule 319)
+     (1246,soft(thump(90,0.25),900),0.9),             # S13 SOLD OUT blind lands (r3)
      (1453,soft(click(),1500),1.0),(1456,soft(thump(110,0.18),900),0.6),   # S16 scoreboard flips to FINAL
-     (1858,whoosh2(0.45),0.7),(1876,soft(thump(80,0.35),700),1.0),(1876,soft(ding(64,1.6),1400),0.35)]   # S21 payoff push + hit on 'turkey'
+     (1858,soft(whoosh2(0.45),1500),0.7),   # r3: low-passed (K-weighting)
+     (1876,soft(thump(80,0.35),700),1.0),(1876,soft(ding(64,1.6),1400),0.35)]   # S21 payoff push + hit on 'turkey'
 # r2 (audio verifier A6c, rule 192 [C]): no square-wave horn, no chalk scratch, no phone-ring tone, one map ding, one calendar beat dropped:
 # 11 event groups in ~55 s (about 12 per minute, rule 192 'about 10-12').
+# r3 (audio verifier round 2: 13 groups = 14.2/min, the S09 pair split): cash whoosh and S14 roar dropped, S09 pair merged: 10 groups, 10.9/min.
 # A6: level every SFX event against the bed under it so each lands at the same offset over the bed
 # (one common offset; mix.py then sets the global SFX gain so the median offset is +10 dB in the mix)
 BEDW=bed/np.abs(bed).max()*0.7
@@ -170,7 +170,7 @@ for it in range(12):   # overlapping tails add up: re-level every group against 
     for gr in G:
         i,w=gr['i'],gr['w']   # robust: average of three comparison spans (span, span+0.2 s, fixed 0.5 s)
         vv=[20*np.log10(pk50(S[i:i+ww])/rms(BEDW[i:i+ww])) for ww in (w,w+int(0.2*SR),int(0.5*SR))]; po=(min(vv)+max(vv))/2; gr['k']*=10**((16-po)/20*0.8)
-ATT={1013:1.0,1054:1.1,1084:-0.6,1109:1.0,137:0.3,1245:0.3,1876:-2.3,1858:0.0,800:1.4,346:0.5,856:0.7,898:0.9,1639:0.6,298:0.6,1589:0.5}   # tonal dings read louder than their RMS (K-weighting): keep every SFX >= 8 LU under the VO
+ATT={1013:1.0,1054:1.1,1084:-0.6,1109:1.0,137:0.3,1246:0.3,1876:-2.3,1858:0.0,800:1.4,346:0.5,856:0.7,898:0.9,1639:0.6,298:0.6,1589:0.5}   # tonal dings read louder than their RMS (K-weighting): keep every SFX >= 8 LU under the VO
 ATT={int(round(_wm(k))):v for k,v in ATT.items()}   # take-3 retime
 for _k in list(ATT): ATT[_k]+=0.8   # r2 rule 319: every group about +0.8 dB (round 1 sat at +3.4-3.9 over the local bed)
 for gr in G: gr['k']*=10**(ATT.get(gr['f0'],0.0)/20)

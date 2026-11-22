@@ -7,7 +7,7 @@ A='/root/det/audio/'; SR=48000
 w=wave.open(A+'bed_music.wav'); a=np.frombuffer(w.readframes(w.getnframes()),np.int16).reshape(-1,2)[:,0]/32768.0
 e=np.sqrt(uniform_filter1d(a**2,int(1.5*SR))+1e-12); d=20*np.log10(e); med=np.median(d)
 x=np.clip(0.30*(d-med),-3,3)
-W=json.load(open('/root/det/audio_r2/vo_final.wav.words.json')); t0=(W[-3][1]+0.1)   # 'turkey' onset in mix time
+W=json.load(open('/root/det/audio_r3/vo_final.wav.words.json')); t0=([w for w in W if 'turkey' in w[0].lower()][-1][1]+0.1)   # 'turkey' onset in mix time
 t=np.arange(len(a))/SR; x+=np.clip((t-t0)/0.6,0,1)*2.0
 x[:int(3*SR)]-=1.0   # open a touch lower so the end clearly outruns it
 y=a*10**(x/20)

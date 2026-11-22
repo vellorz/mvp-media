@@ -98,7 +98,9 @@ def main():
             sent += len(chunk)
     v = json.load(resp)
     print(json.dumps({"id": v["id"], "url": "https://www.youtube.com/shorts/" + v["id"],
-                      "publishAt": v["status"].get("publishAt"), "privacyStatus": v["status"]["privacyStatus"]}))
+                      "publishAt": v["status"].get("publishAt"), "privacyStatus": v["status"]["privacyStatus"],
+                      "channelId": v.get("snippet", {}).get("channelId"),
+                      "channelTitle": v.get("snippet", {}).get("channelTitle")}))
 
 
 if __name__ == "__main__":

@@ -72,6 +72,8 @@ def head(name,fk):
     c=C[name]; e,b,m=c['faces'][fk][:3]; ex=c['faces'][fk][3] if len(c['faces'][fk])>3 else ''
     im,d=new(1024,1024); hair=tuple(c.get('hair',(60,40,30)))+(255,)
     hs=c.get('hairstyle','short')
+    HD=c.get('hairdo'); TD=X.turn_dx(c,ex)   # round 2: Rick hairstyles replace the old ones; TD = face slide toward the turned side
+    if HD: hs='_hairdo'; X.hairdo_back(d,HD,hair,K)
     if hs=='bun': d.ellipse([382,40,642,280],fill=hair,outline=K,width=OUT)
     if hs=='long': d.rounded_rectangle([100,260,924,980],200,fill=hair,outline=K,width=OUT)
     if hs=='mullet': d.rounded_rectangle([170,320,854,1010],140,fill=hair,outline=K,width=OUT)   # back hair, crown to shoulders
@@ -100,6 +102,7 @@ def head(name,fk):
         if hs=='topbun': d.ellipse([392,30,632,250],fill=hair,outline=K,width=OUT)
         d.chord([150,150,874,440],180,360,fill=hair,outline=K,width=OUT)
         if hs=='bob': d.chord([150,150,640,520],180,330,fill=hair,outline=K,width=OUT-8)   # side-swept fringe, part on the right
+    if HD: X.hairdo(d,HD,hair,K,dx=TD//3)
     if c.get('hat')=='leather':
         HC=tuple(c.get('hatcol',(80,60,44)))+(255,)
         for sx in(-1,1): d.rounded_rectangle([CX+sx*400-70,330,CX+sx*400+70,660],50,fill=HC,outline=K,width=OUT-6)
@@ -123,9 +126,17 @@ def head(name,fk):
     if hat=='fedora': d.ellipse([90,300,934,400],fill=HC,outline=K,width=OUT); d.rounded_rectangle([250,90,774,350],60,fill=HC,outline=K,width=OUT); d.rectangle([250,280,774,330],fill=dk(HC,0.5)); d.line([400,110,512,150,624,110],fill=dk(HC,0.7),width=12)
     if hat=='cloche': d.chord([150,70,874,470],180,360,fill=HC,outline=K,width=OUT); d.ellipse([150,240,874,330],fill=HC,outline=K,width=OUT-6); d.rectangle([160,250,864,290],fill=dk(HC,0.6)); d.ellipse([690,200,770,280],fill=(240,220,170,255),outline=K,width=9)
     if hat=='visor': d.chord([170,270,854,420],180,360,fill=(60,140,90,200),outline=K,width=OUT); d.rectangle([170,330,854,350],fill=K)
-    top=im.resize((1024,int(1024*0.6)),Image.LANCZOS); im=base; im.alpha_composite(top,(0,0)); top=None
+    top=im.resize((1024,int(1024*0.6)),Image.LANCZOS); im=base
+    if c.get('hat_tilt') or TD:   # round 2: hats sit tilted and slide a little with the turn (Rick #24 trucker, #03 bowler)
+        tl=Image.new('RGBA',(1024,1024),(0,0,0,0)); tl.alpha_composite(top,(0,0)); top=tl.rotate(-c.get('hat_tilt',0),resample=Image.BICUBIC,center=(CX,180),translate=(TD//2,0))
+    im.alpha_composite(top,(0,0)); top=None
+    if c.get('hat3d'): im.alpha_composite(X.hat3d(c['hat3d'],c.get('hatcol',(80,60,44)),K,tilt=c.get('hat_tilt',0),dx=TD//2,col2=c.get('hatcol2')))
+    if c.get('fhair'): X.fhair(im,c['fhair'],c.get('fhaircol',c.get('hair',(60,40,30))),K,dx=TD)   # round 2: Rick facial hair (rule 326a revision pending owner pick)
     feat,d=new(1024,1024)
-    eyes(d,e,glasses=(tuple(c['glasses'])+(255,)) if c.get('glasses') else None); brows(d,b if hat not in('cop','flatcap','fedora','beanie','ladyhat','leather','cloche','visor') or b!='up' else 'flat'); mouth(d,m)
+    eyes(d,e,glasses=(tuple(c['glasses'])+(255,)) if c.get('glasses') else None); brows(d,b if hat not in('cop','flatcap','fedora','beanie','ladyhat','leather','cloche','visor') or b!='up' else 'flat')
+    MSIDE=c.get('mouth_side',0)
+    if MSIDE: feat.alpha_composite(X.mouth_layer(mouth,m,MSIDE)); d=ImageDraw.Draw(feat)   # round 2: Rick's off-centre, lopsided mouths
+    else: mouth(d,m)
     if c.get('mustache'):   # r8: Rick's bushy two-lobe mustache
         mc=tuple(c['mustache'])+(255,)
         for sx in(-1,1): d.ellipse([CX+sx*80-95,605,CX+sx*80+95,705],fill=mc,outline=K,width=12)
@@ -138,7 +149,7 @@ def head(name,fk):
         bc=tuple(c['beard'])+(255,); d.chord([CX-300,560,CX+300,900],0,180,fill=bc,outline=K,width=12); d.chord([CX-90,640,CX+90,760],0,180,fill=(251,244,241,255))
     if c.get('nose',True): d.arc([CX-30,560,CX+30,640],-30,200,fill=K,width=10)
     extras(d,ex)
-    im.alpha_composite(feat.crop((0,105,1024,1024)),(0,0))
+    im.alpha_composite(feat.crop((0,105,1024,1024)),(TD,0))
     return im
 # ---- round 3 (rule 193): Rick-style construction ----
 # slim column garment (narrower than the head), long coat/robe to the shins, hard cel shadow on the left third,

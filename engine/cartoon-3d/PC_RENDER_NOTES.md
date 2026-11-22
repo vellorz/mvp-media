@@ -73,3 +73,10 @@ Each entry: date, package, what was seen, cause (CONFIRMED or SUSPECTED), the ru
 
 ### N-012 Operations: upload limits for posting
 - The browser upload tool only reads files in the session's allowed folders. Put the posting file in a shared folder or ask for the folder to be added before scheduling. Pinterest blocks fetching a file from another origin (CSP), so a URL fetch inside the page does not work.
+
+## Cape Cod r1 (cc1) - 2026-11-22, RTX 3070
+- Package cc1 at e1fe1a2 (cc.blend sha 99cc8268...); pcrender restores 8 spp / 4 bounces on GPU (OPTIX).
+- 3-frame test ~2-3 s/frame; full render 19 shots, 1936 PNGs (shot ranges overlap by a few frames, so more than the 1817-frame timeline), ~4540 s Blender time = ~2.35 s/frame average, about 1 h 10 min wall clock.
+- Slowest shot S09 (247 frames, 2.2 s/frame); S14 fastest.
+- Encode gave 43 clips, 0.3-8.6 MB each, so 100 MB limit is no issue. Clip names are SHOT_STARTFRAME_.mp4 (chunks of 60 frames).
+- RAM free was 6.7 GB at start; Blender peak ~2.8 GB. No errors in stderr.

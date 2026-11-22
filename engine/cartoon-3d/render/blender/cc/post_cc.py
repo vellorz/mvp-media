@@ -65,11 +65,18 @@ def apply(x,p):
     y=gray(x); yn=np.clip((y-lo)/(hi-lo),0,1); y2=0.055+0.925*yn**g
     r=(y2/np.maximum(y,1e-4))[...,None]; z=np.clip(x*r,0,1)
     y3=gray(z)[...,None]; z=np.clip(y3+sat*(z-y3),0,1); z=np.clip(z*np.array(tint,np.float32),0,1); return z
-CLAR=0.8; CLS=24.0; PLUM=np.array([46,28,54],np.float32)/255   # r2 (visual verifier L5/R20: edge density 22.9 % vs >= 28 %): painted-surface local contrast, sigma 24 px at 2K
+CLAR=0.55; CLS=14.0; PLUM=np.array([46,28,54],np.float32)/255   # r4 (visual L6 0.361 > 0.35 and halos at f60/f1720): weaker, tighter local contrast (r3 was 0.8 / 24 px)
 def finish(o):
     y=gray(o)[...,None]; mid=np.clip(4*y*(1-y),0,1)   # r3: local contrast on midtones only (r2 crushed ink and coats to RGB 0)
-    o=np.clip(o+CLAR*mid*(o-cv2.GaussianBlur(o,(0,0),CLS*K)),0,1)
-    y=gray(o)[...,None]; w=np.clip((0.22-y)/0.14,0,1)*0.75   # r3 (rule 308 / R19): darks go to Rick's dull plum ink (46,28,54), floor about luma 0.12, never black
+    return np.clip(o+CLAR*mid*(o-cv2.GaussianBlur(o,(0,0),CLS*K)),0,1)
+def floor_(o):
+    y=gray(o)[...,None]
+    # rule 308: dark saturated crimson ink (S03/S06/S11/S15 at ~(100,24,44)) pulled to Rick's dull plum
+    mx=o.max(-1,keepdims=True); mn=o.min(-1,keepdims=True); sat=(mx-mn)/np.maximum(mx,1e-4)
+    line=np.clip((0.75*cv2.GaussianBlur(y[...,0],(0,0),5*K)[...,None]-y)/0.05,0,1)   # thin ink lines only (darker than their surroundings), not smooth wood shadow
+    red=np.clip((o[...,:1]-np.maximum(o[...,1:2],o[...,2:3]))/0.12,0,1)*np.clip((sat-0.45)/0.2,0,1)*np.clip((0.32-y)/0.12,0,1)*line
+    o=o*(1-0.85*red)+(PLUM*1.15)*0.85*red
+    y=gray(o)[...,None]; w=np.clip((0.24-y)/0.14,0,1)*0.85   # darks go to Rick's plum (46,28,54); floor about luma 0.12, never black
     return np.clip(o*(1-w)+PLUM*w,0,1)
 def solve(samples,tint,lt=0.45,vk=0.0):
     allY=np.concatenate([gray(s).ravel() for s in samples]); lo,hi=np.percentile(allY,0.8),np.percentile(allY,99.6)
@@ -131,7 +138,8 @@ def chunks():
     return C
 CAPS=chunks()
 DWMAX=17   # r2 (text verifier: dwell mean 0.374 s / P90 0.663 s vs Rick 0.32-0.35 / 0.53-0.57): a card leaves after at most 17 f (0.57 s); a gap shows no caption until the next word
-CAPS=[[a,t,min(b,a+DWMAX)] for a,t,b in CAPS]
+NUMX=30   # r4 (text verifier r3: '121', 'a 94-year-old', 'in 1620' went blank 13-19 f while still spoken): cards with a digit may stay up to 30 f
+CAPS=[[a,t,min(b,a+(NUMX if any(ch.isdigit() for ch in t) else DWMAX))] for a,t,b in CAPS]
 def cap_layer(txt):
     l,t,r,b=FNT.getbbox(txt,anchor='ls',stroke_width=STROKE); w=r-l
     lay=Image.new('RGBA',(W,H),(0,0,0,0)); sh=Image.new('RGBA',(W,H),(0,0,0,0))
@@ -168,12 +176,18 @@ if __name__=='__main__':
     json.dump({'grade':rep,'payoff_grade':dict(from_frame=PAY0,full_at=PAY1,params=PAYP[:4]),'captions':CAPS,'font_px':fs},open(OUT+'.post.json','w'),indent=1,default=str)
     widths=[]
     R={n:Reader(n) for n in SH}; cache={}
-    enc=subprocess.Popen(['ffmpeg','-y','-v','error','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r','30','-i','-','-i','/root/cc/audio/mix.wav',
+    TESTF=set(int(x) for x in os.environ.get('TESTF','').split(',') if x)
+    if TESTF: enc=None
+    else: enc=subprocess.Popen(['ffmpeg','-y','-v','error','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r','30','-i','-','-i','/root/cc/audio/mix.wav',
         '-c:v','libx264','-preset','slow','-crf','14' if K==1 else '20','-pix_fmt','yuv420p','-c:a','aac','-b:a','320k','-shortest','-movflags','+faststart',OUT],stdin=subprocess.PIPE)
     ci=0; capimg=None; capkey=None
     for f in range(END+1):
         act=[n for n,(a,b) in SH.items() if a<=f<=b]
         frames={}
+        if TESTF and f not in TESTF:
+            for n in act: R[n].next()
+            if f>max(TESTF): break
+            continue
         for n in act:
             raw=R[n].next(); o=finish(apply(raw,P[n]))
             if n=='S19' and f>=PAY0:   # payoff close-up: protect the poster's real colours (no highlight stretch, gentle gamma)
@@ -181,7 +195,8 @@ if __name__=='__main__':
                 t=min(1.0,(f-PAY0+1)/(PAY1-PAY0+1)); t=t*t*(3-2*t); o=o*(1-t)+q*t
             if n in HIFLOOR: o=hifloor(o)   # r7 (rule 274): bright ending and S11 highlights (p98 >= 0.86 before the poster's true colours go on)
             if n=='S19' and str(f) in PQ: o=truepost(o,PQ[str(f)])   # r5 (rule 196, round-4 E5 note): the shop file's true colours on the projected poster quad
-            frames[n]=vig(bloom(o,BLOOM),VIG[n])
+            frames[n]=vig(bloom(floor_(o),BLOOM),VIG[n])
+            if n=='S19': frames[n]=floor_(frames[n])   # r4: S19 soffit band fell under luma 0.07 after the vignette (rule 317)
         if len(act)==1: img=frames[act[0]]
         else:
             A,B=act[0],act[1]; s0,e0=SH[B][0],SH[A][1]; t=(f-s0+1)/(e0-s0+2); w_=t*t*(3-2*t); img=frames[A]*(1-w_)+frames[B]*w_
@@ -190,8 +205,10 @@ if __name__=='__main__':
         if cur:
             if capkey!=cur[0][1]: capimg,wd=cap_layer(cur[0][1]); capkey=cur[0][1]; widths.append(wd)
             im.alpha_composite(capimg)
+        if TESTF: im.convert('RGB').save(f'{OUT}_f{f}.png'); continue
         enc.stdin.write(np.asarray(im.convert('RGB')).tobytes())
         if f%100==0: print('POST',f,flush=True)
+    if TESTF: sys.exit(0)
     enc.stdin.close(); enc.wait()
     print('CAPTION_WIDTH_MED',round(float(np.median(widths))*100,1),'MAX',round(float(max(widths))*100,1),'N',len(CAPS))
     print('POST_DONE',OUT)

@@ -3,7 +3,7 @@
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 import json, math
-T='/root/cc/tex/'; K=(50,28,42,255); SK=(251,244,241,255); OUT=27   # r8 (owner Nov 20: clone Rick's characters): pure white heads like Rick's. r8b (guide v1.3 x.3): dark plum ink, never pure black; 27 px on an 800 px disc = 3.4 % lit side
+T='/root/cc/tex/'; K=(50,28,42,255); SK=(251,244,241,255); OUT=23   # r8 (owner Nov 20: clone Rick's characters): pure white heads like Rick's. r8b (guide v1.3 x.3): dark plum ink, never pure black; 27 px on an 800 px disc = 3.4 % lit side
 def new(w,h): im=Image.new('RGBA',(w,h),(0,0,0,0)); return im,ImageDraw.Draw(im)
 def dk(c,f=0.75): return tuple(int(v*f) for v in c[:3])+(255,)
 CX,CY=512,540
@@ -125,7 +125,7 @@ def head(name,fk):
 # slim column garment (narrower than the head), long coat/robe to the shins, hard cel shadow on the left third,
 # light rim on the right, ink detail (collar, placket, buttons, belt + buckle, hem band, fold lines),
 # stick legs with small shoes; thin sleeves with a cuff and a small hand. Drawn at 2x and downsampled (clean edges).
-SS=2; BOUT=20   # round 4: body outline as heavy as the head's (verifier: thin body outlines vs heads)
+SS=2; BOUT=17   # round 4: body outline as heavy as the head's (verifier: thin body outlines vs heads)
 def lt(c,f=1.12): return tuple(min(255,int(v*f)) for v in c[:3])+(255,)
 GB={'tall':(98,175,215),'short':(98,180,222),'round':(98,200,238)}   # r8b: one build for all (guide v1.3 x.3: torso 1.00 H, legs 1.25-1.3 H, total 3.2-3.35 H); kinds differ in width only   # top px, shoulder half-width, hem half-width
 HEMY={'tall':528,'short':528,'round':528}   # r8b: torso 430 px = 1.00 H (head 0.43 m), legs 528->1074 = 1.27 H   # r6 (round-5: legs 0.64-0.90 H, Rick 0.93-1.31): shorter torso, longer legs   # round 5 (B1/B2): torso ~0.86 H tall (H = head disc ~560 px), legs ~0.85 H visible
@@ -303,6 +303,7 @@ def arm(name,prop=None,straight=None):
 # r7 (owner Nov 19: forearms stuck out sideways and swung across faces): natural hang 18 deg; 'armS' = straight card for raised and gripping arms
 BEND={'musket':0,'shovel':6,'spyglass':25,'quill':30,'bow':4,'cane':10,'basket':22,'oar':0,'lantern':18,'phone':28,'pennant':0,'megaphone':15,'paper':20,'bag':20,'box':25,'camera':25,'chalk':30,'pen':30,'redpen':30}
 AW=38
+NBOW=110   # r4: control-point offset in px (sagitta = NBOW/2)
 def noodle(hand,deg,ey=330):
     # the hand (with its prop) swings outward by deg about a point 330 px down; the arm is one quadratic curve from the shoulder to the hand
     W,H=hand.size; out=Image.new('RGBA',(W*3,H),(0,0,0,0)); X=W*3//2
@@ -310,6 +311,12 @@ def noodle(hand,deg,ey=330):
     if deg: lay=lay.rotate(deg,resample=Image.BICUBIC,center=(X,ey))   # PIL rotates counter-clockwise: the hand swings to +x (outward)
     a=math.radians(deg); hx=X+(712-ey)*math.sin(a); hy=ey+(712-ey)*math.cos(a)
     sx0,sy0=X,40; cxp,cyp=X,(sy0+hy)/2+40   # control point straight below the shoulder: leaves the shoulder down, bends smoothly into the hand
+    # r4 (visual verifier r3, must-have 3: every arm read as a straight stick; guide x.3: 85 of 113 Rick arms are curved noodles):
+    # bow the curve sideways so the arm reads as a soft noodle (~35-40 deg total turn, sagitta ~55 px on a 670 px arm), elbow side outward
+    mx_,my_=(sx0+hx)/2,(sy0+hy)/2; dx_,dy_=hx-sx0,hy-sy0; ln_=math.hypot(dx_,dy_) or 1
+    nx_,ny_=dy_/ln_,-dx_/ln_
+    if nx_<0: nx_,ny_=-nx_,-ny_
+    cxp,cyp=mx_+nx_*NBOW,my_+ny_*NBOW
     P=[((1-t)**2*sx0+2*(1-t)*t*cxp+t*t*hx,(1-t)**2*sy0+2*(1-t)*t*cyp+t*t*hy) for t in [i/40 for i in range(41)]]
     big=Image.new('RGBA',(W*3*SS,H*SS),(0,0,0,0)); bd=ImageDraw.Draw(big)
     bd.line([(x*SS,y*SS) for x,y in P],fill=K,width=AW*SS,joint='curve')

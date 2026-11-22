@@ -100,11 +100,17 @@
    "surprise",
    "worried"
   ],
-  "hat": "fedora",
   "hatcol": [
-   96,
-   96,
-   104
+   70,
+   72,
+   80
+  ],
+  "hat3d": "bowler3d",
+  "fhair": "pencil",
+  "fhaircol": [
+   50,
+   34,
+   28
   ]
  },
  "seller": {
@@ -151,11 +157,6 @@
     "line"
    ]
   },
-  "stache_small": [
-   150,
-   140,
-   130
-  ],
   "turn": -0.4,
   "mouth_side": -1,
   "hat_tilt": -8,
@@ -172,7 +173,18 @@
    "surprise",
    "worried"
   ],
-  "hat": "flatcap"
+  "hat3d": "flatcap3d",
+  "hatcol": [
+   110,
+   95,
+   70
+  ],
+  "fhair": "walrus",
+  "fhaircol": [
+   120,
+   110,
+   100
+  ]
  },
  "lion": {
   "coat": [
@@ -489,11 +501,17 @@
    "surprise",
    "worried"
   ],
-  "hat": "fedora",
   "hatcol": [
-   80,
-   60,
-   44
+   95,
+   70,
+   45
+  ],
+  "hat3d": "bowler3d",
+  "fhair": "chevron",
+  "fhaircol": [
+   70,
+   46,
+   30
   ]
  },
  "fanlady": {
@@ -631,11 +649,6 @@
     "frown"
    ]
   },
-  "stache_small": [
-   220,
-   220,
-   224
-  ],
   "turn": -0.45,
   "mouth_side": -1,
   "hat_tilt": -8,
@@ -655,7 +668,18 @@
    "surprise",
    "worried"
   ],
-  "hat": "flatcap"
+  "hat3d": "flatcap3d",
+  "hatcol": [
+   90,
+   90,
+   95
+  ],
+  "fhair": "droop",
+  "fhaircol": [
+   200,
+   200,
+   200
+  ]
  },
  "newsboy": {
   "coat": [
@@ -712,7 +736,13 @@
    "surprise",
    "worried"
   ],
-  "hat": "flatcap"
+  "hat3d": "flatcap3d",
+  "hatcol": [
+   150,
+   110,
+   60
+  ],
+  "hairdo": "messy"
  },
  "dad34": {
   "coat": [
@@ -783,7 +813,14 @@
    "smile",
    "surprise",
    "worried"
-  ]
+  ],
+  "fhair": "curled",
+  "fhaircol": [
+   80,
+   55,
+   35
+  ],
+  "hairdo": "sidepart"
  },
  "mom34": {
   "coat": [
@@ -925,11 +962,6 @@
     "smile"
    ]
   },
-  "stache_small": [
-   230,
-   230,
-   232
-  ],
   "turn": -0.5,
   "mouth_side": -1,
   "library": [
@@ -944,6 +976,12 @@
    "startle",
    "surprise",
    "worried"
+  ],
+  "fhair": "whitebeard",
+  "fhaircol": [
+   235,
+   235,
+   235
   ]
  },
  "kid34": {
@@ -1006,7 +1044,12 @@
    "surprise",
    "worried"
   ],
-  "hat": "flatcap"
+  "hat3d": "flatcap3d",
+  "hatcol": [
+   90,
+   100,
+   120
+  ]
  },
  "operator": {
   "coat": [
@@ -1071,7 +1114,8 @@
    "smile",
    "surprise",
    "worried"
-  ]
+  ],
+  "hairdo": "topknot"
  },
  "clerk": {
   "coat": [
@@ -1132,7 +1176,8 @@
    "surprise",
    "worried"
   ],
-  "hat": "visor"
+  "hat": "visor",
+  "fhair": "stubbledots"
  },
  "dadM": {
   "coat": [
@@ -1189,11 +1234,6 @@
     "line"
    ]
   },
-  "stache_small": [
-   70,
-   46,
-   30
-  ],
   "turn": -0.45,
   "mouth_side": -1,
   "library": [
@@ -1212,7 +1252,14 @@
    "startle",
    "surprise",
    "worried"
-  ]
+  ],
+  "fhair": "chevron",
+  "fhaircol": [
+   70,
+   46,
+   30
+  ],
+  "hairdo": "sidepart"
  },
  "momM": {
   "coat": [
@@ -1338,7 +1385,8 @@
    "smile",
    "surprise",
    "worried"
-  ]
+  ],
+  "hairdo": "cowlick"
  },
  "grandmaM": {
   "coat": [

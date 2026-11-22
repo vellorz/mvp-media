@@ -833,3 +833,22 @@ def turn_dx(c, ex=''):
     if 'lookR' in ks: return 62
     return _turn_dx_r2(c, ex)
 TOKENS = {'turnL', 'turnR', 'front', 'mouthL', 'mouthR', 'mouthC', 'tiltL', 'tiltR', 'lookL', 'lookR'}
+
+# ------------------------------------------------------------------ growing library (owner Nov 22 2026, 5:52 PM CT)
+# "the expression library page [should] keep accumulating new facial expressions ... a constant feedback loop that expands the library".
+# Builders add faces WITHOUT editing this file: library_extra.json next to this file, {"faces": {name: [eyes, brows, mouth, extras]},
+# "family": {name: family}, "log": [...]} using any eyes/brows/mouth/extras kind already defined here (or in cast.py).
+# New drawing primitives (a new eye shape, hair, hat) still go in this file, in a dated section like ROUND 3 above.
+# How-to and checklist: research/rick-style-spec/expression-library/CONTRIBUTING.md (project files).
+def _load_extra():
+    import json, os
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'library_extra.json')
+    if not os.path.exists(p): return
+    try: E = json.load(open(p))
+    except Exception as e: print('library_extra.json unreadable:', e); return
+    for k, v in E.get('faces', {}).items():
+        if k not in LIBRARY: LIBRARY[k] = tuple((list(v) + [''] * 4)[:4])
+    for k, v in E.get('family', {}).items():
+        for fam, members in FAMILY.items():
+            if fam == v and k not in members: members.append(k) if isinstance(members, list) else None
+_load_extra()

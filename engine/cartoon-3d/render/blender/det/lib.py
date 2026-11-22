@@ -191,7 +191,8 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
     neck=plane(inst+'_head',(0,0,0),0.16*HS,0.16*HS,flat('skin',lin((252,246,236)),0.9),coll=C); neck.parent=hp; neck.location=(0,0.004,0.04)
     F={}
     for fk in c['faces']:
-        f=plane(f'{inst}_d_{fk}',(0,0,0),0.75*HS,0.75*HS,card_mat(f'{kind}_h_{fk}',f'{kind}_h_{fk}',emit=0.25),coll=C); f.parent=hp; f.location=(0,-0.012,0.2535*HS); F[fk]=f
+        _pt,_pb=XL.pads(c)   # round 3: tall hats/hair/beards use a taller head texture; card grows by the same ratio, head disc stays put
+        f=plane(f'{inst}_d_{fk}',(0,0,0),0.75*HS,0.75*HS*(1024+_pt+_pb)/1024,card_mat(f'{kind}_h_{fk}',f'{kind}_h_{fk}',emit=0.25),coll=C); f.parent=hp; f.location=(0,-0.012,0.2535*HS+0.75*HS*(_pt-_pb)/2048); F[fk]=f
     A={}
     for sx,ak in zip((-1,1),arms):
         # r7 (rule 268): arms sit BEHIND the face disc (face -0.012) and in front of the body (0): a raised hand can never paint over its own face

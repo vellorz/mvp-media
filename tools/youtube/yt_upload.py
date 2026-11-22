@@ -54,15 +54,21 @@ def main():
     ap.add_argument("--description-file")
     ap.add_argument("--tags", default="")
     ap.add_argument("--category", default="27")  # 27 Education, 19 Travel & Events
-    ap.add_argument("--publish-at", required=True, help="ISO 8601 with UTC offset, in the future")
+    ap.add_argument("--publish-at", help="ISO 8601 with UTC offset, in the future")
+    ap.add_argument("--private-only", action="store_true",
+                    help="test mode: upload as private with NO publish time, so it never goes public")
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args()
 
-    when = datetime.datetime.fromisoformat(a.publish_at)
-    if when.tzinfo is None:
-        sys.exit("--publish-at needs a UTC offset, e.g. 2026-11-26T16:00:00-06:00")
-    if when <= datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(minutes=10):
-        sys.exit("--publish-at must be at least 10 minutes in the future (a past time publishes at once)")
+    if bool(a.publish_at) == bool(a.private_only):
+        sys.exit("Give exactly one of --publish-at or --private-only")
+    when = None
+    if a.publish_at:
+        when = datetime.datetime.fromisoformat(a.publish_at)
+        if when.tzinfo is None:
+            sys.exit("--publish-at needs a UTC offset, e.g. 2026-11-26T16:00:00-06:00")
+        if when <= datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(minutes=10):
+            sys.exit("--publish-at must be at least 10 minutes in the future (a past time publishes at once)")
     if len(a.title) > 100:
         sys.exit("Title is over 100 characters")
     desc = open(a.description_file, encoding="utf-8").read() if a.description_file else a.description
@@ -70,10 +76,10 @@ def main():
     meta = {
         "snippet": {"title": a.title, "description": desc, "categoryId": a.category,
                     "tags": [t.strip() for t in a.tags.split(",") if t.strip()]},
-        "status": {"privacyStatus": "private",
-                   "publishAt": when.astimezone(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z"),
-                   "selfDeclaredMadeForKids": False},
+        "status": {"privacyStatus": "private", "selfDeclaredMadeForKids": False},
     }
+    if when:
+        meta["status"]["publishAt"] = when.astimezone(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
     if a.dry_run:
         print(json.dumps({"dry_run": True, "bytes": size, "metadata": meta}, ensure_ascii=False))
         return

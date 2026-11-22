@@ -7,7 +7,7 @@ def _mono_filter(p):
     n=int(subprocess.run(['ffprobe','-v','error','-select_streams','a:0','-show_entries','stream=channels','-of','csv=p=0',p],capture_output=True).stdout.split()[0])
     return 'pan=mono|c0=0.5*c0+0.5*c1' if n==2 else 'pan=mono|c0=c0'
 def rd(p): return np.frombuffer(subprocess.run(['ffmpeg','-v','error','-i',p,'-af',_mono_filter(p),'-ar',str(sr),'-f','f32le','-'],capture_output=True).stdout,np.float32).astype(np.float64)
-s=rd('/root/det/audio/sfx.wav'); v=rd('/root/det/audio/vo_trim.wav')
+s=rd('/root/det/audio/sfx.wav'); v=rd('/root/det/audio3/vo_final.wav')
 d=int(0.1*sr); v=np.concatenate([np.zeros(d),v]); v=np.pad(v,(0,max(0,len(s)-len(v))))[:len(s)]
 gs=float(re.findall(r"sfx \S+ ->gain (\S+)",subprocess.run(['python3','-c','print(open("/root/det/audio/mixlog.txt").read())'],capture_output=True,text=True).stdout or 'sfx 0 ->gain -14.56')[0]) if False else None
 import sys; gs=float(sys.argv[1]) if len(sys.argv)>1 else -14.56

@@ -3,11 +3,10 @@
 import sys, os, glob, json, subprocess, numpy as np, re, cv2
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 SRC,OUT=sys.argv[1],sys.argv[2]; K=float(sys.argv[3]) if len(sys.argv)>3 else 1.0
-W,H=int(1440*K),int(2560*K); END=1940
+W,H=int(1440*K),int(2560*K)
 # Detroit shot table (same as scene_det.py); overlapping ranges are the declared smoothstep dissolves (8-12 f); every other join is a hard cut
-SH={'S01':(0,112),'S02':(113,196),'S03':(197,330),'S04':(331,414),'S05':(415,494),'S06':(495,547),'S07':(548,605),'S08':(598,716),
-    'S09':(717,794),'S10':(795,931),'S11':(932,1180),'S12':(1171,1226),'S13':(1227,1276),'S14':(1277,1349),'S15':(1350,1409),'S16':(1402,1536),
-    'S17':(1537,1558),'S18':(1559,1729),'S19':(1718,1795),'S20':(1784,1863),'S21':(1852,END)}
+SH={k:tuple(v) for k,v in json.load(open('/root/det/bridge/shots.json')).items()}   # take 3 retime (warp_det.py): shot table from the warped scene
+END=SH['S21'][1]
 # palette per era/mood: today (S01, S20, S21) neutral-cool daylight; 1934 interiors warm lamp; 1934 exteriors warm day; the loss (S16 end, S07) a touch cooler
 _T={'now':(1.0,1.0,1.02),'lamp':(1.06,0.99,0.92),'day':(1.03,1.0,0.96),'cool':(0.99,1.0,1.03)}
 TINT={'S01':_T['now'],'S02':_T['lamp'],'S03':_T['lamp'],'S04':_T['day'],'S05':_T['day'],'S06':_T['day'],'S07':_T['cool'],'S08':_T['lamp'],'S09':_T['lamp'],'S10':_T['lamp'],
@@ -15,7 +14,7 @@ TINT={'S01':_T['now'],'S02':_T['lamp'],'S03':_T['lamp'],'S04':_T['day'],'S05':_T
 # per-shot brightness targets: day exteriors and today bright, lamp-lit 1934 interiors darker (Rick swings 0.2-0.7 across scenes)
 LT={'S01':0.52,'S02':0.44,'S03':0.45,'S04':0.50,'S05':0.50,'S06':0.47,'S07':0.48,'S08':0.45,'S09':0.44,'S10':0.43,'S11':0.44,'S12':0.40,'S13':0.50,'S14':0.48,
     'S15':0.42,'S16':0.47,'S17':0.44,'S18':0.44,'S19':0.42,'S20':0.52,'S21':0.54}
-PAY0,PAY1=1866,1878; PAYP=(0.0,1.0,1.0,1.0,(1.02,1.0,0.99))   # S21 payoff grade: protect the poster's true colours from the landing on
+PAY0,PAY1=1595,1606; PAYP=(0.0,1.0,1.0,1.0,(1.02,1.0,0.99))   # S21 payoff grade: protect the poster's true colours from the landing on
 INTR=('S02','S03','S08','S09','S10','S11','S12','S15','S17','S18')
 VIG={n:(0.70 if n in INTR else 0.10) for n in SH}
 BLOOM=0.0   # light glow on emitters (lamps, screens, lit windows): guide L8
@@ -85,26 +84,41 @@ for _ in range(30):
     if abs(ch-CAP)<1: break
     fs=int(round(fs*CAP/ch))
 FNT=font(fs); BASE=int(0.717*H); STROKE=max(1,int(round(7*K))); SHX,SHY=int(round(4*K)),int(round(5*K))
-WORDS=json.load(open('/root/det/audio/vo_trim.wav.words.json'))
+WORDS=json.load(open('/root/det/audio3/vo_final.wav.words.json'))
+def mergesplit(W_):
+    # whisper splits 'small -town', '8 ,000', 'coast -to -coast,', '26 ,000', '19 -16,': glue a piece that starts with - or , onto the word before
+    o=[]
+    for w,s_,e in W_:
+        t=w.strip()
+        if o and t[:1] in '-,' and len(t)>1: o[-1][0]+=t; o[-1][2]=e
+        else: o.append([t,s_,e])
+    return o
+WORDS=mergesplit(WORDS)
 def fixwords(W_):
     """Detroit: caption text follows the script's punctuation, not the ASR's"""
     o=[]; i=0
     nx=lambda i:(W_[i+1][0].strip() if i+1<len(W_) else '')
     while i<len(W_):
-        w,s_,e=W_[i]; t=w.strip()
-        if t=='radio' and nx(i)=='guy' and o and o[-1][0]=='most':
+        w,s_,e=W_[i]; t=w.strip(); pv=o[-1][0] if o else ''
+        if t=='radio' and nx(i)=='guy' and pv=='most':
             o.append(['radio-guy',s_,W_[i+1][2]]); i+=2; continue
+        if t=='Folks' and nx(i)=='will':
+            o.append(["Folks'll",s_,W_[i+1][2]]); i+=2; continue
         if t=='Detroit,' and nx(i)=='and': t='Detroit'
-        if t=='Champs,': t='champs,'
-        if t=='Then,': t='Then'
+        if t=='town.' and pv=='baseball': t='town,'
+        if t=='The' and pv=='town,': t='the'
+        if t=='Football' and pv=='seats.': t='“Football'
+        if t=='eat!': t='eat!”'
+        if t=='ever.' and pv=='thing': t='ever:'
+        if t=='He' and pv=='ever:': t='he'
         if t=='NBC,': t='NBC:'
         if t.startswith('coast-to-coast'): t='coast to coast.'
-        if t=='the' and o and o[-1][0]=='coast to coast.': t='The'
-        if t=='out,' and o and o[-1][0]=='sold': t='out.'
+        if t=='the' and pv=='coast to coast.': t='The'
+        if t=='out,' and pv=='sold': t='out.'
         if t=='holiday' and nx(i)=='with': t='holiday,'
-        if t=='lost,' and o and o[-1][0]=='Lions': t='lost.'
+        if t=='lost,' and pv=='Lions': t='lost.'
         if t=='19-16,': t='19-16.'
-        if t=='on' and o and o[-1][0]=='19-16.': t='On'
+        if t=='on' and pv=='19-16.': t='On'
         o.append([t,s_,e]); i+=1
     return o
 WORDS=fixwords(WORDS)
@@ -114,23 +128,24 @@ def chunks():
         cur.append((w,s,e)); punct=w.strip()[-1] in ',.?!'
         nxt=WORDS[i+1][1] if i+1<len(WORDS) else e+0.4
         dur=(nxt-cur[0][1])*30
-        if punct or len(cur)==2 or dur>=5 or (len(cur)==2 and len(''.join(x[0] for x in cur))>6):   # round 5 (T1-T3): 1-2 words per card, 162 cards, mean 0.36 s, P90 0.54 s
+        fw=len(cur)==1 and w.strip().lower() in ('a','an','the','of','in','on','to','for','and','its','it','he','so','at','with','was','his','had')
+        if punct or dur>=4 or len(cur)==2:   # Detroit (rule 314, Rick mean dwell 0.32-0.35 s): one word per card; a word shorter than 4 f shares with the next   # round 5 (T1-T3): 1-2 words per card, 162 cards, mean 0.36 s, P90 0.54 s
             out.append(cur); cur=[]
     if cur: out.append(cur)
-    C=[]
+    C=[]; EN=[]
     for c in out:
-        txt=' '.join(x[0].strip() for x in c).replace('Army Navy','Army-Navy').replace('  ',' ')
-        C.append([int((c[0][1]+0.1)*30),txt])   # r9 (rule 9/186 revised: on the word or 0-1 f before, never later than +2): floor of the audible onset frame (round 7 ran 1.7-3.1 f early)
+        txt=' '.join(x[0].strip() for x in c).replace('  ',' ')
+        C.append([int((c[0][1]+0.1)*30),txt]); EN.append(int((c[-1][2]+0.1)*30)+3)   # Detroit (rule 314): a card leaves 3 f after its last word ends, not at the next card   # r9 (rule 9/186 revised: on the word or 0-1 f before, never later than +2): floor of the audible onset frame (round 7 ran 1.7-3.1 f early)
     C[0][0]=0   # the hook frame carries its caption from f0
-    for i in range(len(C)): C[i].append(C[i+1][0] if i+1<len(C) else END+1)
+    for i in range(len(C)): C[i].append(min(C[i+1][0],max(C[i][0]+3,EN[i])) if i+1<len(C) else min(END+1,EN[i]+6))
     return C
 CAPS=chunks()
-def cap_layer(txt):
+def cap_layer(txt,base=None):
     l,t,r,b=FNT.getbbox(txt,anchor='ls',stroke_width=STROKE); w=r-l
     lay=Image.new('RGBA',(W,H),(0,0,0,0)); sh=Image.new('RGBA',(W,H),(0,0,0,0))
-    x=(W-w)//2-l; ImageDraw.Draw(sh).text((x+SHX,BASE+SHY),txt,font=FNT,fill=(0,0,0,150),anchor='ls',stroke_width=STROKE,stroke_fill=(0,0,0,150))
+    B_=BASE if base is None else base; x=(W-w)//2-l; ImageDraw.Draw(sh).text((x+SHX,B_+SHY),txt,font=FNT,fill=(0,0,0,150),anchor='ls',stroke_width=STROKE,stroke_fill=(0,0,0,150))
     sh=sh.filter(ImageFilter.GaussianBlur(2*K)); lay.alpha_composite(sh)
-    ImageDraw.Draw(lay).text((x,BASE),txt,font=FNT,fill=(255,255,255,255),anchor='ls',stroke_width=STROKE,stroke_fill=(0,0,0,255))
+    ImageDraw.Draw(lay).text((x,B_),txt,font=FNT,fill=(255,255,255,255),anchor='ls',stroke_width=STROKE,stroke_fill=(0,0,0,255))
     return lay,w/W
 PQ=json.load(open('/root/det/bridge/posterquad.json'))
 _PF=np.asarray(Image.open('/root/det/poster_2k.png').convert('RGB')).astype(np.float32)/255.0
@@ -181,7 +196,9 @@ if __name__=='__main__':
         im=Image.fromarray((img*255+0.5).astype(np.uint8)).convert('RGBA')
         cur=[c for c in CAPS if c[0]<=f<c[2]]
         if cur:
-            if capkey!=cur[0][1]: capimg,wd=cap_layer(cur[0][1]); capkey=cur[0][1]; widths.append(wd)
+            low=str(f) in PQ and min(p[1] for p in PQ[str(f)])<0.33   # S21: the poster's bottom edge (with MICHIGAN) would sit under the caption band
+            key=(cur[0][1],low)
+            if capkey!=key: capimg,wd=cap_layer(cur[0][1],int(0.90*H) if low else None); capkey=key; widths.append(wd)
             im.alpha_composite(capimg)
         enc.stdin.write(np.asarray(im.convert('RGB')).tobytes())
         if f%100==0: print('POST',f,flush=True)

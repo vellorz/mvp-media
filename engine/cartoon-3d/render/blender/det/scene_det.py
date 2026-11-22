@@ -154,7 +154,7 @@ cheer(dad,4,90,1,up=(-140,-120),side=-1); cheer(kid,10,92,2,up=(-140,-120),side=
 for c_,f_ in ((dad,98),(mom,99),(kid,100),(gm,101)):
     for sx in(-1,1): arm(c_,sx,f_,-12)
 bob(dad,[20,44,70]); bob(kid,[30,56]); bob(mom,[60]); bob(gm,[36])
-path(s,[(0,(LX-1.55,-2.4,1.15),(LX-1.25,2.0,1.05)),(53,(LX-1.4,-1.95,1.12),(LX-1.25,2.0,1.08)),(93,(LX-1.3,-1.55,1.1),(LX-1.2,2.0,1.1)),(112,(LX-1.27,-1.47,1.1),(LX-1.2,2.0,1.1))])
+path(s,[(0,(LX-1.55,-2.4,1.15),(LX-1.25,2.0,1.05)),(53,(LX-1.4,-1.95,1.12),(LX-1.25,2.0,1.08)),(93,(LX-1.3,-1.55,1.1),(LX-1.2,2.0,1.1)),(112,(LX-1.42,-1.6,1.1),(LX-1.25,2.0,1.1))])   # ends on a sideways drift (rule 306: S02 opens on a push)
 # ============== SET STU: radio studio 1934 (X=300) ==============
 UX=300.0
 room('stu',UX,6.0,5.0,2.9,'studiowall','dwood',ftile=(2.0,2.0))
@@ -495,5 +495,7 @@ def world_and_sun():
 world_and_sun()
 print('hulls',L.ink())
 L.render_setup(100,8)
+if os.environ.get('DET_WARP','1')=='1':   # retime to the take-3 VO (pace 3.42 w/s): every key through the word map
+    import warp_det; warp_det.run(SH)
 for m in bpy.data.materials: m.use_fake_user=True
 bpy.ops.wm.save_as_mainfile(filepath='/root/det/blend/det.blend'); print('SCENE_OK all')

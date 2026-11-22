@@ -58,13 +58,16 @@ for bi in range(bars):
     for k in range(4): put('kick',bi*4*B+k*B,KICK,0.9)
 # round 5: level map from the Rick music study (section 7), dB relative to the bed median; layers thin out in dips (S6)
 MAP=[(0.0,3),(3.2,0),(6.5,-1),(10.5,1),(13.6,0),(17.2,-1),(19.8,-2),(23.2,-1),(24.4,2),(26.4,1),(30.8,0),(33.0,0),(37.0,1),(39.2,-1),(40.8,3),(42.6,1),(44.8,-2),(46.4,-2),(50.6,-3),(51.4,1),(55.6,2),(57.6,3),(60.0,2),(62.6,2),(63.5,8),(64.8,8)]   # Detroit: dips under the doubters and the loss, rises on the booking, sold out, 'didn't matter'; +8 at the payoff (bed louder at the end than the start, std 2.3-4.0 dB target)
+import json as _js
+_WM=_js.load(open('/root/det/bridge/warpmap.json')); _wm=lambda f: float(np.interp(f,_WM['old'],_WM['new']))
+MAP=[(_wm(t*30)/30,v) for t,v in MAP]   # take-3 retime
 tt=np.arange(N)/SR-0.1   # VO plays 0.1 s late in the mix
 mk=np.array([m[0] for m in MAP]); mv=np.array([m[1] for m in MAP],float)
 gdb=np.interp(tt,mk,mv)
 # Detroit (rule 244, no ducking): the level map only moves UNDER speech; in VO gaps >= 0.3 s it holds the level of the speech before it,
 # so the bed is never louder in the gaps than under the words around them.
 import subprocess as _sp
-_v=np.frombuffer(_sp.run(['ffmpeg','-v','error','-i','/root/det/audio/vo_trim.wav','-af','pan=mono|c0=c0','-ar',str(SR),'-f','f32le','-'],capture_output=True).stdout,np.float32)
+_v=np.frombuffer(_sp.run(['ffmpeg','-v','error','-i','/root/det/audio3/vo_final.wav','-af','pan=mono|c0=c0','-ar',str(SR),'-f','f32le','-'],capture_output=True).stdout,np.float32)
 _v=np.concatenate([np.zeros(int(0.1*SR)),_v]); _v=np.pad(_v,(0,max(0,N-len(_v))))[:N]
 _w=int(0.1*SR); _act=np.repeat([np.sqrt(np.mean(_v[i:i+_w]**2))>0.01 for i in range(0,N,_w)],_w)[:N]
 _i=0
@@ -147,6 +150,7 @@ def rms(a): return float(np.sqrt(np.mean(a**2))+1e-9)
 # last onset + 0.3 s (at least 0.3 s of bed); the group's loudest 50 ms must sit 8-12 dB over the bed RMS across that span.
 def pk50(a):
     n=int(0.05*SR); return max(rms(a[k:k+n]) for k in range(0,max(1,len(a)-n+1),n//4))
+EV=[(int(round(_wm(f))),x,g) for f,x,g in EV]   # take-3 retime
 evs=sorted(EV,key=lambda e:e[0]); G=[]
 for f,x,g in evs:
     if G and f-G[-1]['f0']<=8: G[-1]['ev'].append((f,x,g)); G[-1]['f1']=f
@@ -166,6 +170,8 @@ for it in range(12):   # overlapping tails add up: re-level every group against 
         i,w=gr['i'],gr['w']   # robust: average of three comparison spans (span, span+0.2 s, fixed 0.5 s)
         vv=[20*np.log10(pk50(S[i:i+ww])/rms(BEDW[i:i+ww])) for ww in (w,w+int(0.2*SR),int(0.5*SR))]; po=(min(vv)+max(vv))/2; gr['k']*=10**((16-po)/20*0.8)
 ATT={1013:1.0,1054:1.1,1084:-0.6,1109:1.0,137:0.3,1245:0.3,1876:-2.3,1858:0.0,800:1.4,346:0.5,856:0.7,898:0.9,1639:0.6,298:0.6,1589:0.5}   # tonal dings read louder than their RMS (K-weighting): keep every SFX >= 8 LU under the VO
+ATT={int(round(_wm(k))):v for k,v in ATT.items()}   # take-3 retime
+for _k,_v in {119:1.5,626:1.5,1075:1.6,1384:1.1,856:0.6,906:1.0,1587:1.0,1604:0.9,358:0.4,1437:0.2}.items(): ATT[_k]=ATT.get(_k,0.0)+_v   # take-3 levelling (rule 319 +4 over the bed where the VO leaves room)
 for gr in G: gr['k']*=10**(ATT.get(gr['f0'],0.0)/20)
 S[:]=sum(gr['tr']*gr['k'] for gr in G)
 evlog=[dict(f=gr['f0'],f1=gr['f1'],i=gr['i'],w=gr['w']) for gr in G]

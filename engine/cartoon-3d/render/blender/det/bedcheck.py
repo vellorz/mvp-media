@@ -8,8 +8,8 @@ def _mono_filter(p):
     return 'pan=mono|c0=0.5*c0+0.5*c1' if n==2 else 'pan=mono|c0=c0'
 def rd(p): return np.frombuffer(subprocess.run(['ffmpeg','-v','error','-i',p,'-af',_mono_filter(p),'-ar',str(sr),'-f','f32le','-'],capture_output=True).stdout,np.float32).astype(np.float64)
 gb=float(sys.argv[1]); b=rd('/root/det/audio/bed.wav')*10**(gb/20)
-v=rd('/root/det/audio/vo_trim.wav'); v=np.concatenate([np.zeros(int(0.1*sr)),v])
-n=min(len(b),int(64.6*sr)); b=b[:n]; v=np.pad(v,(0,max(0,n-len(v))))[:n]
+v=rd('/root/det/audio3/vo_final.wav'); v=np.concatenate([np.zeros(int(0.1*sr)),v])
+n=min(len(b),int(55.7*sr)); b=b[:n]; v=np.pad(v,(0,max(0,n-len(v))))[:n]
 b1=[1.53512485958697,-2.69169618940638,1.19839281085285]; a1=[1,-1.69065929318241,0.73248077421585]; b2=[1,-2,1]; a2=[1,-1.99004745483398,0.99007225036621]
 K=lambda x: lfilter(b2,a2,lfilter(b1,a1,x)); bk,vk=K(b),K(v)
 L=lambda x: -0.691+10*np.log10(np.mean(x**2)+1e-12)

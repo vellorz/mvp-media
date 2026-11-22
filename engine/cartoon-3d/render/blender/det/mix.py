@@ -1,6 +1,6 @@
 # Mix (rules 8/188 revised Nov 21): VO studio-clean, bed 14.4-18.6 dB under the VO riding its level map (std 2.3-4.0 dB, no ducking), SFX gentle (rule 192); master -14 LUFS, -1.9 to -2.2 dBTP
 import subprocess, re, json, sys
-A='/root/det/audio/'; VO='/root/det/audio/vo_trim.wav'
+A='/root/det/audio/'; VO='/root/det/audio3/vo_final.wav'
 import os
 END=int(os.environ.get('END_F','1940'))/30
 def lufs(path,extra=''):

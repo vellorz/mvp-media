@@ -21,7 +21,7 @@ Buffer refreshes TikTok and Instagram numbers about once a day, so new videos fi
 | Posted (Central) | Platform | Video | Views | Avg watched | Length | Completion |
 |---|---|---|---|---|---|---|
 | Nov 21, 4:04 PM | YouTube | Why It's Called Black Friday / Philadelphia History #shorts (https://www.youtube.com/watch?v=UisxvhkaUH8) | 1352 | not available | 59.0 s | — |
-| Nov 21, 12:03 PM | Instagram | bf13_blackfriday_2k.mp4 (https://www.instagram.com/reel/DgA0_t4gE9F/) | 1848 | 29.1 s | not recorded | — |
+| Nov 21, 12:03 PM | Instagram | bf13_blackfriday_2k.mp4 (https://www.instagram.com/reel/DgA0_t4gE9F/) | 1849 | 29.1 s | not recorded | — |
 | Nov 21, 10:03 AM | TikTok | bf13_blackfriday_2k.mp4 (https://tiktok.com/@modernvistaprintsshop/video/7710655478522596622) | 399 | 20.0 s | not recorded | — |
 | Nov 21, 10:01 AM | Facebook | bf13_blackfriday_2k.mp4 (https://www.facebook.com/reel/2189755435225304/) | 231 | 8.3 s | 58.4 s | 14.2% |
 | Nov 17, 7:02 PM | Instagram | 02_tue-nov17_salzburg_2k.mp4 (https://www.instagram.com/reel/Df3Ryocgi3f/) | 792 | 18.2 s | not recorded | — |

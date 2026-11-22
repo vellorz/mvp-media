@@ -109,11 +109,6 @@
    130
   ],
   "hairstyle": "short",
-  "mustache": [
-   150,
-   140,
-   130
-  ],
   "props": [
    "money"
   ],
@@ -138,7 +133,12 @@
     "flat",
     "line"
    ]
-  }
+  },
+  "stache_small": [
+   150,
+   140,
+   130
+  ]
  },
  "lion": {
   "coat": [
@@ -409,7 +409,7 @@
    70,
    40
   ],
-  "hairstyle": "long",
+  "hairstyle": "bob",
   "props": [
    "pennant"
   ],
@@ -466,11 +466,6 @@
    214
   ],
   "hairstyle": "short",
-  "mustache": [
-   220,
-   220,
-   224
-  ],
   "glasses": [
    60,
    50,
@@ -507,7 +502,12 @@
     "worry",
     "frown"
    ]
-  }
+  },
+  "stache_small": [
+   220,
+   220,
+   224
+  ]
  },
  "newsboy": {
   "coat": [
@@ -674,11 +674,6 @@
    224
   ],
   "hairstyle": "bald",
-  "mustache": [
-   230,
-   230,
-   232
-  ],
   "glasses": [
    60,
    50,
@@ -733,7 +728,12 @@
     "raise",
     "smile"
    ]
-  }
+  },
+  "stache_small": [
+   230,
+   230,
+   232
+  ]
  },
  "kid34": {
   "coat": [
@@ -898,11 +898,6 @@
    30
   ],
   "hairstyle": "short",
-  "beard": [
-   70,
-   46,
-   30
-  ],
   "props": [
    "remote",
    "drumstick"
@@ -939,7 +934,12 @@
     "flat",
     "smile"
    ]
-  }
+  },
+  "stache_small": [
+   70,
+   46,
+   30
+  ]
  },
  "momM": {
   "coat": [
@@ -959,7 +959,7 @@
    36,
    24
   ],
-  "hairstyle": "long",
+  "hairstyle": "bob",
   "props": [
    "plate"
   ],

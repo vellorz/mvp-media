@@ -1,0 +1,1362 @@
+{
+ "pilgrimA": {
+  "coat": [
+   40,
+   38,
+   44
+  ],
+  "legs": [
+   34,
+   30,
+   34
+  ],
+  "hat": "capotain",
+  "hatc": [
+   36,
+   30,
+   32
+  ],
+  "cue": "pilgrim",
+  "body": "tall",
+  "hair": [
+   90,
+   60,
+   36
+  ],
+  "hairstyle": "short",
+  "props": [
+   "musket",
+   "shovel",
+   "spyglass",
+   "basket",
+   "quill",
+   "oar"
+  ],
+  "faces": {
+   "neutral": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "worry": [
+    "dot",
+    "worry",
+    "wavy"
+   ],
+   "grin": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "proud": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "excited": [
+    "wide",
+    "up",
+    "open"
+   ],
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit",
+    "sweat"
+   ],
+   "sneaky": [
+    "side",
+    "raise",
+    "smirk"
+   ]
+  }
+ },
+ "pilgrimB": {
+  "coat": [
+   92,
+   64,
+   44
+  ],
+  "legs": [
+   60,
+   44,
+   34
+  ],
+  "hat": "capotain",
+  "hatc": [
+   70,
+   52,
+   40
+  ],
+  "cue": "pilgrim",
+  "body": "round",
+  "hair": [
+   60,
+   40,
+   28
+  ],
+  "hairstyle": "short",
+  "mustache": [
+   60,
+   40,
+   28
+  ],
+  "props": [
+   "musket",
+   "shovel",
+   "basket",
+   "oar"
+  ],
+  "faces": {
+   "neutral": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "worry": [
+    "dot",
+    "worry",
+    "wavy"
+   ],
+   "grin": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "proud": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "excited": [
+    "wide",
+    "up",
+    "open"
+   ],
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit",
+    "sweat"
+   ],
+   "sneaky": [
+    "side",
+    "raise",
+    "smirk"
+   ]
+  }
+ },
+ "pilgrimC": {
+  "coat": [
+   70,
+   74,
+   56
+  ],
+  "legs": [
+   44,
+   44,
+   36
+  ],
+  "cue": "pilgrim",
+  "body": "short",
+  "hair": [
+   150,
+   100,
+   50
+  ],
+  "hairstyle": "short",
+  "props": [
+   "musket",
+   "shovel",
+   "basket",
+   "oar"
+  ],
+  "faces": {
+   "neutral": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "worry": [
+    "dot",
+    "worry",
+    "wavy"
+   ],
+   "grin": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "proud": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "excited": [
+    "wide",
+    "up",
+    "open"
+   ],
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit",
+    "sweat"
+   ],
+   "sneaky": [
+    "side",
+    "raise",
+    "smirk"
+   ]
+  }
+ },
+ "pilgrimD": {
+  "coat": [
+   50,
+   52,
+   70
+  ],
+  "legs": [
+   36,
+   36,
+   44
+  ],
+  "hat": "capotain",
+  "hatc": [
+   44,
+   44,
+   52
+  ],
+  "cue": "pilgrim",
+  "body": "tall",
+  "hair": [
+   170,
+   160,
+   150
+  ],
+  "hairstyle": "short",
+  "mustache": [
+   180,
+   170,
+   160
+  ],
+  "props": [
+   "musket",
+   "quill",
+   "oar"
+  ],
+  "faces": {
+   "neutral": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "worry": [
+    "dot",
+    "worry",
+    "wavy"
+   ],
+   "grin": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "proud": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "excited": [
+    "wide",
+    "up",
+    "open"
+   ],
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit",
+    "sweat"
+   ],
+   "sneaky": [
+    "side",
+    "raise",
+    "smirk"
+   ]
+  }
+ },
+ "master": {
+  "coat": [
+   34,
+   52,
+   96
+  ],
+  "legs": [
+   40,
+   36,
+   40
+  ],
+  "hat": "fedora",
+  "cue": "pilgrim",
+  "body": "round",
+  "hair": [
+   80,
+   56,
+   40
+  ],
+  "hairstyle": "short",
+  "mustache": [
+   80,
+   56,
+   40
+  ],
+  "props": [
+   "spyglass"
+  ],
+  "faces": {
+   "neutral": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "worry": [
+    "dot",
+    "worry",
+    "wavy"
+   ],
+   "grin": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "proud": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "excited": [
+    "wide",
+    "up",
+    "open"
+   ],
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit",
+    "sweat"
+   ],
+   "sneaky": [
+    "side",
+    "raise",
+    "smirk"
+   ]
+  }
+ },
+ "sailorA": {
+  "coat": [
+   150,
+   140,
+   120
+  ],
+  "legs": [
+   70,
+   90,
+   120
+  ],
+  "hat": "knit",
+  "hatc": [
+   150,
+   40,
+   40
+  ],
+  "cue": "sailor",
+  "sash": [
+   170,
+   50,
+   40
+  ],
+  "body": "round",
+  "hair": [
+   70,
+   50,
+   36
+  ],
+  "hairstyle": "short",
+  "props": [
+   "oar"
+  ],
+  "faces": {
+   "neutral": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "worry": [
+    "dot",
+    "worry",
+    "wavy"
+   ],
+   "grin": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "proud": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "excited": [
+    "wide",
+    "up",
+    "open"
+   ],
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit",
+    "sweat"
+   ],
+   "sneaky": [
+    "side",
+    "raise",
+    "smirk"
+   ],
+   "talkA": [
+    "dot",
+    "angry",
+    "open"
+   ],
+   "talkB": [
+    "dot",
+    "angry",
+    "o"
+   ],
+   "talkC": [
+    "dot",
+    "angry",
+    "wide"
+   ],
+   "talkD": [
+    "dot",
+    "angry",
+    "line"
+   ]
+  }
+ },
+ "sailorB": {
+  "coat": [
+   120,
+   130,
+   140
+  ],
+  "legs": [
+   90,
+   80,
+   60
+  ],
+  "hat": "knit",
+  "hatc": [
+   40,
+   80,
+   130
+  ],
+  "cue": "sailor",
+  "sash": [
+   40,
+   90,
+   140
+  ],
+  "body": "tall",
+  "hair": [
+   40,
+   30,
+   26
+  ],
+  "hairstyle": "short",
+  "mustache": [
+   40,
+   30,
+   26
+  ],
+  "props": [
+   "oar"
+  ],
+  "faces": {
+   "neutral": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "worry": [
+    "dot",
+    "worry",
+    "wavy"
+   ],
+   "grin": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "proud": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "excited": [
+    "wide",
+    "up",
+    "open"
+   ],
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit",
+    "sweat"
+   ],
+   "sneaky": [
+    "side",
+    "raise",
+    "smirk"
+   ],
+   "talkA": [
+    "dot",
+    "angry",
+    "open"
+   ],
+   "talkB": [
+    "dot",
+    "angry",
+    "o"
+   ],
+   "talkC": [
+    "dot",
+    "angry",
+    "wide"
+   ],
+   "talkD": [
+    "dot",
+    "angry",
+    "line"
+   ]
+  }
+ },
+ "nausetA": {
+  "coat": [
+   104,
+   72,
+   48
+  ],
+  "legs": [
+   120,
+   84,
+   56
+  ],
+  "cue": "mantle",
+  "body": "tall",
+  "hair": [
+   30,
+   24,
+   24
+  ],
+  "hairstyle": "tied",
+  "props": [
+   "bow"
+  ],
+  "faces": {
+   "neutral": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "worry": [
+    "dot",
+    "worry",
+    "wavy"
+   ],
+   "grin": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "proud": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "excited": [
+    "wide",
+    "up",
+    "open"
+   ],
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit",
+    "sweat"
+   ],
+   "sneaky": [
+    "side",
+    "raise",
+    "smirk"
+   ]
+  }
+ },
+ "nausetB": {
+  "coat": [
+   96,
+   66,
+   44
+  ],
+  "legs": [
+   110,
+   78,
+   52
+  ],
+  "cue": "mantle",
+  "body": "round",
+  "hair": [
+   26,
+   22,
+   22
+  ],
+  "hairstyle": "tied",
+  "props": [
+   "bow"
+  ],
+  "faces": {
+   "neutral": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "worry": [
+    "dot",
+    "worry",
+    "wavy"
+   ],
+   "grin": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "proud": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "excited": [
+    "wide",
+    "up",
+    "open"
+   ],
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit",
+    "sweat"
+   ],
+   "sneaky": [
+    "side",
+    "raise",
+    "smirk"
+   ]
+  }
+ },
+ "nausetC": {
+  "coat": [
+   112,
+   80,
+   54
+  ],
+  "legs": [
+   124,
+   90,
+   60
+  ],
+  "cue": "mantle",
+  "body": "short",
+  "hair": [
+   34,
+   28,
+   26
+  ],
+  "hairstyle": "tied",
+  "props": [
+   "bow",
+   "basket"
+  ],
+  "faces": {
+   "neutral": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "worry": [
+    "dot",
+    "worry",
+    "wavy"
+   ],
+   "grin": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "proud": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "excited": [
+    "wide",
+    "up",
+    "open"
+   ],
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit",
+    "sweat"
+   ],
+   "sneaky": [
+    "side",
+    "raise",
+    "smirk"
+   ]
+  }
+ },
+ "elder": {
+  "coat": [
+   96,
+   70,
+   50
+  ],
+  "legs": [
+   60,
+   50,
+   44
+  ],
+  "hat": "tricorn",
+  "cue": "coat18",
+  "body": "round",
+  "hair": [
+   236,
+   236,
+   232
+  ],
+  "hairstyle": "white",
+  "props": [
+   "cane"
+  ],
+  "faces": {
+   "neutral": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "worry": [
+    "dot",
+    "worry",
+    "wavy"
+   ],
+   "grin": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "proud": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "excited": [
+    "wide",
+    "up",
+    "open"
+   ],
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit",
+    "sweat"
+   ],
+   "sneaky": [
+    "side",
+    "raise",
+    "smirk"
+   ],
+   "talkA": [
+    "half",
+    "up",
+    "open"
+   ],
+   "talkB": [
+    "half",
+    "up",
+    "o"
+   ],
+   "talkC": [
+    "half",
+    "up",
+    "wide"
+   ],
+   "talkD": [
+    "half",
+    "up",
+    "line"
+   ]
+  }
+ },
+ "townA": {
+  "coat": [
+   120,
+   40,
+   40
+  ],
+  "legs": [
+   50,
+   44,
+   40
+  ],
+  "hat": "tricorn",
+  "cue": "coat18",
+  "body": "tall",
+  "hair": [
+   90,
+   64,
+   40
+  ],
+  "hairstyle": "short",
+  "props": [
+   "shovel"
+  ],
+  "faces": {
+   "neutral": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "worry": [
+    "dot",
+    "worry",
+    "wavy"
+   ],
+   "grin": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "proud": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "excited": [
+    "wide",
+    "up",
+    "open"
+   ],
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit",
+    "sweat"
+   ],
+   "sneaky": [
+    "side",
+    "raise",
+    "smirk"
+   ]
+  }
+ },
+ "townB": {
+  "coat": [
+   160,
+   140,
+   100
+  ],
+  "legs": [
+   70,
+   60,
+   50
+  ],
+  "cue": "apron",
+  "body": "round",
+  "hair": [
+   110,
+   70,
+   40
+  ],
+  "hairstyle": "short",
+  "props": [
+   "shovel"
+  ],
+  "faces": {
+   "neutral": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "worry": [
+    "dot",
+    "worry",
+    "wavy"
+   ],
+   "grin": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "proud": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "excited": [
+    "wide",
+    "up",
+    "open"
+   ],
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit",
+    "sweat"
+   ],
+   "sneaky": [
+    "side",
+    "raise",
+    "smirk"
+   ]
+  }
+ },
+ "tourA": {
+  "coat": [
+   230,
+   120,
+   60
+  ],
+  "legs": [
+   60,
+   70,
+   110
+  ],
+  "hat": "sunhat",
+  "cue": "camera",
+  "body": "round",
+  "hair": [
+   80,
+   50,
+   30
+  ],
+  "hairstyle": "bun",
+  "props": [
+   "phone",
+   "camera"
+  ],
+  "faces": {
+   "neutral": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "worry": [
+    "dot",
+    "worry",
+    "wavy"
+   ],
+   "grin": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "proud": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "excited": [
+    "wide",
+    "up",
+    "open"
+   ],
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit",
+    "sweat"
+   ],
+   "sneaky": [
+    "side",
+    "raise",
+    "smirk"
+   ]
+  }
+ },
+ "tourB": {
+  "coat": [
+   60,
+   130,
+   150
+  ],
+  "legs": [
+   200,
+   190,
+   170
+  ],
+  "hat": "cap",
+  "hatc": [
+   200,
+   60,
+   50
+  ],
+  "cue": "stripes",
+  "body": "tall",
+  "hair": [
+   50,
+   36,
+   30
+  ],
+  "hairstyle": "short",
+  "props": [
+   "phone"
+  ],
+  "faces": {
+   "neutral": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "blink": [
+    "closed",
+    "flat",
+    "line"
+   ],
+   "happy": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "shock": [
+    "wide",
+    "up",
+    "O"
+   ],
+   "worry": [
+    "dot",
+    "worry",
+    "wavy"
+   ],
+   "grin": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "deadpan": [
+    "half",
+    "flat",
+    "line"
+   ],
+   "proud": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "excited": [
+    "wide",
+    "up",
+    "open"
+   ],
+   "grit": [
+    "squeeze",
+    "angry",
+    "grit",
+    "sweat"
+   ],
+   "sneaky": [
+    "side",
+    "raise",
+    "smirk"
+   ]
+  }
+ }
+}

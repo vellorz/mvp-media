@@ -69,6 +69,9 @@ def head(name,fk):
     if hs=='bun': d.ellipse([382,40,642,280],fill=hair,outline=K,width=OUT)
     if hs=='long': d.rounded_rectangle([100,260,924,980],200,fill=hair,outline=K,width=OUT)
     if hs=='mullet': d.rounded_rectangle([170,320,854,1010],140,fill=hair,outline=K,width=OUT)   # back hair, crown to shoulders
+    # r5 (owner Nov 22: the M family's slab of 'long' hair read as weird): new women's styles that frame the head, never a slab behind it
+    if hs=='bob': d.rounded_rectangle([96,190,928,760],250,fill=hair,outline=K,width=OUT)   # chin-length bob, sides show down to the jaw
+    if hs=='ponytail': d.ellipse([800,330,1000,640],fill=hair,outline=K,width=OUT); d.ellipse([850,300,930,380],fill=dk(hair,0.7),outline=K,width=10)   # tail out to the side
     if hs=='perm':
         for a in range(0,360,30): x=CX+380*math.cos(math.radians(a)); y=500+360*math.sin(math.radians(a))*0.95; d.ellipse([x-120,y-120,x+120,y+120],fill=hair,outline=K,width=OUT)
     skin=tuple(c.get('skin',SK[:3]))+(255,)
@@ -85,6 +88,11 @@ def head(name,fk):
         if hs=='bald':
             for sx in(-1,1): d.chord([CX+sx*390-100,300,CX+sx*390+100,580],90 if sx>0 else 270,270 if sx>0 else 450,fill=hair)
         if hs=='mullet': d.chord([150,150,874,420],180,360,fill=hair,outline=K,width=OUT)
+        pass
+    if hs in('bob','ponytail','topbun'):
+        if hs=='topbun': d.ellipse([392,30,632,250],fill=hair,outline=K,width=OUT)
+        d.chord([150,150,874,440],180,360,fill=hair,outline=K,width=OUT)
+        if hs=='bob': d.chord([150,150,640,520],180,330,fill=hair,outline=K,width=OUT-8)   # side-swept fringe, part on the right
     if c.get('hat')=='leather':
         HC=tuple(c.get('hatcol',(80,60,44)))+(255,)
         for sx in(-1,1): d.rounded_rectangle([CX+sx*400-70,330,CX+sx*400+70,660],50,fill=HC,outline=K,width=OUT-6)
@@ -115,6 +123,10 @@ def head(name,fk):
         mc=tuple(c['mustache'])+(255,)
         for sx in(-1,1): d.ellipse([CX+sx*80-95,605,CX+sx*80+95,705],fill=mc,outline=K,width=12)
         d.ellipse([CX-70,610,CX+70,690],fill=mc)
+    if c.get('stache_small'):   # r5 (owner Nov 22: the big beard read as weird): one slim rounded mustache, narrower than the mouth
+        mc=tuple(c['stache_small'])+(255,); d.rounded_rectangle([CX-105,628,CX+105,672],22,fill=mc,outline=K,width=10)
+    if c.get('stubble'):   # r5: light jaw shadow, no outline
+        ov=Image.new('RGBA',(1024,1024),(0,0,0,0)); od=ImageDraw.Draw(ov); od.chord([CX-330,520,CX+330,860],0,180,fill=tuple(c['stubble'])+(42,)); feat.alpha_composite(ov); d=ImageDraw.Draw(feat)
     if c.get('beard'):
         bc=tuple(c['beard'])+(255,); d.chord([CX-300,560,CX+300,900],0,180,fill=bc,outline=K,width=12); d.chord([CX-90,640,CX+90,760],0,180,fill=(251,244,241,255))
     if c.get('nose',True): d.arc([CX-30,560,CX+30,640],-30,200,fill=K,width=10)

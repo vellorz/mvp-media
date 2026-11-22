@@ -51,11 +51,17 @@ for bi in range(bars):
     for k in range(16):
         if k%2==0 and k%4!=2: continue
         sw=0.035 if k%2 else 0.0; n=int(0.05*SR); h=np.diff(rng.normal(0,1,n),prepend=0)*np.exp(-np.linspace(0,9,n)); put('hat',t0+k*S16+sw,h,0.22 if k%4==2 else 0.12)
+STYLE=__import__('os').environ.get('STYLE','orig'); OUTD=__import__('os').environ.get('OUTD','/root/det/audio')
+if STYLE!='orig':   # r5: owner asked for other music; musicstyles.py replaces every layer
+    import musicstyles
+    for _k in T: T[_k][:]=0
+    musicstyles.build(STYLE,T,put,SR,DUR,rng,mtof,env,mallet,pluck)
 # soft kick: short sine sweep, rounded (pulse, not a thump)
 n=int(0.22*SR); t=np.arange(n)/SR; KICK=np.sin(2*np.pi*(48*t+ (110-48)*(1-np.exp(-t*40))/40))*np.exp(-t*14)*np.minimum(1,t/0.002)
-T['kick'][:]=0
-for bi in range(bars):
-    for k in range(4): put('kick',bi*4*B+k*B,KICK,0.9)
+if STYLE=='orig':
+    T['kick'][:]=0
+    for bi in range(bars):
+        for k in range(4): put('kick',bi*4*B+k*B,KICK,0.9)
 # round 5: level map from the Rick music study (section 7), dB relative to the bed median; layers thin out in dips (S6)
 MAP=[(0.0,3),(3.2,0),(6.5,-1),(10.5,1),(13.6,0),(17.2,-1),(19.8,-2),(23.2,-1),(24.4,2),(26.4,1),(30.8,0),(33.0,0),(37.0,1),(39.2,-1),(40.8,3),(42.6,1),(44.8,-2),(46.4,-2),(50.6,-3),(51.4,1),(55.6,2),(57.6,3),(60.0,2),(62.6,2),(63.5,8),(64.8,8)]   # Detroit: dips under the doubters and the loss, rises on the booking, sold out, 'didn't matter'; +8 at the payoff (bed louder at the end than the start, std 2.3-4.0 dB target)
 import json as _js
@@ -85,6 +91,7 @@ k_=int(0.7*SR); gdb=np.convolve(np.pad(gdb,(k_//2,k_-k_//2-1),mode='edge'),np.on
 gl=10**(gdb/20)
 thin=np.clip((gdb+1.0)/4.0,0,1)   # melody and plucks drop out in the -3..-5 dips, return on rises
 bed=(T['mal']*0.9*thin+T['plk']*0.6*(0.4+0.6*thin)+T['bass']*0.62+T['kick']*0.7+T['pad']*1.0)*gl
+if STYLE!='orig': bed=(T['mal']*0.9*thin+T['plk']*0.6*(0.4+0.6*thin)+T['bass']*0.62+T['kick']*0.7+T['pad']*1.0+T['hat']*0.8)*gl
 # gentle bus compression for a constant level (no pumping: slow, light)
 bed=np.tanh(bed*0.9)/0.9
 # round 5 (S5): no fade, the bed ends with the last frame
@@ -176,8 +183,8 @@ for _k in list(ATT): ATT[_k]+=0.8   # r2 rule 319: every group about +0.8 dB (ro
 for gr in G: gr['k']*=10**(ATT.get(gr['f0'],0.0)/20)
 S[:]=sum(gr['tr']*gr['k'] for gr in G)
 evlog=[dict(f=gr['f0'],f1=gr['f1'],i=gr['i'],w=gr['w']) for gr in G]
-json.dump(evlog,open('/root/det/audio/sfx_events.json','w'))
+json.dump(evlog,open(OUTD+'/sfx_events.json','w'))
 def w(path,x):
     x=np.clip(x,-1,1); y=(x*32767).astype(np.int16); st=np.stack([y,y],1)
     with wave.open(path,'wb') as fh: fh.setnchannels(2); fh.setsampwidth(2); fh.setframerate(SR); fh.writeframes(st.tobytes())
-w('/root/det/audio/bed.wav',bed/np.abs(bed).max()*0.7); w('/root/det/audio/sfx.wav',S/np.abs(S).max()*0.7); print('MUSIC_OK',DUR)
+w(OUTD+'/bed.wav',bed/np.abs(bed).max()*0.7); w(OUTD+'/sfx.wav',S/np.abs(S).max()*0.7); print('MUSIC_OK',DUR)

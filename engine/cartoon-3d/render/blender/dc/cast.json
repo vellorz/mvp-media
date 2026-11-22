@@ -104,7 +104,8 @@
     "up",
     "line"
    ]
-  }
+  },
+  "look": "M3"
  },
  "clerk": {
   "coat": [
@@ -126,11 +127,6 @@
    50
   ],
   "hairstyle": "short",
-  "mustache": [
-   110,
-   80,
-   50
-  ],
   "props": [
    "letter"
   ],
@@ -222,7 +218,13 @@
     "angry",
     "frown"
    ]
-  }
+  },
+  "mustache": [
+   110,
+   80,
+   50
+  ],
+  "look": "D2"
  },
  "presA": {
   "coat": [
@@ -242,7 +244,7 @@
    224,
    220
   ],
-  "hairstyle": "white",
+  "hairstyle": "short",
   "props": [
    "letter"
   ],
@@ -308,7 +310,8 @@
     "flat",
     "wavy"
    ]
-  }
+  },
+  "look": "D1"
  },
  "presB": {
   "coat": [
@@ -328,12 +331,7 @@
    44,
    34
   ],
-  "hairstyle": "bald",
-  "mustache": [
-   60,
-   44,
-   34
-  ],
+  "hairstyle": "short",
   "props": [
    "letter"
   ],
@@ -399,7 +397,13 @@
     "flat",
     "wavy"
    ]
-  }
+  },
+  "mustache": [
+   60,
+   44,
+   34
+  ],
+  "look": "D2"
  },
  "presC": {
   "coat": [
@@ -490,7 +494,9 @@
     "flat",
     "wavy"
    ]
-  }
+  },
+  "stubble": 1,
+  "look": "D3"
  },
  "presD": {
   "coat": [
@@ -576,7 +582,8 @@
     "flat",
     "wavy"
    ]
-  }
+  },
+  "look": "D1"
  },
  "presE": {
   "coat": [
@@ -658,7 +665,8 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "look": "D1"
  },
  "printer": {
   "coat": [
@@ -743,7 +751,9 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "stubble": 1,
+  "look": "D3"
  },
  "mailman": {
   "coat": [
@@ -836,7 +846,8 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "look": "D1"
  },
  "blueA": {
   "coat": [
@@ -923,7 +934,8 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "look": "D1"
  },
  "blueB": {
   "coat": [
@@ -950,11 +962,6 @@
    80
   ],
   "hairstyle": "short",
-  "mustache": [
-   200,
-   150,
-   80
-  ],
   "props": [
    "plate"
   ],
@@ -1015,7 +1022,13 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "mustache": [
+   200,
+   150,
+   80
+  ],
+  "look": "D2"
  },
  "greyA": {
   "coat": [
@@ -1102,7 +1115,9 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "stubble": 1,
+  "look": "D3"
  },
  "greyB": {
   "coat": [
@@ -1129,11 +1144,6 @@
    50
   ],
   "hairstyle": "short",
-  "mustache": [
-   130,
-   90,
-   50
-  ],
   "props": [
    "plate"
   ],
@@ -1194,7 +1204,13 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "mustache": [
+   130,
+   90,
+   50
+  ],
+  "look": "D2"
  },
  "townW": {
   "coat": [
@@ -1214,7 +1230,7 @@
    100,
    50
   ],
-  "hairstyle": "bun",
+  "hairstyle": "ponytail",
   "props": [
    "pie"
   ],
@@ -1275,7 +1291,8 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "look": "M2"
  },
  "momT": {
   "coat": [
@@ -1300,7 +1317,7 @@
    50,
    30
   ],
-  "hairstyle": "bob",
+  "hairstyle": "ponytail",
   "props": [
    "plate"
   ],
@@ -1361,7 +1378,8 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "look": "M2"
  },
  "dadT": {
   "coat": [
@@ -1447,7 +1465,9 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "stubble": 1,
+  "look": "D3"
  },
  "kidT": {
   "coat": [
@@ -1528,7 +1548,8 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "look": "D1"
  },
  "grandT": {
   "coat": [
@@ -1548,7 +1569,7 @@
    230,
    228
   ],
-  "hairstyle": "perm",
+  "hairstyle": "bob",
   "glasses": [
    150,
    120,
@@ -1614,6 +1635,7 @@
     "raise",
     "smirk"
    ]
-  }
+  },
+  "look": "M1"
  }
 }

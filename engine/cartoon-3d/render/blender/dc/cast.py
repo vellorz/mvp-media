@@ -68,7 +68,8 @@ def head(name,fk):
     hs=c.get('hairstyle','short')
     if hs=='bun': d.ellipse([382,40,642,280],fill=hair,outline=K,width=OUT)
     if hs=='long': d.rounded_rectangle([100,260,924,980],200,fill=hair,outline=K,width=OUT)
-    if hs=='bob': d.rounded_rectangle([62,170,962,800],230,fill=hair,outline=K,width=OUT)   # dc (rule 326): chin-length bob framing the head, no slab below the jaw
+    if hs=='bob': d.rounded_rectangle([62,170,962,800],230,fill=hair,outline=K,width=OUT)   # M1 side-part bob (rule 326a)
+    if hs=='ponytail': d.ellipse([850,380,1010,700],fill=hair,outline=K,width=OUT); d.ellipse([840,330,920,410],fill=dk(hair[:3],0.7),outline=K,width=10)   # M2 ponytail (rule 326a)   # dc (rule 326): chin-length bob framing the head, no slab below the jaw
     if hs=='mullet': d.rounded_rectangle([170,320,854,1010],140,fill=hair,outline=K,width=OUT)   # back hair, crown to shoulders
     if hs=='tied': d.rounded_rectangle([150,250,874,1000],180,fill=hair,outline=K,width=OUT)   # cc: long hair falling behind the shoulders
     if hs=='white': d.rounded_rectangle([130,300,894,860],200,fill=hair,outline=K,width=OUT)   # cc: old man's white hair at the sides
@@ -82,10 +83,11 @@ def head(name,fk):
     # head (x0.6 from the top), the face features on a layer moved up 105 px (eyes at 65.6 % up)
     if 'angryfill' in ex: 
         ov=Image.new('RGBA',(1024,1024),(0,0,0,0)); od=ImageDraw.Draw(ov); od.ellipse([130,158,894,922],fill=(170,60,170,120)); im.alpha_composite(ov); d=ImageDraw.Draw(im)
-    if hs in('short','bald','bun','mullet','tied','white','bob'):   # r9: hairlines raised with the features (hair ends ~285, brows at 300)
+    if hs in('short','bald','bun','mullet','tied','white','bob','ponytail'):   # r9: hairlines raised with the features (hair ends ~285, brows at 300)
         if hs=='short': d.chord([150,150,874,420],180,360,fill=hair,outline=K,width=OUT)
         if hs=='bun': d.chord([150,150,874,410],180,360,fill=hair,outline=K,width=OUT)
-        if hs=='bob': d.chord([140,140,884,430],180,360,fill=hair,outline=K,width=OUT)
+        if hs=='bob': d.chord([140,140,884,430],180,360,fill=hair,outline=K,width=OUT); d.ellipse([120,130,560,360],fill=hair,outline=K,width=OUT)   # side-part sweep
+        if hs=='ponytail': d.chord([150,150,874,420],180,360,fill=hair,outline=K,width=OUT)
         if hs=='bald':
             for sx in(-1,1): d.chord([CX+sx*390-100,300,CX+sx*390+100,580],90 if sx>0 else 270,270 if sx>0 else 450,fill=hair)
         if hs=='mullet': d.chord([150,150,874,420],180,360,fill=hair,outline=K,width=OUT)
@@ -122,6 +124,8 @@ def head(name,fk):
     top=im.resize((1024,int(1024*0.6)),Image.LANCZOS); im=base; im.alpha_composite(top,(0,0)); top=None
     feat,d=new(1024,1024)
     eyes(d,e,glasses=(tuple(c['glasses'])+(255,)) if c.get('glasses') else None); brows(d,b if hat not in('cop','flatcap','fedora','beanie','ladyhat','capotain','tricorn','knit','cap','sunhat','visor','kepi') or b!='up' else 'flat'); mouth(d,m)
+    if c.get('stubble'):   # D3 light stubble (rule 326a): pale translucent shade over the jaw
+        ov=Image.new('RGBA',(1024,1024),(0,0,0,0)); ImageDraw.Draw(ov).chord([150,420,874,860],0,180,fill=(120,110,110,70)); feat.alpha_composite(ov); d=ImageDraw.Draw(feat)
     if c.get('mustache'):   # dc (rule 326, Nov 22): one slim mustache only; the bushy two-lobe mustache is retired
         mc=tuple(c['mustache'])+(255,)
         d.rounded_rectangle([CX-115,632,CX+115,668],18,fill=mc,outline=K,width=8)

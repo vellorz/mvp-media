@@ -573,6 +573,7 @@ def _ground(x,y,f,z0,terrain=False):
         o_=loc+Vector((0,0,-0.001))
         if terrain and not ob.name.startswith(TERRAIN): continue
         if ob.name in CHRN or ob.name.endswith('_ink') or ob.get('fly') or ob.hide_render or (ob.get('noink') and len(ob.data.vertices)<=4): continue
+        if ob.name.endswith('_sea') or ob.name.endswith('_bay'): continue   # r4 (ledger r3: S17 elder sank to the torso at 1604-1606): the enlarged shore sea under the sand is never ground
         return loc.z
     return None
 def snap_all():

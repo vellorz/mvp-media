@@ -42,7 +42,13 @@
    60,
    36
   ],
-  "turn": 0.35
+  "turn": 0.35,
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ]
  },
  "pilgrimB": {
   "coat": [
@@ -85,7 +91,13 @@
    40,
    28
   ],
-  "turn": -0.4
+  "turn": -0.4,
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ]
  },
  "pilgrimC": {
   "coat": [
@@ -116,7 +128,13 @@
   "library": "all",
   "mouth_side": 1,
   "hairdo": "sidepart",
-  "turn": 0.45
+  "turn": 0.45,
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ]
  },
  "pilgrimD": {
   "coat": [
@@ -158,7 +176,13 @@
    170,
    160
   ],
-  "turn": -0.35
+  "turn": -0.35,
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ]
  },
  "master": {
   "coat": [
@@ -193,7 +217,13 @@
    56,
    40
   ],
-  "turn": 0.4
+  "turn": 0.4,
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ]
  },
  "sailorA": {
   "coat": [
@@ -264,6 +294,12 @@
    70,
    50,
    36
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
   ]
  },
  "sailorB": {
@@ -335,7 +371,13 @@
    30,
    26
   ],
-  "turn": 0.35
+  "turn": 0.35,
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ]
  },
  "nausetA": {
   "coat": [
@@ -367,7 +409,8 @@
   ],
   "library": "all",
   "mouth_side": -1,
-  "turn": -0.4
+  "turn": -0.4,
+  "feat_scale": "rick"
  },
  "nausetB": {
   "coat": [
@@ -399,7 +442,8 @@
   ],
   "library": "all",
   "mouth_side": 1,
-  "turn": 0.45
+  "turn": 0.45,
+  "feat_scale": "rick"
  },
  "nausetC": {
   "coat": [
@@ -432,7 +476,8 @@
   ],
   "library": "all",
   "mouth_side": -1,
-  "turn": -0.35
+  "turn": -0.35,
+  "feat_scale": "rick"
  },
  "elder": {
   "coat": [
@@ -482,7 +527,13 @@
   "library": "all",
   "mouth_side": 1,
   "hat_tilt": 6,
-  "turn": 0.4
+  "turn": 0.4,
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ]
  },
  "townA": {
   "coat": [
@@ -517,7 +568,13 @@
    64,
    40
   ],
-  "turn": -0.45
+  "turn": -0.45,
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ]
  },
  "townB": {
   "coat": [
@@ -545,7 +602,13 @@
   "library": "all",
   "mouth_side": 1,
   "turn": 0.35,
-  "hairdo": "curly"
+  "hairdo": "curly",
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ]
  },
  "tourA": {
   "coat": [
@@ -575,7 +638,13 @@
   "library": "all",
   "mouth_side": -1,
   "hat_tilt": 5,
-  "turn": -0.4
+  "turn": -0.4,
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ]
  },
  "tourB": {
   "coat": [
@@ -614,6 +683,12 @@
   ],
   "hat_tilt": -9,
   "turn": 0.45,
-  "hat3d": "trucker"
+  "hat3d": "trucker",
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ]
  }
 }

@@ -12,9 +12,9 @@
 # Face recipe = [eyes, brows, mouth, extras]; extras is a '+'-joined string (e.g. 'sweat+blushR').
 
 import math
-try:
+try:   # Blender's Python has no PIL: lib.py only needs expand()/alternates(), the drawing code runs in cast.py
     from PIL import Image, ImageDraw, ImageFilter
-except ImportError:   # dc: Blender's python has no PIL; lib.py only needs LIBRARY/expand/alternates
+except ImportError:
     Image = ImageDraw = ImageFilter = None
 
 CX = 512
@@ -450,3 +450,427 @@ def hat3d(name, col, K, tilt=0, dx=0, col2=None):
     lay = lay.rotate(-tilt, resample=Image.BICUBIC, center=(CX, 300))
     out = Image.new('RGBA', (1024, 1024), CLEAR); out.alpha_composite(lay, (int(dx), 40))
     return out
+
+# =================================================================== ROUND 3 (owner Nov 22 2026, 5:28 PM CT)
+# Owner's benchmark review: goatee and king bigger and hanging past the chin; full beard re-benchmarked on Rick's #22 bearded soldier
+# (the old ref was a masked robber); sideburns and afro dropped; spiky, curly, cowlick, messy, bowl and bangs redrawn as closer copies of
+# Rick (#08 ginger tufts, #02 orange curls, #11/#13 strand rising from a full head of hair, #13 messy spikes, #09 bowl, #06/#12 fringes);
+# hats redrawn on Rick's proportions (#23 top hat, #07 cowboy, #03 newsboy, #24 trucker, #03/#23 bowler) and NO hair may show above a
+# hat's brim (hair is erased under every hat3d). Approved round-2 items (pencil, chevron, curled, walrus, toothbrush, droop, whitebeard,
+# stubbledots, sidepart, topknot, beanie3d) keep their round-2 drawing exactly.
+# Tall items need room outside the 1024 square: pads(c) gives (top, bottom) pixels; cast.head() returns a 1024 x (top+1024+bottom)
+# texture and lib.char() makes the face card taller by the same ratio, so the head itself stays where it was.
+BANNED = {'sideburns', 'afro'}            # owner Nov 22 5:28 PM CT: never use
+FHAIR = [n for n in FHAIR if n not in BANNED]
+HAIRDO = [n for n in HAIRDO if n not in BANNED]
+_fhair_r2, _hairdo_r2, _hairdo_back_r2, _hat3d_r2 = fhair, hairdo, hairdo_back, hat3d
+SS3 = 2                                   # new items are drawn at 2x and downsampled (clean edges)
+HEADROOM = {'tophat3d': 256, 'cowboy3d': 256, 'bowler3d': 128}
+HAIRROOM = {'spiky': 128, 'cowlick': 160, 'curly': 64}
+FOOTROOM = {'goatee': 128, 'king': 128, 'fullbeard': 160}
+
+def pads(c):
+    """(top, bottom) extra texture pixels a character's head needs; (0, 0) for everyone else (renders in flight are unchanged)"""
+    top = HEADROOM.get(c.get('hat3d'), 0) if c.get('hat3d') else HAIRROOM.get(c.get('hairdo'), 0)
+    return int(top), int(FOOTROOM.get(c.get('fhair'), 0))
+
+def _cr(pts, n=10, closed=True):
+    """Catmull-Rom spline through pts"""
+    P = list(pts); out = []
+    m = len(P) if closed else len(P) - 1
+    for i in range(m):
+        p0 = P[i - 1] if (closed or i > 0) else P[i]; p1 = P[i]; p2 = P[(i + 1) % len(P)]; p3 = P[(i + 2) % len(P)] if (closed or i + 2 < len(P)) else p2
+        for k in range(n):
+            t = k / n; t2, t3 = t * t, t * t * t
+            out.append(tuple(0.5 * ((2 * p1[j]) + (-p0[j] + p2[j]) * t + (2 * p0[j] - 5 * p1[j] + 4 * p2[j] - p3[j]) * t2 + (-p0[j] + 3 * p1[j] - 3 * p2[j] + p3[j]) * t3) for j in (0, 1)))
+    if not closed: out.append(P[-1])
+    return out
+
+class _L:
+    """a 2x RGBA drawing layer in head coordinates (y may be negative down to -top), returned at 1x with .done()"""
+    def __init__(self, top=0, bottom=0):
+        self.oy = top; self.H = 1024 + top + bottom
+        self.im = Image.new('RGBA', (1024 * SS3, self.H * SS3), CLEAR); self.d = ImageDraw.Draw(self.im)
+    def p(self, pts): return [(x * SS3, (y + self.oy) * SS3) for x, y in pts]
+    def b(self, box): x0, y0, x1, y1 = box; return [x0 * SS3, (y0 + self.oy) * SS3, x1 * SS3, (y1 + self.oy) * SS3]
+    def mask(self): return Image.new('L', self.im.size, 0)
+    def poly(self, pts, fill=None, K=None, w=0, d=None):
+        d = d or self.d; q = self.p(pts)
+        if fill is not None: d.polygon(q, fill=fill)
+        if K is not None and w: self.line(pts + pts[:2], K, w, d=d)
+    def line(self, pts, col, w, d=None, caps=True):
+        d = d or self.d; q = self.p(pts); W = int(w * SS3)
+        d.line(q, fill=col, width=W, joint='curve')
+        if caps:
+            for x, y in (q[0], q[-1]): d.ellipse([x - W / 2 + 1, y - W / 2 + 1, x + W / 2 - 1, y + W / 2 - 1], fill=col)
+    def ell(self, box, fill=None, K=None, w=0, d=None):
+        (d or self.d).ellipse(self.b(box), fill=fill, outline=K, width=int(w * SS3))
+    def shapes(self, polys, col, K, w, union=True, circles=()):
+        """filled shapes with a w-px ink outline. union=True: one silhouette (no inner lines); False: layered, each over the last"""
+        items = [('p', s) for s in polys] + [('c', s) for s in circles]
+        def ink(kind, s):
+            if kind == 'p': self.poly(s, K, K, 2 * w)
+            else: x0, y0, x1, y1 = s; self.ell([x0 - w, y0 - w, x1 + w, y1 + w], K)
+        def fil(kind, s):
+            if kind == 'p': self.poly(s, col)
+            else: self.ell(s, col)
+        if union:
+            for it in items: ink(*it)
+            for it in items: fil(*it)
+        else:
+            for it in items: ink(*it); fil(*it)
+    def clipdraw(self, region_polys, fn, region_circles=()):
+        """run fn(draw) on a scratch layer and keep only what lands inside the given region (for highlights, shading, strands)"""
+        m = self.mask(); md = ImageDraw.Draw(m)
+        for s in region_polys: md.polygon(self.p(s), fill=255)
+        for s in region_circles: md.ellipse(self.b(s), fill=255)
+        lay = Image.new('RGBA', self.im.size, CLEAR); fn(ImageDraw.Draw(lay))
+        a = lay.getchannel('A'); from PIL import ImageChops; lay.putalpha(ImageChops.multiply(a, m))
+        self.im.alpha_composite(lay)
+    def done(self): return self.im.resize((1024, self.H), Image.LANCZOS)
+
+def _lt(c, f=1.35, add=25): return tuple(min(255, int(v * f) + add) for v in c[:3]) + (255,)
+def _hc(a, r=400, cx=CX, cy=540):
+    """point on the head circle (angle in degrees, 270 = top, y down)"""
+    return (cx + r * math.cos(math.radians(a)), cy + r * math.sin(math.radians(a)))
+def _arcpts(a0, a1, r, n=24, cx=CX, cy=540): return [_hc(a0 + (a1 - a0) * i / n, r, cx, cy) for i in range(n + 1)]
+
+# ------------------------------------------------------------------ facial hair, round 3
+def fhair_layer(name, col, K, dx=0, top=0, bottom=0):
+    """goatee / king / fullbeard on a padded layer (head coords); None for items that keep their round-2 drawing"""
+    if name not in ('goatee', 'king', 'fullbeard'): return None
+    L = _L(top, bottom); cx = CX + dx; col = tuple(col)[:3] + (255,); dkc = dk_(col, 0.62); hi = _lt(col, 1.3, 40)
+    if name == 'goatee':   # Rick #25 samurai: broad dark tuft from under the lip, hanging well past the chin to a split point
+        patch = [(cx - 26, 662), (cx + 26, 662), (cx + 12, 700), (cx - 12, 700)]
+        g = _cr([(cx - 70, 728), (cx - 20, 716), (cx + 20, 716), (cx + 70, 728), (cx + 78, 800), (cx + 62, 900), (cx + 38, 1000), (cx + 14, 1080), (cx, 1050), (cx - 14, 1082), (cx - 40, 1000), (cx - 64, 900), (cx - 80, 800)], 8)
+        L.shapes([patch], col, K, 9); L.shapes([g], col, K, 11)
+        L.clipdraw([g], lambda dd: [dd.line(L.p([(cx + x, 760), (cx + x * 0.6, 880), (cx + x * 0.25, 1010)]), fill=hi, width=7 * SS3, joint='curve') for x in (-34, 30)])
+        L.clipdraw([g], lambda dd: dd.line(L.p([(cx, 770), (cx + 2, 900), (cx, 1040)]), fill=dkc, width=8 * SS3, joint='curve'))
+    elif name == 'king':   # Rick #17 king: thin curled moustache + soul patch + long narrow pointed goatee past the chin
+        for sx in (-1, 1):
+            L.line([(cx + sx * 10, 566), (cx + sx * 60, 572), (cx + sx * 100, 560), (cx + sx * 116, 536), (cx + sx * 104, 522)], K, 26)
+            L.line([(cx + sx * 10, 566), (cx + sx * 60, 572), (cx + sx * 100, 560), (cx + sx * 116, 536), (cx + sx * 104, 522)], col, 12)
+        patch = [(cx - 18, 664), (cx + 18, 664), (cx + 6, 698), (cx - 6, 698)]
+        g = _cr([(cx - 30, 726), (cx + 30, 726), (cx + 32, 800), (cx + 20, 900), (cx + 8, 1000), (cx - 4, 1086), (cx - 18, 990), (cx - 30, 880), (cx - 34, 790)], 8)
+        L.shapes([patch], col, K, 8); L.shapes([g], col, K, 10)
+        L.clipdraw([g], lambda dd: dd.line(L.p([(cx + 14, 750), (cx + 8, 880), (cx - 2, 1020)]), fill=hi, width=6 * SS3, joint='curve'))
+    elif name == 'fullbeard':   # Rick #22 soldier: no moustache; starts beside the mouth, covers the jaw, hangs a quarter-head below the chin
+        r = _random.Random(22)
+        topedge = [(150, 700), (260, 694), (400, 700), (CX - 60 + dx, 704), (CX + 60 + dx, 704), (624, 700), (764, 694), (874, 700)]
+        side_r = _arcpts(26, 62, 414)
+        bottom = []
+        for i, x in enumerate(range(760, 250, -34)):
+            y = 1040 + 70 * math.sin(math.pi * (x - 250) / 510) + (26 if i % 2 else -8) + r.randint(-6, 6)
+            bottom.append((x + r.randint(-6, 6), y))
+        side_l = _arcpts(118, 154, 414)
+        beard = topedge + side_r + bottom + side_l
+        beard = [(x, y) for x, y in beard]
+        L.shapes([beard], col, K, 14)
+        def tex(dd):
+            for _ in range(300):
+                x = r.uniform(150, 874); y = r.uniform(690, 1180); ln = r.uniform(30, 64); a = math.radians(90 + r.uniform(-20, 20) + (x - 512) * 0.05)
+                c_ = (dk_(col, 0.45) if r.random() < 0.6 else dkc) if r.random() < 0.88 else hi
+                dd.line(L.p([(x, y), (x + ln * math.cos(a), y + ln * math.sin(a))]), fill=c_, width=int(r.choice((5, 6, 7)) * SS3))
+        L.clipdraw([beard], tex)
+    return L.done()
+
+def fhair(im, name, col, K, dx=0):
+    """round-2 entry point kept for approved items; round-3 items draw the part of fhair_layer() that fits in the 1024 square"""
+    if name in BANNED: return
+    if name in ('goatee', 'king', 'fullbeard'):
+        im.alpha_composite(fhair_layer(name, col, K, dx).crop((0, 0, 1024, 1024))); return
+    _fhair_r2(im, name, col, K, dx)
+
+# ------------------------------------------------------------------ hairstyles, round 3
+def _cap(r_out=414, a0=192, a1=348):
+    return _arcpts(a0, a1, r_out)
+
+def hair_layer(name, col, K, dx=0, top=0):
+    """Rick hairstyles on their own padded layer (head coords). Composited AFTER the face features (hairlines end above the brows),
+    erased under any hat. Returns None for approved round-2 styles (sidepart, topknot), which still draw on the head."""
+    if name not in ('spiky', 'curly', 'messy', 'cowlick', 'bowl', 'bangs'): return None
+    L = _L(top, 0); col = tuple(col)[:3] + (255,); dkc = dk_(col, 0.66); hi = _lt(col, 1.3, 45); r = _random.Random(sum(map(ord, name)))
+    W = 22
+    def shade(region, cx_=-120):   # Rick's hair carries the head's cel shadow: a darker band on the lower-left
+        L.clipdraw([region], lambda dd: dd.ellipse(L.b([CX - 520 + cx_, 300, CX + 120 + cx_, 1100]), fill=dkc))
+    if name == 'bowl':   # Rick #09: glossy brown cap, part on the left, fringe sweeping right in one convex curve, sides to the temples
+        outer = _cap(416, 190, 350)
+        hl = _cr([(884, 452), (866, 360), (812, 292), (716, 262), (600, 268), (500, 288), (418, 300), (392, 262), (318, 252), (232, 286), (172, 360), (150, 452)], 6, closed=False)
+        cap = outer + hl
+        L.shapes([cap], col, K, W); shade(cap)
+        def hls(dd):
+            for k, (y0, w_) in enumerate(((176, 14), (206, 10))):
+                dd.line(L.p(_cr([(430, y0 + 12), (560, y0 - 8), (690, y0 + 6), (800, y0 + 50)], 6, closed=False)), fill=hi, width=w_ * SS3, joint='curve')
+        L.clipdraw([cap], hls)
+        L.line([(426, 146), (410, 200), (394, 258)], K, 9)    # part
+        L.line([(330, 262), (300, 300), (296, 330)], K, 8)    # strand at the part
+    elif name == 'bangs':   # Rick #12 office men / #21: glossy black helmet of hair, fringe straight across the brow line,
+                            # sides to the ears, a stack of long white-grey highlight streaks across the crown
+        outer = _cap(424, 190, 350)
+        fringe = _cr([(888, 470), (872, 380), (836, 300), (740, 270), (620, 268), (500, 274), (380, 284), (270, 300), (196, 330), (168, 400), (150, 470)], 6, closed=False)
+        cap = outer + fringe
+        L.shapes([cap], col, K, W); shade(cap, -160)
+        hl2 = _lt(col, 1.1, 130) if sum(col[:3]) < 200 else hi
+        def hls(dd):
+            for k in range(5):
+                dd.line(L.p(_arcpts(216 + k * 3, 296 - k * 5, 372 - k * 30, 18, CX - 10, 570)), fill=hl2, width=int((12 - k * 1.2) * SS3), joint='curve')
+        L.clipdraw([cap], hls)
+        L.line(_cr([(820, 300), (790, 250), (760, 230)], 4, closed=False), K, 8)    # fringe tip strand on the long side
+    elif name == 'spiky':   # Rick #08 ginger: one hair mass whose top breaks into a few big pointed locks sweeping up and right,
+                            # ink lines between the locks, a darker stroke inside each, freckle dots; hairline a row of small points
+        outer = _cap(412, 196, 344)
+        hl = [(884, 430), (864, 330)]
+        for i, x in enumerate(range(800, 180, -62)): hl.append((x, 262 if i % 2 == 0 else 298))
+        hl += [(172, 330), (146, 430)]
+        cap = outer + hl
+        def lock(bl, br, tp):   # a flame lock: base on the cap, body bulging up-left, hollow right edge, sharp tip flicking up and right
+            ml = (bl[0] - 30 + (tp[0] - bl[0]) * 0.12, bl[1] + (tp[1] - bl[1]) * 0.62)
+            mr = (tp[0] - (tp[0] - br[0]) * 0.45 - 40, tp[1] + (br[1] - tp[1]) * 0.5)
+            return (_cr([bl, ml, tp, mr, br, ((bl[0] + br[0]) / 2, (bl[1] + br[1]) / 2 + 50)], 10), bl, ml, tp, br)
+        back = [lock((150, 360), (380, 200), (400, -70)), lock((300, 210), (560, 160), (590, -110)), lock((470, 170), (720, 190), (770, -84)),
+                lock((640, 210), (880, 340), (930, 10))]
+        front = [lock((200, 300), (440, 260), (500, 10)), lock((430, 270), (660, 270), (700, 36))]
+        shapes = back + front
+        L.shapes([cap], col, K, W)
+        for f in back: L.shapes([f[0]], col, K, 14, union=False)
+        for f in front: L.shapes([f[0]], col, K, 13, union=False)
+        shade(cap)
+        for sh_, bl, ml, tp, br in shapes:   # inside each lock: a darker stroke along it, a light sheen near the tip, freckle dots
+            mid = ((bl[0] + br[0]) / 2, (bl[1] + br[1]) / 2 + 30)
+            def inner(dd, mid=mid, tp=tp, ml=ml):
+                dd.line(L.p(_cr([mid, ((mid[0] + tp[0]) / 2 + 14, (mid[1] + tp[1]) / 2 + 6), (tp[0] - (tp[0] - mid[0]) * 0.15, tp[1] + 40)], 6, closed=False)), fill=dkc, width=10 * SS3, joint='curve')
+                dd.line(L.p(_cr([((ml[0] + tp[0]) / 2 + 20, (ml[1] + tp[1]) / 2 + 24), (tp[0] - 30, tp[1] + 30)], 4, closed=False)), fill=hi, width=8 * SS3, joint='curve')
+                for _ in range(4):
+                    x = r.uniform(min(mid[0], tp[0]), max(mid[0], tp[0])); y = r.uniform(tp[1] + 40, mid[1] - 10); dd.ellipse(L.b([x - 5, y - 5, x + 5, y + 5]), fill=dkc)
+            L.clipdraw([sh_], inner)
+    elif name == 'curly':   # Rick #02: a cloud of round curls, wider than the crown, scalloped fringe, curl strokes inside
+        circles = []
+        for i in range(9):
+            a = 192 + i * 19.5; x, y = _hc(a, 395, CX, 470); rr = 92 if 230 < a < 310 else 80
+            circles.append([x - rr, y - rr, x + rr, y + rr])
+        for x in range(212, 840, 88): circles.append([x - 58, 200, x + 58, 292])
+        for sx in (-1, 1): circles.append([CX + sx * 352 - 56, 270, CX + sx * 352 + 56, 382])
+        core = _arcpts(190, 350, 380, 24, CX, 470) + [(840, 260), (184, 260)]
+        L.shapes([core], col, K, 18, circles=circles)
+        shade(core)
+        def curls(dd):
+            for bx in circles:
+                x0, y0, x1, y1 = bx; cxx, cyy = (x0 + x1) / 2, (y0 + y1) / 2; rr = (x1 - x0) * 0.32
+                a0 = r.uniform(150, 220); dd.arc(L.b([cxx - rr, cyy - rr, cxx + rr, cyy + rr]), a0, a0 + 200, fill=dkc, width=8 * SS3)
+            for _ in range(10):
+                x, y = r.uniform(260, 760), r.uniform(120, 230); rr = r.uniform(18, 30)
+                dd.arc(L.b([x - rr, y - rr, x + rr, y + rr]), 200, 340, fill=hi, width=6 * SS3)
+        L.clipdraw([core], curls, circles)
+    elif name == 'cowlick':   # Rick #11/#13: a full head of side-swept hair with one strand curling up off the crown
+        outer = _cap(414, 190, 350)
+        hl = _cr([(886, 450), (870, 350), (820, 286), (720, 262), (600, 262), (480, 276), (380, 300), (300, 300), (220, 320), (170, 380), (150, 452)], 6, closed=False)
+        cap = outer + hl
+        L.shapes([cap], col, K, W); shade(cap)
+        L.clipdraw([cap], lambda dd: dd.line(L.p(_cr([(400, 180), (560, 160), (720, 200), (820, 270)], 6, closed=False)), fill=hi, width=12 * SS3, joint='curve'))
+        for x0 in (600, 470, 360):   # comb lines sweeping toward the fringe
+            L.line(_cr([(x0 + 20, 160), (x0 - 20, 220), (x0 - 70, 286)], 5, closed=False), dkc, 8)
+        # the strand: a tapered blade from the crown, bending back and curling at the tip (Rick #11 onion-tip, #13 sprout)
+        strand = _cr([(500, 146), (560, 146), (590, 80), (566, 0), (520, -60), (470, -96), (500, -40), (520, 20), (510, 90)], 8)
+        L.shapes([strand], col, K, 12, union=False)
+        L.line(_cr([(530, 140), (548, 60), (520, -20), (488, -76)], 5, closed=False), dkc, 7)
+        small = _cr([(620, 152), (650, 150), (676, 90), (700, 40), (672, 60), (640, 110)], 6)
+        L.shapes([small], col, K, 10, union=False)
+    elif name == 'messy':   # Rick #13 (glasses dad): short brown mop with thin spikes sticking out every way, a few on the forehead
+        outer = _cap(410, 192, 348)
+        hl = [(882, 440), (864, 340), (800, 284), (740, 300), (700, 262), (620, 280), (560, 258), (500, 290), (440, 262), (380, 286), (300, 270), (230, 300), (176, 350), (152, 440)]
+        cap = outer + hl
+        spikes = []
+        for a in list(range(198, 346, 15)):
+            a2 = a + r.uniform(-4, 4); base = 404; ln = r.uniform(70, 140); dev = r.uniform(-34, 34)
+            b0, b1 = _hc(a2 - 3.2, base), _hc(a2 + 3.2, base); tip = _hc(a2 + dev * 0.25, base + ln)
+            mid = ((b0[0] + tip[0]) / 2 + dev * 0.4, (b0[1] + tip[1]) / 2)
+            spikes.append(_cr([b0, mid, tip, b1], 5))
+        for x, ln in ((420, 52), (610, 60), (730, 46)):   # a few strands falling onto the forehead
+            spikes.append(_cr([(x - 26, 262), (x + 10, 280), (x + 30, 262 + ln), (x + 26, 262)], 5))
+        L.shapes([cap] + spikes, col, K, 14)
+        shade(cap)
+        for _ in range(7):
+            x = r.uniform(260, 760); y = r.uniform(170, 250)
+            L.line(_cr([(x, y), (x + r.uniform(-30, 30), y + 30), (x + r.uniform(-40, 40), y + 56)], 4, closed=False), dkc, 7)
+    return L.done()
+
+def hairdo(d, name, col, K, dx=0):
+    """round-2 entry point (draws on the head): only the approved styles still draw here; round-3 styles come from hair_layer()"""
+    if name in BANNED: return
+    if name in ('sidepart', 'topknot'): _hairdo_r2(d, name, col, K, dx)
+def hairdo_back(d, name, col, K): return   # afro (banned) and old bangs were the only back pieces
+
+# ------------------------------------------------------------------ hats, round 3
+def hat3d_layer(name, col, K, tilt=0, dx=0, col2=None, top=0, bottom=0):
+    """Rick-proportioned hats on a padded layer (head coords). Returns (layer, brim_y). beanie3d keeps its approved round-2 drawing."""
+    if name == 'beanie3d':
+        lay = _hat3d_r2(name, col, K, tilt, dx, col2); out = Image.new('RGBA', (1024, 1024 + top + bottom), CLEAR); out.alpha_composite(lay, (0, top)); return out, 330
+    L = _L(top, bottom); col = tuple(col)[:3] + (255,); sh = dk_(col, 0.84 if sum(col[:3]) > 600 else 0.7); hi = _lt(col, 1.15, 30); W = 20
+    c2 = tuple(col2 or (245, 245, 245))[:3] + (255,); band = dk_(col, 0.35) if sum(col[:3]) > 200 else (20, 20, 24, 255)
+    if name == 'tophat3d':   # Rick #23: tall crown flaring slightly toward the top, black band, brim curled up at both sides, low on the head
+        by = 236; band = (26, 22, 28, 255)
+        brim = _cr([(52, by - 52), (180, by - 2), (512, by + 20), (844, by - 2), (972, by - 52), (960, by), (830, by + 46), (512, by + 66), (194, by + 46), (64, by)], 6)
+        L.shapes([brim], col, K, W)
+        L.clipdraw([brim], lambda dd: dd.line(L.p(_cr([(70, by - 10), (200, by + 34), (512, by + 54), (824, by + 34), (954, by - 10)], 6, closed=False)), fill=band, width=18 * SS3, joint='curve'))
+        crown = [(266, by + 14), (236, -150), (788, -150), (758, by + 14)]
+        L.poly(crown, col, K, W)
+        L.clipdraw([crown], lambda dd: dd.polygon(L.p([(690, by + 40), (676, -160), (800, -160), (800, by + 40)]), fill=sh))
+        L.clipdraw([crown], lambda dd: dd.polygon(L.p(_cr([(230, by - 66), (512, by - 50), (794, by - 66)], 6, closed=False) + [(794, by + 30), (230, by + 30)]), fill=band))
+        L.line(_cr([(266, by + 10), (512, by + 28), (758, by + 10)], 6, closed=False), K, W)
+        L.ell([236, -184, 788, -116], hi, K, W)                            # top
+        L.line([(306, by - 70), (290, -110)], _lt(col, 1.0, 60), 10)       # highlight stripe
+    elif name == 'cowboy3d':   # Rick #07: pinched crown, very wide thin brim curling up at both sides
+        by = 210
+        brim = _cr([(20, 120), (120, 200), (300, by + 32), (512, by + 44), (724, by + 32), (904, 200), (1004, 120), (990, 170), (880, 250), (700, by + 74), (512, by + 84), (324, by + 74), (144, 250), (34, 170)], 6)
+        L.shapes([brim], sh, K, W)
+        L.clipdraw([brim], lambda dd: dd.line(L.p(_cr([(60, 150), (300, by + 36), (512, by + 48), (724, by + 36), (964, 150)], 6, closed=False)), fill=col, width=22 * SS3, joint='curve'))
+        crown = _cr([(300, by + 40), (300, 60), (330, -110), (420, -170), (512, -126), (604, -170), (694, -110), (724, 60), (724, by + 40), (512, by + 56)], 8)
+        L.shapes([crown], col, K, W)
+        L.clipdraw([crown], lambda dd: dd.polygon(L.p([(620, -200), (760, -200), (760, by + 60), (650, by + 60)]), fill=sh))
+        L.clipdraw([crown], lambda dd: dd.polygon(L.p(_cr([(280, by - 20), (512, by - 4), (744, by - 20)], 6, closed=False) + _cr([(744, by + 44), (512, by + 60), (280, by + 44)], 6, closed=False)), fill=dk_(col, 0.45)))
+        L.line(_cr([(512, -120), (500, -40), (512, 40)], 5, closed=False), sh, 10)   # front crease
+    elif name == 'bowler3d':   # Rick #03/#23: round dome, brim with both sides curled up, sheen on the dome
+        by = 240
+        brim = _cr([(120, by - 40), (240, by + 6), (512, by + 26), (784, by + 6), (904, by - 40), (900, by + 6), (780, by + 56), (512, by + 74), (244, by + 56), (124, by + 6)], 6)
+        L.shapes([brim], sh, K, W)
+        dome = _cr([(222, by + 10), (230, 60), (330, -60), (512, -100), (694, -60), (794, 60), (802, by + 10), (512, by + 30)], 8)
+        L.shapes([dome], col, K, W)
+        L.clipdraw([dome], lambda dd: dd.polygon(L.p(_cr([(200, by - 40), (512, by - 22), (824, by - 40)], 6, closed=False) + [(824, by + 60), (200, by + 60)]), fill=dk_(col, 0.55) if sum(col[:3]) > 150 else (70, 66, 74, 255)))
+        L.clipdraw([dome], lambda dd: dd.line(L.p(_cr([(300, 120), (360, -10), (470, -70)], 6, closed=False)), fill=_lt(col, 1.6, 90), width=16 * SS3, joint='curve'))
+    elif name == 'flatcap3d':   # Rick #03 newsboy: puffy crown wider than the head, panels from a top button, short peak over the brows
+        by = 268
+        crown = _cr([(118, by + 20), (130, 160), (250, 60), (512, 28), (790, 56), (910, 150), (912, by + 16), (512, by)], 8)
+        L.shapes([crown], col, K, W)
+        def stripes(dd):
+            if col2 is not None:
+                for k in range(-9, 10):
+                    dd.line(L.p(_cr([(560, 40), (560 + k * 30, 120), (512 + k * 52, by + 20)], 6, closed=False)), fill=c2, width=11 * SS3, joint='curve')
+            else:
+                for k in (-3, -1, 1, 3): dd.line(L.p(_cr([(560, 40), (560 + k * 40, 130), (512 + k * 90, by + 20)], 6, closed=False)), fill=sh, width=8 * SS3, joint='curve')
+            dd.polygon(L.p([(118, 180), (118, by + 30), (420, by + 30)]), fill=sh)
+        L.clipdraw([crown], stripes)
+        L.ell([538, 24, 586, 60], col, K, 9)
+        peak = _cr([(270, by - 6), (512, by + 6), (760, by - 6), (730, by + 30), (512, by + 44), (296, by + 30)], 6)
+        L.shapes([peak], dk_(col, 0.55), K, 14)
+    elif name == 'trucker':   # Rick #24: rounded crown, white front panels with a centre seam and trim, curved peak seen from below
+        by = 262
+        crown = _cr([(126, by + 20), (150, 140), (300, 52), (512, 30), (724, 52), (874, 140), (898, by + 20), (512, by)], 8)
+        L.shapes([crown], col, K, W)
+        front = _cr([(240, by + 6), (270, 120), (400, 50), (512, 40), (624, 50), (754, 120), (784, by + 6), (512, by - 6)], 8)
+        L.shapes([front], c2, K, 12)
+        L.clipdraw([front], lambda dd: dd.line(L.p(_cr([(250, by - 4), (290, 140), (512, 60), (734, 140), (774, by - 4)], 6, closed=False)), fill=col, width=14 * SS3, joint='curve'))
+        L.line(_cr([(512, 44), (506, 150), (512, by - 6)], 5, closed=False), dk_(c2, 0.6), 8)
+        L.ell([492, 20, 532, 52], col, K, 8)
+        peak = _cr([(200, by + 8), (512, by + 4), (824, by + 8), (790, by + 40), (512, by + 50), (234, by + 40)], 6)
+        L.shapes([peak], col, K, 14)
+        L.clipdraw([peak], lambda dd: dd.polygon(L.p([(200, by + 26), (824, by + 26), (824, by + 60), (200, by + 60)]), fill=sh))
+    else:
+        return None, 0
+    lay = L.done().rotate(-tilt, resample=Image.BICUBIC, center=(CX, by + top), translate=(int(dx), 0))
+    return lay, by
+
+def hat3d(name, col, K, tilt=0, dx=0, col2=None):
+    """round-2 entry point: a 1024 layer (anything above the square is cut). cast.head() uses hat3d_layer() with headroom instead."""
+    lay, _ = hat3d_layer(name, col, K, tilt, dx, col2)
+    return lay
+
+def hat_region(hat, margin=26):
+    """L mask, 255 where something under the hat must not show: above the hat's lower edge (+margin), column by column;
+    columns the hat does not reach use the hat's lowest edge. Rick never shows hair above a brim."""
+    W, H = hat.size; a = hat.getchannel('A').point(lambda v: 255 if v > 40 else 0)
+    m = Image.new('L', (W, H), 0); bb = a.getbbox()
+    if not bb: return m
+    try:
+        import numpy as np
+        A = np.array(a) > 0; anyc = A.any(0); low = np.where(anyc, H - 1 - np.argmax(A[::-1], 0), -1).tolist()
+    except Exception:
+        px = a.load(); low = []
+        for x in range(W):
+            yy = -1
+            for y in range(H - 1, -1, -1):
+                if px[x, y]: yy = y; break
+            low.append(yy)
+    md = ImageDraw.Draw(m)
+    for x in range(W): md.line([(x, 0), (x, (low[x] if low[x] >= 0 else bb[3]) + margin)], fill=255)
+    return m
+
+def erase_under_hat(lay, region, top=0):
+    """clear lay wherever region (same width, at least as tall) is set, and keep what is left inside the head outline (+10 px):
+    under a hat Rick shows hair only as a patch hugging the side of the head (#03 newsboy, #23 top hat), never sticking out"""
+    from PIL import ImageChops
+    r = region.crop((0, 0) + lay.size); keep = Image.new('L', lay.size, 0); ImageDraw.Draw(keep).ellipse([102, 130 + top, 922, 950 + top], fill=255)
+    out = lay.copy(); out.putalpha(ImageChops.multiply(ImageChops.multiply(lay.getchannel('A'), ImageChops.invert(r)), keep)); return out
+
+def restore_under_hat(im, pre, region):
+    """on the 1024 head: hair drawn after `pre` is undone inside the hat region (the head disc comes back, back hair outside it goes)"""
+    disc = Image.new('L', (1024, 1024), 0); ImageDraw.Draw(disc).ellipse([112, 140, 912, 940], fill=255)
+    from PIL import ImageChops
+    r = region.crop((0, 0, 1024, 1024))
+    im.paste(pre, (0, 0), ImageChops.multiply(r, disc))
+    im.paste(Image.new('RGBA', (1024, 1024), CLEAR), (0, 0), ImageChops.multiply(r, ImageChops.invert(disc)))
+
+# ------------------------------------------------------------------ more turn variety (owner liked the turned faces: "add more")
+# Per-face tokens in the extras string, so one character can look left in one shot and right in the next:
+#   turnL / turnR / front    face slides to that side (round 2)
+#   mouthL / mouthR / mouthC lopsided mouth on that side, overriding the character's mouth_side
+#   tiltL / tiltR            whole head tipped ~8 degrees (Rick #22 headband man, #01 grin, #03 newsboy, #21 ranger), hat and hair with it
+#   lookL / lookR            turn + mouth on the same side in one token (the common Rick pose)
+def mouth_side(c, ex=''):
+    ks = (ex or '').split('+'); m = c.get('mouth_side', 0)
+    if 'mouthL' in ks or 'lookL' in ks: m = -1
+    if 'mouthR' in ks or 'lookR' in ks: m = 1
+    if 'mouthC' in ks: m = 0
+    return m
+def head_tilt(c, ex=''):
+    ks = (ex or '').split('+'); t = c.get('head_tilt', 0)
+    if 'tiltL' in ks: t = 8
+    if 'tiltR' in ks: t = -8
+    return t
+_turn_dx_r2 = turn_dx
+def turn_dx(c, ex=''):
+    ks = (ex or '').split('+')
+    if 'lookL' in ks: return -62
+    if 'lookR' in ks: return 62
+    return _turn_dx_r2(c, ex)
+TOKENS = {'turnL', 'turnR', 'front', 'mouthL', 'mouthR', 'mouthC', 'tiltL', 'tiltR', 'lookL', 'lookR'}
+
+# ------------------------------------------------------------------ growing library (owner Nov 22 2026, 5:52 PM CT)
+# "the expression library page [should] keep accumulating new facial expressions ... a constant feedback loop that expands the library".
+# Builders add faces WITHOUT editing this file: library_extra.json next to this file, {"faces": {name: [eyes, brows, mouth, extras]},
+# "family": {name: family}, "log": [...]} using any eyes/brows/mouth/extras kind already defined here (or in cast.py).
+# New drawing primitives (a new eye shape, hair, hat) still go in this file, in a dated section like ROUND 3 above.
+# How-to and checklist: research/rick-style-spec/expression-library/CONTRIBUTING.md (project files).
+def _load_extra():
+    import json, os
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'library_extra.json')
+    if not os.path.exists(p): return
+    try: E = json.load(open(p))
+    except Exception as e: print('library_extra.json unreadable:', e); return
+    for k, v in E.get('faces', {}).items():
+        if k not in LIBRARY: LIBRARY[k] = tuple((list(v) + [''] * 4)[:4])
+    for k, v in E.get('family', {}).items():
+        for fam, members in FAMILY.items():
+            if fam == v and k not in members: members.append(k) if isinstance(members, list) else None
+_load_extra()
+
+
+# ------------------------------------------------------------------ ADDED BY VIDEOS: 2026-11-22, Washington DC Thanksgiving (dc9)
+# kepi3d: 1860s forage cap (Union blue / Confederate grey / postal brown), rule 334(b) addition.
+# Rick refs: 15_022_0 (blue kepi, gold emblem, peak low over the brows) and 02_006_0 (blue peaked cap with badge), both in
+# research/rick-style-spec/expression-library/round2|round3/ref-crops; side by side: additions/2026-11-22_washington-dc_kepi3d.jpg.
+# Drawn like the round-2 hats (lit top ellipse, shaded far side, curved band, peak seen from below), then tilted. The caller squashes it
+# to the top 60 % of the head like the head's other hats (DC cast.py), which keeps the brim above the brows.
+HAT_PERIOD = ['kepi3d']
+def hat3d_period(name, col, K, tilt=0, dx=0):
+    if name not in HAT_PERIOD: return None
+    lay = Image.new('RGBA', (1024, 1024), CLEAR); d = ImageDraw.Draw(lay)
+    col = tuple(col)[:3] + (255,); sh = dk_(col, 0.72); hi = tuple(min(255, int(v * 1.25) + 25) for v in col[:3]) + (255,); W = 22; bd = dk_(col, 0.55)
+    crown = [(230, 380), (270, 80), (800, 50), (812, 380)]
+    d.polygon(crown, fill=col); d.polygon([(690, 58), (800, 50), (812, 380), (700, 380)], fill=sh)
+    d.ellipse([262, 22, 808, 112], fill=hi, outline=K, width=W)
+    d.line(crown + [crown[0]], fill=K, width=W, joint='curve')
+    d.rectangle([222, 318, 820, 384], fill=bd); d.chord([222, 344, 820, 424], 0, 180, fill=bd); d.arc([222, 344, 820, 424], 0, 180, fill=K, width=12); d.line([222, 318, 820, 318], fill=K, width=10)
+    d.chord([160, 370, 660, 520], 0, 180, fill=(24, 22, 26, 255), outline=K, width=W); d.arc([200, 380, 600, 470], 20, 90, fill=(80, 80, 90, 255), width=10)
+    d.ellipse([470, 330, 520, 380], fill=(214, 180, 80, 255), outline=K, width=8)   # plain brass button, no insignia
+    lay = lay.resize((1106, 1106), Image.LANCZOS).crop((41, 0, 1065, 1024)); lay = lay.rotate(-tilt, resample=Image.BICUBIC, center=(CX, 300))
+    out = Image.new('RGBA', (1024, 1024), CLEAR); out.alpha_composite(lay, (int(dx), int(abs(tilt) * 4))); return out

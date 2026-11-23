@@ -8,6 +8,7 @@ sys.path.insert(0,'/root/dc/src')
 import bpy, numpy as np
 from mathutils import Vector
 import lib as L
+import expressions as X
 a=sys.argv[sys.argv.index('--')+1:]; OUT,TXT=a[0],a[1]
 sc=L.init(20)
 C=json.load(open('/root/dc/src/cast.json')); kinds=list(C)
@@ -58,7 +59,9 @@ for ch in CH:
     if nlegs<2: miss.append(f'legs ({nlegs} at mid-shin)')
     bh=b.dimensions.z if b.dimensions.z>0 else 1.1*q; z0=b.matrix_world.translation.z-bh/2
     def zrow(r): return z0+bh*(1-r/h)
-    head_c=max(f.matrix_world.translation.z for f in ch['F'].values()); head_bot=head_c-H/2; head_top=head_c+H/2
+    head_c=max(f.matrix_world.translation.z for f in ch['F'].values())
+    _pt,_pb=X.pads(C[k]); head_c-=ch['root'].scale[0]*H*1024/800*(_pt-_pb)/2048   # round 3: padded head cards are centred off the head disc; measure from the disc
+    head_bot=head_c-H/2; head_top=head_c+H/2
     sc_=ch['root'].scale[0]
     torso=(head_bot-zrow(crotch))/H; legs=(zrow(crotch)-zrow(bot_r))/H; total=(head_top-zrow(bot_r))/H
     # r7b shoulder-join check (owner Nov 22 'arm issue?': arm roots stood inside the outline as a second line, or poked above the shoulder):

@@ -68,29 +68,11 @@ def extras(d,kind):
     if 'angryfill' in kind: pass
     X.extras(d,kind,K)   # library extras: tears, tear1, blushR, vein, zzz, shades, sweat2
 C=X.expand(json.load(open('/root/dc/src/cast.json')))
-def hat3d_dc(name,col,tilt=0,dx=0):
-    """rule 333a(b) DC period hats as perspective props in the X.hat3d style: lit/shaded crown, curved band, brim seen from below, then tilted"""
-    if name not in ('kepi3d','visor3d'): return None
-    lay,d=new(1024,1024); col=tuple(col)[:3]+(255,); sh=dk(col,0.72); hi=tuple(min(255,int(v*1.25)+25) for v in col[:3])+(255,); W=22
-    if name=='kepi3d':   # 1860s forage cap: crown slopes forward, flat top seen as a thin lit ellipse, shaded far side, curved band, black peak from below
-        crown=[(230,380),(270,80),(800,50),(812,380)]
-        d.polygon(crown,fill=col); d.polygon([(690,58),(800,50),(812,380),(700,380)],fill=sh)
-        d.ellipse([262,22,808,112],fill=hi,outline=K,width=W)
-        d.line(crown+[crown[0]],fill=K,width=W,joint='curve')
-        d.rectangle([222,318,820,384],fill=dk(col,0.55)); d.chord([222,344,820,424],0,180,fill=dk(col,0.55)); d.arc([222,344,820,424],0,180,fill=K,width=12); d.line([222,318,820,318],fill=K,width=10)
-        d.chord([160,370,660,520],0,180,fill=(24,22,26,255),outline=K,width=W); d.arc([200,380,600,470],20,90,fill=(80,80,90,255),width=10)
-        d.ellipse([470,330,520,380],fill=(214,180,80,255),outline=K,width=8)   # plain brass button, no insignia
-    if name=='visor3d':  # clerk's eyeshade: leather band ring seen slightly from below, translucent green bill curving out
-        d.chord([150,150,874,420],180,360,fill=(110,80,50,255),outline=K,width=W)
-        d.rectangle([150,296,874,350],fill=(60,50,40,255)); d.chord([150,316,874,380],0,180,fill=(60,50,40,255)); d.arc([150,316,874,380],0,180,fill=K,width=12)
-        d.chord([110,270,914,470],0,180,fill=(70,140,90,215),outline=K,width=W); d.arc([190,290,830,440],30,150,fill=(150,210,160,255),width=12)
-    lay=lay.resize((1106,1106),Image.LANCZOS).crop((41,0,1065,1024)); lay=lay.rotate(-tilt,resample=Image.BICUBIC,center=(CX,300))
-    out=Image.new('RGBA',(1024,1024),(0,0,0,0)); out.alpha_composite(lay,(int(dx),int(abs(tilt)*4))); return out
 def head(name,fk):
     c=C[name]; e,b,m=c['faces'][fk][:3]; ex=c['faces'][fk][3] if len(c['faces'][fk])>3 else ''
     im,d=new(1024,1024); hair=tuple(c.get('hair',(60,40,30)))+(255,)
     hs=c.get('hairstyle','short')
-    HD=c.get('hairdo'); TD=X.turn_dx(c,ex)   # round 2 (v7vnb2 16bb1d7): TD = face slide toward the turned side; hairdo = Rick hairstyles (326a revision pending owner pick)
+    HD=c.get('hairdo'); TD=X.turn_dx(c,ex); PT,PB=X.pads(c)   # round 3 (v7vnb2 5d8d84e): PT/PB extra texture rows for tall hats, hair, beards; round 2 (v7vnb2 16bb1d7): TD = face slide toward the turned side; hairdo = Rick hairstyles (326a revision pending owner pick)
     if HD: hs='_hairdo'; X.hairdo_back(d,HD,hair,K)
     if hs=='bun': d.ellipse([382,40,642,280],fill=hair,outline=K,width=OUT)
     if hs=='long': d.rounded_rectangle([100,260,924,980],200,fill=hair,outline=K,width=OUT)
@@ -110,6 +92,7 @@ def head(name,fk):
     if 'angryfill' in ex: 
         ov=Image.new('RGBA',(1024,1024),(0,0,0,0)); od=ImageDraw.Draw(ov); od.ellipse([130,158,894,922],fill=(170,60,170,120)); im.alpha_composite(ov); d=ImageDraw.Draw(im)
     if 'gloom' in ex or 'redglow' in ex: X.pre(im,ex); d=ImageDraw.Draw(im)   # library: rage gloom on the head top
+    LIBHAT=c.get('hat3d') in X.HAT3D; PRE=im.copy() if LIBHAT else None   # round 3: head before any front hair, to undo hair under a library hat
     if hs in('short','bald','bun','mullet','tied','white','bob','ponytail'):   # r9: hairlines raised with the features (hair ends ~285, brows at 300)
         if hs=='short': d.chord([150,150,874,420],180,360,fill=hair,outline=K,width=OUT)
         if hs=='bun': d.chord([150,150,874,410],180,360,fill=hair,outline=K,width=OUT)
@@ -153,11 +136,15 @@ def head(name,fk):
     if c.get('hat_tilt') or TD:   # round 2 (owner Nov 22 5:11 PM CT): hats sit tilted at an angle and slide with the turn (Rick #24 trucker, #03 bowler)
         tl=Image.new('RGBA',(1024,1024),(0,0,0,0)); tl.alpha_composite(top,(0,0)); top=tl.rotate(-c.get('hat_tilt',0),resample=Image.BICUBIC,center=(CX,180),translate=(TD//2,int(abs(c.get('hat_tilt',0))*4)))   # dc: drop the hat 4 px per degree so the raised corner stays inside the texture
     im.alpha_composite(top,(0,0)); top=None
-    if c.get('hat3d'):   # dc: squashed x0.6 from the top like every other DC hat, so the brim stays above the enlarged brows
-        h3=hat3d_dc(c['hat3d'],c.get('hatcol',(80,60,44)),tilt=c.get('hat_tilt',0),dx=TD//2) or X.hat3d(c['hat3d'],c.get('hatcol',(80,60,44)),K,tilt=c.get('hat_tilt',0),dx=TD//2,col2=c.get('hatcol2'))
+    HAT=None
+    if LIBHAT:   # round 3: Rick-proportioned library hat on a padded layer, composited last; every bit of hair above its brim is removed
+        HAT,_by=X.hat3d_layer(c['hat3d'],c.get('hatcol',(80,60,44)),K,tilt=c.get('hat_tilt',0),dx=TD//2,col2=c.get('hatcol2'),top=PT,bottom=PB)
+        HREG=X.hat_region(HAT); X.restore_under_hat(im,PRE,HREG.crop((0,PT,1024,PT+1024)))
+    elif c.get('hat3d'):   # library period hats (kepi3d, added by the DC build Nov 22), squashed x0.6 from the top like every other DC hat, so the brim stays above the enlarged brows
+        h3=X.hat3d_period(c['hat3d'],c.get('hatcol',(80,60,44)),K,tilt=c.get('hat_tilt',0),dx=TD//2) or X.hat3d(c['hat3d'],c.get('hatcol',(80,60,44)),K,tilt=c.get('hat_tilt',0),dx=TD//2,col2=c.get('hatcol2'))
         h3=h3.resize((1024,int(1024*0.6)),Image.LANCZOS); im.alpha_composite(h3,(0,0)); h3=None
     if c.get('fhair'):   # dc: drawn on its own layer dropped 25 px and moved half-way with the off-centre mouth, because DC's nose and 1.65x mouth sit lower than the library's
-        fl,_=new(1024,1024); X.fhair(fl,c['fhair'],c.get('fhaircol',c.get('hair',(60,40,30))),K,dx=TD+int(30*c.get('mouth_side',0))); im.alpha_composite(fl,(0,25)); fl=None   # round 2: Rick facial hair (326a revision pending owner pick)
+        FDX=TD+int(30*X.mouth_side(c,ex)); fl,_=new(1024,1024); X.fhair(fl,c['fhair'],c.get('fhaircol',c.get('hair',(60,40,30))),K,dx=FDX); im.alpha_composite(fl,(0,25)); fl=None   # round 2: Rick facial hair (326a revision pending owner pick)
     feat,d=new(1024,1024)
     # CAST GATE v2 (run coordinator, Nov 22: Rick's features are big and readable, refs 10#0587 14#0219 14#0695): each eye, brow and the mouth is drawn
     # on its own layer and scaled about its own centre, so the eye spacing (27 % of head width) stays the same
@@ -173,7 +160,7 @@ def head(name,fk):
         for sx in(-1,1): d.ellipse([CX+sx*112-90,EY-84,CX+sx*112+90,EY+84],outline=gc,width=13)
         d.line([CX-24,EY-10,CX+24,EY-10],fill=gc,width=12)
     _big(lambda dd: brows(dd,b if (not c.get('hat3d')) and hat not in('cop','flatcap','fedora','beanie','ladyhat','capotain','tricorn','knit','cap','sunhat','visor','kepi') or b!='up' else 'flat',cy=EY-125),[(CX-108,EY-125,64),(CX+108,EY-125,64)],1.45)
-    MSIDE=c.get('mouth_side',0)
+    MSIDE=X.mouth_side(c,ex)   # round 3: per-face mouthL/mouthR/lookL/lookR tokens override the character's mouth_side
     if MSIDE:   # round 2 (owner Nov 22 5:11 PM CT): Rick's off-centre, lopsided mouths. DC scales the mouth 1.65x first, then shifts it
         # toward the side and tilts it so that corner rides up (round mouths only shift), same as X.mouth_layer
         ml,_=new(1024,1024); _big(lambda dd: mouth(dd,m,cy=770),[(CX,790,150)],1.65,dst=ml)
@@ -188,7 +175,19 @@ def head(name,fk):
     if c.get('nose',True): d.arc([CX-30,560,CX+30,640],-30,200,fill=K,width=10)
     extras(d,ex)
     im.alpha_composite(feat.crop((0,105,1024,1024)),(TD,0))
-    return im
+    HL=X.hair_layer(HD,hair,K,dx=TD//2,top=PT) if HD else None
+    FL=X.fhair_layer(c['fhair'],c.get('fhaircol',c.get('hair',(60,40,30))),K,dx=FDX,top=PT,bottom=PB) if c.get('fhair') else None
+    TILT=X.head_tilt(c,ex)
+    if not (PT or PB or HL or HAT or TILT): return im
+    # round 3: final texture is 1024 x (PT+1024+PB); lib.char() sizes the face card to match (head disc stays in place)
+    out=Image.new('RGBA',(1024,PT+1024+PB),(0,0,0,0)); out.alpha_composite(im,(0,PT))
+    if FL is not None and PB: out.alpha_composite(FL.crop((0,PT+1024-25,1024,PT+1024+PB-25)),(0,PT+1024))   # dc: same 25 px drop as the in-square part
+    if HL is not None:
+        if HAT is not None: HL=X.erase_under_hat(HL,HREG,PT)
+        out.alpha_composite(HL,(0,0))
+    if HAT is not None: out.alpha_composite(HAT,(0,0))
+    if TILT: out=out.rotate(TILT,resample=Image.BICUBIC,center=(512,PT+540))   # round 3: tiltL/tiltR tip the whole head about its centre
+    return out
 # ---- round 3 (rule 193): Rick-style construction ----
 # slim column garment (narrower than the head), long coat/robe to the shins, hard cel shadow on the left third,
 # light rim on the right, ink detail (collar, placket, buttons, belt + buckle, hem band, fold lines),

@@ -242,9 +242,7 @@
    "skeptical"
   ],
   "mouth_side": -1,
-  "hat_tilt": 5,
   "turn": -0.5,
-  "hat3d": "visor3d",
   "fhaircol": [
    110,
    80,
@@ -344,7 +342,15 @@
    "smug"
   ],
   "mouth_side": 0,
-  "turn": 0
+  "turn": 0,
+  "hat": null,
+  "hat3d": "tophat3d",
+  "hatcol": [
+   30,
+   28,
+   34
+  ],
+  "hat_tilt": -6
  },
  "presB": {
   "coat": [
@@ -536,7 +542,6 @@
     "wavy"
    ]
   },
-  "stubble": 1,
   "look": "D3",
   "library": [
    "side_eye",
@@ -544,7 +549,13 @@
    "smug"
   ],
   "mouth_side": 1,
-  "turn": 0.5
+  "turn": 0.5,
+  "fhair": "fullbeard",
+  "fhaircol": [
+   90,
+   70,
+   56
+  ]
  },
  "presD": {
   "coat": [
@@ -640,7 +651,13 @@
    "worried"
   ],
   "mouth_side": 0,
-  "turn": 0
+  "turn": 0,
+  "fhair": "king",
+  "fhaircol": [
+   70,
+   52,
+   40
+  ]
  },
  "presE": {
   "coat": [
@@ -729,7 +746,8 @@
    "open_smile"
   ],
   "mouth_side": 1,
-  "turn": 0.5
+  "turn": 0.5,
+  "hairdo": "sidepart"
  },
  "printer": {
   "coat": [
@@ -823,12 +841,12 @@
    "whistle"
   ],
   "mouth_side": -1,
-  "hat_tilt": -11,
-  "hat3d": "beanie3d",
+  "hat_tilt": -9,
+  "hat3d": "flatcap3d",
   "hatcol": [
-   150,
-   48,
-   40
+   96,
+   86,
+   74
   ],
   "turn": -0.5
  },
@@ -1238,7 +1256,6 @@
     "smirk"
    ]
   },
-  "stubble": 1,
   "look": "D3",
   "library": [
    "content",
@@ -1252,6 +1269,12 @@
    120,
    120,
    124
+  ],
+  "fhair": "goatee",
+  "fhaircol": [
+   70,
+   56,
+   44
   ]
  },
  "greyB": {
@@ -1374,9 +1397,9 @@
   "cue": "dress",
   "body": "round",
   "hair": [
-   150,
-   100,
-   50
+   44,
+   32,
+   34
   ],
   "hairstyle": "ponytail",
   "props": [
@@ -1448,13 +1471,7 @@
   ],
   "mouth_side": -1,
   "turn": -0.5,
-  "hat3d": "beanie3d",
-  "hatcol": [
-   60,
-   110,
-   130
-  ],
-  "hat_tilt": 6
+  "hairdo": "bangs"
  },
  "momT": {
   "coat": [
@@ -1643,7 +1660,8 @@
    "laugh"
   ],
   "mouth_side": -1,
-  "turn": -0.5
+  "turn": -0.5,
+  "hairdo": "messy"
  },
  "kidT": {
   "coat": [
@@ -1733,13 +1751,7 @@
   ],
   "mouth_side": 1,
   "turn": 0.5,
-  "hat3d": "beanie3d",
-  "hatcol": [
-   220,
-   170,
-   50
-  ],
-  "hat_tilt": -8
+  "hairdo": "bowl"
  },
  "grandT": {
   "coat": [

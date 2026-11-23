@@ -622,24 +622,55 @@ def _low_row(img):
     w,h=img.size; a=np.array(img.pixels[:]).reshape(h,w,4)[...,3]   # Blender rows start at the bottom
     rows=np.where(a.max(1)>0.5)[0]; v=(rows.min()/h) if len(rows) else 0.0
     _LOWROW[img.name]=v; return v
+def _set_blocks(p):
+    """r11c (DC thread feedback, dc16: 100 false FAILs on blobs hidden behind tables / crates): True when a set mesh (anything that is
+    not a character card, ink hull or ground blob) sits between the camera and floor point p. Character hits are stepped through, so
+    only furniture / walls count; the character cards themselves are dealt with by shadow_only_pass()."""
+    dg=bpy.context.evaluated_depsgraph_get(); o=sc.camera.matrix_world.translation.copy(); d=(p-o); L_=d.length; d.normalize(); t=0.0
+    for _ in range(40):
+        hit,loc,_n,_i,ob,_m=sc.ray_cast(dg,o+d*t,d,distance=L_-t-0.02)
+        if not hit: return False
+        if ob.name.endswith('_shadow') or any(c.name.startswith('CHR_') for c in ob.users_collection): t=(loc-o).length+1e-4; continue
+        return True
+    return False
 def shadow_pairs(frames,out_json,head_w=0.40):
-    """r11 / rule 367 probe, part 1 (in Blender): for every frame where two characters' feet (roots) are within one head width plus a
-    blob width on the floor, write the screen pixels of blob centre A, blob centre B and the floor point between them; shadowcheck.py
-    then samples the rendered frames there. Returns the number of close pairs."""
+    """r11 / rule 367 probe, part 1 (in Blender). r11b: only pairs whose ground blobs really overlap on the floor (the first version
+    also took pairs up to 0.9 m apart, whose midpoint is plain floor). For each overlap it writes the screen pixels of
+    M = centre of the overlap rectangle, A = M mirrored through blob A's centre (same distance from A's centre, outside B, so it shows
+    A's darkness alone at that falloff), B likewise for blob B. shadowcheck.py then requires the overlap to be at least as dark as
+    the darker single blob there (minus limit). Returns the number of overlapping pairs."""
     import json, itertools
+    from mathutils import Vector
     from bpy_extras.object_utils import world_to_camera_view
     R=sc.render; W=int(R.resolution_x*R.resolution_percentage/100); H=int(R.resolution_y*R.resolution_percentage/100); out=[]
     for f in frames:
         sc.frame_set(f)
-        shs=[o for o in bpy.data.objects if o.type=='MESH' and o.name.endswith('_shadow') and not o.hide_render]
-        for a,b in itertools.combinations(shs,2):
-            pa=a.matrix_world.translation; pb=b.matrix_world.translation
-            if (pa-pb).length>head_w+0.5: continue
-            pts=[]
-            for p in (pa,(pa+pb)/2,pb):
+        shs=[]
+        for o in bpy.data.objects:
+            if o.type=='MESH' and o.name.endswith('_shadow') and not o.hide_render:
+                vs=[o.matrix_world@v.co for v in o.data.vertices]
+                shs.append((o,min(v.x for v in vs),max(v.x for v in vs),min(v.y for v in vs),max(v.y for v in vs),sum(v.z for v in vs)/len(vs),o.matrix_world.translation.copy()))
+        for (a,ax0,ax1,ay0,ay1,az,ca),(b,bx0,bx1,by0,by1,bz,cb) in itertools.combinations(shs,2):
+            ox0,ox1,oy0,oy1=max(ax0,bx0),min(ax1,bx1),max(ay0,by0),min(ay1,by1)
+            if ox1<=ox0 or oy1<=oy0: continue
+            z=max(az,bz); M=Vector(((ox0+ox1)/2,(oy0+oy1)/2,z))
+            pts=[]; hid=[]
+            for p in (Vector((2*ca.x-M.x,2*ca.y-M.y,z)),M,Vector((2*cb.x-M.x,2*cb.y-M.y,z))):
                 v=world_to_camera_view(sc,sc.camera,p); pts.append((round(v.x*W,1),round((1-v.y)*H,1)))
-            out.append(dict(f=f,a=a.name,b=b.name,dist=round((pa-pb).length,3),A=pts[0],M=pts[1],B=pts[2]))
+                # r11c: a mirror reference that falls inside a third character's blob reads two blobs, not one: drop it like a hidden one
+                crowd=p is not M and any(s_[0] not in (a,b) and s_[1]<p.x<s_[2] and s_[3]<p.y<s_[4] for s_ in shs)
+                hid.append(crowd or _set_blocks(p))
+            out.append(dict(f=f,a=a.name,b=b.name,dist=round((ca-cb).length,3),overlap_m=(round(ox1-ox0,3),round(oy1-oy0,3)),A=pts[0],M=pts[1],B=pts[2],hidden=hid))
     json.dump(out,open(out_json,'w'),indent=0); print('SHADOW_PAIRS',len(out)); return len(out)
+def shadow_only_pass():
+    """r11b / rule 367 probe: hide every character card and ink hull from the camera and from the sun (ray visibility, so the card
+    swaps keep working) and leave only the ground blobs on the floor. Rendered for the close-pair frames, this lets shadowcheck.py
+    read the blobs without legs or ink crossing its sample windows. Probe renders only, never a delivery render."""
+    n=0
+    for o in bpy.data.objects:
+        if o.type=='MESH' and not o.name.endswith('_shadow') and any(c.name.startswith('CHR_') for c in o.users_collection):
+            o.visible_camera=False; o.visible_shadow=False; n+=1
+    print('SHADOW_ONLY_PASS hidden',n); return n
 AIR=set()   # r7: (character root name, frame) where combo() plans the feet off the ground (jumps, run air drawings); FOOT skips them
 def rigcheck(frames,floor_z=None):
     """Prints RIGCHECK lines and returns the number of faults:

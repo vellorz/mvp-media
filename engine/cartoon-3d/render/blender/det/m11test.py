@@ -42,6 +42,7 @@ if os.environ.get('SHADOW_OLD'):
 if L.rigcheck(range(0, END + 1, 2)) and not os.environ.get('RIGCHECK_ONLY') and not os.environ.get('SHADOW_OLD'): raise SystemExit('RIGCHECK failed')   # SHADOW_OLD: demo of the old fault only
 L.render_setup(PCT, 8); L.shadow_pairs(range(0, END + 1), (OUT.rstrip('/') + '_pairs.json'))   # r11: rule 367 probe points
 if os.environ.get('RIGCHECK_ONLY'): raise SystemExit(0)
+if os.environ.get('SHADOW_ONLY'): L.shadow_only_pass()   # r11b: rule 367 probe pass (blobs only)
 L.render_setup(PCT, 8)
 os.makedirs(OUT, exist_ok=True)
 fr = [int(x) for x in a[2].split(',')] if len(a) > 2 else list(range(0, END + 1))

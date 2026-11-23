@@ -574,6 +574,24 @@ def _low_row(img):
     w,h=img.size; a=np.array(img.pixels[:]).reshape(h,w,4)[...,3]   # Blender rows start at the bottom
     rows=np.where(a.max(1)>0.5)[0]; v=(rows.min()/h) if len(rows) else 0.0
     _LOWROW[img.name]=v; return v
+def shadow_pairs(frames,out_json,head_w=0.40):
+    """r11 / rule 367 probe, part 1 (in Blender): for every frame where two characters' feet (roots) are within one head width plus a
+    blob width on the floor, write the screen pixels of blob centre A, blob centre B and the floor point between them; shadowcheck.py
+    then samples the rendered frames there. Returns the number of close pairs."""
+    import json, itertools
+    from bpy_extras.object_utils import world_to_camera_view
+    R=sc.render; W=int(R.resolution_x*R.resolution_percentage/100); H=int(R.resolution_y*R.resolution_percentage/100); out=[]
+    for f in frames:
+        sc.frame_set(f)
+        shs=[o for o in bpy.data.objects if o.type=='MESH' and o.name.endswith('_shadow') and not o.hide_render]
+        for a,b in itertools.combinations(shs,2):
+            pa=a.matrix_world.translation; pb=b.matrix_world.translation
+            if (pa-pb).length>head_w+0.5: continue
+            pts=[]
+            for p in (pa,(pa+pb)/2,pb):
+                v=world_to_camera_view(sc,sc.camera,p); pts.append((round(v.x*W,1),round((1-v.y)*H,1)))
+            out.append(dict(f=f,a=a.name,b=b.name,dist=round((pa-pb).length,3),A=pts[0],M=pts[1],B=pts[2]))
+    json.dump(out,open(out_json,'w'),indent=0); print('SHADOW_PAIRS',len(out)); return len(out)
 AIR=set()   # r7: (character root name, frame) where combo() plans the feet off the ground (jumps, run air drawings); FOOT skips them
 def rigcheck(frames,floor_z=None):
     """Prints RIGCHECK lines and returns the number of faults:

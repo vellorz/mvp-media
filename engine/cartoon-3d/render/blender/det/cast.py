@@ -726,6 +726,25 @@ def walk2_legs(name,style,i,view='R'):
     draw(400+(-hs if view=='F' else -side*hs),(p+0.5)%1.0,dk(legc,0.7),-1)   # leg B, far / darker, first
     draw(400+(hs if view=='F' else side*hs),p,legc,1)                        # leg A
     return im.resize((800,1100),Image.LANCZOS)
+# ---- ROUND 10 (owner Nov 23 2:31 PM CT: walk arms swung together and stayed bent inward; arms must swing opposite each other, changing
+# with each step). Rick #24 f733-771 (pedestrian walking across, 3/4 body): the arm on the trailing side hangs in FRONT of the torso and
+# swings forward (hand toward the walk direction, elbow softly bent, hand up to the belly) and back (nearly straight, hand behind the
+# hip); the leading-side arm is mostly hidden BEHIND the torso and shows its hand ahead of or behind the body on the opposite beat.
+# Rick #04 f941-952 / #12 f145-205 (toward camera): arms hang a little away from the body and swing gently. Drawings on 2s like the legs.
+WALK_ARMS={   # (a, cc) back extreme -> forward extreme, per role; a = upper arm from straight down (+ outward), cc = forearm direction
+ 'st':{'n':((10,14),(-14,-38)),'f':((-6,-6),(16,34)),'t':((8,10),(3,-16))},
+ 'nm':{'n':((16,22),(-24,-62)),'f':((-8,-8),(22,50)),'t':((10,13),(2,-28))},
+ 'br':{'n':((22,30),(-32,-92)),'f':((-10,-10),(28,72)),'t':((12,16),(0,-44))},
+}
+def _walk_arm_poses():
+    for st,R in WALK_ARMS.items():
+        n=WALK_STYLES[st]['n']
+        for role,(bk,fw) in R.items():
+            for k in range(n):
+                w=(1+math.cos(2*math.pi*k/n))/2   # k=0: forward extreme, k=n/2: back extreme
+                POSES[f'wa{st}{role}{k}']=(round(bk[0]+(fw[0]-bk[0])*w,2),round(bk[1]+(fw[1]-bk[1])*w,2))
+_walk_arm_poses()
+BACK_POSE_ROLE='f'   # walk poses 'wa<st>f<k>' (leading-side arm) are drawn BEHIND the torso (lib BACK_Y)
 if __name__=='__main__':
     out={}
     for n,c in C.items():

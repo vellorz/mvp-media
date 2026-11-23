@@ -53,6 +53,7 @@ def figure(name, s, size=(900, 1250)):
     else:   # round 8 turned torso
         th = 180 if tk == 'back' else cast.TOP_TURNS[tk[:-1]] * (1 if tk[-1] == 'R' else -1)
         card(upper, tex((name, 'top', tk), lambda: cast.turn_top(name, th)), 0.8, 1.1 * q, 0, zc, ox, oz)
+    back_arms = []   # r10: leading-side walk arm, drawn before the torso card
     front = []   # r8b: cast.FRONT_POSES hands are drawn after the head (in front of the face, as lib FRONT_Y)
     for sx in (-1, 1):
         im, kind = arm_img(name, s['arms'][sx])
@@ -64,8 +65,13 @@ def figure(name, s, size=(900, 1250)):
             card(upper, big, ARM_W * q, ARM_H * 2 * q, sx * shx, shz, ox, oz)
         else:
             args = (im, cast.POSE_W * ARM_W / 1200 * q, cast.POSE_H * ARM_W / 1200 * q, sx * shx, shz + (ARM_H / 2 - ARM_OFF - 40 * ARM_W / 1200) * q, ox, oz)
-            if ab in cast.FRONT_POSES: front.append(args)
+            if ab.startswith('wa') and len(ab) > 4 and ab[4] == 'f': back_arms.append(args)   # r10: behind the torso
+            elif ab in cast.FRONT_POSES: front.append(args)
             else: card(upper, *args)
+    if back_arms:
+        ba = Image.new('RGBA', size, (0, 0, 0, 0))
+        for args in back_arms: card(ba, *args)
+        ba.alpha_composite(upper); upper = ba
     k = X.turn_name(s['face'], s['lv']) if s['lv'] is not None else s['face']
     if k not in c['faces']: k = s['face'] if s['face'] in c['faces'] else list(c['faces'])[0]
     pt, pb = X.pads(c); hd = tex((name, 'h', k), lambda: cast.head(name, k))

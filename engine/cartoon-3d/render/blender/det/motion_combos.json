@@ -4915,12 +4915,15 @@
    "approved": "owner Nov 23 2026 8:46 AM CT (review of round 7)"
   },
   "walk": {
-   "desc": "walk: normal steps (8 f a step, Rick median 7.5), knees bend as each foot swings through, arms swing gently opposite the legs, head turned 3/4 with the torso, a small head bob, no squash. Loop: frames 2-65 (16-frame cycle); the scene moves the character.",
+   "desc": "walk: normal steps (8 f a step, Rick median 7.5), knees bend as each foot swings through, arms swing opposite each other with the legs, head turned 3/4 with the torso, a small head bob, no squash. Arms (round 10, Rick #24 f733-771): the trailing-side arm swings forward and back in front of the torso with a soft elbow, the leading-side arm swings opposite it behind the torso; toward camera both arms swing opposite each other. Loop: frames 2-65 (16-frame cycle); the scene moves the character.",
    "evidence": [
     "#12 f145-205 walk (legs redrawn every 2 f, knees bend as the foot swings, arms hang with a small swing, no squash)",
     "#23 f1352-1358 (lean, legs and arms swing)",
     "guide: 23 Rick walk cadences, median 7.5 f per step; no squash and stretch on walks; bodies slide while legs cycle",
-    "owner Nov 23 10:49 AM CT: round-8 walk unnatural; vary stride by situation, better arms and legs"
+    "owner Nov 23 10:49 AM CT: round-8 walk unnatural; vary stride by situation, better arms and legs",
+    "#24 f733-771 pedestrian walk (near arm across the front, far arm behind the body, alternating)",
+    "#04 f941-952 sailor walking toward camera",
+    "owner Nov 23 2:31 PM CT: arms must swing opposite each other, not together, and not stay bent inward"
    ],
    "events": [
     {
@@ -4956,8 +4959,25 @@
     },
     {
      "at": 2,
-     "ch": "swing",
-     "v": 10.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn0",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 2,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf4",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 2,
@@ -4971,8 +4991,25 @@
     },
     {
      "at": 4,
-     "ch": "swing",
-     "v": 7.07
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn1",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 4,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf5",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 4,
@@ -4986,8 +5023,25 @@
     },
     {
      "at": 6,
-     "ch": "swing",
-     "v": 0.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn2",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf6",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 6,
@@ -5001,8 +5055,25 @@
     },
     {
      "at": 8,
-     "ch": "swing",
-     "v": -7.07
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn3",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 8,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf7",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 8,
@@ -5016,8 +5087,25 @@
     },
     {
      "at": 10,
-     "ch": "swing",
-     "v": -10.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn4",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 10,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf0",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 10,
@@ -5031,8 +5119,25 @@
     },
     {
      "at": 12,
-     "ch": "swing",
-     "v": -7.07
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn5",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 12,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf1",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 12,
@@ -5046,8 +5151,25 @@
     },
     {
      "at": 14,
-     "ch": "swing",
-     "v": -0.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn6",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 14,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf2",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 14,
@@ -5061,8 +5183,25 @@
     },
     {
      "at": 16,
-     "ch": "swing",
-     "v": 7.07
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn7",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 16,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf3",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 16,
@@ -5076,8 +5215,25 @@
     },
     {
      "at": 18,
-     "ch": "swing",
-     "v": 10.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn0",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf4",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 18,
@@ -5091,8 +5247,25 @@
     },
     {
      "at": 20,
-     "ch": "swing",
-     "v": 7.07
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn1",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 20,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf5",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 20,
@@ -5106,8 +5279,25 @@
     },
     {
      "at": 22,
-     "ch": "swing",
-     "v": 0.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn2",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 22,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf6",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 22,
@@ -5121,8 +5311,25 @@
     },
     {
      "at": 24,
-     "ch": "swing",
-     "v": -7.07
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn3",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf7",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 24,
@@ -5136,8 +5343,25 @@
     },
     {
      "at": 26,
-     "ch": "swing",
-     "v": -10.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn4",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 26,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf0",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 26,
@@ -5151,8 +5375,25 @@
     },
     {
      "at": 28,
-     "ch": "swing",
-     "v": -7.07
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn5",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 28,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf1",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 28,
@@ -5166,8 +5407,25 @@
     },
     {
      "at": 30,
-     "ch": "swing",
-     "v": -0.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn6",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 30,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf2",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 30,
@@ -5181,8 +5439,25 @@
     },
     {
      "at": 32,
-     "ch": "swing",
-     "v": 7.07
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn7",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 32,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf3",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 32,
@@ -5196,8 +5471,25 @@
     },
     {
      "at": 34,
-     "ch": "swing",
-     "v": 10.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn0",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 34,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf4",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 34,
@@ -5211,8 +5503,25 @@
     },
     {
      "at": 36,
-     "ch": "swing",
-     "v": 7.07
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn1",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 36,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf5",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 36,
@@ -5226,8 +5535,25 @@
     },
     {
      "at": 38,
-     "ch": "swing",
-     "v": 0.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn2",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 38,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf6",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 38,
@@ -5241,8 +5567,25 @@
     },
     {
      "at": 40,
-     "ch": "swing",
-     "v": -7.07
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn3",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 40,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf7",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 40,
@@ -5256,8 +5599,25 @@
     },
     {
      "at": 42,
-     "ch": "swing",
-     "v": -10.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn4",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 42,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf0",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 42,
@@ -5271,8 +5631,25 @@
     },
     {
      "at": 44,
-     "ch": "swing",
-     "v": -7.07
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn5",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 44,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf1",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 44,
@@ -5286,8 +5663,25 @@
     },
     {
      "at": 46,
-     "ch": "swing",
-     "v": -0.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn6",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 46,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf2",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 46,
@@ -5301,8 +5695,25 @@
     },
     {
      "at": 48,
-     "ch": "swing",
-     "v": 7.07
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn7",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 48,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf3",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 48,
@@ -5316,8 +5727,25 @@
     },
     {
      "at": 50,
-     "ch": "swing",
-     "v": 10.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn0",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 50,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf4",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 50,
@@ -5331,8 +5759,25 @@
     },
     {
      "at": 52,
-     "ch": "swing",
-     "v": 7.07
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn1",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 52,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf5",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 52,
@@ -5346,8 +5791,25 @@
     },
     {
      "at": 54,
-     "ch": "swing",
-     "v": 0.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn2",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 54,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf6",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 54,
@@ -5361,8 +5823,25 @@
     },
     {
      "at": 56,
-     "ch": "swing",
-     "v": -7.07
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn3",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 56,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf7",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 56,
@@ -5376,8 +5855,25 @@
     },
     {
      "at": 58,
-     "ch": "swing",
-     "v": -10.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn4",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 58,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf0",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 58,
@@ -5391,8 +5887,25 @@
     },
     {
      "at": 60,
-     "ch": "swing",
-     "v": -7.07
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn5",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 60,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf1",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 60,
@@ -5406,8 +5919,25 @@
     },
     {
      "at": 62,
-     "ch": "swing",
-     "v": -0.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn6",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 62,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf2",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 62,
@@ -5421,8 +5951,25 @@
     },
     {
      "at": 64,
-     "ch": "swing",
-     "v": 7.07
+     "ch": "arm",
+     "v": [
+      "far",
+      "wanmn7",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 64,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wanmf3",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 64,
@@ -5436,8 +5983,19 @@
     },
     {
      "at": 66,
-     "ch": "swing",
-     "v": 0.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "hang"
+     ]
+    },
+    {
+     "at": 66,
+     "ch": "arm",
+     "v": [
+      "right",
+      "hang"
+     ]
     },
     {
      "at": 66,
@@ -5467,7 +6025,7 @@
     }
    ],
    "status": "INFERRED",
-   "round": 9,
+   "round": 10,
    "legs": "walk cycle v2 (continuous)",
    "loop": 16,
    "loop_start": 2,
@@ -6146,10 +6704,557 @@
      }
     ]
    },
-   "walk_style": "nm"
+   "walk_style": "nm",
+   "previous_r9": {
+    "desc": "walk: normal steps (8 f a step, Rick median 7.5), knees bend as each foot swings through, arms swing gently opposite the legs, head turned 3/4 with the torso, a small head bob, no squash. Loop: frames 2-65 (16-frame cycle); the scene moves the character.",
+    "events": [
+     {
+      "at": 0,
+      "ch": "face",
+      "v": "$face"
+     },
+     {
+      "at": 0,
+      "ch": "turn",
+      "v": [
+       0,
+       2
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "lean",
+      "v": [
+       2,
+       3
+      ]
+     },
+     {
+      "at": 1,
+      "ch": "top",
+      "v": "q"
+     },
+     {
+      "at": 2,
+      "ch": "legs",
+      "v": "wknm0"
+     },
+     {
+      "at": 2,
+      "ch": "swing",
+      "v": 10.0
+     },
+     {
+      "at": 2,
+      "ch": "hdy",
+      "v": 0.004
+     },
+     {
+      "at": 4,
+      "ch": "legs",
+      "v": "wknm1"
+     },
+     {
+      "at": 4,
+      "ch": "swing",
+      "v": 7.07
+     },
+     {
+      "at": 4,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 6,
+      "ch": "legs",
+      "v": "wknm2"
+     },
+     {
+      "at": 6,
+      "ch": "swing",
+      "v": 0.0
+     },
+     {
+      "at": 6,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 8,
+      "ch": "legs",
+      "v": "wknm3"
+     },
+     {
+      "at": 8,
+      "ch": "swing",
+      "v": -7.07
+     },
+     {
+      "at": 8,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 10,
+      "ch": "legs",
+      "v": "wknm4"
+     },
+     {
+      "at": 10,
+      "ch": "swing",
+      "v": -10.0
+     },
+     {
+      "at": 10,
+      "ch": "hdy",
+      "v": 0.004
+     },
+     {
+      "at": 12,
+      "ch": "legs",
+      "v": "wknm5"
+     },
+     {
+      "at": 12,
+      "ch": "swing",
+      "v": -7.07
+     },
+     {
+      "at": 12,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 14,
+      "ch": "legs",
+      "v": "wknm6"
+     },
+     {
+      "at": 14,
+      "ch": "swing",
+      "v": -0.0
+     },
+     {
+      "at": 14,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 16,
+      "ch": "legs",
+      "v": "wknm7"
+     },
+     {
+      "at": 16,
+      "ch": "swing",
+      "v": 7.07
+     },
+     {
+      "at": 16,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 18,
+      "ch": "legs",
+      "v": "wknm0"
+     },
+     {
+      "at": 18,
+      "ch": "swing",
+      "v": 10.0
+     },
+     {
+      "at": 18,
+      "ch": "hdy",
+      "v": 0.004
+     },
+     {
+      "at": 20,
+      "ch": "legs",
+      "v": "wknm1"
+     },
+     {
+      "at": 20,
+      "ch": "swing",
+      "v": 7.07
+     },
+     {
+      "at": 20,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 22,
+      "ch": "legs",
+      "v": "wknm2"
+     },
+     {
+      "at": 22,
+      "ch": "swing",
+      "v": 0.0
+     },
+     {
+      "at": 22,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 24,
+      "ch": "legs",
+      "v": "wknm3"
+     },
+     {
+      "at": 24,
+      "ch": "swing",
+      "v": -7.07
+     },
+     {
+      "at": 24,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 26,
+      "ch": "legs",
+      "v": "wknm4"
+     },
+     {
+      "at": 26,
+      "ch": "swing",
+      "v": -10.0
+     },
+     {
+      "at": 26,
+      "ch": "hdy",
+      "v": 0.004
+     },
+     {
+      "at": 28,
+      "ch": "legs",
+      "v": "wknm5"
+     },
+     {
+      "at": 28,
+      "ch": "swing",
+      "v": -7.07
+     },
+     {
+      "at": 28,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 30,
+      "ch": "legs",
+      "v": "wknm6"
+     },
+     {
+      "at": 30,
+      "ch": "swing",
+      "v": -0.0
+     },
+     {
+      "at": 30,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 32,
+      "ch": "legs",
+      "v": "wknm7"
+     },
+     {
+      "at": 32,
+      "ch": "swing",
+      "v": 7.07
+     },
+     {
+      "at": 32,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 34,
+      "ch": "legs",
+      "v": "wknm0"
+     },
+     {
+      "at": 34,
+      "ch": "swing",
+      "v": 10.0
+     },
+     {
+      "at": 34,
+      "ch": "hdy",
+      "v": 0.004
+     },
+     {
+      "at": 36,
+      "ch": "legs",
+      "v": "wknm1"
+     },
+     {
+      "at": 36,
+      "ch": "swing",
+      "v": 7.07
+     },
+     {
+      "at": 36,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 38,
+      "ch": "legs",
+      "v": "wknm2"
+     },
+     {
+      "at": 38,
+      "ch": "swing",
+      "v": 0.0
+     },
+     {
+      "at": 38,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 40,
+      "ch": "legs",
+      "v": "wknm3"
+     },
+     {
+      "at": 40,
+      "ch": "swing",
+      "v": -7.07
+     },
+     {
+      "at": 40,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 42,
+      "ch": "legs",
+      "v": "wknm4"
+     },
+     {
+      "at": 42,
+      "ch": "swing",
+      "v": -10.0
+     },
+     {
+      "at": 42,
+      "ch": "hdy",
+      "v": 0.004
+     },
+     {
+      "at": 44,
+      "ch": "legs",
+      "v": "wknm5"
+     },
+     {
+      "at": 44,
+      "ch": "swing",
+      "v": -7.07
+     },
+     {
+      "at": 44,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 46,
+      "ch": "legs",
+      "v": "wknm6"
+     },
+     {
+      "at": 46,
+      "ch": "swing",
+      "v": -0.0
+     },
+     {
+      "at": 46,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 48,
+      "ch": "legs",
+      "v": "wknm7"
+     },
+     {
+      "at": 48,
+      "ch": "swing",
+      "v": 7.07
+     },
+     {
+      "at": 48,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 50,
+      "ch": "legs",
+      "v": "wknm0"
+     },
+     {
+      "at": 50,
+      "ch": "swing",
+      "v": 10.0
+     },
+     {
+      "at": 50,
+      "ch": "hdy",
+      "v": 0.004
+     },
+     {
+      "at": 52,
+      "ch": "legs",
+      "v": "wknm1"
+     },
+     {
+      "at": 52,
+      "ch": "swing",
+      "v": 7.07
+     },
+     {
+      "at": 52,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 54,
+      "ch": "legs",
+      "v": "wknm2"
+     },
+     {
+      "at": 54,
+      "ch": "swing",
+      "v": 0.0
+     },
+     {
+      "at": 54,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 56,
+      "ch": "legs",
+      "v": "wknm3"
+     },
+     {
+      "at": 56,
+      "ch": "swing",
+      "v": -7.07
+     },
+     {
+      "at": 56,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 58,
+      "ch": "legs",
+      "v": "wknm4"
+     },
+     {
+      "at": 58,
+      "ch": "swing",
+      "v": -10.0
+     },
+     {
+      "at": 58,
+      "ch": "hdy",
+      "v": 0.004
+     },
+     {
+      "at": 60,
+      "ch": "legs",
+      "v": "wknm5"
+     },
+     {
+      "at": 60,
+      "ch": "swing",
+      "v": -7.07
+     },
+     {
+      "at": 60,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 62,
+      "ch": "legs",
+      "v": "wknm6"
+     },
+     {
+      "at": 62,
+      "ch": "swing",
+      "v": -0.0
+     },
+     {
+      "at": 62,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 64,
+      "ch": "legs",
+      "v": "wknm7"
+     },
+     {
+      "at": 64,
+      "ch": "swing",
+      "v": 7.07
+     },
+     {
+      "at": 64,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 66,
+      "ch": "legs",
+      "v": "body"
+     },
+     {
+      "at": 66,
+      "ch": "swing",
+      "v": 0.0
+     },
+     {
+      "at": 66,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 66,
+      "ch": "lean",
+      "v": [
+       0,
+       3
+      ]
+     },
+     {
+      "at": 67,
+      "ch": "top",
+      "v": "front"
+     },
+     {
+      "at": 67,
+      "ch": "turn",
+      "v": [
+       2,
+       0
+      ]
+     }
+    ]
+   }
   },
   "walk_stroll": {
-   "desc": "stroll: short steps (10 f a step), feet barely lift, arms hang with a small swing, upright; for an easy amble or chatting while walking. Loop: frames 2-61 (20-frame cycle); the scene moves the character.",
+   "desc": "stroll: short steps (10 f a step), feet barely lift, arms swing opposite each other, upright; for an easy amble or chatting while walking. Arms (round 10, Rick #24 f733-771): the trailing-side arm swings forward and back in front of the torso with a soft elbow, the leading-side arm swings opposite it behind the torso; toward camera both arms swing opposite each other. Loop: frames 2-61 (20-frame cycle); the scene moves the character.",
    "events": [
     {
      "at": 0,
@@ -6176,8 +7281,25 @@
     },
     {
      "at": 2,
-     "ch": "swing",
-     "v": 6.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn0",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 2,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf5",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 2,
@@ -6191,8 +7313,25 @@
     },
     {
      "at": 4,
-     "ch": "swing",
-     "v": 4.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn1",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 4,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf6",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 4,
@@ -6206,8 +7345,25 @@
     },
     {
      "at": 6,
-     "ch": "swing",
-     "v": 1.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn2",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf7",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 6,
@@ -6221,8 +7377,25 @@
     },
     {
      "at": 8,
-     "ch": "swing",
-     "v": -1.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn3",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 8,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf8",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 8,
@@ -6236,8 +7409,25 @@
     },
     {
      "at": 10,
-     "ch": "swing",
-     "v": -4.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn4",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 10,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf9",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 10,
@@ -6251,8 +7441,25 @@
     },
     {
      "at": 12,
-     "ch": "swing",
-     "v": -6.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn5",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 12,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf0",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 12,
@@ -6266,8 +7473,25 @@
     },
     {
      "at": 14,
-     "ch": "swing",
-     "v": -4.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn6",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 14,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf1",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 14,
@@ -6281,8 +7505,25 @@
     },
     {
      "at": 16,
-     "ch": "swing",
-     "v": -1.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn7",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 16,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf2",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 16,
@@ -6296,8 +7537,25 @@
     },
     {
      "at": 18,
-     "ch": "swing",
-     "v": 1.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn8",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf3",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 18,
@@ -6311,8 +7569,25 @@
     },
     {
      "at": 20,
-     "ch": "swing",
-     "v": 4.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn9",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 20,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf4",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 20,
@@ -6326,8 +7601,25 @@
     },
     {
      "at": 22,
-     "ch": "swing",
-     "v": 6.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn0",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 22,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf5",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 22,
@@ -6341,8 +7633,25 @@
     },
     {
      "at": 24,
-     "ch": "swing",
-     "v": 4.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn1",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf6",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 24,
@@ -6356,8 +7665,25 @@
     },
     {
      "at": 26,
-     "ch": "swing",
-     "v": 1.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn2",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 26,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf7",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 26,
@@ -6371,8 +7697,25 @@
     },
     {
      "at": 28,
-     "ch": "swing",
-     "v": -1.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn3",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 28,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf8",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 28,
@@ -6386,8 +7729,25 @@
     },
     {
      "at": 30,
-     "ch": "swing",
-     "v": -4.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn4",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 30,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf9",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 30,
@@ -6401,8 +7761,25 @@
     },
     {
      "at": 32,
-     "ch": "swing",
-     "v": -6.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn5",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 32,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf0",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 32,
@@ -6416,8 +7793,25 @@
     },
     {
      "at": 34,
-     "ch": "swing",
-     "v": -4.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn6",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 34,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf1",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 34,
@@ -6431,8 +7825,25 @@
     },
     {
      "at": 36,
-     "ch": "swing",
-     "v": -1.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn7",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 36,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf2",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 36,
@@ -6446,8 +7857,25 @@
     },
     {
      "at": 38,
-     "ch": "swing",
-     "v": 1.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn8",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 38,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf3",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 38,
@@ -6461,8 +7889,25 @@
     },
     {
      "at": 40,
-     "ch": "swing",
-     "v": 4.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn9",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 40,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf4",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 40,
@@ -6476,8 +7921,25 @@
     },
     {
      "at": 42,
-     "ch": "swing",
-     "v": 6.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn0",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 42,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf5",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 42,
@@ -6491,8 +7953,25 @@
     },
     {
      "at": 44,
-     "ch": "swing",
-     "v": 4.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn1",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 44,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf6",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 44,
@@ -6506,8 +7985,25 @@
     },
     {
      "at": 46,
-     "ch": "swing",
-     "v": 1.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn2",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 46,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf7",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 46,
@@ -6521,8 +8017,25 @@
     },
     {
      "at": 48,
-     "ch": "swing",
-     "v": -1.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn3",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 48,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf8",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 48,
@@ -6536,8 +8049,25 @@
     },
     {
      "at": 50,
-     "ch": "swing",
-     "v": -4.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn4",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 50,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf9",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 50,
@@ -6551,8 +8081,25 @@
     },
     {
      "at": 52,
-     "ch": "swing",
-     "v": -6.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn5",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 52,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf0",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 52,
@@ -6566,8 +8113,25 @@
     },
     {
      "at": 54,
-     "ch": "swing",
-     "v": -4.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn6",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 54,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf1",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 54,
@@ -6581,8 +8145,25 @@
     },
     {
      "at": 56,
-     "ch": "swing",
-     "v": -1.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn7",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 56,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf2",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 56,
@@ -6596,8 +8177,25 @@
     },
     {
      "at": 58,
-     "ch": "swing",
-     "v": 1.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn8",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 58,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf3",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 58,
@@ -6611,8 +8209,25 @@
     },
     {
      "at": 60,
-     "ch": "swing",
-     "v": 4.85
+     "ch": "arm",
+     "v": [
+      "far",
+      "wastn9",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 60,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wastf4",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 60,
@@ -6626,8 +8241,19 @@
     },
     {
      "at": 62,
-     "ch": "swing",
-     "v": 0.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "hang"
+     ]
+    },
+    {
+     "at": 62,
+     "ch": "arm",
+     "v": [
+      "right",
+      "hang"
+     ]
     },
     {
      "at": 62,
@@ -6649,7 +8275,7 @@
     }
    ],
    "status": "INFERRED",
-   "round": 9,
+   "round": 10,
    "legs": "walk cycle v2 (continuous)",
    "loop": 20,
    "loop_start": 2,
@@ -6657,12 +8283,516 @@
     "#12 f145-205 walk (legs redrawn every 2 f, knees bend as the foot swings, arms hang with a small swing, no squash)",
     "#23 f1352-1358 (lean, legs and arms swing)",
     "guide: 23 Rick walk cadences, median 7.5 f per step; no squash and stretch on walks; bodies slide while legs cycle",
-    "owner Nov 23 10:49 AM CT: round-8 walk unnatural; vary stride by situation, better arms and legs"
+    "owner Nov 23 10:49 AM CT: round-8 walk unnatural; vary stride by situation, better arms and legs",
+    "#24 f733-771 pedestrian walk (near arm across the front, far arm behind the body, alternating)",
+    "#04 f941-952 sailor walking toward camera",
+    "owner Nov 23 2:31 PM CT: arms must swing opposite each other, not together, and not stay bent inward"
    ],
-   "walk_style": "st"
+   "walk_style": "st",
+   "previous_r9": {
+    "desc": "stroll: short steps (10 f a step), feet barely lift, arms hang with a small swing, upright; for an easy amble or chatting while walking. Loop: frames 2-61 (20-frame cycle); the scene moves the character.",
+    "events": [
+     {
+      "at": 0,
+      "ch": "face",
+      "v": "$face"
+     },
+     {
+      "at": 0,
+      "ch": "turn",
+      "v": [
+       0,
+       2
+      ]
+     },
+     {
+      "at": 1,
+      "ch": "top",
+      "v": "q"
+     },
+     {
+      "at": 2,
+      "ch": "legs",
+      "v": "wkst0"
+     },
+     {
+      "at": 2,
+      "ch": "swing",
+      "v": 6.0
+     },
+     {
+      "at": 2,
+      "ch": "hdy",
+      "v": 0.003
+     },
+     {
+      "at": 4,
+      "ch": "legs",
+      "v": "wkst1"
+     },
+     {
+      "at": 4,
+      "ch": "swing",
+      "v": 4.85
+     },
+     {
+      "at": 4,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 6,
+      "ch": "legs",
+      "v": "wkst2"
+     },
+     {
+      "at": 6,
+      "ch": "swing",
+      "v": 1.85
+     },
+     {
+      "at": 6,
+      "ch": "hdy",
+      "v": 0.0003
+     },
+     {
+      "at": 8,
+      "ch": "legs",
+      "v": "wkst3"
+     },
+     {
+      "at": 8,
+      "ch": "swing",
+      "v": -1.85
+     },
+     {
+      "at": 8,
+      "ch": "hdy",
+      "v": 0.0003
+     },
+     {
+      "at": 10,
+      "ch": "legs",
+      "v": "wkst4"
+     },
+     {
+      "at": 10,
+      "ch": "swing",
+      "v": -4.85
+     },
+     {
+      "at": 10,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 12,
+      "ch": "legs",
+      "v": "wkst5"
+     },
+     {
+      "at": 12,
+      "ch": "swing",
+      "v": -6.0
+     },
+     {
+      "at": 12,
+      "ch": "hdy",
+      "v": 0.003
+     },
+     {
+      "at": 14,
+      "ch": "legs",
+      "v": "wkst6"
+     },
+     {
+      "at": 14,
+      "ch": "swing",
+      "v": -4.85
+     },
+     {
+      "at": 14,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 16,
+      "ch": "legs",
+      "v": "wkst7"
+     },
+     {
+      "at": 16,
+      "ch": "swing",
+      "v": -1.85
+     },
+     {
+      "at": 16,
+      "ch": "hdy",
+      "v": 0.0003
+     },
+     {
+      "at": 18,
+      "ch": "legs",
+      "v": "wkst8"
+     },
+     {
+      "at": 18,
+      "ch": "swing",
+      "v": 1.85
+     },
+     {
+      "at": 18,
+      "ch": "hdy",
+      "v": 0.0003
+     },
+     {
+      "at": 20,
+      "ch": "legs",
+      "v": "wkst9"
+     },
+     {
+      "at": 20,
+      "ch": "swing",
+      "v": 4.85
+     },
+     {
+      "at": 20,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 22,
+      "ch": "legs",
+      "v": "wkst0"
+     },
+     {
+      "at": 22,
+      "ch": "swing",
+      "v": 6.0
+     },
+     {
+      "at": 22,
+      "ch": "hdy",
+      "v": 0.003
+     },
+     {
+      "at": 24,
+      "ch": "legs",
+      "v": "wkst1"
+     },
+     {
+      "at": 24,
+      "ch": "swing",
+      "v": 4.85
+     },
+     {
+      "at": 24,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 26,
+      "ch": "legs",
+      "v": "wkst2"
+     },
+     {
+      "at": 26,
+      "ch": "swing",
+      "v": 1.85
+     },
+     {
+      "at": 26,
+      "ch": "hdy",
+      "v": 0.0003
+     },
+     {
+      "at": 28,
+      "ch": "legs",
+      "v": "wkst3"
+     },
+     {
+      "at": 28,
+      "ch": "swing",
+      "v": -1.85
+     },
+     {
+      "at": 28,
+      "ch": "hdy",
+      "v": 0.0003
+     },
+     {
+      "at": 30,
+      "ch": "legs",
+      "v": "wkst4"
+     },
+     {
+      "at": 30,
+      "ch": "swing",
+      "v": -4.85
+     },
+     {
+      "at": 30,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 32,
+      "ch": "legs",
+      "v": "wkst5"
+     },
+     {
+      "at": 32,
+      "ch": "swing",
+      "v": -6.0
+     },
+     {
+      "at": 32,
+      "ch": "hdy",
+      "v": 0.003
+     },
+     {
+      "at": 34,
+      "ch": "legs",
+      "v": "wkst6"
+     },
+     {
+      "at": 34,
+      "ch": "swing",
+      "v": -4.85
+     },
+     {
+      "at": 34,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 36,
+      "ch": "legs",
+      "v": "wkst7"
+     },
+     {
+      "at": 36,
+      "ch": "swing",
+      "v": -1.85
+     },
+     {
+      "at": 36,
+      "ch": "hdy",
+      "v": 0.0003
+     },
+     {
+      "at": 38,
+      "ch": "legs",
+      "v": "wkst8"
+     },
+     {
+      "at": 38,
+      "ch": "swing",
+      "v": 1.85
+     },
+     {
+      "at": 38,
+      "ch": "hdy",
+      "v": 0.0003
+     },
+     {
+      "at": 40,
+      "ch": "legs",
+      "v": "wkst9"
+     },
+     {
+      "at": 40,
+      "ch": "swing",
+      "v": 4.85
+     },
+     {
+      "at": 40,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 42,
+      "ch": "legs",
+      "v": "wkst0"
+     },
+     {
+      "at": 42,
+      "ch": "swing",
+      "v": 6.0
+     },
+     {
+      "at": 42,
+      "ch": "hdy",
+      "v": 0.003
+     },
+     {
+      "at": 44,
+      "ch": "legs",
+      "v": "wkst1"
+     },
+     {
+      "at": 44,
+      "ch": "swing",
+      "v": 4.85
+     },
+     {
+      "at": 44,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 46,
+      "ch": "legs",
+      "v": "wkst2"
+     },
+     {
+      "at": 46,
+      "ch": "swing",
+      "v": 1.85
+     },
+     {
+      "at": 46,
+      "ch": "hdy",
+      "v": 0.0003
+     },
+     {
+      "at": 48,
+      "ch": "legs",
+      "v": "wkst3"
+     },
+     {
+      "at": 48,
+      "ch": "swing",
+      "v": -1.85
+     },
+     {
+      "at": 48,
+      "ch": "hdy",
+      "v": 0.0003
+     },
+     {
+      "at": 50,
+      "ch": "legs",
+      "v": "wkst4"
+     },
+     {
+      "at": 50,
+      "ch": "swing",
+      "v": -4.85
+     },
+     {
+      "at": 50,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 52,
+      "ch": "legs",
+      "v": "wkst5"
+     },
+     {
+      "at": 52,
+      "ch": "swing",
+      "v": -6.0
+     },
+     {
+      "at": 52,
+      "ch": "hdy",
+      "v": 0.003
+     },
+     {
+      "at": 54,
+      "ch": "legs",
+      "v": "wkst6"
+     },
+     {
+      "at": 54,
+      "ch": "swing",
+      "v": -4.85
+     },
+     {
+      "at": 54,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 56,
+      "ch": "legs",
+      "v": "wkst7"
+     },
+     {
+      "at": 56,
+      "ch": "swing",
+      "v": -1.85
+     },
+     {
+      "at": 56,
+      "ch": "hdy",
+      "v": 0.0003
+     },
+     {
+      "at": 58,
+      "ch": "legs",
+      "v": "wkst8"
+     },
+     {
+      "at": 58,
+      "ch": "swing",
+      "v": 1.85
+     },
+     {
+      "at": 58,
+      "ch": "hdy",
+      "v": 0.0003
+     },
+     {
+      "at": 60,
+      "ch": "legs",
+      "v": "wkst9"
+     },
+     {
+      "at": 60,
+      "ch": "swing",
+      "v": 4.85
+     },
+     {
+      "at": 60,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 62,
+      "ch": "legs",
+      "v": "body"
+     },
+     {
+      "at": 62,
+      "ch": "swing",
+      "v": 0.0
+     },
+     {
+      "at": 62,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 63,
+      "ch": "top",
+      "v": "front"
+     },
+     {
+      "at": 63,
+      "ch": "turn",
+      "v": [
+       2,
+       0
+      ]
+     }
+    ]
+   }
   },
   "walk_brisk": {
-   "desc": "brisk walk: long quick steps (6 f a step), higher knee lift, bigger arm swing, leaning forward 6 deg; for someone in a hurry. Loop: frames 2-61 (12-frame cycle); the scene moves the character.",
+   "desc": "brisk walk: long quick steps (6 f a step), higher knee lift, bigger arm swing, leaning forward 6 deg; for someone in a hurry. Arms (round 10, Rick #24 f733-771): the trailing-side arm swings forward and back in front of the torso with a soft elbow, the leading-side arm swings opposite it behind the torso; toward camera both arms swing opposite each other. Loop: frames 2-61 (12-frame cycle); the scene moves the character.",
    "events": [
     {
      "at": 0,
@@ -6697,8 +8827,25 @@
     },
     {
      "at": 2,
-     "ch": "swing",
-     "v": 16.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn0",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 2,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf3",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 2,
@@ -6712,8 +8859,25 @@
     },
     {
      "at": 4,
-     "ch": "swing",
-     "v": 8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn1",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 4,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf4",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 4,
@@ -6727,8 +8891,25 @@
     },
     {
      "at": 6,
-     "ch": "swing",
-     "v": -8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn2",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf5",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 6,
@@ -6742,8 +8923,25 @@
     },
     {
      "at": 8,
-     "ch": "swing",
-     "v": -16.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn3",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 8,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf0",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 8,
@@ -6757,8 +8955,25 @@
     },
     {
      "at": 10,
-     "ch": "swing",
-     "v": -8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn4",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 10,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf1",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 10,
@@ -6772,8 +8987,25 @@
     },
     {
      "at": 12,
-     "ch": "swing",
-     "v": 8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn5",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 12,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf2",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 12,
@@ -6787,8 +9019,25 @@
     },
     {
      "at": 14,
-     "ch": "swing",
-     "v": 16.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn0",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 14,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf3",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 14,
@@ -6802,8 +9051,25 @@
     },
     {
      "at": 16,
-     "ch": "swing",
-     "v": 8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn1",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 16,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf4",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 16,
@@ -6817,8 +9083,25 @@
     },
     {
      "at": 18,
-     "ch": "swing",
-     "v": -8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn2",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf5",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 18,
@@ -6832,8 +9115,25 @@
     },
     {
      "at": 20,
-     "ch": "swing",
-     "v": -16.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn3",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 20,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf0",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 20,
@@ -6847,8 +9147,25 @@
     },
     {
      "at": 22,
-     "ch": "swing",
-     "v": -8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn4",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 22,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf1",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 22,
@@ -6862,8 +9179,25 @@
     },
     {
      "at": 24,
-     "ch": "swing",
-     "v": 8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn5",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf2",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 24,
@@ -6877,8 +9211,25 @@
     },
     {
      "at": 26,
-     "ch": "swing",
-     "v": 16.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn0",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 26,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf3",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 26,
@@ -6892,8 +9243,25 @@
     },
     {
      "at": 28,
-     "ch": "swing",
-     "v": 8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn1",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 28,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf4",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 28,
@@ -6907,8 +9275,25 @@
     },
     {
      "at": 30,
-     "ch": "swing",
-     "v": -8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn2",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 30,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf5",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 30,
@@ -6922,8 +9307,25 @@
     },
     {
      "at": 32,
-     "ch": "swing",
-     "v": -16.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn3",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 32,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf0",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 32,
@@ -6937,8 +9339,25 @@
     },
     {
      "at": 34,
-     "ch": "swing",
-     "v": -8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn4",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 34,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf1",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 34,
@@ -6952,8 +9371,25 @@
     },
     {
      "at": 36,
-     "ch": "swing",
-     "v": 8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn5",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 36,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf2",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 36,
@@ -6967,8 +9403,25 @@
     },
     {
      "at": 38,
-     "ch": "swing",
-     "v": 16.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn0",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 38,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf3",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 38,
@@ -6982,8 +9435,25 @@
     },
     {
      "at": 40,
-     "ch": "swing",
-     "v": 8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn1",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 40,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf4",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 40,
@@ -6997,8 +9467,25 @@
     },
     {
      "at": 42,
-     "ch": "swing",
-     "v": -8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn2",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 42,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf5",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 42,
@@ -7012,8 +9499,25 @@
     },
     {
      "at": 44,
-     "ch": "swing",
-     "v": -16.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn3",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 44,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf0",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 44,
@@ -7027,8 +9531,25 @@
     },
     {
      "at": 46,
-     "ch": "swing",
-     "v": -8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn4",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 46,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf1",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 46,
@@ -7042,8 +9563,25 @@
     },
     {
      "at": 48,
-     "ch": "swing",
-     "v": 8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn5",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 48,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf2",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 48,
@@ -7057,8 +9595,25 @@
     },
     {
      "at": 50,
-     "ch": "swing",
-     "v": 16.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn0",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 50,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf3",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 50,
@@ -7072,8 +9627,25 @@
     },
     {
      "at": 52,
-     "ch": "swing",
-     "v": 8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn1",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 52,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf4",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 52,
@@ -7087,8 +9659,25 @@
     },
     {
      "at": 54,
-     "ch": "swing",
-     "v": -8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn2",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 54,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf5",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 54,
@@ -7102,8 +9691,25 @@
     },
     {
      "at": 56,
-     "ch": "swing",
-     "v": -16.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn3",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 56,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf0",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 56,
@@ -7117,8 +9723,25 @@
     },
     {
      "at": 58,
-     "ch": "swing",
-     "v": -8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn4",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 58,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf1",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 58,
@@ -7132,8 +9755,25 @@
     },
     {
      "at": 60,
-     "ch": "swing",
-     "v": 8.0
+     "ch": "arm",
+     "v": [
+      "far",
+      "wabrn5",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 60,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wabrf2",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 60,
@@ -7147,8 +9787,19 @@
     },
     {
      "at": 62,
-     "ch": "swing",
-     "v": 0.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "hang"
+     ]
+    },
+    {
+     "at": 62,
+     "ch": "arm",
+     "v": [
+      "right",
+      "hang"
+     ]
     },
     {
      "at": 62,
@@ -7178,7 +9829,7 @@
     }
    ],
    "status": "INFERRED",
-   "round": 9,
+   "round": 10,
    "legs": "walk cycle v2 (continuous)",
    "loop": 12,
    "loop_start": 2,
@@ -7186,12 +9837,532 @@
     "#12 f145-205 walk (legs redrawn every 2 f, knees bend as the foot swings, arms hang with a small swing, no squash)",
     "#23 f1352-1358 (lean, legs and arms swing)",
     "guide: 23 Rick walk cadences, median 7.5 f per step; no squash and stretch on walks; bodies slide while legs cycle",
-    "owner Nov 23 10:49 AM CT: round-8 walk unnatural; vary stride by situation, better arms and legs"
+    "owner Nov 23 10:49 AM CT: round-8 walk unnatural; vary stride by situation, better arms and legs",
+    "#24 f733-771 pedestrian walk (near arm across the front, far arm behind the body, alternating)",
+    "#04 f941-952 sailor walking toward camera",
+    "owner Nov 23 2:31 PM CT: arms must swing opposite each other, not together, and not stay bent inward"
    ],
-   "walk_style": "br"
+   "walk_style": "br",
+   "previous_r9": {
+    "desc": "brisk walk: long quick steps (6 f a step), higher knee lift, bigger arm swing, leaning forward 6 deg; for someone in a hurry. Loop: frames 2-61 (12-frame cycle); the scene moves the character.",
+    "events": [
+     {
+      "at": 0,
+      "ch": "face",
+      "v": "$face"
+     },
+     {
+      "at": 0,
+      "ch": "turn",
+      "v": [
+       0,
+       2
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "lean",
+      "v": [
+       6,
+       3
+      ]
+     },
+     {
+      "at": 1,
+      "ch": "top",
+      "v": "q"
+     },
+     {
+      "at": 2,
+      "ch": "legs",
+      "v": "wkbr0"
+     },
+     {
+      "at": 2,
+      "ch": "swing",
+      "v": 16.0
+     },
+     {
+      "at": 2,
+      "ch": "hdy",
+      "v": 0.005
+     },
+     {
+      "at": 4,
+      "ch": "legs",
+      "v": "wkbr1"
+     },
+     {
+      "at": 4,
+      "ch": "swing",
+      "v": 8.0
+     },
+     {
+      "at": 4,
+      "ch": "hdy",
+      "v": 0.0013
+     },
+     {
+      "at": 6,
+      "ch": "legs",
+      "v": "wkbr2"
+     },
+     {
+      "at": 6,
+      "ch": "swing",
+      "v": -8.0
+     },
+     {
+      "at": 6,
+      "ch": "hdy",
+      "v": 0.0012
+     },
+     {
+      "at": 8,
+      "ch": "legs",
+      "v": "wkbr3"
+     },
+     {
+      "at": 8,
+      "ch": "swing",
+      "v": -16.0
+     },
+     {
+      "at": 8,
+      "ch": "hdy",
+      "v": 0.005
+     },
+     {
+      "at": 10,
+      "ch": "legs",
+      "v": "wkbr4"
+     },
+     {
+      "at": 10,
+      "ch": "swing",
+      "v": -8.0
+     },
+     {
+      "at": 10,
+      "ch": "hdy",
+      "v": 0.0013
+     },
+     {
+      "at": 12,
+      "ch": "legs",
+      "v": "wkbr5"
+     },
+     {
+      "at": 12,
+      "ch": "swing",
+      "v": 8.0
+     },
+     {
+      "at": 12,
+      "ch": "hdy",
+      "v": 0.0013
+     },
+     {
+      "at": 14,
+      "ch": "legs",
+      "v": "wkbr0"
+     },
+     {
+      "at": 14,
+      "ch": "swing",
+      "v": 16.0
+     },
+     {
+      "at": 14,
+      "ch": "hdy",
+      "v": 0.005
+     },
+     {
+      "at": 16,
+      "ch": "legs",
+      "v": "wkbr1"
+     },
+     {
+      "at": 16,
+      "ch": "swing",
+      "v": 8.0
+     },
+     {
+      "at": 16,
+      "ch": "hdy",
+      "v": 0.0013
+     },
+     {
+      "at": 18,
+      "ch": "legs",
+      "v": "wkbr2"
+     },
+     {
+      "at": 18,
+      "ch": "swing",
+      "v": -8.0
+     },
+     {
+      "at": 18,
+      "ch": "hdy",
+      "v": 0.0012
+     },
+     {
+      "at": 20,
+      "ch": "legs",
+      "v": "wkbr3"
+     },
+     {
+      "at": 20,
+      "ch": "swing",
+      "v": -16.0
+     },
+     {
+      "at": 20,
+      "ch": "hdy",
+      "v": 0.005
+     },
+     {
+      "at": 22,
+      "ch": "legs",
+      "v": "wkbr4"
+     },
+     {
+      "at": 22,
+      "ch": "swing",
+      "v": -8.0
+     },
+     {
+      "at": 22,
+      "ch": "hdy",
+      "v": 0.0013
+     },
+     {
+      "at": 24,
+      "ch": "legs",
+      "v": "wkbr5"
+     },
+     {
+      "at": 24,
+      "ch": "swing",
+      "v": 8.0
+     },
+     {
+      "at": 24,
+      "ch": "hdy",
+      "v": 0.0013
+     },
+     {
+      "at": 26,
+      "ch": "legs",
+      "v": "wkbr0"
+     },
+     {
+      "at": 26,
+      "ch": "swing",
+      "v": 16.0
+     },
+     {
+      "at": 26,
+      "ch": "hdy",
+      "v": 0.005
+     },
+     {
+      "at": 28,
+      "ch": "legs",
+      "v": "wkbr1"
+     },
+     {
+      "at": 28,
+      "ch": "swing",
+      "v": 8.0
+     },
+     {
+      "at": 28,
+      "ch": "hdy",
+      "v": 0.0013
+     },
+     {
+      "at": 30,
+      "ch": "legs",
+      "v": "wkbr2"
+     },
+     {
+      "at": 30,
+      "ch": "swing",
+      "v": -8.0
+     },
+     {
+      "at": 30,
+      "ch": "hdy",
+      "v": 0.0012
+     },
+     {
+      "at": 32,
+      "ch": "legs",
+      "v": "wkbr3"
+     },
+     {
+      "at": 32,
+      "ch": "swing",
+      "v": -16.0
+     },
+     {
+      "at": 32,
+      "ch": "hdy",
+      "v": 0.005
+     },
+     {
+      "at": 34,
+      "ch": "legs",
+      "v": "wkbr4"
+     },
+     {
+      "at": 34,
+      "ch": "swing",
+      "v": -8.0
+     },
+     {
+      "at": 34,
+      "ch": "hdy",
+      "v": 0.0013
+     },
+     {
+      "at": 36,
+      "ch": "legs",
+      "v": "wkbr5"
+     },
+     {
+      "at": 36,
+      "ch": "swing",
+      "v": 8.0
+     },
+     {
+      "at": 36,
+      "ch": "hdy",
+      "v": 0.0013
+     },
+     {
+      "at": 38,
+      "ch": "legs",
+      "v": "wkbr0"
+     },
+     {
+      "at": 38,
+      "ch": "swing",
+      "v": 16.0
+     },
+     {
+      "at": 38,
+      "ch": "hdy",
+      "v": 0.005
+     },
+     {
+      "at": 40,
+      "ch": "legs",
+      "v": "wkbr1"
+     },
+     {
+      "at": 40,
+      "ch": "swing",
+      "v": 8.0
+     },
+     {
+      "at": 40,
+      "ch": "hdy",
+      "v": 0.0013
+     },
+     {
+      "at": 42,
+      "ch": "legs",
+      "v": "wkbr2"
+     },
+     {
+      "at": 42,
+      "ch": "swing",
+      "v": -8.0
+     },
+     {
+      "at": 42,
+      "ch": "hdy",
+      "v": 0.0012
+     },
+     {
+      "at": 44,
+      "ch": "legs",
+      "v": "wkbr3"
+     },
+     {
+      "at": 44,
+      "ch": "swing",
+      "v": -16.0
+     },
+     {
+      "at": 44,
+      "ch": "hdy",
+      "v": 0.005
+     },
+     {
+      "at": 46,
+      "ch": "legs",
+      "v": "wkbr4"
+     },
+     {
+      "at": 46,
+      "ch": "swing",
+      "v": -8.0
+     },
+     {
+      "at": 46,
+      "ch": "hdy",
+      "v": 0.0013
+     },
+     {
+      "at": 48,
+      "ch": "legs",
+      "v": "wkbr5"
+     },
+     {
+      "at": 48,
+      "ch": "swing",
+      "v": 8.0
+     },
+     {
+      "at": 48,
+      "ch": "hdy",
+      "v": 0.0013
+     },
+     {
+      "at": 50,
+      "ch": "legs",
+      "v": "wkbr0"
+     },
+     {
+      "at": 50,
+      "ch": "swing",
+      "v": 16.0
+     },
+     {
+      "at": 50,
+      "ch": "hdy",
+      "v": 0.005
+     },
+     {
+      "at": 52,
+      "ch": "legs",
+      "v": "wkbr1"
+     },
+     {
+      "at": 52,
+      "ch": "swing",
+      "v": 8.0
+     },
+     {
+      "at": 52,
+      "ch": "hdy",
+      "v": 0.0013
+     },
+     {
+      "at": 54,
+      "ch": "legs",
+      "v": "wkbr2"
+     },
+     {
+      "at": 54,
+      "ch": "swing",
+      "v": -8.0
+     },
+     {
+      "at": 54,
+      "ch": "hdy",
+      "v": 0.0012
+     },
+     {
+      "at": 56,
+      "ch": "legs",
+      "v": "wkbr3"
+     },
+     {
+      "at": 56,
+      "ch": "swing",
+      "v": -16.0
+     },
+     {
+      "at": 56,
+      "ch": "hdy",
+      "v": 0.005
+     },
+     {
+      "at": 58,
+      "ch": "legs",
+      "v": "wkbr4"
+     },
+     {
+      "at": 58,
+      "ch": "swing",
+      "v": -8.0
+     },
+     {
+      "at": 58,
+      "ch": "hdy",
+      "v": 0.0013
+     },
+     {
+      "at": 60,
+      "ch": "legs",
+      "v": "wkbr5"
+     },
+     {
+      "at": 60,
+      "ch": "swing",
+      "v": 8.0
+     },
+     {
+      "at": 60,
+      "ch": "hdy",
+      "v": 0.0013
+     },
+     {
+      "at": 62,
+      "ch": "legs",
+      "v": "body"
+     },
+     {
+      "at": 62,
+      "ch": "swing",
+      "v": 0.0
+     },
+     {
+      "at": 62,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 62,
+      "ch": "lean",
+      "v": [
+       0,
+       3
+      ]
+     },
+     {
+      "at": 63,
+      "ch": "top",
+      "v": "front"
+     },
+     {
+      "at": 63,
+      "ch": "turn",
+      "v": [
+       2,
+       0
+      ]
+     }
+    ]
+   }
   },
   "walk_toward": {
-   "desc": "walk toward the camera (Rick #12 f145-205): front body, knees bow out as each foot lifts, arms hang with a small swing. Loop: frames 2-65 (16-frame cycle); the scene moves the character.",
+   "desc": "walk toward the camera (Rick #12 f145-205): front body, knees bow out as each foot lifts, arms swing opposite each other. Arms (round 10, Rick #24 f733-771): the trailing-side arm swings forward and back in front of the torso with a soft elbow, the leading-side arm swings opposite it behind the torso; toward camera both arms swing opposite each other. Loop: frames 2-65 (16-frame cycle); the scene moves the character.",
    "events": [
     {
      "at": 0,
@@ -7205,8 +10376,25 @@
     },
     {
      "at": 2,
-     "ch": "swing",
-     "v": 7.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt0",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 2,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt4",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 2,
@@ -7220,8 +10408,25 @@
     },
     {
      "at": 4,
-     "ch": "swing",
-     "v": 4.95
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt1",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 4,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt5",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 4,
@@ -7235,8 +10440,25 @@
     },
     {
      "at": 6,
-     "ch": "swing",
-     "v": 0.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt2",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt6",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 6,
@@ -7250,8 +10472,25 @@
     },
     {
      "at": 8,
-     "ch": "swing",
-     "v": -4.95
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt3",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 8,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt7",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 8,
@@ -7265,8 +10504,25 @@
     },
     {
      "at": 10,
-     "ch": "swing",
-     "v": -7.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt4",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 10,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt0",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 10,
@@ -7280,8 +10536,25 @@
     },
     {
      "at": 12,
-     "ch": "swing",
-     "v": -4.95
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt5",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 12,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt1",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 12,
@@ -7295,8 +10568,25 @@
     },
     {
      "at": 14,
-     "ch": "swing",
-     "v": -0.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt6",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 14,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt2",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 14,
@@ -7310,8 +10600,25 @@
     },
     {
      "at": 16,
-     "ch": "swing",
-     "v": 4.95
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt7",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 16,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt3",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 16,
@@ -7325,8 +10632,25 @@
     },
     {
      "at": 18,
-     "ch": "swing",
-     "v": 7.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt0",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt4",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 18,
@@ -7340,8 +10664,25 @@
     },
     {
      "at": 20,
-     "ch": "swing",
-     "v": 4.95
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt1",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 20,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt5",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 20,
@@ -7355,8 +10696,25 @@
     },
     {
      "at": 22,
-     "ch": "swing",
-     "v": 0.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt2",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 22,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt6",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 22,
@@ -7370,8 +10728,25 @@
     },
     {
      "at": 24,
-     "ch": "swing",
-     "v": -4.95
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt3",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt7",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 24,
@@ -7385,8 +10760,25 @@
     },
     {
      "at": 26,
-     "ch": "swing",
-     "v": -7.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt4",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 26,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt0",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 26,
@@ -7400,8 +10792,25 @@
     },
     {
      "at": 28,
-     "ch": "swing",
-     "v": -4.95
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt5",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 28,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt1",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 28,
@@ -7415,8 +10824,25 @@
     },
     {
      "at": 30,
-     "ch": "swing",
-     "v": -0.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt6",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 30,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt2",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 30,
@@ -7430,8 +10856,25 @@
     },
     {
      "at": 32,
-     "ch": "swing",
-     "v": 4.95
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt7",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 32,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt3",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 32,
@@ -7445,8 +10888,25 @@
     },
     {
      "at": 34,
-     "ch": "swing",
-     "v": 7.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt0",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 34,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt4",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 34,
@@ -7460,8 +10920,25 @@
     },
     {
      "at": 36,
-     "ch": "swing",
-     "v": 4.95
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt1",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 36,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt5",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 36,
@@ -7475,8 +10952,25 @@
     },
     {
      "at": 38,
-     "ch": "swing",
-     "v": 0.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt2",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 38,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt6",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 38,
@@ -7490,8 +10984,25 @@
     },
     {
      "at": 40,
-     "ch": "swing",
-     "v": -4.95
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt3",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 40,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt7",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 40,
@@ -7505,8 +11016,25 @@
     },
     {
      "at": 42,
-     "ch": "swing",
-     "v": -7.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt4",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 42,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt0",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 42,
@@ -7520,8 +11048,25 @@
     },
     {
      "at": 44,
-     "ch": "swing",
-     "v": -4.95
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt5",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 44,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt1",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 44,
@@ -7535,8 +11080,25 @@
     },
     {
      "at": 46,
-     "ch": "swing",
-     "v": -0.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt6",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 46,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt2",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 46,
@@ -7550,8 +11112,25 @@
     },
     {
      "at": 48,
-     "ch": "swing",
-     "v": 4.95
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt7",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 48,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt3",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 48,
@@ -7565,8 +11144,25 @@
     },
     {
      "at": 50,
-     "ch": "swing",
-     "v": 7.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt0",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 50,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt4",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 50,
@@ -7580,8 +11176,25 @@
     },
     {
      "at": 52,
-     "ch": "swing",
-     "v": 4.95
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt1",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 52,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt5",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 52,
@@ -7595,8 +11208,25 @@
     },
     {
      "at": 54,
-     "ch": "swing",
-     "v": 0.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt2",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 54,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt6",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 54,
@@ -7610,8 +11240,25 @@
     },
     {
      "at": 56,
-     "ch": "swing",
-     "v": -4.95
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt3",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 56,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt7",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 56,
@@ -7625,8 +11272,25 @@
     },
     {
      "at": 58,
-     "ch": "swing",
-     "v": -7.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt4",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 58,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt0",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 58,
@@ -7640,8 +11304,25 @@
     },
     {
      "at": 60,
-     "ch": "swing",
-     "v": -4.95
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt5",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 60,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt1",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 60,
@@ -7655,8 +11336,25 @@
     },
     {
      "at": 62,
-     "ch": "swing",
-     "v": -0.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt6",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 62,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt2",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 62,
@@ -7670,8 +11368,25 @@
     },
     {
      "at": 64,
-     "ch": "swing",
-     "v": 4.95
+     "ch": "arm",
+     "v": [
+      "left",
+      "wanmt7",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 64,
+     "ch": "arm",
+     "v": [
+      "right",
+      "wanmt3",
+      {
+       "inb": false
+      }
+     ]
     },
     {
      "at": 64,
@@ -7685,8 +11400,19 @@
     },
     {
      "at": 66,
-     "ch": "swing",
-     "v": 0.0
+     "ch": "arm",
+     "v": [
+      "left",
+      "hang"
+     ]
+    },
+    {
+     "at": 66,
+     "ch": "arm",
+     "v": [
+      "right",
+      "hang"
+     ]
     },
     {
      "at": 66,
@@ -7695,7 +11421,7 @@
     }
    ],
    "status": "INFERRED",
-   "round": 9,
+   "round": 10,
    "legs": "walk cycle v2 (continuous)",
    "loop": 16,
    "loop_start": 2,
@@ -7703,9 +11429,517 @@
     "#12 f145-205 walk (legs redrawn every 2 f, knees bend as the foot swings, arms hang with a small swing, no squash)",
     "#23 f1352-1358 (lean, legs and arms swing)",
     "guide: 23 Rick walk cadences, median 7.5 f per step; no squash and stretch on walks; bodies slide while legs cycle",
-    "owner Nov 23 10:49 AM CT: round-8 walk unnatural; vary stride by situation, better arms and legs"
+    "owner Nov 23 10:49 AM CT: round-8 walk unnatural; vary stride by situation, better arms and legs",
+    "#24 f733-771 pedestrian walk (near arm across the front, far arm behind the body, alternating)",
+    "#04 f941-952 sailor walking toward camera",
+    "owner Nov 23 2:31 PM CT: arms must swing opposite each other, not together, and not stay bent inward"
    ],
-   "walk_style": "nm"
+   "walk_style": "nm",
+   "previous_r9": {
+    "desc": "walk toward the camera (Rick #12 f145-205): front body, knees bow out as each foot lifts, arms hang with a small swing. Loop: frames 2-65 (16-frame cycle); the scene moves the character.",
+    "events": [
+     {
+      "at": 0,
+      "ch": "face",
+      "v": "$face"
+     },
+     {
+      "at": 2,
+      "ch": "legs",
+      "v": "wkFnm0"
+     },
+     {
+      "at": 2,
+      "ch": "swing",
+      "v": 7.0
+     },
+     {
+      "at": 2,
+      "ch": "hdy",
+      "v": 0.004
+     },
+     {
+      "at": 4,
+      "ch": "legs",
+      "v": "wkFnm1"
+     },
+     {
+      "at": 4,
+      "ch": "swing",
+      "v": 4.95
+     },
+     {
+      "at": 4,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 6,
+      "ch": "legs",
+      "v": "wkFnm2"
+     },
+     {
+      "at": 6,
+      "ch": "swing",
+      "v": 0.0
+     },
+     {
+      "at": 6,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 8,
+      "ch": "legs",
+      "v": "wkFnm3"
+     },
+     {
+      "at": 8,
+      "ch": "swing",
+      "v": -4.95
+     },
+     {
+      "at": 8,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 10,
+      "ch": "legs",
+      "v": "wkFnm4"
+     },
+     {
+      "at": 10,
+      "ch": "swing",
+      "v": -7.0
+     },
+     {
+      "at": 10,
+      "ch": "hdy",
+      "v": 0.004
+     },
+     {
+      "at": 12,
+      "ch": "legs",
+      "v": "wkFnm5"
+     },
+     {
+      "at": 12,
+      "ch": "swing",
+      "v": -4.95
+     },
+     {
+      "at": 12,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 14,
+      "ch": "legs",
+      "v": "wkFnm6"
+     },
+     {
+      "at": 14,
+      "ch": "swing",
+      "v": -0.0
+     },
+     {
+      "at": 14,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 16,
+      "ch": "legs",
+      "v": "wkFnm7"
+     },
+     {
+      "at": 16,
+      "ch": "swing",
+      "v": 4.95
+     },
+     {
+      "at": 16,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 18,
+      "ch": "legs",
+      "v": "wkFnm0"
+     },
+     {
+      "at": 18,
+      "ch": "swing",
+      "v": 7.0
+     },
+     {
+      "at": 18,
+      "ch": "hdy",
+      "v": 0.004
+     },
+     {
+      "at": 20,
+      "ch": "legs",
+      "v": "wkFnm1"
+     },
+     {
+      "at": 20,
+      "ch": "swing",
+      "v": 4.95
+     },
+     {
+      "at": 20,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 22,
+      "ch": "legs",
+      "v": "wkFnm2"
+     },
+     {
+      "at": 22,
+      "ch": "swing",
+      "v": 0.0
+     },
+     {
+      "at": 22,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 24,
+      "ch": "legs",
+      "v": "wkFnm3"
+     },
+     {
+      "at": 24,
+      "ch": "swing",
+      "v": -4.95
+     },
+     {
+      "at": 24,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 26,
+      "ch": "legs",
+      "v": "wkFnm4"
+     },
+     {
+      "at": 26,
+      "ch": "swing",
+      "v": -7.0
+     },
+     {
+      "at": 26,
+      "ch": "hdy",
+      "v": 0.004
+     },
+     {
+      "at": 28,
+      "ch": "legs",
+      "v": "wkFnm5"
+     },
+     {
+      "at": 28,
+      "ch": "swing",
+      "v": -4.95
+     },
+     {
+      "at": 28,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 30,
+      "ch": "legs",
+      "v": "wkFnm6"
+     },
+     {
+      "at": 30,
+      "ch": "swing",
+      "v": -0.0
+     },
+     {
+      "at": 30,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 32,
+      "ch": "legs",
+      "v": "wkFnm7"
+     },
+     {
+      "at": 32,
+      "ch": "swing",
+      "v": 4.95
+     },
+     {
+      "at": 32,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 34,
+      "ch": "legs",
+      "v": "wkFnm0"
+     },
+     {
+      "at": 34,
+      "ch": "swing",
+      "v": 7.0
+     },
+     {
+      "at": 34,
+      "ch": "hdy",
+      "v": 0.004
+     },
+     {
+      "at": 36,
+      "ch": "legs",
+      "v": "wkFnm1"
+     },
+     {
+      "at": 36,
+      "ch": "swing",
+      "v": 4.95
+     },
+     {
+      "at": 36,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 38,
+      "ch": "legs",
+      "v": "wkFnm2"
+     },
+     {
+      "at": 38,
+      "ch": "swing",
+      "v": 0.0
+     },
+     {
+      "at": 38,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 40,
+      "ch": "legs",
+      "v": "wkFnm3"
+     },
+     {
+      "at": 40,
+      "ch": "swing",
+      "v": -4.95
+     },
+     {
+      "at": 40,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 42,
+      "ch": "legs",
+      "v": "wkFnm4"
+     },
+     {
+      "at": 42,
+      "ch": "swing",
+      "v": -7.0
+     },
+     {
+      "at": 42,
+      "ch": "hdy",
+      "v": 0.004
+     },
+     {
+      "at": 44,
+      "ch": "legs",
+      "v": "wkFnm5"
+     },
+     {
+      "at": 44,
+      "ch": "swing",
+      "v": -4.95
+     },
+     {
+      "at": 44,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 46,
+      "ch": "legs",
+      "v": "wkFnm6"
+     },
+     {
+      "at": 46,
+      "ch": "swing",
+      "v": -0.0
+     },
+     {
+      "at": 46,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 48,
+      "ch": "legs",
+      "v": "wkFnm7"
+     },
+     {
+      "at": 48,
+      "ch": "swing",
+      "v": 4.95
+     },
+     {
+      "at": 48,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 50,
+      "ch": "legs",
+      "v": "wkFnm0"
+     },
+     {
+      "at": 50,
+      "ch": "swing",
+      "v": 7.0
+     },
+     {
+      "at": 50,
+      "ch": "hdy",
+      "v": 0.004
+     },
+     {
+      "at": 52,
+      "ch": "legs",
+      "v": "wkFnm1"
+     },
+     {
+      "at": 52,
+      "ch": "swing",
+      "v": 4.95
+     },
+     {
+      "at": 52,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 54,
+      "ch": "legs",
+      "v": "wkFnm2"
+     },
+     {
+      "at": 54,
+      "ch": "swing",
+      "v": 0.0
+     },
+     {
+      "at": 54,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 56,
+      "ch": "legs",
+      "v": "wkFnm3"
+     },
+     {
+      "at": 56,
+      "ch": "swing",
+      "v": -4.95
+     },
+     {
+      "at": 56,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 58,
+      "ch": "legs",
+      "v": "wkFnm4"
+     },
+     {
+      "at": 58,
+      "ch": "swing",
+      "v": -7.0
+     },
+     {
+      "at": 58,
+      "ch": "hdy",
+      "v": 0.004
+     },
+     {
+      "at": 60,
+      "ch": "legs",
+      "v": "wkFnm5"
+     },
+     {
+      "at": 60,
+      "ch": "swing",
+      "v": -4.95
+     },
+     {
+      "at": 60,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 62,
+      "ch": "legs",
+      "v": "wkFnm6"
+     },
+     {
+      "at": 62,
+      "ch": "swing",
+      "v": -0.0
+     },
+     {
+      "at": 62,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 64,
+      "ch": "legs",
+      "v": "wkFnm7"
+     },
+     {
+      "at": 64,
+      "ch": "swing",
+      "v": 4.95
+     },
+     {
+      "at": 64,
+      "ch": "hdy",
+      "v": 0.002
+     },
+     {
+      "at": 66,
+      "ch": "legs",
+      "v": "body"
+     },
+     {
+      "at": 66,
+      "ch": "swing",
+      "v": 0.0
+     },
+     {
+      "at": 66,
+      "ch": "hdy",
+      "v": 0.0
+     }
+    ]
+   }
   }
  },
  "approved_assets": {

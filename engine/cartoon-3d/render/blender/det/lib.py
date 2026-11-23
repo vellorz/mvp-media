@@ -182,7 +182,8 @@ ARM_Y={-1:-0.004,1:-0.006}; POSE_DY=-0.0035
 # r8b (owner review 2, Nov 23 14:46Z: clap hands higher and touching, chin taps higher on the face): these four pose drawings sit IN
 # FRONT of the face disc (-12 mm) and behind the head effects (-16 mm): left -13.25, right -14.75 mm (rule 354b gaps >= 1.25 mm).
 # Exception to rule 268 for these poses only (= cast.FRONT_POSES).
-FRONT_POSES={'clap_up_open','clap_up','chin_hi','chin_hi_tap'}; FRONT_Y={-1:-0.01325,1:-0.01475}   # depths -4, -6, -7.5, -9.5 mm: every pair >= 1.5 mm apart, all behind the face (-12)
+FRONT_POSES={'clap_up_open','clap_up','chin_hi','chin_hi_tap'}; FRONT_Y={-1:-0.01325,1:-0.01475}
+BACK_Y=0.00275   # r10 walk: leading-side arm card 2.75 mm behind the body card (1.25 mm from the legs card and the 'behind' fx layer)   # depths -4, -6, -7.5, -9.5 mm: every pair >= 1.5 mm apart, all behind the face (-12)
 FOOT_LIFT=0.0173   # r5b (owner Nov 23: 'feet clipping through the floor'): drawn foot bottom sat at z -0.016 (over half the 2.9 cm foot under the floor); now +0.001
 ARM_W,ARM_H,ARM_OFF=0.744,0.558,0.242   # r6: arm canvas 1200 wide (bent forearm swings outward)
 SHADOW=None
@@ -343,6 +344,8 @@ def _pose_card(ch,sx,key):
     a=plane(f"{ch['inst']}_arm{sx}_{key}",(0,0,0),POSE_W*ARM_PX*_q,POSE_H*ARM_PX*_q,card_mat(tk,tk),coll=chr_coll(ch['shot'])); a.parent=A['piv']
     a.location=(0,POSE_DY,(ARM_H/2-ARM_OFF-40*ARM_PX)*_q)   # drawn shoulder sits where the hanging card's shoulder sits
     _b=key.replace('arm_pose_','',1); _b=_b[:-2] if _b.endswith(('_m','_o')) else _b
+    if _b.startswith('wa') and len(_b)>4 and _b[4]=='f':   # r10: leading-side walk arm sits BEHIND the torso (body 0, legs +1.5 mm, behind fx +4 mm)
+        a.location.y=BACK_Y-ARM_Y[sx]
     if _b in FRONT_POSES:   # r8b: hand in front of the face (owner Nov 23)
         a.location.y=FRONT_Y[sx]-ARM_Y[sx]
     a.visible_shadow=False; A['cards'][key]=a; vis(a,[]); return a

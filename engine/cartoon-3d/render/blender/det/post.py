@@ -63,7 +63,13 @@ def apply(x,p):
     lo,hi,g,sat,tint=p
     y=gray(x); yn=np.clip((y-lo)/(hi-lo),0,1); y2=0.055+0.925*yn**g
     r=(y2/np.maximum(y,1e-4))[...,None]; z=np.clip(x*r,0,1)
-    y3=gray(z)[...,None]; z=np.clip(y3+sat*(z-y3),0,1); z=np.clip(z*np.array(tint,np.float32),0,1); return z
+    # r10c (Cape Cod finding Nov 23; Detroit r10b S01/S06/S20/S21 at satk 2.4 turned faces peach-orange, G/R 0.91 -> 0.81): skin-hued, low-saturation
+    # pixels keep a saturation gain of at most SKMAX, so the solver's lift reaches sets and clothes but not faces (rule 335a skin ratios)
+    hh=cv2.cvtColor((np.clip(x,0,1)*255).astype(np.uint8),cv2.COLOR_RGB2HSV).astype(np.float32); hu,ss,vv=hh[...,0]*2,hh[...,1]/255,hh[...,2]/255
+    sk=np.clip((hu-2)/6,0,1)*np.clip((42-hu)/6,0,1)*np.clip((0.40-ss)/0.08,0,1)*np.clip((vv-0.50)/0.08,0,1)
+    sg=(sat+(min(sat,SKMAX)-sat)*sk)[...,None]
+    y3=gray(z)[...,None]; z=np.clip(y3+sg*(z-y3),0,1); z=np.clip(z*np.array(tint,np.float32),0,1); return z
+SKMAX=1.0
 def solve(samples,tint,lt=0.45,vk=0.0):
     allY=np.concatenate([gray(s).ravel() for s in samples]); lo,hi=np.percentile(allY,0.8),np.percentile(allY,99.6)
     best=None

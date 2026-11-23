@@ -164,11 +164,13 @@ def path(n,keys):
 import expressions as XL   # Rick-style expression library
 CI=XL.expand(json.load(open('/root/dc/src/cast.json')))
 # r7 (round-6 visual: round bodies torso 0.63, legs 0.88 head-heights; need 0.7-1.05 / 0.9-1.5): round body cards stretched 1.118x up from the feet
-BSY={'tall':0.91,'short':0.91,'round':0.91}   # rule 329 (Detroit e1ed5d1): body cards z 0.91 about the feet
+BSY={'tall':1.045,'short':1.045,'round':1.045}   # rule 336 (Nov 23): torso 0.89->~1.0 H, legs 1.12->~1.25 H, total 3.0->~3.25 H; was 0.91.   ARM_Q keeps arm cards at their rule-329 size (limb width 5.5-6.5 % H)
+ARM_Q=0.91
+# rule 329 (Detroit e1ed5d1): body cards z 0.91 about the feet
 # r8b (owner Nov 20: clone Rick's build; guide v1.3 x.3): head 0.43 m wide = H; torso 0.962->0.532 = 1.00 H; legs 0.532->-0.014 = 1.27 H;
 # head disc centre 1.167 (top 1.382): total 3.25 H. Shoulder pivots 0.95, hand (HAND_Z 0.407) at the hem.
 HS=0.43/0.586   # head card scale vs rounds 1-7 (disc 800/1024 of a 0.75 card)
-GEO={'tall':(0.966,0.163,0.868),'short':(0.966,0.170,0.868),'round':(0.966,0.178,0.868)}   # dc shoulder fix (owner 22:33Z: arm stubs above the shoulders, arm crossing the coat): pivots on the capsule's side outline at z 0.79 (after BSY), 0.01 m outside the torso edge measured from the body alpha   # rule 329 (Detroit e1ed5d1): head overlaps the capsule top; was 0.996/0.95
+GEO={'tall':(0.966,0.150,0.868),'short':(0.966,0.156,0.868),'round':(0.966,0.154,0.868)}   # rule 336: round torso narrowed (WK 0.74), pivot moved 0.024 m in   # dc shoulder fix (owner 22:33Z: arm stubs above the shoulders, arm crossing the coat): pivots on the capsule's side outline at z 0.79 (after BSY), 0.01 m outside the torso edge measured from the body alpha   # rule 329 (Detroit e1ed5d1): head overlaps the capsule top; was 0.996/0.95
 #   # r9: shoulders follow the narrower torso (0.73-0.89 H)
 ARM_W,ARM_H,ARM_OFF=0.744,0.558,0.242   # r6: arm canvas 1200 wide (bent forearm swings outward)
 SHADOW=None
@@ -196,7 +198,7 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
         if 'armS' not in keys: keys=keys+['armS']   # r7: straight card swapped in automatically while the arm is raised past 70 deg
         for k in keys:
             tk=f'{kind}_{k}'+('_L' if sx<0 else '')   # r7 (rule 272): mirrored texture, never a negative scale
-            a=plane(f'{inst}_arm{sx}_{k}',(0,0,0),ARM_W*_q,ARM_H*_q,card_mat(tk,tk),coll=C); a.parent=ap; a.location=(0,0,-ARM_OFF*_q)   # dc5b: arm cards follow BSY like Detroit b54a72c
+            a=plane(f'{inst}_arm{sx}_{k}',(0,0,0),ARM_W*ARM_Q,ARM_H*ARM_Q,card_mat(tk,tk),coll=C); a.parent=ap; a.location=(0,0,-ARM_OFF*ARM_Q)   # dc5b: arm cards follow BSY like Detroit b54a72c
             a.visible_shadow=False   # Detroit b54a72c (owner 'arm issue?'): no arm-card shadow notch on the torso
             A[sx]['cards'][k]=a
         A[sx]['sched']=[(rng[0],ak)] if isinstance(ak,str) else ak

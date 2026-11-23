@@ -76,7 +76,7 @@ for ch in CH:
         slope=abs(np.nonzero(A[max(0,r-15)]>0.5)[0][[0,-1]][1 if sx_>0 else 0]-(cols[-1] if sx_>0 else cols[0])) if (A[max(0,r-15)]>0.5).any() else 99
         if d_>0.020 or slope>6: sj.append(f'{sx_:+d} off {d_*1000:.0f}mm slope {slope}px')
     if sj: miss.append('shoulder join '+'; '.join(sj))
-    ok=not miss and 0.85<=torso<=1.2 and 1.1<=legs<=1.3 and 2.9<=total<=3.35
+    ok=not miss and 0.95<=torso<=1.05 and (1.20<=legs<=1.30 or bool(skirt_note)) and 3.2<=total<=3.35   # rule 336 build targets (dress exempt on legs)
     allok&=ok
     rep.append(f"{k:10s} {'PASS' if ok else 'FAIL'} torso {torso:.2f} legs {legs:.2f} total {total:.2f} H  limbs: head, torso, arm_L, arm_R (mitten in card), legs x{nlegs}, feet, shoulder joins{skirt_note}{'' if not miss else '  MISSING: '+', '.join(miss)}")
 w_=bpy.data.worlds.new('w'); sc.world=w_; w_.use_nodes=True; bg_=w_.node_tree.nodes['Background']; bg_.inputs['Color'].default_value=(0.83,0.80,0.75,1); bg_.inputs['Strength'].default_value=1.0

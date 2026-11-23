@@ -196,12 +196,13 @@ SS=2; BOUT=20   # round 4: body outline as heavy as the head's (verifier: thin b
 def lt(c,f=1.12): return tuple(min(255,int(v*f)) for v in c[:3])+(255,)
 GB={'tall':(98,175,215),'short':(98,180,222),'round':(98,200,238)}   # r8b: one build for all (guide v1.3 x.3: torso 1.00 H, legs 1.25-1.3 H, total 3.2-3.35 H); kinds differ in width only   # top px, shoulder half-width, hem half-width
 HEMY={'tall':545,'short':545,'round':545}   # r6det (rule 329, Rick f606/f771: torso ~1.05 H capsule): hem lower   # r8b: torso 430 px = 1.00 H (head 0.43 m), legs 528->1074 = 1.27 H   # r6 (round-5: legs 0.64-0.90 H, Rick 0.93-1.31): shorter torso, longer legs   # round 5 (B1/B2): torso ~0.86 H tall (H = head disc ~560 px), legs ~0.85 H visible
-WK={'tall':0.86,'short':0.87,'round':0.84}   # r6det (rule 329, Rick f606: torso ~0.85-0.9 H wide): was 0.72-0.745
+WK={'tall':0.775,'short':0.78,'round':0.69}   # rule 336 (Nov 23): torso width <= 0.85 H, round measured 0.91 at 0.84 -> 0.74 gives ~0.80   # r6det (rule 329, Rick f606: torso ~0.85-0.9 H wide): was 0.72-0.745
 def _sil(kind):
     y0,w0,w1=GB[kind]; y1=HEMY[kind]; pts=[]
     k_=WK[kind]; w0=int(w0*k_); w1=int(w1*k_)   # r9 (RENDER_SPEC_v1.4 A: torso width 0.73-0.89 H): widths x0.72-0.745
-    w1=int(w0*1.10); rr=int(0.36*2*w1)   # r6det (rule 329): Rick's bean is widest near the hem (pear), sides near-straight   # r6det (rule 329): near-straight sides like Rick's capsule torso (was hem x0.74 = egg)   # r6: hem narrower than the middle (Rick: widest at mid-torso)   # rounded bottom: corner radius >= 0.35 of the torso width (Rick bean)
-    BG_=int(18*k_)   # r6det: small side bulge (was 62)
+    w1=int(w0*0.90); rr=int(0.36*2*w1)   # rule 336a (Nov 23): hem NARROWER than the middle, round hem, widest row in the middle third (was w0*1.10, a hem-widest pear)
+      # r6det (rule 329): Rick's bean is widest near the hem (pear), sides near-straight   # r6det (rule 329): near-straight sides like Rick's capsule torso (was hem x0.74 = egg)   # r6: hem narrower than the middle (Rick: widest at mid-torso)   # rounded bottom: corner radius >= 0.35 of the torso width (Rick bean)
+    BG_=int(46*k_)   # rule 336a: side bulge peaks mid-torso so the widest row sits in the middle third (was 18)
     R_=int(w0*0.85)   # r7det (rule 329, Rick f606: capsule top is fully rounded and sits behind the head, no square shoulders): was 70
     yb=y1-rr*0.55   # sides end here, then a half-ellipse closes the bottom
     for i in range(0,11): t=i/10; pts.append((400-(w1+(w0-w1)*t)-BG_*math.sin(math.pi*t), yb+(y0+R_-yb)*t))
@@ -221,13 +222,13 @@ def body(name,stride=0,skirt=True):
     # legs (thin sticks) + small shoes; stride poses spread the feet, one lifted
     # r8 (Rick clone): legs are one dark noodle line each (6.5 % of head width, no taper), knee bowed outward ~156 deg, small dark stub feet <= 0.12 H
     # r8b (guide v1.3 x.3): one smooth noodle curve per leg (no knee joint), 5.5 % H thick; foot oval ~15 % H wide
-    LW=34   # rule 329 (Detroit e1ed5d1): ink tube with a trouser fill inside
+    LW=30   # rule 336a: limb 6.0-7.5 % H incl. ink; limb width 5.5-6.5 % H incl. ink (34 px read 7.8 %)   # rule 329 (Detroit e1ed5d1): ink tube with a trouser fill inside
     for sx in(-1,1):
         x=400+sx*62; fx=x+sx*20+(sx*60 if stride else 0); lift=(70 if (stride==1 and sx<0) or (stride==2 and sx>0) else 0); fy=1056-lift
         y_0=y1-60; cx_=(x+fx)/2+sx*30; cy_=(y_0+fy)/2
         P=[((1-t)**2*x+2*(1-t)*t*cx_+t*t*fx,(1-t)**2*y_0+2*(1-t)*t*cy_+t*t*fy) for t in [i/24 for i in range(25)]]
         d.line(_S(P),fill=K,width=s(LW),joint='curve')
-        d.line(_S(P),fill=legc,width=s(LW-16),joint='curve')   # rule 329: filled tube
+        d.line(_S(P),fill=legc,width=s(LW-14),joint='curve')   # rule 329: filled tube (336: LW-14 at LW 27)
         for p_ in (P[0],P[-1]): d.ellipse([s(p_[0]-LW/2),s(p_[1]-LW/2),s(p_[0]+LW/2),s(p_[1]+LW/2)],fill=K)
         d.ellipse([s(fx-30+sx*16),s(fy-14),s(fx+34+sx*16),s(fy+18)],fill=K)
     # garment base
@@ -359,7 +360,7 @@ def body(name,stride=0,skirt=True):
     d.line(_S(pts+[pts[0]]),fill=K,width=s(BOUT),joint='curve')
     if cue=='dress' and skirt:   # CAST GATE (rule 329, Rick refs 10#0587/#0757: long garments reach the ankles): 1860s full skirt from the waistband to the ankles, only the shoes show
         gma=np.asarray(gm)>0; ys_=beltY+24; row=np.where(gma[s(ys_)])[0]; xl,xr=row[0]/SS,row[-1]/SS
-        yb_=1028; fl=70+stride*0   # flare beyond the bean at the bottom
+        yb_=960; fl=70+stride*0   # flare beyond the bean at the bottom. rule 336 (dress neck-to-hem 1.6-2.2 H): hem was 1028 = 2.31 H
         SK=[(xl,ys_)]+[(xl-fl*t**1.6,ys_+(yb_-ys_)*t) for t in [i/12 for i in range(1,13)]]
         SK+=[(400+(xl-fl-400)*math.cos(math.pi*i/2/12)*1.0,yb_+18*math.sin(math.pi*i/12)) for i in range(0,1)]
         SK+=[(xr+fl*t**1.6,ys_+(yb_-ys_)*t) for t in [i/12 for i in range(12,0,-1)]]+[(xr,ys_)]
@@ -408,7 +409,7 @@ def arm(name,prop=None,straight=None):
     return noodle(im,BEND.get(prop,18) if straight is None else straight)
 # r7 (owner Nov 19: forearms stuck out sideways and swung across faces): natural hang 18 deg; 'armS' = straight card for raised and gripping arms
 BEND={'letter':22,'stamp':18,'sack':20,'plate':24,'pie':24,'fork':28,'musket':0,'shovel':6,'spyglass':25,'quill':30,'bow':4,'cane':10,'basket':22,'oar':0,'lantern':18,'phone':28,'pennant':0,'megaphone':15,'paper':20,'bag':20,'box':25,'camera':25,'chalk':30,'pen':30,'redpen':30}
-AW=52   # rule 329 (Detroit e1ed5d1, Rick arms 5.5-6 % H measured on their sheet): was 38, then 46
+AW=50   # rule 336a: 6.0-7.5 % H incl. ink; arm width ~6.0 % H incl. ink (52 read 6.8 %)   # rule 329 (Detroit e1ed5d1, Rick arms 5.5-6 % H measured on their sheet): was 38, then 46
 def noodle(hand,deg,ey=330):
     # the hand (with its prop) swings outward by deg about a point 330 px down; the arm is one quadratic curve from the shoulder to the hand
     W,H=hand.size; out=Image.new('RGBA',(W*3,H),(0,0,0,0)); X=W*3//2

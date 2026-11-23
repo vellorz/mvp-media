@@ -153,6 +153,12 @@
    "char": "r5man",
    "face": "determined",
    "side": 1
+  },
+  {
+   "combo": "walk",
+   "char": "r5man",
+   "face": "determined",
+   "side": 1
   }
  ]
 }

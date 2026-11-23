@@ -582,6 +582,104 @@ def head(name,fk):
     d.ellipse([ex_-er,ey-er*1.3,ex_+er,ey+er*1.3],fill=skin,outline=K,width=int(OUT*w/1024*0.8))
     d.arc([cx-R*0.98,cy-R*0.98,cx+R*0.98,cy+R*0.98],(10 if side>0 else 150),(30 if side>0 else 170),fill=K,width=int(OUT*w/1024*0.5))
     return im
+# ---- ROUND 8 (Nov 23 2026, owner review of round 7): the BODY turns with the head (look back, turn away).
+# Rick swaps the whole figure, not just the head, when someone turns to the back: #04 f349-350 (captain: whole figure to a back view),
+# #22 f469-470 (head + torso swap to the back drawing, one 3/4 in-between), #03 f80 (body to 3/4 back in 1 f). Our torso card is turned
+# like a cylinder: the front details slide toward the turned side and wrap out of view, the revealed side is plain coat (the back), and
+# the original outline is kept, so the silhouette and limb joins do not move. Feet turn with it. [INFERRED drawings]
+def turn_top(name,theta):
+    """torso card turned theta degrees (+ = toward screen right; 180 = back view)"""
+    top=split_body(name,0)[0]; A=np.asarray(top).astype(np.float32); H,W=A.shape[:2]; a=A[...,3]
+    from PIL import ImageFilter as _F
+    m=Image.fromarray((a>8).astype(np.uint8)*255); er=np.asarray(m.filter(_F.MinFilter(2*int(BOUT*0.8)+1)))>0
+    ring=(a>8)&~er
+    c=C[name]; coat=np.array(list(c['coat'][:3])+[255],np.float32); shade=np.array(list(dk(tuple(c['coat'][:3]),0.74)),np.float32)
+    out=A.copy(); th=math.radians(theta)
+    for y in range(H):
+        xs=np.nonzero(er[y])[0]
+        if len(xs)<4: continue
+        xl,xr=xs[0],xs[-1]; cx=(xl+xr)/2; R=max(1.0,(xr-xl)/2)
+        for x in range(xl,xr+1):
+            u=max(-1.0,min(1.0,(x-cx)/R)); phi=math.asin(u)-th
+            if abs(phi)<=math.pi/2:
+                sx_=int(round(cx+R*math.sin(phi)))
+                if er[y,min(W-1,max(0,sx_))]: out[y,x]=A[y,sx_]; continue
+            out[y,x]=shade if x<cx-0.33*R else coat   # the coat's back, with the same cel shadow side as the front
+        if abs(theta)>=150:   # back view: a centre seam
+            for x in range(int(cx)-3,int(cx)+4): out[y,x]=np.array(list(dk(tuple(c['coat'][:3]),0.55)),np.float32)
+    out[ring]=A[ring]
+    return Image.fromarray(out.clip(0,255).astype(np.uint8),'RGBA')
+def turned_legs(name,kind,side=1):
+    """legs card for a turned body: kind 'turn' (both feet point to `side`) or 'back' (feet seen from behind)"""
+    c=C[name]; k_=c.get('body','tall'); pts,y0,w0,w1,y1=_sil(k_)
+    legc=dk(tuple(c.get('legs',(40,36,40))),0.8); LW=34; s_=lambda v:int(v*SS)
+    im=Image.new('RGBA',(800*SS,1100*SS),(0,0,0,0)); d=ImageDraw.Draw(im)
+    for sx in (-1,1):
+        x=400+sx*(44 if kind=='turn' else 56); fx=x+(side*14 if kind=='turn' else sx*8); fy=1056
+        y_0=y1-120; cx_=(x+fx)/2+(side*18 if kind=='turn' else sx*14); cy_=(y_0+fy)/2
+        P=[((1-t)**2*x+2*(1-t)*t*cx_+t*t*fx,(1-t)**2*y_0+2*(1-t)*t*cy_+t*t*fy) for t in [i/24 for i in range(25)]]
+        col=dk(legc,0.7) if (kind=='turn' and sx==-side) else legc   # far leg a shade darker
+        d.line(_S(P),fill=K,width=s_(LW),joint='curve'); d.line(_S(P),fill=col,width=s_(LW-16),joint='curve')
+        for p_ in (P[0],P[-1]): d.ellipse([s_(p_[0]-LW/2),s_(p_[1]-LW/2),s_(p_[0]+LW/2),s_(p_[1]+LW/2)],fill=K)
+        if kind=='turn': d.ellipse([s_(fx-24+side*30),s_(fy-14),s_(fx+40+side*30),s_(fy+18)],fill=K)   # foot pointing to the side
+        else: d.ellipse([s_(fx-26),s_(fy-12),s_(fx+26),s_(fy+16)],fill=K)                             # heel seen from behind
+    return im.resize((800,1100),Image.LANCZOS)
+TOP_TURNS={'q':45,'qb':135,'back':180}
+# ---- ROUND 8b (owner review 2, Nov 23 14:46Z): clap hands higher and touching; chin taps higher on the face; clap dashes start
+# outside the body outline. These hands sit IN FRONT of the face (owner asked for it; exception to rule 268, see FRONT_POSES).
+POSES.update({
+ 'clap_up_open':(40.4,-130.65,262,421.5),   # elbows out, hands apart over the chin line (hand centre -150,-75 px from the shoulder)
+ 'clap_up':(40.4,-123.2,262,501.6),        # mittens touch at the body centre, over the chin line (hand centre -250,-75)
+ 'chin_hi':(32.7,-149.67,166,474.7),        # hand on the chin and lower face, elbow tucked (Rick #24 f1112-1116 think pose, higher contact)
+ 'chin_hi_tap':(36.0,-145.78,166,422.4),    # hand drops off the face between taps
+})
+FRONT_POSES={'clap_up_open','clap_up','chin_hi','chin_hi_tap'}   # drawn between the face (-12 mm) and the head effects (-16 mm)
+def _fx_clap2(d,cx,cy,s_,W_):
+    """r8b clap dashes: two short strokes per ray, upward and outward only, starting OUTSIDE the body outline (radius 205-290 px of
+    a 600 px card = 0.24-0.34 m at 0.7 m), so they read off to the side of the character but close to it (owner Nov 23 14:46Z)"""
+    for ang in (-172,-155,-138,-42,-25,-8):
+        r=math.radians(ang)
+        for r0,r1 in ((218,250),(262,292)):
+            p0=(cx+r0*math.cos(r),cy+r0*math.sin(r)); p1=(cx+r1*math.cos(r),cy+r1*math.sin(r))
+            d.line([(p0[0]*SS,p0[1]*SS),(p1[0]*SS,p1[1]*SS)],fill=K,width=s_(20)); d.line([(p0[0]*SS,p0[1]*SS),(p1[0]*SS,p1[1]*SS)],fill=W_,width=s_(8))
+_fx_r7=fx
+def fx(kind):
+    if kind!='clap2': return _fx_r7(kind)
+    S2=FX_SIZE*SS; im=Image.new('RGBA',(S2,S2),(0,0,0,0)); d=ImageDraw.Draw(im); s_=lambda v:int(v*SS)
+    _fx_clap2(d,300,300,s_,(255,255,255,255))
+    return im.resize((FX_SIZE,FX_SIZE),Image.LANCZOS)
+FX_KINDS=FX_KINDS+('clap2',)
+# ---- ROUND 8c (owner Nov 23 15:02Z: "make a walking animation"): walk cycle legs + arm swing drawings. Rick #12 f145-205 walks with the
+# legs redrawn on every drawing, one foot always on the ground, short strides, arms swinging opposite the legs. [INFERRED] timing.
+POSES.update({
+ 'walk_out':(22,30),     # walk: arm swung forward/out, a soft elbow (opposite the forward leg)
+ 'walk_in':(-10,-4),     # walk: arm swung back/in, nearly straight
+ 'walk_mid':(4,6),       # walk passing drawing: arm by the side
+})
+def walk_legs(name,phase,side=1):
+    """legs card for a walk cycle, same build as run_legs(): 1 contact (front heel down, back toe pushing off, both feet on the floor row),
+    2 passing (support leg straight under the hip, swing foot lifted 60 px and passing), 3/4 the same with the legs swapped.
+    side +1 = walking toward screen right. No airborne drawing: one foot is always on row 1056."""
+    c=C[name]; kind=c.get('body','tall'); pts,y0,w0,w1,y1=_sil(kind)
+    legc=dk(tuple(c.get('legs',(40,36,40))),0.8); LW=34; s_=lambda v:int(v*SS)
+    W,H=800*SS,1100*SS; im=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(im)
+    def leg(x,knee,foot,lift_toe,col=None,heel=False):
+        h0=(x,y1-120); cpt=(2*knee[0]-(h0[0]+foot[0])/2,2*knee[1]-(h0[1]+foot[1])/2)
+        P=[((1-t)**2*h0[0]+2*(1-t)*t*cpt[0]+t*t*foot[0],(1-t)**2*h0[1]+2*(1-t)*t*cpt[1]+t*t*foot[1]) for t in [i/28 for i in range(29)]]
+        d.line(_S(P),fill=K,width=s_(LW),joint='curve'); d.line(_S(P),fill=col or legc,width=s_(LW-16),joint='curve')
+        for p_ in (P[0],P[-1]): d.ellipse([s_(p_[0]-LW/2),s_(p_[1]-LW/2),s_(p_[0]+LW/2),s_(p_[1]+LW/2)],fill=K)
+        fx,fy=foot; d.ellipse([s_(fx-30+side*16),s_(fy-14-lift_toe),s_(fx+34+side*16),s_(fy+18-lift_toe)],fill=K)
+    farleg=('near' if phase in (3,4) else 'far')
+    fwd,bk=((1,-1) if phase in (1,2) else (-1,1))
+    for who,sx in sorted((('near',side*fwd),('far',side*bk)),key=lambda w:w[0]!=farleg):
+        x=400+(side if who=='near' else -side)*36; col=dk(legc,0.7) if who==farleg else None   # forward/support role on the walk side's hip: legs never cross
+        if phase in (1,3):   # contact: front heel down ahead, back foot behind on its toe; both on the floor row
+            if who=='near': leg(x,(x+side*70,y1+230),(x+side*130,1056),6,col)
+            else: leg(x,(x-side*50,y1+240),(x-side*120,1050),0,col)
+        else:               # passing: support leg under the hip, swing foot lifted beside it
+            if who=='near': leg(x,(x+side*6,y1+250),(x+side*10,1056),0,col)
+            else: leg(x,(x+side*40,y1+190),(x-side*10,996),0,col)
+    return im.resize((800,1100),Image.LANCZOS)
 if __name__=='__main__':
     out={}
     for n,c in C.items():
@@ -592,7 +690,12 @@ if __name__=='__main__':
         if c.get('combos') or c.get('combos_approved'):   # round 6 (opt-in): split torso/legs cards for lib.combo()
             _t,_l=split_body(n); _t.save(f'{T}{n}_btop.png'); _l.save(f'{T}{n}_blegs.png')
             for _s in (1,2): split_body(n,_s)[1].save(f'{T}{n}_blegsw{_s}.png')
+            for _k,_t in TOP_TURNS.items():   # round 8: turned torso cards + turned feet
+                if _k=='back': turn_top(n,180).save(f'{T}{n}_btopback.png')
+                else: turn_top(n,_t).save(f'{T}{n}_btop{_k}R.png'); turn_top(n,-_t).save(f'{T}{n}_btop{_k}L.png')
+            turned_legs(n,'turn',1).save(f'{T}{n}_blegsturnR.png'); turned_legs(n,'turn',-1).save(f'{T}{n}_blegsturnL.png'); turned_legs(n,'back').save(f'{T}{n}_blegsback.png')
             for _ph in (1,2,3,4):   # round 7: run cycle legs, both directions (no mirrored cards, rule 272)
+                walk_legs(n,_ph,1).save(f'{T}{n}_blegswalkR{_ph}.png'); walk_legs(n,_ph,-1).save(f'{T}{n}_blegswalkL{_ph}.png')   # r8c walk
                 run_legs(n,_ph,1).save(f'{T}{n}_blegsrunR{_ph}.png'); run_legs(n,_ph,-1).save(f'{T}{n}_blegsrunL{_ph}.png')
         for _p in pose_list(c):   # round 5 proposal (opt-in "poses"): pose card, 1-frame in-between from rest, overshoot for settles
             pose_arm(n,_p).save(f'{T}{n}_arm_pose_{_p}.png'); pose_arm(n,_p,mix=0.5).save(f'{T}{n}_arm_pose_{_p}_m.png'); pose_arm(n,_p,over=9).save(f'{T}{n}_arm_pose_{_p}_o.png')

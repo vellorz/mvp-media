@@ -37,21 +37,33 @@ def figure(name, s, size=(900, 1250)):
     def fxs(anchor):
         return [e for e in s.get('fx', []) if e[1] == anchor]
     def fxim(k, side): return tex(('fx', k, side), lambda: cast.fx(k) if side > 0 else cast.fx(k).transpose(Image.FLIP_LEFT_RIGHT))
-    if s['legs'].startswith('run'):   # round 7 run legs (cast.run_legs, both facings)
+    if s['legs'] in ('turnR', 'turnL', 'back'):   # round 8 turned feet
+        lg = s['legs']; card(legs, tex((name, lg), lambda: cast.turned_legs(name, 'back' if lg == 'back' else 'turn', 1 if lg == 'turnR' else -1)), 0.8, 1.1 * q, 0, zc, ox, oz)
+    elif s['legs'].startswith('walk'):   # round 8c walk legs
+        lg = s['legs']; card(legs, tex((name, lg), lambda: cast.walk_legs(name, int(lg[-1]), 1 if lg[4] == 'R' else -1)), 0.8, 1.1 * q, 0, zc, ox, oz)
+    elif s['legs'].startswith('run'):   # round 7 run legs (cast.run_legs, both facings)
         lg = s['legs']; card(legs, tex((name, lg), lambda: cast.run_legs(name, int(lg[-1]), 1 if lg[3] == 'R' else -1)), 0.8, 1.1 * q, 0, zc, ox, oz)
     else:
         card(legs, tex((name, 'legs', stride), lambda: cast.split_body(name, stride)[1]), 0.8, 1.1 * q, 0, zc, ox, oz)
     for k, _a, dx, dz, sz, sd in fxs('behind'): card(behind, fxim(k, sd), sz, sz, dx, zh + dz, ox, oz)
-    card(upper, tex((name, 'top'), lambda: cast.split_body(name, 0)[0]), 0.8, 1.1 * q, 0, zc, ox, oz)
+    tk = s.get('top', 'front')
+    if tk == 'front': card(upper, tex((name, 'top'), lambda: cast.split_body(name, 0)[0]), 0.8, 1.1 * q, 0, zc, ox, oz)
+    else:   # round 8 turned torso
+        th = 180 if tk == 'back' else cast.TOP_TURNS[tk[:-1]] * (1 if tk[-1] == 'R' else -1)
+        card(upper, tex((name, 'top', tk), lambda: cast.turn_top(name, th)), 0.8, 1.1 * q, 0, zc, ox, oz)
+    front = []   # r8b: cast.FRONT_POSES hands are drawn after the head (in front of the face, as lib FRONT_Y)
     for sx in (-1, 1):
         im, kind = arm_img(name, s['arms'][sx])
+        ak = s['arms'][sx]; ab = ak[:-2] if ak.endswith(('_m', '_o')) else ak
         if sx < 0: im = im.transpose(Image.FLIP_LEFT_RIGHT)
         if kind == 'rest':
             big = Image.new('RGBA', (im.width, im.height * 2), (0, 0, 0, 0)); big.alpha_composite(im, (0, im.height - 40))
             big = big.rotate(8 * sx, resample=Image.BICUBIC, center=(im.width / 2, im.height))
             card(upper, big, ARM_W * q, ARM_H * 2 * q, sx * shx, shz, ox, oz)
         else:
-            card(upper, im, cast.POSE_W * ARM_W / 1200 * q, cast.POSE_H * ARM_W / 1200 * q, sx * shx, shz + (ARM_H / 2 - ARM_OFF - 40 * ARM_W / 1200) * q, ox, oz)
+            args = (im, cast.POSE_W * ARM_W / 1200 * q, cast.POSE_H * ARM_W / 1200 * q, sx * shx, shz + (ARM_H / 2 - ARM_OFF - 40 * ARM_W / 1200) * q, ox, oz)
+            if ab in cast.FRONT_POSES: front.append(args)
+            else: card(upper, *args)
     k = X.turn_name(s['face'], s['lv']) if s['lv'] is not None else s['face']
     if k not in c['faces']: k = s['face'] if s['face'] in c['faces'] else list(c['faces'])[0]
     pt, pb = X.pads(c); hd = tex((name, 'h', k), lambda: cast.head(name, k))
@@ -65,6 +77,7 @@ def figure(name, s, size=(900, 1250)):
         upper.alpha_composite(hl)
     else:
         card(upper, hd, hw, hh, 0, hz + 0.2535 * HS + 0.75 * HS * (pt - pb) / 2048, ox, oz, rot=-s['htilt'], piv=(ox, oz - hz * PX))
+    for args in front: card(upper, *args)
     if s['lean']:
         upper = upper.rotate(-s['lean'], resample=Image.BICUBIC, center=(ox, oz - zh * PX))
         behind = behind.rotate(-s['lean'], resample=Image.BICUBIC, center=(ox, oz - zh * PX))

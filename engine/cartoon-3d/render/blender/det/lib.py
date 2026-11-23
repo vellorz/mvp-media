@@ -178,7 +178,11 @@ GEO={'tall':(0.966,0.141,0.86),'short':(0.966,0.156,0.86),'round':(0.966,0.165,0
 # r5b (owner Nov 23 test clip, rule 354b): both arm pivots sat at y -0.006, so the two arm cards were COPLANAR; where one arm's
 # transparent canvas overlapped the other arm's ink, Cycles skipped the ink on some samples (grey, see-through arm, hand 'behind' the body).
 # Every card of one character now has its own depth: body 0 > left arm -0.004 > right arm -0.006 > pose cards 3.5 mm nearer still > face -0.012.
-ARM_Y={-1:-0.004,1:-0.006}; POSE_DY=-0.0035   # depths -4, -6, -7.5, -9.5 mm: every pair >= 1.5 mm apart, all behind the face (-12)
+ARM_Y={-1:-0.004,1:-0.006}; POSE_DY=-0.0035
+# r8b (owner review 2, Nov 23 14:46Z: clap hands higher and touching, chin taps higher on the face): these four pose drawings sit IN
+# FRONT of the face disc (-12 mm) and behind the head effects (-16 mm): left -13.25, right -14.75 mm (rule 354b gaps >= 1.25 mm).
+# Exception to rule 268 for these poses only (= cast.FRONT_POSES).
+FRONT_POSES={'clap_up_open','clap_up','chin_hi','chin_hi_tap'}; FRONT_Y={-1:-0.01325,1:-0.01475}   # depths -4, -6, -7.5, -9.5 mm: every pair >= 1.5 mm apart, all behind the face (-12)
 FOOT_LIFT=0.0173   # r5b (owner Nov 23: 'feet clipping through the floor'): drawn foot bottom sat at z -0.016 (over half the 2.9 cm foot under the floor); now +0.001
 ARM_W,ARM_H,ARM_OFF=0.744,0.558,0.242   # r6: arm canvas 1200 wide (bent forearm swings outward)
 SHADOW=None
@@ -338,6 +342,9 @@ def _pose_card(ch,sx,key):
     c=CI[ch['kind']]; _q=BSY[c['body']]; tk=f"{ch['kind']}_{key}"+('_L' if sx<0 else '')
     a=plane(f"{ch['inst']}_arm{sx}_{key}",(0,0,0),POSE_W*ARM_PX*_q,POSE_H*ARM_PX*_q,card_mat(tk,tk),coll=chr_coll(ch['shot'])); a.parent=A['piv']
     a.location=(0,POSE_DY,(ARM_H/2-ARM_OFF-40*ARM_PX)*_q)   # drawn shoulder sits where the hanging card's shoulder sits
+    _b=key.replace('arm_pose_','',1); _b=_b[:-2] if _b.endswith(('_m','_o')) else _b
+    if _b in FRONT_POSES:   # r8b: hand in front of the face (owner Nov 23)
+        a.location.y=FRONT_Y[sx]-ARM_Y[sx]
     a.visible_shadow=False; A['cards'][key]=a; vis(a,[]); return a
 def _piv_hold(ch,sx,f,deg):
     piv=ch['A'][sx]['piv']; fc=None
@@ -393,6 +400,9 @@ def _const(o):
                 for kp in fc.keyframe_points: kp.interpolation='CONSTANT'
 LEGTEX={'body':'blegs','bodyw1':'blegsw1','bodyw2':'blegsw2'}
 LEGTEX.update({f'run{d}{p}':f'blegsrun{d}{p}' for d in 'RL' for p in (1,2,3,4)})   # r7: run cycle legs (cast.run_legs)
+LEGTEX.update({f'walk{d}{p}':f'blegswalk{d}{p}' for d in 'RL' for p in (1,2,3,4)})   # r8c: walk cycle legs (cast.walk_legs), never airborne
+LEGTEX.update({'turnR':'blegsturnR','turnL':'blegsturnL','back':'blegsback'})   # r8: turned feet (cast.turned_legs)
+TOPTEX={'qR':'btopqR','qL':'btopqL','qbR':'btopqbR','qbL':'btopqbL','back':'btopback'}   # r8: turned torso cards (cast.turn_top)
 def _body_card(ch,key):
     """legs card for 'body' (standing) or a stride drawing used as a step / weight shift / run (made on first use)"""
     L=ch['split']['legs']
@@ -433,6 +443,9 @@ def combo(ch,f,name,side=1,face=None,frm=0,face2=None):
             if prev is None: kloc(hp,g-1,(0,0,top)); krot(hp,g-1,(0,0,0))
             kloc(hp,g,(0,0,top-s['hdy'])); krot(hp,g,(0,math.radians(s['htilt']),0)); last=g
         if s['hop']>0.001 or (s['legs'].startswith('run') and s['legs'][-1] in '24'): AIR.add((ch['root'].name,g))   # r7: planned airborne frame
+        if prev is None or s.get('top','front')!=prev.get('top','front'):   # r8: turned torso card
+            if s.get('top','front')!='front': _top_card(ch,s['top'])
+            ch.setdefault('topsched',[]).append((g,s.get('top','front'))); last=g
         for e in s.get('fx',[]):   # r7: effect cards, shown on the frames the plan lists them
             ch.setdefault('fxf',{}).setdefault(_fx_card(ch,*e),[]).append(g)
         if prev is None or s['legs']!=prev['legs']:
@@ -441,6 +454,13 @@ def combo(ch,f,name,side=1,face=None,frm=0,face2=None):
         prev=s
     _const(ln); _const(wh); _const(hp)
     return last
+def _top_card(ch,key):
+    """r8: a turned torso card (3/4, 3/4 back, back), same size and place as the split torso card"""
+    T_=ch['split'].setdefault('tops',{})
+    if key in T_: return T_[key]
+    c=CI[ch['kind']]; sy=BSY[c['body']]; t=f"{ch['kind']}_{TOPTEX[key]}"
+    o=plane(f"{ch['inst']}_btop_{key}",(0,0,0),0.8,1.1*sy,card_mat(t,t),coll=chr_coll(ch['shot'])); o.parent=ch['lean']
+    o.location=ch['split']['top'].location.copy(); vis(o,[]); T_[key]=o; return o
 FX_Y={'head':-0.016,'torso':-0.0108,'feet':-0.002,'behind':0.004}   # r7 depths (rule 354b: >= 1 mm from every other card layer)
 def _fx_card(ch,kind,anchor,dx,dz,size,side):
     """effect card (cast.fx textures) on the head pivot, the hip/lean pivot or the feet ('whole'); one card per kind/anchor/facing"""
@@ -484,6 +504,17 @@ _finish_r6=finish
 def finish(ch,blink_every=34):
     """round 7: as before, plus effect cards shown on their planned frames"""
     ch=_finish_r6(ch,blink_every)
+    if ch.get('topsched'):   # r8: torso card per frame (front split card, or a turned one)
+        a_,b_=ch['rng']; st={fr:'front' for fr in range(a_,b_+1)}; ts=sorted(ch['topsched'])
+        for i,(g,k) in enumerate(ts):
+            nx=ts[i+1][0] if i+1<len(ts) else b_+1
+            for fr in range(max(a_,g),min(nx,b_+1)): st[fr]=k
+        R={}; cur=None
+        for fr in range(a_,b_+1):
+            if st[fr]!=cur: R.setdefault(st[fr],[]).append([fr,fr]); cur=st[fr]
+            else: R[cur][-1][1]=fr
+        _revis(ch['split']['top'],[tuple(r) for r in R.get('front',[])])
+        for k,o in ch['split'].get('tops',{}).items(): vis(o,[tuple(r) for r in R.get(k,[])]); o['chr']=ch['inst']
     for o,frs in (ch.get('fxf') or {}).items():
         frs=sorted(set(frs)); R=[]
         for f in frs:

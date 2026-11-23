@@ -1738,7 +1738,7 @@
     "smile"
    ]
   },
-  "stubble": 1,
+  "stubble": 0,
   "look": "D3",
   "library": [
    "content",
@@ -1777,7 +1777,8 @@
   ],
   "turns": "all",
   "poses": "all",
-  "combos": true
+  "combos": true,
+  "fhair": "stubbledots"
  },
  "kidT": {
   "coat": [

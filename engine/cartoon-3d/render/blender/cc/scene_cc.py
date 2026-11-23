@@ -532,7 +532,7 @@ faces(wr,[(1436,'neutral'),(1460,'deadpan'),(1486,'proud'),(1504,'deadpan')])
 path(s,[(1436,(IX-4.4,1.25,1.6),(IX-3.6,2.6,0.85)),(1480,(IX-3.6,1.2,1.55),(IX-3.25,2.6,0.85)),(1516,(IX-2.3,0.45,1.65),(IX-3.0,2.6,0.88))])   # r4 (rule 306): clear pull-out after the S14 crash push   # r2: wider (head was 53 % W) and a truck, no push after S14
 # ---- S16 (1509-1574): 1741, a wharf going up beside the rock; hammers ----
 s='S16'; r=S(s)
-for i,(x,y,k) in enumerate([(3.8,2.6,'townA'),(6.0,2.4,'townB'),(-2.4,0.4,'townA')]):
+for i,(x,y,k) in enumerate([(4.15,3.6,'townA'),(5.05,4.5,'townB'),(4.55,6.0,'townA')]):   # r4h: all three diggers inside the frame for the whole truck (cc4 test S16:1540 had one half out left, one off right, one behind the camera)
     c_=char_on(f'S16_w{i}',k,s,(x,y,0.15),r,'grit',arms=('arm','arm_shovel'))
     for f in range(1509,1574,10): arm(c_,1,f+i*3,-120); arm(c_,1,f+i*3+5,-40)
     drift_faces(c_,1509,1574,['grit','neutral','happy'],50+i,(14,24)); bob(c_,[1520+i*6,1550])

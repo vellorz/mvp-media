@@ -881,3 +881,38 @@ def hat3d_layer(name, col, K, tilt=0, dx=0, col2=None, top=0, bottom=0):
         lay = hat3d_period(name, col, K, tilt, dx).resize((1024, int(1024 * 0.6)), Image.LANCZOS)
         out = Image.new('RGBA', (1024, 1024 + top + bottom), CLEAR); out.alpha_composite(lay, (0, top)); return out, 300
     return _hat3d_layer_r3(name, col, K, tilt, dx, col2, top, bottom)
+
+# =================================================================== ROUND 4 PROPOSAL (Nov 23 2026, coordinator's Cape Cod vs Rick #10/#14 check)
+# Measured on 360 Rick heads (24 videos, frames every 2.5 s) with the same detector run on our library heads:
+#   skin: Rick's heads are near-white TINTED BY THE SCENE: per-video median runs from cool blue-white (#05, #21, #24) to peach
+#         (#07 252,226,198; #09 246,231,205; #25 253,236,217) and pink (#10 233,204,206; #14 241,227,227); all-video median 243,231,228.
+#   lidded/wide eyes: Rick 0.19 of head width wide, ours 0.13  (x1.45);  brows: Rick 0.19 long x 0.058 thick, ours 0.11-0.12 x 0.03-0.05 (x1.6);
+#   eye spacing about equal (Rick 0.27-0.28, ours 0.30); walrus moustache about equal (ours 0.42 vs Rick median 0.34 over all moustaches).
+# Opt-in so renders in flight are unchanged: cast.json per character  "feat_scale": "rick"  and  "skin": "rick_warm" | "rick_pink" | ...
+SKIN = {'rick_neutral': (245, 233, 229), 'rick_warm': (250, 231, 208), 'rick_pink': (240, 216, 214), 'rick_cool': (238, 238, 246), 'rig_white': (251, 244, 241)}
+def skin_rgb(v, default):
+    if isinstance(v, str): return SKIN.get(v, default)[:3]
+    return tuple(v)[:3] if v else tuple(default)[:3]
+RICK_SCALE = (1.4, 1.6, 1.3)       # eyes, brows, mouth
+def feat_scale(c):
+    v = c.get('feat_scale')
+    if not v: return None
+    if v == 'rick': return RICK_SCALE
+    return tuple((list(v) + [1, 1, 1])[:3])
+# feature boxes in face-layer coordinates (before the 105 px lift): (centre x, centre y, half size)
+EYE_BOXES = [(CX - 108, 520, 110), (CX + 108, 520, 110)]
+BROW_BOXES = [(CX - 108, 405, 100), (CX + 108, 405, 100)]   # about the old brow line, so bigger brows grow down, away from the hairline
+MOUTH_BOXES = [(CX, 715, 170)]
+def scaled(dst, drawfn, boxes, f):
+    """draw with drawfn on a scratch layer, then scale each box's content about its own centre (feature spacing unchanged)"""
+    lay = Image.new('RGBA', (1024, 1024), CLEAR); drawfn(ImageDraw.Draw(lay))
+    if abs(f - 1) < 1e-3: dst.alpha_composite(lay); return
+    for bx, by, r in boxes:
+        cr = lay.crop((bx - r, by - r, bx + r, by + r)); n = int(2 * r * f); cr = cr.resize((n, n), Image.LANCZOS)
+        dst.alpha_composite(cr, (int(bx - n / 2), int(by - n / 2)))
+def mouth_set(lay, kind, side, cy=715):
+    """Rick's lopsided set for an already drawn mouth layer (same as mouth_layer)"""
+    if not side: return lay
+    ang = 0 if kind in ('O', 'o', 'sigh', 'shout', 'whistleo') else MOUTH_TILT * side
+    lay = lay.rotate(ang, resample=Image.BICUBIC, center=(CX, cy))
+    out = Image.new('RGBA', (1024, 1024), CLEAR); out.alpha_composite(lay, (int(MOUTH_SHIFT * side), 0)); return out

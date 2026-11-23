@@ -612,19 +612,20 @@ for i,(x,y,k) in enumerate([(-1.6,0.2,'blueA'),(-0.35,1.6,'greyA'),(0.4,1.6,'blu
     arm(c_,1,1726,-40); act(c_,['offer','shrug','clutch','wave'][i],1790+i*6)
 tw19=char_on('S19_town','townW',s,(HX+2.2,1.95,0),r,'happy',arms=('arm',[(1726,'arm_pie'),(1866,'arm')]),walker=True)
 walk(tw19,1830,1862,(HX+3.6,1.95,0),(HX+2.2,1.95,0),step=4); faces(tw19,[(1726,'happy'),(1862,'laugh'),(1878,'proud')]); work(tw19,'carry',[(1726,-35)]); act(tw19,'present',1864)
-path(s,[(1726,(HX-2.2,-1.7,1.55),(HX-0.55,1.4,1.0)),(1800,(HX-2.35,-1.7,1.95),(HX-0.5,1.35,0.8)),(1873,(HX-2.5,-1.7,2.5),(HX-0.3,1.3,0.6)),(1892,(HX-2.52,-1.74,2.52),(HX-0.3,1.3,0.6))])   # dc14 (345): high three-quarter landing
+path(s,[(1726,(HX-2.2,-1.7,1.45),(HX-0.55,1.4,1.0)),(1800,(HX-2.35,-1.7,1.65),(HX-0.5,1.35,0.88)),(1873,(HX-2.5,-1.7,1.88),(HX-0.3,1.3,0.76)),(1892,(HX-2.52,-1.74,1.9),(HX-0.3,1.3,0.76))])   # dc16b (rule 336 medians vs 345, coordinator ruling (b)): milder high three-quarter, end pitch ~17 deg (was ~27)   # dc14 (345): high three-quarter landing
 # ---- S20 (1886-1980): today, the whole country eats on the same Thursday (truck) ----
 s='S20'; r=S(s)
 F=[]
 # dc14 rule 345: dad stands at the near right corner (about 1.8 m from camera), the family 1.5 m behind; high three-quarter from the right,
 # 2.1 m up (S19 was 2.5 m: consecutive group shots change height)
-for i,(x,y,k) in enumerate([(-1.3,1.5,'grandT'),(-0.7,1.5,'momT'),(0.8,0.15,'dadT'),(0.55,1.5,'kidT')]):
+for i,(x,y,k) in enumerate([(-1.65,1.5,'grandT'),(-1.05,1.5,'momT'),   # dc16b: grandma and mom 0.35 m left so dad's head clears mom's at f1960
+                             (0.8,0.15,'dadT'),(0.55,1.5,'kidT')]):
     c_=char_on(f'S20_{k}',k,s,(TX+x,y,0),r,'happy',arms=('arm',{'grandT':'arm','momT':'arm_plate','dadT':'arm_fork','kidT':'arm_fork'}[k]),scale=(0.8 if k=='kidT' else 1.0)); F.append(c_)   # CAST GATE: the child stands 0.8 of an adult [INFERRED]
     drift_faces(c_,1886,1980,['happy','grin','laugh','cry_laugh','open_smile'],200+i,(14,26)); bob(c_,[1910+i*8,1950+i*5])
 work(F[2],'eat',[(f+d,a_) for f in range(1890,1980,10) for d,a_ in ((0,-50),(5,-30))])
 act(F[3],'fist_pump',1930); act(F[1],'offer',1912); act(F[0],'wave',1948)   # dc14 (354): four different moves
 faces(F[1],[(1944,'open_smile'),(1962,'proud')]); faces(F[2],[(1920,'laugh'),(1958,'content')])   # exprlib: >=4 faces per featured character
-path(s,[(1886,(TX+1.5,-1.65,2.15),(TX-0.2,1.3,0.9)),(1980,(TX+2.0,-1.25,2.05),(TX-0.2,1.3,0.9))])   # dc14 (345)
+path(s,[(1886,(TX+1.5,-1.65,1.7),(TX-0.2,1.3,0.92)),(1980,(TX+2.0,-1.25,1.65),(TX-0.2,1.3,0.92))])   # dc16b: milder high angle, pitch ~16 deg (was ~26)   # dc14 (345)
 # ---- S21 (1974-2086): all because one woman would not stop writing: past her framed letter, the camera lands on the poster on "writing" ----
 s='S21'; r=S(s)
 k21=char_on('S21_kid','kidT',s,(TX-0.12,1.5,0),r,'happy',arms=('arm','arm_fork'),scale=0.8); faces(k21,[(1974,'happy'),(1999,'wink_grin')]); act(k21,'wave',1996,-1)

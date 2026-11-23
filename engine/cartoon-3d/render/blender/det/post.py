@@ -152,6 +152,10 @@ def chunks():
     for i in range(len(C)): C[i].append((C[i+1][0] if C[i+1][0]-max(C[i][0]+3,EN[i])<=15 else max(C[i][0]+3,EN[i])) if i+1<len(C) else min(END+1,EN[i]+6))   # r2 (T5b): a gap of 12 f or less is bridged by the card before it
     return C
 CAPS=chunks()
+# r10b (text verifier r10 T1 [C]: 'town,' and 'the Tigers' left the 71.7 % band; Rick never moves the baseline, 19/19):
+# 'the Tigers' starts 1 f later (f431, the S06 cut, +1 f lag inside T5's +2 f) so its only face contact (f430, S05) is gone.
+for _i,(_a,_t,_b) in enumerate(CAPS):
+    if _t=='the Tigers' and _a==430 and _i>0 and CAPS[_i-1][1]=='town,': CAPS[_i-1]=(CAPS[_i-1][0],'town,',431); CAPS[_i]=(431,_t,_b)
 # r2 (text verifier T7 [C]: captions on faces in S05, S06, S11, S14, S17, S18): pre-pass over the raw clips at 360x640 finds the face cards
 # (near-white, low-saturation round blobs) per frame; each card then takes the first baseline whose box clears every face it is shown over.
 FW,FH=360,640
@@ -170,6 +174,10 @@ def pick_bases(FM):
         fr=range(c0,max(c0+1,c1))
         if any(str(f) in PQ and min(p[1] for p in PQ[str(f)])<0.33 for f in fr): out.append(int(0.195*H)); continue   # S21: above the poster for the whole card (no 1-frame jump)
         best=None
+        # r10b: a card stays on the band when only its padding (not the glyph box) touches a face: tight-box contact under 0.1e-4 of the frame
+        l_,t_,r_,b_=FNT.getbbox(txt,anchor='ls',stroke_width=STROKE); w_=r_-l_
+        tx0,ty0,tx1,ty1=((W-w_)/2)/W,(BASE+t_)/H,((W+w_)/2)/W,(BASE+b_+SHY)/H
+        if max(sum(max(0,min(tx1,q[2])-max(tx0,q[0]))*max(0,min(ty1,q[3])-max(ty0,q[1])) for q in FM.get(f,[])) for f in fr)<1e-5: out.append(BASE); continue
         for bs in BASES:
             x0,y0,x1,y1=cap_box(txt,bs); x0,x1,y0,y1=x0/FW,x1/FW,y0/FH,y1/FH
             hit=sum(max(0,min(x1,q[2])-max(x0,q[0]))*max(0,min(y1,q[3])-max(y0,q[1])) for f in fr for q in FM.get(f,[]))
@@ -205,6 +213,27 @@ def inkfix(o,raw,excl=None):
     hd=np.minimum(np.abs(h-165),180-np.abs(h-165))
     a=np.clip((15-hd)/5,0,1)*np.clip((s_-0.16)/0.08,0,1)*np.clip((0.52-v)/0.06,0,1)*np.clip((v-0.035)/0.03,0,1)
     a=cv2.GaussianBlur(a,(0,0),0.6*K)
+    # r10b (visual verifier r10, rule 308 [C] darkest-2 % ring probe: a 1-3 px dark-red / near-black fringe where the plum line meets
+    # red, brown or green backgrounds): dark pixels (graded value < 0.30) inside a 2 px ring around the keyed line join the line
+    core=(a>0.5).astype(np.uint8); rk=max(3,int(round(5*K))|1)
+    ring=np.clip(cv2.dilate(core,np.ones((rk,rk),np.uint8)).astype(np.float32)-core,0,1)
+    vg=np.max(np.clip(o,0,1),axis=2)
+    # r10b-2 (re-check: the value-only ring missed the orange-red / dark-red fringe): also take saturated red-orange ring pixels below value 0.62
+    # (skin is low-saturation, so faces stay untouched; saturated red backgrounds lose at most a 2 px edge next to a line)
+    og=cv2.cvtColor((np.clip(o,0,1)*255).astype(np.uint8),cv2.COLOR_RGB2HSV).astype(np.float32); oh,os_=og[...,0],og[...,1]/255
+    redish=((oh<=22)|(oh>=160)).astype(np.float32)*np.clip((os_-0.40)/0.10,0,1)*np.clip((0.62-vg)/0.06,0,1)
+    ring=ring*np.maximum(np.clip((0.30-vg)/0.06,0,1),redish); ring=cv2.GaussianBlur(ring,(0,0),0.5*K)
+    # r10b-3 (re-check per-ray probe: the line CORE itself reads dark red (61,22,22) on warm-lit lower outlines, outside the plum hue key):
+    # thin dark strokes (black-hat on the raw value, 13 px at 2K) with a red-to-plum hue and value < 0.45 are ink too; broad dark red areas
+    # (brick, sofa, booth) are not thin, so they stay
+    bk=max(5,int(round(13*K))|1); vb=cv2.morphologyEx(v.astype(np.float32),cv2.MORPH_BLACKHAT,cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(bk,bk)))
+    hd2=np.minimum(np.abs(h-170),180-np.abs(h-170))
+    thin=np.clip((vb-0.10)/0.06,0,1)*np.clip((30-hd2)/6,0,1)*np.clip((s_-0.18)/0.08,0,1)*np.clip((0.45-v)/0.06,0,1)
+    # grown only along strokes connected to the plum-keyed line (geodesic growth, 12 x 3 px), so dark stripes in sets (bleachers, slats) stay
+    tm=(thin>0.5).astype(np.uint8); g=((a>0.5).astype(np.uint8))&1; k3=np.ones((3,3),np.uint8)
+    for _ in range(12): g=cv2.dilate(g,k3)&(tm|g)
+    a=np.maximum(a,cv2.GaussianBlur(g.astype(np.float32)*np.maximum(thin,0.0),(0,0),0.6*K))
+    a=np.maximum(a,ring)
     if excl is not None: a=a*(1-excl)
     a=a[...,None]; return o*(1-a)+INKT*a
 def quadmask(q,h,w,grow):

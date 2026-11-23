@@ -54,7 +54,9 @@ for ch in CH:
     if nlegs<2: miss.append(f'legs ({nlegs} at mid-shin)')
     bh=b.dimensions.z if b.dimensions.z>0 else 1.1*q; z0=b.matrix_world.translation.z-bh/2
     def zrow(r): return z0+bh*(1-r/h)
-    head_c=max(f.matrix_world.translation.z for f in ch['F'].values()); head_bot=head_c-H/2; head_top=head_c+H/2
+    # r10b (Cape Cod, coordinator Nov 23: the face-card centre sits higher on padded heads (tall hats, hair, beards), so those bodies read short):
+    # measure from the head DISC centre, which lib.char keeps at 0.2535*HS above the head pivot whatever the card's pads
+    _f=next(iter(ch['F'].values())); head_c=(_f.parent.matrix_world@Vector((0,-0.012,0.2535*L.HS))).z; head_bot=head_c-H/2; head_top=head_c+H/2
     sc_=ch['root'].scale[0]
     torso=(head_bot-zrow(crotch))/H; legs=(zrow(crotch)-zrow(bot_r))/H; total=(head_top-zrow(bot_r))/H
     # r7b shoulder-join check (owner Nov 22 'arm issue?': arm roots stood inside the outline as a second line, or poked above the shoulder):
@@ -69,7 +71,7 @@ for ch in CH:
         slope=abs(np.nonzero(A[max(0,r-15)]>0.5)[0][[0,-1]][1 if sx_>0 else 0]-(cols[-1] if sx_>0 else cols[0])) if (A[max(0,r-15)]>0.5).any() else 99
         if d_>0.020 or slope>6: sj.append(f'{sx_:+d} off {d_*1000:.0f}mm slope {slope}px')
     if sj: miss.append('shoulder join '+'; '.join(sj))
-    ok=not miss and 0.85<=torso<=1.2 and 1.1<=legs<=1.3 and 2.9<=total<=3.35
+    ok=not miss and 0.95<=torso<=1.05 and 1.20<=legs<=1.30 and 3.2<=total<=3.35   # rule 336 build targets (straight-on cast sheet, head widths)
     allok&=ok
     rep.append(f"{k:10s} {'PASS' if ok else 'FAIL'} torso {torso:.2f} legs {legs:.2f} total {total:.2f} H  limbs: head, torso, arm_L, arm_R (mitten in card), legs x{nlegs}, feet, shoulder joins{'' if not miss else '  MISSING: '+', '.join(miss)}")
 w_=bpy.data.worlds.new('w'); sc.world=w_; w_.use_nodes=True; bg_=w_.node_tree.nodes['Background']; bg_.inputs['Color'].default_value=(0.83,0.80,0.75,1); bg_.inputs['Strength'].default_value=1.0

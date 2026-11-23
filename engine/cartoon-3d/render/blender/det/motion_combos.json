@@ -1414,7 +1414,7 @@
      ]
     }
    ],
-   "status": "INFERRED",
+   "status": "APPROVED",
    "round": 7,
    "legs": "planted",
    "previous": {
@@ -1511,7 +1511,8 @@
      }
     ],
     "desc": "startle: face snaps to shock, head drops 2 f, body leans back 8 deg and squashes on the same frame, both arms fling up; legs planted"
-   }
+   },
+   "approved": "owner Nov 23 2026 8:46 AM CT (review of round 7)"
   },
   "double_take": {
    "desc": "double take, slowed so it reads: glance at it and back (held), a blank front-on beat with a blink, a 2-frame dip, then the snap to a strong turn with a shock face, a little jump, jolt ticks and a sweat drop",
@@ -2556,7 +2557,7 @@
      ]
     }
    ],
-   "status": "INFERRED",
+   "status": "APPROVED",
    "round": 7,
    "legs": "planted",
    "previous": {
@@ -2649,7 +2650,8 @@
      }
     ],
     "desc": "huff: both arms cross, head turns away one level and tilts up, body leans back 4 deg; legs planted"
-   }
+   },
+   "approved": "owner Nov 23 2026 8:46 AM CT (review of round 7)"
   },
   "akimbo_scold": {
    "status": "APPROVED",
@@ -3416,9 +3418,10 @@
     }
    ],
    "loop": 12,
-   "status": "INFERRED",
+   "status": "APPROVED",
    "round": 7,
-   "legs": "run"
+   "legs": "run",
+   "approved": "owner Nov 23 2026 8:46 AM CT (review of round 7)"
   },
   "sprint": {
    "desc": "sprint: the jog drawings at 2 frames each, torso leaned 24 deg, bigger bob, speed lines trailing behind and dust puffs kicked up on each contact",
@@ -3959,9 +3962,13 @@
     }
    ],
    "loop": 8,
-   "status": "INFERRED",
+   "status": "APPROVED",
    "round": 7,
-   "legs": "run"
+   "legs": "run",
+   "approved": "owner Nov 23 2026 8:46 AM CT (review of round 7)"
   }
+ },
+ "approved_assets": {
+  "back_of_head": "owner Nov 23 2026 8:46 AM CT: back face and back@L/R 3/4 views approved"
  }
 }

@@ -159,6 +159,24 @@
    "char": "r5man",
    "face": "determined",
    "side": 1
+  },
+  {
+   "combo": "walk_stroll",
+   "char": "r5woman",
+   "face": "happy",
+   "side": 1
+  },
+  {
+   "combo": "walk_brisk",
+   "char": "r5hat",
+   "face": "determined",
+   "side": 1
+  },
+  {
+   "combo": "walk_toward",
+   "char": "r5woman",
+   "face": "happy",
+   "side": 1
   }
  ]
 }

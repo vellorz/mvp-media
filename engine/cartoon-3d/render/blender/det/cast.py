@@ -680,6 +680,52 @@ def walk_legs(name,phase,side=1):
             if who=='near': leg(x,(x+side*6,y1+250),(x+side*10,1056),0,col)
             else: leg(x,(x+side*40,y1+190),(x-side*10,996),0,col)
     return im.resize((800,1100),Image.LANCZOS)
+# ---- ROUND 9 (owner Nov 23 10:49 AM CT: the round-8 walk "feels unnatural"; vary stride by situation, better arms and legs).
+# Rick #12 f145-205: legs redrawn every 2 f, noodle legs that bend at the knee as the foot swings, a step every ~7.5 f (median of 23
+# Rick walk cadences), no squash and stretch on walks, bodies slide while the legs cycle, arms hang and swing a little about the shoulder
+# (guide: rotating the rest arm about the shoulder is kept for walking swing). Our walk v2 is a CONTINUOUS cycle (not 4 held drawings):
+# each leg follows a stance (foot flat, sliding back) and a swing (foot lifts on a sine and comes forward with ease-in-out); the knee
+# bends by keeping the leg length, so a lifted or reaching foot bends it the way Rick's do. [INFERRED: stride, lift, cadence]
+WALK_STYLES={   # stride px (foot travel per step on an 800 px card), lift px, drawings per cycle (on 2s), hips apart px, toe lift px
+ 'st':dict(name='stroll',stride=96,lift=36,n=10,toe=6),    # 20 f cycle = 10 f a step: easy, unhurried
+ 'nm':dict(name='walk',  stride=140,lift=52,n=8, toe=8),   # 16 f cycle = 8 f a step (Rick median 7.5)
+ 'br':dict(name='brisk', stride=186,lift=70,n=6, toe=10),  # 12 f cycle = 6 f a step: in a hurry
+}
+def walk2_legs(name,style,i,view='R'):
+    """walk v2 legs card: drawing i of WALK_STYLES[style]['n']; view 'R'/'L' = walking across toward screen right/left (3/4 body),
+    'F' = walking toward the camera (front body; knees bend outward, feet lift; feet never below row 1056). Leg A (light) and leg B (a shade darker, drawn first)
+    are half a cycle apart; one foot is always on row 1056 (each leg is in stance for half the cycle)."""
+    W_=WALK_STYLES[style]; c=C[name]; kind=c.get('body','tall'); pts,y0,w0,w1,y1=_sil(kind)
+    legc=dk(tuple(c.get('legs',(40,36,40))),0.8); LW=34; s_=lambda v:int(v*SS)
+    im=Image.new('RGBA',(800*SS,1100*SS),(0,0,0,0)); d=ImageDraw.Draw(im)
+    side=-1 if view=='L' else 1; hy=y1-120; L0=1056-hy; Lc=L0*1.01
+    def foot_at(p):
+        if p<0.5:   # stance: foot flat, slides from front to back; heel rises in the last fifth (toe-off)
+            t=p/0.5; return W_['stride']/2-W_['stride']*t,0.0,(W_['toe']*max(0.0,(t-0.8)/0.2))
+        t=(p-0.5)/0.5; e=(1-math.cos(math.pi*t))/2   # swing: ease-in-out forward, sine lift
+        return -W_['stride']/2+W_['stride']*e,W_['lift']*math.sin(math.pi*t),0.0
+    def draw(hx,p,col,sx):
+        dx,lift,toe=foot_at(p)
+        if view=='F':   # toward the camera: travel is depth, so the foot stays under the hip; the knee bows outward
+            fx_=hx+sx*6; fy=1056-lift; dd=math.hypot(dx*0.35,fy-hy); kdir=sx   # feet stay on the floor row (rigcheck FOOT); depth shortens the leg only a little   # a foot further forward sits a touch lower
+        else:
+            fx_=hx+side*dx; fy=1056-lift; dd=math.hypot(fx_-hx,fy-hy); kdir=side
+        # thigh + shin of equal length Lc/2 with a ROUNDED knee (like the arm elbow), knee pushed out perpendicular to the hip-foot line
+        cx_,cy_=(hx+fx_)/2,(hy+fy)/2; ux,uy=(fx_-hx)/max(dd,1),(fy-hy)/max(dd,1); nx,ny=-uy,ux
+        if nx*kdir<0: nx,ny=-nx,-ny
+        if view=='F': nx,ny=kdir*0.8,0.0
+        b=0.5*math.sqrt(max(0.0,Lc*Lc-dd*dd)); Kn=(cx_+nx*b,cy_+ny*b)
+        def lerp(P_,Q_,t): return (P_[0]+(Q_[0]-P_[0])*t,P_[1]+(Q_[1]-P_[1])*t)
+        S0,F0=(hx,hy),(fx_,fy); A_=lerp(Kn,S0,0.30); B_=lerp(Kn,F0,0.30)
+        P=[lerp(S0,A_,k/12) for k in range(13)]+[((1-t)**2*A_[0]+2*(1-t)*t*Kn[0]+t*t*B_[0],(1-t)**2*A_[1]+2*(1-t)*t*Kn[1]+t*t*B_[1]) for t in [k/16 for k in range(1,17)]]+[lerp(B_,F0,k/12) for k in range(1,13)]
+        d.line(_S(P),fill=K,width=s_(LW),joint='curve'); d.line(_S(P),fill=col,width=s_(LW-16),joint='curve')
+        for p_ in (P[0],P[-1]): d.ellipse([s_(p_[0]-LW/2),s_(p_[1]-LW/2),s_(p_[0]+LW/2),s_(p_[1]+LW/2)],fill=K)
+        if view=='F': d.ellipse([s_(fx_-28),s_(fy-14-toe),s_(fx_+28),s_(fy+16-toe)],fill=K)
+        else: d.ellipse([s_(fx_-30+side*16),s_(fy-14-toe),s_(fx_+34+side*16),s_(fy+18-toe)],fill=K)
+    p=i/W_['n']; hs=40 if view=='F' else 20   # hips: wide apart from the front, nearly one line from the side (legs overlap, never an X)
+    draw(400+(-hs if view=='F' else -side*hs),(p+0.5)%1.0,dk(legc,0.7),-1)   # leg B, far / darker, first
+    draw(400+(hs if view=='F' else side*hs),p,legc,1)                        # leg A
+    return im.resize((800,1100),Image.LANCZOS)
 if __name__=='__main__':
     out={}
     for n,c in C.items():
@@ -696,6 +742,9 @@ if __name__=='__main__':
             turned_legs(n,'turn',1).save(f'{T}{n}_blegsturnR.png'); turned_legs(n,'turn',-1).save(f'{T}{n}_blegsturnL.png'); turned_legs(n,'back').save(f'{T}{n}_blegsback.png')
             for _ph in (1,2,3,4):   # round 7: run cycle legs, both directions (no mirrored cards, rule 272)
                 walk_legs(n,_ph,1).save(f'{T}{n}_blegswalkR{_ph}.png'); walk_legs(n,_ph,-1).save(f'{T}{n}_blegswalkL{_ph}.png')   # r8c walk
+            for _st,_W in WALK_STYLES.items():   # r9 walk v2 (continuous cycle, three strides, across both ways + toward camera)
+                for _i in range(_W['n']):
+                    for _v in 'RLF': walk2_legs(n,_st,_i,_v).save(f'{T}{n}_blegswk{_v}{_st}{_i}.png')
                 run_legs(n,_ph,1).save(f'{T}{n}_blegsrunR{_ph}.png'); run_legs(n,_ph,-1).save(f'{T}{n}_blegsrunL{_ph}.png')
         for _p in pose_list(c):   # round 5 proposal (opt-in "poses"): pose card, 1-frame in-between from rest, overshoot for settles
             pose_arm(n,_p).save(f'{T}{n}_arm_pose_{_p}.png'); pose_arm(n,_p,mix=0.5).save(f'{T}{n}_arm_pose_{_p}_m.png'); pose_arm(n,_p,over=9).save(f'{T}{n}_arm_pose_{_p}_o.png')

@@ -400,7 +400,9 @@ def _const(o):
                 for kp in fc.keyframe_points: kp.interpolation='CONSTANT'
 LEGTEX={'body':'blegs','bodyw1':'blegsw1','bodyw2':'blegsw2'}
 LEGTEX.update({f'run{d}{p}':f'blegsrun{d}{p}' for d in 'RL' for p in (1,2,3,4)})   # r7: run cycle legs (cast.run_legs)
-LEGTEX.update({f'walk{d}{p}':f'blegswalk{d}{p}' for d in 'RL' for p in (1,2,3,4)})   # r8c: walk cycle legs (cast.walk_legs), never airborne
+LEGTEX.update({f'walk{d}{p}':f'blegswalk{d}{p}' for d in 'RL' for p in (1,2,3,4)})
+WALK_N={'st':10,'nm':8,'br':6}   # = cast.WALK_STYLES n
+LEGTEX.update({f'wk{v}{st}{i}':f'blegswk{v}{st}{i}' for v in 'RLF' for st,n in WALK_N.items() for i in range(n)})   # r9 walk v2   # r8c: walk cycle legs (cast.walk_legs), never airborne
 LEGTEX.update({'turnR':'blegsturnR','turnL':'blegsturnL','back':'blegsback'})   # r8: turned feet (cast.turned_legs)
 TOPTEX={'qR':'btopqR','qL':'btopqL','qbR':'btopqbR','qbL':'btopqbL','back':'btopback'}   # r8: turned torso cards (cast.turn_top)
 def _body_card(ch,key):
@@ -436,6 +438,11 @@ def combo(ch,f,name,side=1,face=None,frm=0,face2=None):
                     _pose_card(ch,sx,'arm_pose_'+a); ch['A'][sx]['sched']=[x for x in ch['A'][sx]['sched'] if x[0]!=g]+[(g,'arm_pose_'+a)]; _piv_hold(ch,sx,g,0)
                     ch['A'][sx]['pose']=a.split('_m')[0].split('_o')[0]
                 last=g
+        sw,psw=s.get('swing',0.0),(prev.get('swing',0.0) if prev else 0.0)   # r9 walk arm swing: rest arm rotates about the shoulder (one out, one in)
+        if sw!=psw:
+            for sx in (-1,1):
+                if s['arms'][sx]=='hang': _piv_hold(ch,sx,g,-8+sw)   # same delta in each arm's own frame = opposite screen directions: one arm forward, one back
+            last=g
         if prev is None or (s['lean'],s['squash'],s['hop'])!=(prev['lean'],prev['squash'],prev['hop']):
             if prev is None: krot(ln,g-1,(0,0,0)); kscale(wh,g-1,(1,1,1)); kloc(wh,g-1,(0,0,0))
             krot(ln,g,(0,math.radians(s['lean']),0)); kscale(wh,g,(1+s['squash']*0.6,1,1-s['squash'])); kloc(wh,g,(0,0,s['hop'])); last=g

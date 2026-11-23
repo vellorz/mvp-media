@@ -39,6 +39,8 @@ def figure(name, s, size=(900, 1250)):
     def fxim(k, side): return tex(('fx', k, side), lambda: cast.fx(k) if side > 0 else cast.fx(k).transpose(Image.FLIP_LEFT_RIGHT))
     if s['legs'] in ('turnR', 'turnL', 'back'):   # round 8 turned feet
         lg = s['legs']; card(legs, tex((name, lg), lambda: cast.turned_legs(name, 'back' if lg == 'back' else 'turn', 1 if lg == 'turnR' else -1)), 0.8, 1.1 * q, 0, zc, ox, oz)
+    elif s['legs'].startswith('wk'):   # round 9 walk v2 legs
+        lg = s['legs']; card(legs, tex((name, lg), lambda: cast.walk2_legs(name, lg[3:5], int(lg[5:]), lg[2])), 0.8, 1.1 * q, 0, zc, ox, oz)
     elif s['legs'].startswith('walk'):   # round 8c walk legs
         lg = s['legs']; card(legs, tex((name, lg), lambda: cast.walk_legs(name, int(lg[-1]), 1 if lg[4] == 'R' else -1)), 0.8, 1.1 * q, 0, zc, ox, oz)
     elif s['legs'].startswith('run'):   # round 7 run legs (cast.run_legs, both facings)
@@ -58,7 +60,7 @@ def figure(name, s, size=(900, 1250)):
         if sx < 0: im = im.transpose(Image.FLIP_LEFT_RIGHT)
         if kind == 'rest':
             big = Image.new('RGBA', (im.width, im.height * 2), (0, 0, 0, 0)); big.alpha_composite(im, (0, im.height - 40))
-            big = big.rotate(8 * sx, resample=Image.BICUBIC, center=(im.width / 2, im.height))
+            big = big.rotate((8 - s.get('swing', 0.0)) * sx, resample=Image.BICUBIC, center=(im.width / 2, im.height))   # r9: Blender rot = radians(-8 + swing)*sx
             card(upper, big, ARM_W * q, ARM_H * 2 * q, sx * shx, shz, ox, oz)
         else:
             args = (im, cast.POSE_W * ARM_W / 1200 * q, cast.POSE_H * ARM_W / 1200 * q, sx * shx, shz + (ARM_H / 2 - ARM_OFF - 40 * ARM_W / 1200) * q, ox, oz)

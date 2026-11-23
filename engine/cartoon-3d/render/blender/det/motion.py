@@ -53,6 +53,8 @@ def plan(name, side=1, face='smug', frm=0, face2=None):
             out.append((o, ch, b if b in ('front', 'back') else f"{b}{'R' if sd > 0 else 'L'}"))
         elif ch == 'legs' and isinstance(v, str) and v.startswith('run'):   # round 7: run cycle drawings face the run side
             out.append((o, 'legs', f"run{'R' if side > 0 else 'L'}{v[3:]}"))
+        elif ch == 'legs' and isinstance(v, str) and v.startswith('wk'):   # round 9 walk v2: 'wknm3' across (faces the walk side), 'wkFnm3' toward camera
+            out.append((o, 'legs', v if v.startswith('wkF') else f"wk{'R' if side > 0 else 'L'}{v[2:]}"))
         elif ch == 'legs' and isinstance(v, str) and v.startswith('walk'):   # round 8c: walk cycle drawings face the walk side
             out.append((o, 'legs', f"walk{'R' if side > 0 else 'L'}{v[4:]}"))
         elif ch in ('lean', 'htilt'):
@@ -74,7 +76,7 @@ def frames(name, side=1, face='smug', frm=0, face2=None, pre=3, post=8):
     """Per-frame state, frame 0 = combo start. Used by the 2D sheet and by the probe (rule 357 'nothing frozen')."""
     P = plan(name, side, face, frm, face2)
     end = max(o for o, _, _ in P) + post
-    st = dict(face=face, lv=frm, arms={-1: 'hang', 1: 'hang'}, lean=0.0, squash=0.0, hdy=0.0, htilt=0.0, legs='body', hop=0.0, top='front')
+    st = dict(face=face, lv=frm, arms={-1: 'hang', 1: 'hang'}, lean=0.0, squash=0.0, hdy=0.0, htilt=0.0, legs='body', hop=0.0, top='front', swing=0.0)
     fxa = []   # active effect cards: (kind, anchor, dx, dz, size, side, last frame)
     keyed = {}   # frame -> list of (channel, value) after expanding turns/arm sequences/ramps
     def put(f, k, v): keyed.setdefault(f, []).append((k, v))
@@ -110,6 +112,7 @@ def frames(name, side=1, face='smug', frm=0, face2=None, pre=3, post=8):
                 st['arms'] = dict(st['arms']); st['arms'][sx] = card
             elif k == 'legs': st['legs'] = v
             elif k == 'top': st['top'] = v
+            elif k == 'swing': st['swing'] = v   # r9: walk arm swing about the shoulder, degrees (+ = left arm forward toward screen right, right arm back)
             elif k == 'fx': fxa.append((v[0], v[1], v[2], v[3], v[4], v[6], f + v[5] - 1))
             elif k.endswith('_ramp'):
                 c = k[:-5]; ramps[c] = (f, st[c], v[0], v[1])
@@ -118,7 +121,7 @@ def frames(name, side=1, face='smug', frm=0, face2=None, pre=3, post=8):
             if t >= 1.0: del ramps[c]
         fxa = [e for e in fxa if e[6] >= f]
         seq.append(dict(f=f, face=st['face'], lv=st['lv'], arms=dict(st['arms']), lean=round(st['lean'], 2), squash=round(st['squash'], 3),
-                        hdy=round(st['hdy'], 4), htilt=round(st['htilt'], 2), legs=st['legs'], hop=round(st['hop'], 4), top=st['top'],
+                        hdy=round(st['hdy'], 4), htilt=round(st['htilt'], 2), legs=st['legs'], hop=round(st['hop'], 4), top=st['top'], swing=round(st['swing'], 2),
                         fx=[e[:6] for e in fxa]))
     return seq
 
@@ -128,7 +131,7 @@ def moving_parts(seq):
     for a, b in zip(seq, seq[1:]):
         m = set()
         if a['lv'] != b['lv'] or a['face'] != b['face'] or a['hdy'] != b['hdy'] or a['htilt'] != b['htilt']: m.add('head')
-        if a['arms'] != b['arms']: m.add('arms')
+        if a['arms'] != b['arms'] or a.get('swing') != b.get('swing'): m.add('arms')
         if a['lean'] != b['lean'] or a['squash'] != b['squash'] or a.get('top') != b.get('top'): m.add('torso')
         if a['legs'] != b['legs'] or a['hop'] != b['hop']: m.add('legs')
         if a.get('fx') != b.get('fx'): m.add('fx')

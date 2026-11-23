@@ -4915,11 +4915,12 @@
    "approved": "owner Nov 23 2026 8:46 AM CT (review of round 7)"
   },
   "walk": {
-   "desc": "walk in place (the scene moves the character): head turns 3/4 and the torso turns 3/4 toward the walk side, four leg drawings 3 frames each (contact, passing, contact, passing; one foot always on the floor), arms swing opposite the legs, the head and body dip a little on each contact; 4 cycles, then stops and turns back to front. Loop frames 3-50 (12-frame cycle = 2 steps per 0.4 s).",
+   "desc": "walk: normal steps (8 f a step, Rick median 7.5), knees bend as each foot swings through, arms swing gently opposite the legs, head turned 3/4 with the torso, a small head bob, no squash. Loop: frames 2-65 (16-frame cycle); the scene moves the character.",
    "evidence": [
-    "#12 f145-205 walk cycle (legs redrawn every frame, arms swing, one foot always down)",
-    "#23 f1352-1358 (lean, legs and arms swing, one measurer)",
-    "owner Nov 23 15:02Z: make a walking animation"
+    "#12 f145-205 walk (legs redrawn every 2 f, knees bend as the foot swings, arms hang with a small swing, no squash)",
+    "#23 f1352-1358 (lean, legs and arms swing)",
+    "guide: 23 Rick walk cadences, median 7.5 f per step; no squash and stretch on walks; bodies slide while legs cycle",
+    "owner Nov 23 10:49 AM CT: round-8 walk unnatural; vary stride by situation, better arms and legs"
    ],
    "events": [
     {
@@ -4939,78 +4940,54 @@
      "at": 0,
      "ch": "lean",
      "v": [
-      4,
-      2
+      2,
+      3
      ]
     },
     {
-     "at": 2,
+     "at": 1,
      "ch": "top",
      "v": "q"
     },
     {
-     "at": 3,
+     "at": 2,
      "ch": "legs",
-     "v": "walk1"
+     "v": "wknm0"
     },
     {
-     "at": 3,
-     "ch": "arm",
-     "v": [
-      "near",
-      "walk_in",
-      {
-       "inb": false
-      }
-     ]
+     "at": 2,
+     "ch": "swing",
+     "v": 10.0
     },
     {
-     "at": 3,
-     "ch": "arm",
-     "v": [
-      "far",
-      "walk_out",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 3,
+     "at": 2,
      "ch": "hdy",
-     "v": 0.008
+     "v": 0.004
     },
     {
-     "at": 3,
-     "ch": "squash",
-     "v": 0.012
+     "at": 4,
+     "ch": "legs",
+     "v": "wknm1"
+    },
+    {
+     "at": 4,
+     "ch": "swing",
+     "v": 7.07
+    },
+    {
+     "at": 4,
+     "ch": "hdy",
+     "v": 0.002
     },
     {
      "at": 6,
      "ch": "legs",
-     "v": "walk2"
+     "v": "wknm2"
     },
     {
      "at": 6,
-     "ch": "arm",
-     "v": [
-      "near",
-      "walk_mid",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 6,
-     "ch": "arm",
-     "v": [
-      "far",
-      "walk_mid",
-      {
-       "inb": false
-      }
-     ]
+     "ch": "swing",
+     "v": 0.0
     },
     {
      "at": 6,
@@ -5018,295 +4995,179 @@
      "v": 0.0
     },
     {
-     "at": 6,
-     "ch": "squash",
-     "v": 0.0
-    },
-    {
-     "at": 9,
+     "at": 8,
      "ch": "legs",
-     "v": "walk3"
+     "v": "wknm3"
     },
     {
-     "at": 9,
-     "ch": "arm",
-     "v": [
-      "near",
-      "walk_out",
-      {
-       "inb": false
-      }
-     ]
+     "at": 8,
+     "ch": "swing",
+     "v": -7.07
     },
     {
-     "at": 9,
-     "ch": "arm",
-     "v": [
-      "far",
-      "walk_in",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 9,
+     "at": 8,
      "ch": "hdy",
-     "v": 0.008
+     "v": 0.002
     },
     {
-     "at": 9,
-     "ch": "squash",
-     "v": 0.012
+     "at": 10,
+     "ch": "legs",
+     "v": "wknm4"
+    },
+    {
+     "at": 10,
+     "ch": "swing",
+     "v": -10.0
+    },
+    {
+     "at": 10,
+     "ch": "hdy",
+     "v": 0.004
     },
     {
      "at": 12,
      "ch": "legs",
-     "v": "walk4"
+     "v": "wknm5"
     },
     {
      "at": 12,
-     "ch": "arm",
-     "v": [
-      "near",
-      "walk_mid",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 12,
-     "ch": "arm",
-     "v": [
-      "far",
-      "walk_mid",
-      {
-       "inb": false
-      }
-     ]
+     "ch": "swing",
+     "v": -7.07
     },
     {
      "at": 12,
      "ch": "hdy",
-     "v": 0.0
+     "v": 0.002
     },
     {
-     "at": 12,
-     "ch": "squash",
-     "v": 0.0
-    },
-    {
-     "at": 15,
+     "at": 14,
      "ch": "legs",
-     "v": "walk1"
+     "v": "wknm6"
     },
     {
-     "at": 15,
-     "ch": "arm",
-     "v": [
-      "near",
-      "walk_in",
-      {
-       "inb": false
-      }
-     ]
+     "at": 14,
+     "ch": "swing",
+     "v": -0.0
     },
     {
-     "at": 15,
-     "ch": "arm",
-     "v": [
-      "far",
-      "walk_out",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 15,
-     "ch": "hdy",
-     "v": 0.008
-    },
-    {
-     "at": 15,
-     "ch": "squash",
-     "v": 0.012
-    },
-    {
-     "at": 18,
-     "ch": "legs",
-     "v": "walk2"
-    },
-    {
-     "at": 18,
-     "ch": "arm",
-     "v": [
-      "near",
-      "walk_mid",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 18,
-     "ch": "arm",
-     "v": [
-      "far",
-      "walk_mid",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 18,
+     "at": 14,
      "ch": "hdy",
      "v": 0.0
     },
     {
+     "at": 16,
+     "ch": "legs",
+     "v": "wknm7"
+    },
+    {
+     "at": 16,
+     "ch": "swing",
+     "v": 7.07
+    },
+    {
+     "at": 16,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
      "at": 18,
-     "ch": "squash",
+     "ch": "legs",
+     "v": "wknm0"
+    },
+    {
+     "at": 18,
+     "ch": "swing",
+     "v": 10.0
+    },
+    {
+     "at": 18,
+     "ch": "hdy",
+     "v": 0.004
+    },
+    {
+     "at": 20,
+     "ch": "legs",
+     "v": "wknm1"
+    },
+    {
+     "at": 20,
+     "ch": "swing",
+     "v": 7.07
+    },
+    {
+     "at": 20,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 22,
+     "ch": "legs",
+     "v": "wknm2"
+    },
+    {
+     "at": 22,
+     "ch": "swing",
      "v": 0.0
     },
     {
-     "at": 21,
-     "ch": "legs",
-     "v": "walk3"
-    },
-    {
-     "at": 21,
-     "ch": "arm",
-     "v": [
-      "near",
-      "walk_out",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 21,
-     "ch": "arm",
-     "v": [
-      "far",
-      "walk_in",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 21,
-     "ch": "hdy",
-     "v": 0.008
-    },
-    {
-     "at": 21,
-     "ch": "squash",
-     "v": 0.012
-    },
-    {
-     "at": 24,
-     "ch": "legs",
-     "v": "walk4"
-    },
-    {
-     "at": 24,
-     "ch": "arm",
-     "v": [
-      "near",
-      "walk_mid",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 24,
-     "ch": "arm",
-     "v": [
-      "far",
-      "walk_mid",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 24,
+     "at": 22,
      "ch": "hdy",
      "v": 0.0
     },
     {
      "at": 24,
-     "ch": "squash",
-     "v": 0.0
-    },
-    {
-     "at": 27,
      "ch": "legs",
-     "v": "walk1"
+     "v": "wknm3"
     },
     {
-     "at": 27,
-     "ch": "arm",
-     "v": [
-      "near",
-      "walk_in",
-      {
-       "inb": false
-      }
-     ]
+     "at": 24,
+     "ch": "swing",
+     "v": -7.07
     },
     {
-     "at": 27,
-     "ch": "arm",
-     "v": [
-      "far",
-      "walk_out",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 27,
+     "at": 24,
      "ch": "hdy",
-     "v": 0.008
+     "v": 0.002
     },
     {
-     "at": 27,
-     "ch": "squash",
-     "v": 0.012
+     "at": 26,
+     "ch": "legs",
+     "v": "wknm4"
+    },
+    {
+     "at": 26,
+     "ch": "swing",
+     "v": -10.0
+    },
+    {
+     "at": 26,
+     "ch": "hdy",
+     "v": 0.004
+    },
+    {
+     "at": 28,
+     "ch": "legs",
+     "v": "wknm5"
+    },
+    {
+     "at": 28,
+     "ch": "swing",
+     "v": -7.07
+    },
+    {
+     "at": 28,
+     "ch": "hdy",
+     "v": 0.002
     },
     {
      "at": 30,
      "ch": "legs",
-     "v": "walk2"
+     "v": "wknm6"
     },
     {
      "at": 30,
-     "ch": "arm",
-     "v": [
-      "near",
-      "walk_mid",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 30,
-     "ch": "arm",
-     "v": [
-      "far",
-      "walk_mid",
-      {
-       "inb": false
-      }
-     ]
+     "ch": "swing",
+     "v": -0.0
     },
     {
      "at": 30,
@@ -5314,290 +5175,2537 @@
      "v": 0.0
     },
     {
-     "at": 30,
-     "ch": "squash",
-     "v": 0.0
-    },
-    {
-     "at": 33,
+     "at": 32,
      "ch": "legs",
-     "v": "walk3"
+     "v": "wknm7"
     },
     {
-     "at": 33,
-     "ch": "arm",
-     "v": [
-      "near",
-      "walk_out",
-      {
-       "inb": false
-      }
-     ]
+     "at": 32,
+     "ch": "swing",
+     "v": 7.07
     },
     {
-     "at": 33,
-     "ch": "arm",
-     "v": [
-      "far",
-      "walk_in",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 33,
+     "at": 32,
      "ch": "hdy",
-     "v": 0.008
+     "v": 0.002
     },
     {
-     "at": 33,
-     "ch": "squash",
-     "v": 0.012
+     "at": 34,
+     "ch": "legs",
+     "v": "wknm0"
+    },
+    {
+     "at": 34,
+     "ch": "swing",
+     "v": 10.0
+    },
+    {
+     "at": 34,
+     "ch": "hdy",
+     "v": 0.004
     },
     {
      "at": 36,
      "ch": "legs",
-     "v": "walk4"
+     "v": "wknm1"
     },
     {
      "at": 36,
-     "ch": "arm",
-     "v": [
-      "near",
-      "walk_mid",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 36,
-     "ch": "arm",
-     "v": [
-      "far",
-      "walk_mid",
-      {
-       "inb": false
-      }
-     ]
+     "ch": "swing",
+     "v": 7.07
     },
     {
      "at": 36,
      "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 38,
+     "ch": "legs",
+     "v": "wknm2"
+    },
+    {
+     "at": 38,
+     "ch": "swing",
      "v": 0.0
     },
     {
-     "at": 36,
-     "ch": "squash",
-     "v": 0.0
-    },
-    {
-     "at": 39,
-     "ch": "legs",
-     "v": "walk1"
-    },
-    {
-     "at": 39,
-     "ch": "arm",
-     "v": [
-      "near",
-      "walk_in",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 39,
-     "ch": "arm",
-     "v": [
-      "far",
-      "walk_out",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 39,
-     "ch": "hdy",
-     "v": 0.008
-    },
-    {
-     "at": 39,
-     "ch": "squash",
-     "v": 0.012
-    },
-    {
-     "at": 42,
-     "ch": "legs",
-     "v": "walk2"
-    },
-    {
-     "at": 42,
-     "ch": "arm",
-     "v": [
-      "near",
-      "walk_mid",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 42,
-     "ch": "arm",
-     "v": [
-      "far",
-      "walk_mid",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 42,
+     "at": 38,
      "ch": "hdy",
      "v": 0.0
     },
     {
-     "at": 42,
-     "ch": "squash",
-     "v": 0.0
-    },
-    {
-     "at": 45,
+     "at": 40,
      "ch": "legs",
-     "v": "walk3"
+     "v": "wknm3"
     },
     {
-     "at": 45,
-     "ch": "arm",
-     "v": [
-      "near",
-      "walk_out",
-      {
-       "inb": false
-      }
-     ]
+     "at": 40,
+     "ch": "swing",
+     "v": -7.07
     },
     {
-     "at": 45,
-     "ch": "arm",
-     "v": [
-      "far",
-      "walk_in",
-      {
-       "inb": false
-      }
-     ]
-    },
-    {
-     "at": 45,
+     "at": 40,
      "ch": "hdy",
-     "v": 0.008
+     "v": 0.002
     },
     {
-     "at": 45,
-     "ch": "squash",
-     "v": 0.012
-    },
-    {
-     "at": 48,
+     "at": 42,
      "ch": "legs",
-     "v": "walk4"
+     "v": "wknm4"
     },
     {
-     "at": 48,
-     "ch": "arm",
-     "v": [
-      "near",
-      "walk_mid",
-      {
-       "inb": false
-      }
-     ]
+     "at": 42,
+     "ch": "swing",
+     "v": -10.0
     },
     {
-     "at": 48,
-     "ch": "arm",
-     "v": [
-      "far",
-      "walk_mid",
-      {
-       "inb": false
-      }
-     ]
+     "at": 42,
+     "ch": "hdy",
+     "v": 0.004
     },
     {
-     "at": 48,
+     "at": 44,
+     "ch": "legs",
+     "v": "wknm5"
+    },
+    {
+     "at": 44,
+     "ch": "swing",
+     "v": -7.07
+    },
+    {
+     "at": 44,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 46,
+     "ch": "legs",
+     "v": "wknm6"
+    },
+    {
+     "at": 46,
+     "ch": "swing",
+     "v": -0.0
+    },
+    {
+     "at": 46,
      "ch": "hdy",
      "v": 0.0
     },
     {
      "at": 48,
-     "ch": "squash",
+     "ch": "legs",
+     "v": "wknm7"
+    },
+    {
+     "at": 48,
+     "ch": "swing",
+     "v": 7.07
+    },
+    {
+     "at": 48,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 50,
+     "ch": "legs",
+     "v": "wknm0"
+    },
+    {
+     "at": 50,
+     "ch": "swing",
+     "v": 10.0
+    },
+    {
+     "at": 50,
+     "ch": "hdy",
+     "v": 0.004
+    },
+    {
+     "at": 52,
+     "ch": "legs",
+     "v": "wknm1"
+    },
+    {
+     "at": 52,
+     "ch": "swing",
+     "v": 7.07
+    },
+    {
+     "at": 52,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 54,
+     "ch": "legs",
+     "v": "wknm2"
+    },
+    {
+     "at": 54,
+     "ch": "swing",
      "v": 0.0
     },
     {
-     "at": 51,
+     "at": 54,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 56,
+     "ch": "legs",
+     "v": "wknm3"
+    },
+    {
+     "at": 56,
+     "ch": "swing",
+     "v": -7.07
+    },
+    {
+     "at": 56,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 58,
+     "ch": "legs",
+     "v": "wknm4"
+    },
+    {
+     "at": 58,
+     "ch": "swing",
+     "v": -10.0
+    },
+    {
+     "at": 58,
+     "ch": "hdy",
+     "v": 0.004
+    },
+    {
+     "at": 60,
+     "ch": "legs",
+     "v": "wknm5"
+    },
+    {
+     "at": 60,
+     "ch": "swing",
+     "v": -7.07
+    },
+    {
+     "at": 60,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 62,
+     "ch": "legs",
+     "v": "wknm6"
+    },
+    {
+     "at": 62,
+     "ch": "swing",
+     "v": -0.0
+    },
+    {
+     "at": 62,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 64,
+     "ch": "legs",
+     "v": "wknm7"
+    },
+    {
+     "at": 64,
+     "ch": "swing",
+     "v": 7.07
+    },
+    {
+     "at": 64,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 66,
      "ch": "legs",
      "v": "body"
     },
     {
-     "at": 51,
-     "ch": "arm",
-     "v": [
-      "near",
-      "hang"
-     ]
+     "at": 66,
+     "ch": "swing",
+     "v": 0.0
     },
     {
-     "at": 51,
-     "ch": "arm",
-     "v": [
-      "far",
-      "hang"
-     ]
-    },
-    {
-     "at": 51,
+     "at": 66,
      "ch": "hdy",
      "v": 0.0
     },
     {
-     "at": 51,
-     "ch": "squash",
-     "v": 0.0
+     "at": 66,
+     "ch": "lean",
+     "v": [
+      0,
+      3
+     ]
     },
     {
-     "at": 52,
+     "at": 67,
      "ch": "top",
      "v": "front"
     },
     {
-     "at": 52,
+     "at": 67,
      "ch": "turn",
      "v": [
       2,
       0
      ]
+    }
+   ],
+   "status": "INFERRED",
+   "round": 9,
+   "legs": "walk cycle v2 (continuous)",
+   "loop": 16,
+   "loop_start": 2,
+   "previous_r8": {
+    "desc": "walk in place (the scene moves the character): head turns 3/4 and the torso turns 3/4 toward the walk side, four leg drawings 3 frames each (contact, passing, contact, passing; one foot always on the floor), arms swing opposite the legs, the head and body dip a little on each contact; 4 cycles, then stops and turns back to front. Loop frames 3-50 (12-frame cycle = 2 steps per 0.4 s).",
+    "events": [
+     {
+      "at": 0,
+      "ch": "face",
+      "v": "$face"
+     },
+     {
+      "at": 0,
+      "ch": "turn",
+      "v": [
+       0,
+       2
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "lean",
+      "v": [
+       4,
+       2
+      ]
+     },
+     {
+      "at": 2,
+      "ch": "top",
+      "v": "q"
+     },
+     {
+      "at": 3,
+      "ch": "legs",
+      "v": "walk1"
+     },
+     {
+      "at": 3,
+      "ch": "arm",
+      "v": [
+       "near",
+       "walk_in",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 3,
+      "ch": "arm",
+      "v": [
+       "far",
+       "walk_out",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 3,
+      "ch": "hdy",
+      "v": 0.008
+     },
+     {
+      "at": 3,
+      "ch": "squash",
+      "v": 0.012
+     },
+     {
+      "at": 6,
+      "ch": "legs",
+      "v": "walk2"
+     },
+     {
+      "at": 6,
+      "ch": "arm",
+      "v": [
+       "near",
+       "walk_mid",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 6,
+      "ch": "arm",
+      "v": [
+       "far",
+       "walk_mid",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 6,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 6,
+      "ch": "squash",
+      "v": 0.0
+     },
+     {
+      "at": 9,
+      "ch": "legs",
+      "v": "walk3"
+     },
+     {
+      "at": 9,
+      "ch": "arm",
+      "v": [
+       "near",
+       "walk_out",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 9,
+      "ch": "arm",
+      "v": [
+       "far",
+       "walk_in",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 9,
+      "ch": "hdy",
+      "v": 0.008
+     },
+     {
+      "at": 9,
+      "ch": "squash",
+      "v": 0.012
+     },
+     {
+      "at": 12,
+      "ch": "legs",
+      "v": "walk4"
+     },
+     {
+      "at": 12,
+      "ch": "arm",
+      "v": [
+       "near",
+       "walk_mid",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 12,
+      "ch": "arm",
+      "v": [
+       "far",
+       "walk_mid",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 12,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 12,
+      "ch": "squash",
+      "v": 0.0
+     },
+     {
+      "at": 15,
+      "ch": "legs",
+      "v": "walk1"
+     },
+     {
+      "at": 15,
+      "ch": "arm",
+      "v": [
+       "near",
+       "walk_in",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 15,
+      "ch": "arm",
+      "v": [
+       "far",
+       "walk_out",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 15,
+      "ch": "hdy",
+      "v": 0.008
+     },
+     {
+      "at": 15,
+      "ch": "squash",
+      "v": 0.012
+     },
+     {
+      "at": 18,
+      "ch": "legs",
+      "v": "walk2"
+     },
+     {
+      "at": 18,
+      "ch": "arm",
+      "v": [
+       "near",
+       "walk_mid",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 18,
+      "ch": "arm",
+      "v": [
+       "far",
+       "walk_mid",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 18,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 18,
+      "ch": "squash",
+      "v": 0.0
+     },
+     {
+      "at": 21,
+      "ch": "legs",
+      "v": "walk3"
+     },
+     {
+      "at": 21,
+      "ch": "arm",
+      "v": [
+       "near",
+       "walk_out",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 21,
+      "ch": "arm",
+      "v": [
+       "far",
+       "walk_in",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 21,
+      "ch": "hdy",
+      "v": 0.008
+     },
+     {
+      "at": 21,
+      "ch": "squash",
+      "v": 0.012
+     },
+     {
+      "at": 24,
+      "ch": "legs",
+      "v": "walk4"
+     },
+     {
+      "at": 24,
+      "ch": "arm",
+      "v": [
+       "near",
+       "walk_mid",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "arm",
+      "v": [
+       "far",
+       "walk_mid",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 24,
+      "ch": "squash",
+      "v": 0.0
+     },
+     {
+      "at": 27,
+      "ch": "legs",
+      "v": "walk1"
+     },
+     {
+      "at": 27,
+      "ch": "arm",
+      "v": [
+       "near",
+       "walk_in",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 27,
+      "ch": "arm",
+      "v": [
+       "far",
+       "walk_out",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 27,
+      "ch": "hdy",
+      "v": 0.008
+     },
+     {
+      "at": 27,
+      "ch": "squash",
+      "v": 0.012
+     },
+     {
+      "at": 30,
+      "ch": "legs",
+      "v": "walk2"
+     },
+     {
+      "at": 30,
+      "ch": "arm",
+      "v": [
+       "near",
+       "walk_mid",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 30,
+      "ch": "arm",
+      "v": [
+       "far",
+       "walk_mid",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 30,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 30,
+      "ch": "squash",
+      "v": 0.0
+     },
+     {
+      "at": 33,
+      "ch": "legs",
+      "v": "walk3"
+     },
+     {
+      "at": 33,
+      "ch": "arm",
+      "v": [
+       "near",
+       "walk_out",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 33,
+      "ch": "arm",
+      "v": [
+       "far",
+       "walk_in",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 33,
+      "ch": "hdy",
+      "v": 0.008
+     },
+     {
+      "at": 33,
+      "ch": "squash",
+      "v": 0.012
+     },
+     {
+      "at": 36,
+      "ch": "legs",
+      "v": "walk4"
+     },
+     {
+      "at": 36,
+      "ch": "arm",
+      "v": [
+       "near",
+       "walk_mid",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 36,
+      "ch": "arm",
+      "v": [
+       "far",
+       "walk_mid",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 36,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 36,
+      "ch": "squash",
+      "v": 0.0
+     },
+     {
+      "at": 39,
+      "ch": "legs",
+      "v": "walk1"
+     },
+     {
+      "at": 39,
+      "ch": "arm",
+      "v": [
+       "near",
+       "walk_in",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 39,
+      "ch": "arm",
+      "v": [
+       "far",
+       "walk_out",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 39,
+      "ch": "hdy",
+      "v": 0.008
+     },
+     {
+      "at": 39,
+      "ch": "squash",
+      "v": 0.012
+     },
+     {
+      "at": 42,
+      "ch": "legs",
+      "v": "walk2"
+     },
+     {
+      "at": 42,
+      "ch": "arm",
+      "v": [
+       "near",
+       "walk_mid",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 42,
+      "ch": "arm",
+      "v": [
+       "far",
+       "walk_mid",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 42,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 42,
+      "ch": "squash",
+      "v": 0.0
+     },
+     {
+      "at": 45,
+      "ch": "legs",
+      "v": "walk3"
+     },
+     {
+      "at": 45,
+      "ch": "arm",
+      "v": [
+       "near",
+       "walk_out",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 45,
+      "ch": "arm",
+      "v": [
+       "far",
+       "walk_in",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 45,
+      "ch": "hdy",
+      "v": 0.008
+     },
+     {
+      "at": 45,
+      "ch": "squash",
+      "v": 0.012
+     },
+     {
+      "at": 48,
+      "ch": "legs",
+      "v": "walk4"
+     },
+     {
+      "at": 48,
+      "ch": "arm",
+      "v": [
+       "near",
+       "walk_mid",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 48,
+      "ch": "arm",
+      "v": [
+       "far",
+       "walk_mid",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 48,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 48,
+      "ch": "squash",
+      "v": 0.0
+     },
+     {
+      "at": 51,
+      "ch": "legs",
+      "v": "body"
+     },
+     {
+      "at": 51,
+      "ch": "arm",
+      "v": [
+       "near",
+       "hang"
+      ]
+     },
+     {
+      "at": 51,
+      "ch": "arm",
+      "v": [
+       "far",
+       "hang"
+      ]
+     },
+     {
+      "at": 51,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 51,
+      "ch": "squash",
+      "v": 0.0
+     },
+     {
+      "at": 52,
+      "ch": "top",
+      "v": "front"
+     },
+     {
+      "at": 52,
+      "ch": "turn",
+      "v": [
+       2,
+       0
+      ]
+     },
+     {
+      "at": 52,
+      "ch": "lean",
+      "v": [
+       0,
+       2
+      ]
+     }
+    ]
+   },
+   "walk_style": "nm"
+  },
+  "walk_stroll": {
+   "desc": "stroll: short steps (10 f a step), feet barely lift, arms hang with a small swing, upright; for an easy amble or chatting while walking. Loop: frames 2-61 (20-frame cycle); the scene moves the character.",
+   "events": [
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
     },
     {
-     "at": 52,
-     "ch": "lean",
+     "at": 0,
+     "ch": "turn",
      "v": [
       0,
       2
      ]
+    },
+    {
+     "at": 1,
+     "ch": "top",
+     "v": "q"
+    },
+    {
+     "at": 2,
+     "ch": "legs",
+     "v": "wkst0"
+    },
+    {
+     "at": 2,
+     "ch": "swing",
+     "v": 6.0
+    },
+    {
+     "at": 2,
+     "ch": "hdy",
+     "v": 0.003
+    },
+    {
+     "at": 4,
+     "ch": "legs",
+     "v": "wkst1"
+    },
+    {
+     "at": 4,
+     "ch": "swing",
+     "v": 4.85
+    },
+    {
+     "at": 4,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 6,
+     "ch": "legs",
+     "v": "wkst2"
+    },
+    {
+     "at": 6,
+     "ch": "swing",
+     "v": 1.85
+    },
+    {
+     "at": 6,
+     "ch": "hdy",
+     "v": 0.0003
+    },
+    {
+     "at": 8,
+     "ch": "legs",
+     "v": "wkst3"
+    },
+    {
+     "at": 8,
+     "ch": "swing",
+     "v": -1.85
+    },
+    {
+     "at": 8,
+     "ch": "hdy",
+     "v": 0.0003
+    },
+    {
+     "at": 10,
+     "ch": "legs",
+     "v": "wkst4"
+    },
+    {
+     "at": 10,
+     "ch": "swing",
+     "v": -4.85
+    },
+    {
+     "at": 10,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 12,
+     "ch": "legs",
+     "v": "wkst5"
+    },
+    {
+     "at": 12,
+     "ch": "swing",
+     "v": -6.0
+    },
+    {
+     "at": 12,
+     "ch": "hdy",
+     "v": 0.003
+    },
+    {
+     "at": 14,
+     "ch": "legs",
+     "v": "wkst6"
+    },
+    {
+     "at": 14,
+     "ch": "swing",
+     "v": -4.85
+    },
+    {
+     "at": 14,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 16,
+     "ch": "legs",
+     "v": "wkst7"
+    },
+    {
+     "at": 16,
+     "ch": "swing",
+     "v": -1.85
+    },
+    {
+     "at": 16,
+     "ch": "hdy",
+     "v": 0.0003
+    },
+    {
+     "at": 18,
+     "ch": "legs",
+     "v": "wkst8"
+    },
+    {
+     "at": 18,
+     "ch": "swing",
+     "v": 1.85
+    },
+    {
+     "at": 18,
+     "ch": "hdy",
+     "v": 0.0003
+    },
+    {
+     "at": 20,
+     "ch": "legs",
+     "v": "wkst9"
+    },
+    {
+     "at": 20,
+     "ch": "swing",
+     "v": 4.85
+    },
+    {
+     "at": 20,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 22,
+     "ch": "legs",
+     "v": "wkst0"
+    },
+    {
+     "at": 22,
+     "ch": "swing",
+     "v": 6.0
+    },
+    {
+     "at": 22,
+     "ch": "hdy",
+     "v": 0.003
+    },
+    {
+     "at": 24,
+     "ch": "legs",
+     "v": "wkst1"
+    },
+    {
+     "at": 24,
+     "ch": "swing",
+     "v": 4.85
+    },
+    {
+     "at": 24,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 26,
+     "ch": "legs",
+     "v": "wkst2"
+    },
+    {
+     "at": 26,
+     "ch": "swing",
+     "v": 1.85
+    },
+    {
+     "at": 26,
+     "ch": "hdy",
+     "v": 0.0003
+    },
+    {
+     "at": 28,
+     "ch": "legs",
+     "v": "wkst3"
+    },
+    {
+     "at": 28,
+     "ch": "swing",
+     "v": -1.85
+    },
+    {
+     "at": 28,
+     "ch": "hdy",
+     "v": 0.0003
+    },
+    {
+     "at": 30,
+     "ch": "legs",
+     "v": "wkst4"
+    },
+    {
+     "at": 30,
+     "ch": "swing",
+     "v": -4.85
+    },
+    {
+     "at": 30,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 32,
+     "ch": "legs",
+     "v": "wkst5"
+    },
+    {
+     "at": 32,
+     "ch": "swing",
+     "v": -6.0
+    },
+    {
+     "at": 32,
+     "ch": "hdy",
+     "v": 0.003
+    },
+    {
+     "at": 34,
+     "ch": "legs",
+     "v": "wkst6"
+    },
+    {
+     "at": 34,
+     "ch": "swing",
+     "v": -4.85
+    },
+    {
+     "at": 34,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 36,
+     "ch": "legs",
+     "v": "wkst7"
+    },
+    {
+     "at": 36,
+     "ch": "swing",
+     "v": -1.85
+    },
+    {
+     "at": 36,
+     "ch": "hdy",
+     "v": 0.0003
+    },
+    {
+     "at": 38,
+     "ch": "legs",
+     "v": "wkst8"
+    },
+    {
+     "at": 38,
+     "ch": "swing",
+     "v": 1.85
+    },
+    {
+     "at": 38,
+     "ch": "hdy",
+     "v": 0.0003
+    },
+    {
+     "at": 40,
+     "ch": "legs",
+     "v": "wkst9"
+    },
+    {
+     "at": 40,
+     "ch": "swing",
+     "v": 4.85
+    },
+    {
+     "at": 40,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 42,
+     "ch": "legs",
+     "v": "wkst0"
+    },
+    {
+     "at": 42,
+     "ch": "swing",
+     "v": 6.0
+    },
+    {
+     "at": 42,
+     "ch": "hdy",
+     "v": 0.003
+    },
+    {
+     "at": 44,
+     "ch": "legs",
+     "v": "wkst1"
+    },
+    {
+     "at": 44,
+     "ch": "swing",
+     "v": 4.85
+    },
+    {
+     "at": 44,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 46,
+     "ch": "legs",
+     "v": "wkst2"
+    },
+    {
+     "at": 46,
+     "ch": "swing",
+     "v": 1.85
+    },
+    {
+     "at": 46,
+     "ch": "hdy",
+     "v": 0.0003
+    },
+    {
+     "at": 48,
+     "ch": "legs",
+     "v": "wkst3"
+    },
+    {
+     "at": 48,
+     "ch": "swing",
+     "v": -1.85
+    },
+    {
+     "at": 48,
+     "ch": "hdy",
+     "v": 0.0003
+    },
+    {
+     "at": 50,
+     "ch": "legs",
+     "v": "wkst4"
+    },
+    {
+     "at": 50,
+     "ch": "swing",
+     "v": -4.85
+    },
+    {
+     "at": 50,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 52,
+     "ch": "legs",
+     "v": "wkst5"
+    },
+    {
+     "at": 52,
+     "ch": "swing",
+     "v": -6.0
+    },
+    {
+     "at": 52,
+     "ch": "hdy",
+     "v": 0.003
+    },
+    {
+     "at": 54,
+     "ch": "legs",
+     "v": "wkst6"
+    },
+    {
+     "at": 54,
+     "ch": "swing",
+     "v": -4.85
+    },
+    {
+     "at": 54,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 56,
+     "ch": "legs",
+     "v": "wkst7"
+    },
+    {
+     "at": 56,
+     "ch": "swing",
+     "v": -1.85
+    },
+    {
+     "at": 56,
+     "ch": "hdy",
+     "v": 0.0003
+    },
+    {
+     "at": 58,
+     "ch": "legs",
+     "v": "wkst8"
+    },
+    {
+     "at": 58,
+     "ch": "swing",
+     "v": 1.85
+    },
+    {
+     "at": 58,
+     "ch": "hdy",
+     "v": 0.0003
+    },
+    {
+     "at": 60,
+     "ch": "legs",
+     "v": "wkst9"
+    },
+    {
+     "at": 60,
+     "ch": "swing",
+     "v": 4.85
+    },
+    {
+     "at": 60,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 62,
+     "ch": "legs",
+     "v": "body"
+    },
+    {
+     "at": 62,
+     "ch": "swing",
+     "v": 0.0
+    },
+    {
+     "at": 62,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 63,
+     "ch": "top",
+     "v": "front"
+    },
+    {
+     "at": 63,
+     "ch": "turn",
+     "v": [
+      2,
+      0
+     ]
     }
    ],
    "status": "INFERRED",
-   "round": 8,
-   "legs": "walk cycle",
+   "round": 9,
+   "legs": "walk cycle v2 (continuous)",
+   "loop": 20,
+   "loop_start": 2,
+   "evidence": [
+    "#12 f145-205 walk (legs redrawn every 2 f, knees bend as the foot swings, arms hang with a small swing, no squash)",
+    "#23 f1352-1358 (lean, legs and arms swing)",
+    "guide: 23 Rick walk cadences, median 7.5 f per step; no squash and stretch on walks; bodies slide while legs cycle",
+    "owner Nov 23 10:49 AM CT: round-8 walk unnatural; vary stride by situation, better arms and legs"
+   ],
+   "walk_style": "st"
+  },
+  "walk_brisk": {
+   "desc": "brisk walk: long quick steps (6 f a step), higher knee lift, bigger arm swing, leaning forward 6 deg; for someone in a hurry. Loop: frames 2-61 (12-frame cycle); the scene moves the character.",
+   "events": [
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 0,
+     "ch": "turn",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "lean",
+     "v": [
+      6,
+      3
+     ]
+    },
+    {
+     "at": 1,
+     "ch": "top",
+     "v": "q"
+    },
+    {
+     "at": 2,
+     "ch": "legs",
+     "v": "wkbr0"
+    },
+    {
+     "at": 2,
+     "ch": "swing",
+     "v": 16.0
+    },
+    {
+     "at": 2,
+     "ch": "hdy",
+     "v": 0.005
+    },
+    {
+     "at": 4,
+     "ch": "legs",
+     "v": "wkbr1"
+    },
+    {
+     "at": 4,
+     "ch": "swing",
+     "v": 8.0
+    },
+    {
+     "at": 4,
+     "ch": "hdy",
+     "v": 0.0013
+    },
+    {
+     "at": 6,
+     "ch": "legs",
+     "v": "wkbr2"
+    },
+    {
+     "at": 6,
+     "ch": "swing",
+     "v": -8.0
+    },
+    {
+     "at": 6,
+     "ch": "hdy",
+     "v": 0.0012
+    },
+    {
+     "at": 8,
+     "ch": "legs",
+     "v": "wkbr3"
+    },
+    {
+     "at": 8,
+     "ch": "swing",
+     "v": -16.0
+    },
+    {
+     "at": 8,
+     "ch": "hdy",
+     "v": 0.005
+    },
+    {
+     "at": 10,
+     "ch": "legs",
+     "v": "wkbr4"
+    },
+    {
+     "at": 10,
+     "ch": "swing",
+     "v": -8.0
+    },
+    {
+     "at": 10,
+     "ch": "hdy",
+     "v": 0.0013
+    },
+    {
+     "at": 12,
+     "ch": "legs",
+     "v": "wkbr5"
+    },
+    {
+     "at": 12,
+     "ch": "swing",
+     "v": 8.0
+    },
+    {
+     "at": 12,
+     "ch": "hdy",
+     "v": 0.0013
+    },
+    {
+     "at": 14,
+     "ch": "legs",
+     "v": "wkbr0"
+    },
+    {
+     "at": 14,
+     "ch": "swing",
+     "v": 16.0
+    },
+    {
+     "at": 14,
+     "ch": "hdy",
+     "v": 0.005
+    },
+    {
+     "at": 16,
+     "ch": "legs",
+     "v": "wkbr1"
+    },
+    {
+     "at": 16,
+     "ch": "swing",
+     "v": 8.0
+    },
+    {
+     "at": 16,
+     "ch": "hdy",
+     "v": 0.0013
+    },
+    {
+     "at": 18,
+     "ch": "legs",
+     "v": "wkbr2"
+    },
+    {
+     "at": 18,
+     "ch": "swing",
+     "v": -8.0
+    },
+    {
+     "at": 18,
+     "ch": "hdy",
+     "v": 0.0012
+    },
+    {
+     "at": 20,
+     "ch": "legs",
+     "v": "wkbr3"
+    },
+    {
+     "at": 20,
+     "ch": "swing",
+     "v": -16.0
+    },
+    {
+     "at": 20,
+     "ch": "hdy",
+     "v": 0.005
+    },
+    {
+     "at": 22,
+     "ch": "legs",
+     "v": "wkbr4"
+    },
+    {
+     "at": 22,
+     "ch": "swing",
+     "v": -8.0
+    },
+    {
+     "at": 22,
+     "ch": "hdy",
+     "v": 0.0013
+    },
+    {
+     "at": 24,
+     "ch": "legs",
+     "v": "wkbr5"
+    },
+    {
+     "at": 24,
+     "ch": "swing",
+     "v": 8.0
+    },
+    {
+     "at": 24,
+     "ch": "hdy",
+     "v": 0.0013
+    },
+    {
+     "at": 26,
+     "ch": "legs",
+     "v": "wkbr0"
+    },
+    {
+     "at": 26,
+     "ch": "swing",
+     "v": 16.0
+    },
+    {
+     "at": 26,
+     "ch": "hdy",
+     "v": 0.005
+    },
+    {
+     "at": 28,
+     "ch": "legs",
+     "v": "wkbr1"
+    },
+    {
+     "at": 28,
+     "ch": "swing",
+     "v": 8.0
+    },
+    {
+     "at": 28,
+     "ch": "hdy",
+     "v": 0.0013
+    },
+    {
+     "at": 30,
+     "ch": "legs",
+     "v": "wkbr2"
+    },
+    {
+     "at": 30,
+     "ch": "swing",
+     "v": -8.0
+    },
+    {
+     "at": 30,
+     "ch": "hdy",
+     "v": 0.0012
+    },
+    {
+     "at": 32,
+     "ch": "legs",
+     "v": "wkbr3"
+    },
+    {
+     "at": 32,
+     "ch": "swing",
+     "v": -16.0
+    },
+    {
+     "at": 32,
+     "ch": "hdy",
+     "v": 0.005
+    },
+    {
+     "at": 34,
+     "ch": "legs",
+     "v": "wkbr4"
+    },
+    {
+     "at": 34,
+     "ch": "swing",
+     "v": -8.0
+    },
+    {
+     "at": 34,
+     "ch": "hdy",
+     "v": 0.0013
+    },
+    {
+     "at": 36,
+     "ch": "legs",
+     "v": "wkbr5"
+    },
+    {
+     "at": 36,
+     "ch": "swing",
+     "v": 8.0
+    },
+    {
+     "at": 36,
+     "ch": "hdy",
+     "v": 0.0013
+    },
+    {
+     "at": 38,
+     "ch": "legs",
+     "v": "wkbr0"
+    },
+    {
+     "at": 38,
+     "ch": "swing",
+     "v": 16.0
+    },
+    {
+     "at": 38,
+     "ch": "hdy",
+     "v": 0.005
+    },
+    {
+     "at": 40,
+     "ch": "legs",
+     "v": "wkbr1"
+    },
+    {
+     "at": 40,
+     "ch": "swing",
+     "v": 8.0
+    },
+    {
+     "at": 40,
+     "ch": "hdy",
+     "v": 0.0013
+    },
+    {
+     "at": 42,
+     "ch": "legs",
+     "v": "wkbr2"
+    },
+    {
+     "at": 42,
+     "ch": "swing",
+     "v": -8.0
+    },
+    {
+     "at": 42,
+     "ch": "hdy",
+     "v": 0.0012
+    },
+    {
+     "at": 44,
+     "ch": "legs",
+     "v": "wkbr3"
+    },
+    {
+     "at": 44,
+     "ch": "swing",
+     "v": -16.0
+    },
+    {
+     "at": 44,
+     "ch": "hdy",
+     "v": 0.005
+    },
+    {
+     "at": 46,
+     "ch": "legs",
+     "v": "wkbr4"
+    },
+    {
+     "at": 46,
+     "ch": "swing",
+     "v": -8.0
+    },
+    {
+     "at": 46,
+     "ch": "hdy",
+     "v": 0.0013
+    },
+    {
+     "at": 48,
+     "ch": "legs",
+     "v": "wkbr5"
+    },
+    {
+     "at": 48,
+     "ch": "swing",
+     "v": 8.0
+    },
+    {
+     "at": 48,
+     "ch": "hdy",
+     "v": 0.0013
+    },
+    {
+     "at": 50,
+     "ch": "legs",
+     "v": "wkbr0"
+    },
+    {
+     "at": 50,
+     "ch": "swing",
+     "v": 16.0
+    },
+    {
+     "at": 50,
+     "ch": "hdy",
+     "v": 0.005
+    },
+    {
+     "at": 52,
+     "ch": "legs",
+     "v": "wkbr1"
+    },
+    {
+     "at": 52,
+     "ch": "swing",
+     "v": 8.0
+    },
+    {
+     "at": 52,
+     "ch": "hdy",
+     "v": 0.0013
+    },
+    {
+     "at": 54,
+     "ch": "legs",
+     "v": "wkbr2"
+    },
+    {
+     "at": 54,
+     "ch": "swing",
+     "v": -8.0
+    },
+    {
+     "at": 54,
+     "ch": "hdy",
+     "v": 0.0012
+    },
+    {
+     "at": 56,
+     "ch": "legs",
+     "v": "wkbr3"
+    },
+    {
+     "at": 56,
+     "ch": "swing",
+     "v": -16.0
+    },
+    {
+     "at": 56,
+     "ch": "hdy",
+     "v": 0.005
+    },
+    {
+     "at": 58,
+     "ch": "legs",
+     "v": "wkbr4"
+    },
+    {
+     "at": 58,
+     "ch": "swing",
+     "v": -8.0
+    },
+    {
+     "at": 58,
+     "ch": "hdy",
+     "v": 0.0013
+    },
+    {
+     "at": 60,
+     "ch": "legs",
+     "v": "wkbr5"
+    },
+    {
+     "at": 60,
+     "ch": "swing",
+     "v": 8.0
+    },
+    {
+     "at": 60,
+     "ch": "hdy",
+     "v": 0.0013
+    },
+    {
+     "at": 62,
+     "ch": "legs",
+     "v": "body"
+    },
+    {
+     "at": 62,
+     "ch": "swing",
+     "v": 0.0
+    },
+    {
+     "at": 62,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 62,
+     "ch": "lean",
+     "v": [
+      0,
+      3
+     ]
+    },
+    {
+     "at": 63,
+     "ch": "top",
+     "v": "front"
+    },
+    {
+     "at": 63,
+     "ch": "turn",
+     "v": [
+      2,
+      0
+     ]
+    }
+   ],
+   "status": "INFERRED",
+   "round": 9,
+   "legs": "walk cycle v2 (continuous)",
    "loop": 12,
-   "loop_start": 3
+   "loop_start": 2,
+   "evidence": [
+    "#12 f145-205 walk (legs redrawn every 2 f, knees bend as the foot swings, arms hang with a small swing, no squash)",
+    "#23 f1352-1358 (lean, legs and arms swing)",
+    "guide: 23 Rick walk cadences, median 7.5 f per step; no squash and stretch on walks; bodies slide while legs cycle",
+    "owner Nov 23 10:49 AM CT: round-8 walk unnatural; vary stride by situation, better arms and legs"
+   ],
+   "walk_style": "br"
+  },
+  "walk_toward": {
+   "desc": "walk toward the camera (Rick #12 f145-205): front body, knees bow out as each foot lifts, arms hang with a small swing. Loop: frames 2-65 (16-frame cycle); the scene moves the character.",
+   "events": [
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 2,
+     "ch": "legs",
+     "v": "wkFnm0"
+    },
+    {
+     "at": 2,
+     "ch": "swing",
+     "v": 7.0
+    },
+    {
+     "at": 2,
+     "ch": "hdy",
+     "v": 0.004
+    },
+    {
+     "at": 4,
+     "ch": "legs",
+     "v": "wkFnm1"
+    },
+    {
+     "at": 4,
+     "ch": "swing",
+     "v": 4.95
+    },
+    {
+     "at": 4,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 6,
+     "ch": "legs",
+     "v": "wkFnm2"
+    },
+    {
+     "at": 6,
+     "ch": "swing",
+     "v": 0.0
+    },
+    {
+     "at": 6,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 8,
+     "ch": "legs",
+     "v": "wkFnm3"
+    },
+    {
+     "at": 8,
+     "ch": "swing",
+     "v": -4.95
+    },
+    {
+     "at": 8,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 10,
+     "ch": "legs",
+     "v": "wkFnm4"
+    },
+    {
+     "at": 10,
+     "ch": "swing",
+     "v": -7.0
+    },
+    {
+     "at": 10,
+     "ch": "hdy",
+     "v": 0.004
+    },
+    {
+     "at": 12,
+     "ch": "legs",
+     "v": "wkFnm5"
+    },
+    {
+     "at": 12,
+     "ch": "swing",
+     "v": -4.95
+    },
+    {
+     "at": 12,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 14,
+     "ch": "legs",
+     "v": "wkFnm6"
+    },
+    {
+     "at": 14,
+     "ch": "swing",
+     "v": -0.0
+    },
+    {
+     "at": 14,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 16,
+     "ch": "legs",
+     "v": "wkFnm7"
+    },
+    {
+     "at": 16,
+     "ch": "swing",
+     "v": 4.95
+    },
+    {
+     "at": 16,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 18,
+     "ch": "legs",
+     "v": "wkFnm0"
+    },
+    {
+     "at": 18,
+     "ch": "swing",
+     "v": 7.0
+    },
+    {
+     "at": 18,
+     "ch": "hdy",
+     "v": 0.004
+    },
+    {
+     "at": 20,
+     "ch": "legs",
+     "v": "wkFnm1"
+    },
+    {
+     "at": 20,
+     "ch": "swing",
+     "v": 4.95
+    },
+    {
+     "at": 20,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 22,
+     "ch": "legs",
+     "v": "wkFnm2"
+    },
+    {
+     "at": 22,
+     "ch": "swing",
+     "v": 0.0
+    },
+    {
+     "at": 22,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 24,
+     "ch": "legs",
+     "v": "wkFnm3"
+    },
+    {
+     "at": 24,
+     "ch": "swing",
+     "v": -4.95
+    },
+    {
+     "at": 24,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 26,
+     "ch": "legs",
+     "v": "wkFnm4"
+    },
+    {
+     "at": 26,
+     "ch": "swing",
+     "v": -7.0
+    },
+    {
+     "at": 26,
+     "ch": "hdy",
+     "v": 0.004
+    },
+    {
+     "at": 28,
+     "ch": "legs",
+     "v": "wkFnm5"
+    },
+    {
+     "at": 28,
+     "ch": "swing",
+     "v": -4.95
+    },
+    {
+     "at": 28,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 30,
+     "ch": "legs",
+     "v": "wkFnm6"
+    },
+    {
+     "at": 30,
+     "ch": "swing",
+     "v": -0.0
+    },
+    {
+     "at": 30,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 32,
+     "ch": "legs",
+     "v": "wkFnm7"
+    },
+    {
+     "at": 32,
+     "ch": "swing",
+     "v": 4.95
+    },
+    {
+     "at": 32,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 34,
+     "ch": "legs",
+     "v": "wkFnm0"
+    },
+    {
+     "at": 34,
+     "ch": "swing",
+     "v": 7.0
+    },
+    {
+     "at": 34,
+     "ch": "hdy",
+     "v": 0.004
+    },
+    {
+     "at": 36,
+     "ch": "legs",
+     "v": "wkFnm1"
+    },
+    {
+     "at": 36,
+     "ch": "swing",
+     "v": 4.95
+    },
+    {
+     "at": 36,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 38,
+     "ch": "legs",
+     "v": "wkFnm2"
+    },
+    {
+     "at": 38,
+     "ch": "swing",
+     "v": 0.0
+    },
+    {
+     "at": 38,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 40,
+     "ch": "legs",
+     "v": "wkFnm3"
+    },
+    {
+     "at": 40,
+     "ch": "swing",
+     "v": -4.95
+    },
+    {
+     "at": 40,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 42,
+     "ch": "legs",
+     "v": "wkFnm4"
+    },
+    {
+     "at": 42,
+     "ch": "swing",
+     "v": -7.0
+    },
+    {
+     "at": 42,
+     "ch": "hdy",
+     "v": 0.004
+    },
+    {
+     "at": 44,
+     "ch": "legs",
+     "v": "wkFnm5"
+    },
+    {
+     "at": 44,
+     "ch": "swing",
+     "v": -4.95
+    },
+    {
+     "at": 44,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 46,
+     "ch": "legs",
+     "v": "wkFnm6"
+    },
+    {
+     "at": 46,
+     "ch": "swing",
+     "v": -0.0
+    },
+    {
+     "at": 46,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 48,
+     "ch": "legs",
+     "v": "wkFnm7"
+    },
+    {
+     "at": 48,
+     "ch": "swing",
+     "v": 4.95
+    },
+    {
+     "at": 48,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 50,
+     "ch": "legs",
+     "v": "wkFnm0"
+    },
+    {
+     "at": 50,
+     "ch": "swing",
+     "v": 7.0
+    },
+    {
+     "at": 50,
+     "ch": "hdy",
+     "v": 0.004
+    },
+    {
+     "at": 52,
+     "ch": "legs",
+     "v": "wkFnm1"
+    },
+    {
+     "at": 52,
+     "ch": "swing",
+     "v": 4.95
+    },
+    {
+     "at": 52,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 54,
+     "ch": "legs",
+     "v": "wkFnm2"
+    },
+    {
+     "at": 54,
+     "ch": "swing",
+     "v": 0.0
+    },
+    {
+     "at": 54,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 56,
+     "ch": "legs",
+     "v": "wkFnm3"
+    },
+    {
+     "at": 56,
+     "ch": "swing",
+     "v": -4.95
+    },
+    {
+     "at": 56,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 58,
+     "ch": "legs",
+     "v": "wkFnm4"
+    },
+    {
+     "at": 58,
+     "ch": "swing",
+     "v": -7.0
+    },
+    {
+     "at": 58,
+     "ch": "hdy",
+     "v": 0.004
+    },
+    {
+     "at": 60,
+     "ch": "legs",
+     "v": "wkFnm5"
+    },
+    {
+     "at": 60,
+     "ch": "swing",
+     "v": -4.95
+    },
+    {
+     "at": 60,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 62,
+     "ch": "legs",
+     "v": "wkFnm6"
+    },
+    {
+     "at": 62,
+     "ch": "swing",
+     "v": -0.0
+    },
+    {
+     "at": 62,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 64,
+     "ch": "legs",
+     "v": "wkFnm7"
+    },
+    {
+     "at": 64,
+     "ch": "swing",
+     "v": 4.95
+    },
+    {
+     "at": 64,
+     "ch": "hdy",
+     "v": 0.002
+    },
+    {
+     "at": 66,
+     "ch": "legs",
+     "v": "body"
+    },
+    {
+     "at": 66,
+     "ch": "swing",
+     "v": 0.0
+    },
+    {
+     "at": 66,
+     "ch": "hdy",
+     "v": 0.0
+    }
+   ],
+   "status": "INFERRED",
+   "round": 9,
+   "legs": "walk cycle v2 (continuous)",
+   "loop": 16,
+   "loop_start": 2,
+   "evidence": [
+    "#12 f145-205 walk (legs redrawn every 2 f, knees bend as the foot swings, arms hang with a small swing, no squash)",
+    "#23 f1352-1358 (lean, legs and arms swing)",
+    "guide: 23 Rick walk cadences, median 7.5 f per step; no squash and stretch on walks; bodies slide while legs cycle",
+    "owner Nov 23 10:49 AM CT: round-8 walk unnatural; vary stride by situation, better arms and legs"
+   ],
+   "walk_style": "nm"
   }
  },
  "approved_assets": {

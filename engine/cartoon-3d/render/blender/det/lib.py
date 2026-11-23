@@ -188,7 +188,7 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
     for key in (['body','bodyw1','bodyw2'] if walker else ['body']):
         sy=BSY[c['body']]; b=plane(f'{inst}_{key}',(0,0,0),0.8,1.1*sy,card_mat(f'{kind}_{key}',f'{kind}_{key}'),coll=C); b.parent=root; b.location=(0,0,-0.04+0.55*sy); bodies[key]=b
     hp=empty(inst+'_hp',(0,0,top),root,coll=C)
-    _sk=XL.SKIN.get(c.get('skin'),(252,246,236)) if isinstance(c.get('skin'),str) else tuple(c.get('skin',(252,246,236)))[:3]; neck=plane(inst+'_head',(0,0,0),0.16*HS,0.16*HS,flat('skin_'+str(_sk[0])+'_'+str(_sk[1]),lin(_sk),0.9),coll=C)   # det r10: neck matches the Rick skin preset; neck.parent=hp; neck.location=(0,0.004,0.04)
+    _sk=tuple(XL.SKIN.get(c.get('skin'),(252,246,236)) if isinstance(c.get('skin'),str) else c.get('skin',(252,246,236)))[:3]; neck=plane(inst+'_head',(0,0,0),0.16*HS,0.16*HS,flat('skin_'+str(_sk[0])+'_'+str(_sk[1]),lin(_sk),0.9),coll=C)   # det r10: neck matches the Rick skin preset; neck.parent=hp; neck.location=(0,0.004,0.04)
     F={}
     for fk in c['faces']:
         _pt,_pb=XL.pads(c)   # round 3: tall hats/hair/beards use a taller head texture; card grows by the same ratio, head disc stays put

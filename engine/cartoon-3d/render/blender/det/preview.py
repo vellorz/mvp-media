@@ -1,6 +1,6 @@
 # quick workbench preview of chosen frames: blender -b det.blend --python preview.py -- S01:50 S08:560 ...
 import bpy,sys
-sc=bpy.context.scene; sc.render.engine='CYCLES'; sc.cycles.samples=6; sc.cycles.use_denoising=False; sc.cycles.device='CPU'; sc.render.use_persistent_data=True; sc.render.resolution_x=360; sc.render.resolution_y=640; sc.render.resolution_percentage=100
+sc=bpy.context.scene; sc.render.engine='CYCLES'; sc.cycles.samples=int(__import__('os').environ.get('PSAMP','6')); sc.cycles.use_denoising=False; sc.cycles.device='CPU'; sc.render.use_persistent_data=True; sc.render.resolution_x=360; sc.render.resolution_y=640; sc.render.resolution_percentage=100
 for a in sys.argv[sys.argv.index('--')+1:]:
     s,f=a.split(':'); f=int(f)
     for c in bpy.data.collections:

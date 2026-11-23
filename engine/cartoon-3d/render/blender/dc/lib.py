@@ -81,7 +81,7 @@ def flat(name,rgb,rough=0.7,emit=0.0,metal=0.0):
     if emit: p.inputs['Emission Color'].default_value=(*rgb,1); p.inputs['Emission Strength'].default_value=emit
     if PAINT and not emit and not metal: _paint(m)
     MC[name]=m; return m
-HEAD_EMIT=1.0   # rule 335 (gate v7 note): at 0.25 heads read grey under AgX (S07 face 206,194,181); 1.0 + pre-warmed skin 255,226,186 gives 216-218,204-205,189-190
+HEAD_EMIT=1.0   # rule 335 (gate v7 note): at 0.25 heads read grey under AgX (S07 face 206,194,181); 1.0 + pre-warmed skin 255,213,166 (Cape Cod F25 method; DC needs less blue for B/R 0.83)
 def card_mat(name,img,emit=0.3,rough=1.0):
     if name in MC: return MC[name]
     m=bpy.data.materials.new(name); N,L=nodes(m); p=N['Principled BSDF']; p.inputs['Roughness'].default_value=rough
@@ -183,7 +183,7 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
     for key in (['body','bodyw1','bodyw2'] if walker else ['body']):
         sy=BSY[c['body']]; b=plane(f'{inst}_{key}',(0,0,0),0.8,1.1*sy,card_mat(f'{kind}_{key}',f'{kind}_{key}'),coll=C); b.parent=root; b.location=(0,0,-0.04+0.55*sy); bodies[key]=b
     hp=empty(inst+'_hp',(0,0,top),root,coll=C)
-    neck=plane(inst+'_head',(0,0,0),0.16*HS,0.16*HS,flat('skin',lin((255,226,186)),0.9),coll=C); neck.parent=hp; neck.location=(0,0.004,0.04)
+    neck=plane(inst+'_head',(0,0,0),0.16*HS,0.16*HS,flat('skin',lin((255,213,166)),0.9),coll=C); neck.parent=hp; neck.location=(0,0.004,0.04)
     F={}
     for fk in c['faces']:
         _pt,_pb=XL.pads(c)   # round 3 (v7vnb2 5d8d84e): tall hats/hair/beards use a taller head texture; card grows by the same ratio, head disc stays put

@@ -36,12 +36,13 @@
   "library": "all",
   "mouth_side": 1,
   "hat_tilt": 7,
-  "fhair": "stubbledots",
+  "fhair": "goatee",
   "fhaircol": [
    90,
    60,
    36
-  ]
+  ],
+  "turn": 0.35
  },
  "pilgrimB": {
   "coat": [
@@ -83,7 +84,8 @@
    60,
    40,
    28
-  ]
+  ],
+  "turn": -0.4
  },
  "pilgrimC": {
   "coat": [
@@ -113,7 +115,8 @@
   "faces": {},
   "library": "all",
   "mouth_side": 1,
-  "hairdo": "sidepart"
+  "hairdo": "sidepart",
+  "turn": 0.45
  },
  "pilgrimD": {
   "coat": [
@@ -154,7 +157,8 @@
    180,
    170,
    160
-  ]
+  ],
+  "turn": -0.35
  },
  "master": {
   "coat": [
@@ -188,7 +192,8 @@
    80,
    56,
    40
-  ]
+  ],
+  "turn": 0.4
  },
  "sailorA": {
   "coat": [
@@ -252,7 +257,14 @@
    40
   ],
   "hat3d": "beanie3d",
-  "hat_tilt": -6
+  "hat_tilt": -6,
+  "turn": -0.45,
+  "fhair": "fullbeard",
+  "fhaircol": [
+   70,
+   50,
+   36
+  ]
  },
  "sailorB": {
   "coat": [
@@ -322,7 +334,8 @@
    40,
    30,
    26
-  ]
+  ],
+  "turn": 0.35
  },
  "nausetA": {
   "coat": [
@@ -353,7 +366,8 @@
    122
   ],
   "library": "all",
-  "mouth_side": -1
+  "mouth_side": -1,
+  "turn": -0.4
  },
  "nausetB": {
   "coat": [
@@ -384,7 +398,8 @@
    104
   ],
   "library": "all",
-  "mouth_side": 1
+  "mouth_side": 1,
+  "turn": 0.45
  },
  "nausetC": {
   "coat": [
@@ -416,7 +431,8 @@
    138
   ],
   "library": "all",
-  "mouth_side": -1
+  "mouth_side": -1,
+  "turn": -0.35
  },
  "elder": {
   "coat": [
@@ -465,7 +481,8 @@
   },
   "library": "all",
   "mouth_side": 1,
-  "hat_tilt": 6
+  "hat_tilt": 6,
+  "turn": 0.4
  },
  "townA": {
   "coat": [
@@ -499,7 +516,8 @@
    90,
    64,
    40
-  ]
+  ],
+  "turn": -0.45
  },
  "townB": {
   "coat": [
@@ -525,7 +543,9 @@
   ],
   "faces": {},
   "library": "all",
-  "mouth_side": 1
+  "mouth_side": 1,
+  "turn": 0.35,
+  "hairdo": "curly"
  },
  "tourA": {
   "coat": [
@@ -554,7 +574,8 @@
   "faces": {},
   "library": "all",
   "mouth_side": -1,
-  "hat_tilt": 5
+  "hat_tilt": 5,
+  "turn": -0.4
  },
  "tourB": {
   "coat": [
@@ -591,7 +612,8 @@
    60,
    50
   ],
-  "hat_tilt": -6,
-  "hat": "cap"
+  "hat_tilt": -9,
+  "turn": 0.45,
+  "hat3d": "trucker"
  }
 }

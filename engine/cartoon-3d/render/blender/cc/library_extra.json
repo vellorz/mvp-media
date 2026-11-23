@@ -1,0 +1,6 @@
+{
+  "_readme": "Faces added by video builds (owner Nov 22 2026: the library keeps growing). Each entry: name -> [eyes, brows, mouth, extras]. Log every addition below with the video, the 2+ Rick reference frames it was matched to, and the date. How-to: research/rick-style-spec/expression-library/CONTRIBUTING.md",
+  "faces": {},
+  "family": {},
+  "log": []
+}

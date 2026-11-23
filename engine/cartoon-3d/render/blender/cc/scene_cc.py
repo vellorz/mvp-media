@@ -497,7 +497,7 @@ for i,(x,y,k) in enumerate([(-1.4,2.4,'pilgrimA'),(1.3,2.0,'pilgrimB'),(2.2,2.6,
 N=[]
 for i,(x,y,k) in enumerate([(-2.4,-16.6,'nausetA'),(0.5,-19.5,'nausetB'),(3.2,-21.4,'nausetC')]):   # r4 (P3/R21): staggered in depth (were a near-equal-depth frontal row at 1008-1035)
     c_=char_on(f'S10_n{i}',k,s,(EX+x,y,eb(EX+x,y)),r,'neutral',arms=('arm','arm_bow')); N.append(c_)
-    faces(c_,[(1005,'neutral'),(1060+i*6,'deadpan'),(1100+i*4,'worry')]); bob(c_,[1050+i*12])
+    faces(c_,[(1005,'neutral'),(1040+i*6,'skeptical'),(1070+i*6,'deadpan'),(1100+i*4,'worry'),(1124+i*3,'determined')])   # r4f: 4+ faces per featured character (rule 332); watchful, never comic; bob(c_,[1050+i*12])
 for f,a in [(1066,-30),(1100,-20)]: arm(N[1],1,f,a)
 path(s,[(1005,(EX+0.5,-4.0,1.9),(EX+0.4,-18,1.35)),(1050,(EX+0.5,-11.0,1.8),(EX+0.4,-19,1.5)),   # stills r3: the push now starts on the beach, not over the empty camp
        (1100,(EX+1.2,-15.2,1.55),(EX+0.5,-19.5,1.65)),(1140,(EX+1.6,-16.3,1.6),(EX+0.55,-19.5,1.7))])   # r2 (K9): the 62 deg whip to the profile framing (1103-1108) is gone; the push settles on the man

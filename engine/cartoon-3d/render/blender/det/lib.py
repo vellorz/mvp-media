@@ -245,8 +245,10 @@ def finish(ch,blink_every=34):
     for i,(f,k) in enumerate(seq):
         nx=seq[i+1][0] if i+1<len(seq) else b+1
         out.append((f,k)); t=f+blink_every
-        if 'blink' in ch['F'] and k!='blink':
-            while t+2<nx-6: out.append((t,'blink')); out.append((t+2,k)); t+=blink_every+((t//7)%9)
+        bk='blink'+(k[k.index('@'):] if '@' in k else '')   # round 5 proposal: a turned face blinks at its own angle (keys with '@' exist only with cast.json "turns")
+        if bk not in ch['F']: bk='blink'
+        if 'blink' in ch['F'] and not k.startswith('blink'):
+            while t+2<nx-6: out.append((t,bk)); out.append((t+2,k)); t+=blink_every+((t//7)%9)
     R={}
     for i,(f,k) in enumerate(out):
         nx=out[i+1][0] if i+1<len(out) else b+1
@@ -289,6 +291,74 @@ def finish(ch,blink_every=34):
     for o in [ch['root']]+list(ch['root'].children_recursive):
         o['chr']=ch['inst']
     return ch
+# ==== ROUND 5 PROPOSAL (Nov 23 2026; awaits owner approval; opt-in: nothing below runs unless a scene calls it) ====
+# (1) Face turns in steps, Rick's way (research/rick-style-spec/face-turns-arms/ in project files):
+#     - one level apart, or front <-> back view: a 1-frame snap (Rick #03 f1014-1015, #04 f349-350)
+#     - left <-> right: pass through FRONT for 1-2 frames (#14 f1254-1258, #12 f1455-1462, #03 f1422 back-of-head in-between)
+#     - two or more levels on the same side (e.g. strong 3/4 -> front): every level in between, 1 frame each, the last step held 2 frames
+#       (#22 f379-385: 6 frames, 4 drawings; #10 f257-265; #24 f413-417; #22 f1458-1464)
+#     Variants come from cast.json "turns" (expressions.turn_name: smug@L3 .. smug@F .. smug@R3); missing variants fall back to the base.
+def turn_plan(frm,to,holds=None):
+    """[(frame offset, level)] for a turn from level frm to level to (-3 left .. 0 front .. 3 right)"""
+    if frm==to: return []
+    if abs(to-frm)==1: return [(0,to)]
+    if frm*to<0: return [(0,0),(2 if abs(frm)+abs(to)>=4 else 1,to)]
+    step=1 if to>frm else -1; lv=list(range(frm+step,to+step,step)); out=[]; o=0
+    for i,l in enumerate(lv):
+        out.append((o,l)); o+=(holds[i] if holds and i<len(holds) else (2 if i==len(lv)-2 else 1))
+    return out
+def turn(ch,f,face_base,frm,to,holds=None,tilt=0):
+    """schedule a stepped head turn starting at frame f; returns the frame the last level lands on. tilt: optional head lean in degrees
+    during the turn (Rick #22 f379-385 leans ~6 deg into the turn and comes back)"""
+    plan=turn_plan(frm,to,holds); last=f
+    for o,l in plan:
+        k=XL.turn_name(face_base,l)
+        face(ch,f+o,k if k in ch['F'] else face_base); last=f+o
+    if tilt and plan:
+        hp=ch['hp']; krot(hp,f-1,(0,0,0)); krot(hp,f+max(1,(last-f)//2),(0,math.radians(tilt),0)); krot(hp,last+2,(0,0,0))
+    return last
+def look(ch,f,face_base,lv):
+    """put the face straight at a level (no steps), e.g. the start of a shot"""
+    k=XL.turn_name(face_base,lv); face(ch,f,k if k in ch['F'] else face_base)
+# (2) Arm gestures: whole-arm POSE cards (cast.POSES, generated when cast.json has "poses"), swapped like Rick's drawings:
+#     snap 1-2 f (59 of 144 labelled Rick arm actions, median 2 f), optional 1-frame in-between (_m), optional 1-2 frame settle on an
+#     overshoot drawing (_o; 21 of 144), optional 2-frame anticipation dip (12 of 144: throws, strikes, points). One arm gestures, the
+#     other usually stays put. Return to rest with gesture(ch,sx,f,'hang') or back to the old card with gesture(ch,sx,f,None).
+ARM_PX=0.744/1200   # metres per arm-texture pixel (ARM_W covers 1200 px)
+def _pose_card(ch,sx,key):
+    A=ch['A'][sx]
+    if key in A['cards']: return A['cards'][key]
+    c=CI[ch['kind']]; _q=BSY[c['body']]; tk=f"{ch['kind']}_{key}"+('_L' if sx<0 else '')
+    a=plane(f"{ch['inst']}_arm{sx}_{key}",(0,0,0),1200*ARM_PX*_q,1800*ARM_PX*_q,card_mat(tk,tk),coll=chr_coll(ch['shot'])); a.parent=A['piv']
+    a.location=(0,0,(ARM_H/2-ARM_OFF-40*ARM_PX)*_q)   # drawn shoulder sits where the hanging card's shoulder sits
+    a.visible_shadow=False; A['cards'][key]=a; vis(a,[]); return a
+def _piv_hold(ch,sx,f,deg):
+    piv=ch['A'][sx]['piv']; fc=None
+    if piv.animation_data and piv.animation_data.action:
+        fc=next((c for c in piv.animation_data.action.fcurves if c.data_path=='rotation_euler' and c.array_index==1),None)
+    if fc: krot(piv,f-1,(0,fc.evaluate(f-1),0))
+    krot(piv,f,(0,math.radians(deg)*sx,0))
+    for c in piv.animation_data.action.fcurves:
+        for kp in c.keyframe_points:
+            if kp.co[0] in (f-1,f): kp.interpolation='CONSTANT'
+def gesture(ch,sx,f,pose,inb=True,settle=0,anticip=0):
+    """swap arm sx (-1 left, 1 right) to a pose at frame f. inb: 1-frame in-between first; settle: frames on the overshoot drawing after
+    landing (0-2); anticip: frames on the 'dip' drawing before it (0 or 2). pose 'hang' or None = back to the character's normal arm card."""
+    A=ch['A'][sx]; seq=[]
+    if pose in (None,'hang'):
+        if inb and A.get('pose'): seq.append((f,f"arm_pose_{A['pose']}_m"))
+        seq.append((f+(1 if inb and A.get('pose') else 0),'arm')); A['pose']=None
+    else:
+        g=f
+        if anticip: seq.append((g,'arm_pose_dip')); g+=anticip
+        if inb: seq.append((g,f'arm_pose_{pose}_m')); g+=1
+        if settle: seq.append((g,f'arm_pose_{pose}_o')); g+=settle
+        seq.append((g,f'arm_pose_{pose}')); A['pose']=pose
+    for g,k in seq:
+        if k!='arm': _pose_card(ch,sx,k)
+        A['sched']=[s_ for s_ in A['sched'] if s_[0]!=g]+[(g,k)]
+        _piv_hold(ch,sx,g,-8 if k=='arm' else 0)   # pose drawings carry their own angle; the rest card keeps its -8 deg hang
+    return seq[-1][0]
 def lipsync(ch,words,f0,f1,shapes=('talkA','talkB','talkC','talkD'),rest='talkD'):
     """mouth shapes on the quoted words only (rule 185: lips move only on quoted lines)"""
     seq=[]

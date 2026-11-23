@@ -1,0 +1,282 @@
+{
+ "turn_strips": [
+  [
+   "r5man",
+   "smug"
+  ],
+  [
+   "r5woman",
+   "smile"
+  ],
+  [
+   "r5hat",
+   "skeptical"
+  ]
+ ],
+ "transitions": [
+  [
+   "r5man",
+   "smug",
+   3,
+   0
+  ],
+  [
+   "r5woman",
+   "worried",
+   -2,
+   2
+  ],
+  [
+   "r5hat",
+   "skeptical",
+   -3,
+   0
+  ],
+  [
+   "r5man",
+   "grin",
+   0,
+   2
+  ]
+ ],
+ "gestures": [
+  [
+   "r5man",
+   "deadpan",
+   [
+    [
+     "rest",
+     "current arm (hang, -8 deg)",
+     [
+      "arm",
+      "arm"
+     ]
+    ],
+    [
+     "akimbo",
+     "both arms",
+     [
+      "arm_pose_akimbo",
+      "arm_pose_akimbo"
+     ]
+    ],
+    [
+     "akimbo_inbetween",
+     "1-frame in-between from rest",
+     [
+      "arm",
+      "arm_pose_akimbo_m"
+     ]
+    ],
+    [
+     "scratch",
+     "one arm, other at rest",
+     [
+      "arm",
+      "arm_pose_scratch"
+     ]
+    ],
+    [
+     "scratch_inbetween",
+     "1-frame in-between from rest",
+     [
+      "arm",
+      "arm_pose_scratch_m"
+     ]
+    ],
+    [
+     "chin",
+     "one arm, other at rest",
+     [
+      "arm",
+      "arm_pose_chin"
+     ]
+    ],
+    [
+     "chin_inbetween",
+     "1-frame in-between from rest",
+     [
+      "arm",
+      "arm_pose_chin_m"
+     ]
+    ],
+    [
+     "point_up",
+     "one arm, other at rest",
+     [
+      "arm",
+      "arm_pose_point_up"
+     ]
+    ],
+    [
+     "point_up_inbetween",
+     "1-frame in-between from rest",
+     [
+      "arm",
+      "arm_pose_point_up_m"
+     ]
+    ],
+    [
+     "point_out",
+     "one arm, other at rest",
+     [
+      "arm",
+      "arm_pose_point_out"
+     ]
+    ],
+    [
+     "point_out_inbetween",
+     "1-frame in-between from rest",
+     [
+      "arm",
+      "arm_pose_point_out_m"
+     ]
+    ],
+    [
+     "raise",
+     "one arm, other at rest",
+     [
+      "arm",
+      "arm_pose_raise"
+     ]
+    ],
+    [
+     "raise_inbetween",
+     "1-frame in-between from rest",
+     [
+      "arm",
+      "arm_pose_raise_m"
+     ]
+    ],
+    [
+     "up",
+     "both arms",
+     [
+      "arm_pose_up",
+      "arm_pose_up"
+     ]
+    ],
+    [
+     "up_inbetween",
+     "1-frame in-between from rest",
+     [
+      "arm",
+      "arm_pose_up_m"
+     ]
+    ],
+    [
+     "shrug",
+     "both arms",
+     [
+      "arm_pose_shrug",
+      "arm_pose_shrug"
+     ]
+    ],
+    [
+     "shrug_inbetween",
+     "1-frame in-between from rest",
+     [
+      "arm",
+      "arm_pose_shrug_m"
+     ]
+    ],
+    [
+     "belly",
+     "one arm, other at rest",
+     [
+      "arm",
+      "arm_pose_belly"
+     ]
+    ],
+    [
+     "belly_inbetween",
+     "1-frame in-between from rest",
+     [
+      "arm",
+      "arm_pose_belly_m"
+     ]
+    ],
+    [
+     "palm",
+     "one arm, other at rest",
+     [
+      "arm",
+      "arm_pose_palm"
+     ]
+    ],
+    [
+     "palm_inbetween",
+     "1-frame in-between from rest",
+     [
+      "arm",
+      "arm_pose_palm_m"
+     ]
+    ],
+    [
+     "windup",
+     "one arm, other at rest",
+     [
+      "arm",
+      "arm_pose_windup"
+     ]
+    ],
+    [
+     "windup_inbetween",
+     "1-frame in-between from rest",
+     [
+      "arm",
+      "arm_pose_windup_m"
+     ]
+    ],
+    [
+     "fling",
+     "one arm, other at rest",
+     [
+      "arm",
+      "arm_pose_fling"
+     ]
+    ],
+    [
+     "fling_inbetween",
+     "1-frame in-between from rest",
+     [
+      "arm",
+      "arm_pose_fling_m"
+     ]
+    ],
+    [
+     "lift",
+     "one arm, other at rest",
+     [
+      "arm",
+      "arm_pose_lift"
+     ]
+    ],
+    [
+     "lift_inbetween",
+     "1-frame in-between from rest",
+     [
+      "arm",
+      "arm_pose_lift_m"
+     ]
+    ],
+    [
+     "dip",
+     "one arm, other at rest",
+     [
+      "arm",
+      "arm_pose_dip"
+     ]
+    ],
+    [
+     "dip_inbetween",
+     "1-frame in-between from rest",
+     [
+      "arm",
+      "arm_pose_dip_m"
+     ]
+    ]
+   ]
+  ]
+ ]
+}

@@ -384,6 +384,51 @@ def head_shade(im,skin):
     cl=Image.new('L',im.size,0); ImageDraw.Draw(cl).ellipse([160,167,885,892],fill=255)   # r8b: shade stays inside the ink
     from PIL import ImageChops; m=ImageChops.multiply(m,cl)
     sh=Image.new('RGBA',im.size,dk(skin,0.88)); im.paste(sh,(0,0),m)
+
+# ---- ROUND 5 PROPOSAL (Nov 23 2026, owner: "arms ... slightly bent downwards, and they are raised from down to up ... a basic repetitive
+# motion ... repeated for all of the characters"; awaits owner approval). Rick arm-gesture library: whole-arm POSE drawings swapped as
+# snaps (1-2 f) with an optional 1-frame in-between, instead of rotating one bent card about the shoulder.
+# Evidence (144 labelled Rick arm actions, 20 checked frame by frame): research/rick-style-spec/face-turns-arms/ (project files).
+# Each pose = (upper-arm angle, forearm angle) in degrees, 0 = straight down, 90 = straight out, 180 = straight up, negative = across
+# the body; drawn as ONE smooth noodle (rounded elbow, no joint; rule 253) of the same thickness and mitten as the hanging arm.
+POSES={
+ 'hang':(8,14),            # rest (our current arm)
+ 'akimbo':(42,-38),        # hand on hip, elbow out: Rick #03 f466-485 (elbow ~75), #04 f700, #22 f212-235
+ 'scratch':(122,198),      # hand to the back/side of the head: #03 f370-372 (elbow ~60)
+  'chin':(-10,-160),        # hand to chin, thinking: #24 f1112-1116 (elbow ~50)
+ 'point_up':(168,174),     # straight arm up: #04 f343-344, #04 f405-425 (180)
+ 'point_out':(96,92),      # straight arm out to the side: #22 f1253-1256 (180), #14 f428-431 (~120)
+ 'raise':(100,172),        # forearm up beside the head, elbow ~90 ('here is the thing'): #04 f1352, #22 f1077-1084
+ 'up':(138,168),           # both arms flung up in a U (shock): #03 f1619-1621 (~130), #22 f779-795
+ 'shrug':(62,118),         # elbows bent down, hands out ('come at me' / shrug): #22 f1325-1331, #10 f397-403
+ 'belly':(16,-82),         # hand on the belly (laugh): #14 f184-186
+ 'palm':(24,78),           # forearm out, palm up (talking): #12 f488-498, #10 f600-603
+ 'windup':(140,218),       # arm cocked back over the shoulder (anticipation of a throw/strike): #03 f625-627, #04 f569-575
+ 'fling':(108,112),        # arm flung out wide, nearly straight (panic): #14 f141-144, #14 f1089-1100
+ 'lift':(20,152),          # hand raised to shoulder height in front (toast, sip, show a prop): #04 f702-711, #14 f790-796, #03 f834-838
+ 'dip':(4,-18),            # 2-frame anticipation dip before a point (#14 f117-119); also the 'pull in' breakdown
+}
+def pose_arm(name,pose,mix=1.0,over=0.0,frm='hang'):
+    """1200 x 1800 card, shoulder at (600,900): the pose (or a mix toward it from `frm` for in-betweens, `over` degrees of overshoot)"""
+    a0,c0=POSES[frm]; a1,c1=POSES[pose]
+    a=a0+(a1-a0)*mix+over*(1 if a1>=a0 else -1); cc=c0+(c1-c0)*mix+over*(1 if c1>=c0 else -1)
+    U,F=330,372   # upper arm and forearm (same total reach as noodle(): hand centre 712 px from the shoulder at y=40)
+    sx0,sy0=600,900
+    ex_=sx0+U*math.sin(math.radians(a)); ey_=sy0+U*math.cos(math.radians(a))
+    hx=ex_+F*math.sin(math.radians(cc)); hy=ey_+F*math.cos(math.radians(cc))
+    # rounded elbow: quadratic through points pulled 28 % in from the elbow on each segment, straight segments elsewhere
+    def lerp(p,q,t): return (p[0]+(q[0]-p[0])*t,p[1]+(q[1]-p[1])*t)
+    S,E,H=(sx0,sy0),(ex_,ey_),(hx,hy); P1=lerp(E,S,0.28); P2=lerp(E,H,0.28)
+    pts=[lerp(S,P1,i/12) for i in range(13)]+[((1-t)**2*P1[0]+2*(1-t)*t*E[0]+t*t*P2[0],(1-t)**2*P1[1]+2*(1-t)*t*E[1]+t*t*P2[1]) for t in [i/16 for i in range(1,17)]]+[lerp(P2,H,i/12) for i in range(1,13)]
+    W,Hh=1200,1800; big=Image.new('RGBA',(W*SS,Hh*SS),(0,0,0,0)); bd=ImageDraw.Draw(big)
+    bd.line([(x*SS,y*SS) for x,y in pts],fill=K,width=AW*SS,joint='curve')
+    for x,y in (pts[0],): bd.ellipse([(x-AW/2)*SS,(y-AW/2)*SS,(x+AW/2)*SS,(y+AW/2)*SS],fill=K)
+    bd.ellipse([(hx-50)*SS,(hy-50)*SS,(hx+50)*SS,(hy+50)*SS],fill=K)   # mitten 100 px, as arm()
+    return big.resize((W,Hh),Image.LANCZOS)
+def pose_list(c):
+    want=c.get('poses')
+    if not want: return []
+    return list(POSES) if want=='all' else [p for p in want if p in POSES]
 if __name__=='__main__':
     out={}
     for n,c in C.items():
@@ -391,6 +436,8 @@ if __name__=='__main__':
         body(n).save(f'{T}{n}_body.png'); body(n,1).save(f'{T}{n}_bodyw1.png'); body(n,2).save(f'{T}{n}_bodyw2.png')
         for p in c.get('props',[None]): arm(n,p).save(f'{T}{n}_arm{"_"+p if p else ""}.png')
         arm(n).save(f'{T}{n}_arm.png'); arm(n,straight=4).save(f'{T}{n}_armS.png')
+        for _p in pose_list(c):   # round 5 proposal (opt-in "poses"): pose card, 1-frame in-between from rest, overshoot for settles
+            pose_arm(n,_p).save(f'{T}{n}_arm_pose_{_p}.png'); pose_arm(n,_p,mix=0.5).save(f'{T}{n}_arm_pose_{_p}_m.png'); pose_arm(n,_p,over=9).save(f'{T}{n}_arm_pose_{_p}_o.png')
         # r7 (rule 272): left arms get their own mirrored texture, never a negative object scale (the PC GPU drew a mirrored card as a black box)
         import glob as _g
         for fp in _g.glob(f'{T}{n}_arm*.png'):

@@ -1,0 +1,8 @@
+{"r5man": {"coat": [58, 74, 120], "legs": [44, 44, 56], "body": "round", "hair": [70, 46, 30], "hairdo": "sidepart", "fhair": "chevron",
+  "skin": "rick_warm", "feat_scale": "rick", "library": "all", "turns": ["deadpan", "smug", "grin", "surprise", "skeptical", "happy"], "poses": "all", "cue": "vest",
+  "faces": {"blink": ["closed", "flat", "line"]}},
+ "r5woman": {"coat": [196, 88, 72], "legs": [50, 56, 70], "body": "tall", "hair": [60, 36, 24], "hairdo": "topknot", "skin": "rick_warm", "feat_scale": "rick",
+  "library": "all", "turns": ["deadpan", "smug", "smile", "worried"], "poses": "all", "cue": "sweater", "faces": {"blink": ["closed", "flat", "line"]}},
+ "r5hat": {"coat": [190, 150, 50], "legs": [40, 36, 44], "body": "round", "hair": [40, 30, 24], "hairdo": "sidepart", "hat3d": "bowler3d", "hatcol": [40, 40, 46],
+  "fhair": "walrus", "skin": "rick_warm", "feat_scale": "rick", "library": "all", "turns": ["skeptical", "smug", "deadpan"], "poses": "all", "cue": "vest",
+  "faces": {"blink": ["closed", "flat", "line"]}}}

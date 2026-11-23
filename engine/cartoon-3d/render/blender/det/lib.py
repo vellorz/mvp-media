@@ -175,18 +175,23 @@ BSY0=1.0   # r8b: one Rick build for every kind (cast.py GB/HEMY), no stretch
 HS=0.43/0.586   # head card scale vs rounds 1-7 (disc 800/1024 of a 0.75 card)
 GEO={'tall':(0.966,0.141,0.86),'short':(0.966,0.156,0.86),'round':(0.966,0.165,0.86)}   # r7b (owner Nov 22 sheet comment 'arm issue?': arm roots poked out above the rounded shoulders): shoulder pivot 0.92 -> 0.86 and x out to the outline (0.126/0.142/0.151 -> 0.141/0.156/0.165) so the arm stroke grows out of the side outline instead of a parallel line with a sliver.   # r7det (rule 329, Rick f606: head overlaps the capsule top ~0.3 H): head and shoulders 0.03 lower; was 0.996/0.95
 #   # r9: shoulders follow the narrower torso (0.73-0.89 H)
+# r5b (owner Nov 23 test clip, rule 354b): both arm pivots sat at y -0.006, so the two arm cards were COPLANAR; where one arm's
+# transparent canvas overlapped the other arm's ink, Cycles skipped the ink on some samples (grey, see-through arm, hand 'behind' the body).
+# Every card of one character now has its own depth: body 0 > left arm -0.004 > right arm -0.006 > pose cards 3.5 mm nearer still > face -0.012.
+ARM_Y={-1:-0.004,1:-0.006}; POSE_DY=-0.0035   # depths -4, -6, -7.5, -9.5 mm: every pair >= 1.5 mm apart, all behind the face (-12)
+FOOT_LIFT=0.0173   # r5b (owner Nov 23: 'feet clipping through the floor'): drawn foot bottom sat at z -0.016 (over half the 2.9 cm foot under the floor); now +0.001
 ARM_W,ARM_H,ARM_OFF=0.744,0.558,0.242   # r6: arm canvas 1200 wide (bent forearm swings outward)
 SHADOW=None
 def chr_coll(shot):
     if shot not in CHRC: CHRC[shot]=col('CHR_'+shot)
     return CHRC[shot]
 def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=False,camname=None):
-    c=CI[kind]; top,shx,shz=GEO[c['body']]; _q=BSY[c['body']]; top=-0.04+(top+0.04)*_q; shz=-0.04+(shz+0.04)*_q; C=chr_coll(shot)
+    c=CI[kind]; top,shx,shz=GEO[c['body']]; _q=BSY[c['body']]; top=-0.04+(top+0.04)*_q+FOOT_LIFT; shz=-0.04+(shz+0.04)*_q+FOOT_LIFT; C=chr_coll(shot)
     root=empty(inst,loc,coll=C); root.scale=(scale,)*3
     bb=root.constraints.new('LOCKED_TRACK'); bb.target=CAM[camname or shot]; bb.track_axis='TRACK_NEGATIVE_Y'; bb.lock_axis='LOCK_Z'
     bodies={}
     for key in (['body','bodyw1','bodyw2'] if walker else ['body']):
-        sy=BSY[c['body']]; b=plane(f'{inst}_{key}',(0,0,0),0.8,1.1*sy,card_mat(f'{kind}_{key}',f'{kind}_{key}'),coll=C); b.parent=root; b.location=(0,0,-0.04+0.55*sy); bodies[key]=b
+        sy=BSY[c['body']]; b=plane(f'{inst}_{key}',(0,0,0),0.8,1.1*sy,card_mat(f'{kind}_{key}',f'{kind}_{key}'),coll=C); b.parent=root; b.location=(0,0,-0.04+0.55*sy+FOOT_LIFT); bodies[key]=b
     hp=empty(inst+'_hp',(0,0,top),root,coll=C)
     neck=plane(inst+'_head',(0,0,0),0.16*HS,0.16*HS,flat('skin',lin((252,246,236)),0.9),coll=C); neck.parent=hp; neck.location=(0,0.004,0.04)
     F={}
@@ -196,7 +201,7 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
     A={}
     for sx,ak in zip((-1,1),arms):
         # r7 (rule 268): arms sit BEHIND the face disc (face -0.012) and in front of the body (0): a raised hand can never paint over its own face
-        ap=empty(f'{inst}_ap{sx}',(sx*shx,-0.006,shz),root,coll=C); A[sx]={'piv':ap,'cards':{}}
+        ap=empty(f'{inst}_ap{sx}',(sx*shx,ARM_Y[sx],shz),root,coll=C); A[sx]={'piv':ap,'cards':{}}
         keys=[ak] if isinstance(ak,str) else sorted(set(k for _,k in ak))
         if 'armS' not in keys: keys=keys+['armS']   # r7: straight card swapped in automatically while the arm is raised past 70 deg
         for k in keys:
@@ -206,6 +211,7 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
             A[sx]['cards'][k]=a
         A[sx]['sched']=[(rng[0],ak)] if isinstance(ak,str) else ak
     sh=plane(inst+'_shadow',(0,0,0),1.0,0.45,card_mat('shadowblob','shadow',emit=0.0),coll=C,horiz=True); sh.parent=root; sh.location=(0,0,0.004)
+    sh.visible_shadow=False   # r5b (owner Nov 23 'box-like shadow on the ground'): the flat blob card blocked the sun over its whole rectangle, so a dark box sat under every character
     ch=dict(inst=inst,kind=kind,root=root,hp=hp,F=F,A=A,bodies=bodies,rng=rng,faces=[],walk=[],neck=neck,shadow=sh,top=top,shot=shot)
     if face0: ch['faces'].append((rng[0],face0))
     for sx in (-1,1): krot(A[sx]['piv'],rng[0],(0,math.radians(-8)*sx,0))
@@ -325,12 +331,13 @@ def look(ch,f,face_base,lv):
 #     overshoot drawing (_o; 21 of 144), optional 2-frame anticipation dip (12 of 144: throws, strikes, points). One arm gestures, the
 #     other usually stays put. Return to rest with gesture(ch,sx,f,'hang') or back to the old card with gesture(ch,sx,f,None).
 ARM_PX=0.744/1200   # metres per arm-texture pixel (ARM_W covers 1200 px)
+POSE_W,POSE_H=1600,1800   # = cast.POSE_W/POSE_H (r5b: wider canvas so no pose drawing is sliced by the card edge)
 def _pose_card(ch,sx,key):
     A=ch['A'][sx]
     if key in A['cards']: return A['cards'][key]
     c=CI[ch['kind']]; _q=BSY[c['body']]; tk=f"{ch['kind']}_{key}"+('_L' if sx<0 else '')
-    a=plane(f"{ch['inst']}_arm{sx}_{key}",(0,0,0),1200*ARM_PX*_q,1800*ARM_PX*_q,card_mat(tk,tk),coll=chr_coll(ch['shot'])); a.parent=A['piv']
-    a.location=(0,0,(ARM_H/2-ARM_OFF-40*ARM_PX)*_q)   # drawn shoulder sits where the hanging card's shoulder sits
+    a=plane(f"{ch['inst']}_arm{sx}_{key}",(0,0,0),POSE_W*ARM_PX*_q,POSE_H*ARM_PX*_q,card_mat(tk,tk),coll=chr_coll(ch['shot'])); a.parent=A['piv']
+    a.location=(0,POSE_DY,(ARM_H/2-ARM_OFF-40*ARM_PX)*_q)   # drawn shoulder sits where the hanging card's shoulder sits
     a.visible_shadow=False; A['cards'][key]=a; vis(a,[]); return a
 def _piv_hold(ch,sx,f,deg):
     piv=ch['A'][sx]['piv']; fc=None
@@ -429,3 +436,56 @@ def render_setup(pct=100,samples=8):
     L.new(rl.outputs['Mist'],mm.inputs[0]); L.new(mm.outputs[0],mx.inputs[0]); L.new(rl.outputs['Image'],mx.inputs[1])
     L.new(mx.outputs['Image'],gl.inputs['Image']); L.new(gl.outputs['Image'],comp.inputs['Image'])
     r.image_settings.file_format='PNG'; r.image_settings.compression=30
+# ---------------- rig check (rule 354b, owner Nov 23 test clip) ----------------
+def _root(o):
+    while o.parent: o=o.parent
+    return o
+_LOWROW={}
+def _low_row(img):
+    """lowest texture row (from the bottom, 0..1) holding opaque ink"""
+    if img.name in _LOWROW: return _LOWROW[img.name]
+    import numpy as np
+    w,h=img.size; a=np.array(img.pixels[:]).reshape(h,w,4)[...,3]   # Blender rows start at the bottom
+    rows=np.where(a.max(1)>0.5)[0]; v=(rows.min()/h) if len(rows) else 0.0
+    _LOWROW[img.name]=v; return v
+def rigcheck(frames,floor_z=None):
+    """Prints RIGCHECK lines and returns the number of faults:
+    COPLANAR_CARD  two visible cards of one character in the same plane (< 1 mm apart) that overlap on screen -> see-through ink
+    FOOT           drawn foot bottom below the floor (clipping) or more than 6 mm above it (floating)
+    SHADOW_CARD    a character's flat ground-blob card casts a sun shadow (dark box on the floor)"""
+    import itertools
+    bad=0
+    for o in bpy.data.objects:
+        if o.name.endswith('_shadow') and o.type=='MESH' and o.visible_shadow:
+            print('RIGCHECK SHADOW_CARD',o.name); bad+=1
+    seen=set()
+    for f in frames:
+        sc.frame_set(f)
+        by={}
+        for o in bpy.data.objects:
+            if o.type!='MESH' or o.hide_render or not any(c.name.startswith('CHR_') for c in o.users_collection): continue
+            if o.name.endswith('_shadow'): continue
+            by.setdefault(_root(o).name,[]).append(o)
+        for r,obs in by.items():
+            P=[]
+            for o in obs:
+                vs=[o.matrix_world@v.co for v in o.data.vertices]
+                if len(vs)!=4: continue
+                n=(vs[1]-vs[0]).cross(vs[3]-vs[0]).normalized(); P.append((o,vs,n))
+            for (a,va,na),(b,vb,nb) in itertools.combinations(P,2):
+                if abs(na.dot(nb))<0.999: continue
+                d=abs((vb[0]-va[0]).dot(na))
+                if d>=0.001: continue
+                u=(va[1]-va[0]).normalized(); w=na.cross(u)
+                ra=[((p-va[0]).dot(u),(p-va[0]).dot(w)) for p in va]; rb=[((p-va[0]).dot(u),(p-va[0]).dot(w)) for p in vb]
+                ov=all(min(max(x[k] for x in ra),max(x[k] for x in rb))>max(min(x[k] for x in ra),min(x[k] for x in rb)) for k in (0,1))
+                key=(a.name,b.name)
+                if ov and key not in seen: seen.add(key); print('RIGCHECK COPLANAR_CARD',f,a.name,b.name,f'{d*1000:.2f}mm'); bad+=1
+            for o,vs,n in P:
+                if '_body' not in o.name or not o.active_material: continue
+                im=next((nd.image for nd in o.active_material.node_tree.nodes if nd.type=='TEX_IMAGE' and nd.image),None)
+                if not im: continue
+                zb=min(v.z for v in vs); zt=max(v.z for v in vs); fz=zb+_low_row(im)*(zt-zb)-(_root(o).matrix_world.translation.z if floor_z is None else floor_z)   # floor = the character's root (feet planted on its own ground)
+                k=('FOOT',o.name)
+                if (fz<0 or fz>0.006) and k not in seen: seen.add(k); print('RIGCHECK FOOT',f,o.name,f'{fz*1000:+.1f}mm'); bad+=1
+    print('RIGCHECK_FAULTS',bad); return bad

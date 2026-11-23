@@ -1157,7 +1157,7 @@
      ]
     }
    ],
-   "status": "INFERRED",
+   "status": "APPROVED",
    "round": 8,
    "legs": "turned then planted",
    "previous": {
@@ -1385,7 +1385,8 @@
       ]
      }
     ]
-   }
+   },
+   "approved": "owner Nov 23 2026 10:49 AM CT (round 8 versions)"
   },
   "startle_recoil": {
    "desc": "startle: the face changes every few frames (startle, shock, nervous), the body jumps up and stretches with a lean back and both arms flung, jolt ticks round the head, lands in a squash, a sweat drop, a nervous tremble, then a hand to the chest",
@@ -1887,7 +1888,7 @@
      "v": "body"
     }
    ],
-   "status": "INFERRED",
+   "status": "APPROVED",
    "round": 8,
    "legs": "planted, turn on the snap",
    "previous": {
@@ -2166,7 +2167,8 @@
       ]
      }
     ]
-   }
+   },
+   "approved": "owner Nov 23 2026 10:49 AM CT (round 8 versions)"
   },
   "wave_hello": {
    "status": "APPROVED",
@@ -2594,7 +2596,7 @@
      ]
     }
    ],
-   "status": "INFERRED",
+   "status": "APPROVED",
    "round": 8,
    "legs": "planted",
    "previous": {
@@ -3037,7 +3039,8 @@
       ]
      }
     ]
-   }
+   },
+   "approved": "owner Nov 23 2026 10:49 AM CT (round 8 versions)"
   },
   "cross_arms_huff": {
    "desc": "huff: arms cross, head turns away and tips up with an annoyed face; shoulders rise on a breath in, then drop with a puff of air out of the nose (blow arcs and a cloud), a second smaller huff",
@@ -3578,7 +3581,7 @@
      ]
     }
    ],
-   "status": "INFERRED",
+   "status": "APPROVED",
    "round": 8,
    "legs": "planted",
    "previous": {
@@ -3800,7 +3803,8 @@
       ]
      }
     ]
-   }
+   },
+   "approved": "owner Nov 23 2026 10:49 AM CT (round 8 versions)"
   },
   "turn_away_back": {
    "desc": "turn away and back: head, torso and feet go round together, one drawing step every 2 frames (front, 3/4, 3/4 back, full back with heels showing); holds; comes back the same way through the side angle to front; the torso dips with it",
@@ -3920,7 +3924,7 @@
      "v": "body"
     }
    ],
-   "status": "INFERRED",
+   "status": "APPROVED",
    "round": 8,
    "legs": "turned with the body",
    "previous": {
@@ -4020,7 +4024,8 @@
       ]
      }
     ]
-   }
+   },
+   "approved": "owner Nov 23 2026 10:49 AM CT (round 8 versions)"
   },
   "jog": {
    "desc": "jog in place (the scene moves the character): four run drawings, 3 frames each, arms pumping opposite the legs with the elbows bent, torso leaned 10 deg, a small bob up on the air drawings and a squash on contact",

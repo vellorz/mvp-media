@@ -32,7 +32,7 @@ def figure(name, face, arms=('arm', 'arm'), size=(1100, 1500)):
             elif p.endswith('_o'): p, over = p[:-2], 9.0
             im = tex((name, k), lambda: cast.pose_arm(name, p, mix=mix, over=over))
             if sx < 0: im = im.transpose(Image.FLIP_LEFT_RIGHT)
-            card(cv, im, 1200 * ARM_W / 1200 * q, 1800 * ARM_W / 1200 * q, sx * shx, shz + (ARM_H / 2 - ARM_OFF - 40 * ARM_W / 1200) * q - 0 * q + (0), ox, oz)
+            card(cv, im, 1600 * ARM_W / 1200 * q, 1800 * ARM_W / 1200 * q, sx * shx, shz + (ARM_H / 2 - ARM_OFF - 40 * ARM_W / 1200) * q - 0 * q + (0), ox, oz)
     pt, pb = X.pads(c); hd = tex((name, face), lambda: cast.head(name, face))
     hw = 0.75 * HS; hh = hw * (1024 + pt + pb) / 1024
     card(cv, hd, hw, hh, 0, top + 0.2535 * HS + 0.75 * HS * (pt - pb) / 2048, ox, oz)

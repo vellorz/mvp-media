@@ -43,7 +43,7 @@ def figure(name, s, size=(900, 1250)):
             big = big.rotate(8 * sx, resample=Image.BICUBIC, center=(im.width / 2, im.height))
             card(upper, big, ARM_W * q, ARM_H * 2 * q, sx * shx, shz, ox, oz)
         else:
-            card(upper, im, ARM_W * q, 1800 * ARM_W / 1200 * q, sx * shx, shz + (ARM_H / 2 - ARM_OFF - 40 * ARM_W / 1200) * q, ox, oz)
+            card(upper, im, cast.POSE_W * ARM_W / 1200 * q, cast.POSE_H * ARM_W / 1200 * q, sx * shx, shz + (ARM_H / 2 - ARM_OFF - 40 * ARM_W / 1200) * q, ox, oz)
     k = X.turn_name(s['face'], s['lv']) if s['lv'] is not None else s['face']
     if k not in c['faces']: k = s['face'] if s['face'] in c['faces'] else list(c['faces'])[0]
     pt, pb = X.pads(c); hd = tex((name, 'h', k), lambda: cast.head(name, k))

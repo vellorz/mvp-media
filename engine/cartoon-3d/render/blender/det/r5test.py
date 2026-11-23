@@ -1,7 +1,8 @@
 # Round 5 Blender test (353a/354a): one stepped turn per character + gestures, plain set. blender -b --python r5test.py -- OUTDIR [pct]
 # Needs /root/det/src/cast.json = r5demo.json and textures from cast.py.
 import sys, os, math
-sys.path.insert(0, '/root/det/src')
+sys.path.insert(0, os.environ.get('LIBDIR','/root/det/src'))
+sys.path.insert(1, '/root/det/src')
 import bpy
 import lib as L
 from lib import plane, flat, lin, cam, char, face, finish, kloc, turn, look, gesture
@@ -23,6 +24,9 @@ turn(man, 62, 'grin', 0, -2); gesture(man, -1, 62, 'point_out', inb=False, antic
 turn(wom, 24, 'worried', -2, 2); gesture(wom, -1, 24, 'shrug'); gesture(wom, 1, 24, 'shrug')
 gesture(wom, -1, 58, 'hang'); look(wom, 60, 'smile', 2); gesture(wom, 1, 60, 'akimbo', settle=2)
 for ch in (man, wom): finish(ch)
+# rule 354b: automatic rig check (coplanar cards, feet vs floor, shadow cards); stops before rendering when anything fails
+if L.rigcheck(range(0, END + 1, 2)) and not os.environ.get('RIGCHECK_ONLY'): raise SystemExit('RIGCHECK failed')
+if os.environ.get('RIGCHECK_ONLY'): raise SystemExit(0)
 L.render_setup(PCT, 8)
 sc.render.filepath = OUT + '/f_'; os.makedirs(OUT, exist_ok=True)
 fr = [int(x) for x in a[2].split(',')] if len(a) > 2 else list(range(0, END + 1))

@@ -444,23 +444,29 @@ def split_body(name,stride=0):
     ul=ul.resize((800,1100),Image.LANCZOS); ul.putalpha(_C.multiply(ul.getchannel('A'),m.point(lambda v:255 if v>0 else 0)))
     out=Image.new('RGBA',im.size,(0,0,0,0)); out.alpha_composite(ul); out.alpha_composite(legs)
     return top,out
+POSE_W,POSE_H,POSE_MARGIN=1600,1800,20   # r5b (owner Nov 23 test clip: a shrugging hand was cut off by a straight 'wall graphic' edge): 14 of 45 pose drawings ran past the old 1200 px canvas; shoulder stays at the canvas centre
 def pose_arm(name,pose,mix=1.0,over=0.0,frm='hang'):
-    """1200 x 1800 card, shoulder at (600,900): the pose (or a mix toward it from `frm` for in-betweens, `over` degrees of overshoot)"""
+    """POSE_W x POSE_H card, shoulder at the centre: the pose (or a mix toward it from `frm` for in-betweens, `over` degrees of overshoot)"""
     a0,c0=POSES[frm]; a1,c1=POSES[pose]
     a=a0+(a1-a0)*mix+over*(1 if a1>=a0 else -1); cc=c0+(c1-c0)*mix+over*(1 if c1>=c0 else -1)
     U,F=330,372   # upper arm and forearm (same total reach as noodle(): hand centre 712 px from the shoulder at y=40)
-    sx0,sy0=600,900
+    sx0,sy0=POSE_W//2,POSE_H//2
     ex_=sx0+U*math.sin(math.radians(a)); ey_=sy0+U*math.cos(math.radians(a))
     hx=ex_+F*math.sin(math.radians(cc)); hy=ey_+F*math.cos(math.radians(cc))
     # rounded elbow: quadratic through points pulled 28 % in from the elbow on each segment, straight segments elsewhere
     def lerp(p,q,t): return (p[0]+(q[0]-p[0])*t,p[1]+(q[1]-p[1])*t)
     S,E,H=(sx0,sy0),(ex_,ey_),(hx,hy); P1=lerp(E,S,0.28); P2=lerp(E,H,0.28)
     pts=[lerp(S,P1,i/12) for i in range(13)]+[((1-t)**2*P1[0]+2*(1-t)*t*E[0]+t*t*P2[0],(1-t)**2*P1[1]+2*(1-t)*t*E[1]+t*t*P2[1]) for t in [i/16 for i in range(1,17)]]+[lerp(P2,H,i/12) for i in range(1,13)]
-    W,Hh=1200,1800; big=Image.new('RGBA',(W*SS,Hh*SS),(0,0,0,0)); bd=ImageDraw.Draw(big)
+    W,Hh=POSE_W,POSE_H; big=Image.new('RGBA',(W*SS,Hh*SS),(0,0,0,0)); bd=ImageDraw.Draw(big)
     bd.line([(x*SS,y*SS) for x,y in pts],fill=K,width=AW*SS,joint='curve')
     for x,y in (pts[0],): bd.ellipse([(x-AW/2)*SS,(y-AW/2)*SS,(x+AW/2)*SS,(y+AW/2)*SS],fill=K)
     bd.ellipse([(hx-50)*SS,(hy-50)*SS,(hx+50)*SS,(hy+50)*SS],fill=K)   # mitten 100 px, as arm()
-    return big.resize((W,Hh),Image.LANCZOS)
+    im=big.resize((W,Hh),Image.LANCZOS)
+    # rule 354b (a): the drawing (arm stroke + mitten) must stay POSE_MARGIN px inside the canvas, or the card edge slices it
+    bb=im.getchannel('A').point(lambda v:255 if v>8 else 0).getbbox()
+    if bb and (bb[0]<POSE_MARGIN or bb[1]<POSE_MARGIN or bb[2]>W-POSE_MARGIN or bb[3]>Hh-POSE_MARGIN):
+        raise SystemExit(f'POSE_CLIP {name} {pose} mix={mix} over={over} bbox={bb} canvas={W}x{Hh}')
+    return im
 def pose_list(c):
     want=c.get('poses')
     if not want: return []

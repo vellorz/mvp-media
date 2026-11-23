@@ -83,7 +83,7 @@ def head(name,fk):
     if hs=='white': d.rounded_rectangle([130,300,894,860],200,fill=hair,outline=K,width=OUT)   # cc: old man's white hair at the sides
     if hs=='perm':
         for a in range(0,360,30): x=CX+380*math.cos(math.radians(a)); y=500+360*math.sin(math.radians(a))*0.95; d.ellipse([x-120,y-120,x+120,y+120],fill=hair,outline=K,width=OUT)
-    skin=tuple(c.get('skin',SK[:3]))+(255,)
+    skin=tuple(X.skin_rgb(c.get('skin'),SK[:3]))+(255,)   # round 4 (owner OK Nov 23 00:20Z): 'skin' names a Rick skin preset (X.SKIN); DC keeps its own feature sizes, no feat_scale
     # r8b (guide v1.3 x.3): ink 3.4 % of head width toward the light (upper right), 6 % away from it and under the chin
     d.ellipse([112,140,912,940],fill=K); d.ellipse([112+48,140+27,912-27,940-48],fill=skin)
     head_shade(im,skin); d=ImageDraw.Draw(im)
@@ -159,7 +159,7 @@ def head(name,fk):
         gc=tuple(c['glasses'])+(255,)
         for sx in(-1,1): d.ellipse([CX+sx*112-90,EY-84,CX+sx*112+90,EY+84],outline=gc,width=13)
         d.line([CX-24,EY-10,CX+24,EY-10],fill=gc,width=12)
-    _big(lambda dd: brows(dd,b if (not c.get('hat3d')) and hat not in('cop','flatcap','fedora','beanie','ladyhat','capotain','tricorn','knit','cap','sunhat','visor','kepi') or b!='up' else 'flat',cy=EY-125),[(CX-108,EY-125,64),(CX+108,EY-125,64)],1.45)
+    _big(lambda dd: brows(dd,b if (not c.get('hat3d')) and hat not in('cop','flatcap','fedora','beanie','ladyhat','capotain','tricorn','knit','cap','sunhat','visor','kepi') or b!='up' else 'flat',cy=EY-125),[(CX-108,EY-125,64),(CX+108,EY-125,64)],1.6)   # rule 335: brows x1.6 (was 1.45)
     MSIDE=X.mouth_side(c,ex)   # round 3: per-face mouthL/mouthR/lookL/lookR tokens override the character's mouth_side
     if MSIDE:   # round 2 (owner Nov 22 5:11 PM CT): Rick's off-centre, lopsided mouths. DC scales the mouth 1.65x first, then shifts it
         # toward the side and tilts it so that corner rides up (round mouths only shift), same as X.mouth_layer

@@ -182,7 +182,7 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
     for key in (['body','bodyw1','bodyw2'] if walker else ['body']):
         sy=BSY[c['body']]; b=plane(f'{inst}_{key}',(0,0,0),0.8,1.1*sy,card_mat(f'{kind}_{key}',f'{kind}_{key}'),coll=C); b.parent=root; b.location=(0,0,-0.04+0.55*sy); bodies[key]=b
     hp=empty(inst+'_hp',(0,0,top),root,coll=C)
-    neck=plane(inst+'_head',(0,0,0),0.16*HS,0.16*HS,flat('skin',lin((252,246,236)),0.9),coll=C); neck.parent=hp; neck.location=(0,0.004,0.04)
+    neck=plane(inst+'_head',(0,0,0),0.16*HS,0.16*HS,flat('skin',lin((250,231,208)),0.9),coll=C); neck.parent=hp; neck.location=(0,0.004,0.04)
     F={}
     for fk in c['faces']:
         _pt,_pb=XL.pads(c)   # round 3 (v7vnb2 5d8d84e): tall hats/hair/beards use a taller head texture; card grows by the same ratio, head disc stays put

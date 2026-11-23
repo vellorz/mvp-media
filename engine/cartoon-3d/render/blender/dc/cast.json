@@ -119,7 +119,8 @@
    "worried"
   ],
   "mouth_side": 1,
-  "turn": 0.5
+  "turn": 0.5,
+  "skin": "rick_warm"
  },
  "clerk": {
   "coat": [
@@ -248,7 +249,8 @@
    80,
    50
   ],
-  "fhair": "chevron"
+  "fhair": "chevron",
+  "skin": "rick_warm"
  },
  "presA": {
   "coat": [
@@ -350,7 +352,8 @@
    28,
    34
   ],
-  "hat_tilt": -6
+  "hat_tilt": -6,
+  "skin": "rick_warm"
  },
  "presB": {
   "coat": [
@@ -450,7 +453,8 @@
    44,
    34
   ],
-  "fhair": "curled"
+  "fhair": "curled",
+  "skin": "rick_warm"
  },
  "presC": {
   "coat": [
@@ -555,7 +559,8 @@
    90,
    70,
    56
-  ]
+  ],
+  "skin": "rick_warm"
  },
  "presD": {
   "coat": [
@@ -657,7 +662,8 @@
    70,
    52,
    40
-  ]
+  ],
+  "skin": "rick_warm"
  },
  "presE": {
   "coat": [
@@ -747,7 +753,8 @@
   ],
   "mouth_side": 1,
   "turn": 0.5,
-  "hairdo": "sidepart"
+  "hairdo": "sidepart",
+  "skin": "rick_warm"
  },
  "printer": {
   "coat": [
@@ -848,7 +855,8 @@
    86,
    74
   ],
-  "turn": -0.5
+  "turn": -0.5,
+  "skin": "rick_warm"
  },
  "mailman": {
   "coat": [
@@ -964,7 +972,8 @@
    70,
    50,
    36
-  ]
+  ],
+  "skin": "rick_warm"
  },
  "blueA": {
   "coat": [
@@ -1065,7 +1074,8 @@
    44,
    62,
    118
-  ]
+  ],
+  "skin": "rick_warm"
  },
  "blueB": {
   "coat": [
@@ -1168,7 +1178,8 @@
    150,
    80
   ],
-  "fhair": "walrus"
+  "fhair": "walrus",
+  "skin": "rick_warm"
  },
  "greyA": {
   "coat": [
@@ -1275,7 +1286,8 @@
    70,
    56,
    44
-  ]
+  ],
+  "skin": "rick_warm"
  },
  "greyB": {
   "coat": [
@@ -1381,7 +1393,8 @@
    90,
    50
   ],
-  "fhair": "droop"
+  "fhair": "droop",
+  "skin": "rick_warm"
  },
  "townW": {
   "coat": [
@@ -1471,7 +1484,8 @@
   ],
   "mouth_side": -1,
   "turn": -0.5,
-  "hairdo": "bangs"
+  "hairdo": "bangs",
+  "skin": "rick_warm"
  },
  "momT": {
   "coat": [
@@ -1565,7 +1579,8 @@
    "open_smile"
   ],
   "mouth_side": 1,
-  "turn": 0.5
+  "turn": 0.5,
+  "skin": "rick_warm"
  },
  "dadT": {
   "coat": [
@@ -1661,7 +1676,8 @@
   ],
   "mouth_side": -1,
   "turn": -0.5,
-  "hairdo": "messy"
+  "hairdo": "messy",
+  "skin": "rick_warm"
  },
  "kidT": {
   "coat": [
@@ -1751,7 +1767,8 @@
   ],
   "mouth_side": 1,
   "turn": 0.5,
-  "hairdo": "bowl"
+  "hairdo": "bowl",
+  "skin": "rick_warm"
  },
  "grandT": {
   "coat": [
@@ -1845,6 +1862,7 @@
    "open_smile"
   ],
   "mouth_side": -1,
-  "turn": -0.5
+  "turn": -0.5,
+  "skin": "rick_warm"
  }
 }

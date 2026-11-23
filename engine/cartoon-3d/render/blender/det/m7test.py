@@ -12,8 +12,8 @@ w = bpy.data.worlds.new('w'); sc.world = w; w.use_nodes = True; w.node_tree.node
 fl = plane('floor', (0, 0, 0), 12, 12, flat('floorm', lin((150, 128, 104)), 0.8), horiz=True)
 bk = plane('back', (0, 2.2, 1.6), 12, 4, flat('backm', lin((120, 150, 170)), 0.9))
 sd = bpy.data.lights.new('sun', 'SUN'); sd.energy = 3.0; so = bpy.data.objects.new('sun', sd); sc.collection.objects.link(so); so.rotation_euler = (math.radians(50), 0, math.radians(30))
-co, tg = cam('T', 40, 11); kloc(co, 0, (0, -2.7, 1.05)); kloc(tg, 0, (0, 0, 1.0)); sc.camera = co
-man = char('man', 'r5man', 'T', (-0.75, 0, 0), (0, END), face0='neutral@F')
+co, tg = cam('T', 40, 11); kloc(co, 0, (0, -4.3, 1.15)); kloc(tg, 0, (0, 0, 1.05)); sc.camera = co
+man = char('man', 'r5man', 'T', (-0.8, 0, 0), (0, END), face0='neutral@F')
 wom = char('wom', 'r5woman', 'T', (0.0, 0.15, 0), (0, END), face0='neutral@F')
 hat = char('hat', 'r5hat', 'T', (0.75, 0.05, 0), (0, END), face0='smug@F')
 # round 7 (owner review Nov 23): the reworked moves and the new runs
@@ -22,7 +22,7 @@ combo(man, 52, 'clap', side=1, face='happy')
 combo(man, 96, 'sprint', side=1, face='determined')
 combo(wom, 8, 'startle_recoil', side=1, face='neutral', face2='sigh')
 combo(wom, 50, 'cross_arms_huff', side=1, face='annoyed')
-combo(wom, 100, 'jog', side=-1, face='determined')
+combo(wom, 100, 'jog', side=1, face='determined')
 combo(hat, 4, 'double_take', side=-1, face='neutral', face2='surprise')
 combo(hat, 54, 'think_chin', side=-1, face='skeptical', face2='open_smile')
 combo(hat, 104, 'turn_away_back', side=1, face='smug')

@@ -977,3 +977,19 @@ def expand(C):
         if c.get('turns') and 'back' not in c.setdefault('faces', {}):
             c['faces']['back'] = ['none', 'none', 'none', 'backview']
     return C
+
+# =================================================================== ROUND 7 (Nov 23 2026, owner review): 3/4 back views
+# 'back@L1..L3' / 'back@R1..R3': the back of the head turned a little toward one side (an ear and the cheek edge show), the in-between
+# Rick draws on the way round to the back (#22 f468-469; #03 f80). 'back@F' = the plain back view. [INFERRED until the owner approves]
+TOKENS = TOKENS | {'back3qL', 'back3qR'}
+_expand_r6 = expand
+def expand(C):
+    C = _expand_r6(C)
+    for n, c in C.items():
+        f = c.get('faces', {})
+        if 'back' in f:
+            f.setdefault('back@F', list(f['back']))
+            for lv in (1, 2, 3):
+                f.setdefault(f'back@L{lv}', ['none', 'none', 'none', 'backview+back3qL'])
+                f.setdefault(f'back@R{lv}', ['none', 'none', 'none', 'backview+back3qR'])
+    return C

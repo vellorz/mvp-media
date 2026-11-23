@@ -392,6 +392,7 @@ def _const(o):
             if fc.data_path!='hide_render':
                 for kp in fc.keyframe_points: kp.interpolation='CONSTANT'
 LEGTEX={'body':'blegs','bodyw1':'blegsw1','bodyw2':'blegsw2'}
+LEGTEX.update({f'run{d}{p}':f'blegsrun{d}{p}' for d in 'RL' for p in (1,2,3,4)})   # r7: run cycle legs (cast.run_legs)
 def _body_card(ch,key):
     """legs card for 'body' (standing) or a stride drawing used as a step / weight shift / run (made on first use)"""
     L=ch['split']['legs']
@@ -406,7 +407,7 @@ def combo(ch,f,name,side=1,face=None,frm=0,face2=None):
     Bakes every channel on the same plan: face/turn (353a grammar), arm pose cards (354a), body lean/squash/hop on the lean pivot,
     head drop/tilt on the head pivot, stride cards for steps. Returns the last frame the combo changes anything."""
     st_=MO.COMBOS[name].get('status')
-    if st_!='MEASURED' and name not in (CI[ch['kind']].get('combos_approved') or []):
+    if st_ not in ('MEASURED','APPROVED') and name not in (CI[ch['kind']].get('combos_approved') or []):   # r7: APPROVED = owner OK'd (Nov 23)
         raise ValueError(f"combo {name} is {st_}: owner approval needed (cast.json 'combos_approved')")   # inferred moves stay OFF (rule 360)
     base=face or (sorted(ch['faces'])[-1][1].split('@')[0] if ch['faces'] else list(ch['F'])[0].split('@')[0])
     seq=MO.frames(name,side,base,frm,face2,pre=0,post=0)
@@ -431,12 +432,24 @@ def combo(ch,f,name,side=1,face=None,frm=0,face2=None):
         if prev is None or (s['hdy'],s['htilt'])!=(prev['hdy'],prev['htilt']):
             if prev is None: kloc(hp,g-1,(0,0,top)); krot(hp,g-1,(0,0,0))
             kloc(hp,g,(0,0,top-s['hdy'])); krot(hp,g,(0,math.radians(s['htilt']),0)); last=g
+        if s['hop']>0.001 or (s['legs'].startswith('run') and s['legs'][-1] in '24'): AIR.add((ch['root'].name,g))   # r7: planned airborne frame
+        for e in s.get('fx',[]):   # r7: effect cards, shown on the frames the plan lists them
+            ch.setdefault('fxf',{}).setdefault(_fx_card(ch,*e),[]).append(g)
         if prev is None or s['legs']!=prev['legs']:
             if s['legs']!='body': _body_card(ch,s['legs'])
             ch.setdefault('legsched',[]).append((g,s['legs'])); last=g
         prev=s
     _const(ln); _const(wh); _const(hp)
     return last
+FX_Y={'head':-0.016,'torso':-0.0108,'feet':-0.002,'behind':0.004}   # r7 depths (rule 354b: >= 1 mm from every other card layer)
+def _fx_card(ch,kind,anchor,dx,dz,size,side):
+    """effect card (cast.fx textures) on the head pivot, the hip/lean pivot or the feet ('whole'); one card per kind/anchor/facing"""
+    key=(kind,anchor,round(dx,3),round(dz,3),round(size,3),side); C_=ch.setdefault('fxc',{})
+    if key in C_: return C_[key]
+    t='fx_'+kind+('_L' if side<0 else '')
+    o=plane(f"{ch['inst']}_fx_{kind}_{len(C_)}",(0,0,0),size,size,card_mat(t,t,emit=0.6),coll=chr_coll(ch['shot']))
+    par={'head':ch['hp'],'torso':ch['lean'],'behind':ch['lean'],'feet':ch['split']['whole']}[anchor]
+    o.parent=par; o.location=(dx,FX_Y[anchor],dz); o.visible_shadow=False; vis(o,[]); C_[key]=o; return o
 def _revis(o,ranges):
     if o.animation_data and o.animation_data.action:
         for fc in list(o.animation_data.action.fcurves):
@@ -466,6 +479,17 @@ def finish(ch,blink_every=34):
     for k,o in ch['split']['legs'].items(): vis(o,BR.get(k,[]))
     vis(ch['split']['top'],[(a,b)])
     for o in [ch['split']['whole'],ch['lean']]+list(ch['split']['legs'].values())+[ch['split']['top']]: o['chr']=ch['inst']
+    return ch
+_finish_r6=finish
+def finish(ch,blink_every=34):
+    """round 7: as before, plus effect cards shown on their planned frames"""
+    ch=_finish_r6(ch,blink_every)
+    for o,frs in (ch.get('fxf') or {}).items():
+        frs=sorted(set(frs)); R=[]
+        for f in frs:
+            if R and f==R[-1][1]+1: R[-1][1]=f
+            else: R.append([f,f])
+        vis(o,[tuple(r) for r in R]); o['chr']=ch['inst']
     return ch
 def lipsync(ch,words,f0,f1,shapes=('talkA','talkB','talkC','talkD'),rest='talkD'):
     """mouth shapes on the quoted words only (rule 185: lips move only on quoted lines)"""
@@ -549,6 +573,7 @@ def _low_row(img):
     w,h=img.size; a=np.array(img.pixels[:]).reshape(h,w,4)[...,3]   # Blender rows start at the bottom
     rows=np.where(a.max(1)>0.5)[0]; v=(rows.min()/h) if len(rows) else 0.0
     _LOWROW[img.name]=v; return v
+AIR=set()   # r7: (character root name, frame) where combo() plans the feet off the ground (jumps, run air drawings); FOOT skips them
 def rigcheck(frames,floor_z=None):
     """Prints RIGCHECK lines and returns the number of faults:
     COPLANAR_CARD  two visible cards of one character in the same plane (< 1 mm apart) that overlap on screen -> see-through ink
@@ -587,6 +612,7 @@ def rigcheck(frames,floor_z=None):
                 im=next((nd.image for nd in o.active_material.node_tree.nodes if nd.type=='TEX_IMAGE' and nd.image),None)
                 if not im: continue
                 zb=min(v.z for v in vs); zt=max(v.z for v in vs); fz=zb+_low_row(im)*(zt-zb)-(_root(o).matrix_world.translation.z if floor_z is None else floor_z)   # floor = the character's root (feet planted on its own ground)
+                if (_root(o).name,f) in AIR: continue   # r7: a planned jump or run air drawing, not a floating foot
                 k=('FOOT',o.name)
                 if (fz<0 or fz>0.006) and k not in seen: seen.add(k); print('RIGCHECK FOOT',f,o.name,f'{fz*1000:+.1f}mm'); bad+=1
     print('RIGCHECK_FAULTS',bad); return bad

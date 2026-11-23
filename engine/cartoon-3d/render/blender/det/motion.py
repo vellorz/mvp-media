@@ -32,7 +32,7 @@ def plan(name, side=1, face='smug', frm=0, face2=None):
     for ev in C['events']:
         o, ch, v = ev['at'], ev['ch'], ev.get('v')
         if ch == 'face':
-            k = v.replace('$face', face).replace('$face2', face2 or face)
+            k = v.replace('$face2', face2 or face).replace('$face', face)   # r7: $face2 first ('$face2' contains '$face')
             out.append((o, 'face', k))
         elif ch == 'look':
             out.append((o, 'look', 0 if v == 0 else (v * side if v != 'from' else lv0)))
@@ -45,6 +45,11 @@ def plan(name, side=1, face='smug', frm=0, face2=None):
             which, pose = v[0], v[1]; opts = v[2] if len(v) > 2 else {}
             sx = side if which == 'near' else (-side if which == 'far' else (1 if which == 'right' else -1))
             out.append((o, 'arm', (sx, pose, opts.get('inb', True), opts.get('settle', 0), opts.get('anticip', 0))))
+        elif ch == 'fx':   # round 7: [kind, anchor 'head'|'torso'|'feet', dx, dz, size m, frames]; dx and facing follow `side`
+            k, anc, dx, dz, size, dur = v
+            out.append((o, 'fx', (k, anc, dx * side, dz, size, int(dur), (1 if dx * side > 0 else -1) if dx else side)))   # faces the side it sits on
+        elif ch == 'legs' and isinstance(v, str) and v.startswith('run'):   # round 7: run cycle drawings face the run side
+            out.append((o, 'legs', f"run{'R' if side > 0 else 'L'}{v[3:]}"))
         elif ch in ('lean', 'htilt'):
             out.append((o, ch, [v[0] * side, v[1]] if isinstance(v, (list, tuple)) else v * side))
         else:
@@ -65,6 +70,7 @@ def frames(name, side=1, face='smug', frm=0, face2=None, pre=3, post=8):
     P = plan(name, side, face, frm, face2)
     end = max(o for o, _, _ in P) + post
     st = dict(face=face, lv=frm, arms={-1: 'hang', 1: 'hang'}, lean=0.0, squash=0.0, hdy=0.0, htilt=0.0, legs='body', hop=0.0)
+    fxa = []   # active effect cards: (kind, anchor, dx, dz, size, side, last frame)
     keyed = {}   # frame -> list of (channel, value) after expanding turns/arm sequences/ramps
     def put(f, k, v): keyed.setdefault(f, []).append((k, v))
     for o, ch, v in P:
@@ -98,13 +104,16 @@ def frames(name, side=1, face='smug', frm=0, face2=None, pre=3, post=8):
                 if card == '_m_back': card = (st['arms'][sx] + '_m') if st['arms'][sx] not in ('hang',) else 'hang'
                 st['arms'] = dict(st['arms']); st['arms'][sx] = card
             elif k == 'legs': st['legs'] = v
+            elif k == 'fx': fxa.append((v[0], v[1], v[2], v[3], v[4], v[6], f + v[5] - 1))
             elif k.endswith('_ramp'):
                 c = k[:-5]; ramps[c] = (f, st[c], v[0], v[1])
         for c, (f0, a, b, n) in list(ramps.items()):
             t = min(1.0, (f - f0 + 1) / n); st[c] = a + (b - a) * t
             if t >= 1.0: del ramps[c]
+        fxa = [e for e in fxa if e[6] >= f]
         seq.append(dict(f=f, face=st['face'], lv=st['lv'], arms=dict(st['arms']), lean=round(st['lean'], 2), squash=round(st['squash'], 3),
-                        hdy=round(st['hdy'], 4), htilt=round(st['htilt'], 2), legs=st['legs'], hop=round(st['hop'], 4)))
+                        hdy=round(st['hdy'], 4), htilt=round(st['htilt'], 2), legs=st['legs'], hop=round(st['hop'], 4),
+                        fx=[e[:6] for e in fxa]))
     return seq
 
 def moving_parts(seq):
@@ -116,5 +125,6 @@ def moving_parts(seq):
         if a['arms'] != b['arms']: m.add('arms')
         if a['lean'] != b['lean'] or a['squash'] != b['squash']: m.add('torso')
         if a['legs'] != b['legs'] or a['hop'] != b['hop']: m.add('legs')
+        if a.get('fx') != b.get('fx'): m.add('fx')
         out.append((b['f'], m))
     return out

@@ -85,28 +85,36 @@
    "side": 1
   },
   {
+   "combo": "wave_hello",
+   "char": "r5woman",
+   "face": "smile",
+   "side": 1
+  },
+  {
+   "combo": "akimbo_scold",
+   "char": "r5hat",
+   "face": "skeptical",
+   "side": 1
+  },
+  {
    "combo": "look_back_shrug",
    "char": "r5man",
-   "face": "deadpan",
+   "face": "neutral",
+   "face2": "skeptical",
    "side": 1
   },
   {
    "combo": "startle_recoil",
    "char": "r5woman",
-   "face": "worried",
+   "face": "neutral",
+   "face2": "sigh",
    "side": 1
   },
   {
    "combo": "double_take",
    "char": "r5man",
-   "face": "deadpan",
+   "face": "neutral",
    "face2": "surprise",
-   "side": 1
-  },
-  {
-   "combo": "wave_hello",
-   "char": "r5woman",
-   "face": "smile",
    "side": 1
   },
   {
@@ -118,25 +126,32 @@
   {
    "combo": "cross_arms_huff",
    "char": "r5woman",
-   "face": "smug",
-   "side": 1
-  },
-  {
-   "combo": "akimbo_scold",
-   "char": "r5hat",
-   "face": "skeptical",
+   "face": "annoyed",
    "side": 1
   },
   {
    "combo": "think_chin",
    "char": "r5man",
    "face": "skeptical",
+   "face2": "open_smile",
    "side": 1
   },
   {
    "combo": "turn_away_back",
    "char": "r5hat",
-   "face": "skeptical",
+   "face": "smug",
+   "side": 1
+  },
+  {
+   "combo": "jog",
+   "char": "r5woman",
+   "face": "determined",
+   "side": 1
+  },
+  {
+   "combo": "sprint",
+   "char": "r5man",
+   "face": "determined",
    "side": 1
   }
  ]

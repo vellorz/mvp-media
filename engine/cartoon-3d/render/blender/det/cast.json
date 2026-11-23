@@ -111,7 +111,9 @@
    50,
    34,
    28
-  ]
+  ],
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "seller": {
   "coat": [
@@ -184,7 +186,9 @@
    120,
    110,
    100
-  ]
+  ],
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "lion": {
   "coat": [
@@ -267,7 +271,9 @@
    "stern",
    "surprise",
    "worried"
-  ]
+  ],
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "lion2": {
   "coat": [
@@ -344,7 +350,9 @@
    "stern",
    "surprise",
    "worried"
-  ]
+  ],
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "bear": {
   "coat": [
@@ -418,7 +426,9 @@
    "stern",
    "surprise",
    "worried"
-  ]
+  ],
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "fanman": {
   "coat": [
@@ -512,7 +522,9 @@
    70,
    46,
    30
-  ]
+  ],
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "fanlady": {
   "coat": [
@@ -586,7 +598,9 @@
    160,
    50,
    60
-  ]
+  ],
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "fanold": {
   "coat": [
@@ -679,7 +693,9 @@
    200,
    200,
    200
-  ]
+  ],
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "newsboy": {
   "coat": [
@@ -742,7 +758,9 @@
    110,
    60
   ],
-  "hairdo": "messy"
+  "hairdo": "messy",
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "dad34": {
   "coat": [
@@ -820,7 +838,9 @@
    55,
    35
   ],
-  "hairdo": "sidepart"
+  "hairdo": "sidepart",
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "mom34": {
   "coat": [
@@ -886,7 +906,9 @@
    "smile",
    "surprise",
    "worried"
-  ]
+  ],
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "gramps": {
   "coat": [
@@ -982,7 +1004,9 @@
    235,
    235,
    235
-  ]
+  ],
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "kid34": {
   "coat": [
@@ -1049,7 +1073,9 @@
    90,
    100,
    120
-  ]
+  ],
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "operator": {
   "coat": [
@@ -1115,7 +1141,9 @@
    "surprise",
    "worried"
   ],
-  "hairdo": "topknot"
+  "hairdo": "topknot",
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "clerk": {
   "coat": [
@@ -1177,7 +1205,9 @@
    "worried"
   ],
   "hat": "visor",
-  "fhair": "stubbledots"
+  "fhair": "stubbledots",
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "dadM": {
   "coat": [
@@ -1259,7 +1289,9 @@
    46,
    30
   ],
-  "hairdo": "sidepart"
+  "hairdo": "sidepart",
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "momM": {
   "coat": [
@@ -1325,7 +1357,9 @@
    "smile",
    "surprise",
    "worried"
-  ]
+  ],
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "kidM": {
   "coat": [
@@ -1386,7 +1420,9 @@
    "surprise",
    "worried"
   ],
-  "hairdo": "cowlick"
+  "hairdo": "cowlick",
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  },
  "grandmaM": {
   "coat": [
@@ -1450,6 +1486,8 @@
    "smile",
    "surprise",
    "worried"
-  ]
+  ],
+  "feat_scale": "rick",
+  "skin": "rick_warm"
  }
 }

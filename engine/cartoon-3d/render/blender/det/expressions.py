@@ -852,3 +852,32 @@ def _load_extra():
         for fam, members in FAMILY.items():
             if fam == v and k not in members: members.append(k) if isinstance(members, list) else None
 _load_extra()
+
+# ------------------------------------------------------------------ ADDED BY VIDEOS: 2026-11-22, Washington DC Thanksgiving (dc9)
+# kepi3d: 1860s forage cap (Union blue / Confederate grey / postal brown), rule 334(b) addition.
+# Rick refs: 15_022_0 (blue kepi, gold emblem, peak low over the brows) and 02_006_0 (blue peaked cap with badge), both in
+# research/rick-style-spec/expression-library/round2|round3/ref-crops; side by side: additions/2026-11-22_washington-dc_kepi3d.jpg.
+# Drawn like the round-2 hats (lit top ellipse, shaded far side, curved band, peak seen from below), then tilted. The caller squashes it
+# to the top 60 % of the head like the head's other hats (DC cast.py), which keeps the brim above the brows.
+HAT_PERIOD = ['kepi3d']
+def hat3d_period(name, col, K, tilt=0, dx=0):
+    if name not in HAT_PERIOD: return None
+    lay = Image.new('RGBA', (1024, 1024), CLEAR); d = ImageDraw.Draw(lay)
+    col = tuple(col)[:3] + (255,); sh = dk_(col, 0.72); hi = tuple(min(255, int(v * 1.25) + 25) for v in col[:3]) + (255,); W = 22; bd = dk_(col, 0.55)
+    crown = [(230, 380), (270, 80), (800, 50), (812, 380)]
+    d.polygon(crown, fill=col); d.polygon([(690, 58), (800, 50), (812, 380), (700, 380)], fill=sh)
+    d.ellipse([262, 22, 808, 112], fill=hi, outline=K, width=W)
+    d.line(crown + [crown[0]], fill=K, width=W, joint='curve')
+    d.rectangle([222, 318, 820, 384], fill=bd); d.chord([222, 344, 820, 424], 0, 180, fill=bd); d.arc([222, 344, 820, 424], 0, 180, fill=K, width=12); d.line([222, 318, 820, 318], fill=K, width=10)
+    d.chord([160, 370, 660, 520], 0, 180, fill=(24, 22, 26, 255), outline=K, width=W); d.arc([200, 380, 600, 470], 20, 90, fill=(80, 80, 90, 255), width=10)
+    d.ellipse([470, 330, 520, 380], fill=(214, 180, 80, 255), outline=K, width=8)   # plain brass button, no insignia
+    lay = lay.resize((1106, 1106), Image.LANCZOS).crop((41, 0, 1065, 1024)); lay = lay.rotate(-tilt, resample=Image.BICUBIC, center=(CX, 300))
+    out = Image.new('RGBA', (1024, 1024), CLEAR); out.alpha_composite(lay, (int(dx), int(abs(tilt) * 4))); return out
+# shared-rig hook (det cast.py goes through hat3d_layer for every hat3d): period hats come out squashed to the top 60 % of the head,
+# exactly as DC's cast.py draws them, on the padded layer so hair under them is erased like under every other hat
+_hat3d_layer_r3 = hat3d_layer
+def hat3d_layer(name, col, K, tilt=0, dx=0, col2=None, top=0, bottom=0):
+    if name in HAT_PERIOD:
+        lay = hat3d_period(name, col, K, tilt, dx).resize((1024, int(1024 * 0.6)), Image.LANCZOS)
+        out = Image.new('RGBA', (1024, 1024 + top + bottom), CLEAR); out.alpha_composite(lay, (0, top)); return out, 300
+    return _hat3d_layer_r3(name, col, K, tilt, dx, col2, top, bottom)

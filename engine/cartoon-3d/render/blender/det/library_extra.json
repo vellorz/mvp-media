@@ -1,0 +1,17 @@
+{
+  "_readme": "Faces added by video builds (owner Nov 22 2026: the library keeps growing). Each entry: name -> [eyes, brows, mouth, extras]. Log every addition below with the video, the 2+ Rick reference frames it was matched to, and the date. How-to: research/rick-style-spec/expression-library/CONTRIBUTING.md",
+  "faces": {},
+  "family": {},
+  "log": [
+    {
+      "name": "kepi3d (hat, expressions.py HAT_PERIOD / hat3d_period)",
+      "video": "Thu Nov 26 Washington DC Thanksgiving",
+      "date": "2026-11-22",
+      "rick_refs": [
+        "15_022_0",
+        "02_006_0"
+      ],
+      "status": "PASS (rule 330 sheet additions/2026-11-22_washington-dc_kepi3d.jpg); added from DC branch z0l0eh 39c6e0e; awaiting owner review on the library page"
+    }
+  ]
+}

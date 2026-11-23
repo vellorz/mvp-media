@@ -833,3 +833,86 @@ def turn_dx(c, ex=''):
     if 'lookR' in ks: return 62
     return _turn_dx_r2(c, ex)
 TOKENS = {'turnL', 'turnR', 'front', 'mouthL', 'mouthR', 'mouthC', 'tiltL', 'tiltR', 'lookL', 'lookR'}
+
+# ------------------------------------------------------------------ growing library (owner Nov 22 2026, 5:52 PM CT)
+# "the expression library page [should] keep accumulating new facial expressions ... a constant feedback loop that expands the library".
+# Builders add faces WITHOUT editing this file: library_extra.json next to this file, {"faces": {name: [eyes, brows, mouth, extras]},
+# "family": {name: family}, "log": [...]} using any eyes/brows/mouth/extras kind already defined here (or in cast.py).
+# New drawing primitives (a new eye shape, hair, hat) still go in this file, in a dated section like ROUND 3 above.
+# How-to and checklist: research/rick-style-spec/expression-library/CONTRIBUTING.md (project files).
+def _load_extra():
+    import json, os
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'library_extra.json')
+    if not os.path.exists(p): return
+    try: E = json.load(open(p))
+    except Exception as e: print('library_extra.json unreadable:', e); return
+    for k, v in E.get('faces', {}).items():
+        if k not in LIBRARY: LIBRARY[k] = tuple((list(v) + [''] * 4)[:4])
+    for k, v in E.get('family', {}).items():
+        for fam, members in FAMILY.items():
+            if fam == v and k not in members: members.append(k) if isinstance(members, list) else None
+_load_extra()
+
+# ------------------------------------------------------------------ ADDED BY VIDEOS: 2026-11-22, Washington DC Thanksgiving (dc9)
+# kepi3d: 1860s forage cap (Union blue / Confederate grey / postal brown), rule 334(b) addition.
+# Rick refs: 15_022_0 (blue kepi, gold emblem, peak low over the brows) and 02_006_0 (blue peaked cap with badge), both in
+# research/rick-style-spec/expression-library/round2|round3/ref-crops; side by side: additions/2026-11-22_washington-dc_kepi3d.jpg.
+# Drawn like the round-2 hats (lit top ellipse, shaded far side, curved band, peak seen from below), then tilted. The caller squashes it
+# to the top 60 % of the head like the head's other hats (DC cast.py), which keeps the brim above the brows.
+HAT_PERIOD = ['kepi3d']
+def hat3d_period(name, col, K, tilt=0, dx=0):
+    if name not in HAT_PERIOD: return None
+    lay = Image.new('RGBA', (1024, 1024), CLEAR); d = ImageDraw.Draw(lay)
+    col = tuple(col)[:3] + (255,); sh = dk_(col, 0.72); hi = tuple(min(255, int(v * 1.25) + 25) for v in col[:3]) + (255,); W = 22; bd = dk_(col, 0.55)
+    crown = [(230, 380), (270, 80), (800, 50), (812, 380)]
+    d.polygon(crown, fill=col); d.polygon([(690, 58), (800, 50), (812, 380), (700, 380)], fill=sh)
+    d.ellipse([262, 22, 808, 112], fill=hi, outline=K, width=W)
+    d.line(crown + [crown[0]], fill=K, width=W, joint='curve')
+    d.rectangle([222, 318, 820, 384], fill=bd); d.chord([222, 344, 820, 424], 0, 180, fill=bd); d.arc([222, 344, 820, 424], 0, 180, fill=K, width=12); d.line([222, 318, 820, 318], fill=K, width=10)
+    d.chord([160, 370, 660, 520], 0, 180, fill=(24, 22, 26, 255), outline=K, width=W); d.arc([200, 380, 600, 470], 20, 90, fill=(80, 80, 90, 255), width=10)
+    d.ellipse([470, 330, 520, 380], fill=(214, 180, 80, 255), outline=K, width=8)   # plain brass button, no insignia
+    lay = lay.resize((1106, 1106), Image.LANCZOS).crop((41, 0, 1065, 1024)); lay = lay.rotate(-tilt, resample=Image.BICUBIC, center=(CX, 300))
+    out = Image.new('RGBA', (1024, 1024), CLEAR); out.alpha_composite(lay, (int(dx), int(abs(tilt) * 4))); return out
+# shared-rig hook (det cast.py goes through hat3d_layer for every hat3d): period hats come out squashed to the top 60 % of the head,
+# exactly as DC's cast.py draws them, on the padded layer so hair under them is erased like under every other hat
+_hat3d_layer_r3 = hat3d_layer
+def hat3d_layer(name, col, K, tilt=0, dx=0, col2=None, top=0, bottom=0):
+    if name in HAT_PERIOD:
+        lay = hat3d_period(name, col, K, tilt, dx).resize((1024, int(1024 * 0.6)), Image.LANCZOS)
+        out = Image.new('RGBA', (1024, 1024 + top + bottom), CLEAR); out.alpha_composite(lay, (0, top)); return out, 300
+    return _hat3d_layer_r3(name, col, K, tilt, dx, col2, top, bottom)
+
+# =================================================================== ROUND 4 PROPOSAL (Nov 23 2026, coordinator's Cape Cod vs Rick #10/#14 check)
+# Measured on 360 Rick heads (24 videos, frames every 2.5 s) with the same detector run on our library heads:
+#   skin: Rick's heads are near-white TINTED BY THE SCENE: per-video median runs from cool blue-white (#05, #21, #24) to peach
+#         (#07 252,226,198; #09 246,231,205; #25 253,236,217) and pink (#10 233,204,206; #14 241,227,227); all-video median 243,231,228.
+#   lidded/wide eyes: Rick 0.19 of head width wide, ours 0.13  (x1.45);  brows: Rick 0.19 long x 0.058 thick, ours 0.11-0.12 x 0.03-0.05 (x1.6);
+#   eye spacing about equal (Rick 0.27-0.28, ours 0.30); walrus moustache about equal (ours 0.42 vs Rick median 0.34 over all moustaches).
+# Opt-in so renders in flight are unchanged: cast.json per character  "feat_scale": "rick"  and  "skin": "rick_warm" | "rick_pink" | ...
+SKIN = {'rick_neutral': (245, 233, 229), 'rick_warm': (250, 231, 208), 'rick_pink': (240, 216, 214), 'rick_cool': (238, 238, 246), 'rig_white': (251, 244, 241)}
+def skin_rgb(v, default):
+    if isinstance(v, str): return SKIN.get(v, default)[:3]
+    return tuple(v)[:3] if v else tuple(default)[:3]
+RICK_SCALE = (1.4, 1.6, 1.3)       # eyes, brows, mouth
+def feat_scale(c):
+    v = c.get('feat_scale')
+    if not v: return None
+    if v == 'rick': return RICK_SCALE
+    return tuple((list(v) + [1, 1, 1])[:3])
+# feature boxes in face-layer coordinates (before the 105 px lift): (centre x, centre y, half size)
+EYE_BOXES = [(CX - 108, 520, 110), (CX + 108, 520, 110)]
+BROW_BOXES = [(CX - 108, 405, 100), (CX + 108, 405, 100)]   # about the old brow line, so bigger brows grow down, away from the hairline
+MOUTH_BOXES = [(CX, 715, 170)]
+def scaled(dst, drawfn, boxes, f):
+    """draw with drawfn on a scratch layer, then scale each box's content about its own centre (feature spacing unchanged)"""
+    lay = Image.new('RGBA', (1024, 1024), CLEAR); drawfn(ImageDraw.Draw(lay))
+    if abs(f - 1) < 1e-3: dst.alpha_composite(lay); return
+    for bx, by, r in boxes:
+        cr = lay.crop((bx - r, by - r, bx + r, by + r)); n = int(2 * r * f); cr = cr.resize((n, n), Image.LANCZOS)
+        dst.alpha_composite(cr, (int(bx - n / 2), int(by - n / 2)))
+def mouth_set(lay, kind, side, cy=715):
+    """Rick's lopsided set for an already drawn mouth layer (same as mouth_layer)"""
+    if not side: return lay
+    ang = 0 if kind in ('O', 'o', 'sigh', 'shout', 'whistleo') else MOUTH_TILT * side
+    lay = lay.rotate(ang, resample=Image.BICUBIC, center=(CX, cy))
+    out = Image.new('RGBA', (1024, 1024), CLEAR); out.alpha_composite(lay, (int(MOUTH_SHIFT * side), 0)); return out

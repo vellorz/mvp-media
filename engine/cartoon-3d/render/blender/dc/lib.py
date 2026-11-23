@@ -81,6 +81,7 @@ def flat(name,rgb,rough=0.7,emit=0.0,metal=0.0):
     if emit: p.inputs['Emission Color'].default_value=(*rgb,1); p.inputs['Emission Strength'].default_value=emit
     if PAINT and not emit and not metal: _paint(m)
     MC[name]=m; return m
+HEAD_EMIT=1.0   # rule 335 (gate v7 note): at 0.25 heads read grey under AgX (S07 face 206,194,181); 1.0 + pre-warmed skin 255,226,186 gives 216-218,204-205,189-190
 def card_mat(name,img,emit=0.3,rough=1.0):
     if name in MC: return MC[name]
     m=bpy.data.materials.new(name); N,L=nodes(m); p=N['Principled BSDF']; p.inputs['Roughness'].default_value=rough
@@ -182,11 +183,11 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
     for key in (['body','bodyw1','bodyw2'] if walker else ['body']):
         sy=BSY[c['body']]; b=plane(f'{inst}_{key}',(0,0,0),0.8,1.1*sy,card_mat(f'{kind}_{key}',f'{kind}_{key}'),coll=C); b.parent=root; b.location=(0,0,-0.04+0.55*sy); bodies[key]=b
     hp=empty(inst+'_hp',(0,0,top),root,coll=C)
-    neck=plane(inst+'_head',(0,0,0),0.16*HS,0.16*HS,flat('skin',lin((250,231,208)),0.9),coll=C); neck.parent=hp; neck.location=(0,0.004,0.04)
+    neck=plane(inst+'_head',(0,0,0),0.16*HS,0.16*HS,flat('skin',lin((255,226,186)),0.9),coll=C); neck.parent=hp; neck.location=(0,0.004,0.04)
     F={}
     for fk in c['faces']:
         _pt,_pb=XL.pads(c)   # round 3 (v7vnb2 5d8d84e): tall hats/hair/beards use a taller head texture; card grows by the same ratio, head disc stays put
-        f=plane(f'{inst}_d_{fk}',(0,0,0),0.75*HS,0.75*HS*(1024+_pt+_pb)/1024,card_mat(f'{kind}_h_{fk}',f'{kind}_h_{fk}',emit=0.25),coll=C); f.parent=hp; f.location=(0,-0.012,0.2535*HS+0.75*HS*(_pt-_pb)/2048); F[fk]=f
+        f=plane(f'{inst}_d_{fk}',(0,0,0),0.75*HS,0.75*HS*(1024+_pt+_pb)/1024,card_mat(f'{kind}_h_{fk}',f'{kind}_h_{fk}',emit=HEAD_EMIT),coll=C); f.parent=hp; f.location=(0,-0.012,0.2535*HS+0.75*HS*(_pt-_pb)/2048); F[fk]=f
     A={}
     for sx,ak in zip((-1,1),arms):
         # r7 (rule 268): arms sit BEHIND the face disc (face -0.012) and in front of the body (0): a raised hand can never paint over its own face

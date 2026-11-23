@@ -5,7 +5,7 @@ D=json.load(open('/root/dc/bridge/faces.json')); SH=json.load(open('/root/dc/bri
 FEAT=sys.argv[1].split(',') if len(sys.argv)>1 else []
 ev=[]   # (frame, kind, face) visible events, clipped to the character's shot range
 for c in D:
-    a,b=SH[c['shot']]; seq=[(f,k) for f,k in c['faces'] if k!='blink' and not k.startswith('talk')]   # lip shapes are not expressions
+    a,b=SH[c['shot']]; seq=[(f,k.replace('_ta','').replace('_tb','')) for f,k in c['faces'] if k!='blink' and not k.startswith('talk')]   # dc14: angle variants count as their base expression   # lip shapes are not expressions
     for i,(f,k) in enumerate(seq):
         nf=seq[i+1][0] if i+1<len(seq) else b
         if nf>=a and f<=b: ev.append((max(f,a),min(nf,b),c['kind'],k))

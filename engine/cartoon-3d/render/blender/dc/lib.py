@@ -82,13 +82,25 @@ def flat(name,rgb,rough=0.7,emit=0.0,metal=0.0):
     if PAINT and not emit and not metal: _paint(m)
     MC[name]=m; return m
 HEAD_EMIT=1.0   # rule 335 (gate v7 note): at 0.25 heads read grey under AgX (S07 face 206,194,181); 1.0 + pre-warmed skin 255,213,166 (Cape Cod F25 method; DC needs less blue for B/R 0.83)
+INK_EMIT=1.0   # dc14 rule 341
+import os as _os
+INK_RGB=tuple(int(v) for v in _os.environ.get('INK_RGB','62,36,72').split(','))
 def card_mat(name,img,emit=0.3,rough=1.0):
     if name in MC: return MC[name]
     m=bpy.data.materials.new(name); N,L=nodes(m); p=N['Principled BSDF']; p.inputs['Roughness'].default_value=rough
     p.inputs['Specular IOR Level'].default_value=0.0
     it=N.new('ShaderNodeTexImage'); it.image=bpy.data.images.load(img if img.startswith('/') else TX+img+'.png',check_existing=True); it.interpolation='Cubic'
-    L.new(it.outputs['Color'],p.inputs['Base Color']); L.new(it.outputs['Alpha'],p.inputs['Alpha'])
+    L.new(it.outputs['Color'],p.inputs['Base Color'])
     if emit: L.new(it.outputs['Color'],p.inputs['Emission Color']); p.inputs['Emission Strength'].default_value=emit
+    # dc14 rule 341: ink is unlit. Texture pixels as dark as the plum ink (linear luminance <= 0.022) render as pure emission of their own
+    # colour, so lamp light cannot push line cores red or magenta; alpha is applied once, outside the mix
+    bw=N.new('ShaderNodeRGBToBW'); L.new(it.outputs['Color'],bw.inputs[0])
+    mr=N.new('ShaderNodeMapRange'); mr.inputs['From Min'].default_value=0.022; mr.inputs['From Max'].default_value=0.036; mr.inputs['To Min'].default_value=1.0; mr.inputs['To Max'].default_value=0.0
+    L.new(bw.outputs[0],mr.inputs['Value'])
+    em=N.new('ShaderNodeEmission'); em.inputs['Color'].default_value=(*lin(INK_RGB),1.0); em.inputs['Strength'].default_value=INK_EMIT   # one calibrated plum, pre-compensated for AgX Punchy (raw (50,28,42) showed as (45,25,24))
+    mx=N.new('ShaderNodeMixShader'); L.new(mr.outputs[0],mx.inputs['Fac']); L.new(p.outputs[0],mx.inputs[1]); L.new(em.outputs[0],mx.inputs[2])
+    tr=N.new('ShaderNodeBsdfTransparent'); ma=N.new('ShaderNodeMixShader'); L.new(it.outputs['Alpha'],ma.inputs['Fac']); L.new(tr.outputs[0],ma.inputs[1]); L.new(mx.outputs[0],ma.inputs[2])
+    out=N['Material Output']; L.new(ma.outputs[0],out.inputs['Surface'])
     MC[name]=m; return m
 # ---------------- geometry (bmesh, no operators: fast with thousands of objects) ----------------
 from mathutils import Matrix, Euler
@@ -242,7 +254,7 @@ def finish(ch,blink_every=34):
     for i,(f,k) in enumerate(seq):
         nx=seq[i+1][0] if i+1<len(seq) else b+1
         out.append((f,k)); t=f+blink_every
-        if 'blink' in ch['F'] and k!='blink':
+        if 'blink' in ch['F'] and k!='blink' and not k.endswith(('_ta','_tb')):   # dc14: no front-angle blink inside a turned hold (rule 353)
             while t+2<nx-6: out.append((t,'blink')); out.append((t+2,k)); t+=blink_every+((t//7)%9)
     R={}
     for i,(f,k) in enumerate(out):
@@ -326,7 +338,7 @@ def ink(skip_prefix=()):
             rgb_=[n_ for n_ in m_.node_tree.nodes if n_.type=='RGB']
             if not pb_.is_linked: bc_=tuple(pb_.default_value)[:3]
             elif rgb_: bc_=tuple(rgb_[0].outputs[0].default_value)[:3]
-        h.color=(bc_[0]*0.22+0.004,bc_[1]*0.22+0.004,bc_[2]*0.22+0.004,1)
+        _pl=lin((46,28,54)); h.color=(0.55*_pl[0]+0.45*(bc_[0]*0.22+0.004),0.55*_pl[1]+0.45*(bc_[1]*0.22+0.004),0.55*_pl[2]+0.45*(bc_[2]*0.22+0.004),1)   # dc14 rule 341/308: unlit hull pulled to dull plum
         h.parent=o; h.matrix_parent_inverse.identity(); h.location=(0,0,0); h.rotation_euler=(0,0,0); h.scale=(1,1,1)
         if h.animation_data: h.animation_data_clear()
         if o.animation_data and o.animation_data.action and any(fc.data_path=='hide_render' for fc in o.animation_data.action.fcurves):

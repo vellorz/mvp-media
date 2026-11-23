@@ -19,7 +19,9 @@ LENS={n:30 for n in SH}; LENS.update({'S07':34,'S14':38,'S15':36,'S17':36,'S16':
 for n in SH: cam(n,LENS[n],11.0)   # sets stay sharp (BF r6 lesson)
 def C(n): return L.chr_coll(n)
 PATHS={}
+TILT=json.load(open('/root/dc/bridge/tilt.json')) if os.path.exists('/root/dc/bridge/tilt.json') else {}   # dc14 rule 344: per-shot look-at drop (m) so faces in the caption column end above 0.665 H
 def path(n,keys):
+    t_=TILT.get(n,0.0); dz,upto=(t_ if isinstance(t_,list) else (t_,10**6)); keys=[(k[0],k[1],(k[2][0],k[2][1],k[2][2]+(dz if k[0]<=upto else 0.0)))+tuple(k[3:]) for k in keys]
     PATHS.setdefault(n,[]).extend(keys); L.path(n,keys)
 ALL=[]
 def shared(name,shots):
@@ -34,6 +36,48 @@ def drift_faces(ch,f0,f1,pool,seed,step=(20,38)):
     rr=random.Random(seed); f=f0; seq=[]
     while f<f1: seq.append((f,rr.choice(pool))); f+=rr.randint(*step)
     faces(ch,seq)
+# ---- dc14 rule 354 (interim, [INFERRED] catalogue pending Rick research + owner approval): named arm actions, logged so a probe can check
+# that neighbours in a shot never share a move and no character repeats a move more than twice. Outward = negative angle on both sides.
+REST=-12; ACTLOG=[]
+ACTS={'point':[(0,REST),(5,-95),(20,-90),(26,REST)],'reach':[(0,REST),(6,-120),(22,-115),(28,REST)],'reach_high':[(0,REST),(6,-140),(22,-136),(28,REST)],
+      'wave':[(0,REST),(4,-150),(8,-122),(12,-150),(16,-122),(20,-150),(26,REST)],'throw':[(0,-25),(3,15),(7,-140),(11,-70),(17,REST)],
+      'drop':[(0,-60),(4,-70),(8,-5),(14,REST)],'flick':[(0,-30),(4,25),(7,-110),(12,-40),(18,REST)],'present':[(0,REST),(6,-70),(22,-65),(28,REST)],
+      'fist_pump':[(0,-30),(3,-160),(6,-120),(9,-160),(14,-40),(18,REST)],'head_grab':[(0,REST),(5,-150),(18,-145),(24,REST)],
+      'stamp':[(0,-50),(6,-130),(9,-35),(14,-40),(20,REST)],'offer':[(0,-30),(6,-60),(20,-55),(26,-30)],'wag':[(0,-60),(5,-80),(10,-62),(15,-80),(20,-62),(25,-60)]}
+BOTH={'shrug':[(0,REST),(4,-48),(14,-48),(19,REST)],'clutch':[(0,REST),(6,22),(24,22),(30,REST)]}
+WORK={'write','press','carry','eat'}   # continuous work loops: not raises, exempt from the repeat count
+def act(ch,name,f,sx=1):
+    if name in BOTH:
+        for side in (-1,1):
+            for d,a_ in BOTH[name]: arm(ch,side,f+d,a_)
+    elif name in ACTS:
+        for d,a_ in ACTS[name]: arm(ch,sx,f+d,a_)
+    ACTLOG.append(dict(shot=ch['shot'],inst=ch['inst'],kind=ch['kind'],act=name,f=f))
+def work(ch,name,keys,sx=1):
+    for f,a_ in keys: arm(ch,sx,f,a_)
+    ACTLOG.append(dict(shot=ch['shot'],inst=ch['inst'],kind=ch['kind'],act=name,f=keys[0][0]))
+# ---- dc14 rule 353 (interim): a character on screen over 2 s changes head angle at least once (twice over 4 s): side -> 2 f in-between
+# (front, or the other side for front-facing characters) -> about 0.8 s on the other side -> 2 f in-between -> the shot's next face
+TURNLOG=[]
+def turnpass(ch):
+    a,b=ch['rng']; n=b-a+1; V=L.CI[ch['kind']].get('turnbase',[])
+    seq=sorted(ch['faces'])
+    if n<60 or not V or any(k.startswith('talk') for _,k in seq): return
+    def active(f,sq):
+        k=sq[0][1]
+        for f_,k_ in sq:
+            if f_<=f: k=k_
+        return k
+    orig=seq[:]; done=[]
+    nb=1 if n<=120 else 2
+    for i in range(nb):
+        t=a+n*(i+1)//(nb+1); cands=[f for f,k in orig if a+15<=f<=b-34 and all(abs(f-d)>40 for d in done)]
+        fb=min(cands,key=lambda f:abs(f-t)) if cands else t
+        K=active(fb,orig); base=K if K in V else V[0]
+        hold=max(12,min(24,b-fb-8)); f_end=fb+2+hold; nxt=active(f_end,orig)
+        ch['faces']=[(f,k) for f,k in ch['faces'] if not (fb<=f<=f_end)]
+        ch['faces']+=[(fb,base+'_ta'),(fb+2,base+'_tb'),(f_end-2,base+'_ta'),(f_end,nxt)]
+        done.append(fb); TURNLOG.append(dict(shot=ch['shot'],inst=ch['inst'],kind=ch['kind'],frames=[fb,fb+2,f_end-2,f_end],face=base))
 def onone(o):
     if o.animation_data and o.animation_data.action:
         for fc in o.animation_data.action.fcurves:
@@ -180,7 +224,8 @@ room('P',PX,7,6,3.4,'wp_office','floor_office')
 P_DAY=shared('P_day',['S01','S07','S08','S10']); P_NIGHT=shared('P_night',['S13','S14','S15'])
 window('P_win',(PX+1.9,2.98,1.85),1.3,1.5,'win_phil',coll=P_DAY); window('P_winN',(PX+1.9,2.98,1.85),1.3,1.5,'win_phil_night',coll=P_NIGHT)
 shelfunit('P_shelf',(PX-2.4,3.0,1.3),1.6,2.6)
-PMAP=wallprop('P_map',(PX-0.35,3.0,2.08),1.6,1.0,'map_land',frame=(120,80,50))
+PG_AT=json.load(open('/root/dc/bridge/pg_at.json')) if os.path.exists('/root/dc/bridge/pg_at.json') else (PX-0.25,1.55)
+PMAP=wallprop('P_map',(PX-0.35,3.0,1.62),1.6,1.0,'map_land',frame=(120,80,50))   # dc14 (346): hung 0.3 m lower so the editor can reach it in S08
 desk('P_desk',(PX,0.9),1.5,0.7,0.62,DESKM)
 inkwell('P_ink',(PX+0.32,0.78,0.62)); oillamp('P_lamp',(PX+0.58,1.05,0.62),energy=30)
 PILE=stack('P_pile',(PX-0.5,0.9,0.62),4,'letter1',seed=3)
@@ -191,7 +236,8 @@ light('P_fill','AREA',(PX,0.2,3.25),520,(1.0,0.9,0.78),5.0,coll=P_DAY)
 light('P_fillN','AREA',(PX,0.2,3.25),120,(1.0,0.78,0.55),5.0,coll=P_NIGHT)   # rule 317: the night room keeps a lit ceiling and walls, no black band
 light('P_moon','AREA',(PX+1.9,2.6,1.9),60,(0.55,0.62,1.0),1.2,rot=(math.radians(-90),0,0),coll=P_NIGHT)
 # S08: the "ONE DAY OF THANKS" page pinned on the map on "thing"
-c8=C('S08'); pg=wallprop('S08_page',(PX-0.35,2.96,2.02),0.36,0.48,'page_print',coll=c8,depth=0.02); vis(pg,[(719,END)])
+PGX,PGZ=PG_AT   # dc14 (346): the page appears where the editor's mitten presses it (handpos.py at the reach peak)
+c8=C('S08'); pg=wallprop('S08_page',(PGX,2.96,PGZ),0.36,0.48,'page_print',coll=c8,depth=0.02); vis(pg,[(719,END)])
 # S15: wall year calendar beside the window, flips on ones (For 17 years)
 YC=[wallprop(f'S15_y{y}',(PX+0.85,2.995,1.6),0.4,0.5,f'ycal{y}',coll=C('S15'),depth=0.015,emit=0.25) for y in (1846,1850,1854,1858,1861,1863)]
 for o_,(a,b) in zip(YC,[(1439,1445),(1446,1451),(1452,1457),(1458,1462),(1463,1468),(1469,END)]): vis(o_,[(a,b)])
@@ -389,51 +435,51 @@ light('T_pl','AREA',(PXP,1.9,2.9),60,(1.0,0.95,0.88),1.2,rot=(math.radians(35),0
 def S(n): return SH[n]
 # ---- S01 (0-70): hook. The editor writes; the camera eases in to her (push) ----
 s='S01'; r=S(s)
-ed=char_on('S01_ed','editor',s,(PX,1.5,0),r,'determined',arms=('arm',[(0,'arm_quill')]))
+ed=char_on('S01_ed','editor',s,(PX,1.12,0),r,'determined',arms=('arm',[(0,'arm_quill')]))
 faces(ed,[(0,'determined'),(22,'squint'),(40,'determined'),(58,'smug')])
-for f,a in [(0,-50),(6,-58),(12,-48),(18,-58),(24,-50),(30,-60),(36,-48),(44,-58),(52,-50),(60,-58),(66,-48)]: arm(ed,1,f,a)
+work(ed,'write',[(f,-22 if (f//6)%2 else -28) for f in range(0,71,6)])   # dc14 (346): the quill mitten rests on her sheet (desk top 0.62 m)
 bob(ed,[34,62])
 path(s,[(0,(PX+0.95,-1.3,1.5),(PX,1.5,1.0)),(70,(PX+0.55,-0.55,1.42),(PX,1.5,1.02))])
 # ---- S02 (64-162): four letters land in the President's bin (truck) ----
 s='S02'; r=S(s)
-pA=char_on('S02_pres','presA',s,(OX,1.6,0),r,'meh',arms=('arm',[(64,'arm_letter'),(136,'arm')]))
+pA=char_on('S02_pres','presA',s,(OX+0.35,1.6,0),r,'meh',arms=('arm',[(64,'arm_letter'),(136,'arm')]))
 faces(pA,[(64,'skeptical'),(96,'side_eye'),(118,'smug'),(140,'blink'),(150,'deadpan')])
-for f,a in [(64,-30),(96,-60),(100,-100),(106,-60),(109,-100),(115,-60),(119,-100),(126,-60),(133,-100),(140,-20)]: arm(pA,1,f,a)
+arm(pA,1,64,-30); act(pA,'throw',96); act(pA,'shrug',122)
 bob(pA,[100,119,140])
 path(s,[(64,(OX+0.2,-1.1,1.25),(OX+0.75,1.0,0.75)),(162,(OX+1.35,-1.0,1.3),(OX+0.8,1.0,0.8))])
 # ---- S03 (156-302): the states board; every state its own day (truck along the board) ----
 s='S03'; r=S(s)
 cl3=char_on('S03_clerk','clerk',s,(WX-1.45,1.95,0),r,'neutral',arms=('arm','arm'))
 faces(cl3,[(156,'neutral'),(190,'skeptical'),(230,'grin'),(262,'shock'),(286,'annoyed')])
-for f,a in [(156,20),(196,95),(214,80),(240,100),(262,70),(290,20)]: arm(cl3,-1,f,-a)   # dc5: point OUTWARD up at the board (positive swung the arm across his chest)
+act(cl3,'point',190,-1); act(cl3,'present',236,-1); act(cl3,'shrug',280)   # dc14 (354): named actions; outward = negative on both sides
 bob(cl3,[214,264,293])
 path(s,[(156,(WX-0.7,-0.6,1.75),(WX-1.2,3.0,1.75)),(230,(WX-1.3,-0.5,1.75),(WX-1.6,3.0,1.75)),(302,(WX-1.9,-0.45,1.7),(WX-1.9,3.0,1.72))])
 # ---- S04 (296-410): mail piles up; the mailman dumps a sack; the clerk groans (crane up / pull out) ----
 s='S04'; r=S(s)
 mm=char_on('S04_mail','mailman',s,(WX-2.4,1.0,0),r,'happy',arms=('arm',[(296,'arm_sack'),(330,'arm')]),walker=True)
-walk(mm,296,318,(WX-3.2,0.6,0),(WX-2.0,1.4,0),step=4)
-for f,a in [(318,-40),(324,-90),(332,-30)]: arm(mm,1,f,a)
+walk(mm,296,318,(WX-3.2,0.6,0),(WX-1.75,1.4,0),step=4)
+act(mm,'throw',316)
 faces(mm,[(296,'happy'),(326,'open_smile'),(356,'proud'),(380,'whistle')])
 sk4=sack('S04_sack',(0,0,0),coll=C(s),s=0.8); kloc(sk4,296,(WX-3.0,0.45,0.55)); kloc(sk4,318,(WX-1.8,1.3,0.55)); fall(sk4,322,8,(WX-1.7,1.35,0.6),(WX-1.6,1.4,0.0)); onone(sk4)
 fx('S04_dust','fx_dust',(WX-1.6,1.3,0.25),330,14,0.8,C(s),grow=1.8,rise=0.2)
-cl4=char_on('S04_clerk','clerk',s,(WX+0.4,1.65,0),r,'neutral',arms=('arm','arm'))
-faces(cl4,[(296,'neutral'),(330,'nervous'),(360,'panic'),(380,'annoyed'),(400,'groan')]); bob(cl4,[362,402]); arm(cl4,1,396,-140); arm(cl4,1,408,-120)
+cl4=char_on('S04_clerk','clerk',s,(WX-0.5,1.65,0),r,'neutral',arms=('arm','arm'))
+faces(cl4,[(296,'neutral'),(330,'nervous'),(360,'panic'),(380,'annoyed'),(400,'groan')]); bob(cl4,[362,402]); act(cl4,'head_grab',384)
 path(s,[(296,(WX-1.7,-1.2,1.45),(WX-1.8,1.4,0.85)),(350,(WX-1.3,-1.7,1.7),(WX-1.2,1.5,0.95)),(410,(WX-0.15,-1.75,1.85),(WX+0.05,1.6,1.0))])
 # ---- S05 (411-500): the clerk, close: "Oh no, it's the turkey lady again." (slow push; lips on the quoted line only) ----
 s='S05'; r=S(s)
 cl5=char_on('S05_clerk','clerk',s,(WX+0.4,1.65,0),r,'groan',arms=('arm',[(411,'arm_letter')]))
 faces(cl5,[(411,'groan'),(450,'sigh'),(490,'annoyed')]); lipsync(cl5,WORDS[48:55],415,492)
-for f,a in [(411,-60),(430,-80),(452,-70),(474,-85),(492,-60)]: arm(cl5,1,f,a)
+act(cl5,'wag',430); act(cl5,'wag',466)
 bob(cl5,[422,461,482])
 path(s,[(411,(WX+0.75,-0.75,1.5),(WX+0.4,1.65,1.12)),(500,(WX+0.62,-0.45,1.48),(WX+0.4,1.65,1.12))])
 # ---- S06 (494-625): she was no nobody: the editor among her magazine stacks; a printer carries a bundle by (truck) ----
 s='S06'; r=S(s)
 ed6=char_on('S06_ed','editor',s,(RX-1.15,1.25,0),r,'proud',arms=('arm','arm'))
 faces(ed6,[(494,'proud'),(523,'side_eye'),(546,'smug'),(580,'grin'),(605,'proud')])
-for f,a in [(494,-15),(540,-60),(556,-45),(580,-70),(600,-30)]: arm(ed6,1,f,a)
+arm(ed6,1,494,REST); act(ed6,'present',536); act(ed6,'fist_pump',584)
 bob(ed6,[523,560,601])
 pr6=char_on('S06_printer','printer',s,(RX+2.2,2.6,0),r,'happy',walker=True)
-walk(pr6,494,600,(RX+2.2,2.6,0),(RX-1.4,2.6,0),step=5); drift_faces(pr6,494,625,['happy','proud','grin','whistle'],61)
+walk(pr6,494,600,(RX+2.2,2.6,0),(RX-1.4,2.6,0),step=5); work(pr6,'carry',[(494,-35)]); drift_faces(pr6,494,625,['happy','proud','grin','whistle'],61)
 path(s,[(494,(RX-0.2,-0.85,1.45),(RX-0.9,1.3,1.05)),(625,(RX-1.5,-0.8,1.45),(RX-1.0,1.3,1.05))])
 # ---- S07 (626-672): Mary Had a Little Lamb: the lamb trots over her desk (insert, push) ----
 s='S07'; r=S(s)
@@ -441,9 +487,9 @@ ed7=char_on('S07_ed','editor',s,(PX,1.5,0),r,'happy'); faces(ed7,[(626,'happy'),
 path(s,[(626,(PX+0.2,-0.6,1.05),(PX,0.9,0.9)),(672,(PX+0.15,-0.35,1.02),(PX+0.05,0.9,0.9))])
 # ---- S08 (666-808): one day for the whole land: she pins her page on the map (pull out on "whole land") ----
 s='S08'; r=S(s)
-ed8=char_on('S08_ed','editor',s,(PX+0.55,2.3,0),r,'determined',arms=('arm','arm'))
+ed8=char_on('S08_ed','editor',s,(PX+0.3,2.78,0),r,'determined',arms=([(666,'arm_page'),(721,'arm')],'arm'))   # dc14 (346): stands at the map, page in hand until she presses it on
 faces(ed8,[(666,'determined'),(700,'happy'),(719,'proud'),(746,'open_smile'),(782,'happy'),(800,'proud')])
-for f,a in [(666,20),(700,60),(712,88),(722,82),(740,40),(782,90),(796,40)]: arm(ed8,-1,f,-a)   # dc5: raise OUTWARD toward the page (positive swung the arm across her chest)   # cast gate v3: raise capped below the face (armprobe S08 712)
+arm(ed8,-1,666,REST); act(ed8,'reach_high',713,-1); act(ed8,'point',770,-1)   # dc14 (354, 346): reach peaks at 719 when the page goes up
 bob(ed8,[719,782])
 fx('S08_spark','fx_spark',(PX-0.35,2.9,2.0),797,14,0.6,C(s),grow=1.5)
 path(s,[(666,(PX+0.35,0.3,1.6),(PX+0.15,3.0,1.6)),(720,(PX+0.25,0.1,1.62),(PX+0.05,3.0,1.62)),(782,(PX-0.1,-1.0,1.6),(PX-0.05,3.0,1.6)),(808,(PX-0.2,-1.15,1.6),(PX-0.1,3.0,1.6))])
@@ -451,45 +497,45 @@ path(s,[(666,(PX+0.35,0.3,1.6),(PX+0.15,3.0,1.6)),(720,(PX+0.25,0.1,1.62),(PX+0.
 s='S09'; r=S(s)
 pr9=char_on('S09_printer','printer',s,(PRX+0.55,PRY-0.55,0),r,'grit',arms=('arm','arm'))
 faces(pr9,[(802,'grit'),(833,'manic_grin'),(853,'squint'),(872,'grin'),(887,'proud')])
-for f,a in [(802,-40),(833,-110),(840,-40),(853,-110),(860,-40),(872,-110),(879,-40),(887,-110)]: arm(pr9,1,f,a)
-ed9=char_on('S09_ed','editor',s,(PRX+1.55,PRY-0.1,0),r,'proud'); drift_faces(ed9,802,892,['proud','happy','grin','content'],91,(16,26)); bob(ed9,[836,875])
+work(pr9,'press',[(802,-40),(833,-110),(840,-40),(853,-110),(860,-40),(872,-110),(879,-40),(887,-110)])
+ed9=char_on('S09_ed','editor',s,(PRX+1.3,PRY-0.1,0),r,'proud'); drift_faces(ed9,802,892,['proud','happy','grin','content'],91,(16,26)); bob(ed9,[836,875]); act(ed9,'present',846,-1)
 path(s,[(802,(PRX-0.6,-1.2,1.5),(PRX+0.5,PRY-0.2,1.05)),(892,(PRX+0.3,-1.45,1.5),(PRX+0.9,PRY-0.2,1.05))])
 # ---- S10 (886-978): she wrote it, and wrote it, and wrote it again (push) ----
 s='S10'; r=S(s)
-ed10=char_on('S10_ed','editor',s,(PX,1.5,0),r,'determined',arms=('arm',[(886,'arm_quill')]))
+ed10=char_on('S10_ed','editor',s,(PX,1.12,0),r,'determined',arms=('arm',[(886,'arm_quill')]))
 faces(ed10,[(886,'determined'),(905,'squint'),(928,'determined'),(951,'grit'),(966,'stern')])
-for f in range(886,978,6): arm(ed10,1,f,-50 if (f//6)%2 else -60)
+work(ed10,'write',[(f,-22 if (f//6)%2 else -28) for f in range(886,978,6)])
 bob(ed10,[905,928,951])
 for k,f in enumerate((905,928,951)): fx(f'S10_puff{k}','fx_paper',(PX-0.5,0.9,0.75),f,12,0.3,C(s),grow=1.6,rise=0.1)
 path(s,[(886,(PX-0.4,-1.2,1.55),(PX-0.2,1.3,0.95)),(978,(PX-0.3,-0.6,1.48),(PX-0.15,1.3,0.98))])
 # ---- S11 (972-1240): THE LONG TAKE (rule 312). Four presidents in turn: nope, nope, nope, still nope; the map tears; war glow in the window ----
 s='S11'; r=S(s)
-def pres(kind,i,a,b,fin,fout,ftoss,stay=False):
+def pres(kind,i,a,b,fin,fout,ftoss,stay=False,move='throw'):
     rng=(a,b)
     p=char_on(f'S11_{kind}',kind,s,(OX+1.7,1.75,0),rng,'neutral',arms=('arm',[(a,'arm_letter'),(ftoss+2,'arm')]),walker=True)
     walk(p,fin,fin+14,(OX+1.7,1.75,0),(OX,1.68,0),step=3)
     if not stay: walk(p,fout,fout+14,(OX,1.68,0),(OX-1.9,1.9,0),step=3)
     faces(p,[(a,'neutral'),(fin+16,'skeptical'),(ftoss-10,'side_eye'),(ftoss+4,'deadpan'),(ftoss+14,'smug')])
-    for f,ang in [(a,-30),(ftoss-6,-60),(ftoss,-110),(ftoss+6,-20)]: arm(p,1,f,ang)
+    arm(p,1,a,-30); act(p,move,ftoss-6)
     bob(p,[ftoss-2,ftoss+10]); return p
 P1=pres('presA',0,972,1062,972,1046,1040)
-P2=pres('presB',1,1044,1094,1044,1080,1068)
-P3=pres('presC',2,1078,1128,1078,1114,1104)
-P4=pres('presD',3,1112,1240,1112,0,1140,stay=True); faces(P4,[(1150,'meh'),(1170,'worried'),(1196,'shock'),(1232,'stunned')])
+P2=pres('presB',1,1044,1094,1044,1080,1068,move='drop')
+P3=pres('presC',2,1078,1128,1078,1114,1104,move='flick')
+P4=pres('presD',3,1112,1240,1112,0,1140,stay=True,move='wave'); walk(P4,1150,1160,(OX,1.68,0),(OX+0.45,1.7,0),step=3); act(P4,'head_grab',1198); faces(P4,[(1150,'meh'),(1170,'worried'),(1196,'shock'),(1232,'stunned')])
 path(s,[(972,(OX+0.35,-1.0,1.48),(OX+0.15,1.6,1.05)),(1040,(OX+0.6,-1.05,1.45),(OX+0.35,1.4,0.95)),(1070,(OX+0.2,-1.1,1.5),(OX+0.1,1.6,1.05)),
         (1104,(OX+0.55,-1.0,1.45),(OX+0.35,1.4,0.95)),(1140,(OX+0.25,-1.0,1.48),(OX+0.3,1.4,1.0)),(1160,(OX-0.1,-0.9,1.6),(OX-0.4,2.5,1.55)),
         (1190,(OX-0.75,-0.55,1.75),(OX-1.5,3.0,2.0)),(1208,(OX-0.75,-0.6,1.75),(OX-1.45,3.0,2.0)),(1236,(OX+0.9,-0.3,1.75),(OX+2.2,3.0,1.95)),(1240,(OX+0.95,-0.25,1.75),(OX+2.22,3.0,1.95))])
 # ---- S12 (1234-1314): no one had time for pie: the clerk rushes by at night; the pie sits (truck, settles on "pie") ----
 s='S12'; r=S(s)
 cl12=char_on('S12_clerk','clerk',s,(WX-1.6,1.5,0),r,'worry',arms=('arm','arm_letter'),walker=True)
-walk(cl12,1238,1290,(WX-1.8,1.55,0),(WX+1.8,1.65,0),step=3)
+walk(cl12,1238,1290,(WX-1.8,1.55,0),(WX+1.8,1.65,0),step=3); work(cl12,'carry',[(1234,-30)])
 faces(cl12,[(1234,'worry'),(1262,'panic'),(1285,'dazed')])
 path(s,[(1234,(WX-1.0,-0.9,1.5),(WX-0.8,1.4,1.0)),(1305,(WX+0.25,-0.75,1.25),(WX+0.0,0.85,0.75)),(1314,(WX+0.27,-0.72,1.24),(WX+0.0,0.85,0.74))])
 # ---- S13 (1308-1390): most folks would have quit. Not her. (night, push) ----
 s='S13'; r=S(s)
-ed13=char_on('S13_ed','editor',s,(PX,1.5,0),r,'worry',arms=('arm',[(1308,'arm_quill')]))
+ed13=char_on('S13_ed','editor',s,(PX,1.12,0),r,'worry',arms=('arm',[(1308,'arm_quill')]))
 faces(ed13,[(1308,'worried'),(1340,'sigh'),(1357,'blink'),(1362,'sad'),(1372,'determined')])
-for f,a in [(1308,-30),(1350,-20),(1372,-60),(1378,-50),(1384,-60)]: arm(ed13,1,f,a)
+work(ed13,'write',[(1308,-24),(1314,-28),(1320,-22),(1326,-26)]); act(ed13,'clutch',1334); act(ed13,'point',1368)
 bob(ed13,[1372])
 path(s,[(1308,(PX+0.8,-1.2,1.5),(PX,1.5,1.0)),(1390,(PX+0.5,-0.6,1.43),(PX,1.5,1.03))])
 # ---- S14 (1391-1438): quill close-up (truck) ----
@@ -501,43 +547,50 @@ path(s,[(1439,(PX+0.85,1.6,1.62),(PX+0.85,3.0,1.6)),(1490,(PX+0.82,1.85,1.61),(P
 # ---- S16 (1484-1598): autumn 1863, Washington: leaves fall, the mail goes out (crane down, the camera backs off as he walks in) ----
 s='S16'; r=S(s)
 mm16=char_on('S16_mail','mailman',s,(SX+0.6,8.0,0),r,'neutral',arms=('arm','arm_sack'),walker=True)
-walk(mm16,1484,1598,(SX+0.6,9.0,0),(SX+0.4,1.6,0),step=4); drift_faces(mm16,1484,1598,['neutral','worried','look_up'],160,(18,30)); faces(mm16,[(1552,'nervous'),(1584,'grit')])
-tw=char_on('S16_town','townW',s,(SX-2.6,4.0,0.12),r,'worry'); drift_faces(tw,1484,1598,['worried','look_up','neutral','smile'],161); bob(tw,[1530,1570])
+walk(mm16,1484,1598,(SX+0.6,9.0,0),(SX+0.4,1.6,0),step=4); work(mm16,'carry',[(1484,-30)],-1); drift_faces(mm16,1484,1598,['neutral','worried','look_up'],160,(18,30)); faces(mm16,[(1552,'nervous'),(1584,'grit')])
+tw=char_on('S16_town','townW',s,(SX-2.6,4.0,0.12),r,'worry'); drift_faces(tw,1484,1598,['worried','look_up','neutral','smile'],161); bob(tw,[1530,1570]); act(tw,'clutch',1526)
 path(s,[(1484,(SX+0.3,-2.6,3.4),(SX+0.2,10,2.0)),(1540,(SX+0.4,-2.9,2.3),(SX+0.4,8,1.4)),(1598,(SX+0.5,-3.4,1.5),(SX+0.4,5,1.2))])
 # ---- S17 (1592-1644): the letter to the fifth president (insert, push) ----
 s='S17'; r=S(s)
 path(s,[(1592,(OX-0.05,-0.1,1.35),(OX-0.05,0.8,0.64)),(1644,(OX-0.05,0.15,1.22),(OX-0.05,0.82,0.64))])
 # ---- S18 (1638-1732): this time, yes: he stamps it; the desk calendar runs out in a week (truck) ----
 s='S18'; r=S(s)
-p5=char_on('S18_pres','presE',s,(OX,1.6,0),r,'neutral',arms=('arm',[(1638,'arm_letter'),(1664,'arm_stamp')]))
+p5=char_on('S18_pres','presE',s,(OX,1.25,0),r,'neutral',arms=('arm',[(1638,'arm_letter'),(1664,'arm_stamp')]))
 faces(p5,[(1638,'neutral'),(1654,'look_down'),(1670,'proud'),(1682,'open_smile'),(1700,'grin'),(1718,'proud')])
-for f,a in [(1638,-50),(1664,-60),(1676,-130),(1682,-35),(1690,-40),(1700,-90),(1712,-30)]: arm(p5,1,f,a)
+arm(p5,1,1638,-50); arm(p5,1,1664,-50); act(p5,'stamp',1670); act(p5,'present',1698)
 bob(p5,[1682,1718])
+SHX_=json.load(open('/root/dc/bridge/hand_at.json')) if os.path.exists('/root/dc/bridge/hand_at.json') else {}
+for nm_,key_,c_ in (('S01','write',C('S01')),('S10','write',C('S10')),('S13','write',C('S13')),('S18','stamp',C('S18'))):   # dc14 (346): the sheet sits under the mitten
+    if nm_ in SHX_: x_,y_=SHX_[nm_]; paper(f'{nm_}_wsheet',(x_,y_,0.645 if nm_=='S18' else 0.625),0.24,0.32,'letter_hero',0.15,coll=c_)
 path(s,[(1638,(OX-0.7,-1.0,1.42),(OX-0.1,1.3,0.95)),(1732,(OX+0.35,-1.05,1.42),(OX+0.15,1.3,0.95))])
 # ---- S19 (1726-1892): one big table: blue and grey sit down together (pull out and rise; lands wide on "table") ----
 s='S19'; r=S(s)
 G=[]
-for i,(x,k) in enumerate([(-2.0,'blueA'),(-1.0,'greyA'),(0.6,'blueB'),(1.6,'greyB')]):
-    c_=char_on(f'S19_{k}',k,s,(HX+x,1.6,0),r,'happy',arms=('arm',[(1726,'arm_plate')] if i%2==0 else 'arm')); G.append(c_)
+# dc14 rule 345: real depth. blueA stands at the near end of the table (about 2 m from the landing camera), the rest 1.6 m further back;
+# the frontal row becomes a high three-quarter view (camera 2.5 m up, about 36 deg off axis). Each soldier a different arm move (354).
+for i,(x,y,k) in enumerate([(-1.6,0.2,'blueA'),(-1.0,1.6,'greyA'),(0.6,1.6,'blueB'),(1.0,1.6,'greyB')]):
+    c_=char_on(f'S19_{k}',k,s,(HX+x,y,0),r,'happy',arms=('arm',[(1726,'arm_plate')] if i%2==0 else 'arm')); G.append(c_)
     drift_faces(c_,1726,1892,['happy','grin','proud','laugh','content'],190+i,(16,28)); bob(c_,[1760+i*9,1820+i*7,1873])
-    for f,a in [(1726,-40),(1790+i*6,-80),(1810+i*6,-40)]: arm(c_,1,f,a)
-tw19=char_on('S19_town','townW',s,(HX+2.5,1.75,0),r,'happy',arms=('arm',[(1726,'arm_pie'),(1866,'arm')]),walker=True)
-walk(tw19,1830,1862,(HX+3.6,1.75,0),(HX+2.5,1.75,0),step=4); faces(tw19,[(1726,'happy'),(1862,'laugh'),(1878,'proud')])
-path(s,[(1726,(HX-1.2,-0.4,1.4),(HX-1.5,1.6,1.15)),(1800,(HX-0.6,-1.5,1.6),(HX-0.6,1.5,1.05)),(1873,(HX+0.1,-2.2,1.8),(HX+0.1,1.4,1.0)),(1892,(HX+0.12,-2.28,1.81),(HX+0.1,1.4,1.0))])
+    arm(c_,1,1726,-40); act(c_,['offer','shrug','clutch','wave'][i],1790+i*6)
+tw19=char_on('S19_town','townW',s,(HX+2.0,1.95,0),r,'happy',arms=('arm',[(1726,'arm_pie'),(1866,'arm')]),walker=True)
+walk(tw19,1830,1862,(HX+3.4,1.95,0),(HX+2.0,1.95,0),step=4); faces(tw19,[(1726,'happy'),(1862,'laugh'),(1878,'proud')]); work(tw19,'carry',[(1726,-35)]); act(tw19,'present',1864)
+path(s,[(1726,(HX-2.2,-1.7,1.55),(HX-0.55,1.4,1.0)),(1800,(HX-2.35,-1.7,1.95),(HX-0.5,1.35,0.8)),(1873,(HX-2.5,-1.7,2.5),(HX-0.3,1.3,0.6)),(1892,(HX-2.52,-1.74,2.52),(HX-0.3,1.3,0.6))])   # dc14 (345): high three-quarter landing
 # ---- S20 (1886-1980): today, the whole country eats on the same Thursday (truck) ----
 s='S20'; r=S(s)
 F=[]
-for i,(x,k) in enumerate([(-1.3,'grandT'),(-0.7,'momT'),(-0.05,'dadT'),(0.55,'kidT')]):
-    c_=char_on(f'S20_{k}',k,s,(TX+x,1.5,0),r,'happy',arms=('arm',{'grandT':'arm','momT':'arm_plate','dadT':'arm_fork','kidT':'arm_fork'}[k]),scale=(0.8 if k=='kidT' else 1.0)); F.append(c_)   # CAST GATE: the child stands 0.8 of an adult [INFERRED]
+# dc14 rule 345: dad stands at the near right corner (about 1.8 m from camera), the family 1.5 m behind; high three-quarter from the right,
+# 2.1 m up (S19 was 2.5 m: consecutive group shots change height)
+for i,(x,y,k) in enumerate([(-1.3,1.5,'grandT'),(-0.7,1.5,'momT'),(0.8,0.15,'dadT'),(0.55,1.5,'kidT')]):
+    c_=char_on(f'S20_{k}',k,s,(TX+x,y,0),r,'happy',arms=('arm',{'grandT':'arm','momT':'arm_plate','dadT':'arm_fork','kidT':'arm_fork'}[k]),scale=(0.8 if k=='kidT' else 1.0)); F.append(c_)   # CAST GATE: the child stands 0.8 of an adult [INFERRED]
     drift_faces(c_,1886,1980,['happy','grin','laugh','cry_laugh','open_smile'],200+i,(14,26)); bob(c_,[1910+i*8,1950+i*5])
-for f in range(1890,1980,10): arm(F[2],1,f,-50); arm(F[2],1,f+5,-30)   # cast gate v3: the shorter child's face sat under dad's fork hand at -70
-arm(F[3],1,1934,-120); arm(F[3],1,1944,-50)
+work(F[2],'eat',[(f+d,a_) for f in range(1890,1980,10) for d,a_ in ((0,-50),(5,-30))])
+act(F[3],'fist_pump',1930); act(F[1],'offer',1912); act(F[0],'wave',1948)   # dc14 (354): four different moves
 faces(F[1],[(1944,'open_smile'),(1962,'proud')]); faces(F[2],[(1920,'laugh'),(1958,'content')])   # exprlib: >=4 faces per featured character
-path(s,[(1886,(TX-1.3,-1.4,1.5),(TX-0.9,1.4,1.0)),(1980,(TX-0.2,-1.45,1.5),(TX+0.0,1.4,1.0))])
+path(s,[(1886,(TX+1.5,-1.65,2.15),(TX-0.2,1.3,0.9)),(1980,(TX+2.0,-1.25,2.05),(TX-0.2,1.3,0.9))])   # dc14 (345)
 # ---- S21 (1974-2086): all because one woman would not stop writing: past her framed letter, the camera lands on the poster on "writing" ----
 s='S21'; r=S(s)
-k21=char_on('S21_kid','kidT',s,(TX+0.55,1.5,0),r,'happy',arms=('arm','arm_fork'),scale=0.8); faces(k21,[(1974,'happy'),(1999,'wink_grin')])
-path(s,[(1974,(TX+0.3,-1.2,1.5),(TX+0.55,1.6,1.15)),(2012,(TX+0.75,-0.5,1.65),(TX+0.75,3.0,1.8)),(2054,(PXP+0.05,PY-2.25,1.53),(PXP,PY,PZ-0.21)),(END,(PXP+0.03,PY-2.05,1.52),(PXP,PY,PZ-0.21))])
+k21=char_on('S21_kid','kidT',s,(TX-0.12,1.5,0),r,'happy',arms=('arm','arm_fork'),scale=0.8); faces(k21,[(1974,'happy'),(1999,'wink_grin')]); act(k21,'wave',1996,-1)
+path(s,[(1974,(TX+0.0,-1.2,1.5),(TX+0.2,1.6,1.15)),(2012,(TX+0.75,-0.5,1.65),(TX+0.75,3.0,1.8)),(2054,(PXP+0.05,PY-2.25,1.53),(PXP,PY,PZ-0.21)),(END,(PXP+0.03,PY-2.05,1.52),(PXP,PY,PZ-0.21))])
 # ======================= foreground layers (rule 311): one near object per shot over 60 f, low in a corner, never over a face or the poster =======================
 def campos(n,f):
     def ev(o):
@@ -571,7 +624,9 @@ def world_and_sun():
     w=bpy.data.worlds.new('w'); sc.world=w; w.use_nodes=True; bg=w.node_tree.nodes['Background']; bg.inputs['Color'].default_value=(*lin((200,196,186)),1); bg.inputs['Strength'].default_value=0.8
     bpy.ops.object.light_add(type='SUN',rotation=(math.radians(52),0,math.radians(40))); sun=bpy.context.object; sun.name='sun'; sun.data.energy=3.6; sun.data.color=(1.0,0.93,0.82); sun.data.angle=math.radians(3)
 world_and_sun()
+for a in ALL: turnpass(a)
 for a in ALL: finish(a)
+json.dump(dict(acts=ACTLOG,turns=TURNLOG),open('/root/dc/bridge/motion.json','w'),indent=0)   # dc14: armvariety.py / turn check input
 json.dump([dict(inst=a['inst'],kind=a['kind'],shot=a['shot'],rng=list(a['rng']),faces=sorted([(int(f),k) for f,k in a['faces']]),avail=sorted(a['F'])) for a in ALL],open('/root/dc/bridge/faces.json','w'))   # facecheck.py input
 print('hulls',L.ink())
 for o_ in bpy.data.objects:

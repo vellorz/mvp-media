@@ -69,7 +69,9 @@ def extras(d,kind):
     X.extras(d,kind,K)   # library extras: tears, tear1, blushR, vein, zzz, shades, sweat2
 C=X.expand(json.load(open('/root/dc/src/cast.json')))
 def head(name,fk):
-    c=C[name]; e,b,m=c['faces'][fk][:3]; ex=c['faces'][fk][3] if len(c['faces'][fk])>3 else ''
+    c=C[name]; _ov=c.get('turnmap',{}).get(fk)
+    if _ov: c=dict(c,turn=_ov[0],mouth_side=_ov[1])   # dc14 rule 353: in-shot angle variants (_ta in-between/front, _tb other side)
+    e,b,m=c['faces'][fk][:3]; ex=c['faces'][fk][3] if len(c['faces'][fk])>3 else ''
     im,d=new(1024,1024); hair=tuple(c.get('hair',(60,40,30)))+(255,)
     hs=c.get('hairstyle','short')
     HD=c.get('hairdo'); TD=X.turn_dx(c,ex); PT,PB=X.pads(c)   # round 3 (v7vnb2 5d8d84e): PT/PB extra texture rows for tall hats, hair, beards; round 2 (v7vnb2 16bb1d7): TD = face slide toward the turned side; hairdo = Rick hairstyles (326a revision pending owner pick)
@@ -404,19 +406,25 @@ def arm(name,prop=None,straight=None):
     if prop=='plate': d.ellipse([70,730,330,810],fill=(248,246,240,255),outline=K,width=9); d.ellipse([130,700,270,780],fill=(190,120,60,255),outline=K,width=8); mitt()
     if prop=='pie': d.chord([80,700,320,860],180,360,fill=(220,150,70,255),outline=K,width=10); d.rectangle([80,778,320,810],fill=(200,190,180,255),outline=K,width=8); [d.line([120+k*40,730,130+k*40,770],fill=(150,90,40,255),width=6) for k in range(5)]; mitt()
     if prop=='fork': d.line([200,720,200,880],fill=(190,190,200,255),width=14); [d.line([186+k*14,860,186+k*14,900],fill=(190,190,200,255),width=6) for k in range(3)]; mitt()
+    if prop=='page': d.rectangle([90,640,310,900],fill=(240,234,216,255),outline=K,width=9); [d.line([115,690+k*30,285,690+k*30],fill=(120,110,100,255),width=6) for k in range(7)]; d.rectangle([115,655,285,675],fill=(60,50,50,255)); mitt()   # dc14 (346): the ONE DAY OF THANKS page she pins on the map
     if prop=='phone': d.rounded_rectangle([160,640,240,780],12,fill=(40,40,48,255),outline=K,width=8); mitt()
     if prop in ('box','bag','paper','megaphone','camera','letter','sack','plate','pie'): mitt()   # the mitten sits over the prop so it is held, not floating
     return noodle(im,BEND.get(prop,18) if straight is None else straight)
 # r7 (owner Nov 19: forearms stuck out sideways and swung across faces): natural hang 18 deg; 'armS' = straight card for raised and gripping arms
-BEND={'letter':22,'stamp':18,'sack':20,'plate':24,'pie':24,'fork':28,'musket':0,'shovel':6,'spyglass':25,'quill':30,'bow':4,'cane':10,'basket':22,'oar':0,'lantern':18,'phone':28,'pennant':0,'megaphone':15,'paper':20,'bag':20,'box':25,'camera':25,'chalk':30,'pen':30,'redpen':30}
+BEND={'letter':22,'stamp':18,'sack':20,'plate':24,'pie':24,'fork':28,'musket':0,'shovel':6,'spyglass':25,'quill':30,'bow':4,'cane':10,'basket':22,'oar':0,'lantern':18,'phone':28,'pennant':0,'megaphone':15,'paper':20,'bag':20,'box':25,'camera':25,'chalk':30,'pen':30,'redpen':30,'page':20}
 AW=50   # rule 336a: 6.0-7.5 % H incl. ink; arm width ~6.0 % H incl. ink (52 read 6.8 %)   # rule 329 (Detroit e1ed5d1, Rick arms 5.5-6 % H measured on their sheet): was 38, then 46
+SAG=0.08   # dc14 rule 350 (target 8 %, floor 6 %)
 def noodle(hand,deg,ey=330):
     # the hand (with its prop) swings outward by deg about a point 330 px down; the arm is one quadratic curve from the shoulder to the hand
     W,H=hand.size; out=Image.new('RGBA',(W*3,H),(0,0,0,0)); X=W*3//2
     lay=Image.new('RGBA',(W*3,H),(0,0,0,0)); lay.paste(hand,(W,0),hand)
     if deg: lay=lay.rotate(deg,resample=Image.BICUBIC,center=(X,ey))   # PIL rotates counter-clockwise: the hand swings to +x (outward)
     a=math.radians(deg); hx=X+(712-ey)*math.sin(a); hy=ey+(712-ey)*math.cos(a)
-    sx0,sy0=X,40; cxp,cyp=X,(sy0+hy)/2+40   # control point straight below the shoulder: leaves the shoulder down, bends smoothly into the hand
+    sx0,sy0=X,40
+    # dc14 (rule 350: noodle arms, sagitta >= 6 % of arm length in every pose): the control point sits off the shoulder-hand chord on the
+    # outward side, so the arm bows like Rick's '( )' arms; SAG = sagitta / chord (a quadratic's sagitta is half the control offset)
+    ch_=math.hypot(hx-sx0,hy-sy0); nx_,ny_=(hy-sy0)/ch_,-(hx-sx0)/ch_
+    cxp,cyp=(sx0+hx)/2+nx_*2*SAG*ch_,(sy0+hy)/2+ny_*2*SAG*ch_
     P=[((1-t)**2*sx0+2*(1-t)*t*cxp+t*t*hx,(1-t)**2*sy0+2*(1-t)*t*cyp+t*t*hy) for t in [i/40 for i in range(41)]]
     big=Image.new('RGBA',(W*3*SS,H*SS),(0,0,0,0)); bd=ImageDraw.Draw(big)
     bd.line([(x*SS,y*SS) for x,y in P],fill=K,width=AW*SS,joint='curve')

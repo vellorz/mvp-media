@@ -1,0 +1,6 @@
+# dc14: Washington DC Thanksgiving short, round 12 PC package: dc13 + rules 341 (unlit plum ink), 344 (captions clear faces by staging), 345 (S19/S20 groups in depth, high three-quarter), 346 (hands on the page, sheets and stamp), 350 (curved noodle arms, sagitta 7.1-7.3 %), 353 (38 in-shot head-angle changes) and 354 (18 named arm moves, no shared moves between neighbours). Supersedes dc13 (rendered, fallback only)
+- dc.blend (packed, all textures inside), sha256 in dc.blend.sha256, 86225169 bytes. 21 shots, 2,199 frames (overlaps are dissolves; the timeline is 2,087 frames).
+- Test frames first: `cd /d D:\AI\MVP-render\dc14` first (never write to C:), then `blender.exe -b dc.blend --python pctest.py -- D:\AI\MVP-render\dc14\test S05:455 S11:1200 S21:2060`
+- Full render: `blender.exe -b dc.blend --python pcrender.py -- frames` (resume-safe, per shot, OptiX 8 spp)
+- Encode: `blender.exe -b --python pcencode.py -- frames clips` then push clips/ and test/ to render-test/dc14/ on claude/project-thread-z0l0eh.
+- Sources: engine/cartoon-3d/render/blender/dc/ (scene_dc.py builds the blend; post_dc.py, music_dc.py, mix_dc.py run in the cloud).

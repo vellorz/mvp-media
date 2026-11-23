@@ -17,7 +17,6 @@ LT={'S01':0.50,'S02':0.50,'S03':0.50,'S04':0.50,'S05':0.48,'S06':0.46,'S07':0.52
 PAY0,PAY1=2030,2054; PAYP=(0.0,1.0,1.0,1.0,(1.03,0.99,1.0))   # S21 payoff grade, eased in while the camera lands on the poster
 INTR=('S06','S09','S12','S13','S14','S19')
 # vignette strength (corner multiplier = 1-k): interiors get Rick's lantern falloff, exteriors a light one
-PAY0,PAY1=1778,1793; PAYP=(0.0,1.0,1.0,1.0,(1.03,0.99,1.0))   # S19 payoff grade (poster <1% clipped, luma ~143 vs file 117)
 VIG={n:(0.70 if n in INTR else 0.10) for n in SH}   # start values; interiors are calibrated per shot below to corner/centre 0.38 (guide 0.33-0.42); day exteriors light only
 BLOOM=0.0   # light glow on emitters (lamps, screens, lit windows): guide L8
 def bloom(x,amt=BLOOM):

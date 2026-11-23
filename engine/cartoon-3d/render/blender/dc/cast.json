@@ -20,14 +20,10 @@
   "hairstyle": "bun",
   "props": [
    "quill",
-   "letter"
+   "letter",
+   "page"
   ],
   "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
    "blink": [
     "closed",
     "flat",
@@ -37,11 +33,6 @@
     "happy",
     "up",
     "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
    ],
    "worry": [
     "dot",
@@ -53,20 +44,10 @@
     "up",
     "grin"
    ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
    "proud": [
     "half",
     "raise",
     "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
    ],
    "grit": [
     "squeeze",
@@ -74,35 +55,30 @@
     "grit",
     "sweat"
    ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ],
    "determined": [
     "dot",
     "angry",
     "smirk"
    ],
-   "talkA": [
-    "half",
-    "up",
-    "open"
+   "determined_ta": [
+    "dot",
+    "angry",
+    "smirk"
    ],
-   "talkB": [
-    "half",
-    "up",
-    "o"
+   "determined_tb": [
+    "dot",
+    "angry",
+    "smirk"
    ],
-   "talkC": [
+   "proud_ta": [
     "half",
-    "up",
-    "wide"
+    "raise",
+    "smirk"
    ],
-   "talkD": [
+   "proud_tb": [
     "half",
-    "up",
-    "line"
+    "raise",
+    "smirk"
    ]
   },
   "look": "M3",
@@ -124,6 +100,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "determined_ta": [
+    0,
+    0
+   ],
+   "determined_tb": [
+    -1.0,
+    -1
+   ],
+   "proud_ta": [
+    0,
+    0
+   ],
+   "proud_tb": [
+    -1.0,
+    -1
+   ]
+  },
+  "turnbase": [
+   "determined",
+   "proud"
   ]
  },
  "clerk": {
@@ -155,16 +153,6 @@
     "flat",
     "line"
    ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
    "shock": [
     "wide",
     "up",
@@ -179,32 +167,6 @@
     "happy",
     "up",
     "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
    ],
    "talkA": [
     "dot",
@@ -236,6 +198,26 @@
     "half",
     "angry",
     "frown"
+   ],
+   "neutral_ta": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "neutral_tb": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "annoyed_ta": [
+    "half",
+    "angry",
+    "frown"
+   ],
+   "annoyed_tb": [
+    "half",
+    "angry",
+    "frown"
    ]
   },
   "look": "D2",
@@ -258,6 +240,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "neutral_ta": [
+    0,
+    0
+   ],
+   "neutral_tb": [
+    1.0,
+    1
+   ],
+   "annoyed_ta": [
+    0,
+    0
+   ],
+   "annoyed_tb": [
+    1.0,
+    1
+   ]
+  },
+  "turnbase": [
+   "neutral",
+   "annoyed"
   ]
  },
  "presA": {
@@ -293,56 +297,35 @@
     "flat",
     "line"
    ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
    "deadpan": [
     "half",
     "flat",
     "line"
    ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ],
    "meh": [
     "half",
     "flat",
     "wavy"
+   ],
+   "skeptical_ta": [
+    "lid",
+    "Lraise",
+    "line"
+   ],
+   "skeptical_tb": [
+    "lid",
+    "Lraise",
+    "line"
+   ],
+   "side_eye_ta": [
+    "sideR",
+    "none",
+    "smirkR"
+   ],
+   "side_eye_tb": [
+    "sideR",
+    "none",
+    "smirkR"
    ]
   },
   "look": "D1",
@@ -365,6 +348,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "skeptical_ta": [
+    -0.5,
+    -1
+   ],
+   "skeptical_tb": [
+    -1.0,
+    -1
+   ],
+   "side_eye_ta": [
+    -0.5,
+    -1
+   ],
+   "side_eye_tb": [
+    -1.0,
+    -1
+   ]
+  },
+  "turnbase": [
+   "skeptical",
+   "side_eye"
   ]
  },
  "presB": {
@@ -395,61 +400,30 @@
     "flat",
     "line"
    ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
    "deadpan": [
     "half",
     "flat",
     "line"
    ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ],
-   "meh": [
-    "half",
+   "neutral_ta": [
+    "dot",
     "flat",
-    "wavy"
+    "line"
+   ],
+   "neutral_tb": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "side_eye_ta": [
+    "sideR",
+    "none",
+    "smirkR"
+   ],
+   "side_eye_tb": [
+    "sideR",
+    "none",
+    "smirkR"
    ]
   },
   "look": "D2",
@@ -470,6 +444,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "neutral_ta": [
+    0,
+    0
+   ],
+   "neutral_tb": [
+    1.0,
+    1
+   ],
+   "side_eye_ta": [
+    0,
+    0
+   ],
+   "side_eye_tb": [
+    1.0,
+    1
+   ]
+  },
+  "turnbase": [
+   "neutral",
+   "side_eye"
   ]
  },
  "presC": {
@@ -505,61 +501,30 @@
     "flat",
     "line"
    ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
    "deadpan": [
     "half",
     "flat",
     "line"
    ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ],
-   "meh": [
-    "half",
+   "neutral_ta": [
+    "dot",
     "flat",
-    "wavy"
+    "line"
+   ],
+   "neutral_tb": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "side_eye_ta": [
+    "sideR",
+    "none",
+    "smirkR"
+   ],
+   "side_eye_tb": [
+    "sideR",
+    "none",
+    "smirkR"
    ]
   },
   "look": "D3",
@@ -580,6 +545,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "neutral_ta": [
+    0,
+    0
+   ],
+   "neutral_tb": [
+    -1.0,
+    -1
+   ],
+   "side_eye_ta": [
+    0,
+    0
+   ],
+   "side_eye_tb": [
+    -1.0,
+    -1
+   ]
+  },
+  "turnbase": [
+   "neutral",
+   "side_eye"
   ]
  },
  "presD": {
@@ -610,61 +597,40 @@
     "flat",
     "line"
    ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
    "shock": [
     "wide",
     "up",
     "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
    ],
    "deadpan": [
     "half",
     "flat",
     "line"
    ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
-   ],
    "meh": [
     "half",
     "flat",
     "wavy"
+   ],
+   "neutral_ta": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "neutral_tb": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "skeptical_ta": [
+    "lid",
+    "Lraise",
+    "line"
+   ],
+   "skeptical_tb": [
+    "lid",
+    "Lraise",
+    "line"
    ]
   },
   "look": "D1",
@@ -687,6 +653,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "neutral_ta": [
+    -0.5,
+    -1
+   ],
+   "neutral_tb": [
+    -1.0,
+    -1
+   ],
+   "skeptical_ta": [
+    -0.5,
+    -1
+   ],
+   "skeptical_tb": [
+    -1.0,
+    -1
+   ]
+  },
+  "turnbase": [
+   "neutral",
+   "skeptical"
   ]
  },
  "presE": {
@@ -718,54 +706,33 @@
     "flat",
     "line"
    ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
-   "happy": [
-    "happy",
-    "up",
-    "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
    "grin": [
     "happy",
     "up",
     "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
    ],
    "proud": [
     "half",
     "raise",
     "smirk"
    ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
+   "neutral_ta": [
+    "dot",
+    "flat",
+    "line"
    ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
+   "neutral_tb": [
+    "dot",
+    "flat",
+    "line"
    ],
-   "sneaky": [
-    "side",
+   "proud_ta": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "proud_tb": [
+    "half",
     "raise",
     "smirk"
    ]
@@ -782,6 +749,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "neutral_ta": [
+    0,
+    0
+   ],
+   "neutral_tb": [
+    -1.0,
+    -1
+   ],
+   "proud_ta": [
+    0,
+    0
+   ],
+   "proud_tb": [
+    -1.0,
+    -1
+   ]
+  },
+  "turnbase": [
+   "neutral",
+   "proud"
   ]
  },
  "printer": {
@@ -811,50 +800,20 @@
   "hairstyle": "short",
   "props": [],
   "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
    "happy": [
     "happy",
     "up",
     "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
    ],
    "grin": [
     "happy",
     "up",
     "grin"
    ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
    "proud": [
     "half",
     "raise",
     "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
    ],
    "grit": [
     "squeeze",
@@ -862,10 +821,25 @@
     "grit",
     "sweat"
    ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
+   "grin_ta": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "grin_tb": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "happy_ta": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "happy_tb": [
+    "happy",
+    "up",
+    "smile"
    ]
   },
   "stubble": 1,
@@ -888,6 +862,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "grin_ta": [
+    0,
+    0
+   ],
+   "grin_tb": [
+    1.0,
+    1
+   ],
+   "happy_ta": [
+    0,
+    0
+   ],
+   "happy_tb": [
+    1.0,
+    1
+   ]
+  },
+  "turnbase": [
+   "grin",
+   "happy"
   ]
  },
  "mailman": {
@@ -930,45 +926,15 @@
     "flat",
     "line"
    ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
    "happy": [
     "happy",
     "up",
     "smile"
    ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
    "proud": [
     "half",
     "raise",
     "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
    ],
    "grit": [
     "squeeze",
@@ -976,10 +942,25 @@
     "grit",
     "sweat"
    ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
+   "neutral_ta": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "neutral_tb": [
+    "dot",
+    "flat",
+    "line"
+   ],
+   "happy_ta": [
+    "happy",
+    "up",
+    "smile"
+   ],
+   "happy_tb": [
+    "happy",
+    "up",
+    "smile"
    ]
   },
   "look": "D1",
@@ -1009,6 +990,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "neutral_ta": [
+    0,
+    0
+   ],
+   "neutral_tb": [
+    -1.0,
+    -1
+   ],
+   "happy_ta": [
+    0,
+    0
+   ],
+   "happy_tb": [
+    -1.0,
+    -1
+   ]
+  },
+  "turnbase": [
+   "neutral",
+   "happy"
   ]
  },
  "blueA": {
@@ -1040,61 +1043,40 @@
    "plate"
   ],
   "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
    "happy": [
     "happy",
     "up",
     "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
    ],
    "grin": [
     "happy",
     "up",
     "grin"
    ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
    "proud": [
     "half",
     "raise",
     "smirk"
    ],
-   "excited": [
-    "wide",
+   "happy_ta": [
+    "happy",
     "up",
-    "open"
+    "smile"
    ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
+   "happy_tb": [
+    "happy",
+    "up",
+    "smile"
    ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
+   "content_ta": [
+    "closed",
+    "none",
+    "smile"
+   ],
+   "content_tb": [
+    "closed",
+    "none",
+    "smile"
    ]
   },
   "look": "D1",
@@ -1115,6 +1097,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "happy_ta": [
+    0,
+    0
+   ],
+   "happy_tb": [
+    -1.0,
+    -1
+   ],
+   "content_ta": [
+    0,
+    0
+   ],
+   "content_tb": [
+    -1.0,
+    -1
+   ]
+  },
+  "turnbase": [
+   "happy",
+   "content"
   ]
  },
  "blueB": {
@@ -1146,61 +1150,40 @@
    "plate"
   ],
   "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
    "happy": [
     "happy",
     "up",
     "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
    ],
    "grin": [
     "happy",
     "up",
     "grin"
    ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
    "proud": [
     "half",
     "raise",
     "smirk"
    ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
+   "proud_ta": [
+    "half",
     "raise",
     "smirk"
+   ],
+   "proud_tb": [
+    "half",
+    "raise",
+    "smirk"
+   ],
+   "grin_ta": [
+    "happy",
+    "up",
+    "grin"
+   ],
+   "grin_tb": [
+    "happy",
+    "up",
+    "grin"
    ]
   },
   "look": "D2",
@@ -1223,6 +1206,29 @@
    255,
    213,
    166
+  ],
+  "library": [],
+  "turnmap": {
+   "proud_ta": [
+    0,
+    0
+   ],
+   "proud_tb": [
+    1.0,
+    1
+   ],
+   "grin_ta": [
+    0,
+    0
+   ],
+   "grin_tb": [
+    1.0,
+    1
+   ]
+  },
+  "turnbase": [
+   "proud",
+   "grin"
   ]
  },
  "greyA": {
@@ -1254,61 +1260,30 @@
    "plate"
   ],
   "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
    "happy": [
     "happy",
     "up",
     "smile"
    ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
+   "content_ta": [
+    "closed",
+    "none",
+    "smile"
    ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
+   "content_tb": [
+    "closed",
+    "none",
+    "smile"
    ],
-   "grin": [
+   "laugh_ta": [
     "happy",
-    "up",
-    "grin"
+    "Lup",
+    "laugh"
    ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
-   ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
+   "laugh_tb": [
+    "happy",
+    "Lup",
+    "laugh"
    ]
   },
   "look": "D3",
@@ -1335,6 +1310,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "content_ta": [
+    0,
+    0
+   ],
+   "content_tb": [
+    1.0,
+    1
+   ],
+   "laugh_ta": [
+    0,
+    0
+   ],
+   "laugh_tb": [
+    1.0,
+    1
+   ]
+  },
+  "turnbase": [
+   "content",
+   "laugh"
   ]
  },
  "greyB": {
@@ -1366,61 +1363,35 @@
    "plate"
   ],
   "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
    "happy": [
     "happy",
     "up",
     "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
    ],
    "grin": [
     "happy",
     "up",
     "grin"
    ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
+   "content_ta": [
+    "closed",
+    "none",
+    "smile"
    ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
+   "content_tb": [
+    "closed",
+    "none",
+    "smile"
    ],
-   "excited": [
-    "wide",
+   "happy_ta": [
+    "happy",
     "up",
-    "open"
+    "smile"
    ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
+   "happy_tb": [
+    "happy",
+    "up",
+    "smile"
    ]
   },
   "look": "D2",
@@ -1446,6 +1417,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "content_ta": [
+    0,
+    0
+   ],
+   "content_tb": [
+    -1.0,
+    -1
+   ],
+   "happy_ta": [
+    0,
+    0
+   ],
+   "happy_tb": [
+    -1.0,
+    -1
+   ]
+  },
+  "turnbase": [
+   "content",
+   "happy"
   ]
  },
  "townW": {
@@ -1471,61 +1464,40 @@
    "pie"
   ],
   "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
    "happy": [
     "happy",
     "up",
     "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
    ],
    "worry": [
     "dot",
     "worry",
     "wavy"
    ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
    "proud": [
     "half",
     "raise",
     "smirk"
    ],
-   "excited": [
-    "wide",
-    "up",
-    "open"
+   "look_up_ta": [
+    "ringup",
+    "Lup",
+    "o"
    ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
+   "look_up_tb": [
+    "ringup",
+    "Lup",
+    "o"
    ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
+   "smile_ta": [
+    "dot",
+    "none",
+    "smile"
+   ],
+   "smile_tb": [
+    "dot",
+    "none",
+    "smile"
    ]
   },
   "look": "M2",
@@ -1541,6 +1513,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "look_up_ta": [
+    0,
+    0
+   ],
+   "look_up_tb": [
+    1.0,
+    1
+   ],
+   "smile_ta": [
+    0,
+    0
+   ],
+   "smile_tb": [
+    1.0,
+    1
+   ]
+  },
+  "turnbase": [
+   "look_up",
+   "smile"
   ]
  },
  "momT": {
@@ -1571,61 +1565,35 @@
    "plate"
   ],
   "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
    "happy": [
     "happy",
     "up",
     "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
-    "happy",
-    "up",
-    "grin"
-   ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
    ],
    "proud": [
     "half",
     "raise",
     "smirk"
    ],
-   "excited": [
-    "wide",
+   "happy_ta": [
+    "happy",
     "up",
-    "open"
+    "smile"
    ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
+   "happy_tb": [
+    "happy",
+    "up",
+    "smile"
    ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
+   "laugh_ta": [
+    "happy",
+    "Lup",
+    "laugh"
+   ],
+   "laugh_tb": [
+    "happy",
+    "Lup",
+    "laugh"
    ]
   },
   "look": "M2",
@@ -1640,6 +1608,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "happy_ta": [
+    0,
+    0
+   ],
+   "happy_tb": [
+    -1.0,
+    -1
+   ],
+   "laugh_ta": [
+    0,
+    0
+   ],
+   "laugh_tb": [
+    -1.0,
+    -1
+   ]
+  },
+  "turnbase": [
+   "happy",
+   "laugh"
   ]
  },
  "dadT": {
@@ -1670,61 +1660,37 @@
    "fork"
   ],
   "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
    "happy": [
     "happy",
     "up",
     "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
    ],
    "grin": [
     "happy",
     "up",
     "grin"
    ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
+   "cry_laugh_ta": [
+    "happy",
+    "Lworry",
+    "toothy",
+    "tears+blushR"
    ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
+   "cry_laugh_tb": [
+    "happy",
+    "Lworry",
+    "toothy",
+    "tears+blushR"
    ],
-   "excited": [
-    "wide",
+   "happy_ta": [
+    "happy",
     "up",
-    "open"
+    "smile"
    ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
-   ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
+   "happy_tb": [
+    "happy",
+    "up",
+    "smile"
    ]
   },
   "stubble": 1,
@@ -1741,6 +1707,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "cry_laugh_ta": [
+    0,
+    0
+   ],
+   "cry_laugh_tb": [
+    1.0,
+    1
+   ],
+   "happy_ta": [
+    0,
+    0
+   ],
+   "happy_tb": [
+    1.0,
+    1
+   ]
+  },
+  "turnbase": [
+   "cry_laugh",
+   "happy"
   ]
  },
  "kidT": {
@@ -1766,61 +1754,35 @@
    "fork"
   ],
   "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
    "happy": [
     "happy",
     "up",
     "smile"
-   ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
    ],
    "grin": [
     "happy",
     "up",
     "grin"
    ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
+   "happy_ta": [
+    "happy",
     "up",
-    "open"
+    "smile"
    ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
+   "happy_tb": [
+    "happy",
+    "up",
+    "smile"
    ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
+   "open_smile_ta": [
+    "dot",
+    "Lup",
+    "dsmile"
+   ],
+   "open_smile_tb": [
+    "dot",
+    "Lup",
+    "dsmile"
    ]
   },
   "look": "D1",
@@ -1836,6 +1798,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "happy_ta": [
+    0,
+    0
+   ],
+   "happy_tb": [
+    -1.0,
+    -1
+   ],
+   "open_smile_ta": [
+    0,
+    0
+   ],
+   "open_smile_tb": [
+    -1.0,
+    -1
+   ]
+  },
+  "turnbase": [
+   "happy",
+   "open_smile"
   ]
  },
  "grandT": {
@@ -1866,61 +1850,30 @@
    "pie"
   ],
   "faces": {
-   "neutral": [
-    "dot",
-    "flat",
-    "line"
-   ],
-   "blink": [
-    "closed",
-    "flat",
-    "line"
-   ],
    "happy": [
     "happy",
     "up",
     "smile"
    ],
-   "shock": [
-    "wide",
-    "up",
-    "O"
-   ],
-   "worry": [
-    "dot",
-    "worry",
-    "wavy"
-   ],
-   "grin": [
+   "happy_ta": [
     "happy",
     "up",
-    "grin"
+    "smile"
    ],
-   "deadpan": [
-    "half",
-    "flat",
-    "line"
-   ],
-   "proud": [
-    "half",
-    "raise",
-    "smirk"
-   ],
-   "excited": [
-    "wide",
+   "happy_tb": [
+    "happy",
     "up",
-    "open"
+    "smile"
    ],
-   "grit": [
-    "squeeze",
-    "angry",
-    "grit",
-    "sweat"
+   "open_smile_ta": [
+    "dot",
+    "Lup",
+    "dsmile"
    ],
-   "sneaky": [
-    "side",
-    "raise",
-    "smirk"
+   "open_smile_tb": [
+    "dot",
+    "Lup",
+    "dsmile"
    ]
   },
   "look": "M1",
@@ -1935,6 +1888,28 @@
    255,
    213,
    166
+  ],
+  "turnmap": {
+   "happy_ta": [
+    0,
+    0
+   ],
+   "happy_tb": [
+    1.0,
+    1
+   ],
+   "open_smile_ta": [
+    0,
+    0
+   ],
+   "open_smile_tb": [
+    1.0,
+    1
+   ]
+  },
+  "turnbase": [
+   "happy",
+   "open_smile"
   ]
  }
 }

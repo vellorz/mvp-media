@@ -487,7 +487,7 @@ path(s,[(64,(OX+0.2,-1.1,1.25),(OX+0.75,1.0,0.75)),(162,(OX+1.35,-1.0,1.3),(OX+0
 s='S03'; r=S(s)
 cl3=char_on('S03_clerk','clerk',s,(WX-1.45,1.95,0),r,'neutral',arms=('arm','arm'))
 faces(cl3,[(156,'neutral'),(190,'skeptical'),(230,'grin'),(262,'shock'),(286,'annoyed')])
-act(cl3,'point',190,-1); act(cl3,'present',236,-1); act(cl3,'think',280)   # dc14 (354): named actions; outward = negative on both sides
+act(cl3,'reach',190,-1); act(cl3,'present',236,-1); act(cl3,'think',280)   # dc14 (354): named actions; outward = negative on both sides   # dc16b: reach (lean_reach), the point_out pose card is nearly straight (visual verifier f198, rule 350)
 bob(cl3,[214,264,293])
 path(s,[(156,(WX-0.7,-0.6,1.75),(WX-1.2,3.0,1.75)),(230,(WX-1.3,-0.5,1.75),(WX-1.6,3.0,1.75)),(302,(WX-1.9,-0.45,1.7),(WX-1.9,3.0,1.72))])
 # ---- S04 (296-410): mail piles up; the mailman dumps a sack; the clerk groans (crane up / pull out) ----
@@ -499,7 +499,7 @@ faces(mm,[(296,'happy'),(326,'open_smile'),(356,'proud'),(380,'whistle')])
 sk4=sack('S04_sack',(0,0,0),coll=C(s),s=0.8); kloc(sk4,296,(WX-3.0,0.45,0.55)); kloc(sk4,318,(WX-1.8,1.3,0.55)); fall(sk4,322,8,(WX-1.7,1.35,0.6),(WX-1.6,1.4,0.0)); onone(sk4)
 fx('S04_dust','fx_dust',(WX-1.6,1.3,0.25),330,14,0.8,C(s),grow=1.8,rise=0.2)
 cl4=char_on('S04_clerk','clerk',s,(WX-0.5,1.65,0),r,'neutral',arms=('arm','arm'))
-faces(cl4,[(296,'neutral'),(330,'nervous'),(360,'panic'),(380,'annoyed'),(400,'groan')]); bob(cl4,[362,402]); act(cl4,'doubletake',384)
+faces(cl4,[(296,'neutral'),(330,'nervous'),(360,'panic'),(380,'annoyed'),(400,'groan')]); bob(cl4,[362,402]); act(cl4,'doubletake',370)   # dc16b: the snap lands at ~400, before the cut at 411
 path(s,[(296,(WX-1.7,-1.5,1.45),(WX-1.35,1.4,0.85)),(350,(WX-1.3,-1.9,1.7),(WX-1.05,1.5,0.95)),(410,(WX-0.15,-1.75,1.85),(WX+0.05,1.6,1.0))])   # dc15 (shots verifier: clerk cut at the edge 315-340): framed between the two
 # ---- S05 (411-500): the clerk, close: "Oh no, it's the turkey lady again." (slow push; lips on the quoted line only) ----
 s='S05'; r=S(s)
@@ -584,7 +584,9 @@ path(s,[(1439,(PX+0.85,1.6,1.62),(PX+0.85,3.0,1.6)),(1490,(PX+0.82,1.85,1.61),(P
 s='S16'; r=S(s)
 mm16=char_on('S16_mail','mailman',s,(SX+0.6,8.0,0),r,'neutral',arms=('arm','arm_sack'),walker=True)
 walk(mm16,1484,1598,(SX+0.6,9.0,0),(SX+0.4,1.6,0),step=4); work(mm16,'carry',[(1484,-30)],-1); drift_faces(mm16,1484,1598,['neutral','worried','look_up'],160,(18,30)); faces(mm16,[(1552,'nervous'),(1584,'grit')])
-tw=char_on('S16_town','townW',s,(SX-2.6,4.0,0.12),r,'worry'); drift_faces(tw,1484,1598,['worried','look_up','neutral','smile'],161); bob(tw,[1530,1570]); act(tw,'recoil',1526)
+tw=char_on('S16_town','townW',s,(SX-0.55,4.6,0.0),r,'worry'); drift_faces(tw,1484,1598,['worried','look_up','neutral','smile'],161); bob(tw,[1530,1570]); act(tw,'recoil',1526)   # dc16b (shots verifier: she stood off camera, so her startle_recoil never showed)
+# dc16b (visual verifier: flat plum band under the S16 walker): the blob's dark plum turned into unlit ink on the cobbles; S16 blobs use a lighter, lit shadow texture
+for _o in [o for o in bpy.data.objects if o.name.startswith('S16_') and o.name.endswith('_shadow')]: _o.data.materials[0]=L.card_mat('shadow_soft','shadow_soft',emit=0.0)
 path(s,[(1484,(SX+0.3,-2.6,3.4),(SX+0.2,10,2.0)),(1540,(SX+0.4,-2.9,2.3),(SX+0.4,8,1.4)),(1598,(SX+0.5,-3.4,1.5),(SX+0.4,5,1.2))])
 # ---- S17 (1592-1644): the letter to the fifth president (insert, push) ----
 s='S17'; r=S(s)

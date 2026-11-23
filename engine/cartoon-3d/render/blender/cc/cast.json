@@ -48,7 +48,10 @@
    255,
    214,
    178
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "pilgrimB": {
   "coat": [
@@ -97,7 +100,10 @@
    255,
    214,
    178
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "pilgrimC": {
   "coat": [
@@ -134,7 +140,10 @@
    255,
    214,
    178
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "pilgrimD": {
   "coat": [
@@ -182,7 +191,10 @@
    255,
    214,
    178
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "master": {
   "coat": [
@@ -223,7 +235,10 @@
    255,
    214,
    178
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "sailorA": {
   "coat": [
@@ -300,7 +315,10 @@
    255,
    214,
    178
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "sailorB": {
   "coat": [
@@ -377,7 +395,10 @@
    255,
    214,
    178
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "nausetA": {
   "coat": [
@@ -410,7 +431,10 @@
   "library": "all",
   "mouth_side": -1,
   "turn": -0.4,
-  "feat_scale": "rick"
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "nausetB": {
   "coat": [
@@ -443,7 +467,10 @@
   "library": "all",
   "mouth_side": 1,
   "turn": 0.45,
-  "feat_scale": "rick"
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "nausetC": {
   "coat": [
@@ -477,7 +504,10 @@
   "library": "all",
   "mouth_side": -1,
   "turn": -0.35,
-  "feat_scale": "rick"
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "elder": {
   "coat": [
@@ -533,7 +563,10 @@
    255,
    214,
    178
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "townA": {
   "coat": [
@@ -574,7 +607,10 @@
    255,
    214,
    178
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "townB": {
   "coat": [
@@ -608,7 +644,10 @@
    255,
    214,
    178
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "tourA": {
   "coat": [
@@ -644,7 +683,10 @@
    255,
    214,
    178
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "tourB": {
   "coat": [
@@ -689,6 +731,9 @@
    255,
    214,
    178
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  }
 }

@@ -45,6 +45,11 @@ def mitten(ob):
 roots=[o for o in bpy.data.objects if o.type=='EMPTY' and o.get('chr')==o.name]
 if not roots:   # fall back: empties that own a _head child
     roots=[o for o in bpy.data.objects if o.type=='EMPTY' and (o.name+'_hp') in bpy.data.objects]
+def anc(o,r):
+    while o.parent:
+        o=o.parent
+        if o==r: return True
+    return False
 res={}; fails=[]
 for r in sorted(roots,key=lambda o:o.name):
     inst=r.name; shot=r.users_collection[0].name.replace('CHR_','') if r.users_collection else '?'
@@ -54,8 +59,8 @@ for r in sorted(roots,key=lambda o:o.name):
     arms={sx:[o for o in kids if o.name.startswith(f'{inst}_arm{sx}_')] for sx in (-1,1)}
     piv={sx:bpy.data.objects.get(f'{inst}_ap{sx}') for sx in (-1,1)}
     d=dict(shot=shot,heads=len(heads),neck=neck is not None,bodies=len(bodies),arm_L=len(arms[-1]),arm_R=len(arms[1]),
-           piv_L=piv[-1] is not None and piv[-1].parent==r,piv_R=piv[1] is not None and piv[1].parent==r)
-    d['mitten_L']=all(mitten(o) for o in arms[-1]) and len(arms[-1])>0; d['mitten_R']=all(mitten(o) for o in arms[1]) and len(arms[1])>0
+           piv_L=piv[-1] is not None and anc(piv[-1],r),piv_R=piv[1] is not None and anc(piv[1],r))   # r6: combo rig puts pivots under root>whole>lean
+    d['mitten_L']=all(mitten(o) for o in arms[-1] if 'arm_pose' not in o.name) and len(arms[-1])>0; d['mitten_R']=all(mitten(o) for o in arms[1] if 'arm_pose' not in o.name) and len(arms[1])>0
     bm=[body_measure(b) for b in bodies]; d['body']=bm[0] if bm else None
     d['two_legs']=all(b['two_legs'] for b in bm) and bool(bm); d['two_feet']=all(b['two_feet'] for b in bm) and bool(bm)
     # visibility on sampled frames of the shot
@@ -63,10 +68,10 @@ for r in sorted(roots,key=lambda o:o.name):
     for f in range(f0,f1+1,6):
         sc.frame_set(f)
         if r.hide_render: continue
-        vh=[o for o in heads if not o.hide_render]; vb=[o for o in bodies if not o.hide_render]
+        vh=[o for o in heads if not o.hide_render]; vb=[o for o in bodies if not o.hide_render]; _tp=bpy.data.objects.get(inst+'_btop'); vt=bool(_tp and not _tp.hide_render)
         vL=[o for o in arms[-1] if not o.hide_render]; vR=[o for o in arms[1] if not o.hide_render]
         if not (vh or vb or vL or vR): continue   # character not on screen yet (enters later in the shot): nothing to check
-        if len(vh)!=1 or len(vb)!=1 or len(vL)!=1 or len(vR)!=1: bad.append((f,len(vh),len(vb),len(vL),len(vR)))
+        if len(vh)!=1 or len(vb)!=1 or len(vL)!=1 or len(vR)!=1 or (vt and not any('_blegs' in o.name for o in vb)): bad.append((f,len(vh),len(vb),len(vL),len(vR)))   # r6: split torso (btop) + one legs card counts as one body
         if cam and vb:
             n+=1; b=vb[0]; mw=b.matrix_world
             pts=[w2c(sc,cam,mw@Vector(c)) for c in b.bound_box]+[w2c(sc,cam,o.matrix_world.translation) for o in vh]

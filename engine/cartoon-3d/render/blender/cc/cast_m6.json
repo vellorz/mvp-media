@@ -1,0 +1,118 @@
+{
+ "combos": [
+  {
+   "combo": "panic_clutch",
+   "char": "pilgrimA",
+   "face": "shock",
+   "side": 1
+  },
+  {
+   "combo": "tilt_talk",
+   "char": "pilgrimD",
+   "face": "happy",
+   "side": -1
+  },
+  {
+   "combo": "glance_shift",
+   "char": "pilgrimB",
+   "face": "skeptical",
+   "side": 1
+  },
+  {
+   "combo": "victory_up",
+   "char": "pilgrimB",
+   "face": "happy",
+   "side": 1
+  },
+  {
+   "combo": "cross_arms_huff",
+   "char": "sailorB",
+   "face": "annoyed",
+   "side": -1
+  },
+  {
+   "combo": "laugh_lean_back",
+   "char": "sailorB",
+   "face": "laugh",
+   "side": -1
+  },
+  {
+   "combo": "akimbo_scold",
+   "char": "sailorA",
+   "face": "annoyed",
+   "side": 1
+  },
+  {
+   "combo": "dip_talk",
+   "char": "pilgrimB",
+   "face": "sigh",
+   "side": 1
+  },
+  {
+   "combo": "eureka_point_up",
+   "char": "pilgrimC",
+   "face": "excited",
+   "side": 1
+  },
+  {
+   "combo": "turn_and_point",
+   "char": "pilgrimB",
+   "face": "worry",
+   "side": 1
+  },
+  {
+   "combo": "glance_shift",
+   "char": "pilgrimA",
+   "face": "worry",
+   "side": -1
+  },
+  {
+   "combo": "laugh_bob",
+   "char": "pilgrimA",
+   "face": "laugh",
+   "side": 1
+  },
+  {
+   "combo": "turn_and_point",
+   "char": "elder",
+   "face": "proud",
+   "side": 1
+  },
+  {
+   "combo": "panic_clutch",
+   "char": "townA",
+   "face": "shock",
+   "side": -1
+  },
+  {
+   "combo": "point_out_tilt",
+   "char": "townB",
+   "face": "shock",
+   "side": -1
+  },
+  {
+   "combo": "startle_recoil",
+   "char": "townA",
+   "face": "shock",
+   "side": 1
+  },
+  {
+   "combo": "wave_hello",
+   "char": "pilgrimA",
+   "face": "grin",
+   "side": -1
+  },
+  {
+   "combo": "point_out_tilt",
+   "char": "tourA",
+   "face": "excited",
+   "side": 1
+  },
+  {
+   "combo": "tilt_talk",
+   "char": "tourB",
+   "face": "cool_shades",
+   "side": -1
+  }
+ ]
+}

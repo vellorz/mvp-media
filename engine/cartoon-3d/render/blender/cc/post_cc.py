@@ -183,13 +183,19 @@ if __name__=='__main__':
     widths=[]
     R={n:Reader(n) for n in SH}; cache={}
     TESTF=set(int(x) for x in os.environ.get('TESTF','').split(',') if x)
+    RG=[int(x) for x in os.environ.get('RANGE','').split(',') if x]   # r6: RANGE=a,b writes a video-only segment (two halves in parallel, then concat + audio): one full pass ran past the 2 h task limit
     if TESTF: enc=None
+    elif RG: enc=subprocess.Popen(['ffmpeg','-y','-v','error','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r','30','-i','-','-c:v','libx264','-preset','slow','-crf','14' if K==1 else '20','-pix_fmt','yuv420p',OUT],stdin=subprocess.PIPE)
     else: enc=subprocess.Popen(['ffmpeg','-y','-v','error','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r','30','-i','-','-i','/root/cc/audio/mix.wav',
         '-c:v','libx264','-preset','slow','-crf','14' if K==1 else '20','-pix_fmt','yuv420p','-c:a','aac','-b:a','320k','-shortest','-movflags','+faststart',OUT],stdin=subprocess.PIPE)
     ci=0; capimg=None; capkey=None
     for f in range(END+1):
         act=[n for n,(a,b) in SH.items() if a<=f<=b]
         frames={}
+        if RG and not (RG[0]<=f<=RG[1]):
+            for n in act: R[n].next()
+            if f>RG[1]: break
+            continue
         if TESTF and f not in TESTF:
             for n in act: R[n].next()
             if f>max(TESTF): break
@@ -216,5 +222,5 @@ if __name__=='__main__':
         if f%100==0: print('POST',f,flush=True)
     if TESTF: sys.exit(0)
     enc.stdin.close(); enc.wait()
-    print('CAPTION_WIDTH_MED',round(float(np.median(widths))*100,1),'MAX',round(float(max(widths))*100,1),'N',len(CAPS))
+    if widths: print('CAPTION_WIDTH_MED',round(float(np.median(widths))*100,1),'MAX',round(float(max(widths))*100,1),'N',len(CAPS))
     print('POST_DONE',OUT)

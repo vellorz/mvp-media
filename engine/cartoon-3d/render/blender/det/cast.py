@@ -408,6 +408,42 @@ POSES={
  'lift':(20,152),          # hand raised to shoulder height in front (toast, sip, show a prop): #04 f702-711, #14 f790-796, #03 f834-838
  'dip':(4,-18),            # 2-frame anticipation dip before a point (#14 f117-119); also the 'pull in' breakdown
 }
+# ---- ROUND 6 (Nov 23 2026, coordinated motion): more Rick arm drawings, from 70 new strips (#05 #08 #13 #21 #23, two measurers).
+# Additive: existing poses unchanged; cards are only made for characters with cast.json "poses". INFERRED = fewer than 2 Rick examples.
+POSES.update({
+ 'reach':(74,84),          # arm out and forward to take something: #13 f722, #08 f983, #21 f1054-1061, #23 f506
+ 'swing':(34,30),          # arm swung down-forward after an overhead strike/stamp: #21 f359-373, #05 f28-31
+ 'throw':(86,64),          # follow-through after a fling/toss: #21 f437-443, #23 f1298
+ 'hands_head':(150,250),   # hand clamped on the head/neck (panic): #21 f1468, #22 f1325-1327 (old labels)
+ 'wave_a':(128,158),       # [INFERRED] wave, hand up beside the head: #05 f139, #05 f469 (one measurer each)
+ 'wave_b':(128,196),       # [INFERRED] wave, hand tipped over
+ 'clap_open':(18,-58),     # [INFERRED] forearms in front, apart: #08 f1116 (one measurer)
+ 'clap':(10,-96),          # [INFERRED] mittens together in front of the chest
+ 'cross':(-4,-104),        # [INFERRED] arms folded across the belly (owner list; no Rick example in the new strips)
+})
+# ROUND 6: Rick leans the TORSO while the legs stay planted (70 new strips: legs moved in 5 of 63, torso leans 10-30 deg, median ~12).
+# For characters that use lib.combo() the body card is split in two cards cut from the SAME drawing: the garment (torso) and the legs.
+HIP_ROW=520   # texture row (of 1100) of the lean pivot, inside the rounded hem (HEMY 545) so the turning torso always covers the leg tops
+def split_body(name,stride=0):
+    from PIL import ImageFilter as _F
+    im=body(name,stride); kind=C[name].get('body','tall'); pts=_sil(kind)[0]
+    m=Image.new('L',im.size,0); ImageDraw.Draw(m).polygon(pts,fill=255); m=m.filter(_F.MaxFilter(2*BOUT+5))
+    a=im.getchannel('A'); from PIL import ImageChops as _C
+    top=im.copy(); top.putalpha(_C.multiply(a,m))
+    legs=im.copy(); legs.putalpha(_C.multiply(a,_C.invert(m)))
+    # leg tubes redrawn from higher up (same curve as body(), start 120 px above the hem) and laid BEHIND, so a leaning torso never
+    # uncovers a cut leg top
+    c=C[name]; legc=dk(tuple(c.get('legs',(40,36,40))),0.8); y1=_sil(kind)[4]; LW=34
+    W,H=800*SS,1100*SS; ul=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(ul); s_=lambda v:int(v*SS)
+    for sx in(-1,1):
+        x=400+sx*62; fx=x+sx*20+(sx*60 if stride else 0); lift=(70 if (stride==1 and sx<0) or (stride==2 and sx>0) else 0); fy=1056-lift
+        y_0=y1-60; cx_=(x+fx)/2+sx*30; cy_=(y_0+fy)/2
+        P=[((1-t)**2*x+2*(1-t)*t*cx_+t*t*fx,(1-t)**2*y_0+2*(1-t)*t*cy_+t*t*fy) for t in [i/24 for i in range(25)]]
+        P=[(x+(P[1][0]-x)*-5*k/5,y_0-60*k/5) for k in range(5,0,-1)]+P   # extend the tube straight up 60 px
+        d.line(_S(P),fill=K,width=s_(LW),joint='curve'); d.line(_S(P),fill=legc,width=s_(LW-16),joint='curve')
+    ul=ul.resize((800,1100),Image.LANCZOS); ul.putalpha(_C.multiply(ul.getchannel('A'),m.point(lambda v:255 if v>0 else 0)))
+    out=Image.new('RGBA',im.size,(0,0,0,0)); out.alpha_composite(ul); out.alpha_composite(legs)
+    return top,out
 def pose_arm(name,pose,mix=1.0,over=0.0,frm='hang'):
     """1200 x 1800 card, shoulder at (600,900): the pose (or a mix toward it from `frm` for in-betweens, `over` degrees of overshoot)"""
     a0,c0=POSES[frm]; a1,c1=POSES[pose]
@@ -429,6 +465,23 @@ def pose_list(c):
     want=c.get('poses')
     if not want: return []
     return list(POSES) if want=='all' else [p for p in want if p in POSES]
+
+# ---- ROUND 6: back-of-head face ('backview' token, expressions.py round 6). Wraps head() for that one token only.
+_head_r5=head
+def head(name,fk):
+    c=C[name]; spec=c['faces'][fk]; ex=spec[3] if len(spec)>3 else ''
+    if 'backview' not in ex: return _head_r5(name,fk)
+    keep={k:c.get(k) for k in ('nose','fhair','mustache','stache_small','stubble','beard','glasses')}
+    c['nose']=False
+    for k in ('fhair','mustache','stache_small','stubble','beard','glasses'): c.pop(k,None)
+    try: im=_head_r5(name,fk)
+    finally:
+        for k,v in keep.items():
+            if v is None: c.pop(k,None)
+            else: c[k]=v
+    # Rick's back views (#04 f349-350 chef and captain, #05 f577 farmer) are the PLAIN head disc: no hair mass, no nape line; hats and the
+    # hair that shows above the outline stay as drawn. (A first try painted a hair mass over the crown; the rule-330 sheet showed Rick does not.)
+    return im
 if __name__=='__main__':
     out={}
     for n,c in C.items():
@@ -436,6 +489,9 @@ if __name__=='__main__':
         body(n).save(f'{T}{n}_body.png'); body(n,1).save(f'{T}{n}_bodyw1.png'); body(n,2).save(f'{T}{n}_bodyw2.png')
         for p in c.get('props',[None]): arm(n,p).save(f'{T}{n}_arm{"_"+p if p else ""}.png')
         arm(n).save(f'{T}{n}_arm.png'); arm(n,straight=4).save(f'{T}{n}_armS.png')
+        if c.get('combos') or c.get('combos_approved'):   # round 6 (opt-in): split torso/legs cards for lib.combo()
+            _t,_l=split_body(n); _t.save(f'{T}{n}_btop.png'); _l.save(f'{T}{n}_blegs.png')
+            for _s in (1,2): split_body(n,_s)[1].save(f'{T}{n}_blegsw{_s}.png')
         for _p in pose_list(c):   # round 5 proposal (opt-in "poses"): pose card, 1-frame in-between from rest, overshoot for settles
             pose_arm(n,_p).save(f'{T}{n}_arm_pose_{_p}.png'); pose_arm(n,_p,mix=0.5).save(f'{T}{n}_arm_pose_{_p}_m.png'); pose_arm(n,_p,over=9).save(f'{T}{n}_arm_pose_{_p}_o.png')
         # r7 (rule 272): left arms get their own mirrored texture, never a negative object scale (the PC GPU drew a mirrored card as a black box)

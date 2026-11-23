@@ -359,6 +359,107 @@ def gesture(ch,sx,f,pose,inb=True,settle=0,anticip=0):
         A['sched']=[s_ for s_ in A['sched'] if s_[0]!=g]+[(g,k)]
         _piv_hold(ch,sx,g,-8 if k=='arm' else 0)   # pose drawings carry their own angle; the rest card keeps its -8 deg hang
     return seq[-1][0]
+# ==== ROUND 6 (Nov 23 2026): COORDINATED MOTION (owner: "face turns, arm gestures, leg motion and body posture are ONE movement") ====
+# Opt-in and additive: nothing below runs unless a scene calls combo(). Combos live in motion_combos.json (catalogue + Rick evidence +
+# agreement rates; research/rick-style-spec/motion-library/ in project files). motion.frames() is the single plan for both this
+# function and the 2D preview sheet (m6sheet.py). Rules 356+ (RULES_CONSOLIDATED.md).
+import motion as MO
+HIP_ROW=520   # = cast.HIP_ROW: lean pivot row in the 1100-row body texture
+def _lean_rig(ch):
+    """Round 6 hierarchy, made on first combo() only: root -> whole (feet: squash, hop) -> [legs card, lean (hip: torso lean) ->
+    [torso card, head pivot, arm pivots]]. The torso and legs cards are cut from the same body drawing (cast.split_body), so at
+    lean 0 the character looks exactly as before; the original body card is hidden for this character (finish())."""
+    if ch.get('lean'): return ch['lean']
+    c=CI[ch['kind']]; sy=BSY[c['body']]; C_=chr_coll(ch['shot'])
+    zc=-0.04+0.55*sy; zh=-0.04+1.1*sy*(1-HIP_ROW/1100)
+    wh=empty(ch['inst']+'_whole',(0,0,0),ch['root'],coll=C_)
+    ln=empty(ch['inst']+'_lean',(0,0,zh),wh,coll=C_)
+    tp=plane(f"{ch['inst']}_btop",(0,0,0),0.8,1.1*sy,card_mat(f"{ch['kind']}_btop",f"{ch['kind']}_btop"),coll=C_); tp.parent=ln; tp.location=(0,0,zc-zh)
+    for o in [ch['hp']]+[ch['A'][sx]['piv'] for sx in (-1,1)]:
+        x,y,z=o.location; o.parent=ln; o.location=(x,y,z-zh)
+    ch['top']=ch['top']-zh   # head pivot z is now measured from the hip
+    ch['split']=dict(whole=wh,top=tp,legs={},zc=zc); ch['lean']=ln; return ln
+def _const(o):
+    if o.animation_data and o.animation_data.action:
+        for fc in o.animation_data.action.fcurves:
+            if fc.data_path!='hide_render':
+                for kp in fc.keyframe_points: kp.interpolation='CONSTANT'
+LEGTEX={'body':'blegs','bodyw1':'blegsw1','bodyw2':'blegsw2'}
+def _body_card(ch,key):
+    """legs card for 'body' (standing) or a stride drawing used as a step / weight shift / run (made on first use)"""
+    L=ch['split']['legs']
+    if key in L: return L[key]
+    c=CI[ch['kind']]; sy=BSY[c['body']]; t=f"{ch['kind']}_{LEGTEX[key]}"
+    b=plane(f"{ch['inst']}_{LEGTEX[key]}",(0,0,0),0.8,1.1*sy,card_mat(t,t),coll=chr_coll(ch['shot']))
+    b.parent=ch['split']['whole']; b.location=(0,0.001,ch['split']['zc']); L[key]=b; return b
+_setface=face
+def combo(ch,f,name,side=1,face=None,frm=0,face2=None):
+    """Rick combined move `name` (motion_combos.json) starting at frame f, toward screen side `side` (+1 right, -1 left).
+    face: base face (default: the character's current face); frm: head level at the start (-3..3).
+    Bakes every channel on the same plan: face/turn (353a grammar), arm pose cards (354a), body lean/squash/hop on the lean pivot,
+    head drop/tilt on the head pivot, stride cards for steps. Returns the last frame the combo changes anything."""
+    st_=MO.COMBOS[name].get('status')
+    if st_!='MEASURED' and name not in (CI[ch['kind']].get('combos_approved') or []):
+        raise ValueError(f"combo {name} is {st_}: owner approval needed (cast.json 'combos_approved')")   # inferred moves stay OFF (rule 360)
+    base=face or (sorted(ch['faces'])[-1][1].split('@')[0] if ch['faces'] else list(ch['F'])[0].split('@')[0])
+    seq=MO.frames(name,side,base,frm,face2,pre=0,post=0)
+    ln=_lean_rig(ch); wh=ch['split']['whole']; hp=ch['hp']; top=ch['top']; prev=None; last=f
+    _body_card(ch,'body')
+    for s in seq:
+        g=f+s['f']
+        if prev is None or s['lv']!=prev['lv'] or s['face']!=prev['face']:
+            k=XL.turn_name(s['face'],s['lv']) if s['lv'] is not None else s['face']
+            _setface(ch,g,k if k in ch['F'] else s['face']); last=g
+        for sx in (-1,1):
+            a=s['arms'][sx]; pa=prev['arms'][sx] if prev else 'hang'
+            if a!=pa:
+                if a=='hang': ch['A'][sx]['sched']=[x for x in ch['A'][sx]['sched'] if x[0]!=g]+[(g,'arm')]; _piv_hold(ch,sx,g,-8); ch['A'][sx]['pose']=None
+                else:
+                    _pose_card(ch,sx,'arm_pose_'+a); ch['A'][sx]['sched']=[x for x in ch['A'][sx]['sched'] if x[0]!=g]+[(g,'arm_pose_'+a)]; _piv_hold(ch,sx,g,0)
+                    ch['A'][sx]['pose']=a.split('_m')[0].split('_o')[0]
+                last=g
+        if prev is None or (s['lean'],s['squash'],s['hop'])!=(prev['lean'],prev['squash'],prev['hop']):
+            if prev is None: krot(ln,g-1,(0,0,0)); kscale(wh,g-1,(1,1,1)); kloc(wh,g-1,(0,0,0))
+            krot(ln,g,(0,math.radians(s['lean']),0)); kscale(wh,g,(1+s['squash']*0.6,1,1-s['squash'])); kloc(wh,g,(0,0,s['hop'])); last=g
+        if prev is None or (s['hdy'],s['htilt'])!=(prev['hdy'],prev['htilt']):
+            if prev is None: kloc(hp,g-1,(0,0,top)); krot(hp,g-1,(0,0,0))
+            kloc(hp,g,(0,0,top-s['hdy'])); krot(hp,g,(0,math.radians(s['htilt']),0)); last=g
+        if prev is None or s['legs']!=prev['legs']:
+            if s['legs']!='body': _body_card(ch,s['legs'])
+            ch.setdefault('legsched',[]).append((g,s['legs'])); last=g
+        prev=s
+    _const(ln); _const(wh); _const(hp)
+    return last
+def _revis(o,ranges):
+    if o.animation_data and o.animation_data.action:
+        for fc in list(o.animation_data.action.fcurves):
+            if fc.data_path=='hide_render': o.animation_data.action.fcurves.remove(fc)
+    vis(o,ranges)
+_finish_r5=finish
+def finish(ch,blink_every=34):
+    """round 6: as before; a character that used combo() shows the split torso card for its whole range, its original body cards
+    never, and the legs card that matches each frame (standing, or the stride drawings for walks and combo steps)"""
+    ch=_finish_r5(ch,blink_every)
+    if not ch.get('split'): return ch
+    a,b=ch['rng']; st={}
+    for fr in range(a,b+1): st[fr]='body'
+    ls=sorted(ch.get('legsched',[]))
+    for i,(g,k) in enumerate(ls):
+        nx=ls[i+1][0] if i+1<len(ls) else b+1
+        for fr in range(max(a,g),min(nx,b+1)): st[fr]=k
+    for f0,f1,step in ch['walk']:
+        for fr in range(f0,min(f1,b+1)):
+            ph=((fr-f0)//step)%4; st[fr]=['bodyw1','body','bodyw2','body'][ph]
+    for k in set(st.values()): _body_card(ch,k)
+    BR={}; cur=None
+    for fr in range(a,b+1):
+        if st[fr]!=cur: BR.setdefault(st[fr],[]).append([fr,fr]); cur=st[fr]
+        else: BR[cur][-1][1]=fr
+    for o in ch['bodies'].values(): _revis(o,[])
+    for k,o in ch['split']['legs'].items(): vis(o,BR.get(k,[]))
+    vis(ch['split']['top'],[(a,b)])
+    for o in [ch['split']['whole'],ch['lean']]+list(ch['split']['legs'].values())+[ch['split']['top']]: o['chr']=ch['inst']
+    return ch
 def lipsync(ch,words,f0,f1,shapes=('talkA','talkB','talkC','talkD'),rest='talkD'):
     """mouth shapes on the quoted words only (rule 185: lips move only on quoted lines)"""
     seq=[]

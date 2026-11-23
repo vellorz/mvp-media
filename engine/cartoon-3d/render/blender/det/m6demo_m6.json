@@ -1,0 +1,143 @@
+{
+ "combos": [
+  {
+   "combo": "tilt_talk",
+   "char": "r5man",
+   "face": "smug",
+   "side": 1
+  },
+  {
+   "combo": "lean_reach",
+   "char": "r5woman",
+   "face": "smile",
+   "side": 1
+  },
+  {
+   "combo": "laugh_lean_back",
+   "char": "r5hat",
+   "face": "laugh",
+   "side": 1
+  },
+  {
+   "combo": "laugh_bob",
+   "char": "r5man",
+   "face": "laugh",
+   "side": 1
+  },
+  {
+   "combo": "swing_down",
+   "char": "r5man",
+   "face": "skeptical",
+   "side": 1
+  },
+  {
+   "combo": "toss",
+   "char": "r5woman",
+   "face": "smug",
+   "side": -1
+  },
+  {
+   "combo": "point_out_tilt",
+   "char": "r5hat",
+   "face": "smug",
+   "side": 1
+  },
+  {
+   "combo": "turn_and_point",
+   "char": "r5man",
+   "face": "grin",
+   "side": 1
+  },
+  {
+   "combo": "eureka_point_up",
+   "char": "r5woman",
+   "face": "smug",
+   "side": 1
+  },
+  {
+   "combo": "victory_up",
+   "char": "r5man",
+   "face": "happy",
+   "side": 1
+  },
+  {
+   "combo": "dip_talk",
+   "char": "r5hat",
+   "face": "deadpan",
+   "side": -1
+  },
+  {
+   "combo": "panic_clutch",
+   "char": "r5woman",
+   "face": "worried",
+   "side": 1
+  },
+  {
+   "combo": "startle_dash",
+   "char": "r5man",
+   "face": "surprise",
+   "side": 1
+  },
+  {
+   "combo": "glance_shift",
+   "char": "r5hat",
+   "face": "skeptical",
+   "side": 1
+  },
+  {
+   "combo": "look_back_shrug",
+   "char": "r5man",
+   "face": "deadpan",
+   "side": 1
+  },
+  {
+   "combo": "startle_recoil",
+   "char": "r5woman",
+   "face": "worried",
+   "side": 1
+  },
+  {
+   "combo": "double_take",
+   "char": "r5man",
+   "face": "deadpan",
+   "face2": "surprise",
+   "side": 1
+  },
+  {
+   "combo": "wave_hello",
+   "char": "r5woman",
+   "face": "smile",
+   "side": 1
+  },
+  {
+   "combo": "clap",
+   "char": "r5man",
+   "face": "happy",
+   "side": 1
+  },
+  {
+   "combo": "cross_arms_huff",
+   "char": "r5woman",
+   "face": "smug",
+   "side": 1
+  },
+  {
+   "combo": "akimbo_scold",
+   "char": "r5hat",
+   "face": "skeptical",
+   "side": 1
+  },
+  {
+   "combo": "think_chin",
+   "char": "r5man",
+   "face": "skeptical",
+   "side": 1
+  },
+  {
+   "combo": "turn_away_back",
+   "char": "r5hat",
+   "face": "skeptical",
+   "side": 1
+  }
+ ]
+}

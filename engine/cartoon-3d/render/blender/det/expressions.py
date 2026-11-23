@@ -965,3 +965,15 @@ def expand(C):
                 nm = turn_name('blink', lv)
                 if nm not in f: f[nm] = [e, b, m, f'tq{lv}']
     return C
+# =================================================================== ROUND 6 (Nov 23 2026, coordinated motion; owner approves before use)
+# Back-of-head drawing for front <-> back snaps (Rick #04 f349-350, #04 f394, #03 f1422; #05 f579 whole-body back->front snap, both
+# measurers). Face key 'back' (extras token 'backview'): no eyes, brows, mouth, nose or facial hair; the hair mass covers the crown.
+# Added for characters with cast.json "turns" (opt-in). [INFERRED drawing: Rick's back views are small in frame; owner to approve.]
+TOKENS = TOKENS | {'backview'}
+_expand_r5 = expand
+def expand(C):
+    C = _expand_r5(C)
+    for n, c in C.items():
+        if c.get('turns') and 'back' not in c.setdefault('faces', {}):
+            c['faces']['back'] = ['none', 'none', 'none', 'backview']
+    return C

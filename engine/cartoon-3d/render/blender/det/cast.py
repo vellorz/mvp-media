@@ -82,7 +82,7 @@ def head(name,fk):
     if hs=='ponytail': d.ellipse([800,330,1000,640],fill=hair,outline=K,width=OUT); d.ellipse([850,300,930,380],fill=dk(hair,0.7),outline=K,width=10)   # tail out to the side
     if hs=='perm':
         for a in range(0,360,30): x=CX+380*math.cos(math.radians(a)); y=500+360*math.sin(math.radians(a))*0.95; d.ellipse([x-120,y-120,x+120,y+120],fill=hair,outline=K,width=OUT)
-    skin=tuple(c.get('skin',SK[:3]))+(255,)
+    skin=tuple(X.skin_rgb(c.get('skin'),SK[:3]))+(255,)   # round 4 proposal: 'skin' may name a Rick skin preset (X.SKIN)
     # r8b (guide v1.3 x.3): ink 3.4 % of head width toward the light (upper right), 6 % away from it and under the chin
     d.ellipse([112,140,912,940],fill=K); d.ellipse([112+48,140+27,912-27,940-48],fill=skin)
     head_shade(im,skin); d=ImageDraw.Draw(im)
@@ -137,9 +137,16 @@ def head(name,fk):
         HREG=X.hat_region(HAT); X.restore_under_hat(im,PRE,HREG.crop((0,PT,1024,PT+1024)))
     if c.get('fhair'): X.fhair(im,c['fhair'],c.get('fhaircol',c.get('hair',(60,40,30))),K,dx=TD)   # round 2: Rick facial hair (rule 326a revision pending owner pick)
     feat,d=new(1024,1024)
-    eyes(d,e,glasses=(tuple(c['glasses'])+(255,)) if c.get('glasses') else None); brows(d,b if hat not in('cop','flatcap','fedora','beanie','ladyhat','leather','cloche','visor') or b!='up' else 'flat')
+    FS=X.feat_scale(c)   # round 4 proposal: Rick-sized eyes / brows / mouth, opt-in per character ("feat_scale": "rick" or [eyes, brows, mouth])
+    _gl=(tuple(c['glasses'])+(255,)) if c.get('glasses') else None; _bk=b if hat not in('cop','flatcap','fedora','beanie','ladyhat','leather','cloche','visor') or b!='up' else 'flat'
+    if FS:
+        X.scaled(feat,lambda dd: eyes(dd,e,glasses=_gl),X.EYE_BOXES,FS[0]); X.scaled(feat,lambda dd: brows(dd,_bk),X.BROW_BOXES,FS[1]); d=ImageDraw.Draw(feat)
+    else:
+        eyes(d,e,glasses=_gl); brows(d,_bk)
     MSIDE=X.mouth_side(c,ex)   # round 3: per-face mouthL/mouthR/lookL/lookR tokens override the character's mouth_side
-    if MSIDE: feat.alpha_composite(X.mouth_layer(mouth,m,MSIDE)); d=ImageDraw.Draw(feat)   # round 2: Rick's off-centre, lopsided mouths
+    if FS:
+        _ml,_md=new(1024,1024); X.scaled(_ml,lambda dd: mouth(dd,m),X.MOUTH_BOXES,FS[2]); feat.alpha_composite(X.mouth_set(_ml,m,MSIDE)); d=ImageDraw.Draw(feat)
+    elif MSIDE: feat.alpha_composite(X.mouth_layer(mouth,m,MSIDE)); d=ImageDraw.Draw(feat)   # round 2: Rick's off-centre, lopsided mouths
     else: mouth(d,m)
     if c.get('mustache'):   # r8: Rick's bushy two-lobe mustache
         mc=tuple(c['mustache'])+(255,)

@@ -14,7 +14,7 @@ SH={'S01':(0,127),'S02':(120,214),'S03':(207,278),'S04':(271,392),'S05':(385,510
     'S09':(766,1012),'S10':(1005,1140),'S11':(1141,1252),'S12':(1244,1330),'S13':(1322,1412),'S14':(1413,1443),'S15':(1436,1516),
     'S16':(1509,1574),'S17':(1567,1712),'S18':(1702,1758),'S19':(1759,END)}
 sc['shots']=json.dumps(SH)
-LENS={'S01':30,'S02':32,'S03':40,'S04':30,'S05':34,'S06':32,'S07':30,'S08':36,'S09':30,'S10':32,'S11':30,'S12':30,'S13':30,'S14':36,'S15':38,'S16':30,'S17':32,'S18':32,'S19':34}
+LENS={'S01':30,'S02':32,'S03':40,'S04':30,'S05':31,'S06':32,'S07':30,'S08':36,'S09':30,'S10':32,'S11':30,'S12':30,'S13':30,'S14':36,'S15':38,'S16':30,'S17':32,'S18':32,'S19':34}
 for n in SH: cam(n,LENS[n],11.0)   # sets stay sharp like Rick's newest videos (BF r6 lesson: DOF blur, not missing paint, killed surface detail)
 def C(n): return L.chr_coll(n)
 PATHS={}
@@ -319,7 +319,9 @@ skydome('E_sky',(EX,0),200,160,'sky_dawn')
 tl=plane('E_trees',(EX,-32,3.6),150,11,card_mat('trees_dawn','trees_dawn',emit=0.35),coll=L.C_NOI,face='+Y'); tl['fly']=1
 tl2=plane('E_trees2',(EX-6,-46,5.0),190,15,card_mat('trees','trees',emit=0.3),coll=L.C_NOI,face='+Y'); tl2['fly']=1
 for i in range(60):
-    x=EX+R.uniform(-50,50); y=R.uniform(-30,-6); grass(f'E_g{i}',(x,y,eb(x,y)-0.05),R.uniform(0.7,1.4),i+5)
+    x=EX+R.uniform(-50,50); y=R.uniform(-30,-6)
+    if abs(x-EX)<6.5 and y<-12: continue   # r5 (visual/payoff r4 critical): no grass tufts behind the Nauset men (read as a feather crest at 1026-1074)
+    grass(f'E_g{i}',(x,y,eb(x,y)-0.05),R.uniform(0.7,1.4),i+5)
 BARR=surf('barrm','barricade',(1.5,1.5))
 for i in range(9):   # log barricade in an arc
     a=math.radians(200+i*17); x=EX+math.cos(a)*5.5; y=1.5+math.sin(a)*4.0
@@ -434,7 +436,7 @@ pf=onship(char_on('S05_pil','pilgrimC',s,(SX+1.2,9.8,3.82),r,'happy')); pB=onshi
 faces(pf,[(385,'happy'),(420,'excited'),(452,'happy'),(470,'grin'),(488,'shock'),(500,'worry')]); faces(pB,[(385,'deadpan'),(440,'skeptical'),(486,'grit'),(498,'deadpan')])
 for f,a in [(385,-20),(430,-55),(470,-65),(486,-35)]: arm(pf,1,f,a)   # armprobe r3: a raised forearm crossed the other Pilgrim's face
 for f,a in [(470,-10),(484,-60),(492,-55)]: arm(pB,1,f,a)
-kloc(pf['root'],458,(1.2,9.8,3.8)); kloc(pf['root'],470,(1.05,10.25,3.8)); kloc(pf['root'],488,(1.05,10.25,3.8)); kloc(pf['root'],494,(1.1,10.05,4.05)); kloc(pf['root'],500,(1.2,9.8,3.8))   # r2: a hop back, not a 4 f glide. r4: shorter lean toward the lens (head cut by the right edge 480-488)
+kloc(pf['root'],458,(1.2,9.8,3.8)); kloc(pf['root'],470,(1.0,9.98,3.8)); kloc(pf['root'],488,(1.0,9.98,3.8)); kloc(pf['root'],494,(1.05,9.9,4.05)); kloc(pf['root'],500,(1.2,9.8,3.8))   # r2: a hop back, not a 4 f glide. r4: shorter lean toward the lens (head cut by the right edge 480-488)
 path(s,[(385,(SX+5.7,18.6,2.7),(AX,14.9,3.0)),(419,(SX+5.4,18.2,2.5),(AX,14.9,2.7)),(432,(SX+5.2,17.9,1.7),(AX,15.0,0.5)),(442,(SX+4.6,16.4,2.6),(SX+1.9,13.2,2.4)),(458,(SX+3.2,12.6,4.5),(SX+1.1,9.9,4.0)),(510,(SX+2.9,12.2,4.55),(SX+1.0,9.7,4.1))])   # stills r3: the Pilgrim sat at the frame edge
 # ---- S06 (502-583): below deck, the men sign the deal to rule themselves ----
 s='S06'; r=S(s)
@@ -466,7 +468,7 @@ for f,a in [(654,-20),(700,-140),(712,-110),(730,-150),(750,-60)]: arm(s8a,1,f,a
 for f,a in [(654,-30),(705,-60),(740,-100)]: arm(s8b,-1,f,a)
 bob(s8a,[703,732,756]); bob(s8b,[716,744])
 p8=onship(char_on('S08_pil','pilgrimB',s,(SX+0.3,0.6,2.32),r,'worry')); faces(p8,[(654,'worry'),(712,'shock'),(740,'sigh')])
-path(s,[(654,(SX-2.4,4.0,3.0),(SX-0.6,2.0,2.75)),(700,(SX-1.9,3.95,2.95),(SX-1.0,2.0,2.8)),(765,(SX-0.7,5.3,2.95),(SX-1.0,2.0,2.8))])   # r4 (rule 306): ends further out than it starts (no push after S07's track)   # r2: closer on the speaking sailor (C6), lateral truck   # r2 (rule 306): lateral truck, no push after S07
+path(s,[(654,(SX-2.4,4.0,3.0),(SX-0.6,2.0,2.75)),(700,(SX-2.3,4.4,2.95),(SX-1.0,2.0,2.8)),(765,(SX-0.7,5.3,2.95),(SX-1.0,2.0,2.8))])   # r4 (rule 306): ends further out than it starts (no push after S07's track)   # r2: closer on the speaking sailor (C6), lateral truck   # r2 (rule 306): lateral truck, no push after S07
 # ---- S09 (766-1012): the packed long take on Corn Hill: climb, dig, the corn basket, take it, give it back, the name ----
 s='S09'; r=S(s); hz=lambda x,y:dune(x,y)
 cA=char_on('S09_dig','pilgrimC',s,(DX-0.9,11.0,hz(DX-0.9,11.0)),r,'neutral',arms=('arm',[(766,'arm_shovel'),(822,'arm')]),walker=True)
@@ -529,12 +531,13 @@ s='S15'; r=S(s)
 wr=char_on('S15_writer','pilgrimD',s,(IX-3.4,3.35,0.0),r,'neutral',arms=('arm',[(1436,'arm_quill')]))
 for f,a in [(1436,-50),(1450,-58),(1466,-46),(1480,-56),(1496,-44)]: arm(wr,1,f,a)
 faces(wr,[(1436,'neutral'),(1460,'deadpan'),(1486,'proud'),(1504,'deadpan')])
-path(s,[(1436,(IX-4.4,1.25,1.6),(IX-3.6,2.6,0.85)),(1480,(IX-3.6,1.2,1.55),(IX-3.25,2.6,0.85)),(1516,(IX-2.3,0.45,1.65),(IX-3.0,2.6,0.88))])   # r4 (rule 306): clear pull-out after the S14 crash push   # r2: wider (head was 53 % W) and a truck, no push after S14
+path(s,[(1436,(IX-4.4,1.25,1.6),(IX-3.6,2.6,0.85)),(1480,(IX-3.95,0.95,1.6),(IX-3.25,2.6,0.85)),(1516,(IX-2.3,0.45,1.65),(IX-3.0,2.6,0.88))])   # r4 (rule 306): clear pull-out after the S14 crash push   # r2: wider (head was 53 % W) and a truck, no push after S14
 # ---- S16 (1509-1574): 1741, a wharf going up beside the rock; hammers ----
 s='S16'; r=S(s)
-for i,(x,y,k) in enumerate([(4.15,3.6,'townA'),(5.05,4.5,'townB'),(4.55,6.0,'townA')]):   # r4h: all three diggers inside the frame for the whole truck (cc4 test S16:1540 had one half out left, one off right, one behind the camera)
-    c_=char_on(f'S16_w{i}',k,s,(x,y,0.15),r,'grit',arms=('arm','arm_shovel'))
-    for f in range(1509,1574,10): arm(c_,1,f+i*3,-120); arm(c_,1,f+i*3+5,-40)
+for i,(x,y,k) in enumerate([(4.15,3.6,'townA'),(5.2,4.6,'townB')]):   # r5: two diggers; a third had no clear spot (always behind a head or a shovel)   # r5 (shots r4 C4/276): w2 further back so its head clears w0's; w1 clear of w0's shovel arm   # r4h: all three diggers inside the frame for the whole truck (cc4 test S16:1540 had one half out left, one off right, one behind the camera)
+    sd=-1 if i==0 else 1   # r5 (occprobe/shots r4): the front digger (screen left) digs with his outer hand, so the shovel never sweeps the others' faces
+    c_=char_on(f'S16_w{i}',k,s,(x,y,0.15),r,'grit',arms=(('arm_shovel','arm') if sd<0 else ('arm','arm_shovel')))
+    for f in range(1509,1574,10): arm(c_,sd,f+i*3,-120); arm(c_,sd,f+i*3+5,-40)
     drift_faces(c_,1509,1574,['grit','neutral','happy'],50+i,(14,24)); bob(c_,[1520+i*6,1550])
 path(s,[(1509,(3.4,-2.6,1.9),(4.4,2.6,1.2)),(1574,(5.0,-2.8,1.85),(4.6,2.6,1.2))])   # r2 (rule 306): truck, not a push
 # ---- S17 (1567-1712): the 94-year-old elder arrives, points at the gray stone; the town gasps; "That's the one." ----
@@ -597,7 +600,7 @@ def snap_all():
     print('SNAPPED',n)
 snap_all()
 # ---- rule 309 pass (head probe r1: S05 14%, S07 18%, S16 12%, S18 18% of W): dolly cameras in toward their targets ----
-for n,k,fr in [('S01',0.7,(0,92)),('S09',0.75,None),('S11',0.75,None),
+for n,k,fr in [('S01',0.7,(0,92)),('S09',0.75,(850,1012)),('S11',0.75,None),
                ('S13',0.9,None),('S16',0.45,None),('S17',0.65,(1567,1640)),('S18',0.6,None)]: dolly(n,k,fr)
 # r4 (visual r3 R07 [C]: 21 of 31 medium-shot heads under 28 % W, median 25.1): a second, gentler dolly on the medium shots
 for n,k,fr in [('S03',0.82,None),('S10',0.72,(1080,1140)),('S11',0.675,None),('S17',0.85,(1640,1712)),('S09',0.675,(862,1012))]: dolly(n,k,fr)   # S11/S09: factor is from the original keys (0.75 x 0.9)
@@ -639,4 +642,16 @@ for o_ in bpy.data.objects:
 L.render_setup(100,8)
 sc.cycles.samples=4; sc.cycles.transparent_max_bounces=8; sc.cycles.diffuse_bounces=1; sc.cycles.max_bounces=3   # r1 speed test: 89 s -> 53 s per 2K frame, mean abs diff 1.4/255
 os.makedirs('/root/cc/blend',exist_ok=True)
+# r5 (shots r4 C4): heads cut by the frame edge while the body is on screen; headnudge_cc.py gives the sideways shift (m) per character, x1.15 margin.
+NUDGE={"S01_pil": [0.273, -0.182], "S02_master": [0.104, 1.863], "S02_x2": [0.028, 0.51], "S03_pil": [-0.347, -0.228], "S05_pil": [-0.347, 0.264], "S05_pilB": [0.248, -0.188], "S07_p0": [0.827, 0.138], "S07_p1": [0.047, 0.008], "S08_pil": [-0.429, 0.039], "S08_sailA": [0.06, -0.005], "S09_carry": [-0.24, 0.134], "S10_n0": [0.895, -0.294], "S10_n2": [-0.956, 0.314], "S17_elder": [0.304, 0.089], "S15_writer": [0.034, 0.011]}
+for _n,(_dx,_dy) in NUDGE.items():
+    _o=bpy.data.objects.get(_n)
+    if not _o: continue
+    _o.location.x+=_dx*1.15; _o.location.y+=_dy*1.15
+    _ad=_o.animation_data
+    if _ad and _ad.action:
+        for _fc in _ad.action.fcurves:
+            if _fc.data_path=='location' and _fc.array_index in (0,1):
+                for _k in _fc.keyframe_points:
+                    _d=(_dx if _fc.array_index==0 else _dy)*1.15; _k.co[1]+=_d; _k.handle_left[1]+=_d; _k.handle_right[1]+=_d
 bpy.ops.wm.save_as_mainfile(filepath='/root/cc/blend/cc.blend'); print('SCENE_OK all')

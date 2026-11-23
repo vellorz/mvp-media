@@ -1,7 +1,7 @@
 # Painted textures for "Black Friday" (Philadelphia). PIL only. Output /root/bf/tex/
 import numpy as np, random, math
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
-T='/root/dc/tex/'; INK=(46,34,30)
+T='/root/dc/tex15/'; INK=(46,34,30)
 FS='/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf'; FSN='/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
 FM='/home/user/mvp-media/engine/cartoon-3d/project/public/havasu/fonts/Montserrat.ttf'
 def font(p,s):
@@ -365,7 +365,7 @@ def wallpaper(name,base,motif,W=1024,H=1024,seed=90):
             fleur(d,x,y,mul(motif,0.92),ink,1.0)
             d.ellipse([x-64-4,y-64-4,x-64+4,y-64+4],fill=mul(motif,0.8))
     # wainscot: panels with ink frames, chair rail, skirting
-    d.rectangle([0,H-260,W,H],fill=mul(base,0.6))
+    d.rectangle([0,H-260,W,H],fill=mul(base,0.8))   # dc15 (visual verifier: S08/S01/S13 arms vanish against a wainscot the ink-emission threshold turned plum): lighter wainscot
     for x in range(0,W,128): jr(d,x+10,H-240,x+118,H-30,6,mul(base,0.3),x); jl(d,[(x+18,H-232),(x+110,H-232)],3,mul(base,0.82),x+3)
     d.rectangle([0,H-284,W,H-260],fill=mul(base,0.45)); jl(d,[(0,H-284),(W,H-284)],5,mul(base,0.25),7); jl(d,[(0,H-260),(W,H-260)],4,mul(base,0.25),8)
     im=strokes(im,700,mul(base,0.8),seed,6,22,2,40)

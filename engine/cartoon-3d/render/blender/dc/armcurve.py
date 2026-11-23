@@ -1,7 +1,7 @@
 # dc14 rule 350 probe: sagitta of the arm stroke centre line on every arm texture, as % of the shoulder-to-hand chord. PASS >= 6 %.
 import sys, glob, numpy as np, math
 from PIL import Image
-T=sys.argv[1] if len(sys.argv)>1 else '/root/dc/tex/'
+T=sys.argv[1] if len(sys.argv)>1 else '/root/dc/tex15/'
 res=[]
 for p in sorted(glob.glob(T+'*_arm*.png')):
     if p.endswith('_L.png'): continue

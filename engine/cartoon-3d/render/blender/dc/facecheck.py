@@ -1,7 +1,7 @@
 # Expression-library targets (coordinator Nov 22, proposed rule from 'Build Rick-style facial expression library'):
 # >=14 distinct faces per video, >=4 per featured character, >=5 distinct faces in any 12 s window. blink is not counted. Reads bridge/faces.json.
 import json,sys,collections
-D=json.load(open('/root/dc/bridge/faces.json')); SH=json.load(open('/root/dc/bridge/shots.json')); END=2086; W=360
+D=json.load(open('/root/dc/bridge15/faces.json')); SH=json.load(open('/root/dc/bridge15/shots.json')); END=2086; W=360
 FEAT=sys.argv[1].split(',') if len(sys.argv)>1 else []
 ev=[]   # (frame, kind, face) visible events, clipped to the character's shot range
 for c in D:

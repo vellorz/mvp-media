@@ -4,7 +4,7 @@ import sys, os, glob, json, subprocess, numpy as np, re, cv2
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 SRC,OUT=sys.argv[1],sys.argv[2]; K=float(sys.argv[3]) if len(sys.argv)>3 else 1.0
 W,H=int(1440*K),int(2560*K)
-SH={k:tuple(v) for k,v in json.load(open('/root/dc/bridge/shots.json')).items()}; END=max(b for a,b in SH.values())
+SH={k:tuple(v) for k,v in json.load(open('/root/dc/bridge15/shots.json')).items()}; END=max(b for a,b in SH.values())
 # palette per place/mood (multipliers R,G,B): flips across each place/time join (rule 187). Philadelphia office warm, Washington mail room cool, the President's office neutral-cool,
 # print room warm-red, night shots blue-violet, autumn street amber, hall warm, today neutral-bright
 TINT={'S01':(1.04,1.0,0.94),'S02':(0.98,1.0,1.03),'S03':(0.97,1.0,1.04),'S04':(0.97,1.0,1.04),'S05':(0.97,1.0,1.04),'S06':(1.06,0.99,0.92),
@@ -64,13 +64,29 @@ def apply(x,p):
     lo,hi,g,sat,tint=p
     y=gray(x); yn=np.clip((y-lo)/(hi-lo),0,1); y2=0.055+0.925*yn**g
     r=(y2/np.maximum(y,1e-4))[...,None]; z=np.clip(x*r,0,1)
-    y3=gray(z)[...,None]; z=np.clip(y3+sat*(z-y3),0,1); z=np.clip(z*np.array(tint,np.float32),0,1); return z
+    y3=gray(z)[...,None]
+    # dc14 (Cape Cod cc5 0ab3a16 skin protect, coordinator Nov 23): skin-hued pixels (R>G>B, warm hue, mid saturation, lit) keep at most SKMAX saturation gain;
+    # DC's solver chose satk up to 1.5 (S11, S20), which pushes rule-335 skin B/R from 0.83 toward 0.76
+    mx=x.max(-1); mn=x.min(-1); hs=(mx-mn)/np.maximum(mx,1e-4); hue=(x[...,1]-x[...,2])/np.maximum(mx-mn,1e-4)
+    skin=((x[...,0]>=x[...,1])&(x[...,1]>=x[...,2]-0.02)&(hs>0.06)&(hs<0.62)&(hue>0.15)&(hue<0.95)&(y>0.22)).astype(np.float32)
+    skin=cv2.GaussianBlur(skin,(0,0),2.0)[...,None]; sk=np.minimum(sat,SKMAX)*skin+sat*(1-skin)
+    z=np.clip(y3+sk*(z-y3),0,1); tn=np.array(tint,np.float32); z=np.clip(z*(1+(tn-1)*(1-skin)),0,1); return z   # dc14d (visual verifier, rule 355: 11 of 18 shots skin B/R 0.71-0.81 after the warm tints): skin keeps its rendered hue, the scene tint skips it
+SKMAX=1.0
 CLAR=0.8; CLS=24.0; PLUM=np.array([46,28,54],np.float32)/255   # r2 (visual verifier L5/R20: edge density 22.9 % vs >= 28 %): painted-surface local contrast, sigma 24 px at 2K
 def finish(o):
     y=gray(o)[...,None]; mid=np.clip(4*y*(1-y),0,1)   # r3: local contrast on midtones only (r2 crushed ink and coats to RGB 0)
-    o=np.clip(o+CLAR*mid*(o-cv2.GaussianBlur(o,(0,0),CLS*K)),0,1)
+    yl=gray(o); o=np.clip(o+CLAR*mid*(yl-cv2.GaussianBlur(yl,(0,0),CLS*K))[...,None],0,1)   # dc14d (rule 355: S13 skin B/R 0.84->0.74 from per-channel clarity next to blue night walls): local contrast on luminance only, hue kept
     y=gray(o)[...,None]; w=np.clip((0.22-y)/0.14,0,1)*0.75   # r3 (rule 308 / R19): darks go to Rick's dull plum ink (46,28,54), floor about luma 0.12, never black
     return np.clip(o*(1-w)+PLUM*w,0,1)
+def vcap(o,CM=0.12):
+    # dc14c (rule 341/308, dc14b watch: plum ink came out violet 66-97,11-27,114-142 in S09/S12/S13 because the grade's dark lift + sat gain
+    # stretched AgX's dark plum (29,5,47)): dark-to-mid violet-hue pixels keep at most CM chroma and sink toward Rick's dull plum, never below luma 0.12
+    mx=o.max(-1); mn=o.min(-1); c=mx-mn; y=gray(o)
+    vi=np.clip((o[...,2]-o[...,1]-0.04)/0.08,0,1)*np.clip((o[...,0]-o[...,1]+0.02)/0.06,0,1)*np.clip((o[...,2]-o[...,0]+0.04)/0.06,0,1)*np.clip((0.42-y)/0.10,0,1)   # violet only (B>=R): magenta dresses and lit purple costumes keep their colour
+    k=np.where(c>CM,CM/np.maximum(c,1e-4),1.0); k=1-vi*(1-k)
+    o=y[...,None]+(o-y[...,None])*k[...,None]
+    f=1-0.32*vi*np.clip((0.40-y)/0.15,0,1); f=np.maximum(f,np.minimum(1.0,0.12/np.maximum(y,1e-4)))
+    return np.clip(o*f[...,None],0,1)
 def solve(samples,tint,lt=0.45,vk=0.0):
     allY=np.concatenate([gray(s).ravel() for s in samples]); lo,hi=np.percentile(allY,0.8),np.percentile(allY,99.6)
     best=None
@@ -130,16 +146,29 @@ def chunks():
 CAPS=chunks()
 DWMAX=17   # r2 (text verifier: dwell mean 0.374 s / P90 0.663 s vs Rick 0.32-0.35 / 0.53-0.57): a card leaves after at most 17 f (0.57 s); a gap shows no caption until the next word
 CAPS=[[a,t,min(b,a+DWMAX)] for a,t,b in CAPS]
-def cap_layer(txt):
+FB=json.load(open('/root/dc/bridge15/facebox15.json'))
+def capbase(f,wd=0.26):
+    # dc14d (text verifier T19, rules 344/288 [C]: caption on a head at 1221-1227 and 1992-1995): if a face box meets the caption box, move the line
+    # just below the lowest clashing head, else just above it; the normal line stays at 0.717 H
+    x0,x1=0.5-wd/2-0.02,0.5+wd/2+0.02; cap=lambda b:(b-0.040,b+0.010)
+    fr=f if isinstance(f,range) else [f]
+    boxes=[q for g in fr for q in FB.get(str(g),[]) if q[0]<x1 and q[2]>x0]   # one line per caption card (no jitter): all its frames' boxes
+    def ok(b): lo,hi=cap(b); return all(not(q[1]<hi and q[3]>lo) for q in boxes)
+    if ok(0.717): return 0.717
+    for b in sorted([max(q[3] for q in boxes)+0.048,min(q[1] for q in boxes)-0.012],key=lambda b:abs(b-0.717)):
+        if 0.50<=b<=0.90 and ok(b): return round(b,3)
+    return 0.717
+def cap_layer(txt,bf=0.717):
+    BASE=int(bf*H)
     l,t,r,b=FNT.getbbox(txt,anchor='ls',stroke_width=STROKE); w=r-l
     lay=Image.new('RGBA',(W,H),(0,0,0,0)); sh=Image.new('RGBA',(W,H),(0,0,0,0))
     x=(W-w)//2-l; ImageDraw.Draw(sh).text((x+SHX,BASE+SHY),txt,font=FNT,fill=(0,0,0,150),anchor='ls',stroke_width=STROKE,stroke_fill=(0,0,0,150))
     sh=sh.filter(ImageFilter.GaussianBlur(2*K)); lay.alpha_composite(sh)
     ImageDraw.Draw(lay).text((x,BASE),txt,font=FNT,fill=(255,255,255,255),anchor='ls',stroke_width=STROKE,stroke_fill=(0,0,0,255))
     return lay,w/W
-PQ=json.load(open('/root/dc/bridge/posterquad.json'))
+PQ=json.load(open('/root/dc/bridge15/posterquad.json'))
 _PF=np.asarray(Image.open('/root/dc/poster_2k.png').convert('RGB')).astype(np.float32)/255.0
-def truepost(o,q,k=0.96):
+def truepost(o,q,k=1.0):   # dc14d (payoff P4/P11: poster -6 RGB vs the shop file): true level
     h,w=o.shape[:2]; ph,pw=_PF.shape[:2]
     src=np.float32([[0,ph],[pw,ph],[pw,0],[0,0]]); dst=np.float32([[x*w,(1-y)*h] for x,y in q])
     Mx=cv2.getPerspectiveTransform(src,dst)
@@ -173,11 +202,12 @@ if __name__=='__main__':
         act=[n for n,(a,b) in SH.items() if a<=f<=b]
         frames={}
         for n in act:
-            raw=R[n].next(); o=finish(apply(raw,P[n]))
+            raw=R[n].next(); o=vcap(finish(apply(raw,P[n])))
             if n=='S21' and f>=PAY0:   # payoff close-up: protect the poster's real colours (no highlight stretch, gentle gamma)
                 q=apply(raw,PAYP); q=np.clip(q+0.7*(q-cv2.GaussianBlur(q,(0,0),1.4*K)),0,1);   # round 4: poster read soft (38 % of file sharpness): gentle unsharp on the payoff
                 t=min(1.0,(f-PAY0+1)/(PAY1-PAY0+1)); t=t*t*(3-2*t); o=o*(1-t)+q*t
-            if n in HIFLOOR: o=hifloor(o)   # r7 (rule 274): bright ending and S11 highlights (p98 >= 0.86 before the poster's true colours go on)
+            if n in HIFLOOR: o=hifloor(o,target=0.92,gmax=1.35)   # dc14d (payoff verifier P9: ending p98 0.832-0.841 after the PAYP blend + vignette): higher floor so the graded ending holds >= 0.86
+            o=vcap(o)   # dc14d (payoff verifier OM3: S21 ink violet, hue 277 deg): cap AFTER the payoff blend and floor, before the true poster goes on   # r7 (rule 274): bright ending and S11 highlights (p98 >= 0.86 before the poster's true colours go on)
             if n=='S21' and str(f) in PQ: o=truepost(o,PQ[str(f)])   # r5 (rule 196, round-4 E5 note): the shop file's true colours on the projected poster quad
             frames[n]=vig(bloom(o,BLOOM),VIG[n])
         if len(act)==1: img=frames[act[0]]
@@ -186,7 +216,8 @@ if __name__=='__main__':
         im=Image.fromarray((img*255+0.5).astype(np.uint8)).convert('RGBA')
         cur=[c for c in CAPS if c[0]<=f<c[2]]
         if cur:
-            if capkey!=cur[0][1]: capimg,wd=cap_layer(cur[0][1]); capkey=cur[0][1]; widths.append(wd)
+            _l,_t,_r,_b=FNT.getbbox(cur[0][1],anchor='ls',stroke_width=STROKE); bf=capbase(range(cur[0][0],cur[0][2]),(_r-_l)/W)
+            if capkey!=(cur[0][1],bf): capimg,wd=cap_layer(cur[0][1],bf); capkey=(cur[0][1],bf); widths.append(wd)
             im.alpha_composite(capimg)
         enc.stdin.write(np.asarray(im.convert('RGB')).tobytes())
         if f%100==0: print('POST',f,flush=True)

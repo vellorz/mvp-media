@@ -59,7 +59,7 @@ cmd=(f'ffmpeg -y -hide_banner -loglevel error -i {VO} -i {A}bed.wav -i {A}sfx_le
      f'[v][b][s]amix=inputs=3:normalize=0:duration=longest,atrim=0:{END}[m]" -map "[m]" -ar 48000 {A}premix.wav')
 subprocess.run(cmd,shell=True,check=True)
 pI,pL,pT=lufs(A+'premix.wav'); g=-14.0-pI
-subprocess.run(f'ffmpeg -y -hide_banner -loglevel error -i {A}premix.wav -af "volume={g}dB,alimiter=limit=0.78:attack=2:release=60:level=disabled" -ar 48000 {A}mix.wav',shell=True,check=True)
+subprocess.run(f'ffmpeg -y -hide_banner -loglevel error -i {A}premix.wav -af "volume={g}dB,alimiter=limit=0.755:attack=2:release=60:level=disabled" -ar 48000 {A}mix.wav',shell=True,check=True)
 I,LRA,TP=lufs(A+'mix.wav'); g+=-14.0-I
-subprocess.run(f'ffmpeg -y -hide_banner -loglevel error -i {A}premix.wav -af "volume={g}dB,alimiter=limit=0.78:attack=2:release=60:level=disabled" -ar 48000 {A}mix.wav',shell=True,check=True)
+subprocess.run(f'ffmpeg -y -hide_banner -loglevel error -i {A}premix.wav -af "volume={g}dB,alimiter=limit=0.755:attack=2:release=60:level=disabled" -ar 48000 {A}mix.wav',shell=True,check=True)
 I,LRA,TP=lufs(A+'mix.wav'); print(json.dumps({'I':I,'LRA':LRA,'TP':TP,'bed_under_vo':BED_UNDER,'sfx_under_vo':SFX_UNDER}))

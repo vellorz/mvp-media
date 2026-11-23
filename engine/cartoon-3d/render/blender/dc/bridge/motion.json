@@ -1,0 +1,910 @@
+{
+"acts": [
+{
+"shot": "S01",
+"inst": "S01_ed",
+"kind": "editor",
+"act": "write",
+"f": 0
+},
+{
+"shot": "S02",
+"inst": "S02_pres",
+"kind": "presA",
+"act": "throw",
+"f": 96
+},
+{
+"shot": "S02",
+"inst": "S02_pres",
+"kind": "presA",
+"act": "dip_talk",
+"f": 122
+},
+{
+"shot": "S03",
+"inst": "S03_clerk",
+"kind": "clerk",
+"act": "point_out_tilt",
+"f": 190
+},
+{
+"shot": "S03",
+"inst": "S03_clerk",
+"kind": "clerk",
+"act": "tilt_talk",
+"f": 236
+},
+{
+"shot": "S03",
+"inst": "S03_clerk",
+"kind": "clerk",
+"act": "dip_talk",
+"f": 280
+},
+{
+"shot": "S04",
+"inst": "S04_mail",
+"kind": "mailman",
+"act": "throw",
+"f": 316
+},
+{
+"shot": "S04",
+"inst": "S04_clerk",
+"kind": "clerk",
+"act": "panic_clutch",
+"f": 384
+},
+{
+"shot": "S05",
+"inst": "S05_clerk",
+"kind": "clerk",
+"act": "wag",
+"f": 430
+},
+{
+"shot": "S05",
+"inst": "S05_clerk",
+"kind": "clerk",
+"act": "wag",
+"f": 466
+},
+{
+"shot": "S06",
+"inst": "S06_ed",
+"kind": "editor",
+"act": "tilt_talk",
+"f": 536
+},
+{
+"shot": "S06",
+"inst": "S06_ed",
+"kind": "editor",
+"act": "victory_up",
+"f": 584
+},
+{
+"shot": "S06",
+"inst": "S06_printer",
+"kind": "printer",
+"act": "carry",
+"f": 494
+},
+{
+"shot": "S08",
+"inst": "S08_ed",
+"kind": "editor",
+"act": "reach_high",
+"f": 713
+},
+{
+"shot": "S08",
+"inst": "S08_ed",
+"kind": "editor",
+"act": "point_out_tilt",
+"f": 770
+},
+{
+"shot": "S09",
+"inst": "S09_printer",
+"kind": "printer",
+"act": "press",
+"f": 802
+},
+{
+"shot": "S09",
+"inst": "S09_ed",
+"kind": "editor",
+"act": "tilt_talk",
+"f": 846
+},
+{
+"shot": "S10",
+"inst": "S10_ed",
+"kind": "editor",
+"act": "write",
+"f": 886
+},
+{
+"shot": "S11",
+"inst": "S11_presA",
+"kind": "presA",
+"act": "throw",
+"f": 1034
+},
+{
+"shot": "S11",
+"inst": "S11_presB",
+"kind": "presB",
+"act": "drop",
+"f": 1062
+},
+{
+"shot": "S11",
+"inst": "S11_presC",
+"kind": "presC",
+"act": "flick",
+"f": 1098
+},
+{
+"shot": "S11",
+"inst": "S11_presD",
+"kind": "presD",
+"act": "wave_hello",
+"f": 1134
+},
+{
+"shot": "S11",
+"inst": "S11_presD",
+"kind": "presD",
+"act": "panic_clutch",
+"f": 1198
+},
+{
+"shot": "S12",
+"inst": "S12_clerk",
+"kind": "clerk",
+"act": "carry",
+"f": 1234
+},
+{
+"shot": "S13",
+"inst": "S13_ed",
+"kind": "editor",
+"act": "write",
+"f": 1308
+},
+{
+"shot": "S13",
+"inst": "S13_ed",
+"kind": "editor",
+"act": "clutch",
+"f": 1334
+},
+{
+"shot": "S13",
+"inst": "S13_ed",
+"kind": "editor",
+"act": "point_out_tilt",
+"f": 1368
+},
+{
+"shot": "S16",
+"inst": "S16_mail",
+"kind": "mailman",
+"act": "carry",
+"f": 1484
+},
+{
+"shot": "S16",
+"inst": "S16_town",
+"kind": "townW",
+"act": "panic_clutch",
+"f": 1526
+},
+{
+"shot": "S18",
+"inst": "S18_pres",
+"kind": "presE",
+"act": "stamp",
+"f": 1670
+},
+{
+"shot": "S18",
+"inst": "S18_pres",
+"kind": "presE",
+"act": "tilt_talk",
+"f": 1698
+},
+{
+"shot": "S19",
+"inst": "S19_blueA",
+"kind": "blueA",
+"act": "offer",
+"f": 1790
+},
+{
+"shot": "S19",
+"inst": "S19_greyA",
+"kind": "greyA",
+"act": "dip_talk",
+"f": 1796
+},
+{
+"shot": "S19",
+"inst": "S19_blueB",
+"kind": "blueB",
+"act": "clutch",
+"f": 1802
+},
+{
+"shot": "S19",
+"inst": "S19_greyB",
+"kind": "greyB",
+"act": "wave_hello",
+"f": 1808
+},
+{
+"shot": "S19",
+"inst": "S19_town",
+"kind": "townW",
+"act": "carry",
+"f": 1726
+},
+{
+"shot": "S19",
+"inst": "S19_town",
+"kind": "townW",
+"act": "tilt_talk",
+"f": 1864
+},
+{
+"shot": "S20",
+"inst": "S20_dadT",
+"kind": "dadT",
+"act": "eat",
+"f": 1890
+},
+{
+"shot": "S20",
+"inst": "S20_kidT",
+"kind": "kidT",
+"act": "fist_pump",
+"f": 1930
+},
+{
+"shot": "S20",
+"inst": "S20_momT",
+"kind": "momT",
+"act": "offer",
+"f": 1912
+},
+{
+"shot": "S20",
+"inst": "S20_grandT",
+"kind": "grandT",
+"act": "wave_hello",
+"f": 1948
+},
+{
+"shot": "S21",
+"inst": "S21_kid",
+"kind": "kidT",
+"act": "wave_hello",
+"f": 1996
+}
+],
+"turns": [
+{
+"shot": "S01",
+"inst": "S01_ed",
+"kind": "editor",
+"frames": [
+22,
+24,
+46,
+48
+],
+"face": "determined"
+},
+{
+"shot": "S02",
+"inst": "S02_pres",
+"kind": "presA",
+"frames": [
+96,
+98,
+120,
+122
+],
+"face": "side_eye"
+},
+{
+"shot": "S03",
+"inst": "S03_clerk",
+"kind": "clerk",
+"frames": [
+205,
+207,
+229,
+231
+],
+"face": "neutral"
+},
+{
+"shot": "S03",
+"inst": "S03_clerk",
+"kind": "clerk",
+"frames": [
+254,
+256,
+278,
+280
+],
+"face": "neutral"
+},
+{
+"shot": "S04",
+"inst": "S04_mail",
+"kind": "mailman",
+"frames": [
+356,
+358,
+380,
+382
+],
+"face": "neutral"
+},
+{
+"shot": "S04",
+"inst": "S04_clerk",
+"kind": "clerk",
+"frames": [
+360,
+362,
+384,
+386
+],
+"face": "neutral"
+},
+{
+"shot": "S06",
+"inst": "S06_ed",
+"kind": "editor",
+"frames": [
+523,
+525,
+547,
+549
+],
+"face": "determined"
+},
+{
+"shot": "S06",
+"inst": "S06_ed",
+"kind": "editor",
+"frames": [
+582,
+584,
+606,
+608
+],
+"face": "determined"
+},
+{
+"shot": "S06",
+"inst": "S06_printer",
+"kind": "printer",
+"frames": [
+549,
+551,
+573,
+575
+],
+"face": "grin"
+},
+{
+"shot": "S06",
+"inst": "S06_printer",
+"kind": "printer",
+"frames": [
+582,
+584,
+606,
+608
+],
+"face": "happy"
+},
+{
+"shot": "S08",
+"inst": "S08_ed",
+"kind": "editor",
+"frames": [
+719,
+721,
+743,
+745
+],
+"face": "proud"
+},
+{
+"shot": "S08",
+"inst": "S08_ed",
+"kind": "editor",
+"frames": [
+761,
+763,
+785,
+787
+],
+"face": "determined"
+},
+{
+"shot": "S09",
+"inst": "S09_printer",
+"kind": "printer",
+"frames": [
+853,
+855,
+877,
+879
+],
+"face": "grin"
+},
+{
+"shot": "S09",
+"inst": "S09_ed",
+"kind": "editor",
+"frames": [
+827,
+829,
+851,
+853
+],
+"face": "determined"
+},
+{
+"shot": "S10",
+"inst": "S10_ed",
+"kind": "editor",
+"frames": [
+928,
+930,
+952,
+954
+],
+"face": "determined"
+},
+{
+"shot": "S11",
+"inst": "S11_presA",
+"kind": "presA",
+"frames": [
+988,
+990,
+1012,
+1014
+],
+"face": "skeptical"
+},
+{
+"shot": "S11",
+"inst": "S11_presD",
+"kind": "presD",
+"frames": [
+1155,
+1157,
+1179,
+1181
+],
+"face": "neutral"
+},
+{
+"shot": "S11",
+"inst": "S11_presD",
+"kind": "presD",
+"frames": [
+1198,
+1200,
+1222,
+1224
+],
+"face": "neutral"
+},
+{
+"shot": "S12",
+"inst": "S12_clerk",
+"kind": "clerk",
+"frames": [
+1262,
+1264,
+1286,
+1288
+],
+"face": "neutral"
+},
+{
+"shot": "S13",
+"inst": "S13_ed",
+"kind": "editor",
+"frames": [
+1340,
+1342,
+1364,
+1366
+],
+"face": "determined"
+},
+{
+"shot": "S16",
+"inst": "S16_mail",
+"kind": "mailman",
+"frames": [
+1534,
+1536,
+1558,
+1560
+],
+"face": "neutral"
+},
+{
+"shot": "S16",
+"inst": "S16_town",
+"kind": "townW",
+"frames": [
+1541,
+1543,
+1565,
+1567
+],
+"face": "look_up"
+},
+{
+"shot": "S18",
+"inst": "S18_pres",
+"kind": "presE",
+"frames": [
+1682,
+1684,
+1706,
+1708
+],
+"face": "neutral"
+},
+{
+"shot": "S19",
+"inst": "S19_blueA",
+"kind": "blueA",
+"frames": [
+1784,
+1786,
+1808,
+1810
+],
+"face": "happy"
+},
+{
+"shot": "S19",
+"inst": "S19_blueA",
+"kind": "blueA",
+"frames": [
+1851,
+1853,
+1875,
+1877
+],
+"face": "content"
+},
+{
+"shot": "S19",
+"inst": "S19_greyA",
+"kind": "greyA",
+"frames": [
+1778,
+1780,
+1802,
+1804
+],
+"face": "content"
+},
+{
+"shot": "S19",
+"inst": "S19_greyA",
+"kind": "greyA",
+"frames": [
+1857,
+1859,
+1881,
+1883
+],
+"face": "content"
+},
+{
+"shot": "S19",
+"inst": "S19_blueB",
+"kind": "blueB",
+"frames": [
+1791,
+1793,
+1815,
+1817
+],
+"face": "proud"
+},
+{
+"shot": "S19",
+"inst": "S19_blueB",
+"kind": "blueB",
+"frames": [
+1839,
+1841,
+1863,
+1865
+],
+"face": "grin"
+},
+{
+"shot": "S19",
+"inst": "S19_greyB",
+"kind": "greyB",
+"frames": [
+1789,
+1791,
+1813,
+1815
+],
+"face": "content"
+},
+{
+"shot": "S19",
+"inst": "S19_greyB",
+"kind": "greyB",
+"frames": [
+1837,
+1839,
+1861,
+1863
+],
+"face": "content"
+},
+{
+"shot": "S19",
+"inst": "S19_town",
+"kind": "townW",
+"frames": [
+1781,
+1783,
+1805,
+1807
+],
+"face": "look_up"
+},
+{
+"shot": "S19",
+"inst": "S19_town",
+"kind": "townW",
+"frames": [
+1837,
+1839,
+1861,
+1863
+],
+"face": "look_up"
+},
+{
+"shot": "S20",
+"inst": "S20_grandT",
+"kind": "grandT",
+"frames": [
+1919,
+1921,
+1943,
+1945
+],
+"face": "open_smile"
+},
+{
+"shot": "S20",
+"inst": "S20_momT",
+"kind": "momT",
+"frames": [
+1931,
+1933,
+1955,
+1957
+],
+"face": "happy"
+},
+{
+"shot": "S20",
+"inst": "S20_dadT",
+"kind": "dadT",
+"frames": [
+1930,
+1932,
+1954,
+1956
+],
+"face": "cry_laugh"
+},
+{
+"shot": "S20",
+"inst": "S20_kidT",
+"kind": "kidT",
+"frames": [
+1937,
+1939,
+1961,
+1963
+],
+"face": "open_smile"
+},
+{
+"shot": "S21",
+"inst": "S21_kid",
+"kind": "kidT",
+"frames": [
+2030,
+2032,
+2054,
+2056
+],
+"face": "happy"
+}
+],
+"combos": [
+{
+"shot": "S02",
+"inst": "S02_pres",
+"kind": "presA",
+"combo": "dip_talk",
+"f": 122,
+"last": 137
+},
+{
+"shot": "S03",
+"inst": "S03_clerk",
+"kind": "clerk",
+"combo": "point_out_tilt",
+"f": 190,
+"last": 209
+},
+{
+"shot": "S03",
+"inst": "S03_clerk",
+"kind": "clerk",
+"combo": "tilt_talk",
+"f": 236,
+"last": 252
+},
+{
+"shot": "S03",
+"inst": "S03_clerk",
+"kind": "clerk",
+"combo": "dip_talk",
+"f": 280,
+"last": 295
+},
+{
+"shot": "S04",
+"inst": "S04_clerk",
+"kind": "clerk",
+"combo": "panic_clutch",
+"f": 384,
+"last": 395
+},
+{
+"shot": "S06",
+"inst": "S06_ed",
+"kind": "editor",
+"combo": "tilt_talk",
+"f": 536,
+"last": 552
+},
+{
+"shot": "S06",
+"inst": "S06_ed",
+"kind": "editor",
+"combo": "victory_up",
+"f": 584,
+"last": 606
+},
+{
+"shot": "S08",
+"inst": "S08_ed",
+"kind": "editor",
+"combo": "point_out_tilt",
+"f": 770,
+"last": 789
+},
+{
+"shot": "S09",
+"inst": "S09_ed",
+"kind": "editor",
+"combo": "tilt_talk",
+"f": 846,
+"last": 862
+},
+{
+"shot": "S11",
+"inst": "S11_presD",
+"kind": "presD",
+"combo": "wave_hello",
+"f": 1134,
+"last": 1152
+},
+{
+"shot": "S11",
+"inst": "S11_presD",
+"kind": "presD",
+"combo": "panic_clutch",
+"f": 1198,
+"last": 1209
+},
+{
+"shot": "S13",
+"inst": "S13_ed",
+"kind": "editor",
+"combo": "point_out_tilt",
+"f": 1368,
+"last": 1387
+},
+{
+"shot": "S16",
+"inst": "S16_town",
+"kind": "townW",
+"combo": "panic_clutch",
+"f": 1526,
+"last": 1537
+},
+{
+"shot": "S18",
+"inst": "S18_pres",
+"kind": "presE",
+"combo": "tilt_talk",
+"f": 1698,
+"last": 1714
+},
+{
+"shot": "S19",
+"inst": "S19_greyA",
+"kind": "greyA",
+"combo": "dip_talk",
+"f": 1796,
+"last": 1811
+},
+{
+"shot": "S19",
+"inst": "S19_greyB",
+"kind": "greyB",
+"combo": "wave_hello",
+"f": 1808,
+"last": 1826
+},
+{
+"shot": "S19",
+"inst": "S19_town",
+"kind": "townW",
+"combo": "tilt_talk",
+"f": 1864,
+"last": 1880
+},
+{
+"shot": "S20",
+"inst": "S20_grandT",
+"kind": "grandT",
+"combo": "wave_hello",
+"f": 1948,
+"last": 1966
+},
+{
+"shot": "S21",
+"inst": "S21_kid",
+"kind": "kidT",
+"combo": "wave_hello",
+"f": 1996,
+"last": 2014
+}
+]
+}

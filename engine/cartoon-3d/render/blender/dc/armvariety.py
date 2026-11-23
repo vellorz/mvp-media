@@ -1,6 +1,6 @@
 # dc14 rule 354 probe (interim): neighbours in a shot never share a named arm move; no character repeats a raise more than twice; work loops exempt.
 import json, collections
-M=json.load(open('/root/dc/bridge/motion.json')); WORK={'write','press','carry','eat'}
+M=json.load(open('/root/dc/bridge15/motion.json')); WORK={'write','press','carry','eat'}
 fail=0; by=collections.defaultdict(list); cnt=collections.Counter()
 for a in M['acts']:
     by[a['shot']].append(a)

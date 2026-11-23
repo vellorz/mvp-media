@@ -65,9 +65,9 @@ gdb=np.interp(tt,mk,mv)
 k_=int(0.7*SR); gdb=np.convolve(np.pad(gdb,(k_//2,k_-k_//2-1),mode='edge'),np.ones(k_)/k_,mode='valid')   # rides take ~0.7 s (M8)
 gl=10**(gdb/20)
 # stop-time on the payoff hit (mix time 68.40-68.76 s, ding at f2054 on "writing"): the bed drops 12 dB for the ding with 40 ms ramps, then returns at full payoff level (rule 319 payoff >= +6 over the local bed while rule 192 keeps it >= 8 LU under the VO)
-_tm=np.arange(N)/SR; _r=0.04; _st=np.clip(np.minimum((_tm-68.38)/_r,(69.1-_tm)/_r),0,1); gl=gl*10**(-18*_st/20)
+# dc14d (audio verifier A6, rule 342 [C]): stop-time dip REMOVED; the payoff ding sits where the levelling puts it and any rule-319 shortfall is reported
 thin=np.clip((gdb+1.0)/4.0,0,1)   # melody and plucks drop out in the -3..-5 dips, return on rises
-bed=(T['mal']*0.9*thin+T['plk']*0.6*(0.4+0.6*thin)+T['bass']*0.62+T['kick']*0.7+T['pad']*1.0)*gl
+bed=(T['mal']*0.9*thin+T['plk']*0.6*(0.4+0.6*thin)+T['bass']*0.62+T['kick']*0.7+T['hat']*0.55+T['pad']*1.0)*gl   # dc14d (A14): the garage hats are in the bed
 # gentle bus compression for a constant level (no pumping: slow, light)
 bed=np.tanh(bed*0.9)/0.9
 # round 5 (S5): no fade, the bed ends with the last frame
@@ -108,7 +108,8 @@ def whoosh2(dur=0.45):
     n=int(dur*SR); t=np.arange(n)/SR; x=soft(rng.normal(0,1,n),900); e=np.sin(np.pi*t/dur)**1.5; return x/np.abs(x).max()*e
 # Rick master guide: SFX are SPARSE, in the bed bus, well under the VO: whoosh on fast camera moves, thud on impacts, a bigger hit on the payoff.
 EV=[]
-EV+=[(111,soft(thump(120,0.18),1100),0.5),(120,soft(thump(120,0.18),1100),0.5),(130,soft(thump(120,0.18),1100),0.5),(144,soft(thump(120,0.18),1100),0.5),   # S02 four letters land in the bin
+KEEP={111,264,330,580,833,905,1050,1194,1230,1584,1628,1682,1866,2054}   # dc14d (A10, rule 192 [C]): one hit per story beat, 14 events = 12.1/min
+EV+=[e for e in [(111,soft(thump(120,0.18),1100),0.5),(120,soft(thump(120,0.18),1100),0.5),(130,soft(thump(120,0.18),1100),0.5),(144,soft(thump(120,0.18),1100),0.5),   # S02 four letters land in the bin
      (264,soft(thump(160,0.12),1500),0.45),(277,soft(thump(160,0.12),1500),0.45),(293,soft(thump(160,0.12),1500),0.45),   # S03 red crosses stamp on the board
      (318,whoosh2(0.4),0.5),(330,soft(thump(60,0.4),700),1.0),   # S04 the sack swings and lands
      (580,soft(ding(86,0.8),3000),0.4),   # S06 the magazine pops up
@@ -124,7 +125,7 @@ EV+=[(111,soft(thump(120,0.18),1100),0.5),(120,soft(thump(120,0.18),1100),0.5),(
      (1682,soft(thump(90,0.25),900),0.8),(1686,soft(ding(88,0.9),3000),0.35),   # S18 the YES stamp
      (1700,soft(click(),1600),0.35),(1711,soft(click(),1600),0.35),   # desk calendar flips
      (1866,soft(ding(86,0.8),3000),0.35), # S19 the pie arrives
-     (2054,soft(ding(83,1.4),3000),0.45),(2054,soft(ding(88,1.4),3000),0.32)]   # payoff: the camera lands on the poster on "writing"
+     (2054,soft(ding(83,1.4),3000),0.45),(2054,soft(ding(88,1.4),3000),0.32)] if e[0] in KEEP]   # payoff: the camera lands on the poster on "writing"
 # A6: level every SFX event against the bed under it so each lands at the same offset over the bed
 # (one common offset; mix.py then sets the global SFX gain so the median offset is +10 dB in the mix)
 BEDW=bed/np.abs(bed).max()*0.7

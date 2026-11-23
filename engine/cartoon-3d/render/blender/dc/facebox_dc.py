@@ -2,11 +2,11 @@
 # blender -b dc.blend --python facebox_dc.py -- OUT.json [S19 S20 ...]   prints CAPCLASH (face disc meets the caption column 0.37-0.63 W and reaches below 0.665 H)
 # and FACECUT (face disc cut by the frame edge away from shot edges), plus head width % W per instance (rule 345/309)
 import bpy, json, sys
-sys.path.insert(0,'/root/dc/src'); import expressions as X
+sys.path.insert(0,'/root/dc/src15'); import expressions as X
 from bpy_extras.object_utils import world_to_camera_view as w2c
 from mathutils import Vector
 a=sys.argv[sys.argv.index('--')+1:]; out=a[0]; only=set(a[1:])
-CI=X.expand(json.load(open('/root/dc/src/cast.json')))
+CI=X.expand(json.load(open('/root/dc/src15/cast.json')))
 sc=bpy.context.scene; SH=json.loads(sc['shots']); R={}; CUT={}; CLASH={}; HW={}
 heads={}
 for o in bpy.data.objects:

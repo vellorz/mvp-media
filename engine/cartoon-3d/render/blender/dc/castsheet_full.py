@@ -2,7 +2,7 @@
 # shoulder pivots at the rest pose -8 deg, face disc on the neck pivot), 300 px/m, plus per-character proportion measures.
 import json,math,sys
 from PIL import Image,ImageDraw,ImageFont
-T='/root/dc/tex/'; CI=json.load(open('/root/dc/src/cast.json'))
+T='/root/dc/tex15/'; CI=json.load(open('/root/dc/src15/cast.json'))
 HS=0.43/0.586; GEO={'tall':(0.996,0.126,0.95),'short':(0.996,0.142,0.95),'round':(0.996,0.151,0.95)}
 ARM_W,ARM_H,ARM_OFF=0.744,0.558,0.242; S=300
 SCALE={'kidT':0.8}

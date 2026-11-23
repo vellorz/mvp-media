@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 import json, math
 import expressions as X   # Rick-style expression library (thread 'Build Rick-style facial expression library', mvp-media v7vnb2 91d1fe0)
-T='/root/dc/tex/'; K=(50,28,42,255); SK=(251,244,241,255); OUT=27   # r8 (owner Nov 20: clone Rick's characters): pure white heads like Rick's. r8b (guide v1.3 x.3): dark plum ink, never pure black; 27 px on an 800 px disc = 3.4 % lit side
+T='/root/dc/tex15/'; K=(50,28,42,255); SK=(251,244,241,255); OUT=27   # r8 (owner Nov 20: clone Rick's characters): pure white heads like Rick's. r8b (guide v1.3 x.3): dark plum ink, never pure black; 27 px on an 800 px disc = 3.4 % lit side
 def new(w,h): im=Image.new('RGBA',(w,h),(0,0,0,0)); return im,ImageDraw.Draw(im)
 def dk(c,f=0.75): return tuple(int(v*f) for v in c[:3])+(255,)
 CX,CY=512,540
@@ -67,7 +67,7 @@ def extras(d,kind):
     if 'tear' in kind: d.ellipse([370,580,410,640],fill=(120,190,255,255),outline=K,width=6)
     if 'angryfill' in kind: pass
     X.extras(d,kind,K)   # library extras: tears, tear1, blushR, vein, zzz, shades, sweat2
-C=X.expand(json.load(open('/root/dc/src/cast.json')))
+C=X.expand(json.load(open('/root/dc/src15/cast.json')))
 def head(name,fk):
     c=C[name]; _ov=c.get('turnmap',{}).get(fk)
     if _ov: c=dict(c,turn=_ov[0],mouth_side=_ov[1])   # dc14 rule 353: in-shot angle variants (_ta in-between/front, _tb other side)
@@ -447,19 +447,228 @@ def head_shade(im,skin):
     cl=Image.new('L',im.size,0); ImageDraw.Draw(cl).ellipse([160,167,885,892],fill=255)   # r8b: shade stays inside the ink
     from PIL import ImageChops; m=ImageChops.multiply(m,cl)
     sh=Image.new('RGBA',im.size,dk(skin,0.88)); im.paste(sh,(0,0),m)
+
+# ---- ROUND 5 PROPOSAL (Nov 23 2026, owner: "arms ... slightly bent downwards, and they are raised from down to up ... a basic repetitive
+# motion ... repeated for all of the characters"; awaits owner approval). Rick arm-gesture library: whole-arm POSE drawings swapped as
+# snaps (1-2 f) with an optional 1-frame in-between, instead of rotating one bent card about the shoulder.
+# Evidence (144 labelled Rick arm actions, 20 checked frame by frame): research/rick-style-spec/face-turns-arms/ (project files).
+# Each pose = (upper-arm angle, forearm angle) in degrees, 0 = straight down, 90 = straight out, 180 = straight up, negative = across
+# the body; drawn as ONE smooth noodle (rounded elbow, no joint; rule 253) of the same thickness and mitten as the hanging arm.
+POSES={
+ 'hang':(8,14),            # rest (our current arm)
+ 'akimbo':(42,-38),        # hand on hip, elbow out: Rick #03 f466-485 (elbow ~75), #04 f700, #22 f212-235
+ 'scratch':(122,198),      # hand to the back/side of the head: #03 f370-372 (elbow ~60)
+  'chin':(-10,-160),        # hand to chin, thinking: #24 f1112-1116 (elbow ~50)
+ 'point_up':(168,174),     # straight arm up: #04 f343-344, #04 f405-425 (180)
+ 'point_out':(96,92),      # straight arm out to the side: #22 f1253-1256 (180), #14 f428-431 (~120)
+ 'raise':(100,172),        # forearm up beside the head, elbow ~90 ('here is the thing'): #04 f1352, #22 f1077-1084
+ 'up':(138,168),           # both arms flung up in a U (shock): #03 f1619-1621 (~130), #22 f779-795
+ 'shrug':(62,118),         # elbows bent down, hands out ('come at me' / shrug): #22 f1325-1331, #10 f397-403
+ 'belly':(16,-82),         # hand on the belly (laugh): #14 f184-186
+ 'palm':(24,78),           # forearm out, palm up (talking): #12 f488-498, #10 f600-603
+ 'windup':(140,218),       # arm cocked back over the shoulder (anticipation of a throw/strike): #03 f625-627, #04 f569-575
+ 'fling':(108,112),        # arm flung out wide, nearly straight (panic): #14 f141-144, #14 f1089-1100
+ 'lift':(20,152),          # hand raised to shoulder height in front (toast, sip, show a prop): #04 f702-711, #14 f790-796, #03 f834-838
+ 'dip':(4,-18),            # 2-frame anticipation dip before a point (#14 f117-119); also the 'pull in' breakdown
+}
+# ---- ROUND 6 (Nov 23 2026, coordinated motion): more Rick arm drawings, from 70 new strips (#05 #08 #13 #21 #23, two measurers).
+# Additive: existing poses unchanged; cards are only made for characters with cast.json "poses". INFERRED = fewer than 2 Rick examples.
+POSES.update({
+ 'reach':(74,84),          # arm out and forward to take something: #13 f722, #08 f983, #21 f1054-1061, #23 f506
+ 'swing':(34,30),          # arm swung down-forward after an overhead strike/stamp: #21 f359-373, #05 f28-31
+ 'throw':(86,64),          # follow-through after a fling/toss: #21 f437-443, #23 f1298
+ 'hands_head':(150,250),   # hand clamped on the head/neck (panic): #21 f1468, #22 f1325-1327 (old labels)
+ 'wave_a':(128,158),       # [INFERRED] wave, hand up beside the head: #05 f139, #05 f469 (one measurer each)
+ 'wave_b':(128,196),       # [INFERRED] wave, hand tipped over
+ 'clap_open':(18,-58),     # [INFERRED] forearms in front, apart: #08 f1116 (one measurer)
+ 'clap':(10,-96),          # [INFERRED] mittens together in front of the chest
+ 'cross':(-4,-104),        # [INFERRED] arms folded across the belly (owner list; no Rick example in the new strips)
+})
+# ROUND 6: Rick leans the TORSO while the legs stay planted (70 new strips: legs moved in 5 of 63, torso leans 10-30 deg, median ~12).
+# For characters that use lib.combo() the body card is split in two cards cut from the SAME drawing: the garment (torso) and the legs.
+HIP_ROW=520   # texture row (of 1100) of the lean pivot, inside the rounded hem (HEMY 545) so the turning torso always covers the leg tops
+def split_body(name,stride=0):
+    from PIL import ImageFilter as _F
+    im=body(name,stride); kind=C[name].get('body','tall'); pts=_sil(kind)[0]
+    m=Image.new('L',im.size,0); ImageDraw.Draw(m).polygon(pts,fill=255); m=m.filter(_F.MaxFilter(2*BOUT+5))
+    a=im.getchannel('A'); from PIL import ImageChops as _C
+    top=im.copy(); top.putalpha(_C.multiply(a,m))
+    legs=im.copy(); legs.putalpha(_C.multiply(a,_C.invert(m)))
+    # leg tubes redrawn from higher up (same curve as body(), start 120 px above the hem) and laid BEHIND, so a leaning torso never
+    # uncovers a cut leg top
+    c=C[name]; legc=dk(tuple(c.get('legs',(40,36,40))),0.8); y1=_sil(kind)[4]; LW=34
+    W,H=800*SS,1100*SS; ul=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(ul); s_=lambda v:int(v*SS)
+    for sx in(-1,1):
+        x=400+sx*62; fx=x+sx*20+(sx*60 if stride else 0); lift=(70 if (stride==1 and sx<0) or (stride==2 and sx>0) else 0); fy=1056-lift
+        y_0=y1-60; cx_=(x+fx)/2+sx*30; cy_=(y_0+fy)/2
+        P=[((1-t)**2*x+2*(1-t)*t*cx_+t*t*fx,(1-t)**2*y_0+2*(1-t)*t*cy_+t*t*fy) for t in [i/24 for i in range(25)]]
+        P=[(x+(P[1][0]-x)*-5*k/5,y_0-60*k/5) for k in range(5,0,-1)]+P   # extend the tube straight up 60 px
+        d.line(_S(P),fill=K,width=s_(LW),joint='curve'); d.line(_S(P),fill=legc,width=s_(LW-16),joint='curve')
+    ul=ul.resize((800,1100),Image.LANCZOS); ul.putalpha(_C.multiply(ul.getchannel('A'),m.point(lambda v:255 if v>0 else 0)))
+    out=Image.new('RGBA',im.size,(0,0,0,0)); out.alpha_composite(ul); out.alpha_composite(legs)
+    return top,out
+POSE_W,POSE_H,POSE_MARGIN=1600,1800,20   # r5b (owner Nov 23 test clip: a shrugging hand was cut off by a straight 'wall graphic' edge): 14 of 45 pose drawings ran past the old 1200 px canvas; shoulder stays at the canvas centre
+def pose_arm(name,pose,mix=1.0,over=0.0,frm='hang'):
+    """POSE_W x POSE_H card, shoulder at the centre: the pose (or a mix toward it from `frm` for in-betweens, `over` degrees of overshoot)"""
+    P0=tuple(POSES[frm])+(330,372)[len(POSES[frm])-2:]; P1=tuple(POSES[pose])+(330,372)[len(POSES[pose])-2:]   # r7: optional (a, cc, U, F) lengths
+    a0,c0=P0[:2]; a1,c1=P1[:2]
+    a=a0+(a1-a0)*mix+over*(1 if a1>=a0 else -1); cc=c0+(c1-c0)*mix+over*(1 if c1>=c0 else -1)
+    U,F=P0[2]+(P1[2]-P0[2])*mix,P0[3]+(P1[3]-P0[3])*mix   # upper arm and forearm; default 330/372 = noodle() reach (712 px at y=40)
+    sx0,sy0=POSE_W//2,POSE_H//2
+    ex_=sx0+U*math.sin(math.radians(a)); ey_=sy0+U*math.cos(math.radians(a))
+    hx=ex_+F*math.sin(math.radians(cc)); hy=ey_+F*math.cos(math.radians(cc))
+    # rounded elbow: quadratic through points pulled 28 % in from the elbow on each segment, straight segments elsewhere
+    def lerp(p,q,t): return (p[0]+(q[0]-p[0])*t,p[1]+(q[1]-p[1])*t)
+    S,E,H=(sx0,sy0),(ex_,ey_),(hx,hy); P1=lerp(E,S,0.28); P2=lerp(E,H,0.28)
+    pts=[lerp(S,P1,i/12) for i in range(13)]+[((1-t)**2*P1[0]+2*(1-t)*t*E[0]+t*t*P2[0],(1-t)**2*P1[1]+2*(1-t)*t*E[1]+t*t*P2[1]) for t in [i/16 for i in range(1,17)]]+[lerp(P2,H,i/12) for i in range(1,13)]
+    W,Hh=POSE_W,POSE_H; big=Image.new('RGBA',(W*SS,Hh*SS),(0,0,0,0)); bd=ImageDraw.Draw(big)
+    bd.line([(x*SS,y*SS) for x,y in pts],fill=K,width=AW*SS,joint='curve')
+    for x,y in (pts[0],): bd.ellipse([(x-AW/2)*SS,(y-AW/2)*SS,(x+AW/2)*SS,(y+AW/2)*SS],fill=K)
+    bd.ellipse([(hx-50)*SS,(hy-50)*SS,(hx+50)*SS,(hy+50)*SS],fill=K)   # mitten 100 px, as arm()
+    im=big.resize((W,Hh),Image.LANCZOS)
+    # rule 354b (a): the drawing (arm stroke + mitten) must stay POSE_MARGIN px inside the canvas, or the card edge slices it
+    bb=im.getchannel('A').point(lambda v:255 if v>8 else 0).getbbox()
+    if bb and (bb[0]<POSE_MARGIN or bb[1]<POSE_MARGIN or bb[2]>W-POSE_MARGIN or bb[3]>Hh-POSE_MARGIN):
+        raise SystemExit(f'POSE_CLIP {name} {pose} mix={mix} over={over} bbox={bb} canvas={W}x{Hh}')
+    return im
+def pose_list(c):
+    want=c.get('poses')
+    if not want: return []
+    return list(POSES) if want=='all' else [p for p in want if p in POSES]
+
+# ---- ROUND 6: back-of-head face ('backview' token, expressions.py round 6). Wraps head() for that one token only.
+_head_r5=head
+def head(name,fk):
+    c=C[name]; spec=c['faces'][fk]; ex=spec[3] if len(spec)>3 else ''
+    if 'backview' not in ex: return _head_r5(name,fk)
+    keep={k:c.get(k) for k in ('nose','fhair','mustache','stache_small','stubble','beard','glasses')}
+    c['nose']=False
+    for k in ('fhair','mustache','stache_small','stubble','beard','glasses'): c.pop(k,None)
+    try: im=_head_r5(name,fk)
+    finally:
+        for k,v in keep.items():
+            if v is None: c.pop(k,None)
+            else: c[k]=v
+    # Rick's back views (#04 f349-350 chef and captain, #05 f577 farmer) are the PLAIN head disc: no hair mass, no nape line; hats and the
+    # hair that shows above the outline stay as drawn. (A first try painted a hair mass over the crown; the rule-330 sheet showed Rick does not.)
+    return im
+# ---- ROUND 7 (Nov 23 2026, owner review of the inferred moves): new arm drawings, run legs, 2D effect cards, 3/4 back head.
+# Owner: clap with elbows out and hands meeting under the chin; chin taps; a jog and a sprint with all four limbs moving; small
+# Rick-style effect drawings (his own: speed lines #14 f143-156, dust puffs under heels #12 f1071-1079, blow arcs #04 f1464-1497,
+# impact ticks #14 f570-576, sweat drop #04 f394). All [INFERRED] until the owner approves them on the page.
+POSES.update({
+ 'clap_hi_open':(40.4,-122.2,262,319),   # elbows out to the sides, hands apart just under the chin (owner Nov 23); arms sit behind the face disc, so the hands stay below it
+ 'clap_hi':(40.4,-112.0,262,426),        # mittens meet under the chin
+ 'chin_tap':(-10,-146),                  # hand 14 deg off the chin, between taps
+ 'pump_out_hi':(62,150),                 # run: arm forward and up on the outer side, elbow ~90 deg
+ 'pump_out_lo':(38,12),                  # run: arm swung back and low on the outer side
+ 'pump_in_hi':(-8,-132),                 # run: forearm swung up across the chest
+ 'pump_in_lo':(-14,-38),                 # run: hand low across the belly
+})
+def run_legs(name,phase,side=1):
+    """legs card for a run cycle drawn like split_body()'s legs: phase 1 contact (near leg reaching forward, far leg back), 2 air
+    (near knee up, far foot kicked back), 3 and 4 the same with the legs swapped. side +1 = running toward screen right."""
+    from PIL import ImageFilter as _F, ImageChops as _C
+    c=C[name]; kind=c.get('body','tall'); pts,y0,w0,w1,y1=_sil(kind)
+    legc=dk(tuple(c.get('legs',(40,36,40))),0.8); LW=34; s_=lambda v:int(v*SS)
+    W,H=800*SS,1100*SS; im=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(im)
+    fwd,bk=((1,-1) if phase in (1,2) else (-1,1))
+    def leg(x,knee,foot,lift_toe,col=None):
+        h0=(x,y1-120); cpt=(2*knee[0]-(h0[0]+foot[0])/2,2*knee[1]-(h0[1]+foot[1])/2)   # one noodle curve through the knee (Rick legs bend, no joint)
+        P=[((1-t)**2*h0[0]+2*(1-t)*t*cpt[0]+t*t*foot[0],(1-t)**2*h0[1]+2*(1-t)*t*cpt[1]+t*t*foot[1]) for t in [i/28 for i in range(29)]]
+        d.line(_S(P),fill=K,width=s_(LW),joint='curve'); d.line(_S(P),fill=col or legc,width=s_(LW-16),joint='curve')
+        for p_ in (P[0],P[-1]): d.ellipse([s_(p_[0]-LW/2),s_(p_[1]-LW/2),s_(p_[0]+LW/2),s_(p_[1]+LW/2)],fill=K)
+        fx,fy=foot; d.ellipse([s_(fx-30+side*16),s_(fy-14-lift_toe),s_(fx+34+side*16),s_(fy+18-lift_toe)],fill=K)
+    # the leg on the far side of the body is drawn first and a shade darker, so phases 3/4 read as the other leg (front-on cards)
+    farleg=('near' if phase in (3,4) else 'far')
+    for who,sx in sorted((('near',side*fwd),('far',side*bk)),key=lambda w:w[0]!=farleg):
+        x=400+sx*40; col=dk(legc,0.7) if who==farleg else None
+        if phase in (1,3):   # contact: front leg reaches, back leg pushes off
+            if who=='near': leg(x,(x+side*120,y1+170),(x+side*230,1056),0,col)   # contact foot on the same row as the standing feet
+            else: leg(x,(x-side*70,y1+200),(x-side*190,1010),0,col)
+        else:               # air: front knee lifted, back foot kicked up behind
+            if who=='near': leg(x,(x+side*150,y1+120),(x+side*120,y1+330),0,col)
+            else: leg(x,(x-side*60,y1+240),(x-side*220,y1+170),0,col)
+    return im.resize((800,1100),Image.LANCZOS)   # sits 1.5 mm behind the torso card, which covers the hip ends
+FX_SIZE=600
+def fx(kind):
+    """2D effect cards, 600x600, drawn in our ink colour. Anchor = card centre."""
+    S2=FX_SIZE*SS; im=Image.new('RGBA',(S2,S2),(0,0,0,0)); d=ImageDraw.Draw(im); s_=lambda v:int(v*SS); cx=cy=300
+    W_=(255,255,255,255)
+    if kind=='clap':      # short dashed strokes bursting out of the clap, both sides
+        for ang in (-150,-120,-90,-60,-30,30,150):
+            r=math.radians(ang)
+            for r0,r1 in ((90,140),(160,210)):
+                p0=(cx+r0*math.cos(r),cy+r0*math.sin(r)); p1=(cx+r1*math.cos(r),cy+r1*math.sin(r))
+                d.line([(p0[0]*SS,p0[1]*SS),(p1[0]*SS,p1[1]*SS)],fill=K,width=s_(20)); d.line([(p0[0]*SS,p0[1]*SS),(p1[0]*SS,p1[1]*SS)],fill=W_,width=s_(8))   # white core: reads on dark coats
+    elif kind=='puff':    # huff: three blow arcs and a small cloud puff out of the nose (to the right; mirrored for left)
+        for k,(r0,w) in enumerate(((60,14),(105,12),(150,10))):
+            d.arc([s_(cx-r0),s_(cy-r0),s_(cx+r0),s_(cy+r0)],-35,35,fill=K,width=s_(w))
+        for (px,py,r) in ((cx+200,cy-20,34),(cx+240,cy+18,28),(cx+186,cy+30,24)):
+            d.ellipse([s_(px-r),s_(py-r),s_(px+r),s_(py+r)],fill=W_,outline=K,width=s_(9))
+    elif kind=='startle': # jolt ticks all round the head (teardrop ticks like Rick's impact bursts)
+        for ang in range(-170,10,20):
+            r=math.radians(ang); r0,r1=215,280
+            p0=(cx+r0*math.cos(r),cy+r0*math.sin(r)); p1=(cx+r1*math.cos(r),cy+r1*math.sin(r))
+            d.line([(p0[0]*SS,p0[1]*SS),(p1[0]*SS,p1[1]*SS)],fill=K,width=s_(13))
+        for ang in (-170,-10):
+            r=math.radians(ang); p0=(cx+215*math.cos(r),cy+215*math.sin(r)); p1=(cx+290*math.cos(r),cy+290*math.sin(r))
+            d.line([(p0[0]*SS,p0[1]*SS),(p1[0]*SS,p1[1]*SS)],fill=K,width=s_(13))
+    elif kind=='sweat':   # one sweat drop
+        P=[(cx,cy-70)]+[(cx+42*math.sin(t),cy+20-42*math.cos(t)) for t in [math.radians(a) for a in range(-120,121,10)]]
+        d.polygon(_S(P),fill=(150,205,240,255),outline=K,width=s_(10)); d.ellipse([s_(cx-14),s_(cy-8),s_(cx-2),s_(cy+10)],fill=W_)
+    elif kind=='speed':   # speed lines trailing behind a runner (runner faces right; mirrored for left)
+        for y_,x0,x1 in ((-170,40,250),(-90,0,230),(-10,30,270),(70,10,220),(150,50,240)):
+            d.line([(s_(x0)),s_(cy+y_),s_(x1),s_(cy+y_)],fill=K,width=s_(10))
+    elif kind=='dust':    # dust puffs kicked up under the heels
+        for (px,py,r) in ((cx-60,cy+40,52),(cx-130,cy+60,40),(cx+10,cy+70,36),(cx-190,cy+20,28)):
+            d.ellipse([s_(px-r),s_(py-r),s_(px+r),s_(py+r)],fill=(236,228,214,255),outline=K,width=s_(9))
+    elif kind=='think':   # three small bubbles rising beside the head
+        for (px,py,r) in ((cx+40,cy+120,16),(cx+90,cy+60,24),(cx+150,cy-10,34)):
+            d.ellipse([s_(px-r),s_(py-r),s_(px+r),s_(py+r)],fill=W_,outline=K,width=s_(8))
+    return im.resize((FX_SIZE,FX_SIZE),Image.LANCZOS)
+FX_KINDS=('clap','puff','startle','sweat','speed','dust','think')
+_head_r6=head
+def head(name,fk):
+    """'back3qL' / 'back3qR' (token backview + ear side): the back view turned a little toward one side, so an ear and the edge of the
+    cheek show at that side (Rick #22 f468-469, #03 f80: on the way round to the back the face slides off the disc)."""
+    c=C[name]; spec=c['faces'][fk]; ex=spec[3] if len(spec)>3 else ''
+    if 'back3q' not in ex: return _head_r6(name,fk)
+    side=1 if 'back3qR' in ex else -1
+    sp0=c['faces'][fk]; c['faces'][fk]=[sp0[0],sp0[1],sp0[2],'backview']
+    try: im=_head_r6(name,fk)
+    finally: c['faces'][fk]=sp0
+    w,h=im.size; d=ImageDraw.Draw(im); pt,pb=X.pads(c)
+    R=w*400/1024; cx=w/2+side*0; cy=pt+512   # disc centre in card px
+    ex_=cx+side*R*0.93; ey=cy+R*0.12; er=R*0.15
+    skin=im.getpixel((int(cx),int(cy+R*0.3)))[:3]+(255,)   # the disc's own (scene-tinted) skin
+    d.ellipse([ex_-er,ey-er*1.3,ex_+er,ey+er*1.3],fill=skin,outline=K,width=int(OUT*w/1024*0.8))
+    d.arc([cx-R*0.98,cy-R*0.98,cx+R*0.98,cy+R*0.98],(10 if side>0 else 150),(30 if side>0 else 170),fill=K,width=int(OUT*w/1024*0.5))
+    return im
 if __name__=='__main__':
     out={}
+    import os as _os; _ONLY=set(filter(None,_os.environ.get('CAST_ONLY','').split(',')))   # dc15: rebuild one character's textures
     for n,c in C.items():
+        if _ONLY and n not in _ONLY: continue
         for fk in c['faces']: head(n,fk).save(f'{T}{n}_h_{fk}.png')
         if c.get('cue')=='dress': body(n,skirt=False).save(f'{T}{n}_body_noskirt.png')   # castcheck measures the skeleton under the ankle skirt
         body(n).save(f'{T}{n}_body.png'); body(n,1).save(f'{T}{n}_bodyw1.png'); body(n,2).save(f'{T}{n}_bodyw2.png')
         for p in c.get('props',[None]): arm(n,p).save(f'{T}{n}_arm{"_"+p if p else ""}.png')
         arm(n).save(f'{T}{n}_arm.png'); arm(n,straight=4).save(f'{T}{n}_armS.png')
+        if c.get('combos') or c.get('combos_approved'):   # round 6 (opt-in): split torso/legs cards for lib.combo()
+            _t,_l=split_body(n); _t.save(f'{T}{n}_btop.png'); _l.save(f'{T}{n}_blegs.png')
+            for _s in (1,2): split_body(n,_s)[1].save(f'{T}{n}_blegsw{_s}.png')
+            for _ph in (1,2,3,4):   # round 7: run cycle legs, both directions (no mirrored cards, rule 272)
+                run_legs(n,_ph,1).save(f'{T}{n}_blegsrunR{_ph}.png'); run_legs(n,_ph,-1).save(f'{T}{n}_blegsrunL{_ph}.png')
+        for _p in pose_list(c):   # round 5 proposal (opt-in "poses"): pose card, 1-frame in-between from rest, overshoot for settles
+            pose_arm(n,_p).save(f'{T}{n}_arm_pose_{_p}.png'); pose_arm(n,_p,mix=0.5).save(f'{T}{n}_arm_pose_{_p}_m.png'); pose_arm(n,_p,over=9).save(f'{T}{n}_arm_pose_{_p}_o.png')
         # r7 (rule 272): left arms get their own mirrored texture, never a negative object scale (the PC GPU drew a mirrored card as a black box)
         import glob as _g
         for fp in _g.glob(f'{T}{n}_arm*.png'):
             if fp.endswith('_L.png'): continue
             Image.open(fp).transpose(Image.FLIP_LEFT_RIGHT).save(fp[:-4]+'_L.png')
+    for _k in FX_KINDS:   # round 7: effect cards (shared by every character), both facings
+        _im=fx(_k); _im.save(f'{T}fx_{_k}.png'); _im.transpose(Image.FLIP_LEFT_RIGHT).save(f'{T}fx_{_k}_L.png')
     # preview
     pv=Image.new('RGBA',(300*len(C),700),(236,230,218,255))
     for i,n in enumerate(C):

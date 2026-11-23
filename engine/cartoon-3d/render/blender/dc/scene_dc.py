@@ -1,8 +1,8 @@
-# Washington DC Thanksgiving short (thu-washington-dc): Blender builder.   blender -b --python scene_dc.py   -> /root/dc/blend/dc.blend
+# Washington DC Thanksgiving short (thu-washington-dc): Blender builder.   blender -b --python scene_dc.py   -> /root/dc/blend15/dc.blend
 # Built on the Black Friday / Cape Cod pipeline (lib.py rig, ink hulls, cast cards, render setup); every set, prop and scene here is new for this video.
 # Story: one magazine editor writes to five presidents for one shared Thanksgiving day; four say no, the fifth says yes (1863).
 import sys, os, math, random, json
-sys.path.insert(0,'/root/dc/src')
+sys.path.insert(0,'/root/dc/src15')
 import bpy, bmesh
 from mathutils import Vector, Euler, Matrix
 import lib as L
@@ -14,12 +14,12 @@ WORDS=json.load(open('/root/dc/vo/vo_trim.wav.words.json'))
 SH={'S01':(0,70),'S02':(64,162),'S03':(156,302),'S04':(296,410),'S05':(411,500),'S06':(494,625),'S07':(626,672),'S08':(666,808),
     'S09':(802,892),'S10':(886,978),'S11':(972,1240),'S12':(1234,1314),'S13':(1308,1390),'S14':(1391,1438),'S15':(1439,1490),
     'S16':(1484,1598),'S17':(1592,1644),'S18':(1638,1732),'S19':(1726,1892),'S20':(1886,1980),'S21':(1974,END)}
-sc['shots']=json.dumps(SH); os.makedirs('/root/dc/bridge',exist_ok=True); json.dump(SH,open('/root/dc/bridge/shots.json','w'))
+sc['shots']=json.dumps(SH); os.makedirs('/root/dc/bridge15',exist_ok=True); json.dump(SH,open('/root/dc/bridge15/shots.json','w'))
 LENS={n:30 for n in SH}; LENS.update({'S07':34,'S14':38,'S15':36,'S17':36,'S16':28,'S19':28})
 for n in SH: cam(n,LENS[n],11.0)   # sets stay sharp (BF r6 lesson)
 def C(n): return L.chr_coll(n)
 PATHS={}
-TILT=json.load(open('/root/dc/bridge/tilt.json')) if os.path.exists('/root/dc/bridge/tilt.json') else {}   # dc14 rule 344: per-shot look-at drop (m) so faces in the caption column end above 0.665 H
+TILT=json.load(open('/root/dc/bridge15/tilt.json')) if os.path.exists('/root/dc/bridge15/tilt.json') else {}   # dc14 rule 344: per-shot look-at drop (m) so faces in the caption column end above 0.665 H
 def path(n,keys):
     t_=TILT.get(n,0.0); dz,upto=(t_ if isinstance(t_,list) else (t_,10**6)); keys=[(k[0],k[1],(k[2][0],k[2][1],k[2][2]+(dz if k[0]<=upto else 0.0)))+tuple(k[3:]) for k in keys]
     PATHS.setdefault(n,[]).extend(keys); L.path(n,keys)
@@ -38,6 +38,7 @@ def drift_faces(ch,f0,f1,pool,seed,step=(20,38)):
     faces(ch,seq)
 # ---- dc14 rule 354 (interim, [INFERRED] catalogue pending Rick research + owner approval): named arm actions, logged so a probe can check
 # that neighbours in a shot never share a move and no character repeats a move more than twice. Outward = negative angle on both sides.
+import motion as MO
 REST=-12; ACTLOG=[]
 ACTS={'point':[(0,REST),(5,-95),(20,-90),(26,REST)],'reach':[(0,REST),(6,-120),(22,-115),(28,REST)],'reach_high':[(0,REST),(6,-140),(22,-136),(28,REST)],
       'wave':[(0,REST),(4,-150),(8,-122),(12,-150),(16,-122),(20,-150),(26,REST)],'throw':[(0,-25),(3,15),(7,-140),(11,-70),(17,REST)],
@@ -46,7 +47,41 @@ ACTS={'point':[(0,REST),(5,-95),(20,-90),(26,REST)],'reach':[(0,REST),(6,-120),(
       'stamp':[(0,-50),(6,-130),(9,-35),(14,-40),(20,REST)],'offer':[(0,-30),(6,-60),(20,-55),(26,-30)],'wag':[(0,-60),(5,-80),(10,-62),(15,-80),(20,-62),(25,-60)]}
 BOTH={'shrug':[(0,REST),(4,-48),(14,-48),(19,REST)],'clutch':[(0,REST),(6,22),(24,22),(30,REST)]}
 WORK={'write','press','carry','eat'}   # continuous work loops: not raises, exempt from the repeat count
+# dc15 (owner approved the coordinated motion library Nov 23; rules 356-364): story beats play as Rick's MEASURED/APPROVED combos (lib.combo):
+# head, torso lean and arm on one plan. Legacy keyframed moves stay only where a prop card is in the hand (346 contact), for lip-synced
+# characters and for hand-placed contacts (S08 map reach).
+CMAP={'point':'point_out_tilt','reach':'lean_reach','wave':'wave_hello','throw':'toss','flick':'toss','stamp':'swing_down','fist_pump':'victory_up',
+      'head_grab':'panic_clutch','clutch':'panic_clutch','shrug':'dip_talk','present':'tilt_talk','offer':'tilt_talk','drop':'dip_talk','wag':'akimbo_scold'}
+COMBOLOG=[]
+def _active_face(ch,f):
+    k=None
+    for f_,k_ in sorted(ch['faces']):
+        if f_<=f: k=k_
+    k=k or (sorted(ch['faces'])[0][1] if ch['faces'] else 'neutral')
+    return k.split('@')[0].replace('_ta','').replace('_tb','')
+def _card_at(ch,sx,f):
+    c='arm'
+    for f_,k_ in sorted(ch['A'][sx].get('sched',[])):
+        if f_<=f: c=k_
+    return c
 def act(ch,name,f,sx=1):
+    cm=CMAP.get(name); ci=L.CI[ch['kind']]
+    def _free(side):   # arms this combo moves must not hold a prop card (346 contact); a free arm may be on a plain or pose card
+        used={a for st in MO.frames(cm,side,'neutral',0,None,pre=0,post=0) for a in (-1,1) if st['arms'][a]!='hang'}
+        return all(_card_at(ch,a,f)=='arm' or _card_at(ch,a,f).startswith('arm_pose_') for a in used)
+    side_=None
+    PROPMOVES={'throw','flick','stamp','drop','offer'}   # the prop hand itself acts: keep the keyframed move with its prop card
+    if cm and name in PROPMOVES and any(_card_at(ch,a,f) not in ('arm',) and not _card_at(ch,a,f).startswith('arm_pose_') for a in (-1,1)): cm=None
+    if cm: side_=sx if _free(sx) else (-sx if _free(-sx) else None)
+    if (cm and side_ and ci.get('combos') and not any(k.startswith('talk') for _,k in ch['faces']) and not ch.get('nocombo')
+        and sum(1 for c in COMBOLOG if c['kind']==ch['kind'] and c['combo']==cm)<3):
+        try:
+            last=L.combo(ch,f,cm,side=side_,face=_active_face(ch,f))
+            ch.setdefault('cwin',[]).append((f,last)); COMBOLOG.append(dict(shot=ch['shot'],inst=ch['inst'],kind=ch['kind'],combo=cm,f=f,last=last))
+            ACTLOG.append(dict(shot=ch['shot'],inst=ch['inst'],kind=ch['kind'],act=cm,f=f)); return
+        except KeyError as e:
+            print('COMBO_SKIP',ch['inst'],cm,f,e)
+    if cm: print('COMBO_NO',ch['inst'],name,f,'combos' if not ci.get('combos') else '', 'talk' if any(k.startswith('talk') for _,k in ch['faces']) else '', [_card_at(ch,s_,f) for s_ in (-1,1)], ch.get('nocombo'))
     if name in BOTH:
         for side in (-1,1):
             for d,a_ in BOTH[name]: arm(ch,side,f+d,a_)
@@ -71,7 +106,7 @@ def turnpass(ch):
     orig=seq[:]; done=[]
     nb=1 if n<=120 else 2
     for i in range(nb):
-        t=a+n*(i+1)//(nb+1); cands=[f for f,k in orig if a+15<=f<=b-34 and all(abs(f-d)>40 for d in done)]
+        t=a+n*(i+1)//(nb+1); cands=[f for f,k in orig if a+15<=f<=b-34 and all(abs(f-d)>40 for d in done) and all(not(c0-6<=f<=c1+30) for c0,c1 in ch.get('cwin',[]))]   # dc15: combos already turn the head
         fb=min(cands,key=lambda f:abs(f-t)) if cands else t
         K=active(fb,orig); base=K if K in V else V[0]
         hold=max(12,min(24,b-fb-8)); f_end=fb+2+hold; nxt=active(f_end,orig)
@@ -224,7 +259,7 @@ room('P',PX,7,6,3.4,'wp_office','floor_office')
 P_DAY=shared('P_day',['S01','S07','S08','S10']); P_NIGHT=shared('P_night',['S13','S14','S15'])
 window('P_win',(PX+1.9,2.98,1.85),1.3,1.5,'win_phil',coll=P_DAY); window('P_winN',(PX+1.9,2.98,1.85),1.3,1.5,'win_phil_night',coll=P_NIGHT)
 shelfunit('P_shelf',(PX-2.4,3.0,1.3),1.6,2.6)
-PG_AT=json.load(open('/root/dc/bridge/pg_at.json')) if os.path.exists('/root/dc/bridge/pg_at.json') else (PX-0.25,1.55)
+PG_AT=json.load(open('/root/dc/bridge15/pg_at.json')) if os.path.exists('/root/dc/bridge15/pg_at.json') else (PX-0.25,1.55)
 PMAP=wallprop('P_map',(PX-0.35,3.0,1.62),1.6,1.0,'map_land',frame=(120,80,50))   # dc14 (346): hung 0.3 m lower so the editor can reach it in S08
 desk('P_desk',(PX,0.9),1.5,0.7,0.62,DESKM)
 inkwell('P_ink',(PX+0.32,0.78,0.62)); oillamp('P_lamp',(PX+0.58,1.05,0.62),energy=30)
@@ -435,7 +470,7 @@ light('T_pl','AREA',(PXP,1.9,2.9),60,(1.0,0.95,0.88),1.2,rot=(math.radians(35),0
 def S(n): return SH[n]
 # ---- S01 (0-70): hook. The editor writes; the camera eases in to her (push) ----
 s='S01'; r=S(s)
-ed=char_on('S01_ed','editor',s,(PX,1.12,0),r,'determined',arms=('arm',[(0,'arm_quill')]))
+ed=char_on('S01_ed','editor',s,(PX,1.12,-L.FOOT_LIFT),r,'determined',arms=('arm',[(0,'arm_quill')]))   # dc15 (346): desk writers keep their rule-346 hand contact; feet hidden by the desk
 faces(ed,[(0,'determined'),(22,'squint'),(40,'determined'),(58,'smug')])
 work(ed,'write',[(f,-22 if (f//6)%2 else -28) for f in range(0,71,6)])   # dc14 (346): the quill mitten rests on her sheet (desk top 0.62 m)
 bob(ed,[34,62])
@@ -457,14 +492,14 @@ path(s,[(156,(WX-0.7,-0.6,1.75),(WX-1.2,3.0,1.75)),(230,(WX-1.3,-0.5,1.75),(WX-1
 # ---- S04 (296-410): mail piles up; the mailman dumps a sack; the clerk groans (crane up / pull out) ----
 s='S04'; r=S(s)
 mm=char_on('S04_mail','mailman',s,(WX-2.4,1.0,0),r,'happy',arms=('arm',[(296,'arm_sack'),(330,'arm')]),walker=True)
-walk(mm,296,318,(WX-3.2,0.6,0),(WX-1.75,1.4,0),step=4)
+walk(mm,296,318,(WX-3.0,0.5,0),(WX-1.5,1.0,0),step=4)   # dc15 (345): the mailman ends 0.8 m nearer than the clerk
 act(mm,'throw',316)
 faces(mm,[(296,'happy'),(326,'open_smile'),(356,'proud'),(380,'whistle')])
 sk4=sack('S04_sack',(0,0,0),coll=C(s),s=0.8); kloc(sk4,296,(WX-3.0,0.45,0.55)); kloc(sk4,318,(WX-1.8,1.3,0.55)); fall(sk4,322,8,(WX-1.7,1.35,0.6),(WX-1.6,1.4,0.0)); onone(sk4)
 fx('S04_dust','fx_dust',(WX-1.6,1.3,0.25),330,14,0.8,C(s),grow=1.8,rise=0.2)
 cl4=char_on('S04_clerk','clerk',s,(WX-0.5,1.65,0),r,'neutral',arms=('arm','arm'))
 faces(cl4,[(296,'neutral'),(330,'nervous'),(360,'panic'),(380,'annoyed'),(400,'groan')]); bob(cl4,[362,402]); act(cl4,'head_grab',384)
-path(s,[(296,(WX-1.7,-1.2,1.45),(WX-1.8,1.4,0.85)),(350,(WX-1.3,-1.7,1.7),(WX-1.2,1.5,0.95)),(410,(WX-0.15,-1.75,1.85),(WX+0.05,1.6,1.0))])
+path(s,[(296,(WX-1.7,-1.5,1.45),(WX-1.35,1.4,0.85)),(350,(WX-1.3,-1.9,1.7),(WX-1.05,1.5,0.95)),(410,(WX-0.15,-1.75,1.85),(WX+0.05,1.6,1.0))])   # dc15 (shots verifier: clerk cut at the edge 315-340): framed between the two
 # ---- S05 (411-500): the clerk, close: "Oh no, it's the turkey lady again." (slow push; lips on the quoted line only) ----
 s='S05'; r=S(s)
 cl5=char_on('S05_clerk','clerk',s,(WX+0.4,1.65,0),r,'groan',arms=('arm',[(411,'arm_letter')]))
@@ -502,7 +537,7 @@ ed9=char_on('S09_ed','editor',s,(PRX+1.3,PRY-0.1,0),r,'proud'); drift_faces(ed9,
 path(s,[(802,(PRX-0.6,-1.2,1.5),(PRX+0.5,PRY-0.2,1.05)),(892,(PRX+0.3,-1.45,1.5),(PRX+0.9,PRY-0.2,1.05))])
 # ---- S10 (886-978): she wrote it, and wrote it, and wrote it again (push) ----
 s='S10'; r=S(s)
-ed10=char_on('S10_ed','editor',s,(PX,1.12,0),r,'determined',arms=('arm',[(886,'arm_quill')]))
+ed10=char_on('S10_ed','editor',s,(PX,1.12,-L.FOOT_LIFT),r,'determined',arms=('arm',[(886,'arm_quill')]))
 faces(ed10,[(886,'determined'),(905,'squint'),(928,'determined'),(951,'grit'),(966,'stern')])
 work(ed10,'write',[(f,-22 if (f//6)%2 else -28) for f in range(886,978,6)])
 bob(ed10,[905,928,951])
@@ -533,7 +568,7 @@ faces(cl12,[(1234,'worry'),(1262,'panic'),(1285,'dazed')])
 path(s,[(1234,(WX-1.0,-0.9,1.5),(WX-0.8,1.4,1.0)),(1305,(WX+0.25,-0.75,1.25),(WX+0.0,0.85,0.75)),(1314,(WX+0.27,-0.72,1.24),(WX+0.0,0.85,0.74))])
 # ---- S13 (1308-1390): most folks would have quit. Not her. (night, push) ----
 s='S13'; r=S(s)
-ed13=char_on('S13_ed','editor',s,(PX,1.12,0),r,'worry',arms=('arm',[(1308,'arm_quill')]))
+ed13=char_on('S13_ed','editor',s,(PX,1.12,-L.FOOT_LIFT),r,'worry',arms=('arm',[(1308,'arm_quill')]))
 faces(ed13,[(1308,'worried'),(1340,'sigh'),(1357,'blink'),(1362,'sad'),(1372,'determined')])
 work(ed13,'write',[(1308,-24),(1314,-28),(1320,-22),(1326,-26)]); act(ed13,'clutch',1334); act(ed13,'point',1368)
 bob(ed13,[1372])
@@ -555,11 +590,11 @@ s='S17'; r=S(s)
 path(s,[(1592,(OX-0.05,-0.1,1.35),(OX-0.05,0.8,0.64)),(1644,(OX-0.05,0.15,1.22),(OX-0.05,0.82,0.64))])
 # ---- S18 (1638-1732): this time, yes: he stamps it; the desk calendar runs out in a week (truck) ----
 s='S18'; r=S(s)
-p5=char_on('S18_pres','presE',s,(OX,1.25,0),r,'neutral',arms=('arm',[(1638,'arm_letter'),(1664,'arm_stamp')]))
+p5=char_on('S18_pres','presE',s,(OX,1.25,-L.FOOT_LIFT),r,'neutral',arms=('arm',[(1638,'arm_letter'),(1664,'arm_stamp')]))
 faces(p5,[(1638,'neutral'),(1654,'look_down'),(1670,'proud'),(1682,'open_smile'),(1700,'grin'),(1718,'proud')])
 arm(p5,1,1638,-50); arm(p5,1,1664,-50); act(p5,'stamp',1670); act(p5,'present',1698)
 bob(p5,[1682,1718])
-SHX_=json.load(open('/root/dc/bridge/hand_at.json')) if os.path.exists('/root/dc/bridge/hand_at.json') else {}
+SHX_=json.load(open('/root/dc/bridge15/hand_at.json')) if os.path.exists('/root/dc/bridge15/hand_at.json') else {}
 for nm_,key_,c_ in (('S01','write',C('S01')),('S10','write',C('S10')),('S13','write',C('S13')),('S18','stamp',C('S18'))):   # dc14 (346): the sheet sits under the mitten
     if nm_ in SHX_: x_,y_=SHX_[nm_]; paper(f'{nm_}_wsheet',(x_,y_,0.645 if nm_=='S18' else 0.625),0.24,0.32,'letter_hero',0.15,coll=c_)
 path(s,[(1638,(OX-0.7,-1.0,1.42),(OX-0.1,1.3,0.95)),(1732,(OX+0.35,-1.05,1.42),(OX+0.15,1.3,0.95))])
@@ -568,12 +603,12 @@ s='S19'; r=S(s)
 G=[]
 # dc14 rule 345: real depth. blueA stands at the near end of the table (about 2 m from the landing camera), the rest 1.6 m further back;
 # the frontal row becomes a high three-quarter view (camera 2.5 m up, about 36 deg off axis). Each soldier a different arm move (354).
-for i,(x,y,k) in enumerate([(-1.6,0.2,'blueA'),(-1.0,1.6,'greyA'),(0.6,1.6,'blueB'),(1.0,1.6,'greyB')]):
+for i,(x,y,k) in enumerate([(-1.6,0.2,'blueA'),(-0.35,1.6,'greyA'),(0.4,1.6,'blueB'),(1.05,1.6,'greyB')]):   # dc15 (visual verifier 345: greyA sat on blueA's line of sight, a stacked totem 1776-1884): back row spread right of the front head
     c_=char_on(f'S19_{k}',k,s,(HX+x,y,0),r,'happy',arms=('arm',[(1726,'arm_plate')] if i%2==0 else 'arm')); G.append(c_)
     drift_faces(c_,1726,1892,['happy','grin','proud','laugh','content'],190+i,(16,28)); bob(c_,[1760+i*9,1820+i*7,1873])
     arm(c_,1,1726,-40); act(c_,['offer','shrug','clutch','wave'][i],1790+i*6)
-tw19=char_on('S19_town','townW',s,(HX+2.0,1.95,0),r,'happy',arms=('arm',[(1726,'arm_pie'),(1866,'arm')]),walker=True)
-walk(tw19,1830,1862,(HX+3.4,1.95,0),(HX+2.0,1.95,0),step=4); faces(tw19,[(1726,'happy'),(1862,'laugh'),(1878,'proud')]); work(tw19,'carry',[(1726,-35)]); act(tw19,'present',1864)
+tw19=char_on('S19_town','townW',s,(HX+2.2,1.95,0),r,'happy',arms=('arm',[(1726,'arm_pie'),(1866,'arm')]),walker=True)
+walk(tw19,1830,1862,(HX+3.6,1.95,0),(HX+2.2,1.95,0),step=4); faces(tw19,[(1726,'happy'),(1862,'laugh'),(1878,'proud')]); work(tw19,'carry',[(1726,-35)]); act(tw19,'present',1864)
 path(s,[(1726,(HX-2.2,-1.7,1.55),(HX-0.55,1.4,1.0)),(1800,(HX-2.35,-1.7,1.95),(HX-0.5,1.35,0.8)),(1873,(HX-2.5,-1.7,2.5),(HX-0.3,1.3,0.6)),(1892,(HX-2.52,-1.74,2.52),(HX-0.3,1.3,0.6))])   # dc14 (345): high three-quarter landing
 # ---- S20 (1886-1980): today, the whole country eats on the same Thursday (truck) ----
 s='S20'; r=S(s)
@@ -626,12 +661,14 @@ def world_and_sun():
 world_and_sun()
 for a in ALL: turnpass(a)
 for a in ALL: finish(a)
-json.dump(dict(acts=ACTLOG,turns=TURNLOG),open('/root/dc/bridge/motion.json','w'),indent=0)   # dc14: armvariety.py / turn check input
-json.dump([dict(inst=a['inst'],kind=a['kind'],shot=a['shot'],rng=list(a['rng']),faces=sorted([(int(f),k) for f,k in a['faces']]),avail=sorted(a['F'])) for a in ALL],open('/root/dc/bridge/faces.json','w'))   # facecheck.py input
+if os.environ.get('RIGCHECK','1')=='1':
+    _rc=L.rigcheck(range(0,END+1,2)); print('RIGCHECK_FAULTS',_rc,flush=True)   # dc15 rule 354b: blocking before any render
+json.dump(dict(acts=ACTLOG,turns=TURNLOG,combos=COMBOLOG),open('/root/dc/bridge15/motion.json','w'),indent=0)   # dc14: armvariety.py / turn check input
+json.dump([dict(inst=a['inst'],kind=a['kind'],shot=a['shot'],rng=list(a['rng']),faces=sorted([(int(f),k) for f,k in a['faces']]),avail=sorted(a['F'])) for a in ALL],open('/root/dc/bridge15/faces.json','w'))   # facecheck.py input
 print('hulls',L.ink())
 for o_ in bpy.data.objects:
     if o_.type=='LIGHT' and o_.data.type!='SUN': o_.visible_camera=False
 L.render_setup(100,8)
 sc.cycles.samples=4; sc.cycles.transparent_max_bounces=8; sc.cycles.diffuse_bounces=1; sc.cycles.max_bounces=3
-os.makedirs('/root/dc/blend',exist_ok=True)
-bpy.ops.wm.save_as_mainfile(filepath='/root/dc/blend/dc.blend'); print('SCENE_OK all')
+os.makedirs('/root/dc/blend15',exist_ok=True)
+bpy.ops.wm.save_as_mainfile(filepath='/root/dc/blend15/dc.blend'); print('SCENE_OK all')

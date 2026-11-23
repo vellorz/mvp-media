@@ -916,3 +916,80 @@ def mouth_set(lay, kind, side, cy=715):
     ang = 0 if kind in ('O', 'o', 'sigh', 'shout', 'whistleo') else MOUTH_TILT * side
     lay = lay.rotate(ang, resample=Image.BICUBIC, center=(CX, cy))
     out = Image.new('RGBA', (1024, 1024), CLEAR); out.alpha_composite(lay, (int(MOUTH_SHIFT * side), 0)); return out
+
+# =================================================================== ROUND 5 PROPOSAL (Nov 23 2026, owner asks; awaits owner approval)
+# Owner, Nov 23 2026: "when someone has a facial expression that is angled, it remains angled for the whole duration of that said scene ...
+# Rick has a great tendency to have a couple of frames where it transitions from an angled facial reference to ... a slightly less angled
+# reference, or maybe a symmetrical reference."  Evidence: research/rick-style-spec/face-turns-arms/ (project files).
+# Graded turn levels: the face slides toward the side it faces by a level, in units of the round-2 turn (62 px = 7.75 % of the 800 px disc).
+#   level 0 front, 1 slight (5 % of disc width), 2 three-quarter (10 %), 3 strong three-quarter (16 %); lookL/lookR stay 7.75 % [level 3 INFERRED
+#   from 4 Rick events: #22 f376-379, #24 f414-416, #10 f257-260, #22 f1459-1463].  Negative = left, positive = right.
+# Tokens: tq-3 .. tq3 in a face's extras string.  cast.json "turns": "all" or [face names] adds variants name@L3..name@R3 (opt-in).
+TURN_UNITS = {0: 0.0, 1: 0.65, 2: 1.3, 3: 2.05}   # = 5 %, 10 %, 16 % of the disc width (Rick measured 6-16 % on #12 f1438-1445, #14 f1255-1260)
+def turn_level(ex=''):
+    for k in (ex or '').split('+'):
+        if k.startswith('tq'):
+            try: return max(-3, min(3, int(k[2:])))
+            except ValueError: return None
+    return None
+_turn_dx_r4 = turn_dx
+def turn_dx(c, ex=''):
+    lv = turn_level(ex)
+    if lv is None: return _turn_dx_r4(c, ex)
+    return int(round((1 if lv > 0 else -1) * TURN_UNITS[abs(lv)] * 62))
+_mouth_side_r4 = mouth_side
+def mouth_side(c, ex=''):
+    lv = turn_level(ex)
+    if lv is None: return _mouth_side_r4(c, ex)
+    return 0 if lv == 0 else (1 if lv > 0 else -1)   # Rick: the mouth rides toward the turned side from the slight level on
+TOKENS = TOKENS | {f'tq{i}' for i in range(-3, 4)}
+def turn_name(base, lv):
+    return f"{base}@F" if lv == 0 else f"{base}@{'L' if lv < 0 else 'R'}{abs(lv)}"
+_expand_r4 = expand
+def expand(C):
+    C = _expand_r4(C)
+    for n, c in C.items():
+        want = c.get('turns')
+        if not want: continue
+        f = c.setdefault('faces', {})
+        bases = [k for k in list(f) if '@' not in k and not k.startswith('talk') and k != 'blink'] if want == 'all' else [k for k in want if k in f]
+        for k in bases:
+            e, b, m = f[k][:3]; ex = f[k][3] if len(f[k]) > 3 else ''
+            ex = '+'.join(t for t in ex.split('+') if t and t not in ('lookL', 'lookR', 'turnL', 'turnR', 'front', 'mouthL', 'mouthR', 'mouthC'))
+            for lv in (-3, -2, -1, 0, 1, 2, 3):
+                nm = turn_name(k, lv)
+                if nm not in f: f[nm] = [e, b, m, (ex + '+' if ex else '') + f'tq{lv}']
+        if c.get('blink_turns', True) and 'blink' in f:   # blinks keep the head angle they interrupt
+            e, b, m = f['blink'][:3]
+            for lv in (-3, -2, -1, 0, 1, 2, 3):
+                nm = turn_name('blink', lv)
+                if nm not in f: f[nm] = [e, b, m, f'tq{lv}']
+    return C
+# =================================================================== ROUND 6 (Nov 23 2026, coordinated motion; owner approves before use)
+# Back-of-head drawing for front <-> back snaps (Rick #04 f349-350, #04 f394, #03 f1422; #05 f579 whole-body back->front snap, both
+# measurers). Face key 'back' (extras token 'backview'): no eyes, brows, mouth, nose or facial hair; the hair mass covers the crown.
+# Added for characters with cast.json "turns" (opt-in). [INFERRED drawing: Rick's back views are small in frame; owner to approve.]
+TOKENS = TOKENS | {'backview'}
+_expand_r5 = expand
+def expand(C):
+    C = _expand_r5(C)
+    for n, c in C.items():
+        if c.get('turns') and 'back' not in c.setdefault('faces', {}):
+            c['faces']['back'] = ['none', 'none', 'none', 'backview']
+    return C
+
+# =================================================================== ROUND 7 (Nov 23 2026, owner review): 3/4 back views
+# 'back@L1..L3' / 'back@R1..R3': the back of the head turned a little toward one side (an ear and the cheek edge show), the in-between
+# Rick draws on the way round to the back (#22 f468-469; #03 f80). 'back@F' = the plain back view. [INFERRED until the owner approves]
+TOKENS = TOKENS | {'back3qL', 'back3qR'}
+_expand_r6 = expand
+def expand(C):
+    C = _expand_r6(C)
+    for n, c in C.items():
+        f = c.get('faces', {})
+        if 'back' in f:
+            f.setdefault('back@F', list(f['back']))
+            for lv in (1, 2, 3):
+                f.setdefault(f'back@L{lv}', ['none', 'none', 'none', 'backview+back3qL'])
+                f.setdefault(f'back@R{lv}', ['none', 'none', 'none', 'backview+back3qR'])
+    return C

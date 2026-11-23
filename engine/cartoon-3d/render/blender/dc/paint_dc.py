@@ -1,8 +1,8 @@
-# Painted textures for the Washington DC Thanksgiving short (thu-washington-dc). PIL only, our own designs. Output /root/dc/tex/
+# Painted textures for the Washington DC Thanksgiving short (thu-washington-dc). PIL only, our own designs. Output /root/dc/tex15/
 # Reuses only the generic painter helpers of the Black Friday paint.py (wash, strokes, paintdetail, sky, wallpaper, woodfloor, facade): no BF texture is reused.
-import sys; sys.path.insert(0,'/root/dc/src')
+import sys; sys.path.insert(0,'/root/dc/src15')
 import paint as P
-P.T='/root/dc/tex/'; T=P.T
+P.T='/root/dc/tex15/'; T=P.T
 import numpy as np, random, math
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 from paint import wash, strokes, paintdetail, noise, jl, jr, mul, text, font, FS, FSN, FM, INK
@@ -260,7 +260,7 @@ def fx_cards():
         im.save(T+nm+'.png')
     W=H=256; im=Image.new('RGBA',(W,H),(0,0,0,0)); d=ImageDraw.Draw(im)
     for a in range(0,360,45): d.line([128,128,128+110*math.cos(math.radians(a)),128+110*math.sin(math.radians(a))],fill=(255,240,190,255),width=14 if a%90==0 else 8)
-    im.save(T+'fx_spark.png')
+    im.save(T+'fx_spark_painted.png')   # dc15: the gate-approved hand-made soft-glow fx_spark.png is never overwritten
 def glow(name='glow',W=256,H=256):
     yy,xx=np.mgrid[0:H,0:W]; r=np.sqrt((xx-W/2)**2+(yy-H/2)**2)/(W/2); a=np.clip(1-r,0,1)**2
     im=np.zeros((H,W,4),np.uint8); im[...,:3]=255; im[...,3]=(a*255).astype(np.uint8); Image.fromarray(im).save(T+name+'.png')

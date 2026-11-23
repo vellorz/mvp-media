@@ -122,7 +122,10 @@
   "turnbase": [
    "determined",
    "proud"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "clerk": {
   "coat": [
@@ -262,7 +265,10 @@
   "turnbase": [
    "neutral",
    "annoyed"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "presA": {
   "coat": [
@@ -370,7 +376,10 @@
   "turnbase": [
    "skeptical",
    "side_eye"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "presB": {
   "coat": [
@@ -466,7 +475,10 @@
   "turnbase": [
    "neutral",
    "side_eye"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "presC": {
   "coat": [
@@ -535,7 +547,7 @@
   ],
   "mouth_side": 1,
   "turn": 0.5,
-  "fhair": "fullbeard",
+  "fhair": "toothbrush",
   "fhaircol": [
    90,
    70,
@@ -567,7 +579,10 @@
   "turnbase": [
    "neutral",
    "side_eye"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "presD": {
   "coat": [
@@ -675,7 +690,10 @@
   "turnbase": [
    "neutral",
    "skeptical"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "presE": {
   "coat": [
@@ -771,7 +789,10 @@
   "turnbase": [
    "neutral",
    "proud"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "printer": {
   "coat": [
@@ -884,7 +905,10 @@
   "turnbase": [
    "grin",
    "happy"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "mailman": {
   "coat": [
@@ -1012,7 +1036,10 @@
   "turnbase": [
    "neutral",
    "happy"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "blueA": {
   "coat": [
@@ -1119,7 +1146,10 @@
   "turnbase": [
    "happy",
    "content"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "blueB": {
   "coat": [
@@ -1229,7 +1259,10 @@
   "turnbase": [
    "proud",
    "grin"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "greyA": {
   "coat": [
@@ -1332,7 +1365,10 @@
   "turnbase": [
    "content",
    "laugh"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "greyB": {
   "coat": [
@@ -1439,7 +1475,10 @@
   "turnbase": [
    "content",
    "happy"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "townW": {
   "coat": [
@@ -1535,7 +1574,10 @@
   "turnbase": [
    "look_up",
    "smile"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "momT": {
   "coat": [
@@ -1630,7 +1672,10 @@
   "turnbase": [
    "happy",
    "laugh"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "dadT": {
   "coat": [
@@ -1729,7 +1774,10 @@
   "turnbase": [
    "cry_laugh",
    "happy"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "kidT": {
   "coat": [
@@ -1820,7 +1868,10 @@
   "turnbase": [
    "happy",
    "open_smile"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  },
  "grandT": {
   "coat": [
@@ -1910,6 +1961,9 @@
   "turnbase": [
    "happy",
    "open_smile"
-  ]
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true
  }
 }

@@ -4,14 +4,14 @@
 # checks head, torso/body card, both arms (with mitten hand in the arm card), both legs/feet (in the body card) exist, render and sit in frame,
 # and measures torso / legs / total in head widths (H = head disc, outer ink) from the cards' geometry and the body texture's alpha.
 import sys, json, math
-sys.path.insert(0,'/root/dc/src')
+sys.path.insert(0,'/root/dc/src15')
 import bpy, numpy as np
 from mathutils import Vector
 import lib as L
 import expressions as X
 a=sys.argv[sys.argv.index('--')+1:]; OUT,TXT=a[0],a[1]
 sc=L.init(20)
-C=json.load(open('/root/dc/src/cast.json')); kinds=list(C)
+C=json.load(open('/root/dc/src15/cast.json')); kinds=list(C)
 N=len(kinds); SP=1.25
 cam,tg=L.cam('SHEET',50); cam.data.dof.use_dof=False; cam.data.type='ORTHO'; cam.data.ortho_scale=SP*N+0.6
 cam.location=((N-1)*SP/2,-12,0.75); cam.rotation_euler=(math.radians(90),0,0)
@@ -49,8 +49,8 @@ for ch in CH:
     w,h=img.size; A=np.array(img.pixels[:]).reshape(h,w,4)[::-1,:,3]   # row 0 = top
     import os
     skirt_note=''
-    if os.path.exists(f'/root/dc/tex/{k}_body_noskirt.png'):   # dc: ankle-length skirt hides the legs; measure the identical skeleton without it
-        _im=bpy.data.images.load(f'/root/dc/tex/{k}_body_noskirt.png'); _w,_h=_im.size; A=np.array(_im.pixels[:]).reshape(_h,_w,4)[::-1,:,3]; w,h=_w,_h; skirt_note=' (skeleton under ankle skirt; feet visible)'
+    if os.path.exists(f'/root/dc/tex15/{k}_body_noskirt.png'):   # dc: ankle-length skirt hides the legs; measure the identical skeleton without it
+        _im=bpy.data.images.load(f'/root/dc/tex15/{k}_body_noskirt.png'); _w,_h=_im.size; A=np.array(_im.pixels[:]).reshape(_h,_w,4)[::-1,:,3]; w,h=_w,_h; skirt_note=' (skeleton under ankle skirt; feet visible)'
     rows=np.nonzero(A.max(1)>0.5)[0]; top_r,bot_r=rows[0],rows[-1]
     wid=(A>0.5).sum(1); crotch=max(r for r in rows if wid[r]>0.22*w)
     legs_ok=(A[crotch+5:bot_r,:]>0.5).any(0).sum()>0

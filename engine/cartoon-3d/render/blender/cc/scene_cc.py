@@ -433,7 +433,7 @@ cyl('S05_astock',(0,0,0.62),0.04,0.8,INK,v=6,coll=C(s),rot=(math.radians(90),0,0
 cyl('S05_acable',(0,0,0.62+2.0),0.025,4.0,flat('cable',lin((120,92,60)),0.8),v=6,coll=C(s)).parent=anc   # r2 (shots verifier): the anchor hung with no rope
 kloc(anc,385,(AX,14.8,3.4)); kloc(anc,419,(AX,14.8,3.4)); fall(anc,420,12,(AX,14.8,3.4),(AX,15.0,-1.2)); kloc(anc,433,(AX,15.0,-1.2)); onone(anc)
 fx('S05_splash','fx_splash',(AX,15.1,0.4),432,18,1.4,C(s),face='+X',grow=1.6,rise=0.3)
-pf=onship(char_on('S05_pil','pilgrimC',s,(SX+1.2,9.8,3.82),r,'happy')); pB=onship(char_on('S05_pilB','pilgrimB',s,(SX-2.2,8.0,3.82),r,'deadpan'))   # r4 (C4): was hidden behind S05_pil 466-492   # footprobe r1: were past the deck end at y 11.5
+pf=onship(char_on('S05_pil','pilgrimC',s,(SX+1.2,9.8,3.82),r,'happy')); pB=onship(char_on('S05_pilB','pilgrimB',s,(SX-2.2,9.6,3.82),r,'deadpan'))   # r4 (C4): was hidden behind S05_pil 466-492   # footprobe r1: were past the deck end at y 11.5
 faces(pf,[(385,'happy'),(420,'excited'),(452,'happy'),(470,'grin'),(488,'shock'),(500,'worry')]); faces(pB,[(385,'deadpan'),(486,'grit'),(498,'deadpan')]); COMBOS.append((pB,440,'glance_shift',1,'skeptical'))
 for f,a in [(385,-20),(430,-38),(470,-45),(486,-30)]: arm(pf,1,f,a)   # r6 (armprobe): lower, the hand crossed pilB's face at 443-447   # armprobe r3: a raised forearm crossed the other Pilgrim's face
 for f,a in [(470,-10),(484,-60),(492,-55)]: arm(pB,1,f,a)
@@ -469,7 +469,7 @@ arm(s8a,1,654,-20)   # r6: hands stay on hips after the akimbo scold (armprobe: 
 arm(s8b,-1,654,-30); COMBOS.append((s8b,660,'cross_arms_huff',-1,'annoyed'))   # r6: owner-approved huff (Nov 23)
 bob(s8a,[703,732,756]); bob(s8b,[712])
 COMBOS.append((s8b,728,'laugh_lean_back',-1,'laugh'))
-p8=onship(char_on('S08_pil','pilgrimB',s,(SX+0.3,0.6,2.32),r,'worry')); faces(p8,[(654,'worry'),(712,'shock')]); COMBOS.append((p8,740,'dip_talk',1,'sigh'))
+p8=onship(char_on('S08_pil','pilgrimB',s,(SX+0.25,1.56,2.32),r,'worry')); faces(p8,[(654,'worry'),(712,'shock')]); COMBOS.append((p8,740,'dip_talk',1,'sigh'))
 path(s,[(654,(SX-2.4,4.0,3.0),(SX-0.6,2.0,2.75)),(700,(SX-2.3,4.4,2.95),(SX-1.0,2.0,2.8)),(765,(SX-0.7,5.3,2.95),(SX-1.0,2.0,2.8))])   # r4 (rule 306): ends further out than it starts (no push after S07's track)   # r2: closer on the speaking sailor (C6), lateral truck   # r2 (rule 306): lateral truck, no push after S07
 # ---- S09 (766-1012): the packed long take on Corn Hill: climb, dig, the corn basket, take it, give it back, the name ----
 s='S09'; r=S(s); hz=lambda x,y:dune(x,y)
@@ -489,12 +489,12 @@ bob(cC,[830,900,980]); COMBOS.append((cC,846,'turn_and_point',1,'worry'))
 # basket follows the carrier's hand from the lift (899) until the hand-back (936), then sits in the Wampanoag man's arms
 for f,z in [(898,bz+0.05),(899,bz+0.15)]: kloc(bsk,f,(DX,12,z))
 vis(bsk,[(766,898)])
-wp=char_on('S09_wamp','nausetC',s,(DX+3.6,9.4,hz(DX+3.6,9.4)),(918,1012),'neutral',arms=('arm',[(918,'arm'),(936,'arm_basket')]),walker=True)
-gwalk(wp,918,932,(DX+6.0,8.6,hz(DX+6.0,8.6)),(DX+3.6,9.4,hz(DX+3.6,9.4)),hz,step=3)
+wp=char_on('S09_wamp','nausetC',s,(DX+3.3,9.7,hz(DX+3.3,9.7)),(918,1012),'neutral',arms=('arm',[(918,'arm'),(936,'arm_basket')]),walker=True)
+gwalk(wp,918,932,(DX+5.7,8.9,hz(DX+5.7,8.9)),(DX+3.3,9.7,hz(DX+3.3,9.7)),hz,step=3)
 faces(wp,[(918,'neutral'),(936,'happy'),(950,'proud'),(975,'grin')])
 for f,a in [(936,-25),(950,-20)]: arm(wp,-1,f,a)
 bob(wp,[938,966])
-B=bz; path(s,[(766,(DX-6.5,3.0,B+0.4),(DX-3.0,9.0,B+0.2)),(800,(DX-3.6,7.0,B+1.6),(DX-0.6,11.2,B+1.0)),(822,(DX-2.4,8.6,B+1.5),(DX-0.2,11.6,B+0.7)),(862,(DX-1.6,8.4,B+1.6),(DX+0.3,11.2,B+0.9)),(899,(DX-0.6,8.0,B+1.6),(DX+1.0,10.8,B+1.0)),(936,(DX+0.8,7.0,B+1.4),(DX+2.6,9.8,B+0.9)),(972,(DX+1.6,7.2,B+1.4),(DX+3.0,10.0,B+1.1)),(1012,(DX+1.2,6.9,B+1.75),(DX+3.2,10.5,B+1.5))])
+B=bz; path(s,[(766,(DX-6.5,3.0,B+0.4),(DX-3.0,9.0,B+0.2)),(800,(DX-3.6,7.0,B+1.6),(DX-0.6,11.2,B+1.0)),(822,(DX-2.4,8.6,B+1.5),(DX-0.2,11.6,B+0.7)),(862,(DX-1.6,8.4,B+1.6),(DX+0.3,11.2,B+0.9)),(899,(DX-0.6,8.0,B+1.6),(DX+1.0,10.8,B+1.0)),(936,(DX+0.5,7.0,B+1.4),(DX+2.3,9.8,B+0.9)),(972,(DX+1.3,7.2,B+1.4),(DX+2.7,10.0,B+1.1)),(1012,(DX+0.9,6.9,B+1.75),(DX+2.9,10.5,B+1.5))])
 # ---- S10 (1005-1140): dawn camp behind the barricade, Nauset men at the tree line; push to one of them watching an English ship on the horizon ----
 s='S10'; r=S(s)
 for i,(x,y,k) in enumerate([(-1.4,2.4,'pilgrimA'),(1.3,2.0,'pilgrimB'),(2.2,2.6,'pilgrimC'),(-0.2,3.8,'pilgrimD')]):
@@ -503,7 +503,7 @@ for i,(x,y,k) in enumerate([(-1.4,2.4,'pilgrimA'),(1.3,2.0,'pilgrimB'),(2.2,2.6,
 N=[]
 for i,(x,y,k) in enumerate([(-2.1,-16.6,'nausetA'),(0.5,-19.5,'nausetB'),(-1.6,-22.5,'nausetC')]):   # r4 (P3/R21): staggered in depth (were a near-equal-depth frontal row at 1008-1035)
     c_=char_on(f'S10_n{i}',k,s,(EX+x,y,eb(EX+x,y)),r,'neutral',arms=('arm','arm_bow')); N.append(c_)
-    faces(c_,[(1005,'neutral'),(1040+i*6,'skeptical'),(1070+i*6,'deadpan'),(1100+i*4,'worry'),(1124+i*3,'determined')])   # r4f: 4+ faces per featured character (rule 332); watchful, never comic; bob(c_,[1050+i*12])
+    faces(c_,[(1005,'neutral'),(1040+i*6,'skeptical'),(1070+i*6,'deadpan'),(1100+i*4,'worry'),(1124+i*3,'skeptical')])   # r4f: 4+ faces per featured character (rule 332); watchful, never comic; bob(c_,[1050+i*12])
 for f,a in [(1066,-30),(1100,-20)]: arm(N[1],1,f,a)
 path(s,[(1005,(EX+0.5,-4.0,1.9),(EX+0.4,-18,1.35)),(1050,(EX+0.5,-11.0,1.8),(EX+0.4,-19,1.5)),   # stills r3: the push now starts on the beach, not over the empty camp
        (1100,(EX+1.2,-15.2,1.55),(EX+0.5,-19.5,1.65)),(1140,(EX+1.6,-16.3,1.6),(EX+0.55,-19.5,1.7))])   # r2 (K9): the 62 deg whip to the profile framing (1103-1108) is gone; the push settles on the man
@@ -553,7 +553,7 @@ for f,a in [(1612,-30),(1700,-90)]: arm(el,1,f,a)
 COMBOS.append((el,1620,'turn_and_point',1,'proud'))   # r2: the free arm, toward the stone (was the cane side, pointing away)
 faces(el,[(1567,'deadpan'),(1600,'proud'),(1624,'laugh'),(1660,'proud')]); lipsync(el,WORDS[194:197],1686,1712)
 T17=[]
-for i,(x,y,k) in enumerate([(2.6,1.0,'townA'),(3.4,-0.4,'townB'),(1.2,-1.4,'townA')]):
+for i,(x,y,k) in enumerate([(2.6,1.0,'townA'),(3.9,0.9,'townB'),(1.2,-1.4,'townA')]):
     c_=char_on(f'S17_t{i}',k,s,(x,y,0.12),r,'neutral'); T17.append(c_)
     faces(c_,[(1567,'neutral'),(1600,'deadpan'),(1626+i*2,'shock'),(1640,'excited'),(1676,'surprise'),(1700+i,'shock')])
     bob(c_,[1700])
@@ -607,10 +607,11 @@ def snap_all():
     print('SNAPPED',n)
 snap_all()
 # ---- rule 309 pass (head probe r1: S05 14%, S07 18%, S16 12%, S18 18% of W): dolly cameras in toward their targets ----
-for n,k,fr in [('S01',0.7,(0,92)),('S09',0.75,(850,1012)),('S11',0.75,None),
+for n,k,fr in [('S01',0.7,(0,92)),('S09',0.75,(850,930)),('S11',0.75,None),
                ('S13',0.9,None),('S16',0.45,None),('S17',0.65,(1567,1640)),('S18',0.6,None)]: dolly(n,k,fr)
 # r4 (visual r3 R07 [C]: 21 of 31 medium-shot heads under 28 % W, median 25.1): a second, gentler dolly on the medium shots
-for n,k,fr in [('S03',0.82,None),('S10',0.72,(1080,1140)),('S11',0.675,None),('S17',0.85,(1640,1712)),('S09',0.675,(862,1012))]: dolly(n,k,fr)   # S11/S09: factor is from the original keys (0.75 x 0.9)
+# r6 (shots/text r5 C4: carrier and Wampanoag man both out of frame 936-1012 at 2 m): the hand-back keys (936+) keep their original distance
+for n,k,fr in [('S03',0.82,None),('S10',0.72,(1080,1140)),('S11',0.675,None),('S17',0.85,(1640,1712)),('S09',0.675,(862,930))]: dolly(n,k,fr)   # S11/S09: factor is from the original keys (0.75 x 0.9)
 # ======================= foreground layers (rule 311): one near object per shot over 60 f, low in a corner, never over a face or the poster =======================
 def campos(n,f):
     def ev(o):

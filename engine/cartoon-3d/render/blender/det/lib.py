@@ -190,6 +190,14 @@ SHADOW=None
 def chr_coll(shot):
     if shot not in CHRC: CHRC[shot]=col('CHR_'+shot)
     return CHRC[shot]
+# r11 (owner Nov 23 3:40 PM CT: "when the people walk really closely together ... their overlapping shadows cause the shadow to kind of
+# disappear or glitch out"): every ground blob sat at z 0.004, so two overlapping blobs were coplanar transparent cards and Cycles
+# flickered between them. Each character now gets its own blob height, 1.3 mm apart (2.5-6.4 mm above the floor, under every card),
+# and rigcheck SHADOW_OVERLAP fails any two overlapping blobs closer than 1 mm in height.
+_SHN=[0]
+def _shadow_z():
+    z=0.0025+0.0013*(_SHN[0]%4); _SHN[0]+=1; return z
+
 def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=False,camname=None):
     c=CI[kind]; top,shx,shz=GEO[c['body']]; _q=BSY[c['body']]; top=-0.04+(top+0.04)*_q+FOOT_LIFT; shz=-0.04+(shz+0.04)*_q+FOOT_LIFT; C=chr_coll(shot)
     root=empty(inst,loc,coll=C); root.scale=(scale,)*3
@@ -215,7 +223,7 @@ def char(inst,kind,shot,loc,rng,face0=None,arms=('arm','arm'),scale=1.0,walker=F
             a.visible_shadow=False   # r7b (owner Nov 22 'arm issue?'): the sun cast the arm card's shadow onto the torso as a dark notch on the lit side; Rick's arms cast none
             A[sx]['cards'][k]=a
         A[sx]['sched']=[(rng[0],ak)] if isinstance(ak,str) else ak
-    sh=plane(inst+'_shadow',(0,0,0),1.0,0.45,card_mat('shadowblob','shadow',emit=0.0),coll=C,horiz=True); sh.parent=root; sh.location=(0,0,0.004)
+    sh=plane(inst+'_shadow',(0,0,0),1.0,0.45,card_mat('shadowblob','shadow',emit=0.0),coll=C,horiz=True); sh.parent=root; sh.location=(0,0,_shadow_z())   # r11: each character's blob on its own height, so two blobs never share a plane
     sh.visible_shadow=False   # r5b (owner Nov 23 'box-like shadow on the ground'): the flat blob card blocked the sun over its whole rectangle, so a dark box sat under every character
     ch=dict(inst=inst,kind=kind,root=root,hp=hp,F=F,A=A,bodies=bodies,rng=rng,faces=[],walk=[],neck=neck,shadow=sh,top=top,shot=shot)
     if face0: ch['faces'].append((rng[0],face0))
@@ -614,12 +622,31 @@ def _low_row(img):
     w,h=img.size; a=np.array(img.pixels[:]).reshape(h,w,4)[...,3]   # Blender rows start at the bottom
     rows=np.where(a.max(1)>0.5)[0]; v=(rows.min()/h) if len(rows) else 0.0
     _LOWROW[img.name]=v; return v
+def shadow_pairs(frames,out_json,head_w=0.40):
+    """r11 / rule 367 probe, part 1 (in Blender): for every frame where two characters' feet (roots) are within one head width plus a
+    blob width on the floor, write the screen pixels of blob centre A, blob centre B and the floor point between them; shadowcheck.py
+    then samples the rendered frames there. Returns the number of close pairs."""
+    import json, itertools
+    from bpy_extras.object_utils import world_to_camera_view
+    R=sc.render; W=int(R.resolution_x*R.resolution_percentage/100); H=int(R.resolution_y*R.resolution_percentage/100); out=[]
+    for f in frames:
+        sc.frame_set(f)
+        shs=[o for o in bpy.data.objects if o.type=='MESH' and o.name.endswith('_shadow') and not o.hide_render]
+        for a,b in itertools.combinations(shs,2):
+            pa=a.matrix_world.translation; pb=b.matrix_world.translation
+            if (pa-pb).length>head_w+0.5: continue
+            pts=[]
+            for p in (pa,(pa+pb)/2,pb):
+                v=world_to_camera_view(sc,sc.camera,p); pts.append((round(v.x*W,1),round((1-v.y)*H,1)))
+            out.append(dict(f=f,a=a.name,b=b.name,dist=round((pa-pb).length,3),A=pts[0],M=pts[1],B=pts[2]))
+    json.dump(out,open(out_json,'w'),indent=0); print('SHADOW_PAIRS',len(out)); return len(out)
 AIR=set()   # r7: (character root name, frame) where combo() plans the feet off the ground (jumps, run air drawings); FOOT skips them
 def rigcheck(frames,floor_z=None):
     """Prints RIGCHECK lines and returns the number of faults:
     COPLANAR_CARD  two visible cards of one character in the same plane (< 1 mm apart) that overlap on screen -> see-through ink
     FOOT           drawn foot bottom below the floor (clipping) or more than 6 mm above it (floating)
-    SHADOW_CARD    a character's flat ground-blob card casts a sun shadow (dark box on the floor)"""
+    SHADOW_CARD    a character's flat ground-blob card casts a sun shadow (dark box on the floor)
+    SHADOW_OVERLAP two characters' ground blobs overlap on the floor at the same height (< 1 mm): the shadows flicker or vanish (r11)"""
     import itertools
     bad=0
     for o in bpy.data.objects:
@@ -628,6 +655,14 @@ def rigcheck(frames,floor_z=None):
     seen=set()
     for f in frames:
         sc.frame_set(f)
+        shs=[]   # r11: SHADOW_OVERLAP
+        for o in bpy.data.objects:
+            if o.type=='MESH' and o.name.endswith('_shadow') and not o.hide_render:
+                vs=[o.matrix_world@v.co for v in o.data.vertices]; shs.append((o,min(v.x for v in vs),max(v.x for v in vs),min(v.y for v in vs),max(v.y for v in vs),sum(v.z for v in vs)/len(vs)))
+        for (a,ax0,ax1,ay0,ay1,az),(b,bx0,bx1,by0,by1,bz) in itertools.combinations(shs,2):
+            if abs(az-bz)<0.001 and min(ax1,bx1)>max(ax0,bx0) and min(ay1,by1)>max(ay0,by0):
+                k=('SHOV',a.name,b.name)
+                if k not in seen: seen.add(k); print('RIGCHECK SHADOW_OVERLAP',f,a.name,b.name,f'{abs(az-bz)*1000:.2f}mm'); bad+=1
         by={}
         for o in bpy.data.objects:
             if o.type!='MESH' or o.hide_render or not any(c.name.startswith('CHR_') for c in o.users_collection): continue

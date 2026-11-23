@@ -6024,7 +6024,7 @@
      ]
     }
    ],
-   "status": "INFERRED",
+   "status": "APPROVED",
    "round": 10,
    "legs": "walk cycle v2 (continuous)",
    "loop": 16,
@@ -7251,7 +7251,8 @@
       ]
      }
     ]
-   }
+   },
+   "approved": "owner Nov 23 2026 3:40 PM CT (round 10 arms)"
   },
   "walk_stroll": {
    "desc": "stroll: short steps (10 f a step), feet barely lift, arms swing opposite each other, upright; for an easy amble or chatting while walking. Arms (round 10, Rick #24 f733-771): the trailing-side arm swings forward and back in front of the torso with a soft elbow, the leading-side arm swings opposite it behind the torso; toward camera both arms swing opposite each other. Loop: frames 2-61 (20-frame cycle); the scene moves the character.",
@@ -8274,7 +8275,7 @@
      ]
     }
    ],
-   "status": "INFERRED",
+   "status": "APPROVED",
    "round": 10,
    "legs": "walk cycle v2 (continuous)",
    "loop": 20,
@@ -8789,7 +8790,8 @@
       ]
      }
     ]
-   }
+   },
+   "approved": "owner Nov 23 2026 3:40 PM CT (round 10 arms)"
   },
   "walk_brisk": {
    "desc": "brisk walk: long quick steps (6 f a step), higher knee lift, bigger arm swing, leaning forward 6 deg; for someone in a hurry. Arms (round 10, Rick #24 f733-771): the trailing-side arm swings forward and back in front of the torso with a soft elbow, the leading-side arm swings opposite it behind the torso; toward camera both arms swing opposite each other. Loop: frames 2-61 (12-frame cycle); the scene moves the character.",
@@ -9828,7 +9830,7 @@
      ]
     }
    ],
-   "status": "INFERRED",
+   "status": "APPROVED",
    "round": 10,
    "legs": "walk cycle v2 (continuous)",
    "loop": 12,
@@ -10359,7 +10361,8 @@
       ]
      }
     ]
-   }
+   },
+   "approved": "owner Nov 23 2026 3:40 PM CT (round 10 arms)"
   },
   "walk_toward": {
    "desc": "walk toward the camera (Rick #12 f145-205): front body, knees bow out as each foot lifts, arms swing opposite each other. Arms (round 10, Rick #24 f733-771): the trailing-side arm swings forward and back in front of the torso with a soft elbow, the leading-side arm swings opposite it behind the torso; toward camera both arms swing opposite each other. Loop: frames 2-65 (16-frame cycle); the scene moves the character.",
@@ -11420,7 +11423,7 @@
      "v": 0.0
     }
    ],
-   "status": "INFERRED",
+   "status": "APPROVED",
    "round": 10,
    "legs": "walk cycle v2 (continuous)",
    "loop": 16,
@@ -11939,7 +11942,8 @@
       "v": 0.0
      }
     ]
-   }
+   },
+   "approved": "owner Nov 23 2026 3:40 PM CT (round 10 arms)"
   }
  },
  "approved_assets": {

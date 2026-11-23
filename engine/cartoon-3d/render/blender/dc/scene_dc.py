@@ -1,8 +1,8 @@
-# Washington DC Thanksgiving short (thu-washington-dc): Blender builder.   blender -b --python scene_dc.py   -> /root/dc/blend15/dc.blend
+# Washington DC Thanksgiving short (thu-washington-dc): Blender builder.   blender -b --python scene_dc.py   -> /root/dc/blend16/dc.blend
 # Built on the Black Friday / Cape Cod pipeline (lib.py rig, ink hulls, cast cards, render setup); every set, prop and scene here is new for this video.
 # Story: one magazine editor writes to five presidents for one shared Thanksgiving day; four say no, the fifth says yes (1863).
 import sys, os, math, random, json
-sys.path.insert(0,'/root/dc/src15')
+sys.path.insert(0,'/root/dc/src16')
 import bpy, bmesh
 from mathutils import Vector, Euler, Matrix
 import lib as L
@@ -14,12 +14,12 @@ WORDS=json.load(open('/root/dc/vo/vo_trim.wav.words.json'))
 SH={'S01':(0,70),'S02':(64,162),'S03':(156,302),'S04':(296,410),'S05':(411,500),'S06':(494,625),'S07':(626,672),'S08':(666,808),
     'S09':(802,892),'S10':(886,978),'S11':(972,1240),'S12':(1234,1314),'S13':(1308,1390),'S14':(1391,1438),'S15':(1439,1490),
     'S16':(1484,1598),'S17':(1592,1644),'S18':(1638,1732),'S19':(1726,1892),'S20':(1886,1980),'S21':(1974,END)}
-sc['shots']=json.dumps(SH); os.makedirs('/root/dc/bridge15',exist_ok=True); json.dump(SH,open('/root/dc/bridge15/shots.json','w'))
+sc['shots']=json.dumps(SH); os.makedirs('/root/dc/bridge16',exist_ok=True); json.dump(SH,open('/root/dc/bridge16/shots.json','w'))
 LENS={n:30 for n in SH}; LENS.update({'S07':34,'S14':38,'S15':36,'S17':36,'S16':28,'S19':28})
 for n in SH: cam(n,LENS[n],11.0)   # sets stay sharp (BF r6 lesson)
 def C(n): return L.chr_coll(n)
 PATHS={}
-TILT=json.load(open('/root/dc/bridge15/tilt.json')) if os.path.exists('/root/dc/bridge15/tilt.json') else {}   # dc14 rule 344: per-shot look-at drop (m) so faces in the caption column end above 0.665 H
+TILT=json.load(open('/root/dc/bridge16/tilt.json')) if os.path.exists('/root/dc/bridge16/tilt.json') else {}   # dc14 rule 344: per-shot look-at drop (m) so faces in the caption column end above 0.665 H
 def path(n,keys):
     t_=TILT.get(n,0.0); dz,upto=(t_ if isinstance(t_,list) else (t_,10**6)); keys=[(k[0],k[1],(k[2][0],k[2][1],k[2][2]+(dz if k[0]<=upto else 0.0)))+tuple(k[3:]) for k in keys]
     PATHS.setdefault(n,[]).extend(keys); L.path(n,keys)
@@ -51,7 +51,7 @@ WORK={'write','press','carry','eat'}   # continuous work loops: not raises, exem
 # head, torso lean and arm on one plan. Legacy keyframed moves stay only where a prop card is in the hand (346 contact), for lip-synced
 # characters and for hand-placed contacts (S08 map reach).
 CMAP={'point':'point_out_tilt','reach':'lean_reach','wave':'wave_hello','throw':'toss','flick':'toss','stamp':'swing_down','fist_pump':'victory_up',
-      'head_grab':'panic_clutch','clutch':'panic_clutch','shrug':'dip_talk','present':'tilt_talk','offer':'tilt_talk','drop':'dip_talk','wag':'akimbo_scold'}
+      'head_grab':'panic_clutch','clutch':'panic_clutch','shrug':'look_back_shrug','shrugtalk':'dip_talk','think':'think_chin','doubletake':'double_take','clap':'clap','recoil':'startle_recoil','huff':'cross_arms_huff','present':'tilt_talk','offer':'tilt_talk','drop':'dip_talk','wag':'akimbo_scold'}
 COMBOLOG=[]
 def _active_face(ch,f):
     k=None
@@ -82,6 +82,7 @@ def act(ch,name,f,sx=1):
         except KeyError as e:
             print('COMBO_SKIP',ch['inst'],cm,f,e)
     if cm: print('COMBO_NO',ch['inst'],name,f,'combos' if not ci.get('combos') else '', 'talk' if any(k.startswith('talk') for _,k in ch['faces']) else '', [_card_at(ch,s_,f) for s_ in (-1,1)], ch.get('nocombo'))
+    name={'shrugtalk':'shrug','think':'shrug','doubletake':'head_grab','clap':'present','recoil':'clutch','huff':'head_grab'}.get(name,name)   # dc16: legacy arms when a new combo cannot run
     if name in BOTH:
         for side in (-1,1):
             for d,a_ in BOTH[name]: arm(ch,side,f+d,a_)
@@ -259,7 +260,7 @@ room('P',PX,7,6,3.4,'wp_office','floor_office')
 P_DAY=shared('P_day',['S01','S07','S08','S10']); P_NIGHT=shared('P_night',['S13','S14','S15'])
 window('P_win',(PX+1.9,2.98,1.85),1.3,1.5,'win_phil',coll=P_DAY); window('P_winN',(PX+1.9,2.98,1.85),1.3,1.5,'win_phil_night',coll=P_NIGHT)
 shelfunit('P_shelf',(PX-2.4,3.0,1.3),1.6,2.6)
-PG_AT=json.load(open('/root/dc/bridge15/pg_at.json')) if os.path.exists('/root/dc/bridge15/pg_at.json') else (PX-0.25,1.55)
+PG_AT=json.load(open('/root/dc/bridge16/pg_at.json')) if os.path.exists('/root/dc/bridge16/pg_at.json') else (PX-0.25,1.55)
 PMAP=wallprop('P_map',(PX-0.35,3.0,1.62),1.6,1.0,'map_land',frame=(120,80,50))   # dc14 (346): hung 0.3 m lower so the editor can reach it in S08
 desk('P_desk',(PX,0.9),1.5,0.7,0.62,DESKM)
 inkwell('P_ink',(PX+0.32,0.78,0.62)); oillamp('P_lamp',(PX+0.58,1.05,0.62),energy=30)
@@ -479,14 +480,14 @@ path(s,[(0,(PX+0.95,-1.3,1.5),(PX,1.5,1.0)),(70,(PX+0.55,-0.55,1.42),(PX,1.5,1.0
 s='S02'; r=S(s)
 pA=char_on('S02_pres','presA',s,(OX+0.35,1.6,0),r,'meh',arms=('arm',[(64,'arm_letter'),(136,'arm')]))
 faces(pA,[(64,'skeptical'),(96,'side_eye'),(118,'smug'),(140,'blink'),(150,'deadpan')])
-arm(pA,1,64,-30); act(pA,'throw',96); act(pA,'shrug',122)
+arm(pA,1,64,-30); act(pA,'throw',96); act(pA,'shrugtalk',122)
 bob(pA,[100,119,140])
 path(s,[(64,(OX+0.2,-1.1,1.25),(OX+0.75,1.0,0.75)),(162,(OX+1.35,-1.0,1.3),(OX+0.8,1.0,0.8))])
 # ---- S03 (156-302): the states board; every state its own day (truck along the board) ----
 s='S03'; r=S(s)
 cl3=char_on('S03_clerk','clerk',s,(WX-1.45,1.95,0),r,'neutral',arms=('arm','arm'))
 faces(cl3,[(156,'neutral'),(190,'skeptical'),(230,'grin'),(262,'shock'),(286,'annoyed')])
-act(cl3,'point',190,-1); act(cl3,'present',236,-1); act(cl3,'shrug',280)   # dc14 (354): named actions; outward = negative on both sides
+act(cl3,'point',190,-1); act(cl3,'present',236,-1); act(cl3,'think',280)   # dc14 (354): named actions; outward = negative on both sides
 bob(cl3,[214,264,293])
 path(s,[(156,(WX-0.7,-0.6,1.75),(WX-1.2,3.0,1.75)),(230,(WX-1.3,-0.5,1.75),(WX-1.6,3.0,1.75)),(302,(WX-1.9,-0.45,1.7),(WX-1.9,3.0,1.72))])
 # ---- S04 (296-410): mail piles up; the mailman dumps a sack; the clerk groans (crane up / pull out) ----
@@ -498,7 +499,7 @@ faces(mm,[(296,'happy'),(326,'open_smile'),(356,'proud'),(380,'whistle')])
 sk4=sack('S04_sack',(0,0,0),coll=C(s),s=0.8); kloc(sk4,296,(WX-3.0,0.45,0.55)); kloc(sk4,318,(WX-1.8,1.3,0.55)); fall(sk4,322,8,(WX-1.7,1.35,0.6),(WX-1.6,1.4,0.0)); onone(sk4)
 fx('S04_dust','fx_dust',(WX-1.6,1.3,0.25),330,14,0.8,C(s),grow=1.8,rise=0.2)
 cl4=char_on('S04_clerk','clerk',s,(WX-0.5,1.65,0),r,'neutral',arms=('arm','arm'))
-faces(cl4,[(296,'neutral'),(330,'nervous'),(360,'panic'),(380,'annoyed'),(400,'groan')]); bob(cl4,[362,402]); act(cl4,'head_grab',384)
+faces(cl4,[(296,'neutral'),(330,'nervous'),(360,'panic'),(380,'annoyed'),(400,'groan')]); bob(cl4,[362,402]); act(cl4,'doubletake',384)
 path(s,[(296,(WX-1.7,-1.5,1.45),(WX-1.35,1.4,0.85)),(350,(WX-1.3,-1.9,1.7),(WX-1.05,1.5,0.95)),(410,(WX-0.15,-1.75,1.85),(WX+0.05,1.6,1.0))])   # dc15 (shots verifier: clerk cut at the edge 315-340): framed between the two
 # ---- S05 (411-500): the clerk, close: "Oh no, it's the turkey lady again." (slow push; lips on the quoted line only) ----
 s='S05'; r=S(s)
@@ -511,7 +512,7 @@ path(s,[(411,(WX+0.75,-0.75,1.5),(WX+0.4,1.65,1.12)),(500,(WX+0.62,-0.45,1.48),(
 s='S06'; r=S(s)
 ed6=char_on('S06_ed','editor',s,(RX-1.15,1.25,0),r,'proud',arms=('arm','arm'))
 faces(ed6,[(494,'proud'),(523,'side_eye'),(546,'smug'),(580,'grin'),(605,'proud')])
-arm(ed6,1,494,REST); act(ed6,'present',536); act(ed6,'fist_pump',584)
+arm(ed6,1,494,REST); act(ed6,'clap',536); act(ed6,'fist_pump',584)
 bob(ed6,[523,560,601])
 pr6=char_on('S06_printer','printer',s,(RX+2.2,2.6,0),r,'happy',walker=True)
 walk(pr6,494,600,(RX+2.2,2.6,0),(RX-1.4,2.6,0),step=5); work(pr6,'carry',[(494,-35)]); drift_faces(pr6,494,625,['happy','proud','grin','whistle'],61)
@@ -556,7 +557,7 @@ def pres(kind,i,a,b,fin,fout,ftoss,stay=False,move='throw'):
 P1=pres('presA',0,972,1062,972,1046,1040)
 P2=pres('presB',1,1044,1094,1044,1080,1068,move='drop')
 P3=pres('presC',2,1078,1128,1078,1114,1104,move='flick')
-P4=pres('presD',3,1112,1240,1112,0,1140,stay=True,move='wave'); walk(P4,1150,1160,(OX,1.68,0),(OX+0.45,1.7,0),step=3); act(P4,'head_grab',1198); faces(P4,[(1150,'meh'),(1170,'worried'),(1196,'shock'),(1232,'stunned')])
+P4=pres('presD',3,1112,1240,1112,0,1140,stay=True,move='wave'); act(P4,'huff',1154); walk(P4,1190,1200,(OX,1.68,0),(OX+0.45,1.7,0),step=3);   # dc16: huff on camera right after the toss (at 1198 the camera was on the map) faces(P4,[(1150,'meh'),(1170,'worried'),(1196,'shock'),(1232,'stunned')])
 path(s,[(972,(OX+0.35,-1.0,1.48),(OX+0.15,1.6,1.05)),(1040,(OX+0.6,-1.05,1.45),(OX+0.35,1.4,0.95)),(1070,(OX+0.2,-1.1,1.5),(OX+0.1,1.6,1.05)),
         (1104,(OX+0.55,-1.0,1.45),(OX+0.35,1.4,0.95)),(1140,(OX+0.25,-1.0,1.48),(OX+0.3,1.4,1.0)),(1160,(OX-0.1,-0.9,1.6),(OX-0.4,2.5,1.55)),
         (1190,(OX-0.75,-0.55,1.75),(OX-1.5,3.0,2.0)),(1208,(OX-0.75,-0.6,1.75),(OX-1.45,3.0,2.0)),(1236,(OX+0.9,-0.3,1.75),(OX+2.2,3.0,1.95)),(1240,(OX+0.95,-0.25,1.75),(OX+2.22,3.0,1.95))])
@@ -583,7 +584,7 @@ path(s,[(1439,(PX+0.85,1.6,1.62),(PX+0.85,3.0,1.6)),(1490,(PX+0.82,1.85,1.61),(P
 s='S16'; r=S(s)
 mm16=char_on('S16_mail','mailman',s,(SX+0.6,8.0,0),r,'neutral',arms=('arm','arm_sack'),walker=True)
 walk(mm16,1484,1598,(SX+0.6,9.0,0),(SX+0.4,1.6,0),step=4); work(mm16,'carry',[(1484,-30)],-1); drift_faces(mm16,1484,1598,['neutral','worried','look_up'],160,(18,30)); faces(mm16,[(1552,'nervous'),(1584,'grit')])
-tw=char_on('S16_town','townW',s,(SX-2.6,4.0,0.12),r,'worry'); drift_faces(tw,1484,1598,['worried','look_up','neutral','smile'],161); bob(tw,[1530,1570]); act(tw,'clutch',1526)
+tw=char_on('S16_town','townW',s,(SX-2.6,4.0,0.12),r,'worry'); drift_faces(tw,1484,1598,['worried','look_up','neutral','smile'],161); bob(tw,[1530,1570]); act(tw,'recoil',1526)
 path(s,[(1484,(SX+0.3,-2.6,3.4),(SX+0.2,10,2.0)),(1540,(SX+0.4,-2.9,2.3),(SX+0.4,8,1.4)),(1598,(SX+0.5,-3.4,1.5),(SX+0.4,5,1.2))])
 # ---- S17 (1592-1644): the letter to the fifth president (insert, push) ----
 s='S17'; r=S(s)
@@ -594,7 +595,7 @@ p5=char_on('S18_pres','presE',s,(OX,1.25,-L.FOOT_LIFT),r,'neutral',arms=('arm',[
 faces(p5,[(1638,'neutral'),(1654,'look_down'),(1670,'proud'),(1682,'open_smile'),(1700,'grin'),(1718,'proud')])
 arm(p5,1,1638,-50); arm(p5,1,1664,-50); act(p5,'stamp',1670); act(p5,'present',1698)
 bob(p5,[1682,1718])
-SHX_=json.load(open('/root/dc/bridge15/hand_at.json')) if os.path.exists('/root/dc/bridge15/hand_at.json') else {}
+SHX_=json.load(open('/root/dc/bridge16/hand_at.json')) if os.path.exists('/root/dc/bridge16/hand_at.json') else {}
 for nm_,key_,c_ in (('S01','write',C('S01')),('S10','write',C('S10')),('S13','write',C('S13')),('S18','stamp',C('S18'))):   # dc14 (346): the sheet sits under the mitten
     if nm_ in SHX_: x_,y_=SHX_[nm_]; paper(f'{nm_}_wsheet',(x_,y_,0.645 if nm_=='S18' else 0.625),0.24,0.32,'letter_hero',0.15,coll=c_)
 path(s,[(1638,(OX-0.7,-1.0,1.42),(OX-0.1,1.3,0.95)),(1732,(OX+0.35,-1.05,1.42),(OX+0.15,1.3,0.95))])
@@ -663,12 +664,12 @@ for a in ALL: turnpass(a)
 for a in ALL: finish(a)
 if os.environ.get('RIGCHECK','1')=='1':
     _rc=L.rigcheck(range(0,END+1,2)); print('RIGCHECK_FAULTS',_rc,flush=True)   # dc15 rule 354b: blocking before any render
-json.dump(dict(acts=ACTLOG,turns=TURNLOG,combos=COMBOLOG),open('/root/dc/bridge15/motion.json','w'),indent=0)   # dc14: armvariety.py / turn check input
-json.dump([dict(inst=a['inst'],kind=a['kind'],shot=a['shot'],rng=list(a['rng']),faces=sorted([(int(f),k) for f,k in a['faces']]),avail=sorted(a['F'])) for a in ALL],open('/root/dc/bridge15/faces.json','w'))   # facecheck.py input
+json.dump(dict(acts=ACTLOG,turns=TURNLOG,combos=COMBOLOG),open('/root/dc/bridge16/motion.json','w'),indent=0)   # dc14: armvariety.py / turn check input
+json.dump([dict(inst=a['inst'],kind=a['kind'],shot=a['shot'],rng=list(a['rng']),faces=sorted([(int(f),k) for f,k in a['faces']]),avail=sorted(a['F'])) for a in ALL],open('/root/dc/bridge16/faces.json','w'))   # facecheck.py input
 print('hulls',L.ink())
 for o_ in bpy.data.objects:
     if o_.type=='LIGHT' and o_.data.type!='SUN': o_.visible_camera=False
 L.render_setup(100,8)
 sc.cycles.samples=4; sc.cycles.transparent_max_bounces=8; sc.cycles.diffuse_bounces=1; sc.cycles.max_bounces=3
-os.makedirs('/root/dc/blend15',exist_ok=True)
-bpy.ops.wm.save_as_mainfile(filepath='/root/dc/blend15/dc.blend'); print('SCENE_OK all')
+os.makedirs('/root/dc/blend16',exist_ok=True)
+bpy.ops.wm.save_as_mainfile(filepath='/root/dc/blend16/dc.blend'); print('SCENE_OK all')

@@ -39,7 +39,7 @@
 "shot": "S03",
 "inst": "S03_clerk",
 "kind": "clerk",
-"act": "dip_talk",
+"act": "think_chin",
 "f": 280
 },
 {
@@ -53,7 +53,7 @@
 "shot": "S04",
 "inst": "S04_clerk",
 "kind": "clerk",
-"act": "panic_clutch",
+"act": "double_take",
 "f": 384
 },
 {
@@ -74,7 +74,7 @@
 "shot": "S06",
 "inst": "S06_ed",
 "kind": "editor",
-"act": "tilt_talk",
+"act": "clap",
 "f": 536
 },
 {
@@ -158,8 +158,8 @@
 "shot": "S11",
 "inst": "S11_presD",
 "kind": "presD",
-"act": "panic_clutch",
-"f": 1198
+"act": "cross_arms_huff",
+"f": 1154
 },
 {
 "shot": "S12",
@@ -200,7 +200,7 @@
 "shot": "S16",
 "inst": "S16_town",
 "kind": "townW",
-"act": "panic_clutch",
+"act": "startle_recoil",
 "f": 1526
 },
 {
@@ -228,7 +228,7 @@
 "shot": "S19",
 "inst": "S19_greyA",
 "kind": "greyA",
-"act": "dip_talk",
+"act": "look_back_shrug",
 "f": 1796
 },
 {
@@ -613,12 +613,12 @@
 "inst": "S19_greyA",
 "kind": "greyA",
 "frames": [
-1857,
-1859,
-1881,
-1883
+1837,
+1839,
+1861,
+1863
 ],
-"face": "content"
+"face": "laugh"
 },
 {
 "shot": "S19",
@@ -782,25 +782,25 @@
 "shot": "S03",
 "inst": "S03_clerk",
 "kind": "clerk",
-"combo": "dip_talk",
+"combo": "think_chin",
 "f": 280,
-"last": 295
+"last": 324
 },
 {
 "shot": "S04",
 "inst": "S04_clerk",
 "kind": "clerk",
-"combo": "panic_clutch",
+"combo": "double_take",
 "f": 384,
-"last": 395
+"last": 441
 },
 {
 "shot": "S06",
 "inst": "S06_ed",
 "kind": "editor",
-"combo": "tilt_talk",
+"combo": "clap",
 "f": 536,
-"last": 552
+"last": 566
 },
 {
 "shot": "S06",
@@ -838,9 +838,9 @@
 "shot": "S11",
 "inst": "S11_presD",
 "kind": "presD",
-"combo": "panic_clutch",
-"f": 1198,
-"last": 1209
+"combo": "cross_arms_huff",
+"f": 1154,
+"last": 1196
 },
 {
 "shot": "S13",
@@ -854,9 +854,9 @@
 "shot": "S16",
 "inst": "S16_town",
 "kind": "townW",
-"combo": "panic_clutch",
+"combo": "startle_recoil",
 "f": 1526,
-"last": 1537
+"last": 1554
 },
 {
 "shot": "S18",
@@ -870,9 +870,9 @@
 "shot": "S19",
 "inst": "S19_greyA",
 "kind": "greyA",
-"combo": "dip_talk",
+"combo": "look_back_shrug",
 "f": 1796,
-"last": 1811
+"last": 1833
 },
 {
 "shot": "S19",

@@ -985,11 +985,13 @@
    ]
   },
   "look_back_shrug": {
-   "desc": "look back over the shoulder, then shrug: head steps round (front, 3/4, strong 3/4) with the torso twisting, snaps to a 3/4 back view looking behind and holds, comes back round to front, then shrugs with a head tilt",
+   "desc": "look back over the shoulder, then shrug: the head steps round (front, 3/4, strong 3/4) and the WHOLE BODY follows: torso card to 3/4 on f2, feet turn on f3, torso to 3/4 back with the 3/4 back head on f5; holds looking behind; comes back round (torso 3/4, then front with feet planted forward) and shrugs with a head tilt",
    "evidence": [
     "#22 f466-473 (front, 3/4, back with the torso following)",
     "#03 f80 (whole drawing flips toward 3/4 back in 1 f)",
-    "owner Nov 23: must really turn to look back"
+    "owner Nov 23: must really turn to look back",
+    "#04 f349-350 (back views: whole body seen from behind, feet included)",
+    "owner Nov 23 14:46Z review 2: body turns too, hips and/or feet"
    ],
    "events": [
     {
@@ -1022,9 +1024,24 @@
      ]
     },
     {
+     "at": 2,
+     "ch": "top",
+     "v": "-q"
+    },
+    {
+     "at": 3,
+     "ch": "legs",
+     "v": "-turn"
+    },
+    {
      "at": 5,
      "ch": "face",
      "v": "back"
+    },
+    {
+     "at": 5,
+     "ch": "top",
+     "v": "-qb"
     },
     {
      "at": 6,
@@ -1061,7 +1078,22 @@
      ]
     },
     {
-     "at": 19,
+     "at": 16,
+     "ch": "top",
+     "v": "-q"
+    },
+    {
+     "at": 18,
+     "ch": "top",
+     "v": "front"
+    },
+    {
+     "at": 18,
+     "ch": "legs",
+     "v": "body"
+    },
+    {
+     "at": 20,
      "ch": "arm",
      "v": [
       "left",
@@ -1069,7 +1101,7 @@
      ]
     },
     {
-     "at": 19,
+     "at": 20,
      "ch": "arm",
      "v": [
       "right",
@@ -1077,7 +1109,7 @@
      ]
     },
     {
-     "at": 19,
+     "at": 20,
      "ch": "htilt",
      "v": [
       7,
@@ -1085,7 +1117,7 @@
      ]
     },
     {
-     "at": 19,
+     "at": 20,
      "ch": "squash",
      "v": [
       -0.02,
@@ -1093,7 +1125,7 @@
      ]
     },
     {
-     "at": 21,
+     "at": 22,
      "ch": "squash",
      "v": [
       0,
@@ -1101,7 +1133,7 @@
      ]
     },
     {
-     "at": 36,
+     "at": 37,
      "ch": "arm",
      "v": [
       "left",
@@ -1109,7 +1141,7 @@
      ]
     },
     {
-     "at": 36,
+     "at": 37,
      "ch": "arm",
      "v": [
       "right",
@@ -1117,7 +1149,7 @@
      ]
     },
     {
-     "at": 36,
+     "at": 37,
      "ch": "htilt",
      "v": [
       0,
@@ -1125,9 +1157,9 @@
      ]
     }
    ],
-   "status": "INFERRED",
-   "round": 7,
-   "legs": "planted",
+   "status": "APPROVED",
+   "round": 8,
+   "legs": "turned then planted",
    "previous": {
     "events": [
      {
@@ -1216,7 +1248,145 @@
      }
     ],
     "desc": "look back over the shoulder, then shrug: turn in steps, both arms shrug 2 f after the turn lands, head tilts, lean 4 deg"
-   }
+   },
+   "previous_r7": {
+    "desc": "look back over the shoulder, then shrug: head steps round (front, 3/4, strong 3/4) with the torso twisting, snaps to a 3/4 back view looking behind and holds, comes back round to front, then shrugs with a head tilt",
+    "events": [
+     {
+      "at": 0,
+      "ch": "face",
+      "v": "$face"
+     },
+     {
+      "at": 0,
+      "ch": "turn",
+      "v": [
+       0,
+       -3
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "lean",
+      "v": [
+       -5,
+       3
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "htilt",
+      "v": [
+       -4,
+       2
+      ]
+     },
+     {
+      "at": 5,
+      "ch": "face",
+      "v": "back"
+     },
+     {
+      "at": 6,
+      "ch": "look",
+      "v": -2
+     },
+     {
+      "at": 16,
+      "ch": "face",
+      "v": "$face2"
+     },
+     {
+      "at": 16,
+      "ch": "turn",
+      "v": [
+       -2,
+       0
+      ]
+     },
+     {
+      "at": 16,
+      "ch": "lean",
+      "v": [
+       0,
+       2
+      ]
+     },
+     {
+      "at": 16,
+      "ch": "htilt",
+      "v": [
+       0,
+       1
+      ]
+     },
+     {
+      "at": 19,
+      "ch": "arm",
+      "v": [
+       "left",
+       "shrug"
+      ]
+     },
+     {
+      "at": 19,
+      "ch": "arm",
+      "v": [
+       "right",
+       "shrug"
+      ]
+     },
+     {
+      "at": 19,
+      "ch": "htilt",
+      "v": [
+       7,
+       1
+      ]
+     },
+     {
+      "at": 19,
+      "ch": "squash",
+      "v": [
+       -0.02,
+       1
+      ]
+     },
+     {
+      "at": 21,
+      "ch": "squash",
+      "v": [
+       0,
+       1
+      ]
+     },
+     {
+      "at": 36,
+      "ch": "arm",
+      "v": [
+       "left",
+       "hang"
+      ]
+     },
+     {
+      "at": 36,
+      "ch": "arm",
+      "v": [
+       "right",
+       "hang"
+      ]
+     },
+     {
+      "at": 36,
+      "ch": "htilt",
+      "v": [
+       0,
+       2
+      ]
+     }
+    ]
+   },
+   "approved": "owner Nov 23 2026 10:49 AM CT (round 8 versions)"
   },
   "startle_recoil": {
    "desc": "startle: the face changes every few frames (startle, shock, nervous), the body jumps up and stretches with a lean back and both arms flung, jolt ticks round the head, lands in a squash, a sweat drop, a nervous tremble, then a hand to the chest",
@@ -1515,11 +1685,12 @@
    "approved": "owner Nov 23 2026 8:46 AM CT (review of round 7)"
   },
   "double_take": {
-   "desc": "double take, slowed so it reads: glance at it and back (held), a blank front-on beat with a blink, a 2-frame dip, then the snap to a strong turn with a shock face, a little jump, jolt ticks and a sweat drop",
+   "desc": "double take, longer so it reads: a strong glance at it (strong 3/4, held 13 frames) and back, a long blank front-on beat with a blink, a 2-frame dip, then the snap: strong turn with a shock face, torso and feet swing toward it, a little jump, jolt ticks, a sweat drop; shocked look held",
    "evidence": [
     "#24 f1034-1036 snap with one in-between",
     "#14 f570-576 impact ticks",
-    "owner Nov 23: too quick, show the double take"
+    "owner Nov 23: too quick, show the double take",
+    "owner Nov 23 14:46Z review 2: a little longer; the double take part was not apparent"
    ],
    "events": [
     {
@@ -1530,25 +1701,25 @@
     {
      "at": 0,
      "ch": "look",
-     "v": 1
+     "v": 2
     },
     {
-     "at": 9,
+     "at": 13,
      "ch": "look",
      "v": 0
     },
     {
-     "at": 16,
+     "at": 20,
      "ch": "face",
      "v": "blink"
     },
     {
-     "at": 18,
+     "at": 22,
      "ch": "face",
      "v": "$face"
     },
     {
-     "at": 22,
+     "at": 28,
      "ch": "hdy",
      "v": [
       0.012,
@@ -1556,7 +1727,7 @@
      ]
     },
     {
-     "at": 22,
+     "at": 28,
      "ch": "squash",
      "v": [
       0.03,
@@ -1564,22 +1735,22 @@
      ]
     },
     {
-     "at": 24,
+     "at": 30,
      "ch": "face",
      "v": "$face2"
     },
     {
-     "at": 24,
+     "at": 30,
      "ch": "look",
      "v": 3
     },
     {
-     "at": 24,
+     "at": 30,
      "ch": "hdy",
      "v": 0.0
     },
     {
-     "at": 24,
+     "at": 30,
      "ch": "squash",
      "v": [
       -0.05,
@@ -1587,7 +1758,7 @@
      ]
     },
     {
-     "at": 24,
+     "at": 30,
      "ch": "hop",
      "v": [
       0.04,
@@ -1595,7 +1766,7 @@
      ]
     },
     {
-     "at": 24,
+     "at": 30,
      "ch": "lean",
      "v": [
       -8,
@@ -1603,7 +1774,7 @@
      ]
     },
     {
-     "at": 24,
+     "at": 30,
      "ch": "arm",
      "v": [
       "left",
@@ -1614,7 +1785,7 @@
      ]
     },
     {
-     "at": 24,
+     "at": 30,
      "ch": "arm",
      "v": [
       "right",
@@ -1625,7 +1796,7 @@
      ]
     },
     {
-     "at": 24,
+     "at": 30,
      "ch": "fx",
      "v": [
       "startle",
@@ -1637,7 +1808,17 @@
      ]
     },
     {
-     "at": 26,
+     "at": 30,
+     "ch": "top",
+     "v": "q"
+    },
+    {
+     "at": 31,
+     "ch": "legs",
+     "v": "turn"
+    },
+    {
+     "at": 32,
      "ch": "hop",
      "v": [
       0,
@@ -1645,7 +1826,7 @@
      ]
     },
     {
-     "at": 26,
+     "at": 32,
      "ch": "squash",
      "v": [
       0.03,
@@ -1653,7 +1834,7 @@
      ]
     },
     {
-     "at": 28,
+     "at": 34,
      "ch": "squash",
      "v": [
       0,
@@ -1661,7 +1842,7 @@
      ]
     },
     {
-     "at": 29,
+     "at": 35,
      "ch": "fx",
      "v": [
       "sweat",
@@ -1673,7 +1854,7 @@
      ]
     },
     {
-     "at": 44,
+     "at": 56,
      "ch": "arm",
      "v": [
       "left",
@@ -1681,7 +1862,7 @@
      ]
     },
     {
-     "at": 44,
+     "at": 56,
      "ch": "arm",
      "v": [
       "right",
@@ -1689,17 +1870,27 @@
      ]
     },
     {
-     "at": 44,
+     "at": 56,
      "ch": "lean",
      "v": [
       0,
       3
      ]
+    },
+    {
+     "at": 56,
+     "ch": "top",
+     "v": "front"
+    },
+    {
+     "at": 57,
+     "ch": "legs",
+     "v": "body"
     }
    ],
-   "status": "INFERRED",
-   "round": 7,
-   "legs": "planted",
+   "status": "APPROVED",
+   "round": 8,
+   "legs": "planted, turn on the snap",
    "previous": {
     "events": [
      {
@@ -1797,7 +1988,187 @@
      }
     ],
     "desc": "double take: glance at it (1 level), back to front, hold 6 f, then snap to a strong turn with a shock face, both arms up, head drop"
-   }
+   },
+   "previous_r7": {
+    "desc": "double take, slowed so it reads: glance at it and back (held), a blank front-on beat with a blink, a 2-frame dip, then the snap to a strong turn with a shock face, a little jump, jolt ticks and a sweat drop",
+    "events": [
+     {
+      "at": 0,
+      "ch": "face",
+      "v": "$face"
+     },
+     {
+      "at": 0,
+      "ch": "look",
+      "v": 1
+     },
+     {
+      "at": 9,
+      "ch": "look",
+      "v": 0
+     },
+     {
+      "at": 16,
+      "ch": "face",
+      "v": "blink"
+     },
+     {
+      "at": 18,
+      "ch": "face",
+      "v": "$face"
+     },
+     {
+      "at": 22,
+      "ch": "hdy",
+      "v": [
+       0.012,
+       2
+      ]
+     },
+     {
+      "at": 22,
+      "ch": "squash",
+      "v": [
+       0.03,
+       2
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "face",
+      "v": "$face2"
+     },
+     {
+      "at": 24,
+      "ch": "look",
+      "v": 3
+     },
+     {
+      "at": 24,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 24,
+      "ch": "squash",
+      "v": [
+       -0.05,
+       1
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "hop",
+      "v": [
+       0.04,
+       1
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "lean",
+      "v": [
+       -8,
+       1
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "arm",
+      "v": [
+       "left",
+       "up",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "arm",
+      "v": [
+       "right",
+       "up",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "fx",
+      "v": [
+       "startle",
+       "head",
+       0,
+       0.2,
+       0.62,
+       6
+      ]
+     },
+     {
+      "at": 26,
+      "ch": "hop",
+      "v": [
+       0,
+       1
+      ]
+     },
+     {
+      "at": 26,
+      "ch": "squash",
+      "v": [
+       0.03,
+       1
+      ]
+     },
+     {
+      "at": 28,
+      "ch": "squash",
+      "v": [
+       0,
+       2
+      ]
+     },
+     {
+      "at": 29,
+      "ch": "fx",
+      "v": [
+       "sweat",
+       "head",
+       -0.2,
+       0.33,
+       0.16,
+       14
+      ]
+     },
+     {
+      "at": 44,
+      "ch": "arm",
+      "v": [
+       "left",
+       "hang"
+      ]
+     },
+     {
+      "at": 44,
+      "ch": "arm",
+      "v": [
+       "right",
+       "hang"
+      ]
+     },
+     {
+      "at": 44,
+      "ch": "lean",
+      "v": [
+       0,
+       3
+      ]
+     }
+    ]
+   },
+   "approved": "owner Nov 23 2026 10:49 AM CT (round 8 versions)"
   },
   "wave_hello": {
    "status": "APPROVED",
@@ -1914,12 +2285,13 @@
    "approved": "owner Nov 23 2026 (review of the inferred moves: not flagged, \"I have really loved everything else\")"
   },
   "clap": {
-   "desc": "clap: elbows out to the sides, mittens meet just under the chin every 6 frames, a burst of short dashes at each clap, the head nods on the claps",
+   "desc": "clap: elbows out to the sides, mittens TOUCH level with the chin (drawn in front of the face) every 6 frames, short dashes burst out beside the character, starting outside the body outline, upward and outward only; the head nods on the claps",
    "evidence": [
     "#08 f1116 (hands come together in front, one measurer)",
     "#12 f37-38 (burst lines)",
     "#14 f570-576 (impact ticks)",
-    "owner Nov 23 (elbows out, clap in front of the chin, sound dashes)"
+    "owner Nov 23 (elbows out, clap in front of the chin, sound dashes)",
+    "owner Nov 23 14:46Z review 2: hands higher, touching; dashes off the body, a little to the side"
    ],
    "events": [
     {
@@ -1927,7 +2299,7 @@
      "ch": "arm",
      "v": [
       "left",
-      "clap_hi_open"
+      "clap_up_open"
      ]
     },
     {
@@ -1935,7 +2307,7 @@
      "ch": "arm",
      "v": [
       "right",
-      "clap_hi_open"
+      "clap_up_open"
      ]
     },
     {
@@ -1948,7 +2320,7 @@
      "ch": "arm",
      "v": [
       "left",
-      "clap_hi",
+      "clap_up",
       {
        "inb": false
       }
@@ -1959,7 +2331,7 @@
      "ch": "arm",
      "v": [
       "right",
-      "clap_hi",
+      "clap_up",
       {
        "inb": false
       }
@@ -1974,10 +2346,10 @@
      "at": 4,
      "ch": "fx",
      "v": [
-      "clap",
+      "clap2",
       "torso",
       0,
-      0.32,
+      0.38,
       0.7,
       2
      ]
@@ -1987,7 +2359,7 @@
      "ch": "arm",
      "v": [
       "left",
-      "clap_hi_open",
+      "clap_up_open",
       {
        "inb": false
       }
@@ -1998,7 +2370,7 @@
      "ch": "arm",
      "v": [
       "right",
-      "clap_hi_open",
+      "clap_up_open",
       {
        "inb": false
       }
@@ -2014,7 +2386,7 @@
      "ch": "arm",
      "v": [
       "left",
-      "clap_hi",
+      "clap_up",
       {
        "inb": false
       }
@@ -2025,7 +2397,7 @@
      "ch": "arm",
      "v": [
       "right",
-      "clap_hi",
+      "clap_up",
       {
        "inb": false
       }
@@ -2040,10 +2412,10 @@
      "at": 10,
      "ch": "fx",
      "v": [
-      "clap",
+      "clap2",
       "torso",
       0,
-      0.32,
+      0.38,
       0.7,
       2
      ]
@@ -2053,7 +2425,7 @@
      "ch": "arm",
      "v": [
       "left",
-      "clap_hi_open",
+      "clap_up_open",
       {
        "inb": false
       }
@@ -2064,7 +2436,7 @@
      "ch": "arm",
      "v": [
       "right",
-      "clap_hi_open",
+      "clap_up_open",
       {
        "inb": false
       }
@@ -2080,7 +2452,7 @@
      "ch": "arm",
      "v": [
       "left",
-      "clap_hi",
+      "clap_up",
       {
        "inb": false
       }
@@ -2091,7 +2463,7 @@
      "ch": "arm",
      "v": [
       "right",
-      "clap_hi",
+      "clap_up",
       {
        "inb": false
       }
@@ -2106,10 +2478,10 @@
      "at": 16,
      "ch": "fx",
      "v": [
-      "clap",
+      "clap2",
       "torso",
       0,
-      0.32,
+      0.38,
       0.7,
       2
      ]
@@ -2119,7 +2491,7 @@
      "ch": "arm",
      "v": [
       "left",
-      "clap_hi_open",
+      "clap_up_open",
       {
        "inb": false
       }
@@ -2130,7 +2502,7 @@
      "ch": "arm",
      "v": [
       "right",
-      "clap_hi_open",
+      "clap_up_open",
       {
        "inb": false
       }
@@ -2146,7 +2518,7 @@
      "ch": "arm",
      "v": [
       "left",
-      "clap_hi",
+      "clap_up",
       {
        "inb": false
       }
@@ -2157,7 +2529,7 @@
      "ch": "arm",
      "v": [
       "right",
-      "clap_hi",
+      "clap_up",
       {
        "inb": false
       }
@@ -2172,10 +2544,10 @@
      "at": 22,
      "ch": "fx",
      "v": [
-      "clap",
+      "clap2",
       "torso",
       0,
-      0.32,
+      0.38,
       0.7,
       2
      ]
@@ -2185,7 +2557,7 @@
      "ch": "arm",
      "v": [
       "left",
-      "clap_hi_open",
+      "clap_up_open",
       {
        "inb": false
       }
@@ -2196,7 +2568,7 @@
      "ch": "arm",
      "v": [
       "right",
-      "clap_hi_open",
+      "clap_up_open",
       {
        "inb": false
       }
@@ -2224,8 +2596,8 @@
      ]
     }
    ],
-   "status": "INFERRED",
-   "round": 7,
+   "status": "APPROVED",
+   "round": 8,
    "legs": "planted",
    "previous": {
     "events": [
@@ -2361,7 +2733,314 @@
      }
     ],
     "desc": "clap: both forearms meet in front every 3 f, head nods with the claps"
-   }
+   },
+   "previous_r7": {
+    "desc": "clap: elbows out to the sides, mittens meet just under the chin every 6 frames, a burst of short dashes at each clap, the head nods on the claps",
+    "events": [
+     {
+      "at": 0,
+      "ch": "arm",
+      "v": [
+       "left",
+       "clap_hi_open"
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "arm",
+      "v": [
+       "right",
+       "clap_hi_open"
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "face",
+      "v": "$face"
+     },
+     {
+      "at": 4,
+      "ch": "arm",
+      "v": [
+       "left",
+       "clap_hi",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 4,
+      "ch": "arm",
+      "v": [
+       "right",
+       "clap_hi",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 4,
+      "ch": "hdy",
+      "v": 0.008
+     },
+     {
+      "at": 4,
+      "ch": "fx",
+      "v": [
+       "clap",
+       "torso",
+       0,
+       0.32,
+       0.7,
+       2
+      ]
+     },
+     {
+      "at": 6,
+      "ch": "arm",
+      "v": [
+       "left",
+       "clap_hi_open",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 6,
+      "ch": "arm",
+      "v": [
+       "right",
+       "clap_hi_open",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 6,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 10,
+      "ch": "arm",
+      "v": [
+       "left",
+       "clap_hi",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 10,
+      "ch": "arm",
+      "v": [
+       "right",
+       "clap_hi",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 10,
+      "ch": "hdy",
+      "v": 0.008
+     },
+     {
+      "at": 10,
+      "ch": "fx",
+      "v": [
+       "clap",
+       "torso",
+       0,
+       0.32,
+       0.7,
+       2
+      ]
+     },
+     {
+      "at": 12,
+      "ch": "arm",
+      "v": [
+       "left",
+       "clap_hi_open",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 12,
+      "ch": "arm",
+      "v": [
+       "right",
+       "clap_hi_open",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 12,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 16,
+      "ch": "arm",
+      "v": [
+       "left",
+       "clap_hi",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 16,
+      "ch": "arm",
+      "v": [
+       "right",
+       "clap_hi",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 16,
+      "ch": "hdy",
+      "v": 0.008
+     },
+     {
+      "at": 16,
+      "ch": "fx",
+      "v": [
+       "clap",
+       "torso",
+       0,
+       0.32,
+       0.7,
+       2
+      ]
+     },
+     {
+      "at": 18,
+      "ch": "arm",
+      "v": [
+       "left",
+       "clap_hi_open",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 18,
+      "ch": "arm",
+      "v": [
+       "right",
+       "clap_hi_open",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 18,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 22,
+      "ch": "arm",
+      "v": [
+       "left",
+       "clap_hi",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 22,
+      "ch": "arm",
+      "v": [
+       "right",
+       "clap_hi",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 22,
+      "ch": "hdy",
+      "v": 0.008
+     },
+     {
+      "at": 22,
+      "ch": "fx",
+      "v": [
+       "clap",
+       "torso",
+       0,
+       0.32,
+       0.7,
+       2
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "arm",
+      "v": [
+       "left",
+       "clap_hi_open",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "arm",
+      "v": [
+       "right",
+       "clap_hi_open",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 30,
+      "ch": "arm",
+      "v": [
+       "left",
+       "hang"
+      ]
+     },
+     {
+      "at": 30,
+      "ch": "arm",
+      "v": [
+       "right",
+       "hang"
+      ]
+     }
+    ]
+   },
+   "approved": "owner Nov 23 2026 10:49 AM CT (round 8 versions)"
   },
   "cross_arms_huff": {
    "desc": "huff: arms cross, head turns away and tips up with an annoyed face; shoulders rise on a breath in, then drop with a puff of air out of the nose (blow arcs and a cloud), a second smaller huff",
@@ -2747,11 +3426,12 @@
    "approved": "owner Nov 23 2026 (review of the inferred moves: not flagged, \"I have really loved everything else\")"
   },
   "think_chin": {
-   "desc": "think: hand to the chin, head tilts and turns a little, the hand taps the chin three times (out 4 frames, back on the chin, every 10 frames), three small thought bubbles; ends on face2 (an idea)",
+   "desc": "think: hand up on the chin and lower face (in front of the face), head tilts and turns a little, the hand taps the chin three times (out 4 frames, back on the chin, every 10 frames), three small thought bubbles; ends on face2 (an idea)",
    "evidence": [
     "#24 f1112-1116 (right forearm and hand rise to the chin)",
     "#08 f1116 (hand at the chin, one measurer)",
-    "owner Nov 23: tap the chin as if thinking, not too quick"
+    "owner Nov 23: tap the chin as if thinking, not too quick",
+    "owner Nov 23 14:46Z review 2: tap higher on the chin or face"
    ],
    "events": [
     {
@@ -2759,7 +3439,7 @@
      "ch": "arm",
      "v": [
       "near",
-      "chin"
+      "chin_hi"
      ]
     },
     {
@@ -2805,7 +3485,7 @@
      "ch": "arm",
      "v": [
       "near",
-      "chin_tap",
+      "chin_hi_tap",
       {
        "inb": false
       }
@@ -2816,7 +3496,7 @@
      "ch": "arm",
      "v": [
       "near",
-      "chin",
+      "chin_hi",
       {
        "inb": false
       }
@@ -2827,7 +3507,7 @@
      "ch": "arm",
      "v": [
       "near",
-      "chin_tap",
+      "chin_hi_tap",
       {
        "inb": false
       }
@@ -2838,7 +3518,7 @@
      "ch": "arm",
      "v": [
       "near",
-      "chin",
+      "chin_hi",
       {
        "inb": false
       }
@@ -2849,7 +3529,7 @@
      "ch": "arm",
      "v": [
       "near",
-      "chin_tap",
+      "chin_hi_tap",
       {
        "inb": false
       }
@@ -2860,7 +3540,7 @@
      "ch": "arm",
      "v": [
       "near",
-      "chin",
+      "chin_hi",
       {
        "inb": false
       }
@@ -2901,8 +3581,8 @@
      ]
     }
    ],
-   "status": "INFERRED",
-   "round": 7,
+   "status": "APPROVED",
+   "round": 8,
    "legs": "planted",
    "previous": {
     "events": [
@@ -2972,14 +3652,168 @@
      }
     ],
     "desc": "think: hand to chin, head tilts toward the hand and turns one level, body leans 3 deg; legs planted"
-   }
+   },
+   "previous_r7": {
+    "desc": "think: hand to the chin, head tilts and turns a little, the hand taps the chin three times (out 4 frames, back on the chin, every 10 frames), three small thought bubbles; ends on face2 (an idea)",
+    "events": [
+     {
+      "at": 0,
+      "ch": "arm",
+      "v": [
+       "near",
+       "chin"
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "look",
+      "v": 1
+     },
+     {
+      "at": 0,
+      "ch": "face",
+      "v": "$face"
+     },
+     {
+      "at": 0,
+      "ch": "htilt",
+      "v": [
+       6,
+       2
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "lean",
+      "v": [
+       3,
+       2
+      ]
+     },
+     {
+      "at": 8,
+      "ch": "fx",
+      "v": [
+       "think",
+       "head",
+       0.22,
+       0.38,
+       0.3,
+       34
+      ]
+     },
+     {
+      "at": 10,
+      "ch": "arm",
+      "v": [
+       "near",
+       "chin_tap",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 14,
+      "ch": "arm",
+      "v": [
+       "near",
+       "chin",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 20,
+      "ch": "arm",
+      "v": [
+       "near",
+       "chin_tap",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "arm",
+      "v": [
+       "near",
+       "chin",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 30,
+      "ch": "arm",
+      "v": [
+       "near",
+       "chin_tap",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 34,
+      "ch": "arm",
+      "v": [
+       "near",
+       "chin",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 44,
+      "ch": "face",
+      "v": "$face2"
+     },
+     {
+      "at": 44,
+      "ch": "arm",
+      "v": [
+       "near",
+       "hang"
+      ]
+     },
+     {
+      "at": 44,
+      "ch": "look",
+      "v": 0
+     },
+     {
+      "at": 44,
+      "ch": "htilt",
+      "v": [
+       0,
+       1
+      ]
+     },
+     {
+      "at": 44,
+      "ch": "lean",
+      "v": [
+       0,
+       2
+      ]
+     }
+    ]
+   },
+   "approved": "owner Nov 23 2026 10:49 AM CT (round 8 versions)"
   },
   "turn_away_back": {
-   "desc": "turn away and back: the head steps round through a side angle (front, 3/4, strong 3/4), shows a 3/4 back view, then the full back; holds; comes back the same way through the side angle to front; the torso dips with it",
+   "desc": "turn away and back: head, torso and feet go round together, one drawing step every 2 frames (front, 3/4, 3/4 back, full back with heels showing); holds; comes back the same way through the side angle to front; the torso dips with it",
    "evidence": [
     "#22 f466-473 (front, 3/4, back)",
     "#04 f349-350 and #05 f577-580 back views",
-    "owner Nov 23: show a side angle on the way round"
+    "owner Nov 23: show a side angle on the way round",
+    "#04 f349-350 (full back view, body and feet)",
+    "owner Nov 23 14:46Z review 2: body turns as well, feet and/or hips"
    ],
    "events": [
     {
@@ -3004,9 +3838,24 @@
      ]
     },
     {
+     "at": 2,
+     "ch": "top",
+     "v": "q"
+    },
+    {
+     "at": 3,
+     "ch": "legs",
+     "v": "turn"
+    },
+    {
      "at": 4,
      "ch": "face",
      "v": "back"
+    },
+    {
+     "at": 4,
+     "ch": "top",
+     "v": "qb"
     },
     {
      "at": 6,
@@ -3014,14 +3863,39 @@
      "v": 0
     },
     {
+     "at": 6,
+     "ch": "top",
+     "v": "back"
+    },
+    {
+     "at": 6,
+     "ch": "legs",
+     "v": "back"
+    },
+    {
      "at": 20,
      "ch": "look",
      "v": 2
     },
     {
+     "at": 20,
+     "ch": "top",
+     "v": "qb"
+    },
+    {
+     "at": 20,
+     "ch": "legs",
+     "v": "turn"
+    },
+    {
      "at": 22,
      "ch": "face",
      "v": "$face"
+    },
+    {
+     "at": 22,
+     "ch": "top",
+     "v": "q"
     },
     {
      "at": 24,
@@ -3038,11 +3912,21 @@
       0,
       2
      ]
+    },
+    {
+     "at": 25,
+     "ch": "top",
+     "v": "front"
+    },
+    {
+     "at": 26,
+     "ch": "legs",
+     "v": "body"
     }
    ],
-   "status": "INFERRED",
-   "round": 7,
-   "legs": "planted",
+   "status": "APPROVED",
+   "round": 8,
+   "legs": "turned with the body",
    "previous": {
     "events": [
      {
@@ -3078,7 +3962,70 @@
      }
     ],
     "desc": "turn away then back: front <-> back-of-head as a 1-frame snap (hair redrawn on the same frame), torso dips 4 deg the same frame, arms hold; back to the face 18 f later"
-   }
+   },
+   "previous_r7": {
+    "desc": "turn away and back: the head steps round through a side angle (front, 3/4, strong 3/4), shows a 3/4 back view, then the full back; holds; comes back the same way through the side angle to front; the torso dips with it",
+    "events": [
+     {
+      "at": 0,
+      "ch": "face",
+      "v": "$face"
+     },
+     {
+      "at": 0,
+      "ch": "turn",
+      "v": [
+       0,
+       2
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "lean",
+      "v": [
+       -3,
+       2
+      ]
+     },
+     {
+      "at": 4,
+      "ch": "face",
+      "v": "back"
+     },
+     {
+      "at": 6,
+      "ch": "look",
+      "v": 0
+     },
+     {
+      "at": 20,
+      "ch": "look",
+      "v": 2
+     },
+     {
+      "at": 22,
+      "ch": "face",
+      "v": "$face"
+     },
+     {
+      "at": 24,
+      "ch": "turn",
+      "v": [
+       2,
+       0
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "lean",
+      "v": [
+       0,
+       2
+      ]
+     }
+    ]
+   },
+   "approved": "owner Nov 23 2026 10:49 AM CT (round 8 versions)"
   },
   "jog": {
    "desc": "jog in place (the scene moves the character): four run drawings, 3 frames each, arms pumping opposite the legs with the elbows bent, torso leaned 10 deg, a small bob up on the air drawings and a squash on contact",
@@ -3966,6 +4913,691 @@
    "round": 7,
    "legs": "run",
    "approved": "owner Nov 23 2026 8:46 AM CT (review of round 7)"
+  },
+  "walk": {
+   "desc": "walk in place (the scene moves the character): head turns 3/4 and the torso turns 3/4 toward the walk side, four leg drawings 3 frames each (contact, passing, contact, passing; one foot always on the floor), arms swing opposite the legs, the head and body dip a little on each contact; 4 cycles, then stops and turns back to front. Loop frames 3-50 (12-frame cycle = 2 steps per 0.4 s).",
+   "evidence": [
+    "#12 f145-205 walk cycle (legs redrawn every frame, arms swing, one foot always down)",
+    "#23 f1352-1358 (lean, legs and arms swing, one measurer)",
+    "owner Nov 23 15:02Z: make a walking animation"
+   ],
+   "events": [
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 0,
+     "ch": "turn",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "lean",
+     "v": [
+      4,
+      2
+     ]
+    },
+    {
+     "at": 2,
+     "ch": "top",
+     "v": "q"
+    },
+    {
+     "at": 3,
+     "ch": "legs",
+     "v": "walk1"
+    },
+    {
+     "at": 3,
+     "ch": "arm",
+     "v": [
+      "near",
+      "walk_in",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 3,
+     "ch": "arm",
+     "v": [
+      "far",
+      "walk_out",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 3,
+     "ch": "hdy",
+     "v": 0.008
+    },
+    {
+     "at": 3,
+     "ch": "squash",
+     "v": 0.012
+    },
+    {
+     "at": 6,
+     "ch": "legs",
+     "v": "walk2"
+    },
+    {
+     "at": 6,
+     "ch": "arm",
+     "v": [
+      "near",
+      "walk_mid",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "arm",
+     "v": [
+      "far",
+      "walk_mid",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 6,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 9,
+     "ch": "legs",
+     "v": "walk3"
+    },
+    {
+     "at": 9,
+     "ch": "arm",
+     "v": [
+      "near",
+      "walk_out",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 9,
+     "ch": "arm",
+     "v": [
+      "far",
+      "walk_in",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 9,
+     "ch": "hdy",
+     "v": 0.008
+    },
+    {
+     "at": 9,
+     "ch": "squash",
+     "v": 0.012
+    },
+    {
+     "at": 12,
+     "ch": "legs",
+     "v": "walk4"
+    },
+    {
+     "at": 12,
+     "ch": "arm",
+     "v": [
+      "near",
+      "walk_mid",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 12,
+     "ch": "arm",
+     "v": [
+      "far",
+      "walk_mid",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 12,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 12,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 15,
+     "ch": "legs",
+     "v": "walk1"
+    },
+    {
+     "at": 15,
+     "ch": "arm",
+     "v": [
+      "near",
+      "walk_in",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 15,
+     "ch": "arm",
+     "v": [
+      "far",
+      "walk_out",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 15,
+     "ch": "hdy",
+     "v": 0.008
+    },
+    {
+     "at": 15,
+     "ch": "squash",
+     "v": 0.012
+    },
+    {
+     "at": 18,
+     "ch": "legs",
+     "v": "walk2"
+    },
+    {
+     "at": 18,
+     "ch": "arm",
+     "v": [
+      "near",
+      "walk_mid",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "arm",
+     "v": [
+      "far",
+      "walk_mid",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 18,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 21,
+     "ch": "legs",
+     "v": "walk3"
+    },
+    {
+     "at": 21,
+     "ch": "arm",
+     "v": [
+      "near",
+      "walk_out",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 21,
+     "ch": "arm",
+     "v": [
+      "far",
+      "walk_in",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 21,
+     "ch": "hdy",
+     "v": 0.008
+    },
+    {
+     "at": 21,
+     "ch": "squash",
+     "v": 0.012
+    },
+    {
+     "at": 24,
+     "ch": "legs",
+     "v": "walk4"
+    },
+    {
+     "at": 24,
+     "ch": "arm",
+     "v": [
+      "near",
+      "walk_mid",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "arm",
+     "v": [
+      "far",
+      "walk_mid",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 24,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 27,
+     "ch": "legs",
+     "v": "walk1"
+    },
+    {
+     "at": 27,
+     "ch": "arm",
+     "v": [
+      "near",
+      "walk_in",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 27,
+     "ch": "arm",
+     "v": [
+      "far",
+      "walk_out",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 27,
+     "ch": "hdy",
+     "v": 0.008
+    },
+    {
+     "at": 27,
+     "ch": "squash",
+     "v": 0.012
+    },
+    {
+     "at": 30,
+     "ch": "legs",
+     "v": "walk2"
+    },
+    {
+     "at": 30,
+     "ch": "arm",
+     "v": [
+      "near",
+      "walk_mid",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 30,
+     "ch": "arm",
+     "v": [
+      "far",
+      "walk_mid",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 30,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 30,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 33,
+     "ch": "legs",
+     "v": "walk3"
+    },
+    {
+     "at": 33,
+     "ch": "arm",
+     "v": [
+      "near",
+      "walk_out",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 33,
+     "ch": "arm",
+     "v": [
+      "far",
+      "walk_in",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 33,
+     "ch": "hdy",
+     "v": 0.008
+    },
+    {
+     "at": 33,
+     "ch": "squash",
+     "v": 0.012
+    },
+    {
+     "at": 36,
+     "ch": "legs",
+     "v": "walk4"
+    },
+    {
+     "at": 36,
+     "ch": "arm",
+     "v": [
+      "near",
+      "walk_mid",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 36,
+     "ch": "arm",
+     "v": [
+      "far",
+      "walk_mid",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 36,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 36,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 39,
+     "ch": "legs",
+     "v": "walk1"
+    },
+    {
+     "at": 39,
+     "ch": "arm",
+     "v": [
+      "near",
+      "walk_in",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 39,
+     "ch": "arm",
+     "v": [
+      "far",
+      "walk_out",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 39,
+     "ch": "hdy",
+     "v": 0.008
+    },
+    {
+     "at": 39,
+     "ch": "squash",
+     "v": 0.012
+    },
+    {
+     "at": 42,
+     "ch": "legs",
+     "v": "walk2"
+    },
+    {
+     "at": 42,
+     "ch": "arm",
+     "v": [
+      "near",
+      "walk_mid",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 42,
+     "ch": "arm",
+     "v": [
+      "far",
+      "walk_mid",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 42,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 42,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 45,
+     "ch": "legs",
+     "v": "walk3"
+    },
+    {
+     "at": 45,
+     "ch": "arm",
+     "v": [
+      "near",
+      "walk_out",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 45,
+     "ch": "arm",
+     "v": [
+      "far",
+      "walk_in",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 45,
+     "ch": "hdy",
+     "v": 0.008
+    },
+    {
+     "at": 45,
+     "ch": "squash",
+     "v": 0.012
+    },
+    {
+     "at": 48,
+     "ch": "legs",
+     "v": "walk4"
+    },
+    {
+     "at": 48,
+     "ch": "arm",
+     "v": [
+      "near",
+      "walk_mid",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 48,
+     "ch": "arm",
+     "v": [
+      "far",
+      "walk_mid",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 48,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 48,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 51,
+     "ch": "legs",
+     "v": "body"
+    },
+    {
+     "at": 51,
+     "ch": "arm",
+     "v": [
+      "near",
+      "hang"
+     ]
+    },
+    {
+     "at": 51,
+     "ch": "arm",
+     "v": [
+      "far",
+      "hang"
+     ]
+    },
+    {
+     "at": 51,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 51,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 52,
+     "ch": "top",
+     "v": "front"
+    },
+    {
+     "at": 52,
+     "ch": "turn",
+     "v": [
+      2,
+      0
+     ]
+    },
+    {
+     "at": 52,
+     "ch": "lean",
+     "v": [
+      0,
+      2
+     ]
+    }
+   ],
+   "status": "INFERRED",
+   "round": 8,
+   "legs": "walk cycle",
+   "loop": 12,
+   "loop_start": 3
   }
  },
  "approved_assets": {

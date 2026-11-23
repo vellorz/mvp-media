@@ -4,7 +4,7 @@ import sys, os, glob, json, subprocess, numpy as np, re, cv2
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 SRC,OUT=sys.argv[1],sys.argv[2]; K=float(sys.argv[3]) if len(sys.argv)>3 else 1.0
 W,H=int(1440*K),int(2560*K)
-SH={k:tuple(v) for k,v in json.load(open('/root/dc/bridge15/shots.json')).items()}; END=max(b for a,b in SH.values())
+SH={k:tuple(v) for k,v in json.load(open('/root/dc/bridge16/shots.json')).items()}; END=max(b for a,b in SH.values())
 # palette per place/mood (multipliers R,G,B): flips across each place/time join (rule 187). Philadelphia office warm, Washington mail room cool, the President's office neutral-cool,
 # print room warm-red, night shots blue-violet, autumn street amber, hall warm, today neutral-bright
 TINT={'S01':(1.04,1.0,0.94),'S02':(0.98,1.0,1.03),'S03':(0.97,1.0,1.04),'S04':(0.97,1.0,1.04),'S05':(0.97,1.0,1.04),'S06':(1.06,0.99,0.92),
@@ -146,7 +146,7 @@ def chunks():
 CAPS=chunks()
 DWMAX=17   # r2 (text verifier: dwell mean 0.374 s / P90 0.663 s vs Rick 0.32-0.35 / 0.53-0.57): a card leaves after at most 17 f (0.57 s); a gap shows no caption until the next word
 CAPS=[[a,t,min(b,a+DWMAX)] for a,t,b in CAPS]
-FB=json.load(open('/root/dc/bridge15/facebox15.json'))
+FB=json.load(open('/root/dc/bridge16/facebox15.json'))
 def capbase(f,wd=0.26):
     # dc14d (text verifier T19, rules 344/288 [C]: caption on a head at 1221-1227 and 1992-1995): if a face box meets the caption box, move the line
     # just below the lowest clashing head, else just above it; the normal line stays at 0.717 H
@@ -166,7 +166,7 @@ def cap_layer(txt,bf=0.717):
     sh=sh.filter(ImageFilter.GaussianBlur(2*K)); lay.alpha_composite(sh)
     ImageDraw.Draw(lay).text((x,BASE),txt,font=FNT,fill=(255,255,255,255),anchor='ls',stroke_width=STROKE,stroke_fill=(0,0,0,255))
     return lay,w/W
-PQ=json.load(open('/root/dc/bridge15/posterquad.json'))
+PQ=json.load(open('/root/dc/bridge16/posterquad.json'))
 _PF=np.asarray(Image.open('/root/dc/poster_2k.png').convert('RGB')).astype(np.float32)/255.0
 def truepost(o,q,k=1.0):   # dc14d (payoff P4/P11: poster -6 RGB vs the shop file): true level
     h,w=o.shape[:2]; ph,pw=_PF.shape[:2]

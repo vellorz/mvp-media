@@ -1,0 +1,3974 @@
+{
+ "version": "2026-11-23 round 6",
+ "source": "research/rick-style-spec/motion-library/ (project files); 70 strips from Rick #05 #08 #13 #21 #23 labelled by two independent measurers + 347 labels from #03 #04 #10 #12 #14 #22 #24",
+ "units": {
+  "at": "frames from the combo start (30 fps)",
+  "lean": "degrees toward the combo side (+) or away (-)",
+  "htilt": "degrees",
+  "hdy": "metres the head drops",
+  "squash": "+ squash / - stretch",
+  "ramp": "[target, frames]: drawn steps one per frame"
+ },
+ "measured_rules": {
+  "head_torso_same_frame": "9 of 10 inter-measurer pairs within 2 f (90 %), median 0 f",
+  "arm_head_window": "8 of 10 within 2 f (80 %); offsets -6..+5 f, either part may lead",
+  "legs_planted": "legs moved in 5 of 63 usable strips (presence agreement 95 %)",
+  "leader": "arm 38 / head 27 / simultaneous 17 / single part 35 calls; leader agreement 65 % [uncertain]"
+ },
+ "combos": {
+  "tilt_talk": {
+   "status": "MEASURED",
+   "desc": "talking beat: head tilts and the torso leans the same way on the same frame, free arm opens palm-out within 1 f; legs planted",
+   "evidence": [
+    "#21 f1149-1152",
+    "#23 f1236-1238",
+    "#08 f790-791"
+   ],
+   "legs": "still",
+   "events": [
+    {
+     "at": 0,
+     "ch": "htilt",
+     "v": [
+      8,
+      2
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "lean",
+     "v": [
+      6,
+      2
+     ]
+    },
+    {
+     "at": 1,
+     "ch": "arm",
+     "v": [
+      "near",
+      "palm",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 14,
+     "ch": "htilt",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 14,
+     "ch": "lean",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 16,
+     "ch": "arm",
+     "v": [
+      "near",
+      "hang",
+      {
+       "inb": true
+      }
+     ]
+    }
+   ]
+  },
+  "lean_reach": {
+   "status": "MEASURED",
+   "desc": "reach for something: head turns toward it, body leans in 15-30 deg on the same frame, near arm reaches within 0-1 f; legs planted (knees bend only on deep leans)",
+   "evidence": [
+    "#13 f717-722",
+    "#08 f983-985",
+    "#23 f504-508",
+    "#21 f1054-1061"
+   ],
+   "legs": "still",
+   "events": [
+    {
+     "at": 0,
+     "ch": "turn",
+     "v": [
+      "from",
+      2
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "lean",
+     "v": [
+      18,
+      3
+     ]
+    },
+    {
+     "at": 1,
+     "ch": "arm",
+     "v": [
+      "near",
+      "reach",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 16,
+     "ch": "turn",
+     "v": [
+      2,
+      "from"
+     ]
+    },
+    {
+     "at": 16,
+     "ch": "lean",
+     "v": [
+      0,
+      3
+     ]
+    },
+    {
+     "at": 17,
+     "ch": "arm",
+     "v": [
+      "near",
+      "hang",
+      {
+       "inb": true
+      }
+     ]
+    }
+   ]
+  },
+  "laugh_lean_back": {
+   "status": "MEASURED",
+   "desc": "big laugh: head tips back and the body leans back ~10 deg together, one hand to belly or hat; legs planted, a small bob",
+   "evidence": [
+    "#05 f127-139",
+    "#23 f677-680",
+    "#05 f771-776",
+    "#13 f639-644"
+   ],
+   "legs": "still",
+   "events": [
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 0,
+     "ch": "htilt",
+     "v": [
+      -6,
+      2
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "lean",
+     "v": [
+      -10,
+      2
+     ]
+    },
+    {
+     "at": 1,
+     "ch": "arm",
+     "v": [
+      "far",
+      "belly",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "hdy",
+     "v": 0.012
+    },
+    {
+     "at": 9,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 12,
+     "ch": "hdy",
+     "v": 0.012
+    },
+    {
+     "at": 15,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 20,
+     "ch": "htilt",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 20,
+     "ch": "lean",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 21,
+     "ch": "arm",
+     "v": [
+      "far",
+      "hang",
+      {
+       "inb": true
+      }
+     ]
+    }
+   ]
+  },
+  "laugh_bob": {
+   "status": "MEASURED",
+   "desc": "laughing bob: torso bobs on 3-frame beats, head rides with it, arms and legs hold",
+   "evidence": [
+    "#23 f1072-1080",
+    "#23 f1448-1456",
+    "#05 f1798-1808"
+   ],
+   "legs": "still",
+   "events": [
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 0,
+     "ch": "squash",
+     "v": 0.03
+    },
+    {
+     "at": 3,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 6,
+     "ch": "squash",
+     "v": 0.03
+    },
+    {
+     "at": 9,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 12,
+     "ch": "squash",
+     "v": 0.03
+    },
+    {
+     "at": 15,
+     "ch": "squash",
+     "v": 0.0
+    }
+   ]
+  },
+  "swing_down": {
+   "status": "MEASURED",
+   "desc": "stamp/strike: arm already raised swings down in 2-4 drawn frames while the body leans into it ~15 deg on the same beat; head tilts at the hit; legs planted",
+   "evidence": [
+    "#21 f359-373",
+    "#05 f22-31"
+   ],
+   "legs": "still",
+   "events": [
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "near",
+      "windup",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 3,
+     "ch": "arm",
+     "v": [
+      "near",
+      "swing",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 3,
+     "ch": "lean",
+     "v": [
+      12,
+      2
+     ]
+    },
+    {
+     "at": 4,
+     "ch": "htilt",
+     "v": [
+      6,
+      1
+     ]
+    },
+    {
+     "at": 16,
+     "ch": "lean",
+     "v": [
+      0,
+      3
+     ]
+    },
+    {
+     "at": 16,
+     "ch": "htilt",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "arm",
+     "v": [
+      "near",
+      "hang",
+      {
+       "inb": true
+      }
+     ]
+    }
+   ]
+  },
+  "toss": {
+   "status": "MEASURED",
+   "desc": "lift then throw: hand lifts to shoulder, then flings out on the next beat; head tilts with the release; legs planted",
+   "evidence": [
+    "#21 f430-443",
+    "#23 f1297-1300"
+   ],
+   "legs": "still",
+   "events": [
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "near",
+      "lift",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 5,
+     "ch": "arm",
+     "v": [
+      "near",
+      "throw",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "htilt",
+     "v": [
+      6,
+      1
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "lean",
+     "v": [
+      6,
+      2
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "htilt",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "lean",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 19,
+     "ch": "arm",
+     "v": [
+      "near",
+      "hang",
+      {
+       "inb": true
+      }
+     ]
+    }
+   ]
+  },
+  "point_out_tilt": {
+   "status": "MEASURED",
+   "desc": "point at something: arm snaps out and the head tilts toward it on the same frame; torso and legs hold",
+   "evidence": [
+    "#23 f933-941",
+    "#21 f1579-1585",
+    "#23 f1127"
+   ],
+   "legs": "still",
+   "events": [
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "near",
+      "point_out",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "htilt",
+     "v": [
+      6,
+      1
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "look",
+     "v": 1
+    },
+    {
+     "at": 18,
+     "ch": "htilt",
+     "v": [
+      0,
+      1
+     ]
+    },
+    {
+     "at": 19,
+     "ch": "arm",
+     "v": [
+      "near",
+      "hang",
+      {
+       "inb": true
+      }
+     ]
+    }
+   ]
+  },
+  "turn_and_point": {
+   "status": "MEASURED",
+   "desc": "head turns toward the target in steps, torso leans with the head on the same frame, the near arm points within 2-6 f (Rick #21 f1579->1585); legs planted",
+   "evidence": [
+    "#21 f1579-1585",
+    "#22 f1253-1256 (old labels)",
+    "#23 f933"
+   ],
+   "legs": "still",
+   "events": [
+    {
+     "at": 0,
+     "ch": "turn",
+     "v": [
+      "from",
+      2
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "lean",
+     "v": [
+      5,
+      2
+     ]
+    },
+    {
+     "at": 3,
+     "ch": "arm",
+     "v": [
+      "near",
+      "point_out",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 20,
+     "ch": "lean",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 21,
+     "ch": "arm",
+     "v": [
+      "near",
+      "hang",
+      {
+       "inb": true
+      }
+     ]
+    }
+   ]
+  },
+  "eureka_point_up": {
+   "status": "MEASURED",
+   "desc": "idea: face snaps (smug), head tilts back and the body leans back ~10 deg on the same frame, one arm points up 2 f earlier or with it; legs planted",
+   "evidence": [
+    "#21 f217-219",
+    "#04 f343-344 (old labels)"
+   ],
+   "legs": "still",
+   "events": [
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "near",
+      "point_up",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 2,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 2,
+     "ch": "htilt",
+     "v": [
+      -5,
+      1
+     ]
+    },
+    {
+     "at": 2,
+     "ch": "lean",
+     "v": [
+      -8,
+      2
+     ]
+    },
+    {
+     "at": 20,
+     "ch": "htilt",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 20,
+     "ch": "lean",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 21,
+     "ch": "arm",
+     "v": [
+      "near",
+      "hang",
+      {
+       "inb": true
+      }
+     ]
+    }
+   ]
+  },
+  "victory_up": {
+   "status": "MEASURED",
+   "desc": "cheer: both arms dip for 2 f (anticipation) then shoot up; the body stretches up on the same frame; legs planted",
+   "evidence": [
+    "#08 f2027-2034",
+    "#03 f1619-1639 (old labels)"
+   ],
+   "legs": "still",
+   "events": [
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "left",
+      "up",
+      {
+       "inb": false,
+       "anticip": 2
+      }
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "right",
+      "up",
+      {
+       "inb": false,
+       "anticip": 2
+      }
+     ]
+    },
+    {
+     "at": 2,
+     "ch": "squash",
+     "v": [
+      -0.04,
+      2
+     ]
+    },
+    {
+     "at": 2,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 8,
+     "ch": "squash",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 22,
+     "ch": "arm",
+     "v": [
+      "left",
+      "hang",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 22,
+     "ch": "arm",
+     "v": [
+      "right",
+      "hang",
+      {
+       "inb": true
+      }
+     ]
+    }
+   ]
+  },
+  "dip_talk": {
+   "status": "MEASURED",
+   "desc": "set down / concede: arm lowers, head tilts and the body dips on the same frame; legs planted",
+   "evidence": [
+    "#13 f1144-1146",
+    "#13 f639-644"
+   ],
+   "legs": "still",
+   "events": [
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "near",
+      "dip",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 1,
+     "ch": "htilt",
+     "v": [
+      7,
+      1
+     ]
+    },
+    {
+     "at": 1,
+     "ch": "lean",
+     "v": [
+      8,
+      2
+     ]
+    },
+    {
+     "at": 1,
+     "ch": "hdy",
+     "v": 0.01
+    },
+    {
+     "at": 14,
+     "ch": "htilt",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 14,
+     "ch": "lean",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 14,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 15,
+     "ch": "arm",
+     "v": [
+      "near",
+      "hang",
+      {
+       "inb": true
+      }
+     ]
+    }
+   ]
+  },
+  "panic_clutch": {
+   "status": "MEASURED",
+   "desc": "panic: both hands grab the head/neck on the same frame as a head tilt and side lean, then a shake every 2 f; legs planted",
+   "evidence": [
+    "#21 f1468-1470",
+    "#22 f1325-1327 (old labels)"
+   ],
+   "legs": "still",
+   "events": [
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "left",
+      "hands_head",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "right",
+      "hands_head",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 1,
+     "ch": "htilt",
+     "v": [
+      6,
+      1
+     ]
+    },
+    {
+     "at": 1,
+     "ch": "lean",
+     "v": [
+      6,
+      1
+     ]
+    },
+    {
+     "at": 3,
+     "ch": "lean",
+     "v": -4
+    },
+    {
+     "at": 5,
+     "ch": "lean",
+     "v": 6
+    },
+    {
+     "at": 7,
+     "ch": "lean",
+     "v": -4
+    },
+    {
+     "at": 9,
+     "ch": "lean",
+     "v": 6
+    },
+    {
+     "at": 11,
+     "ch": "lean",
+     "v": 0
+    },
+    {
+     "at": 11,
+     "ch": "htilt",
+     "v": 0
+    },
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
+    }
+   ]
+  },
+  "startle_dash": {
+   "status": "MEASURED",
+   "desc": "startle then exit: head turns up/toward the threat in steps, then the body leans forward 25-30 deg, arms swing and the legs run (the only combo where legs lead the exit)",
+   "evidence": [
+    "#23 f1346-1356",
+    "#13 f717-722"
+   ],
+   "legs": "run",
+   "events": [
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 0,
+     "ch": "turn",
+     "v": [
+      "from",
+      2
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "lean",
+     "v": [
+      26,
+      2
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "arm",
+     "v": [
+      "near",
+      "swing",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "arm",
+     "v": [
+      "far",
+      "swing",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 7,
+     "ch": "legs",
+     "v": "bodyw1"
+    },
+    {
+     "at": 11,
+     "ch": "legs",
+     "v": "bodyw2"
+    },
+    {
+     "at": 15,
+     "ch": "legs",
+     "v": "bodyw1"
+    },
+    {
+     "at": 19,
+     "ch": "legs",
+     "v": "bodyw2"
+    }
+   ]
+  },
+  "glance_shift": {
+   "status": "MEASURED",
+   "desc": "nervous glance: look away and back while the weight shifts foot to foot (stride drawing for 4 f); arms hold",
+   "evidence": [
+    "#21 f1229-1240"
+   ],
+   "legs": "shift",
+   "events": [
+    {
+     "at": 0,
+     "ch": "look",
+     "v": -1
+    },
+    {
+     "at": 0,
+     "ch": "legs",
+     "v": "bodyw1"
+    },
+    {
+     "at": 4,
+     "ch": "legs",
+     "v": "body"
+    },
+    {
+     "at": 6,
+     "ch": "look",
+     "v": 1
+    },
+    {
+     "at": 6,
+     "ch": "legs",
+     "v": "bodyw2"
+    },
+    {
+     "at": 10,
+     "ch": "legs",
+     "v": "body"
+    },
+    {
+     "at": 12,
+     "ch": "look",
+     "v": 0
+    }
+   ]
+  },
+  "look_back_shrug": {
+   "desc": "look back over the shoulder, then shrug: head steps round (front, 3/4, strong 3/4) with the torso twisting, snaps to a 3/4 back view looking behind and holds, comes back round to front, then shrugs with a head tilt",
+   "evidence": [
+    "#22 f466-473 (front, 3/4, back with the torso following)",
+    "#03 f80 (whole drawing flips toward 3/4 back in 1 f)",
+    "owner Nov 23: must really turn to look back"
+   ],
+   "events": [
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 0,
+     "ch": "turn",
+     "v": [
+      0,
+      -3
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "lean",
+     "v": [
+      -5,
+      3
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "htilt",
+     "v": [
+      -4,
+      2
+     ]
+    },
+    {
+     "at": 5,
+     "ch": "face",
+     "v": "back"
+    },
+    {
+     "at": 6,
+     "ch": "look",
+     "v": -2
+    },
+    {
+     "at": 16,
+     "ch": "face",
+     "v": "$face2"
+    },
+    {
+     "at": 16,
+     "ch": "turn",
+     "v": [
+      -2,
+      0
+     ]
+    },
+    {
+     "at": 16,
+     "ch": "lean",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 16,
+     "ch": "htilt",
+     "v": [
+      0,
+      1
+     ]
+    },
+    {
+     "at": 19,
+     "ch": "arm",
+     "v": [
+      "left",
+      "shrug"
+     ]
+    },
+    {
+     "at": 19,
+     "ch": "arm",
+     "v": [
+      "right",
+      "shrug"
+     ]
+    },
+    {
+     "at": 19,
+     "ch": "htilt",
+     "v": [
+      7,
+      1
+     ]
+    },
+    {
+     "at": 19,
+     "ch": "squash",
+     "v": [
+      -0.02,
+      1
+     ]
+    },
+    {
+     "at": 21,
+     "ch": "squash",
+     "v": [
+      0,
+      1
+     ]
+    },
+    {
+     "at": 36,
+     "ch": "arm",
+     "v": [
+      "left",
+      "hang"
+     ]
+    },
+    {
+     "at": 36,
+     "ch": "arm",
+     "v": [
+      "right",
+      "hang"
+     ]
+    },
+    {
+     "at": 36,
+     "ch": "htilt",
+     "v": [
+      0,
+      2
+     ]
+    }
+   ],
+   "status": "INFERRED",
+   "round": 7,
+   "legs": "planted",
+   "previous": {
+    "events": [
+     {
+      "at": 0,
+      "ch": "turn",
+      "v": [
+       "from",
+       -2
+      ]
+     },
+     {
+      "at": 4,
+      "ch": "arm",
+      "v": [
+       "left",
+       "shrug",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 4,
+      "ch": "arm",
+      "v": [
+       "right",
+       "shrug",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 4,
+      "ch": "htilt",
+      "v": [
+       6,
+       1
+      ]
+     },
+     {
+      "at": 4,
+      "ch": "lean",
+      "v": [
+       -4,
+       2
+      ]
+     },
+     {
+      "at": 20,
+      "ch": "arm",
+      "v": [
+       "left",
+       "hang",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 20,
+      "ch": "arm",
+      "v": [
+       "right",
+       "hang",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 20,
+      "ch": "htilt",
+      "v": [
+       0,
+       2
+      ]
+     },
+     {
+      "at": 20,
+      "ch": "lean",
+      "v": [
+       0,
+       2
+      ]
+     }
+    ],
+    "desc": "look back over the shoulder, then shrug: turn in steps, both arms shrug 2 f after the turn lands, head tilts, lean 4 deg"
+   }
+  },
+  "startle_recoil": {
+   "desc": "startle: the face changes every few frames (startle, shock, nervous), the body jumps up and stretches with a lean back and both arms flung, jolt ticks round the head, lands in a squash, a sweat drop, a nervous tremble, then a hand to the chest",
+   "evidence": [
+    "#14 f570-576 impact ticks",
+    "#04 f394 and #14 f1168 sweat drop",
+    "#23 f1346-1352 wide-eyed look up (measured startle)",
+    "owner Nov 23: not a fixed face, show the startle"
+   ],
+   "events": [
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "startle"
+    },
+    {
+     "at": 0,
+     "ch": "hop",
+     "v": [
+      0.06,
+      2
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "squash",
+     "v": [
+      -0.06,
+      1
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "lean",
+     "v": [
+      -12,
+      1
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "left",
+      "up",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "right",
+      "fling",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "fx",
+     "v": [
+      "startle",
+      "head",
+      0,
+      0.2,
+      0.62,
+      6
+     ]
+    },
+    {
+     "at": 2,
+     "ch": "face",
+     "v": "shock"
+    },
+    {
+     "at": 3,
+     "ch": "hop",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 4,
+     "ch": "squash",
+     "v": [
+      0.06,
+      1
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "squash",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 7,
+     "ch": "fx",
+     "v": [
+      "sweat",
+      "head",
+      -0.2,
+      0.33,
+      0.16,
+      16
+     ]
+    },
+    {
+     "at": 10,
+     "ch": "face",
+     "v": "nervous"
+    },
+    {
+     "at": 10,
+     "ch": "lean",
+     "v": [
+      -5,
+      3
+     ]
+    },
+    {
+     "at": 10,
+     "ch": "arm",
+     "v": [
+      "right",
+      "belly"
+     ]
+    },
+    {
+     "at": 10,
+     "ch": "arm",
+     "v": [
+      "left",
+      "hang"
+     ]
+    },
+    {
+     "at": 12,
+     "ch": "htilt",
+     "v": [
+      -4,
+      1
+     ]
+    },
+    {
+     "at": 14,
+     "ch": "htilt",
+     "v": [
+      4,
+      1
+     ]
+    },
+    {
+     "at": 16,
+     "ch": "htilt",
+     "v": [
+      -3,
+      1
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "htilt",
+     "v": [
+      0,
+      1
+     ]
+    },
+    {
+     "at": 28,
+     "ch": "face",
+     "v": "$face2"
+    },
+    {
+     "at": 28,
+     "ch": "arm",
+     "v": [
+      "right",
+      "hang"
+     ]
+    },
+    {
+     "at": 28,
+     "ch": "lean",
+     "v": [
+      0,
+      3
+     ]
+    }
+   ],
+   "status": "APPROVED",
+   "round": 7,
+   "legs": "planted",
+   "previous": {
+    "events": [
+     {
+      "at": 0,
+      "ch": "face",
+      "v": "$face"
+     },
+     {
+      "at": 0,
+      "ch": "hdy",
+      "v": 0.015
+     },
+     {
+      "at": 0,
+      "ch": "lean",
+      "v": [
+       -8,
+       1
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "squash",
+      "v": 0.04
+     },
+     {
+      "at": 0,
+      "ch": "arm",
+      "v": [
+       "left",
+       "up",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "arm",
+      "v": [
+       "right",
+       "fling",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 2,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 2,
+      "ch": "squash",
+      "v": -0.02
+     },
+     {
+      "at": 4,
+      "ch": "squash",
+      "v": 0.0
+     },
+     {
+      "at": 18,
+      "ch": "lean",
+      "v": [
+       0,
+       3
+      ]
+     },
+     {
+      "at": 18,
+      "ch": "arm",
+      "v": [
+       "left",
+       "hang",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 18,
+      "ch": "arm",
+      "v": [
+       "right",
+       "hang",
+       {
+        "inb": true
+       }
+      ]
+     }
+    ],
+    "desc": "startle: face snaps to shock, head drops 2 f, body leans back 8 deg and squashes on the same frame, both arms fling up; legs planted"
+   },
+   "approved": "owner Nov 23 2026 8:46 AM CT (review of round 7)"
+  },
+  "double_take": {
+   "desc": "double take, slowed so it reads: glance at it and back (held), a blank front-on beat with a blink, a 2-frame dip, then the snap to a strong turn with a shock face, a little jump, jolt ticks and a sweat drop",
+   "evidence": [
+    "#24 f1034-1036 snap with one in-between",
+    "#14 f570-576 impact ticks",
+    "owner Nov 23: too quick, show the double take"
+   ],
+   "events": [
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 0,
+     "ch": "look",
+     "v": 1
+    },
+    {
+     "at": 9,
+     "ch": "look",
+     "v": 0
+    },
+    {
+     "at": 16,
+     "ch": "face",
+     "v": "blink"
+    },
+    {
+     "at": 18,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 22,
+     "ch": "hdy",
+     "v": [
+      0.012,
+      2
+     ]
+    },
+    {
+     "at": 22,
+     "ch": "squash",
+     "v": [
+      0.03,
+      2
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "face",
+     "v": "$face2"
+    },
+    {
+     "at": 24,
+     "ch": "look",
+     "v": 3
+    },
+    {
+     "at": 24,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 24,
+     "ch": "squash",
+     "v": [
+      -0.05,
+      1
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "hop",
+     "v": [
+      0.04,
+      1
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "lean",
+     "v": [
+      -8,
+      1
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "arm",
+     "v": [
+      "left",
+      "up",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "arm",
+     "v": [
+      "right",
+      "up",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "fx",
+     "v": [
+      "startle",
+      "head",
+      0,
+      0.2,
+      0.62,
+      6
+     ]
+    },
+    {
+     "at": 26,
+     "ch": "hop",
+     "v": [
+      0,
+      1
+     ]
+    },
+    {
+     "at": 26,
+     "ch": "squash",
+     "v": [
+      0.03,
+      1
+     ]
+    },
+    {
+     "at": 28,
+     "ch": "squash",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 29,
+     "ch": "fx",
+     "v": [
+      "sweat",
+      "head",
+      -0.2,
+      0.33,
+      0.16,
+      14
+     ]
+    },
+    {
+     "at": 44,
+     "ch": "arm",
+     "v": [
+      "left",
+      "hang"
+     ]
+    },
+    {
+     "at": 44,
+     "ch": "arm",
+     "v": [
+      "right",
+      "hang"
+     ]
+    },
+    {
+     "at": 44,
+     "ch": "lean",
+     "v": [
+      0,
+      3
+     ]
+    }
+   ],
+   "status": "INFERRED",
+   "round": 7,
+   "legs": "planted",
+   "previous": {
+    "events": [
+     {
+      "at": 0,
+      "ch": "look",
+      "v": 1
+     },
+     {
+      "at": 3,
+      "ch": "look",
+      "v": 0
+     },
+     {
+      "at": 9,
+      "ch": "face",
+      "v": "$face2"
+     },
+     {
+      "at": 9,
+      "ch": "turn",
+      "v": [
+       0,
+       3
+      ]
+     },
+     {
+      "at": 9,
+      "ch": "hdy",
+      "v": 0.012
+     },
+     {
+      "at": 9,
+      "ch": "arm",
+      "v": [
+       "left",
+       "up",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 9,
+      "ch": "arm",
+      "v": [
+       "right",
+       "up",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 9,
+      "ch": "lean",
+      "v": [
+       -6,
+       1
+      ]
+     },
+     {
+      "at": 11,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 24,
+      "ch": "arm",
+      "v": [
+       "left",
+       "hang",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "arm",
+      "v": [
+       "right",
+       "hang",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "lean",
+      "v": [
+       0,
+       2
+      ]
+     }
+    ],
+    "desc": "double take: glance at it (1 level), back to front, hold 6 f, then snap to a strong turn with a shock face, both arms up, head drop"
+   }
+  },
+  "wave_hello": {
+   "status": "APPROVED",
+   "desc": "wave: near arm raises (lift) then alternates two wave drawings every 3 f, head tilts toward the wave, a small body bob",
+   "evidence": [
+    "#05 f139 hat wave (one measurer)",
+    "#05 f469 (one measurer)"
+   ],
+   "legs": "still",
+   "events": [
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wave_a",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "htilt",
+     "v": [
+      6,
+      1
+     ]
+    },
+    {
+     "at": 4,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wave_b",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 7,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wave_a",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 10,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wave_b",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 13,
+     "ch": "arm",
+     "v": [
+      "near",
+      "wave_a",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 3,
+     "ch": "squash",
+     "v": 0.02
+    },
+    {
+     "at": 6,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 9,
+     "ch": "squash",
+     "v": 0.02
+    },
+    {
+     "at": 12,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 18,
+     "ch": "arm",
+     "v": [
+      "near",
+      "hang",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "htilt",
+     "v": [
+      0,
+      2
+     ]
+    }
+   ],
+   "approved": "owner Nov 23 2026 (review of the inferred moves: not flagged, \"I have really loved everything else\")"
+  },
+  "clap": {
+   "desc": "clap: elbows out to the sides, mittens meet just under the chin every 6 frames, a burst of short dashes at each clap, the head nods on the claps",
+   "evidence": [
+    "#08 f1116 (hands come together in front, one measurer)",
+    "#12 f37-38 (burst lines)",
+    "#14 f570-576 (impact ticks)",
+    "owner Nov 23 (elbows out, clap in front of the chin, sound dashes)"
+   ],
+   "events": [
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "left",
+      "clap_hi_open"
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "right",
+      "clap_hi_open"
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 4,
+     "ch": "arm",
+     "v": [
+      "left",
+      "clap_hi",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 4,
+     "ch": "arm",
+     "v": [
+      "right",
+      "clap_hi",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 4,
+     "ch": "hdy",
+     "v": 0.008
+    },
+    {
+     "at": 4,
+     "ch": "fx",
+     "v": [
+      "clap",
+      "torso",
+      0,
+      0.32,
+      0.7,
+      2
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "arm",
+     "v": [
+      "left",
+      "clap_hi_open",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "arm",
+     "v": [
+      "right",
+      "clap_hi_open",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 10,
+     "ch": "arm",
+     "v": [
+      "left",
+      "clap_hi",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 10,
+     "ch": "arm",
+     "v": [
+      "right",
+      "clap_hi",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 10,
+     "ch": "hdy",
+     "v": 0.008
+    },
+    {
+     "at": 10,
+     "ch": "fx",
+     "v": [
+      "clap",
+      "torso",
+      0,
+      0.32,
+      0.7,
+      2
+     ]
+    },
+    {
+     "at": 12,
+     "ch": "arm",
+     "v": [
+      "left",
+      "clap_hi_open",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 12,
+     "ch": "arm",
+     "v": [
+      "right",
+      "clap_hi_open",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 12,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 16,
+     "ch": "arm",
+     "v": [
+      "left",
+      "clap_hi",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 16,
+     "ch": "arm",
+     "v": [
+      "right",
+      "clap_hi",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 16,
+     "ch": "hdy",
+     "v": 0.008
+    },
+    {
+     "at": 16,
+     "ch": "fx",
+     "v": [
+      "clap",
+      "torso",
+      0,
+      0.32,
+      0.7,
+      2
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "arm",
+     "v": [
+      "left",
+      "clap_hi_open",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "arm",
+     "v": [
+      "right",
+      "clap_hi_open",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 22,
+     "ch": "arm",
+     "v": [
+      "left",
+      "clap_hi",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 22,
+     "ch": "arm",
+     "v": [
+      "right",
+      "clap_hi",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 22,
+     "ch": "hdy",
+     "v": 0.008
+    },
+    {
+     "at": 22,
+     "ch": "fx",
+     "v": [
+      "clap",
+      "torso",
+      0,
+      0.32,
+      0.7,
+      2
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "arm",
+     "v": [
+      "left",
+      "clap_hi_open",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "arm",
+     "v": [
+      "right",
+      "clap_hi_open",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "hdy",
+     "v": 0.0
+    },
+    {
+     "at": 30,
+     "ch": "arm",
+     "v": [
+      "left",
+      "hang"
+     ]
+    },
+    {
+     "at": 30,
+     "ch": "arm",
+     "v": [
+      "right",
+      "hang"
+     ]
+    }
+   ],
+   "status": "INFERRED",
+   "round": 7,
+   "legs": "planted",
+   "previous": {
+    "events": [
+     {
+      "at": 0,
+      "ch": "arm",
+      "v": [
+       "left",
+       "clap_open",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "arm",
+      "v": [
+       "right",
+       "clap_open",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 3,
+      "ch": "arm",
+      "v": [
+       "left",
+       "clap",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 3,
+      "ch": "arm",
+      "v": [
+       "right",
+       "clap",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 3,
+      "ch": "hdy",
+      "v": 0.008
+     },
+     {
+      "at": 6,
+      "ch": "arm",
+      "v": [
+       "left",
+       "clap_open",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 6,
+      "ch": "arm",
+      "v": [
+       "right",
+       "clap_open",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 6,
+      "ch": "hdy",
+      "v": 0.0
+     },
+     {
+      "at": 9,
+      "ch": "arm",
+      "v": [
+       "left",
+       "clap",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 9,
+      "ch": "arm",
+      "v": [
+       "right",
+       "clap",
+       {
+        "inb": false
+       }
+      ]
+     },
+     {
+      "at": 9,
+      "ch": "hdy",
+      "v": 0.008
+     },
+     {
+      "at": 12,
+      "ch": "arm",
+      "v": [
+       "left",
+       "hang",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 12,
+      "ch": "arm",
+      "v": [
+       "right",
+       "hang",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 12,
+      "ch": "hdy",
+      "v": 0.0
+     }
+    ],
+    "desc": "clap: both forearms meet in front every 3 f, head nods with the claps"
+   }
+  },
+  "cross_arms_huff": {
+   "desc": "huff: arms cross, head turns away and tips up with an annoyed face; shoulders rise on a breath in, then drop with a puff of air out of the nose (blow arcs and a cloud), a second smaller huff",
+   "evidence": [
+    "#04 f1464-1497 (blow arcs under the mouth)",
+    "#23 f1509 (both hands held across the chest)",
+    "owner Nov 23: he never really huffs"
+   ],
+   "events": [
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "left",
+      "cross"
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "right",
+      "cross"
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "look",
+     "v": -1
+    },
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 0,
+     "ch": "htilt",
+     "v": [
+      -5,
+      2
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "lean",
+     "v": [
+      -4,
+      2
+     ]
+    },
+    {
+     "at": 8,
+     "ch": "squash",
+     "v": [
+      -0.035,
+      3
+     ]
+    },
+    {
+     "at": 8,
+     "ch": "hdy",
+     "v": [
+      -0.012,
+      3
+     ]
+    },
+    {
+     "at": 8,
+     "ch": "face",
+     "v": "closed_annoyed"
+    },
+    {
+     "at": 12,
+     "ch": "squash",
+     "v": [
+      0.03,
+      1
+     ]
+    },
+    {
+     "at": 12,
+     "ch": "hdy",
+     "v": [
+      0.008,
+      1
+     ]
+    },
+    {
+     "at": 12,
+     "ch": "fx",
+     "v": [
+      "puff",
+      "head",
+      -0.17,
+      0.15,
+      0.36,
+      8
+     ]
+    },
+    {
+     "at": 14,
+     "ch": "squash",
+     "v": [
+      0,
+      3
+     ]
+    },
+    {
+     "at": 14,
+     "ch": "hdy",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 22,
+     "ch": "squash",
+     "v": [
+      -0.02,
+      2
+     ]
+    },
+    {
+     "at": 25,
+     "ch": "squash",
+     "v": [
+      0.02,
+      1
+     ]
+    },
+    {
+     "at": 25,
+     "ch": "fx",
+     "v": [
+      "puff",
+      "head",
+      -0.17,
+      0.15,
+      0.3,
+      6
+     ]
+    },
+    {
+     "at": 27,
+     "ch": "squash",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 30,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 42,
+     "ch": "arm",
+     "v": [
+      "left",
+      "hang"
+     ]
+    },
+    {
+     "at": 42,
+     "ch": "arm",
+     "v": [
+      "right",
+      "hang"
+     ]
+    },
+    {
+     "at": 42,
+     "ch": "look",
+     "v": 0
+    },
+    {
+     "at": 42,
+     "ch": "htilt",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 42,
+     "ch": "lean",
+     "v": [
+      0,
+      2
+     ]
+    }
+   ],
+   "status": "APPROVED",
+   "round": 7,
+   "legs": "planted",
+   "previous": {
+    "events": [
+     {
+      "at": 0,
+      "ch": "arm",
+      "v": [
+       "left",
+       "cross",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "arm",
+      "v": [
+       "right",
+       "cross",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "look",
+      "v": -1
+     },
+     {
+      "at": 0,
+      "ch": "htilt",
+      "v": [
+       -4,
+       1
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "lean",
+      "v": [
+       -4,
+       2
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "arm",
+      "v": [
+       "left",
+       "hang",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "arm",
+      "v": [
+       "right",
+       "hang",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "look",
+      "v": 0
+     },
+     {
+      "at": 24,
+      "ch": "htilt",
+      "v": [
+       0,
+       1
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "lean",
+      "v": [
+       0,
+       2
+      ]
+     }
+    ],
+    "desc": "huff: both arms cross, head turns away one level and tilts up, body leans back 4 deg; legs planted"
+   },
+   "approved": "owner Nov 23 2026 8:46 AM CT (review of round 7)"
+  },
+  "akimbo_scold": {
+   "status": "APPROVED",
+   "desc": "scold: hands on hips, body leans in 6 deg toward the listener on the same frame, head tilts; legs planted",
+   "evidence": [
+    "#03 f466-485 akimbo (old labels)",
+    "#22 f212-235 akimbo (old labels)"
+   ],
+   "legs": "still",
+   "events": [
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "left",
+      "akimbo",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "right",
+      "akimbo",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "lean",
+     "v": [
+      6,
+      2
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "htilt",
+     "v": [
+      5,
+      1
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "look",
+     "v": 1
+    },
+    {
+     "at": 24,
+     "ch": "lean",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "htilt",
+     "v": [
+      0,
+      1
+     ]
+    },
+    {
+     "at": 25,
+     "ch": "arm",
+     "v": [
+      "left",
+      "hang",
+      {
+       "inb": true
+      }
+     ]
+    },
+    {
+     "at": 25,
+     "ch": "arm",
+     "v": [
+      "right",
+      "hang",
+      {
+       "inb": true
+      }
+     ]
+    }
+   ],
+   "approved": "owner Nov 23 2026 (review of the inferred moves: not flagged, \"I have really loved everything else\")"
+  },
+  "think_chin": {
+   "desc": "think: hand to the chin, head tilts and turns a little, the hand taps the chin three times (out 4 frames, back on the chin, every 10 frames), three small thought bubbles; ends on face2 (an idea)",
+   "evidence": [
+    "#24 f1112-1116 (right forearm and hand rise to the chin)",
+    "#08 f1116 (hand at the chin, one measurer)",
+    "owner Nov 23: tap the chin as if thinking, not too quick"
+   ],
+   "events": [
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "near",
+      "chin"
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "look",
+     "v": 1
+    },
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 0,
+     "ch": "htilt",
+     "v": [
+      6,
+      2
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "lean",
+     "v": [
+      3,
+      2
+     ]
+    },
+    {
+     "at": 8,
+     "ch": "fx",
+     "v": [
+      "think",
+      "head",
+      0.22,
+      0.38,
+      0.3,
+      34
+     ]
+    },
+    {
+     "at": 10,
+     "ch": "arm",
+     "v": [
+      "near",
+      "chin_tap",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 14,
+     "ch": "arm",
+     "v": [
+      "near",
+      "chin",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 20,
+     "ch": "arm",
+     "v": [
+      "near",
+      "chin_tap",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "arm",
+     "v": [
+      "near",
+      "chin",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 30,
+     "ch": "arm",
+     "v": [
+      "near",
+      "chin_tap",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 34,
+     "ch": "arm",
+     "v": [
+      "near",
+      "chin",
+      {
+       "inb": false
+      }
+     ]
+    },
+    {
+     "at": 44,
+     "ch": "face",
+     "v": "$face2"
+    },
+    {
+     "at": 44,
+     "ch": "arm",
+     "v": [
+      "near",
+      "hang"
+     ]
+    },
+    {
+     "at": 44,
+     "ch": "look",
+     "v": 0
+    },
+    {
+     "at": 44,
+     "ch": "htilt",
+     "v": [
+      0,
+      1
+     ]
+    },
+    {
+     "at": 44,
+     "ch": "lean",
+     "v": [
+      0,
+      2
+     ]
+    }
+   ],
+   "status": "INFERRED",
+   "round": 7,
+   "legs": "planted",
+   "previous": {
+    "events": [
+     {
+      "at": 0,
+      "ch": "arm",
+      "v": [
+       "near",
+       "chin",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "htilt",
+      "v": [
+       5,
+       1
+      ]
+     },
+     {
+      "at": 0,
+      "ch": "look",
+      "v": 1
+     },
+     {
+      "at": 0,
+      "ch": "lean",
+      "v": [
+       3,
+       2
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "arm",
+      "v": [
+       "near",
+       "hang",
+       {
+        "inb": true
+       }
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "htilt",
+      "v": [
+       0,
+       1
+      ]
+     },
+     {
+      "at": 24,
+      "ch": "look",
+      "v": 0
+     },
+     {
+      "at": 24,
+      "ch": "lean",
+      "v": [
+       0,
+       2
+      ]
+     }
+    ],
+    "desc": "think: hand to chin, head tilts toward the hand and turns one level, body leans 3 deg; legs planted"
+   }
+  },
+  "turn_away_back": {
+   "desc": "turn away and back: the head steps round through a side angle (front, 3/4, strong 3/4), shows a 3/4 back view, then the full back; holds; comes back the same way through the side angle to front; the torso dips with it",
+   "evidence": [
+    "#22 f466-473 (front, 3/4, back)",
+    "#04 f349-350 and #05 f577-580 back views",
+    "owner Nov 23: show a side angle on the way round"
+   ],
+   "events": [
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 0,
+     "ch": "turn",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "lean",
+     "v": [
+      -3,
+      2
+     ]
+    },
+    {
+     "at": 4,
+     "ch": "face",
+     "v": "back"
+    },
+    {
+     "at": 6,
+     "ch": "look",
+     "v": 0
+    },
+    {
+     "at": 20,
+     "ch": "look",
+     "v": 2
+    },
+    {
+     "at": 22,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 24,
+     "ch": "turn",
+     "v": [
+      2,
+      0
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "lean",
+     "v": [
+      0,
+      2
+     ]
+    }
+   ],
+   "status": "INFERRED",
+   "round": 7,
+   "legs": "planted",
+   "previous": {
+    "events": [
+     {
+      "at": 0,
+      "ch": "look",
+      "v": 0
+     },
+     {
+      "at": 0,
+      "ch": "face",
+      "v": "back"
+     },
+     {
+      "at": 0,
+      "ch": "lean",
+      "v": [
+       -4,
+       1
+      ]
+     },
+     {
+      "at": 18,
+      "ch": "face",
+      "v": "$face"
+     },
+     {
+      "at": 18,
+      "ch": "lean",
+      "v": [
+       0,
+       1
+      ]
+     }
+    ],
+    "desc": "turn away then back: front <-> back-of-head as a 1-frame snap (hair redrawn on the same frame), torso dips 4 deg the same frame, arms hold; back to the face 18 f later"
+   }
+  },
+  "jog": {
+   "desc": "jog in place (the scene moves the character): four run drawings, 3 frames each, arms pumping opposite the legs with the elbows bent, torso leaned 10 deg, a small bob up on the air drawings and a squash on contact",
+   "evidence": [
+    "#23 f1352-1358 (lean forward ~30 deg, legs and arms swing, one measurer)",
+    "#12 f145-205 walk cycle (legs redrawn every frame)",
+    "owner Nov 23: all four limbs"
+   ],
+   "events": [
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 0,
+     "ch": "lean",
+     "v": [
+      10,
+      2
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "legs",
+     "v": "run1"
+    },
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "near",
+      "pump_in_lo"
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "far",
+      "pump_in_hi"
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "hop",
+     "v": 0.0
+    },
+    {
+     "at": 0,
+     "ch": "squash",
+     "v": 0.02
+    },
+    {
+     "at": 3,
+     "ch": "legs",
+     "v": "run2"
+    },
+    {
+     "at": 3,
+     "ch": "hop",
+     "v": 0.02
+    },
+    {
+     "at": 3,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 6,
+     "ch": "legs",
+     "v": "run3"
+    },
+    {
+     "at": 6,
+     "ch": "arm",
+     "v": [
+      "near",
+      "pump_out_hi"
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "arm",
+     "v": [
+      "far",
+      "pump_out_lo"
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "hop",
+     "v": 0.0
+    },
+    {
+     "at": 6,
+     "ch": "squash",
+     "v": 0.02
+    },
+    {
+     "at": 9,
+     "ch": "legs",
+     "v": "run4"
+    },
+    {
+     "at": 9,
+     "ch": "hop",
+     "v": 0.02
+    },
+    {
+     "at": 9,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 12,
+     "ch": "legs",
+     "v": "run1"
+    },
+    {
+     "at": 12,
+     "ch": "arm",
+     "v": [
+      "near",
+      "pump_in_lo"
+     ]
+    },
+    {
+     "at": 12,
+     "ch": "arm",
+     "v": [
+      "far",
+      "pump_in_hi"
+     ]
+    },
+    {
+     "at": 12,
+     "ch": "hop",
+     "v": 0.0
+    },
+    {
+     "at": 12,
+     "ch": "squash",
+     "v": 0.02
+    },
+    {
+     "at": 15,
+     "ch": "legs",
+     "v": "run2"
+    },
+    {
+     "at": 15,
+     "ch": "hop",
+     "v": 0.02
+    },
+    {
+     "at": 15,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 18,
+     "ch": "legs",
+     "v": "run3"
+    },
+    {
+     "at": 18,
+     "ch": "arm",
+     "v": [
+      "near",
+      "pump_out_hi"
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "arm",
+     "v": [
+      "far",
+      "pump_out_lo"
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "hop",
+     "v": 0.0
+    },
+    {
+     "at": 18,
+     "ch": "squash",
+     "v": 0.02
+    },
+    {
+     "at": 21,
+     "ch": "legs",
+     "v": "run4"
+    },
+    {
+     "at": 21,
+     "ch": "hop",
+     "v": 0.02
+    },
+    {
+     "at": 21,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 24,
+     "ch": "legs",
+     "v": "run1"
+    },
+    {
+     "at": 24,
+     "ch": "arm",
+     "v": [
+      "near",
+      "pump_in_lo"
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "arm",
+     "v": [
+      "far",
+      "pump_in_hi"
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "hop",
+     "v": 0.0
+    },
+    {
+     "at": 24,
+     "ch": "squash",
+     "v": 0.02
+    },
+    {
+     "at": 27,
+     "ch": "legs",
+     "v": "run2"
+    },
+    {
+     "at": 27,
+     "ch": "hop",
+     "v": 0.02
+    },
+    {
+     "at": 27,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 30,
+     "ch": "legs",
+     "v": "run3"
+    },
+    {
+     "at": 30,
+     "ch": "arm",
+     "v": [
+      "near",
+      "pump_out_hi"
+     ]
+    },
+    {
+     "at": 30,
+     "ch": "arm",
+     "v": [
+      "far",
+      "pump_out_lo"
+     ]
+    },
+    {
+     "at": 30,
+     "ch": "hop",
+     "v": 0.0
+    },
+    {
+     "at": 30,
+     "ch": "squash",
+     "v": 0.02
+    },
+    {
+     "at": 33,
+     "ch": "legs",
+     "v": "run4"
+    },
+    {
+     "at": 33,
+     "ch": "hop",
+     "v": 0.02
+    },
+    {
+     "at": 33,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 36,
+     "ch": "legs",
+     "v": "body"
+    },
+    {
+     "at": 36,
+     "ch": "hop",
+     "v": 0.0
+    },
+    {
+     "at": 36,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 36,
+     "ch": "lean",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 36,
+     "ch": "arm",
+     "v": [
+      "near",
+      "hang"
+     ]
+    },
+    {
+     "at": 36,
+     "ch": "arm",
+     "v": [
+      "far",
+      "hang"
+     ]
+    }
+   ],
+   "loop": 12,
+   "status": "APPROVED",
+   "round": 7,
+   "legs": "run",
+   "approved": "owner Nov 23 2026 8:46 AM CT (review of round 7)"
+  },
+  "sprint": {
+   "desc": "sprint: the jog drawings at 2 frames each, torso leaned 24 deg, bigger bob, speed lines trailing behind and dust puffs kicked up on each contact",
+   "evidence": [
+    "#23 f1352-1358 run off (lean ~30 deg)",
+    "#14 f143-156 speed lines",
+    "#12 f1071-1079 dust puffs under heels",
+    "owner Nov 23: a sprinty run"
+   ],
+   "events": [
+    {
+     "at": 0,
+     "ch": "face",
+     "v": "$face"
+    },
+    {
+     "at": 0,
+     "ch": "lean",
+     "v": [
+      24,
+      2
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "legs",
+     "v": "run1"
+    },
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "near",
+      "pump_in_lo"
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "arm",
+     "v": [
+      "far",
+      "pump_in_hi"
+     ]
+    },
+    {
+     "at": 0,
+     "ch": "hop",
+     "v": 0.0
+    },
+    {
+     "at": 0,
+     "ch": "squash",
+     "v": 0.02
+    },
+    {
+     "at": 0,
+     "ch": "fx",
+     "v": [
+      "dust",
+      "feet",
+      -0.2,
+      0.05,
+      0.4,
+      3
+     ]
+    },
+    {
+     "at": 2,
+     "ch": "legs",
+     "v": "run2"
+    },
+    {
+     "at": 2,
+     "ch": "hop",
+     "v": 0.035
+    },
+    {
+     "at": 2,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 4,
+     "ch": "legs",
+     "v": "run3"
+    },
+    {
+     "at": 4,
+     "ch": "arm",
+     "v": [
+      "near",
+      "pump_out_hi"
+     ]
+    },
+    {
+     "at": 4,
+     "ch": "arm",
+     "v": [
+      "far",
+      "pump_out_lo"
+     ]
+    },
+    {
+     "at": 4,
+     "ch": "hop",
+     "v": 0.0
+    },
+    {
+     "at": 4,
+     "ch": "squash",
+     "v": 0.02
+    },
+    {
+     "at": 4,
+     "ch": "fx",
+     "v": [
+      "dust",
+      "feet",
+      -0.2,
+      0.05,
+      0.4,
+      3
+     ]
+    },
+    {
+     "at": 6,
+     "ch": "legs",
+     "v": "run4"
+    },
+    {
+     "at": 6,
+     "ch": "hop",
+     "v": 0.035
+    },
+    {
+     "at": 6,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 8,
+     "ch": "legs",
+     "v": "run1"
+    },
+    {
+     "at": 8,
+     "ch": "arm",
+     "v": [
+      "near",
+      "pump_in_lo"
+     ]
+    },
+    {
+     "at": 8,
+     "ch": "arm",
+     "v": [
+      "far",
+      "pump_in_hi"
+     ]
+    },
+    {
+     "at": 8,
+     "ch": "hop",
+     "v": 0.0
+    },
+    {
+     "at": 8,
+     "ch": "squash",
+     "v": 0.02
+    },
+    {
+     "at": 8,
+     "ch": "fx",
+     "v": [
+      "dust",
+      "feet",
+      -0.2,
+      0.05,
+      0.4,
+      3
+     ]
+    },
+    {
+     "at": 10,
+     "ch": "legs",
+     "v": "run2"
+    },
+    {
+     "at": 10,
+     "ch": "hop",
+     "v": 0.035
+    },
+    {
+     "at": 10,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 12,
+     "ch": "legs",
+     "v": "run3"
+    },
+    {
+     "at": 12,
+     "ch": "arm",
+     "v": [
+      "near",
+      "pump_out_hi"
+     ]
+    },
+    {
+     "at": 12,
+     "ch": "arm",
+     "v": [
+      "far",
+      "pump_out_lo"
+     ]
+    },
+    {
+     "at": 12,
+     "ch": "hop",
+     "v": 0.0
+    },
+    {
+     "at": 12,
+     "ch": "squash",
+     "v": 0.02
+    },
+    {
+     "at": 12,
+     "ch": "fx",
+     "v": [
+      "dust",
+      "feet",
+      -0.2,
+      0.05,
+      0.4,
+      3
+     ]
+    },
+    {
+     "at": 14,
+     "ch": "legs",
+     "v": "run4"
+    },
+    {
+     "at": 14,
+     "ch": "hop",
+     "v": 0.035
+    },
+    {
+     "at": 14,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 16,
+     "ch": "legs",
+     "v": "run1"
+    },
+    {
+     "at": 16,
+     "ch": "arm",
+     "v": [
+      "near",
+      "pump_in_lo"
+     ]
+    },
+    {
+     "at": 16,
+     "ch": "arm",
+     "v": [
+      "far",
+      "pump_in_hi"
+     ]
+    },
+    {
+     "at": 16,
+     "ch": "hop",
+     "v": 0.0
+    },
+    {
+     "at": 16,
+     "ch": "squash",
+     "v": 0.02
+    },
+    {
+     "at": 16,
+     "ch": "fx",
+     "v": [
+      "dust",
+      "feet",
+      -0.2,
+      0.05,
+      0.4,
+      3
+     ]
+    },
+    {
+     "at": 18,
+     "ch": "legs",
+     "v": "run2"
+    },
+    {
+     "at": 18,
+     "ch": "hop",
+     "v": 0.035
+    },
+    {
+     "at": 18,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 20,
+     "ch": "legs",
+     "v": "run3"
+    },
+    {
+     "at": 20,
+     "ch": "arm",
+     "v": [
+      "near",
+      "pump_out_hi"
+     ]
+    },
+    {
+     "at": 20,
+     "ch": "arm",
+     "v": [
+      "far",
+      "pump_out_lo"
+     ]
+    },
+    {
+     "at": 20,
+     "ch": "hop",
+     "v": 0.0
+    },
+    {
+     "at": 20,
+     "ch": "squash",
+     "v": 0.02
+    },
+    {
+     "at": 20,
+     "ch": "fx",
+     "v": [
+      "dust",
+      "feet",
+      -0.2,
+      0.05,
+      0.4,
+      3
+     ]
+    },
+    {
+     "at": 22,
+     "ch": "legs",
+     "v": "run4"
+    },
+    {
+     "at": 22,
+     "ch": "hop",
+     "v": 0.035
+    },
+    {
+     "at": 22,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 24,
+     "ch": "legs",
+     "v": "run1"
+    },
+    {
+     "at": 24,
+     "ch": "arm",
+     "v": [
+      "near",
+      "pump_in_lo"
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "arm",
+     "v": [
+      "far",
+      "pump_in_hi"
+     ]
+    },
+    {
+     "at": 24,
+     "ch": "hop",
+     "v": 0.0
+    },
+    {
+     "at": 24,
+     "ch": "squash",
+     "v": 0.02
+    },
+    {
+     "at": 24,
+     "ch": "fx",
+     "v": [
+      "dust",
+      "feet",
+      -0.2,
+      0.05,
+      0.4,
+      3
+     ]
+    },
+    {
+     "at": 26,
+     "ch": "legs",
+     "v": "run2"
+    },
+    {
+     "at": 26,
+     "ch": "hop",
+     "v": 0.035
+    },
+    {
+     "at": 26,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 28,
+     "ch": "legs",
+     "v": "run3"
+    },
+    {
+     "at": 28,
+     "ch": "arm",
+     "v": [
+      "near",
+      "pump_out_hi"
+     ]
+    },
+    {
+     "at": 28,
+     "ch": "arm",
+     "v": [
+      "far",
+      "pump_out_lo"
+     ]
+    },
+    {
+     "at": 28,
+     "ch": "hop",
+     "v": 0.0
+    },
+    {
+     "at": 28,
+     "ch": "squash",
+     "v": 0.02
+    },
+    {
+     "at": 28,
+     "ch": "fx",
+     "v": [
+      "dust",
+      "feet",
+      -0.2,
+      0.05,
+      0.4,
+      3
+     ]
+    },
+    {
+     "at": 30,
+     "ch": "legs",
+     "v": "run4"
+    },
+    {
+     "at": 30,
+     "ch": "hop",
+     "v": 0.035
+    },
+    {
+     "at": 30,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 0,
+     "ch": "fx",
+     "v": [
+      "speed",
+      "behind",
+      -0.4,
+      0.25,
+      0.62,
+      32
+     ]
+    },
+    {
+     "at": 32,
+     "ch": "legs",
+     "v": "body"
+    },
+    {
+     "at": 32,
+     "ch": "hop",
+     "v": 0.0
+    },
+    {
+     "at": 32,
+     "ch": "squash",
+     "v": 0.0
+    },
+    {
+     "at": 32,
+     "ch": "lean",
+     "v": [
+      0,
+      2
+     ]
+    },
+    {
+     "at": 32,
+     "ch": "arm",
+     "v": [
+      "near",
+      "hang"
+     ]
+    },
+    {
+     "at": 32,
+     "ch": "arm",
+     "v": [
+      "far",
+      "hang"
+     ]
+    }
+   ],
+   "loop": 8,
+   "status": "APPROVED",
+   "round": 7,
+   "legs": "run",
+   "approved": "owner Nov 23 2026 8:46 AM CT (review of round 7)"
+  }
+ },
+ "approved_assets": {
+  "back_of_head": "owner Nov 23 2026 8:46 AM CT: back face and back@L/R 3/4 views approved"
+ }
+}

@@ -656,7 +656,8 @@ sc.cycles.samples=4; sc.cycles.transparent_max_bounces=8; sc.cycles.diffuse_boun
 os.makedirs('/root/cc/blend',exist_ok=True)
 # r5 (shots r4 C4): heads cut by the frame edge while the body is on screen; headnudge_cc.py gives the sideways shift (m) per character, x1.15 margin.
 # r6c (shots r6 C4, rule 56): S10_n0 head left the frame 1053-1061 as the push passed him; grid search (hx/grid probe on cc6b) (numpy projection on cam_S10) puts him +0.25 m x, -4.25 m y deeper, right of the close-up man: head 0.59-0.89 W for the whole shot and >= 77 px clear of the other two heads (first try, +2.0/-3.5, hid him behind S10_n1)
-NUDGE={"S01_pil": [0.273, -0.182], "S02_master": [0.104, 1.863], "S02_x2": [0.028, 0.51], "S03_pil": [-0.347, -0.228], "S05_pil": [-0.347, 0.264], "S05_pilB": [0.248, -0.188], "S07_p0": [0.827, 0.138], "S07_p1": [0.047, 0.008], "S08_pil": [-0.429, 0.039], "S08_sailA": [0.06, -0.005], "S09_carry": [-0.24, 0.134], "S10_n0": [1.112, -3.99], "S17_elder": [0.304, 0.089], "S15_writer": [0.034, 0.011]}
+# r6d (targeted r6c C4/rule 56): S08_pil head cut ~6 % by the left edge 758-765 as the truck ends; 0.12 m more toward frame centre (screen x +0.06 at 758)
+NUDGE={"S01_pil": [0.273, -0.182], "S02_master": [0.104, 1.863], "S02_x2": [0.028, 0.51], "S03_pil": [-0.347, -0.228], "S05_pil": [-0.347, 0.264], "S05_pilB": [0.248, -0.188], "S07_p0": [0.827, 0.138], "S07_p1": [0.047, 0.008], "S08_pil": [-0.533, 0.039], "S08_sailA": [0.06, -0.005], "S09_carry": [-0.24, 0.134], "S10_n0": [1.112, -3.99], "S17_elder": [0.304, 0.089], "S15_writer": [0.034, 0.011]}
 for _n,(_dx,_dy) in NUDGE.items():
     _o=bpy.data.objects.get(_n)
     if not _o: continue

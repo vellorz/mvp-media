@@ -301,9 +301,13 @@ def body(name,stride=0,skirt=True):
         belt(col=dk(R,0.55),buck=(200,190,170,255)); folds(4)
     elif cue=='apron':
         collar(dk(R,0.8)); placket(); buttons((400,),[y0+110,y0+190,y0+270,beltY+60],col=(90,70,50,255),r=11)
-        dd.line(_S([(260,y0+10),(560,beltY+40)]),fill=(110,84,52,255),width=s(26)); dd.line(_S([(260,y0+10),(560,beltY+40)]),fill=K,width=s(5))
-        dd.rounded_rectangle([s(430),s(beltY+20),s(650),s(beltY+190)],s(16),fill=(214,196,150,255),outline=K,width=s(8)); dd.line([s(430),s(beltY+60),s(650),s(beltY+60)],fill=K,width=s(6))
-        for k in range(3): dd.rectangle([s(450+k*55),s(beltY+5),s(495+k*55),s(beltY+40)],fill=(240,236,222,255),outline=K,width=s(4))
+        # dc16d (rule 375, owner's-eye pass: the satchel with paper tabs read as 'spectacles'): a printer's canvas APRON, bib to hem, neck strap, waist ties, ink smudges
+        dd.line(_S([(318,y0+40),(345,y0+120)]),fill=(200,186,150,255),width=s(16)); dd.line(_S([(482,y0+40),(455,y0+120)]),fill=(200,186,150,255),width=s(16))
+        dd.rounded_rectangle([s(320),s(y0+110),s(480),s(beltY+30)],s(14),fill=(228,216,186,255),outline=K,width=s(8))
+        dd.polygon(_S([(300,beltY+10),(500,beltY+10),(540,beltY+300),(260,beltY+300)]),fill=(228,216,186,255)); dd.line(_S([(300,beltY+10),(260,beltY+300)]),fill=K,width=s(8)); dd.line(_S([(500,beltY+10),(540,beltY+300)]),fill=K,width=s(8))
+        dd.line([s(250),s(beltY+12),s(550),s(beltY+12)],fill=(200,186,150,255),width=s(18)); dd.line([s(250),s(beltY+12),s(550),s(beltY+12)],fill=K,width=s(4))
+        dd.rounded_rectangle([s(350),s(beltY+70),s(450),s(beltY+140)],s(8),fill=(214,200,166,255),outline=K,width=s(6))
+        for (x_,y_,r_) in ((372,y0+170,14),(440,beltY+190,18),(470,beltY+240,10),(330,beltY+220,12)): dd.ellipse([s(x_-r_),s(y_-r_),s(x_+r_),s(y_+r_)],fill=(70,64,80,255))
         folds(3)
     elif cue=='pilgrim':   # cc: doublet buttoned down the front, plain white falling collar, breeches band at the hem
         placket(); buttons((400,),[y0+120,y0+180,y0+240,beltY+20,beltY+80,beltY+140],col=dk(R,0.55),r=11)
@@ -401,8 +405,18 @@ def arm(name,prop=None,straight=None):
     if prop=='oar': d.line([200,900,200,100],fill=(150,110,70,255),width=20); d.line([200,900,200,100],fill=K,width=4); mitt()
     if prop=='lantern': d.line([200,700,200,760],fill=K,width=6); d.rounded_rectangle([150,760,250,880],12,fill=(255,214,120,255),outline=K,width=9); d.rectangle([140,750,260,770],fill=(60,50,44,255)); mitt()
     if prop=='letter': d.rectangle([110,700,290,830],fill=(246,240,222,255),outline=K,width=10); d.line([(110,700),(200,770),(290,700)],fill=K,width=7); d.ellipse([182,752,218,788],fill=(170,30,40,255),outline=K,width=5); mitt()
-    if prop=='stamp': d.rectangle([170,640,230,740],fill=(120,80,50,255),outline=K,width=8); d.rectangle([130,740,270,790],fill=(170,30,40,255),outline=K,width=8); mitt()
-    if prop=='sack': d.ellipse([60,700,340,900],fill=(196,170,120,255),outline=K,width=11); d.line([140,720,260,720],fill=K,width=9); d.ellipse([100,760,150,800],fill=(246,240,222,255),outline=K,width=5); mitt()
+    if prop=='stamp':   # dc16d (rule 375, owner's-eye pass: 'a short red-and-black stub'): a classic rubber stamp, round wooden knob, neck, wide block, red rubber face
+        d.ellipse([140,600,260,700],fill=(150,98,56,255),outline=K,width=9); d.rectangle([180,690,220,760],fill=(150,98,56,255),outline=K,width=8)
+        d.rounded_rectangle([90,755,310,815],10,fill=(120,78,44,255),outline=K,width=9); d.rectangle([100,815,300,845],fill=(200,36,40,255),outline=K,width=8); mitt()
+    if prop=='sack':   # dc16d (rule 375, owner's-eye pass: 'a beige egg with a white dot'): a leather MAIL BAG, letters poking out, held by its strap
+        for k_,(x_,a_) in enumerate(((120,-14),(175,6),(232,-6))):
+            e_=Image.new('RGBA',(120,90),(0,0,0,0)); de_=ImageDraw.Draw(e_); de_.rectangle([4,4,116,86],fill=(248,244,232,255),outline=K,width=7); de_.line([(4,4),(60,46),(116,4)],fill=K,width=5)
+            if k_==1: de_.rectangle([84,12,108,36],fill=(196,40,40,255),outline=K,width=3)
+            e_=e_.rotate(a_,expand=True,resample=Image.BICUBIC); im.alpha_composite(e_,(x_-30,700))
+        d.rounded_rectangle([60,760,340,895],28,fill=(132,84,48,255),outline=K,width=11)
+        d.polygon([(60,770),(340,770),(320,835),(80,835)],fill=(110,68,38,255),outline=K); d.line([(60,770),(340,770),(320,835),(80,835),(60,770)],fill=K,width=10)
+        d.rectangle([182,812,218,848],fill=(214,180,80,255),outline=K,width=6)
+        d.line([(200,712),(90,770)],fill=(90,56,30,255),width=14); d.line([(200,712),(310,770)],fill=(90,56,30,255),width=14); mitt()
     if prop=='plate': d.ellipse([70,730,330,810],fill=(248,246,240,255),outline=K,width=9); d.ellipse([130,700,270,780],fill=(190,120,60,255),outline=K,width=8); mitt()
     if prop=='pie': d.chord([80,700,320,860],180,360,fill=(220,150,70,255),outline=K,width=10); d.rectangle([80,778,320,810],fill=(200,190,180,255),outline=K,width=8); [d.line([120+k*40,730,130+k*40,770],fill=(150,90,40,255),width=6) for k in range(5)]; mitt()
     if prop=='fork': d.line([200,720,200,880],fill=(190,190,200,255),width=14); [d.line([186+k*14,860,186+k*14,900],fill=(190,190,200,255),width=6) for k in range(3)]; mitt()
@@ -474,7 +488,7 @@ POSES={
 # ---- ROUND 6 (Nov 23 2026, coordinated motion): more Rick arm drawings, from 70 new strips (#05 #08 #13 #21 #23, two measurers).
 # Additive: existing poses unchanged; cards are only made for characters with cast.json "poses". INFERRED = fewer than 2 Rick examples.
 POSES.update({
- 'reach':(74,84),          # arm out and forward to take something: #13 f722, #08 f983, #21 f1054-1061, #23 f506
+ 'reach':(66,92),          # dc16d (rule 350 sagitta >= 6 %: was (74,84) = 3.2 % on screen; same hand direction ~80 deg) arm out and forward to take something: #13 f722, #08 f983, #21 f1054-1061, #23 f506
  'swing':(34,30),          # arm swung down-forward after an overhead strike/stamp: #21 f359-373, #05 f28-31
  'throw':(86,64),          # follow-through after a fling/toss: #21 f437-443, #23 f1298
  'hands_head':(150,250),   # hand clamped on the head/neck (panic): #21 f1468, #22 f1325-1327 (old labels)
@@ -743,6 +757,57 @@ def walk_legs(name,phase,side=1):
             if who=='near': leg(x,(x+side*6,y1+250),(x+side*10,1056),0,col)
             else: leg(x,(x+side*40,y1+190),(x-side*10,996),0,col)
     return im.resize((800,1100),Image.LANCZOS)
+
+# ---- dc16d (rule 373, owner's-eye pass: the S16 mailman glided toward the camera): walk v3 legs ported from the motion library
+# (mvp-media d5lr4u cast.py walk2_legs, owner-approved Nov 23 'toward camera' walk), composed under the split torso card.
+WALK_STYLES={   # stride px (foot travel per step on an 800 px card), lift px, drawings per cycle (on 2s), hips apart px, toe lift px
+ 'st':dict(name='stroll',stride=96,lift=36,n=10,toe=6),    # 20 f cycle = 10 f a step: easy, unhurried
+ 'nm':dict(name='walk',  stride=140,lift=52,n=8, toe=8),   # 16 f cycle = 8 f a step (Rick median 7.5)
+ 'br':dict(name='brisk', stride=186,lift=70,n=6, toe=10),  # 12 f cycle = 6 f a step: in a hurry
+}
+def walk2_legs(name,style,i,view='R'):
+    """walk v2 legs card: drawing i of WALK_STYLES[style]['n']; view 'R'/'L' = walking across toward screen right/left (3/4 body),
+    'F' = walking toward the camera (front body; knees bend outward, feet lift; feet never below row 1056). Leg A (light) and leg B (a shade darker, drawn first)
+    are half a cycle apart; one foot is always on row 1056 (each leg is in stance for half the cycle)."""
+    W_=WALK_STYLES[style]; c=C[name]; kind=c.get('body','tall'); pts,y0,w0,w1,y1=_sil(kind)
+    legc=dk(tuple(c.get('legs',(40,36,40))),0.8); LW=34; s_=lambda v:int(v*SS)
+    im=Image.new('RGBA',(800*SS,1100*SS),(0,0,0,0)); d=ImageDraw.Draw(im)
+    side=-1 if view=='L' else 1; hy=y1-120; L0=1056-hy; Lc=L0*1.01
+    def foot_at(p):
+        if p<0.5:   # stance: foot flat, slides from front to back; heel rises in the last fifth (toe-off)
+            t=p/0.5; return W_['stride']/2-W_['stride']*t,0.0,(W_['toe']*max(0.0,(t-0.8)/0.2))
+        t=(p-0.5)/0.5; e=(1-math.cos(math.pi*t))/2   # swing: ease-in-out forward, sine lift
+        return -W_['stride']/2+W_['stride']*e,W_['lift']*math.sin(math.pi*t),0.0
+    def draw(hx,p,col,sx):
+        dx,lift,toe=foot_at(p)
+        if view=='F':   # toward the camera: travel is depth, so the foot stays under the hip; the knee bows outward
+            fx_=hx+sx*6; fy=1056-lift; dd=math.hypot(dx*0.35,fy-hy); kdir=sx   # feet stay on the floor row (rigcheck FOOT); depth shortens the leg only a little   # a foot further forward sits a touch lower
+        else:
+            fx_=hx+side*dx; fy=1056-lift; dd=math.hypot(fx_-hx,fy-hy); kdir=side
+        # thigh + shin of equal length Lc/2 with a ROUNDED knee (like the arm elbow), knee pushed out perpendicular to the hip-foot line
+        cx_,cy_=(hx+fx_)/2,(hy+fy)/2; ux,uy=(fx_-hx)/max(dd,1),(fy-hy)/max(dd,1); nx,ny=-uy,ux
+        if nx*kdir<0: nx,ny=-nx,-ny
+        if view=='F': nx,ny=kdir*0.8,0.0
+        b=0.5*math.sqrt(max(0.0,Lc*Lc-dd*dd)); Kn=(cx_+nx*b,cy_+ny*b)
+        def lerp(P_,Q_,t): return (P_[0]+(Q_[0]-P_[0])*t,P_[1]+(Q_[1]-P_[1])*t)
+        S0,F0=(hx,hy),(fx_,fy); A_=lerp(Kn,S0,0.30); B_=lerp(Kn,F0,0.30)
+        P=[lerp(S0,A_,k/12) for k in range(13)]+[((1-t)**2*A_[0]+2*(1-t)*t*Kn[0]+t*t*B_[0],(1-t)**2*A_[1]+2*(1-t)*t*Kn[1]+t*t*B_[1]) for t in [k/16 for k in range(1,17)]]+[lerp(B_,F0,k/12) for k in range(1,13)]
+        d.line(_S(P),fill=K,width=s_(LW),joint='curve'); d.line(_S(P),fill=col,width=s_(LW-16),joint='curve')
+        for p_ in (P[0],P[-1]): d.ellipse([s_(p_[0]-LW/2),s_(p_[1]-LW/2),s_(p_[0]+LW/2),s_(p_[1]+LW/2)],fill=K)
+        if view=='F': d.ellipse([s_(fx_-28),s_(fy-14-toe),s_(fx_+28),s_(fy+16-toe)],fill=K)
+        else: d.ellipse([s_(fx_-30+side*16),s_(fy-14-toe),s_(fx_+34+side*16),s_(fy+18-toe)],fill=K)
+    p=i/W_['n']; hs=40 if view=='F' else 20   # hips: wide apart from the front, nearly one line from the side (legs overlap, never an X)
+    draw(400+(-hs if view=='F' else -side*hs),(p+0.5)%1.0,dk(legc,0.7),-1)   # leg B, far / darker, first
+    draw(400+(hs if view=='F' else side*hs),p,legc,1)                        # leg A
+    return im.resize((800,1100),Image.LANCZOS)
+
+def walk_body(name,style,i,view='F'):
+    top,_=split_body(name); lg=walk2_legs(name,style,i,view); out=Image.new('RGBA',top.size,(0,0,0,0)); out.alpha_composite(lg.resize(top.size)); out.alpha_composite(top); return out
+import os as _os2
+if _os2.environ.get('WALK_ONLY'):
+    for _n in _os2.environ['WALK_ONLY'].split(','):
+        for _i in range(WALK_STYLES['br']['n']): walk_body(_n,'br',_i,'F').save(f'{T}{_n}_bodywkFbr{_i}.png')
+    print('WALK_OK'); raise SystemExit
 if __name__=='__main__':
     out={}
     import os as _os; _ONLY=set(filter(None,_os.environ.get('CAST_ONLY','').split(',')))   # dc15: rebuild one character's textures

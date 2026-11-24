@@ -1,0 +1,699 @@
+{
+ "preacher": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   30,
+   28,
+   34
+  ],
+  "legs": [
+   30,
+   28,
+   32
+  ],
+  "cue": "gown",
+  "long": true,
+  "skirt": [
+   30,
+   28,
+   34
+  ],
+  "body": "tall",
+  "hair": [
+   70,
+   50,
+   36
+  ],
+  "hairstyle": "short",
+  "hat3d": "flatcap3d",
+  "hatcol": [
+   28,
+   26,
+   30
+  ],
+  "hat_tilt": 8,
+  "fhair": "goatee",
+  "fhaircol": [
+   70,
+   50,
+   36
+  ],
+  "props": [
+   "book"
+  ],
+  "look": "D1+goatee",
+  "mouth_side": 1,
+  "turn": 0.4,
+  "skin": "rick_warm"
+ },
+ "kidA": {
+  "faces": {
+   "talkA": [
+    "dot",
+    "raise",
+    "open"
+   ],
+   "talkB": [
+    "dot",
+    "raise",
+    "o"
+   ],
+   "talkC": [
+    "dot",
+    "raise",
+    "wide"
+   ],
+   "talkD": [
+    "dot",
+    "raise",
+    "smile"
+   ]
+  },
+  "library": "all",
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   176,
+   60,
+   50
+  ],
+  "legs": [
+   70,
+   60,
+   50
+  ],
+  "cue": "tunic",
+  "body": "round",
+  "hair": [
+   150,
+   100,
+   50
+  ],
+  "hairstyle": "short",
+  "hairdo": "bowl",
+  "props": [
+   "doll",
+   "gift"
+  ],
+  "look": "D1+bowl",
+  "mouth_side": -1,
+  "turn": -0.5,
+  "skin": "rick_warm"
+ },
+ "kidB": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   60,
+   90,
+   150
+  ],
+  "legs": [
+   50,
+   50,
+   60
+  ],
+  "cue": "kirtle",
+  "long": true,
+  "skirt": [
+   60,
+   90,
+   150
+  ],
+  "body": "round",
+  "hair": [
+   110,
+   70,
+   40
+  ],
+  "hairstyle": "ponytail",
+  "props": [
+   "gingerbread",
+   "gift"
+  ],
+  "look": "M2",
+  "mouth_side": 1,
+  "turn": 0.5,
+  "skin": "rick_warm"
+ },
+ "kidC": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   70,
+   120,
+   70
+  ],
+  "legs": [
+   60,
+   50,
+   44
+  ],
+  "cue": "tunic",
+  "body": "round",
+  "hair": [
+   60,
+   40,
+   30
+  ],
+  "hairstyle": "short",
+  "hairdo": "messy",
+  "props": [
+   "apple",
+   "gift"
+  ],
+  "look": "D1+messy",
+  "mouth_side": 1,
+  "turn": 0.4,
+  "skin": "rick_warm"
+ },
+ "councilA": {
+  "faces": {
+   "talkA": [
+    "dot",
+    "raise",
+    "open"
+   ],
+   "talkB": [
+    "dot",
+    "raise",
+    "o"
+   ],
+   "talkC": [
+    "dot",
+    "raise",
+    "wide"
+   ],
+   "talkD": [
+    "dot",
+    "raise",
+    "smile"
+   ]
+  },
+  "library": "all",
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   120,
+   30,
+   36
+  ],
+  "legs": [
+   40,
+   30,
+   30
+  ],
+  "cue": "robe",
+  "long": true,
+  "skirt": [
+   120,
+   30,
+   36
+  ],
+  "fur": [
+   150,
+   110,
+   70
+  ],
+  "body": "round",
+  "hair": [
+   90,
+   64,
+   44
+  ],
+  "hairstyle": "short",
+  "hat3d": "flatcap3d",
+  "hatcol": [
+   40,
+   30,
+   34
+  ],
+  "hat_tilt": -7,
+  "fhair": "walrus",
+  "fhaircol": [
+   90,
+   64,
+   44
+  ],
+  "props": [
+   "scroll"
+  ],
+  "look": "D2 walrus",
+  "mouth_side": -1,
+  "turn": -0.5,
+  "skin": "rick_warm"
+ },
+ "councilB": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   40,
+   70,
+   56
+  ],
+  "legs": [
+   30,
+   34,
+   30
+  ],
+  "cue": "robe",
+  "long": true,
+  "skirt": [
+   40,
+   70,
+   56
+  ],
+  "fur": [
+   200,
+   190,
+   170
+  ],
+  "body": "tall",
+  "hair": [
+   220,
+   218,
+   214
+  ],
+  "hairstyle": "short",
+  "fhair": "whitebeard",
+  "fhaircol": [
+   230,
+   228,
+   224
+  ],
+  "props": [
+   "scroll"
+  ],
+  "look": "whitebeard",
+  "mouth_side": 1,
+  "turn": 0.5,
+  "skin": "rick_warm"
+ },
+ "councilC": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   86,
+   60,
+   40
+  ],
+  "legs": [
+   40,
+   32,
+   28
+  ],
+  "cue": "robe",
+  "long": true,
+  "skirt": [
+   86,
+   60,
+   40
+  ],
+  "fur": [
+   60,
+   44,
+   32
+  ],
+  "body": "tall",
+  "hair": [
+   50,
+   36,
+   28
+  ],
+  "hairstyle": "short",
+  "hairdo": "sidepart",
+  "fhair": "pencil",
+  "fhaircol": [
+   50,
+   36,
+   28
+  ],
+  "props": [
+   "scroll"
+  ],
+  "look": "D2 pencil",
+  "mouth_side": 0,
+  "turn": 0,
+  "skin": "rick_warm"
+ },
+ "sellerA": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   150,
+   110,
+   60
+  ],
+  "legs": [
+   60,
+   50,
+   40
+  ],
+  "cue": "apron",
+  "body": "round",
+  "hair": [
+   120,
+   80,
+   40
+  ],
+  "hairstyle": "short",
+  "hairdo": "curly",
+  "fhair": "chevron",
+  "fhaircol": [
+   120,
+   80,
+   40
+  ],
+  "props": [
+   "doll",
+   "gingerbread"
+  ],
+  "look": "D2 chevron",
+  "mouth_side": 1,
+  "turn": 0.5,
+  "skin": "rick_warm"
+ },
+ "sellerB": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   130,
+   50,
+   80
+  ],
+  "legs": [
+   50,
+   40,
+   40
+  ],
+  "cue": "kirtle",
+  "long": true,
+  "skirt": [
+   100,
+   40,
+   60
+  ],
+  "body": "round",
+  "hair": [
+   60,
+   40,
+   30
+  ],
+  "hairstyle": "topbun",
+  "props": [
+   "gingerbread",
+   "candle"
+  ],
+  "look": "M3",
+  "mouth_side": -1,
+  "turn": -0.5,
+  "skin": "rick_warm"
+ },
+ "mother": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   60,
+   100,
+   90
+  ],
+  "legs": [
+   50,
+   40,
+   40
+  ],
+  "cue": "kirtle",
+  "long": true,
+  "skirt": [
+   50,
+   80,
+   72
+  ],
+  "body": "round",
+  "hair": [
+   140,
+   90,
+   50
+  ],
+  "hairstyle": "bob",
+  "props": [
+   "rose",
+   "apple",
+   "gift"
+  ],
+  "look": "M1",
+  "mouth_side": 1,
+  "turn": 0.5,
+  "skin": "rick_warm"
+ },
+ "father": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   90,
+   64,
+   44
+  ],
+  "legs": [
+   50,
+   40,
+   34
+  ],
+  "cue": "vest",
+  "body": "tall",
+  "hair": [
+   60,
+   44,
+   30
+  ],
+  "hairstyle": "short",
+  "hairdo": "cowlick",
+  "fhair": "curled",
+  "fhaircol": [
+   60,
+   44,
+   30
+  ],
+  "props": [
+   "apple",
+   "rose"
+  ],
+  "look": "D2 curled",
+  "mouth_side": -1,
+  "turn": -0.5,
+  "skin": "rick_warm"
+ },
+ "tourA": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   200,
+   60,
+   60
+  ],
+  "legs": [
+   50,
+   50,
+   70
+  ],
+  "cue": "scarf",
+  "scarf": [
+   240,
+   220,
+   120
+  ],
+  "body": "round",
+  "hair": [
+   90,
+   60,
+   40
+  ],
+  "hairstyle": "ponytail",
+  "hat3d": "beanie3d",
+  "hatcol": [
+   60,
+   90,
+   150
+  ],
+  "hat_tilt": 6,
+  "props": [
+   "mug",
+   "smartphone"
+  ],
+  "look": "M2",
+  "mouth_side": 1,
+  "turn": 0.5,
+  "skin": "rick_warm"
+ },
+ "tourB": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   60,
+   80,
+   110
+  ],
+  "legs": [
+   40,
+   40,
+   50
+  ],
+  "cue": "scarf",
+  "scarf": [
+   180,
+   40,
+   40
+  ],
+  "body": "tall",
+  "hair": [
+   50,
+   36,
+   28
+  ],
+  "hairstyle": "short",
+  "hairdo": "spiky",
+  "props": [
+   "mug",
+   "smartphone"
+  ],
+  "look": "D3",
+  "mouth_side": -1,
+  "turn": -0.5,
+  "skin": "rick_warm",
+  "fhair": "stubbledots",
+  "fhaircol": [
+   50,
+   36,
+   28
+  ]
+ },
+ "kidM": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   240,
+   170,
+   40
+  ],
+  "legs": [
+   60,
+   70,
+   120
+  ],
+  "cue": "camera",
+  "body": "round",
+  "hair": [
+   160,
+   110,
+   60
+  ],
+  "hairstyle": "short",
+  "hairdo": "bangs",
+  "props": [
+   "gift"
+  ],
+  "look": "D1+bangs",
+  "mouth_side": 1,
+  "turn": 0.4,
+  "skin": "rick_warm"
+ },
+ "chalet": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   120,
+   40,
+   40
+  ],
+  "legs": [
+   40,
+   40,
+   46
+  ],
+  "cue": "apron",
+  "body": "tall",
+  "hair": [
+   200,
+   196,
+   190
+  ],
+  "hairstyle": "short",
+  "hat3d": "beanie3d",
+  "hatcol": [
+   200,
+   40,
+   40
+  ],
+  "hat_tilt": -8,
+  "fhair": "toothbrush",
+  "fhaircol": [
+   200,
+   196,
+   190
+  ],
+  "props": [
+   "mug"
+  ],
+  "look": "D2 toothbrush",
+  "mouth_side": -1,
+  "turn": -0.4,
+  "skin": "rick_warm"
+ }
+}

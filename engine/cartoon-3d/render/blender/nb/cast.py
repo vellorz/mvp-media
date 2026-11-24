@@ -399,7 +399,11 @@ def arm(name,prop=None,straight=None):
     if prop=='magnifier': d.line([200,720,200,640],fill=(60,40,30,255),width=26); d.line([200,720,200,640],fill=K,width=5); d.ellipse([110,460,290,640],fill=(210,232,240,255),outline=K,width=16); d.arc([140,490,260,610],200,260,fill=(255,255,255,255),width=12); mitt()
     if prop=='woodbox': d.ellipse([88,700,312,800],fill=(214,170,110,255),outline=K,width=10); d.rectangle([88,750,312,850],fill=(200,156,98,255)); d.line([88,750,88,850],fill=K,width=10); d.line([312,750,312,850],fill=K,width=10); d.arc([88,800,312,900],0,180,fill=K,width=10); d.ellipse([88,700,312,800],fill=(226,188,130,255),outline=K,width=10); [d.ellipse([140+k*44,728,170+k*44,758],fill=[(200,50,60,255),(60,120,170,255),(230,190,60,255),(200,50,60,255)][k],outline=K,width=4) for k in range(4)]; mitt()
     if prop=='ledger': d.rectangle([70,640,330,890],fill=(110,40,36,255),outline=K,width=12); d.rectangle([92,662,308,868],outline=(214,180,90,255),width=6); d.rectangle([300,650,330,880],fill=(236,226,200,255),outline=K,width=6); mitt()
-    if prop=='candles': [ (d.rectangle([120+k*40,560,146+k*40,740],fill=[(230,70,80,255),(250,210,80,255),(90,160,220,255),(240,240,240,255)][k%4],outline=K,width=6), d.line([133+k*40,560,133+k*40,536],fill=K,width=5)) for k in range(4)]; mitt()
+    if prop=='candles':   # nb eyepass r1 (rule 375: read as crayons at viewing size): bigger candles with lit flames so they read as candles at a glance
+        for k in range(4):
+            x0=104+k*46; d.rectangle([x0,530,x0+36,750],fill=[(230,70,80,255),(250,210,80,255),(90,160,220,255),(240,240,240,255)][k%4],outline=K,width=7)
+            d.line([x0+18,530,x0+18,506],fill=K,width=6); d.ellipse([x0+4,440,x0+32,512],fill=(255,170,50,255),outline=K,width=5); d.ellipse([x0+11,468,x0+25,506],fill=(255,240,170,255))
+        mitt()
     if prop=='brush': d.line([200,720,200,500],fill=(150,100,50,255),width=20); d.line([200,720,200,500],fill=K,width=4); d.rectangle([176,430,224,500],fill=(190,190,196,255),outline=K,width=6); d.polygon([(176,430),(224,430),(214,370),(186,370)],fill=(200,40,40,255),outline=K); mitt()
     if prop=='mug': d.rounded_rectangle([130,690,270,830],16,fill=(200,40,40,255),outline=K,width=10); d.arc([250,720,320,800],270,90,fill=K,width=12); [d.arc([150+k*40,600,190+k*40,690],180,300,fill=(240,240,240,255),width=8) for k in range(3)]; mitt()
     if prop=='phone': d.rounded_rectangle([160,640,240,780],12,fill=(40,40,48,255),outline=K,width=8); mitt()

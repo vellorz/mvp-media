@@ -9,7 +9,7 @@ _SH={'S01':(0,130),'S02':(130,193),'S03':(193,332),'S04':(332,505),'S05':(505,66
      'S10':(1062,1158),'S11':(1158,1246),'S12':(1246,1334),'S13':(1334,1404),'S14':(1404,1520),'S15':(1520,1588),'S16':(1588,1676),'S17':(1676,1800),'S18':(1800,END)}
 SH={n:(a,(b if n=='S18' else b-1)) for n,(a,b) in _SH.items()}
 # palette per place/era (multipliers R,G,B), flips across each time/mood join (rule 187): dusk market cool-warm, museum neutral-cool, office warm, archive amber, graveyard cold, 1678 sepia-warm
-_M=(1.02,0.99,0.98); _A=(0.98,1.0,1.03); _P=(1.04,1.0,0.95); _G=(1.05,1.0,0.9); _C=(0.96,0.99,1.05); _H=(1.07,1.0,0.88)
+_M=(1.02,0.99,0.98); _A=(0.98,1.0,1.03); _P=(1.04,1.0,0.95); _G=(1.05,1.0,0.9); _C=(1.0,1.0,1.0); _H=(1.07,1.0,0.88)   # r2 (visual 355: S10 face B/R 0.926, too blue under the cool tint): _C neutral
 TINT={'S01':_M,'S02':_A,'S03':_A,'S04':_P,'S05':_A,'S06':_A,'S07':_P,'S08':_A,'S09':_G,'S10':_C,'S11':_G,'S12':_H,'S13':_P,'S14':_A,'S15':_A,'S16':_H,'S17':_M,'S18':(1.03,1.0,0.96)}
 # per-shot brightness targets: snow exteriors brighter, lamp-lit interiors darker (Rick's film swings 0.2-0.7 across scenes)
 LT={'S01':0.46,'S02':0.48,'S03':0.44,'S04':0.46,'S05':0.48,'S06':0.48,'S07':0.44,'S08':0.46,'S09':0.42,'S10':0.52,'S11':0.46,'S12':0.50,
@@ -66,15 +66,21 @@ def apply(x,p):
     y3=gray(z)[...,None]
     # r4b (visual r4 critical: S10 Nauset and S01 Pilgrim skin went orange under satk 2.4): skin-hued pixels (R>G>B, warm hue, mid saturation, lit) keep at most SKMAX saturation gain
     mx=x.max(-1); mn=x.min(-1); hs=(mx-mn)/np.maximum(mx,1e-4); hue=(x[...,1]-x[...,2])/np.maximum(mx-mn,1e-4)
-    skin=((x[...,0]>=x[...,1])&(x[...,1]>=x[...,2]-0.02)&(hs>0.14)&(hs<0.55)&(hue>0.22)&(hue<0.58)&(y>0.22)).astype(np.float32)
+    skin=((x[...,0]>=x[...,1])&(x[...,1]>=x[...,2]-0.02)&(hs>0.05)&(hs<0.55)&(hue>0.22)&(hue<0.58)&(y>0.22)).astype(np.float32)
     skin=cv2.GaussianBlur(skin,(0,0),2.0)[...,None]; sk=np.minimum(sat,SKMAX)*skin+sat*(1-skin)
     if PROT[0] and sat>1:   # r6b (visual r6 critical: S10 Nauset deerskin mantles 163,103,62 went traffic-cone orange 222,88,0 and the face rim speckled once the narrowed skin mask left them out): warm pixels that are already saturated get little of the gain, low-sat sand still gets all of it
         warm=np.clip((hue[...,None]+0.1)/0.2,0,1)*np.clip((0.75-hue[...,None])/0.15,0,1)*(x[...,:1]>=x[...,2:3])
         keep=np.clip((0.62-hs[...,None])/0.32,0,1); sk=sk*(1-warm)+(1+(sk-1)*keep)*warm
-    z=np.clip(y3+sk*(z-y3),0,1); z=np.clip(z*np.array(tint,np.float32),0,1); return z
+    z=np.clip(y3+sk*(z-y3),0,1)
+    # nb r2b (rule 355, skin probe: graded face B/R 0.74-0.80 vs raw 0.87-0.93): the lighter r2 skin (248,230,214, sat 0.14) fell under the old hs>0.14 mask and took the full
+    # warm tint + saturation gain. Skin pixels now take the square root of the place tint (half the colour shift) and no saturation gain.
+    tn=np.array(tint,np.float32); z=np.clip(z*(tn**(1.0-0.5*skin)),0,1)
+    # nb r2b: per-shot skin balance (G, B multipliers on skin pixels only) measured by skinprobe_nb.py on graded faces, centring each shot on G/R 0.92, B/R 0.86
+    g_,b_=SKC.get(CUR[0],(1.0,1.0)); z[...,1]*=g_**skin[...,0]; z[...,2]*=b_**skin[...,0]; return np.clip(z,0,1)
 SKMAX=1.0
 SATPROT=set(os.environ.get('SATPROT',','.join(_SH)).split(','))   # nb: warm-saturation protect on every shot (rules 355/367b)   # r6b: shots graded with the saturated-warm protect (only S10 re-posted in round 6b; apply to every shot from the next video on)
-PROT=[False]
+PROT=[False]; CUR=['']
+SKC={"S01": (0.984, 0.973), "S03": (0.98, 0.952), "S04": (0.993, 0.996), "S07": (0.995, 1.004), "S08": (0.98, 0.953), "S09": (0.955, 0.972), "S10": (0.957, 0.914), "S12": (0.987, 1.012), "S13": (0.989, 0.994), "S14": (0.977, 0.945), "S16": (0.986, 1.011), "S17": (0.983, 0.952), "S18": (0.941, 0.933)}   # r2b skin balance per shot (skinprobe_nb.py, graded faces before balance)
 CLAR=0.55; CLS=14.0; PLUM=np.array([46,28,54],np.float32)/255   # r4 (visual L6 0.361 > 0.35 and halos at f60/f1720): weaker, tighter local contrast (r3 was 0.8 / 24 px)
 def finish(o):
     y=gray(o)[...,None]; mid=np.clip(4*y*(1-y),0,1)   # r3: local contrast on midtones only (r2 crushed ink and coats to RGB 0)
@@ -112,7 +118,7 @@ WORDS=[[w['w'],w['s'],w['e']] for w in json.load(open('/root/nb/vo/vo_trim.wav.w
 def fixwords(W_):
     """caption text follows script.md, not ASR spelling: numbers as digits, Nauset, gray, quote marks"""
     MERGE=[]
-    SUB={'400th':'400th','It':'\u201cIt','banners!':'banners!\u201d','Christkind':'Christkind'}
+    SUB={'400th':'400th','It':'\u201cIt','banners!':'banners!\u201d','Christkind':'Christkind','two?':'2?','seven?':'7?','seven.':'7.'}   # r2 (payoff S8: numbers as digits)
     o=[]; i=0
     while i<len(W_):
         hit=False
@@ -155,6 +161,17 @@ def cap_layer(txt):
     ImageDraw.Draw(lay).text((x,BASE),txt,font=FNT,fill=(255,255,255,255),anchor='ls',stroke_width=STROKE,stroke_fill=(0,0,0,255))
     return lay,w/W
 PQ=json.load(open('/root/nb/bridge/posterquad.json'))
+# nb: the S17 crane sweeps the "350 JAHRE 1678-2028" banner down through the caption line (f1740-1765). The story fact on the banner must stay readable,
+# so on those frames the caption moves just below the banner (or above it if below would leave the frame). Banner box per frame: bannerproj_nb.py.
+B17={int(k):v for k,v in json.load(open('/root/nb/bridge/banner17.json')).items()}
+CAPT,CAPB=0.717-0.035,0.717+0.012   # caption glyph band (fraction of H) at the default baseline
+def capdy(f):
+    return 0   # r2 (text verifier, rule 344): the caption never moves; S17 is staged so the banner stays out of the caption band
+    if f not in B17: return 0
+    lo,hi=B17[f]
+    for base in (0.717,0.90,lo-0.03):   # default line, then a fixed lower line, then just above the banner
+        if hi<base-0.035-0.01 or lo>base+0.012+0.01: return int(round((base-0.717)*H))
+    return 0
 _PF=np.asarray(Image.open('/root/nb/poster_2k.png').convert('RGB')).astype(np.float32)/255.0
 def truepost(o,q,k=0.96):
     h,w=o.shape[:2]; ph,pw=_PF.shape[:2]
@@ -167,7 +184,7 @@ if __name__=='__main__':
     # grade params per shot from 5 sampled frames
     P={}; rep={}
     for n in SH:
-        PROT[0]=(n in SATPROT)
+        PROT[0]=(n in SATPROT); CUR[0]=n
         rd=Reader(n); idx=set(np.linspace(0,rd.n-1,5).astype(int)); smp=[]
         for i in range(rd.n):
             fr=rd.next()
@@ -203,7 +220,7 @@ if __name__=='__main__':
             if f>max(TESTF): break
             continue
         for n in act:
-            PROT[0]=(n in SATPROT); raw=R[n].next(); o=finish(apply(raw,P[n]))
+            PROT[0]=(n in SATPROT); CUR[0]=n; raw=R[n].next(); o=finish(apply(raw,P[n]))
             if n=='S18' and f>=PAY0:   # payoff close-up: protect the poster's real colours (no highlight stretch, gentle gamma)
                 q=apply(raw,PAYP); q=np.clip(q+0.7*(q-cv2.GaussianBlur(q,(0,0),1.4*K)),0,1);   # round 4: poster read soft (38 % of file sharpness): gentle unsharp on the payoff
                 t=min(1.0,(f-PAY0+1)/(PAY1-PAY0+1)); t=t*t*(3-2*t); o=o*(1-t)+q*t
@@ -218,7 +235,9 @@ if __name__=='__main__':
         cur=[c for c in CAPS if c[0]<=f<c[2]]
         if cur:
             if capkey!=cur[0][1]: capimg,wd=cap_layer(cur[0][1]); capkey=cur[0][1]; widths.append(wd)
-            im.alpha_composite(capimg)
+            dy=capdy(f)
+            if dy: im.alpha_composite(capimg.crop((0,max(0,-dy),W,H-max(0,dy))),dest=(0,max(0,dy)))
+            else: im.alpha_composite(capimg)
         if TESTF: im.convert('RGB').save(f'{OUT}_f{f}.png'); continue
         enc.stdin.write(np.asarray(im.convert('RGB')).tobytes())
         if f%100==0: print('POST',f,flush=True)

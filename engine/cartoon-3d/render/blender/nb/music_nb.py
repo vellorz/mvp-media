@@ -64,7 +64,7 @@ gdb=np.interp(tt,mk,mv)
 k_=int(0.7*SR); gdb=np.convolve(np.pad(gdb,(k_//2,k_-k_//2-1),mode='edge'),np.ones(k_)/k_,mode='valid')   # rides take ~0.7 s (M8)
 gl=10**(gdb/20)
 # cc r2: stop-time on the payoff hit (mix time 59.74-60.10 s, ding at f1793): the bed drops 12 dB for the ding with 40 ms ramps, then returns at full payoff level (rule 319 payoff >= +6 over the local bed while rule 192 keeps it >= 8 LU under the VO)
-_tm=np.arange(N)/SR; _r=0.04; _st=np.clip(np.minimum((_tm-62.57)/_r,(63.25-_tm)/_r),0,1); gl=gl*10**(-20*_st/20); _s2=np.clip(np.minimum((_tm-52.13)/_r,(52.55-_tm)/_r),0,1); gl=gl*10**(-9*_s2/20)   # nb: stop-time on the 1678 reveal ding too (f1565); payoff ding at f1878 ("short")
+_tm=np.arange(N)/SR; _r=0.04; _st=np.clip(np.minimum((_tm-62.57)/_r,(63.25-_tm)/_r),0,1); pass   # r2 (audio verifier, rule 342 [C]: the bed is never lowered for an effect): no stop-times; the dings land just after their words instead   # nb: stop-time on the 1678 reveal ding too (f1565); payoff ding at f1878 ("short")
 thin=np.clip((gdb+1.0)/4.0,0,1)   # melody and plucks drop out in the -3..-5 dips, return on rises
 bed=(T['mal']*0.9*thin+T['plk']*0.6*(0.4+0.6*thin)+T['bass']*0.62+T['kick']*0.7+T['pad']*1.0)*gl
 # gentle bus compression for a constant level (no pumping: slow, light)
@@ -111,11 +111,11 @@ EV+=[(100,whoosh2(0.5),0.6),                        # S01 swing up on "birthday"
      (140,whoosh2(0.35),0.45),                        # S02 push down onto the ink blot
      (684,soft(click(),1100),0.45),(712,soft(click(),1100),0.45),   # the 2, then the 7, tried on over the smudge
      (862,soft(click(),1200),0.6),(871,soft(click(),1200),0.6),     # two photo flashes
-     (1376,soft(click(),1500),0.7),(1380,whoosh2(0.35),0.5),        # the banner string snaps, the banner swings down
+     (1376,soft(thump(160,0.14),1800),0.9),(1380,whoosh2(0.35),0.5),        # the banner string snaps, the banner swings down
      (1491,soft(ding(88,0.7),3000),0.35),             # eureka on "blob"
-     (1565,soft(ding(83,0.9),3000),0.45),             # the 7 shows through: 1678
+     (1580,soft(ding(83,0.9),3000),0.45),             # the 7 shows through: 1678
      (1730,whoosh2(0.4),0.45),                        # crane up to the Christkind
-     (1878,soft(ding(83,1.4),3000),0.45),(1878,soft(ding(88,1.4),3000),0.32)]   # payoff push lands on "short"
+     (1889,soft(ding(83,1.4),3000),0.45),(1889,soft(ding(88,1.4),3000),0.32)]   # payoff push lands on "short"
 # A6: level every SFX event against the bed under it so each lands at the same offset over the bed
 # (one common offset; mix.py then sets the global SFX gain so the median offset is +10 dB in the mix)
 BEDW=bed/np.abs(bed).max()*0.7
@@ -142,7 +142,7 @@ for it in range(12):   # overlapping tails add up: re-level every group against 
     for gr in G:
         i,w=gr['i'],gr['w']   # robust: average of three comparison spans (span, span+0.2 s, fixed 0.5 s)
         vv=[20*np.log10(pk50(S[i:i+ww])/rms(BEDW[i:i+ww])) for ww in (w,w+int(0.2*SR),int(0.5*SR))]; po=(min(vv)+max(vv))/2; gr['k']*=10**((16-po)/20*0.8)
-ATT={1878:-6.8,1491:-5.0,1565:-5.0,100:-1.5}   # tonal dings read louder than their RMS (K-weighting): keep every SFX >= 8 LU under the VO
+ATT={1889:-6.8,1491:-5.0,1580:-5.0,100:-1.5}   # tonal dings read louder than their RMS (K-weighting): keep every SFX >= 8 LU under the VO
 for gr in G: gr['k']*=10**(ATT.get(gr['f0'],0.0)/20)
 S[:]=sum(gr['tr']*gr['k'] for gr in G)
 evlog=[dict(f=gr['f0'],f1=gr['f1'],i=gr['i'],w=gr['w']) for gr in G]

@@ -235,7 +235,7 @@ def stall(n,c,yaw,front,roof='stall_roof',w=2.6,d=1.3,coll=None,lit=True):
     parts.append(card(f'{n}_sign',(0,-d/2-0.02,2.27),w-0.04,w*0.25,front,coll=coll,emit=0.25))
     parts.append(box(n+'_back',(0,d/2-0.05,1.6),(w,0.06,1.2),WOOD,coll=coll,bv=0))
     if lit:
-        for i in range(6): parts.append(sph(f'{n}_bulb{i}',(-w/2+0.15+i*(w-0.3)/5,-d/2-0.05,2.45),0.035,BULB,coll=coll))
+        for i in range(6): parts.append(sph(f'{n}_bulb{i}',(-w/2+0.15+i*(w-0.3)/5,-d/2-0.05,2.27+w*0.125+0.05),0.035,BULB,coll=coll))   # nb eyepass r1: bulbs sat over the sign letters (KLNSTDFU); now along its top edge
     for p in parts: p.parent=e
     return e
 BULB=flat('bulb',lin((255,226,150)),0.4,emit=5.0)
@@ -304,9 +304,11 @@ box('poster_frame',(PX-0.9,PY+0.03,PZ),(PW+0.12,0.04,PH+0.12),flat('pframe',lin(
 pmat=bpy.data.materials.new('poster'); N_,L_=L.nodes(pmat); pp_=N_['Principled BSDF']; it_=N_.new('ShaderNodeTexImage'); it_.image=bpy.data.images.load('/root/nb/poster_2k.png'); it_.interpolation='Cubic'
 L_.new(it_.outputs['Color'],pp_.inputs['Base Color']); L_.new(it_.outputs['Color'],pp_.inputs['Emission Color']); pp_.inputs['Emission Strength'].default_value=0.15; pp_.inputs['Roughness'].default_value=1.0; pp_.inputs['Specular IOR Level'].default_value=0.0
 poster=plane('poster',(PX-0.9,PY,PZ),PW,PH,pmat,coll=L.C_NOI); poster['noink']=1
-for sx in(-1,1): cyl(f'M_easel{sx}',(PX-0.9+sx*0.36,PY+0.12,0.62),0.025,1.26,flat('easel',lin((120,86,54))),v=6,rot=(math.radians(-8),math.radians(sx*-10),0))
-cyl('M_easelb',(PX-0.9,PY+0.3,0.62),0.025,1.26,flat('easel',lin((120,86,54))),v=6,rot=(math.radians(14),0,0))
-box('M_easeltray',(PX-0.9,PY-0.02,PZ-PH/2-0.08),(PW+0.2,0.1,0.04),flat('easel',lin((120,86,54))),bv=0.005)
+for sx in(-1,1): cyl(f'M_easel{sx}',(PX-0.9+sx*0.36,PY+0.12,0.62),0.025,1.26,flat('easel',lin((196,156,104))),v=6,rot=(math.radians(-8),math.radians(sx*-10),0))
+cyl('M_easelb',(PX-0.9,PY+0.3,0.62),0.025,1.26,flat('easel',lin((196,156,104))),v=6,rot=(math.radians(14),0,0))
+box('M_easeltray',(PX-0.9,PY-0.02,PZ-PH/2-0.08),(PW+0.2,0.1,0.04),flat('easel',lin((196,156,104))),bv=0.005)
+# nb eyepass r1 (critical: the stall front went to a black slab under the poster in the landing frames): warm lamp light on the counter and easel (camera-invisible, like every non-sun lamp)
+bpy.ops.object.light_add(type='AREA',location=(PX-0.9,PY-1.7,1.0),rotation=(math.radians(80),0,0)); _fl=bpy.context.object; _fl.name='M_stallfill'; _fl.data.size=2.6; _fl.data.energy=140; _fl.data.color=(1.0,0.82,0.62)
 # ======================= SET A: museum workroom (x=300): the box, the inscription, the photo tests =======================
 AX=300.0
 floor('A_floor',AX,0,14,10,'parquet',(3,3)); wall('A_back',(AX,4,2.0),(14,0.2,4.0),'museum_wall',(2,2)); wall('A_side',(AX-6,0,2.0),(0.2,10,4.0),'museum_wall',(2,2))
@@ -319,10 +321,11 @@ for sx in(-1,1):
 for sy in(-1,1): box(f'A_vtop{sy}',(AX,1.2+sy*0.34,1.6),(0.9,0.02,0.02),GOLD,bv=0)
 for sx in(-1,1): box(f'A_vtopx{sx}',(AX+sx*0.44,1.2,1.6),(0.02,0.7,0.02),GOLD,bv=0)
 BOXM=flat('bentwood',lin((214,170,110)),0.7)
-bx=cyl('A_box',(AX-0.05,1.2,1.035),0.1,0.07,BOXM,v=32); bx.scale=(1.0,0.62,1.0)
-bl=plane('A_boxlid',(AX-0.05,1.2,1.0705),0.2,0.124,card_mat('boxlid','boxlid',emit=0.2),horiz=True); bl['noink']=1
-box('A_pencil',(AX+0.17,1.15,1.02),(0.2,0.06,0.04),flat('pencilcase',lin((60,96,150)),0.6),bv=0.01)
-card('A_label',(AX,0.95,1.033),0.36,0.18,'label_box',emit=0.2,rot=(math.radians(-70),0,0))   # tilted reading label lying on the plinth top
+box('A_stand',(AX-0.05,1.2,1.06),(0.26,0.18,0.12),flat('stand',lin((206,210,218)),0.3),bv=0.01)   # nb eyepass r1: the box sat below the label's line of sight (a tan sliver); a display stand lifts it into view
+bx=cyl('A_box',(AX-0.05,1.2,1.155),0.1,0.07,BOXM,v=32); bx.scale=(1.0,0.62,1.0)
+bl=plane('A_boxlid',(AX-0.05,1.2,1.1905),0.2,0.124,card_mat('boxlid','boxlid',emit=0.2),horiz=True); bl['noink']=1
+box('A_pencil',(AX+0.24,1.32,1.02),(0.2,0.06,0.04),flat('pencilcase',lin((60,96,150)),0.6),bv=0.01)
+card('A_label',(AX+0.24,0.97,1.033),0.36,0.18,'label_box',emit=0.2,rot=(math.radians(-70),0,0))   # tilted reading label lying on the plinth top
 # work table with the box flipped over (the inscription on the bottom faces up) for the macro shots S02, S05, S06, S15
 box('A_table',(AX+3.2,-0.6,0.74),(1.6,1.0,0.06),TABLE,bv=0.02)
 for sx in(-1,1):
@@ -461,12 +464,12 @@ for i,(x,y) in enumerate([(-9,10),(-9,2),(9,10),(9,2),(-4,16),(4,16)]):
 stall('H_st1',(HX0-3.2,6.5,0),0.0,'stall_old1',lit=False); stall('H_st2',(HX0+3.4,7.0,0),0.0,'stall_old2',roof='stall_roof_g',lit=False)
 for sx in(-1,1):
     cyl(f'H_lanp{sx}',(HX0+sx*1.9,4.2,1.1),0.05,2.2,DARK,v=8); cyl(f'H_lan{sx}',(HX0+sx*1.9,4.2,2.3),0.09,0.24,flat('lanternglow',lin((255,210,130)),0.4,emit=4.0),v=10)
-SIGN_Q=card('H_sign1628q',(HX0,8.5,3.0),1.6,0.6,'sign_1628q',emit=0.3); vis(SIGN_Q,[(1246,1334)])
-SIGN_Y=card('H_sign1678',(HX0,8.5,3.0),1.6,0.6,'sign_1678',emit=0.3); vis(SIGN_Y,[(1588,1676)])
-for sx in(-1,1): cyl(f'H_signc{sx}',(HX0+sx*0.7,8.5,3.6),0.022,0.6,INK,v=6)   # eyepass r1: hangers too thin to read
-cyl('H_signbar',(HX0,8.5,3.9),0.03,2.4,DARK,v=6,rot=(0,math.radians(90),0))
+SIGN_Q=card('H_sign1628q',(HX0,8.5,3.5),1.6,0.6,'sign_1628q',emit=0.3); vis(SIGN_Q,[(1246,1334)])
+SIGN_Y=card('H_sign1678',(HX0,8.5,3.5),1.6,0.6,'sign_1678',emit=0.3); vis(SIGN_Y,[(1588,1676)])
+for sx in(-1,1): cyl(f'H_signc{sx}',(HX0+sx*0.7,8.5,3.85),0.035,0.12,INK,v=6)   # nb eyepass r1 (critical: signs floated): sign hangs right under the bar on short iron hangers   # eyepass r1: hangers too thin to read
+cyl('H_signbar',(HX0,8.5,3.9),0.045,2.4,DARK,v=6,rot=(0,math.radians(90),0))
 for sx in(-1,1): cyl(f'H_signpost{sx}',(HX0+sx*1.2,8.5,1.95),0.06,3.9,DARK,v=8)
-GHOST=card('H_ghost',(HX0+0.75,3.6,0.7),0.8,1.4,'ghost_outline',emit=0.4); vis(GHOST,[(WF(149),1334)])
+GHOST=card('H_ghost',(HX0+0.42,3.6,0.7),0.8,1.4,'ghost_outline',emit=0.4); vis(GHOST,[(WF(149),1334)])
 snowfall('H_snowf',HX0,4,14,14,6,160,9,avoid=[(HX0-3.2,6.5,1.9,1.9),(HX0+3.4,7.0,1.9,1.9)])
 # ======================= CAST + CAMERAS =======================
 def S(n): return SH[n]
@@ -478,37 +481,49 @@ LX,LY=GX0+0.05,-0.25         # ledger page centre; "getraut 1651" at (LX-0.145, 
 # ---- S01 (0-130): hook. The market at dusk under the 400 JAHRE banner; the party man cheers on "birthday party" ----
 s='S01'; r=S(s)
 pa=char_on('S01_partyA','partyA',s,(0.5,8.3,0.0),r,'open_smile',arms=('arm','arm'))
-look(pa,0,'open_smile',-1); turn(pa,40,'open_smile',-1,1); COMBOS.append((pa,WF(10)-4,'victory_up',1,'laugh'))
-tA=char_on('S01_townA','townA',s,(-0.55,9.6,0.0),r,'happy',arms=('arm','arm_mug')); arm(tA,1,0,-35)
+look(pa,0,'open_smile',-1); turn(pa,40,'open_smile',-1,1); COMBOS.append((pa,WF(10)-4,'victory_up',-1,'laugh'))   # r2 (shots C: raised mitten covered townB's face): cheer with the other arm
+tA=char_on('S01_townA','townA',s,(-0.75,9.9,0.0),r,'happy',arms=('arm','arm_mug')); arm(tA,1,0,-35)
 at(tA,[(0,'happy@R1'),(34,'smile@R2'),(70,'grin@R1'),(104,'laugh@F')])
-tB=char_on('S01_townB','townB',s,(1.0,10.0,0.0),r,'smile',arms=('arm_mug','arm')); arm(tB,-1,0,-35)
+tB=char_on('S01_townB','townB',s,(1.25,11.2,0.0),r,'smile',arms=('arm_mug','arm')); arm(tB,-1,0,-35)
 at(tB,[(0,'smile@L1'),(46,'happy@L2'),(88,'open_smile@L1'),(112,'laugh@F')])
    # eyepass r1: the stacked-disc steam read as an odd floating shape; removed
-path(s,[(0,(0.4,3.4,1.35),(0.4,9.5,1.9)),(70,(0.45,4.5,1.42),(0.45,9.5,2.05)),(130,(0.5,5.3,1.5),(0.5,9.5,2.2))])   # r1 framing probe: heads 10-16 % W, townA/B at the frame edges
+path(s,[(0,(0.4,3.6,1.45),(0.4,9.5,1.55)),(70,(0.45,4.6,1.5),(0.45,9.5,1.62)),(130,(0.5,5.5,1.55),(0.5,9.5,1.64))])   # r2 (text T7: caption on the party man's face): camera tilted down so heads sit above the caption band; banner stays in the top half   # r1 framing probe: heads 10-16 % W, townA/B at the frame edges
 # ---- S02 (130-193): "all because of one ink blot": macro push down onto the smudged digit ----
 s='S02'; r=S(s)
 path(s,[(130,(NX-0.04,NY-0.36,NZ+0.30),(NX-0.02,NY-0.005,NZ)),(193,(NX,NY-0.17,NZ+0.13),(NX,NY-0.022,NZ))])
 # ---- S03 (193-332): the oldest proof: the box in its case, label and a pencil case for size; the archivist leans in with a magnifier ----
 s='S03'; r=S(s)
-ar=char_on('S03_arch','archivist',s,(AX-0.62,0.95,0.0),r,'smile',arms=('arm',[(193,'arm'),(240,'arm_magnifier')]))
-for f,a in [(193,-15),(236,-30),(244,-92),(270,-98),(300,-94)]: arm(ar,1,f,a)
+ar=char_on('S03_arch','archivist',s,(AX-0.6,0.55,0.0),r,'smile',arms=('arm',[(193,'arm'),(240,'arm_magnifier')]))
+for f,a in [(193,-15),(236,-30),(244,-112),(270,-118),(300,-114)]: arm(ar,1,f,a)   # nb eyepass r1 (critical: magnifier sank into the plinth): archivist stands in front of the plinth and holds the glass up over the case
 at(ar,[(193,'smile@R1')]); turn(ar,232,'surprise',1,2); at(ar,[(262,'open_smile@R2'),(290,'look_down@R2')]); turn(ar,312,'smile',2,0)
 path(s,[(193,(AX-0.75,-1.55,1.36),(AX-0.5,1.08,1.08)),(332,(AX-0.1,-1.6,1.36),(AX-0.25,1.08,1.08))])   # run lead r1 (archivist huge against a bare table mid-move): lateral truck at one distance, no push after S02's push (rule 306)
 # ---- S04 (332-505): the archivist shows the box; the party team laughs; "It says 1628! Print the banners!" ----
+# r2 (ledger: 1 of 18 shots under 2 s; visual P3/R21 frontal row; shots: pointing arm over partyB's face, camera static):
+# three camera setups with hard cuts inside the shot: A 332-422 wide 3/4 from the left, B 423-476 close-up on partyA for "It says 1628!",
+# C 477-505 two-shot from the right for "Print the banners!". Camera keys are linear inside a setup and constant across the two cuts.
 s='S04'; r=S(s)
-a4=char_on('S04_arch','archivist',s,(PX0-0.55,-0.5,0.0),r,'neutral',arms=('arm','arm_woodbox')); arm(a4,1,332,-48)
+S04A,S04B,S04C=(332,422),(423,476),(477,505)
+a4=char_on('S04_arch','archivist',s,(PX0-0.6,-0.5,0.0),r,'neutral',arms=('arm','arm_woodbox')); arm(a4,1,332,-48); arm(a4,1,S04A[1],-48); arm(a4,1,S04B[0],-86); arm(a4,1,S04B[1],-86); arm(a4,1,S04C[0],-48)   # r2b: off-frame in setup B, so the box arm hangs instead of reaching in from the left edge
 at(a4,[(332,'neutral@R1'),(380,'smile@R1'),(410,'skeptical@R2'),(452,'side_eye@R1'),(486,'deadpan@R2')])
-p4=char_on('S04_partyA','partyA',s,(PX0+0.3,0.0,0.0),r,'open_smile')
-at(p4,[(332,'open_smile@L1'),(372,'grin@L2')]); COMBOS.append((p4,WF(48)-2,'point_out_tilt',1,'laugh'))
+p4=char_on('S04_partyA','partyA',s,(PX0+0.25,-0.05,0.0),r,'open_smile')
+at(p4,[(332,'open_smile@L1'),(372,'grin@L2')]); COMBOS.append((p4,WF(48)-2,'point_out_tilt',-1,'laugh'))   # points at the box (archivist side), not across a face
 lipsync(p4,WORDS[49:55],WF(49)-1,WF(54)+12)
-b4=char_on('S04_partyB','partyB',s,(PX0+0.75,0.4,0.0),r,'happy'); at(b4,[(332,'happy@L1'),(366,'smile@L2')]); COMBOS.append((b4,WF(48)-6,'laugh_lean_back',-1,'laugh'))
+b4=char_on('S04_partyB','partyB',s,(PX0+1.15,0.42,0.0),r,'happy'); at(b4,[(332,'happy@L1'),(366,'smile@L2')]); COMBOS.append((b4,WF(48)-6,'laugh_lean_back',-1,'laugh'))
 at(b4,[(440,'open_smile@L1'),(476,'laugh@L2')])
-c4=char_on('S04_partyC','partyC',s,(PX0-0.2,0.45,0.0),r,'smile',arms=('arm','arm_brush')); arm(c4,1,332,-40)
-at(c4,[(332,'smile@R1'),(360,'happy@L1')]); COMBOS.append((c4,WF(48)+2,'laugh_bob',1,'laugh')); at(c4,[(450,'grin@R1'),(480,'open_smile@F')])
-path(s,[(332,(PX0-0.05,-3.45,1.45),(PX0+0.05,0.4,1.12)),(420,(PX0+0.08,-3.35,1.45),(PX0+0.1,0.4,1.13)),(505,(PX0+0.2,-3.25,1.44),(PX0+0.15,0.4,1.14))])   # r1 framing: 4 people staggered in depth inside the 9:16 frame
+# r2b stills: partyC left S04 (in every placement she hid behind a nearer head or sat cut at an edge in one of the three setups); the laugh is carried by partyB
+pass
+path(s,[(332,(PX0-1.55,-2.45,1.42),(PX0+0.05,0.3,1.0),30),(422,(PX0-1.35,-2.3,1.44),(PX0+0.1,0.3,1.02),30),
+        (423,(PX0+0.6,-1.5,1.38),(PX0+0.05,0.6,1.0),30),(476,(PX0+0.62,-1.44,1.38),(PX0+0.05,0.6,1.01),30),
+        (477,(PX0+1.35,-2.05,1.42),(PX0-0.5,0.3,1.02),30),(505,(PX0+1.28,-1.98,1.42),(PX0-0.58,0.3,1.03),30)])   # r2b framing probe: the archivist's head sat on the left edge in setup C
+for ob_ in (L.CAM[s],L.TGT[s],L.CAM[s].data):
+    if ob_.animation_data and ob_.animation_data.action:
+        for fc_ in ob_.animation_data.action.fcurves:
+            for kp_ in fc_.keyframe_points: kp_.interpolation='CONSTANT' if int(round(kp_.co[0])) in (S04A[1],S04B[1]) else 'LINEAR'
+# r2b stills: setup B is now a single of partyA from the right on 'It says 1628! Print the banners!' (the archivist's half body and long arm crossed the left edge)
+# r2b contactcheck: partyB/partyC stood inside the desk (y 0.75-0.8); now in front of it, still staggered behind partyA
 # ---- S05 (505-668): the bottom of the box: the note, read along the lines, ends on the smear ----
 s='S05'; r=S(s)
-path(s,[(505,(NX-0.07,NY-0.10,NZ+0.17),(NX-0.06,NY+0.035,NZ)),(580,(NX+0.02,NY-0.11,NZ+0.17),(NX+0.03,NY+0.02,NZ)),(668,(NX+0.0,NY-0.12,NZ+0.13),(NX,NY-0.022,NZ))])
+path(s,[(505,(NX-0.07,NY-0.10,NZ+0.17),(NX-0.06,NY+0.035,NZ)),(580,(NX+0.02,NY-0.14,NZ+0.17),(NX+0.03,NY-0.01,NZ)),(668,(NX+0.0,NY-0.12,NZ+0.13),(NX,NY-0.022,NZ))])
 # ---- S06 (668-725): "Was it a two? Or a seven?": the smudge, the 2 and the 7 tried on in turn ----
 s='S06'; r=S(s)
 path(s,[(668,(NX,NY-0.11,NZ+0.12),(NX,NY-0.022,NZ)),(725,(NX,NY-0.095,NZ+0.105),(NX,NY-0.022,NZ))])
@@ -527,13 +542,14 @@ at(ph,[(815,'determined@R1'),(850,'squint@R1'),(884,'neutral@R2')]); COMBOS.appe
 a8=char_on('S08_arch','archivist',s,(AX-2.3,-0.45,0.0),r,'hope' if False else 'smile')
 at(a8,[(815,'smile@L1'),(846,'open_smile@L2'),(880,'worried@R1')]); COMBOS.append((a8,WF(100),'dip_talk',-1,'sigh'))
 for f_ in (WF(96)-2,WF(97)): fx(f'S08_flash{f_}','fx_spark',(AX-3.25,-0.12,1.27),f_,8,0.35,C(s),grow=1.4)   # eyepass r1: smaller, clear of the photographer's face
-path(s,[(815,(AX-3.05,-3.6,1.45),(AX-3.05,0.0,1.15)),(880,(AX-3.0,-3.4,1.5),(AX-3.0,1.0,1.3)),(935,(AX-3.15,-2.4,1.62),(AX-3.0,3.6,1.65))])   # eyepass r1: the archivist was cut by the right edge; the pan now leaves her out
+path(s,[(815,(AX-3.05,-3.6,1.45),(AX-3.05,0.0,1.15)),(880,(AX-3.02,-3.45,1.48),(AX-3.02,1.0,1.25)),(935,(AX-3.1,-3.3,1.52),(AX-3.1,1.5,1.32))])   # r2 (shots C4: both faces cut at the edges f900-934): no pan past them   # eyepass r1: the archivist was cut by the right edge; the pan now leaves her out
+# nb eyepass r1 (critical: the pointing hand went into the table edge): archivist 35 cm further from the table
 # ---- S09 (935-1062): "Then she went where no one looks for a Christmas gift. The old graveyard books." ----
 s='S09'; r=S(s)
-a9=char_on('S09_arch','archivist',s,(GX0-1.3,-0.45,0.0),r,'determined',arms=([(935,'arm'),(WF(117),'arm_ledger')],'arm'))
+a9=char_on('S09_arch','archivist',s,(GX0-1.65,-0.45,0.0),r,'determined',arms=([(935,'arm'),(WF(117),'arm_ledger')],'arm'))
 arm(a9,-1,WF(117),-42); arm(a9,-1,WF(117)+20,-40)
 at(a9,[(935,'determined@R1')]); COMBOS.append((a9,965,'turn_and_point',1,'determined')); at(a9,[(1010,'smile@L1'),(1036,'proud@F'),(1050,'smug@R1')])
-path(s,[(935,(GX0+0.3,-4.3,1.6),(GX0-0.9,1.4,1.45)),(1000,(GX0+0.2,-3.6,1.5),(GX0-0.9,0.5,1.25)),(1062,(GX0-0.1,-3.2,1.45),(GX0-1.0,0.0,1.2))])
+path(s,[(935,(GX0-0.2,-3.5,1.55),(GX0-1.25,1.4,1.4)),(1000,(GX0-0.4,-2.9,1.45),(GX0-1.3,0.5,1.2)),(1062,(GX0-0.7,-2.6,1.42),(GX0-1.4,0.0,1.15))])   # r2 (visual R07): closer
 # ---- S10 (1062-1158): St. Johannis, grave No. 54: three lanterns for the girl and her parents ----
 s='S10'; r=S(s)
 a10=char_on('S10_arch','archivist',s,(CX0-0.6,1.0,0.0),r,'sad',arms=('arm_ledger','arm')); arm(a10,-1,1062,-40)
@@ -541,19 +557,19 @@ at(a10,[(1062,'sad@R1'),(1090,'look_down@R2'),(1122,'content@R1'),(1146,'smile@R
 path(s,[(1062,(CX0+0.1,-3.0,1.65),(CX0-0.2,1.7,0.65)),(1158,(CX0-0.2,-1.3,1.3),(CX0-0.25,2.0,0.45))])
 # ---- S11 (1158-1246): the church book: "getraut 1651", long before 1628? no: long AFTER 1628 ----
 s='S11'; r=S(s)
-path(s,[(1158,(LX-0.12,LY+0.0,0.811+0.28),(LX-0.14,LY+0.125,0.811)),(1200,(LX-0.13,LY-0.15,0.811+0.24),(LX-0.14,LY-0.02,0.811)),(1246,(LX-0.14,LY-0.18,0.811+0.18),(LX-0.145,LY-0.07,0.811))])
+path(s,[(1158,(LX-0.07,LY-0.02,0.811+0.30),(LX-0.09,LY+0.11,0.811)),(1200,(LX-0.12,LY-0.19,0.811+0.24),(LX-0.13,LY-0.055,0.811)),(1246,(LX-0.14,LY-0.21,0.811+0.18),(LX-0.145,LY-0.09,0.811))])   # r2 (text: '4' of 'Grab No. 54' cut; caption on 'getraut 1651')
 # ---- S12 (1246-1334): 1628, imagined: the girl holds the box out; the one who should take it is not there yet ----
 s='S12'; r=S(s)
 g12=char_on('S12_giver','giver1678',s,(HX0-0.45,3.6,0.0),r,'smile',arms=('arm','arm_woodbox'))
 for f,a in [(1246,-40),(WF(146),-74),(1300,-74)]: arm(g12,1,f,a)
-at(g12,[(1246,'smile@R1'),(1268,'open_smile@R2'),(1288,'happy@R1')]); COMBOS.append((g12,WF(150)+2,'startle_recoil',-1,'shock')); at(g12,[(1324,'stunned@R1')])
+at(g12,[(1246,'smile@R1'),(1268,'open_smile@R2'),(1288,'happy@R1')]); at(g12,[(WF(150)+2,'shock@R1'),(1324,'stunned@R1')]); arm(g12,1,WF(150)+2,-74); arm(g12,1,WF(150)+8,-60)   # r2 (shots 358/F3: the dress tilted like a plank and the box vanished with the combo cards): face and arm only
 pass   # eyepass r1: the background man lined up with the held-out box (read as a hand-over to him); removed
-path(s,[(1246,(HX0-0.2,-0.4,1.45),(HX0-0.1,3.6,1.4)),(1334,(HX0+0.1,0.6,1.45),(HX0+0.25,3.6,1.45))])
+path(s,[(1246,(HX0-0.2,0.5,1.4),(HX0-0.1,3.6,1.25)),(1334,(HX0-0.08,1.2,1.4),(HX0-0.05,3.6,1.25))])   # r2 (visual R07, eyepass outline): closer; the girl and the outline fill the frame
 # ---- S13 (1334-1404): "That's when the big birthday fell apart": the string snaps, the banner drops ----
 s='S13'; r=S(s)
 p13=char_on('S13_partyA','partyA',s,(PX0-0.35,0.2,0.0),r,'proud'); at(p13,[(1334,'proud@R1'),(1352,'smile@R2')]); COMBOS.append((p13,SNAP+2,'startle_recoil',1,'shock')); at(p13,[(1396,'stunned@F')])
-b13=char_on('S13_partyB','partyB',s,(PX0+0.65,0.4,0.0),r,'smile'); at(b13,[(1334,'smile@L1'),(1356,'happy@L2')]); COMBOS.append((b13,SNAP+4,'panic_clutch',-1,'panic'))
-path(s,[(1334,(PX0+0.15,-2.6,1.5),(PX0+0.15,1.6,1.7)),(1404,(PX0+0.15,-2.85,1.55),(PX0+0.15,1.6,1.8))])
+b13=char_on('S13_partyB','partyB',s,(PX0+0.62,0.45,0.0),r,'smile'); at(b13,[(1334,'smile@L1'),(1356,'happy@L2')]); COMBOS.append((b13,SNAP+4,'panic_clutch',-1,'panic'))
+path(s,[(1334,(PX0-0.05,-2.2,1.5),(PX0+0.15,1.6,1.3)),(1404,(PX0+0.05,-2.45,1.55),(PX0+0.15,1.6,1.4))])   # r2 (text T7 + frontal row): partyB staggered back, camera tilted down so faces clear the caption band
 # ---- S14 (1404-1520): "no one gets a gift before she's born, so that blob had to be a seven" ----
 s='S14'; r=S(s)
 a14=char_on('S14_arch','archivist',s,(AX-0.8,0.95,0.0),r,'determined')
@@ -565,26 +581,26 @@ path(s,[(1520,(NX,NY-0.15,NZ+0.15),(NX,NY-0.022,NZ)),(1564,(NX,NY-0.12,NZ+0.12),
 # ---- S16 (1588-1676): 1678: the market is real; Susanna hands the box to little Regina ----
 s='S16'; r=S(s)
 HAND=1618
-g16=char_on('S16_giver','giver1678',s,(HX0-0.55,3.6,0.0),r,'happy',arms=('arm',[(1588,'arm_woodbox'),(HAND,'arm')]))
+g16=char_on('S16_giver','giver1678',s,(HX0-0.42,3.6,0.0),r,'happy',arms=('arm',[(1588,'arm_woodbox'),(HAND,'arm')]))
 for f,a in [(1588,-42),(1604,-72),(HAND+6,-60),(HAND+16,-15)]: arm(g16,1,f,a)
 at(g16,[(1588,'happy@R1'),(1606,'open_smile@R2'),(1636,'smile@R1'),(1660,'content@F')])
-q16=char_on('S16_recip','recip1678',s,(HX0+0.6,3.5,0.0),r,'surprise',arms=([(1588,'arm'),(HAND,'arm_woodbox')],'arm'))
+q16=char_on('S16_recip','recip1678',s,(HX0+0.6,3.5,0.0),r,'surprise',arms=([(1588,'arm'),(HAND,'arm_woodbox')],'arm'),scale=0.86)   # nb eyepass r1: 'little Regina' read as the same age
 for f,a in [(1588,-12),(1604,-70),(HAND+12,-56),(HAND+26,-40)]: arm(q16,-1,f,a)
 at(q16,[(1588,'surprise@L1'),(1612,'open_smile@L2'),(1640,'laugh@L1'),(1662,'happy@F')])
 pass   # eyepass r1: the hand-over met on the background man's body; removed
-path(s,[(1588,(HX0,0.2,1.35),(HX0,3.6,1.3)),(1640,(HX0+0.05,0.3,1.42),(HX0+0.05,3.6,1.55)),(1676,(HX0+0.05,0.1,1.55),(HX0,4.0,2.0))])
+path(s,[(1588,(HX0+0.08,1.05,1.3),(HX0+0.06,3.6,1.12)),(1640,(HX0+0.1,1.15,1.34),(HX0+0.08,3.6,1.15)),(1676,(HX0+0.1,1.0,1.4),(HX0+0.05,4.0,1.3))])   # r2 (shots 375 tiny box, visual R07 heads): closer, faces above the caption band
 # ---- S17 (1676-1800): "So this week, Nuremberg's Christkind opens it again from the church balcony" ----
 s='S17'; r=S(s)
 ck=char_on('S17_christkind','christkind',s,(0.0,CY-0.6,BZ),r,'smile'); at(ck,[(1676,'smile@L1'),(1710,'open_smile@F')]); COMBOS.append((ck,WF(196)-2,'wave_hello',1,'happy')); at(ck,[(1790,'laugh@R1')])
 CR=[]
-for i,(x,y,k,arms_) in enumerate([(-1.1,13.8,'townA',('arm','arm_mug')),(0.15,14.6,'townC',('arm','arm')),(1.15,13.9,'townB',('arm_mug','arm')),(-0.8,12.6,'partyB',('arm','arm')),(1.0,12.4,'vendor',('arm','arm'))]):
+for i,(x,y,k,arms_) in enumerate([(-0.95,14.2,'townA',('arm','arm_mug')),(0.45,14.6,'townC',('arm','arm')),(1.2,14.4,'townB',('arm_mug','arm')),(-0.05,13.3,'partyB',('arm','arm')),(0.8,13.3,'vendor',('arm','arm'))]):   # nb eyepass r1 (critical f1680: half body at the left edge, a face behind a nearer head): staggered so every head has its own gap
     c_=char_on(f'S17_crowd{i}',k,s,(x,y,0.0),r,'happy',arms=arms_); CR.append(c_)
     at(c_,[(1676,['happy@R1','smile@F','open_smile@L1','happy@L1','grin@R1'][i]),(1712+i*6,['look_up@R1','look_up@F','look_up@L1','look_up@L1','look_up@R1'][i]),(1760+i*4,['open_smile@R1','laugh@F','happy@L2','open_smile@L1','grin@R2'][i])])
 COMBOS.append((CR[3],1765,'victory_up',-1,'laugh'))
-path(s,[(1676,(0.6,9.0,1.5),(0.2,14.0,1.6)),(1720,(0.5,10.5,2.2),(0.0,16.0,3.2)),(1760,(0.35,14.8,4.7),(0.0,CY-0.6,BZ+1.0)),(1800,(0.3,16.2,5.4),(0.0,CY-0.6,BZ+0.95))])   # r1: crane up over the crowd to the Christkind (head was 6-7 % W)
+path(s,[(1676,(0.6,9.0,2.0),(0.1,15.0,3.2)),(1706,(0.52,10.3,2.4),(0.05,16.5,3.4)),(1720,(0.5,11.0,2.6),(0.0,17.0,3.6)),(1760,(0.3,14.6,4.55),(0.0,CY-0.6,4.75)),(1800,(0.25,15.0,4.75),(0.0,CY-0.6,4.85))])   # r2b (framing probe: crowd heads crossed the caption band on the way down): opens with the crowd heads already under the band, looking up at the balcony   # r2 (text: caption vs 350 banner; shots: pitch 13.5 deg, heads cut): the crane settles with the banner in mid-frame, never in the caption band   # r1: crane up over the crowd to the Christkind (head was 6-7 % W)
 # ---- S18 (1800-1905): payoff. The party's still on, just fifty candles short: the prints stall, the poster lands on "short" ----
 s='S18'; r=S(s)
-p18=char_on('S18_partyA','partyA',s,(3.05,-1.0,0.0),r,'happy',arms=('arm','arm_candles')); arm(p18,1,1800,-55); arm(p18,1,WF(208)-4,-55); arm(p18,1,WF(208)+2,-6)   # eyepass r1 (critical): the raised candles floated into the landing frame without her; arm drops after 'candles'
+p18=char_on('S18_partyA','partyA',s,(3.05,-1.0,0.0),r,'happy',arms=('arm','arm_candles')); arm(p18,1,1800,-55); arm(p18,1,WF(208)-4,-55); arm(p18,1,WF(208)+2,4)   # eyepass r1 (critical): the raised candles floated into the landing frame without her; arm drops after 'candles'
 at(p18,[(1800,'happy@R1'),(1830,'open_smile@R2'),(WF(210),'grin@F'),(1890,'smile@R1')])
 LAND=WF(211)
 path(s,[(1800,(3.4,-4.6,1.7),(3.7,0.2,1.55)),(1850,(3.7,-4.2,1.66),(3.8,0.2,1.57)),(LAND,(3.95,-2.35,1.62),(3.9,0.2,1.58)),(END,(3.95,-2.3,1.62),(3.9,0.2,1.58))])

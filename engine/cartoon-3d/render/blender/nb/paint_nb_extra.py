@@ -15,7 +15,10 @@ def ghost(name='ghost_outline',W=800,H=1400):
         for a,b in zip(P,P[1:]):
             L_=math.dist(a,b); n=max(1,int(L_/14))
             for i in range(n): seg.append((a[0]+(b[0]-a[0])*i/n,a[1]+(b[1]-a[1])*i/n))
-        for i in range(0,len(seg)-3,6): d.line(seg[i:i+3],fill=K,width=18)
+        for i in range(0,len(seg)-4,7): d.line(seg[i:i+4],fill=K,width=28)
+    # nb eyepass r1 (outline read as scattered dashes): a faint lavender fill makes the empty figure read as a person-shaped gap
+    fl=Image.new('RGBA',(W,H),(0,0,0,0)); fd=ImageDraw.Draw(fl); FC=(196,182,230,95)
+    fd.ellipse([cx-r,cy-r,cx+r,cy+r],fill=FC); fd.polygon(body+[(W/2+200,620)],fill=FC); im.alpha_composite(fl); d=ImageDraw.Draw(im)
     dash(pts,True); dash(body,False)
     d.text((W/2-40,250),'?',fill=K,font=font(FS,260))
     im.save(T+name+'.png')

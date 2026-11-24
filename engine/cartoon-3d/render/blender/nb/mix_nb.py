@@ -1,6 +1,6 @@
 # Mix (rules 8/188 revised Nov 21): VO studio-clean, bed 14.4-18.6 dB under the VO riding its level map (std 2.3-4.0 dB, no ducking), SFX levelled per event to +9 over the bed (A6, rule 319), still >= 8 LU under the VO (rule 192); master -14 LUFS, -1.9 to -2.2 dBTP
 import subprocess, re, json, sys
-A='/root/nb/audio/'; VO='/root/nb/vo/vo_trim.wav'
+A='/root/nb/audio/'; VO='/root/nb/vo/vo_comp.wav'   # r2 (LRA 4.0 > 3.2): VO with light 2.5:1 compression, made once from vo_trim.wav
 END=1906/30
 def lufs(path,extra=''):
     o=subprocess.run(f'ffmpeg -hide_banner -nostats -i {path} {extra} -af ebur128=peak=true -f null -',shell=True,capture_output=True,text=True).stderr
@@ -23,7 +23,7 @@ def pk(a):
     n=2400; return max(r(a[k:k+n]) for k in range(0,max(1,len(a)-n+1),600))
 offs=[20*np.log10(pk(sfxA[e['i']:e['i']+e['w']])/r(bedA[e['i']:e['i']+e['w']])) for e in EVs]
 HR=18.0; gs=gb+HR   # stem written HR dB low so boosted events never clip int16, gain restored here. cc r2: each SFX event levelled on its own to +9 dB over the bed (payoff ding +10): A6 8-12 dB, rule 319 (>= +4, payoff >= +6); rule 192 (>= 8 LU under the VO) is re-checked by sfxcheck_cc.py
-TGT={1878:10.0}; G=np.array([TGT.get(e["f"],9.0)-o for e,o in zip(EVs,offs)]); SR_=48000
+TGT={1889:10.0}; G=np.array([TGT.get(e["f"],9.0)-o for e,o in zip(EVs,offs)]); SR_=48000
 def envf(G):
     acc=np.zeros(len(sfxA)); cnt=np.zeros(len(sfxA))
     for e,g in zip(EVs,G):

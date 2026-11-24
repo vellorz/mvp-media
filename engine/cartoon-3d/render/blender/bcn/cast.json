@@ -1,0 +1,1443 @@
+{
+ "hero": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   92,
+   96,
+   104
+  ],
+  "legs": [
+   46,
+   44,
+   50
+  ],
+  "cue": "bowtie",
+  "body": "tall",
+  "hair": [
+   70,
+   48,
+   32
+  ],
+  "hairdo": "sidepart",
+  "fhair": "pencil",
+  "fhaircol": [
+   70,
+   48,
+   32
+  ],
+  "mouth_side": 1,
+  "turn": 0.35,
+  "props": [
+   "ball",
+   "paper",
+   "suitcase"
+  ],
+  "hat3d": "boater3d",
+  "hatcol": [
+   232,
+   214,
+   160
+  ],
+  "hatcol2": [
+   34,
+   30,
+   44
+  ],
+  "hat_tilt": 8
+ },
+ "heroH": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   92,
+   96,
+   104
+  ],
+  "legs": [
+   46,
+   44,
+   50
+  ],
+  "cue": "bowtie",
+  "body": "tall",
+  "hair": [
+   70,
+   48,
+   32
+  ],
+  "hairdo": "sidepart",
+  "fhair": "pencil",
+  "fhaircol": [
+   70,
+   48,
+   32
+  ],
+  "mouth_side": 1,
+  "turn": 0.35,
+  "props": [
+   "ball",
+   "paper",
+   "suitcase"
+  ]
+ },
+ "heroK": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   240,
+   238,
+   230
+  ],
+  "legs": [
+   40,
+   40,
+   48
+  ],
+  "cue": "kit1899",
+  "body": "tall",
+  "hair": [
+   70,
+   48,
+   32
+  ],
+  "hairdo": "sidepart",
+  "fhair": "pencil",
+  "fhaircol": [
+   70,
+   48,
+   32
+  ],
+  "mouth_side": 1,
+  "turn": 0.35,
+  "props": [
+   "ball"
+  ]
+ },
+ "pal": {
+  "faces": {},
+  "library": "all",
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   70,
+   60,
+   52
+  ],
+  "legs": [
+   50,
+   44,
+   40
+  ],
+  "cue": "vest",
+  "body": "round",
+  "hair": [
+   120,
+   96,
+   70
+  ],
+  "hairstyle": "short",
+  "fhair": "walrus",
+  "fhaircol": [
+   120,
+   96,
+   70
+  ],
+  "mouth_side": -1,
+  "turn": -0.4,
+  "hat3d": "bowler3d",
+  "hatcol": [
+   44,
+   40,
+   46
+  ],
+  "hat_tilt": -7,
+  "props": []
+ },
+ "engA": {
+  "faces": {},
+  "library": [
+   "happy",
+   "grin",
+   "neutral",
+   "proud",
+   "open_smile",
+   "smile",
+   "surprise",
+   "shock",
+   "determined",
+   "skeptical",
+   "laugh",
+   "worried",
+   "content",
+   "smug",
+   "blink",
+   "deadpan",
+   "nervous"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   110,
+   84,
+   56
+  ],
+  "legs": [
+   60,
+   52,
+   44
+  ],
+  "cue": "blazer",
+  "body": "tall",
+  "hair": [
+   176,
+   96,
+   48
+  ],
+  "hairdo": "sidepart",
+  "fhair": "toothbrush",
+  "fhaircol": [
+   176,
+   96,
+   48
+  ],
+  "mouth_side": 1,
+  "turn": 0.45,
+  "hat3d": "flatcap3d",
+  "hatcol": [
+   120,
+   110,
+   96
+  ],
+  "hat_tilt": 6,
+  "props": []
+ },
+ "engB": {
+  "faces": {},
+  "library": [
+   "happy",
+   "grin",
+   "neutral",
+   "proud",
+   "open_smile",
+   "smile",
+   "surprise",
+   "shock",
+   "determined",
+   "skeptical",
+   "laugh",
+   "worried",
+   "content",
+   "smug",
+   "blink",
+   "deadpan",
+   "nervous"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   96,
+   100,
+   70
+  ],
+  "legs": [
+   60,
+   52,
+   44
+  ],
+  "cue": "blazer",
+  "body": "tall",
+  "hair": [
+   176,
+   96,
+   48
+  ],
+  "hairstyle": "short",
+  "fhair": "chevron",
+  "fhaircol": [
+   176,
+   96,
+   48
+  ],
+  "mouth_side": -1,
+  "turn": -0.4,
+  "hat3d": "flatcap3d",
+  "hatcol": [
+   96,
+   90,
+   80
+  ],
+  "hat_tilt": -8,
+  "props": []
+ },
+ "german": {
+  "faces": {},
+  "library": [
+   "happy",
+   "grin",
+   "neutral",
+   "proud",
+   "open_smile",
+   "smile",
+   "surprise",
+   "shock",
+   "determined",
+   "skeptical",
+   "laugh",
+   "worried",
+   "content",
+   "smug",
+   "blink",
+   "deadpan",
+   "nervous"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   60,
+   70,
+   60
+  ],
+  "legs": [
+   44,
+   40,
+   40
+  ],
+  "cue": "vest",
+  "body": "tall",
+  "hair": [
+   200,
+   170,
+   110
+  ],
+  "hairdo": "bowl",
+  "fhair": "curled",
+  "fhaircol": [
+   200,
+   170,
+   110
+  ],
+  "mouth_side": 1,
+  "turn": 0.4,
+  "hat3d": "bowler3d",
+  "hatcol": [
+   100,
+   70,
+   50
+  ],
+  "hat_tilt": 9,
+  "props": []
+ },
+ "locA": {
+  "faces": {},
+  "library": [
+   "happy",
+   "grin",
+   "neutral",
+   "proud",
+   "open_smile",
+   "smile",
+   "surprise",
+   "shock",
+   "determined",
+   "skeptical",
+   "laugh",
+   "worried",
+   "content",
+   "smug",
+   "blink",
+   "deadpan",
+   "nervous"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   130,
+   60,
+   50
+  ],
+  "legs": [
+   50,
+   44,
+   40
+  ],
+  "cue": "scarf",
+  "scarf": [
+   220,
+   190,
+   90
+  ],
+  "body": "round",
+  "hair": [
+   40,
+   30,
+   26
+  ],
+  "hairstyle": "short",
+  "fhair": "droop",
+  "fhaircol": [
+   40,
+   30,
+   26
+  ],
+  "mouth_side": -1,
+  "turn": -0.45,
+  "hat3d": "beanie3d",
+  "hatcol": [
+   150,
+   40,
+   40
+  ],
+  "hat_tilt": -6,
+  "props": []
+ },
+ "locB": {
+  "faces": {},
+  "library": [
+   "happy",
+   "grin",
+   "neutral",
+   "proud",
+   "open_smile",
+   "smile",
+   "surprise",
+   "shock",
+   "determined",
+   "skeptical",
+   "laugh",
+   "worried",
+   "content",
+   "smug",
+   "blink",
+   "deadpan",
+   "nervous"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   60,
+   80,
+   110
+  ],
+  "legs": [
+   60,
+   56,
+   50
+  ],
+  "cue": "vest",
+  "body": "tall",
+  "hair": [
+   30,
+   24,
+   22
+  ],
+  "hairdo": "topknot",
+  "fhair": "stubbledots",
+  "fhaircol": [
+   30,
+   24,
+   22
+  ],
+  "mouth_side": 1,
+  "turn": 0.4,
+  "props": []
+ },
+ "locC": {
+  "faces": {},
+  "library": [
+   "happy",
+   "grin",
+   "neutral",
+   "proud",
+   "open_smile",
+   "smile",
+   "surprise",
+   "shock",
+   "determined",
+   "skeptical",
+   "laugh",
+   "worried",
+   "content",
+   "smug",
+   "blink",
+   "deadpan",
+   "nervous"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   150,
+   120,
+   80
+  ],
+  "legs": [
+   50,
+   46,
+   44
+  ],
+  "cue": "blazer",
+  "body": "tall",
+  "hair": [
+   52,
+   36,
+   28
+  ],
+  "hairdo": "curly",
+  "mouth_side": 1,
+  "turn": 0.35,
+  "hat3d": "flatcap3d",
+  "hatcol": [
+   70,
+   64,
+   60
+  ],
+  "hat_tilt": 7,
+  "props": []
+ },
+ "locD": {
+  "faces": {},
+  "library": [
+   "happy",
+   "grin",
+   "neutral",
+   "proud",
+   "open_smile",
+   "smile",
+   "surprise",
+   "shock",
+   "determined",
+   "skeptical",
+   "laugh",
+   "worried",
+   "content",
+   "smug",
+   "blink",
+   "deadpan",
+   "nervous"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   90,
+   60,
+   90
+  ],
+  "legs": [
+   44,
+   40,
+   44
+  ],
+  "cue": "bowtie",
+  "body": "round",
+  "hair": [
+   46,
+   32,
+   26
+  ],
+  "hairdo": "cowlick",
+  "fhair": "goatee",
+  "fhaircol": [
+   46,
+   32,
+   26
+  ],
+  "mouth_side": -1,
+  "turn": -0.4,
+  "props": []
+ },
+ "clerk": {
+  "faces": {
+   "talkA": [
+    "dot",
+    "up",
+    "open"
+   ],
+   "talkB": [
+    "dot",
+    "up",
+    "o"
+   ],
+   "talkC": [
+    "dot",
+    "up",
+    "wide"
+   ],
+   "talkD": [
+    "dot",
+    "up",
+    "line"
+   ]
+  },
+  "library": [
+   "deadpan",
+   "skeptical",
+   "side_eye",
+   "neutral",
+   "smug",
+   "blink",
+   "squint",
+   "sigh",
+   "annoyed",
+   "happy",
+   "grin",
+   "stern",
+   "surprise",
+   "shock",
+   "sleepy",
+   "asleep"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   120,
+   96,
+   80
+  ],
+  "legs": [
+   54,
+   48,
+   44
+  ],
+  "cue": "bowtie",
+  "body": "round",
+  "hair": [
+   90,
+   70,
+   56
+  ],
+  "hairdo": "bowl",
+  "fhair": "king",
+  "fhaircol": [
+   90,
+   70,
+   56
+  ],
+  "mouth_side": -1,
+  "turn": -0.45,
+  "props": [
+   "paper"
+  ]
+ },
+ "gymA": {
+  "faces": {
+   "talkA": [
+    "dot",
+    "angry",
+    "open"
+   ],
+   "talkB": [
+    "dot",
+    "angry",
+    "o"
+   ],
+   "talkC": [
+    "dot",
+    "angry",
+    "wide"
+   ],
+   "talkD": [
+    "dot",
+    "angry",
+    "line"
+   ]
+  },
+  "library": [
+   "laugh",
+   "cry_laugh",
+   "smug",
+   "smug_grin",
+   "side_eye",
+   "skeptical",
+   "deadpan",
+   "grin",
+   "neutral",
+   "annoyed",
+   "blink",
+   "shock",
+   "surprise",
+   "manic_grin"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   236,
+   232,
+   222
+  ],
+  "legs": [
+   40,
+   40,
+   46
+  ],
+  "cue": "stripes",
+  "body": "round",
+  "hair": [
+   30,
+   26,
+   24
+  ],
+  "hairdo": "messy",
+  "fhair": "curled",
+  "fhaircol": [
+   30,
+   26,
+   24
+  ],
+  "mouth_side": 1,
+  "turn": 0.45,
+  "props": [
+   "dumbbell"
+  ]
+ },
+ "gymB": {
+  "faces": {},
+  "library": [
+   "laugh",
+   "cry_laugh",
+   "smug",
+   "smug_grin",
+   "side_eye",
+   "skeptical",
+   "deadpan",
+   "grin",
+   "neutral",
+   "annoyed",
+   "blink",
+   "shock",
+   "surprise",
+   "manic_grin"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   236,
+   232,
+   222
+  ],
+  "legs": [
+   40,
+   40,
+   46
+  ],
+  "cue": "stripes",
+  "body": "tall",
+  "hair": [
+   96,
+   70,
+   50
+  ],
+  "hairdo": "spiky",
+  "fhair": "chevron",
+  "fhaircol": [
+   96,
+   70,
+   50
+  ],
+  "mouth_side": -1,
+  "turn": -0.4,
+  "props": [
+   "dumbbell"
+  ]
+ },
+ "engT1": {
+  "faces": {},
+  "library": [
+   "smug",
+   "smug_grin",
+   "determined",
+   "neutral",
+   "grin",
+   "laugh",
+   "cool_shades",
+   "blink",
+   "skeptical",
+   "shout",
+   "happy",
+   "deadpan",
+   "surprise",
+   "closed_annoyed"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   40,
+   90,
+   60
+  ],
+  "legs": [
+   230,
+   226,
+   216
+  ],
+  "cue": "kit1899",
+  "body": "tall",
+  "hair": [
+   150,
+   110,
+   70
+  ],
+  "hairstyle": "short",
+  "fhair": "walrus",
+  "fhaircol": [
+   150,
+   110,
+   70
+  ],
+  "mouth_side": 1,
+  "turn": 0.4,
+  "props": [
+   "ball"
+  ]
+ },
+ "engT2": {
+  "faces": {},
+  "library": [
+   "smug",
+   "smug_grin",
+   "determined",
+   "neutral",
+   "grin",
+   "laugh",
+   "cool_shades",
+   "blink",
+   "skeptical",
+   "shout",
+   "happy",
+   "deadpan",
+   "surprise"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   40,
+   90,
+   60
+  ],
+  "legs": [
+   230,
+   226,
+   216
+  ],
+  "cue": "kit1899",
+  "body": "round",
+  "hair": [
+   60,
+   44,
+   32
+  ],
+  "hairdo": "sidepart",
+  "fhair": "toothbrush",
+  "fhaircol": [
+   60,
+   44,
+   32
+  ],
+  "mouth_side": -1,
+  "turn": -0.45,
+  "props": []
+ },
+ "keeper": {
+  "faces": {},
+  "library": [
+   "determined",
+   "shock",
+   "panic",
+   "wince",
+   "sad",
+   "frown",
+   "neutral",
+   "blink",
+   "grin",
+   "happy",
+   "stunned",
+   "dazed",
+   "shout",
+   "worried",
+   "laugh",
+   "proud",
+   "sigh",
+   "nervous",
+   "startle"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   236,
+   232,
+   222
+  ],
+  "legs": [
+   40,
+   40,
+   48
+  ],
+  "cue": "kit1899",
+  "body": "round",
+  "hair": [
+   60,
+   40,
+   30
+  ],
+  "hairdo": "curly",
+  "fhair": "stubbledots",
+  "fhaircol": [
+   60,
+   40,
+   30
+  ],
+  "mouth_side": 1,
+  "turn": 0.4,
+  "hat3d": "flatcap3d",
+  "hatcol": [
+   60,
+   56,
+   60
+  ],
+  "hat_tilt": -6,
+  "props": []
+ },
+ "palK": {
+  "faces": {},
+  "library": [
+   "determined",
+   "shock",
+   "panic",
+   "wince",
+   "sad",
+   "frown",
+   "neutral",
+   "blink",
+   "grin",
+   "happy",
+   "stunned",
+   "dazed",
+   "shout",
+   "worried",
+   "laugh",
+   "proud",
+   "sigh",
+   "nervous",
+   "startle"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   236,
+   232,
+   222
+  ],
+  "legs": [
+   40,
+   40,
+   48
+  ],
+  "cue": "kit1899",
+  "body": "round",
+  "hair": [
+   120,
+   96,
+   70
+  ],
+  "hairstyle": "short",
+  "fhair": "walrus",
+  "fhaircol": [
+   120,
+   96,
+   70
+  ],
+  "mouth_side": -1,
+  "turn": -0.4,
+  "props": []
+ },
+ "vendor": {
+  "faces": {},
+  "library": [
+   "happy",
+   "grin",
+   "surprise",
+   "shock",
+   "stunned",
+   "laugh",
+   "cry_laugh",
+   "smile",
+   "neutral",
+   "blink",
+   "manic_grin",
+   "open_smile",
+   "proud",
+   "wink_grin",
+   "smug",
+   "smug_grin"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   60,
+   110,
+   80
+  ],
+  "legs": [
+   60,
+   56,
+   54
+  ],
+  "cue": "apron",
+  "body": "round",
+  "hair": [
+   40,
+   30,
+   26
+  ],
+  "hairdo": "cowlick",
+  "fhair": "chevron",
+  "fhaircol": [
+   40,
+   30,
+   26
+  ],
+  "mouth_side": 1,
+  "turn": 0.4,
+  "hat3d": "flatcap3d",
+  "hatcol": [
+   50,
+   70,
+   60
+  ],
+  "hat_tilt": 8,
+  "props": [
+   "paper"
+  ]
+ },
+ "tourW": {
+  "faces": {},
+  "library": [
+   "happy",
+   "grin",
+   "surprise",
+   "shock",
+   "stunned",
+   "laugh",
+   "cry_laugh",
+   "smile",
+   "neutral",
+   "blink",
+   "manic_grin",
+   "open_smile",
+   "proud",
+   "wink_grin",
+   "nervous",
+   "startle"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   230,
+   120,
+   60
+  ],
+  "legs": [
+   60,
+   70,
+   110
+  ],
+  "cue": "camera",
+  "body": "round",
+  "hair": [
+   80,
+   50,
+   30
+  ],
+  "hairstyle": "bob",
+  "mouth_side": -1,
+  "turn": -0.4,
+  "props": [
+   "phone"
+  ]
+ },
+ "tourM": {
+  "faces": {},
+  "library": [
+   "happy",
+   "grin",
+   "surprise",
+   "shock",
+   "stunned",
+   "laugh",
+   "cry_laugh",
+   "smile",
+   "neutral",
+   "blink",
+   "manic_grin",
+   "open_smile",
+   "proud",
+   "wink_grin",
+   "skeptical"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   60,
+   130,
+   150
+  ],
+  "legs": [
+   200,
+   190,
+   170
+  ],
+  "cue": "stripes",
+  "body": "tall",
+  "hair": [
+   50,
+   36,
+   30
+  ],
+  "hairstyle": "short",
+  "mouth_side": 1,
+  "turn": 0.45,
+  "hat3d": "trucker",
+  "hatcol": [
+   200,
+   60,
+   50
+  ],
+  "hat_tilt": -9,
+  "props": [
+   "phone"
+  ]
+ },
+ "swiss2": {
+  "faces": {},
+  "library": [
+   "happy",
+   "grin",
+   "neutral",
+   "proud",
+   "open_smile",
+   "smile",
+   "surprise",
+   "shock",
+   "determined",
+   "skeptical",
+   "laugh",
+   "worried",
+   "content",
+   "smug",
+   "blink",
+   "deadpan",
+   "nervous"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   70,
+   90,
+   120
+  ],
+  "legs": [
+   40,
+   40,
+   48
+  ],
+  "cue": "vest",
+  "body": "short",
+  "hair": [
+   200,
+   160,
+   90
+  ],
+  "hairdo": "bangs",
+  "mouth_side": 1,
+  "turn": 0.35,
+  "hatcol": [
+   70,
+   64,
+   60
+  ],
+  "hat_tilt": 7,
+  "props": [],
+  "fhair": "toothbrush",
+  "hairstyle": "short"
+ },
+ "locE": {
+  "faces": {},
+  "library": [
+   "happy",
+   "grin",
+   "neutral",
+   "proud",
+   "open_smile",
+   "smile",
+   "surprise",
+   "shock",
+   "determined",
+   "skeptical",
+   "laugh",
+   "worried",
+   "content",
+   "smug",
+   "blink",
+   "deadpan",
+   "nervous"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   120,
+   60,
+   50
+  ],
+  "legs": [
+   50,
+   44,
+   40
+  ],
+  "cue": "scarf",
+  "body": "tall",
+  "hair": [
+   30,
+   24,
+   22
+  ],
+  "hairdo": "cowlick",
+  "fhair": "goatee",
+  "fhaircol": [
+   46,
+   32,
+   26
+  ],
+  "mouth_side": -1,
+  "turn": -0.4,
+  "props": [],
+  "scarf": [
+   40,
+   90,
+   70
+  ]
+ },
+ "locF": {
+  "faces": {},
+  "library": [
+   "happy",
+   "grin",
+   "neutral",
+   "proud",
+   "open_smile",
+   "smile",
+   "surprise",
+   "shock",
+   "determined",
+   "skeptical",
+   "laugh",
+   "worried",
+   "content",
+   "smug",
+   "blink",
+   "deadpan",
+   "nervous"
+  ],
+  "feat_scale": "rick",
+  "skin": [
+   255,
+   214,
+   178
+  ],
+  "turns": "all",
+  "poses": "all",
+  "combos": true,
+  "coat": [
+   90,
+   100,
+   70
+  ],
+  "legs": [
+   46,
+   44,
+   40
+  ],
+  "cue": "blazer",
+  "body": "round",
+  "hair": [
+   60,
+   40,
+   30
+  ],
+  "hairdo": "topknot",
+  "fhair": "stubbledots",
+  "fhaircol": [
+   30,
+   24,
+   22
+  ],
+  "mouth_side": 1,
+  "turn": 0.4,
+  "props": []
+ }
+}

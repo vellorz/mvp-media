@@ -23,6 +23,22 @@ if 'bpy' in sys.modules or os.path.basename(sys.argv[0]).startswith('blender'):
             w=abs(w2c(sc,cam,c+right*0.43).x-p.x); hs.append((r.name.split('_',1)[1],p.x,1-p.y,w))
         heads[key]=hs; sc.render.filepath=f'{out}/{key}.png'; bpy.ops.render.render(write_still=True); print('SKINSTILL',key,len(hs),flush=True)
     json.dump(heads,open(f'{out}/heads.json','w'))
+elif sys.argv[1]=='--video':
+    import numpy as np
+    from PIL import Image
+    d,hj=sys.argv[2],sys.argv[3]; heads=json.load(open(hj)); allg=[]
+    for key,hs in sorted(heads.items()):
+        fp=f'{d}/{key}.png'
+        if not os.path.exists(fp): continue
+        g=np.asarray(Image.open(fp).convert('RGB'),np.float32)/255; H_,W_=g.shape[:2]
+        for nm,x,y,w in hs:
+            r=max(3,int(w*W_*0.45)); cx,cy=int(x*W_),int(y*H_); p=g[max(0,cy-r):cy+r,max(0,cx-r):cx+r].reshape(-1,3)
+            R,G,B=p[:,0],p[:,1],p[:,2]; sat=(R-B)/np.maximum(R,1e-4)
+            m=(R>0.25)&(R>=G)&(G>=B)&(sat<0.45)&(sat>0.04)
+            if m.sum()<12: continue
+            q=p[m]; br=float(np.median(q[:,2]/q[:,0])); gr=float(np.median(q[:,1]/q[:,0])); ok=abs(br-0.86)<=0.04 and abs(gr-0.92)<=0.04
+            allg.append((br,gr,ok)); print(f"{key:11s} {nm:13s} B/R {br:.3f}  G/R {gr:.3f}  {'PASS' if ok else 'FAIL'}")
+    print('SKIN_VIDEO median B/R',round(float(np.median([a[0] for a in allg])),3),'G/R',round(float(np.median([a[1] for a in allg])),3),'pass',sum(a[2] for a in allg),'/',len(allg))
 else:
     import numpy as np
     from PIL import Image
@@ -62,3 +78,4 @@ else:
             print(f"{key:11s} {nm:13s} {r0[1] if r0 else float('nan'):7.3f}  {r0[2] if r0 else float('nan'):7.3f}  {br:9.3f}  {gr:9.3f}   {'PASS' if ok else 'FAIL'}")
     if allg: print('SKIN_GRADED median B/R',round(float(np.median([a[0] for a in allg])),3),'G/R',round(float(np.median([a[1] for a in allg])),3),'pass',sum(a[2] for a in allg),'/',len(allg))
     json.dump(rows,open(f'{out}/skin_table.json','w'),indent=1)
+# stage 3 (video): python3 skinprobe_nb.py --video FRAMEDIR HEADS.json  -> faces on frames taken from the finished graded video (captions included)

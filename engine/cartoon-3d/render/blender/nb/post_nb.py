@@ -44,12 +44,15 @@ def vig(x,k):
 class Reader:
     def __init__(s,shot):
         a,b=SH[shot]; s.a=a; s.n=b-a+1; s.i=0
-        mp=sorted(glob.glob(f'{SRC}/{shot}_*.mp4')); s.png=None
+        mp=sorted(glob.glob(f'{SRC}/{shot}_*.mp4')); s.png=None; s.mp=mp; s.p=None; s.shot=shot
+        if not mp: s.png=sorted(glob.glob(f'{SRC}/{shot}/f_*.png'))
+    def _open(s):   # nb r2b: decoder starts on first use (18 decoders opened at once ran the cloud cgroup out of memory on the last RANGE part)
+        shot=s.shot; mp=s.mp
         if mp:
             lst=f'/tmp/{shot}_list.txt'; open(lst,'w').write(''.join(f"file '{os.path.abspath(m)}'\n" for m in mp))
             s.p=subprocess.Popen(['ffmpeg','-v','error','-f','concat','-safe','0','-i',lst,'-vf',f'scale={W}:{H}:flags=lanczos','-f','rawvideo','-pix_fmt','rgb24','-'],stdout=subprocess.PIPE)
-        else: s.png=sorted(glob.glob(f'{SRC}/{shot}/f_*.png'))
     def next(s):
+        if s.png is None and s.p is None: s._open()
         s.i+=1
         if s.png is not None:
             im=Image.open(s.png[s.i-1]).convert('RGB')
@@ -212,7 +215,8 @@ if __name__=='__main__':
         act=[n for n,(a,b) in SH.items() if a<=f<=b]
         frames={}
         if RG and not (RG[0]<=f<=RG[1]):
-            for n in act: R[n].next()
+            for n in act:
+                if SH[n][1]>=RG[0]: R[n].next()   # nb r2b: shots that end before the range are never decoded
             if f>RG[1]: break
             continue
         if TESTF and f not in TESTF:

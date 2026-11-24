@@ -308,7 +308,7 @@ for sx in(-1,1): cyl(f'M_easel{sx}',(PX-0.9+sx*0.36,PY+0.12,0.62),0.025,1.26,fla
 cyl('M_easelb',(PX-0.9,PY+0.3,0.62),0.025,1.26,flat('easel',lin((196,156,104))),v=6,rot=(math.radians(14),0,0))
 box('M_easeltray',(PX-0.9,PY-0.02,PZ-PH/2-0.08),(PW+0.2,0.1,0.04),flat('easel',lin((196,156,104))),bv=0.005)
 # nb eyepass r1 (critical: the stall front went to a black slab under the poster in the landing frames): warm lamp light on the counter and easel (camera-invisible, like every non-sun lamp)
-bpy.ops.object.light_add(type='AREA',location=(PX-0.9,PY-1.7,1.0),rotation=(math.radians(80),0,0)); _fl=bpy.context.object; _fl.name='M_stallfill'; _fl.data.size=2.6; _fl.data.energy=140; _fl.data.color=(1.0,0.82,0.62)
+bpy.ops.object.light_add(type='AREA',location=(PX-0.9,PY-1.7,1.0),rotation=(math.radians(80),0,0)); _fl=bpy.context.object; _fl.name='M_stallfill'; _fl.data.size=2.6; _fl.data.energy=120; _fl.data.color=(1.0,0.93,0.86)   # r3 (visual: S18 ink read red 91,47,44): near-white fill
 # ======================= SET A: museum workroom (x=300): the box, the inscription, the photo tests =======================
 AX=300.0
 floor('A_floor',AX,0,14,10,'parquet',(3,3)); wall('A_back',(AX,4,2.0),(14,0.2,4.0),'museum_wall',(2,2)); wall('A_side',(AX-6,0,2.0),(0.2,10,4.0),'museum_wall',(2,2))
@@ -440,6 +440,11 @@ bpy.ops.object.light_add(type='POINT',location=(GX0+0.4,-0.1,1.1)); _l=bpy.conte
 # the open church book on the table (close-up S11): page with the three names, grave No. 54 and "getraut 1651"
 LB=box('G_ledger',(GX0+0.05,-0.25,0.79),(0.62,0.42,0.04),flat('ledgerc',lin((110,40,36)),0.7),bv=0.01)
 lp=plane('G_ledgerpage',(GX0+0.05,-0.25,0.8105),0.58,0.39,card_mat('ledger_page','ledger_page',emit=0.25),horiz=True); lp['noink']=1
+# r3 (eye pass critical: the S11 page read as a loose sheet, no spine, gutter or facing page): the book now lies open: left cover + facing page, a dark gutter and a raised spine
+box('G_ledgerL',(GX0+0.05-0.61,-0.25,0.79),(0.62,0.42,0.04),flat('ledgerc',lin((110,40,36)),0.7),bv=0.01)
+_lpl=plane('G_ledgerpageL',(GX0+0.05-0.6,-0.25,0.8125),0.58,0.39,flat('ledgerpL',lin((232,220,192)),0.8,emit=0.2),horiz=True); _lpl.rotation_euler=(0,math.radians(-3),0); _lpl['noink']=1
+box('G_gutter',(GX0+0.05-0.305,-0.25,0.8115),(0.03,0.39,0.003),flat('gutter',lin((96,74,52)),0.9),bv=0.0)
+box('G_spine',(GX0+0.05-0.305,-0.25,0.775),(0.05,0.43,0.05),flat('ledgerc',lin((110,40,36)),0.7),bv=0.02)
 bpy.ops.object.light_add(type='AREA',location=(GX0,0,4.3)); _l=bpy.context.object; _l.name='G_fill'; _l.data.energy=300; _l.data.size=6; _l.data.color=(1.0,0.92,0.84)
 # ======================= SET C: St. Johannis cemetery in snow (x=1100) =======================
 CX0=1100.0
@@ -482,12 +487,12 @@ LX,LY=GX0+0.05,-0.25         # ledger page centre; "getraut 1651" at (LX-0.145, 
 s='S01'; r=S(s)
 pa=char_on('S01_partyA','partyA',s,(0.5,8.3,0.0),r,'open_smile',arms=('arm','arm'))
 look(pa,0,'open_smile',-1); turn(pa,40,'open_smile',-1,1); COMBOS.append((pa,WF(10)-4,'victory_up',-1,'laugh'))   # r2 (shots C: raised mitten covered townB's face): cheer with the other arm
-tA=char_on('S01_townA','townA',s,(-0.75,9.9,0.0),r,'happy',arms=('arm','arm_mug')); arm(tA,1,0,-35)
+tA=char_on('S01_townA','townA',s,(-0.55,9.9,0.0),r,'happy',arms=('arm','arm_mug')); arm(tA,1,0,-35)
 at(tA,[(0,'happy@R1'),(34,'smile@R2'),(70,'grin@R1'),(104,'laugh@F')])
-tB=char_on('S01_townB','townB',s,(1.25,11.2,0.0),r,'smile',arms=('arm_mug','arm')); arm(tB,-1,0,-35)
+tB=char_on('S01_townB','townB',s,(1.7,11.6,0.0),r,'smile',arms=('arm_mug','arm')); arm(tB,-1,0,-35)
 at(tB,[(0,'smile@L1'),(46,'happy@L2'),(88,'open_smile@L1'),(112,'laugh@F')])
    # eyepass r1: the stacked-disc steam read as an odd floating shape; removed
-path(s,[(0,(0.4,3.6,1.45),(0.4,9.5,1.55)),(70,(0.45,4.6,1.5),(0.45,9.5,1.62)),(130,(0.5,5.5,1.55),(0.5,9.5,1.64))])   # r2 (text T7: caption on the party man's face): camera tilted down so heads sit above the caption band; banner stays in the top half   # r1 framing probe: heads 10-16 % W, townA/B at the frame edges
+path(s,[(0,(0.4,3.6,1.45),(0.4,9.5,1.55)),(70,(0.45,4.6,1.5),(0.45,9.5,1.62)),(130,(0.5,5.5,1.55),(0.55,9.5,1.52))])   # r3 (shots capprobe: caption on partyA's chin f102-130; C4 mitten over townB f104-112): heads higher, townB out of the cheer arm's path   # r2 (text T7: caption on the party man's face): camera tilted down so heads sit above the caption band; banner stays in the top half   # r1 framing probe: heads 10-16 % W, townA/B at the frame edges
 # ---- S02 (130-193): "all because of one ink blot": macro push down onto the smudged digit ----
 s='S02'; r=S(s)
 path(s,[(130,(NX-0.04,NY-0.36,NZ+0.30),(NX-0.02,NY-0.005,NZ)),(193,(NX,NY-0.17,NZ+0.13),(NX,NY-0.022,NZ))])
@@ -513,7 +518,7 @@ at(b4,[(440,'open_smile@L1'),(476,'laugh@L2')])
 # r2b stills: partyC left S04 (in every placement she hid behind a nearer head or sat cut at an edge in one of the three setups); the laugh is carried by partyB
 pass
 path(s,[(332,(PX0-1.55,-2.45,1.42),(PX0+0.05,0.3,1.0),30),(422,(PX0-1.35,-2.3,1.44),(PX0+0.1,0.3,1.02),30),
-        (423,(PX0+0.6,-1.5,1.38),(PX0+0.05,0.6,1.0),30),(476,(PX0+0.62,-1.44,1.38),(PX0+0.05,0.6,1.01),30),
+        (423,(PX0+0.6,-1.5,1.38),(PX0+0.05,0.6,1.0),30),(476,(PX0+0.5,-1.2,1.36),(PX0+0.06,0.6,1.03),30),
         (477,(PX0+1.35,-2.05,1.42),(PX0-0.5,0.3,1.02),30),(505,(PX0+1.28,-1.98,1.42),(PX0-0.58,0.3,1.03),30)])   # r2b framing probe: the archivist's head sat on the left edge in setup C
 for ob_ in (L.CAM[s],L.TGT[s],L.CAM[s].data):
     if ob_.animation_data and ob_.animation_data.action:
@@ -523,7 +528,7 @@ for ob_ in (L.CAM[s],L.TGT[s],L.CAM[s].data):
 # r2b contactcheck: partyB/partyC stood inside the desk (y 0.75-0.8); now in front of it, still staggered behind partyA
 # ---- S05 (505-668): the bottom of the box: the note, read along the lines, ends on the smear ----
 s='S05'; r=S(s)
-path(s,[(505,(NX-0.07,NY-0.10,NZ+0.17),(NX-0.06,NY+0.035,NZ)),(580,(NX+0.02,NY-0.14,NZ+0.17),(NX+0.03,NY-0.01,NZ)),(668,(NX+0.0,NY-0.12,NZ+0.13),(NX,NY-0.022,NZ))])
+path(s,[(505,(NX-0.07,NY-0.10,NZ+0.17),(NX-0.06,NY+0.005,NZ)),(580,(NX+0.02,NY-0.14,NZ+0.17),(NX+0.03,NY-0.04,NZ)),(668,(NX+0.0,NY-0.12,NZ+0.13),(NX,NY-0.052,NZ))])   # r3 (text T7: captions on the note's digits f522-560): note lines higher in frame
 # ---- S06 (668-725): "Was it a two? Or a seven?": the smudge, the 2 and the 7 tried on in turn ----
 s='S06'; r=S(s)
 path(s,[(668,(NX,NY-0.11,NZ+0.12),(NX,NY-0.022,NZ)),(725,(NX,NY-0.095,NZ+0.105),(NX,NY-0.022,NZ))])
@@ -533,11 +538,12 @@ b7=char_on('S07_partyB','partyB',s,(PX0+0.42,-0.2,0.0),r,'worried')
 at(b7,[(725,'worried@L1'),(745,'nervous@L2')]); COMBOS.append((b7,WF(86),'glance_shift',-1,'nervous')); at(b7,[(790,'wince@L1')])
 c7=char_on('S07_partyC','partyC',s,(PX0-0.42,-0.1,0.0),r,'worried',arms=('arm','arm_brush')); arm(c7,1,725,-30)
 at(c7,[(725,'worried@R1'),(760,'look_up@R1'),(784,'nervous@R2'),(804,'wince@R1')])
-path(s,[(725,(PX0-0.08,-2.75,0.95),(PX0,3.0,1.95)),(815,(PX0+0.08,-2.6,0.97),(PX0+0.03,3.0,2.15))])   # r1: low angle from in front of the pair (the cake hid partyB when they stood at the back wall)
+path(s,[(725,(PX0-0.08,-2.75,0.95),(PX0,3.0,1.6)),(815,(PX0+0.08,-2.6,0.97),(PX0+0.03,3.0,1.72))])   # r3 (capprobe f781-793: caption over both chins): less up-tilt so the faces sit above the caption line   # r1: low angle from in front of the pair (the cake hid partyB when they stood at the back wall)
 # ---- S08 (815-935): the photo tests: two flashes, the print on the wall, still a blob ----
 s='S08'; r=S(s)
 ph=char_on('S08_photog','photog',s,(AX-3.75,-0.75,0.0),r,'determined',arms=('arm','arm'))
-for f,a in [(815,-20),(855,-62),(862,-70),(866,-62),(871,-70),(876,-25)]: arm(ph,1,f,a)
+for f,a in [(815,-20),(876,-25)]: arm(ph,1,f,a)
+for f,a in [(815,-30),(846,-30),(852,-4),(880,-4),(888,-30)]: arm(ph,-1,f,a)   # r3 (shots 374: the flashes fired with both hands away from the tripod camera): the camera-side hand is on the camera body through both flashes
 at(ph,[(815,'determined@R1'),(850,'squint@R1'),(884,'neutral@R2')]); COMBOS.append((ph,WF(103)-6,'tilt_talk',1,'deadpan'))
 a8=char_on('S08_arch','archivist',s,(AX-2.3,-0.45,0.0),r,'hope' if False else 'smile')
 at(a8,[(815,'smile@L1'),(846,'open_smile@L2'),(880,'worried@R1')]); COMBOS.append((a8,WF(100),'dip_talk',-1,'sigh'))
@@ -557,7 +563,7 @@ at(a10,[(1062,'sad@R1'),(1090,'look_down@R2'),(1122,'content@R1'),(1146,'smile@R
 path(s,[(1062,(CX0+0.1,-3.0,1.65),(CX0-0.2,1.7,0.65)),(1158,(CX0-0.2,-1.3,1.3),(CX0-0.25,2.0,0.45))])
 # ---- S11 (1158-1246): the church book: "getraut 1651", long before 1628? no: long AFTER 1628 ----
 s='S11'; r=S(s)
-path(s,[(1158,(LX-0.07,LY-0.02,0.811+0.30),(LX-0.09,LY+0.11,0.811)),(1200,(LX-0.12,LY-0.19,0.811+0.24),(LX-0.13,LY-0.055,0.811)),(1246,(LX-0.14,LY-0.21,0.811+0.18),(LX-0.145,LY-0.09,0.811))])   # r2 (text: '4' of 'Grab No. 54' cut; caption on 'getraut 1651')
+path(s,[(1158,(LX-0.3,LY-0.2,0.811+0.50),(LX-0.3,LY-0.06,0.811)),(1200,(LX-0.12,LY-0.19,0.811+0.24),(LX-0.13,LY-0.08,0.811)),(1246,(LX-0.14,LY-0.21,0.811+0.18),(LX-0.145,LY-0.115,0.811))])   # r3 (text T7: captions on 'geb. Kraus' and '1651'; eye pass: open book): opens on the spread with the gutter, then pushes in; page lines higher in frame   # r2 (text: '4' of 'Grab No. 54' cut; caption on 'getraut 1651')
 # ---- S12 (1246-1334): 1628, imagined: the girl holds the box out; the one who should take it is not there yet ----
 s='S12'; r=S(s)
 g12=char_on('S12_giver','giver1678',s,(HX0-0.45,3.6,0.0),r,'smile',arms=('arm','arm_woodbox'))
@@ -597,10 +603,10 @@ for i,(x,y,k,arms_) in enumerate([(-0.95,14.2,'townA',('arm','arm_mug')),(0.45,1
     c_=char_on(f'S17_crowd{i}',k,s,(x,y,0.0),r,'happy',arms=arms_); CR.append(c_)
     at(c_,[(1676,['happy@R1','smile@F','open_smile@L1','happy@L1','grin@R1'][i]),(1712+i*6,['look_up@R1','look_up@F','look_up@L1','look_up@L1','look_up@R1'][i]),(1760+i*4,['open_smile@R1','laugh@F','happy@L2','open_smile@L1','grin@R2'][i])])
 COMBOS.append((CR[3],1765,'victory_up',-1,'laugh'))
-path(s,[(1676,(0.6,9.0,2.0),(0.1,15.0,3.2)),(1706,(0.52,10.3,2.4),(0.05,16.5,3.4)),(1720,(0.5,11.0,2.6),(0.0,17.0,3.6)),(1760,(0.3,14.6,4.55),(0.0,CY-0.6,4.75)),(1800,(0.25,15.0,4.75),(0.0,CY-0.6,4.85))])   # r2b (framing probe: crowd heads crossed the caption band on the way down): opens with the crowd heads already under the band, looking up at the balcony   # r2 (text: caption vs 350 banner; shots: pitch 13.5 deg, heads cut): the crane settles with the banner in mid-frame, never in the caption band   # r1: crane up over the crowd to the Christkind (head was 6-7 % W)
+path(s,[(1676,(0.6,9.0,2.0),(0.1,15.0,3.2)),(1706,(0.52,10.3,2.4),(0.05,16.5,3.4)),(1720,(0.5,11.0,2.6),(0.0,17.0,3.6)),(1760,(0.3,14.6,4.55),(0.0,CY-0.6,4.5)),(1800,(0.25,15.0,4.75),(0.0,CY-0.6,4.45))])   # r3 (text T7: the 350 JAHRE banner sank into the caption line f1768-1799): crane ends tilted down so the banner stays above it   # r2b (framing probe: crowd heads crossed the caption band on the way down): opens with the crowd heads already under the band, looking up at the balcony   # r2 (text: caption vs 350 banner; shots: pitch 13.5 deg, heads cut): the crane settles with the banner in mid-frame, never in the caption band   # r1: crane up over the crowd to the Christkind (head was 6-7 % W)
 # ---- S18 (1800-1905): payoff. The party's still on, just fifty candles short: the prints stall, the poster lands on "short" ----
 s='S18'; r=S(s)
-p18=char_on('S18_partyA','partyA',s,(3.05,-1.0,0.0),r,'happy',arms=('arm','arm_candles')); arm(p18,1,1800,-55); arm(p18,1,WF(208)-4,-55); arm(p18,1,WF(208)+2,4)   # eyepass r1 (critical): the raised candles floated into the landing frame without her; arm drops after 'candles'
+p18=char_on('S18_partyA','partyA',s,(3.25,-1.0,0.0),r,'happy',arms=('arm_candles','arm')); arm(p18,-1,1800,-55); arm(p18,-1,WF(208)-4,-55); arm(p18,-1,WF(208)+2,-8)   # r3 (shots 344/370b: candles alone at the edge f1866): candles in the hand on the exit side, so they leave before her body   # eyepass r1 (critical): the raised candles floated into the landing frame without her; arm drops after 'candles'
 at(p18,[(1800,'happy@R1'),(1830,'open_smile@R2'),(WF(210),'grin@F'),(1890,'smile@R1')])
 LAND=WF(211)
 path(s,[(1800,(3.4,-4.6,1.7),(3.7,0.2,1.55)),(1850,(3.7,-4.2,1.66),(3.8,0.2,1.57)),(LAND,(3.95,-2.35,1.62),(3.9,0.2,1.58)),(END,(3.95,-2.3,1.62),(3.9,0.2,1.58))])

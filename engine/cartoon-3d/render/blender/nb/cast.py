@@ -158,7 +158,9 @@ def head(name,fk):
     if c.get('stache_small'):   # 326a D2 (from Detroit r5): one slim rounded mustache, narrower than the mouth
         mc=tuple(c['stache_small'])+(255,); d.rounded_rectangle([CX-105,628,CX+105,672],22,fill=mc,outline=K,width=10)
     if c.get('stubble'):   # 326a D3: light jaw shadow, no outline
-        ov=Image.new('RGBA',(1024,1024),(0,0,0,0)); od=ImageDraw.Draw(ov); od.chord([CX-330,520,CX+330,860],0,180,fill=tuple(c['stubble'])+(42,)); feat.alpha_composite(ov); d=ImageDraw.Draw(feat)
+        # nb (PC test S04:420): the flat-topped chord read as a horizontal band across the mouth. Now a jaw crescent (curved top edge, follows the chin), feathered, light
+        m_=Image.new('L',(1024,1024),0); md=ImageDraw.Draw(m_); md.ellipse([CX-330,500,CX+330,860],fill=255); md.ellipse([CX-400,330,CX+400,735],fill=0); m_=m_.filter(ImageFilter.GaussianBlur(16))
+        ov=Image.new('RGBA',(1024,1024),tuple(c['stubble'])+(0,)); ov.putalpha(m_.point(lambda v:int(v*46/255))); feat.alpha_composite(ov); d=ImageDraw.Draw(feat)
     if c.get('nose',True): d.arc([CX-30,560,CX+30,640],-30,200,fill=K,width=10)
     extras(d,ex)
     im.alpha_composite(feat.crop((0,105,1024,1024)),(TD,0))

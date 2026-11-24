@@ -425,7 +425,7 @@ def _body_card(ch,key):
     b=plane(f"{ch['inst']}_body_{LEGTEX[key]}",(0,0,0),0.8,1.1*sy,card_mat(t,t),coll=chr_coll(ch['shot']))   # '_body' in the name: rigcheck FOOT tests it
     b.parent=ch['split']['whole']; b.location=(0,0.0015,ch['split']['zc']); L[key]=b; return b   # 1.5 mm behind the torso card (rule 354b: no coplanar cards)
 _setface=face
-def combo(ch,f,name,side=1,face=None,frm=0,face2=None):
+def combo(ch,f,name,side=1,face=None,frm=0,face2=None,keep=None):
     """Rick combined move `name` (motion_combos.json) starting at frame f, toward screen side `side` (+1 right, -1 left).
     face: base face (default: the character's current face); frm: head level at the start (-3..3).
     Bakes every channel on the same plan: face/turn (353a grammar), arm pose cards (354a), body lean/squash/hop on the lean pivot,
@@ -437,12 +437,15 @@ def combo(ch,f,name,side=1,face=None,frm=0,face2=None):
     seq=MO.frames(name,side,base,frm,face2,pre=0,post=0)
     ln=_lean_rig(ch); wh=ch['split']['whole']; hp=ch['hp']; top=ch['top']; prev=None; last=f
     _body_card(ch,'body')
+    if keep is None:   # sb r2 (verifier F3 prop pops): an arm holding a prop card keeps it through the move (no swap to an empty pose card)
+        keep={sx for sx in (-1,1) if ch['A'][sx]['sched'] and ch['A'][sx]['sched'][0][1]!='arm'}
     for s in seq:
         g=f+s['f']
         if prev is None or s['lv']!=prev['lv'] or s['face']!=prev['face']:
             k=XL.turn_name(s['face'],s['lv']) if s['lv'] is not None else s['face']
             _setface(ch,g,k if k in ch['F'] else s['face']); last=g
         for sx in (-1,1):
+            if sx in keep: continue
             a=s['arms'][sx]; pa=prev['arms'][sx] if prev else 'hang'
             if a!=pa:
                 if a=='hang': ch['A'][sx]['sched']=[x for x in ch['A'][sx]['sched'] if x[0]!=g]+[(g,'arm')]; _piv_hold(ch,sx,g,-8); ch['A'][sx]['pose']=None
@@ -453,7 +456,7 @@ def combo(ch,f,name,side=1,face=None,frm=0,face2=None):
         sw,psw=s.get('swing',0.0),(prev.get('swing',0.0) if prev else 0.0)   # r9 walk arm swing: rest arm rotates about the shoulder (one out, one in)
         if sw!=psw:
             for sx in (-1,1):
-                if s['arms'][sx]=='hang': _piv_hold(ch,sx,g,-8+sw)   # same delta in each arm's own frame = opposite screen directions: one arm forward, one back
+                if s['arms'][sx]=='hang' and sx not in keep: _piv_hold(ch,sx,g,-8+sw)   # same delta in each arm's own frame = opposite screen directions: one arm forward, one back
             last=g
         if prev is None or (s['lean'],s['squash'],s['hop'])!=(prev['lean'],prev['squash'],prev['hop']):
             if prev is None: krot(ln,g-1,(0,0,0)); kscale(wh,g-1,(1,1,1)); kloc(wh,g-1,(0,0,0))

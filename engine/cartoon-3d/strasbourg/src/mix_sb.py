@@ -1,7 +1,7 @@
 # Mix (rules 8/188 revised Nov 21): VO studio-clean, bed 14.4-18.6 dB under the VO riding its level map (std 2.3-4.0 dB, no ducking), SFX levelled per event to +9 over the bed (A6, rule 319), still >= 8 LU under the VO (rule 192); master -14 LUFS, -1.9 to -2.2 dBTP
 import subprocess, re, json, sys
-A='/root/sb/audio/'; VO='/root/sb/vo/vo_final.wav'
-END=2041/30
+A='/root/sb/audio/'; VO='/root/sb/vo/vo_final_dc.wav'   # r1b: click at 20.734 s smoothed (declick_sb.py)
+END=2037/30   # r2 (payoff E3: tail 1.31 s after 'Nicholas'): video ends at f2036
 def lufs(path,extra=''):
     o=subprocess.run(f'ffmpeg -hide_banner -nostats -i {path} {extra} -af ebur128=peak=true -f null -',shell=True,capture_output=True,text=True).stderr
     s=o[o.rfind('Summary'):]
@@ -23,7 +23,7 @@ def pk(a):
     n=2400; return max(r(a[k:k+n]) for k in range(0,max(1,len(a)-n+1),600))
 offs=[20*np.log10(pk(sfxA[e['i']:e['i']+e['w']])/r(bedA[e['i']:e['i']+e['w']])) for e in EVs]
 HR=18.0; gs=gb+HR   # stem written HR dB low so boosted events never clip int16, gain restored here. cc r2: each SFX event levelled on its own to +9 dB over the bed (payoff ding +10): A6 8-12 dB, rule 319 (>= +4, payoff >= +6); rule 192 (>= 8 LU under the VO) is re-checked by sfxcheck_cc.py
-TGT={2007:10.0}; G=np.array([TGT.get(e['f'],9.0)-o for e,o in zip(EVs,offs)]); SR_=48000
+TGT={2002:10.0}; G=np.array([TGT.get(e['f'],9.0)-o for e,o in zip(EVs,offs)]); SR_=48000
 def envf(G):
     acc=np.zeros(len(sfxA)); cnt=np.zeros(len(sfxA))
     for e,g in zip(EVs,G):
@@ -59,7 +59,7 @@ cmd=(f'ffmpeg -y -hide_banner -loglevel error -i {VO} -i {A}bed.wav -i {A}sfx_le
      f'[v][b][s]amix=inputs=3:normalize=0:duration=longest,atrim=0:{END}[m]" -map "[m]" -ar 48000 {A}premix.wav')
 subprocess.run(cmd,shell=True,check=True)
 pI,pL,pT=lufs(A+'premix.wav'); g=-14.0-pI
-subprocess.run(f'ffmpeg -y -hide_banner -loglevel error -i {A}premix.wav -af "volume={g}dB,alimiter=limit=0.78:attack=2:release=60:level=disabled" -ar 48000 {A}mix.wav',shell=True,check=True)
+subprocess.run(f'ffmpeg -y -hide_banner -loglevel error -i {A}premix.wav -af "volume={g}dB,alimiter=limit=0.78:attack=2:release=60:level=disabled,afade=t=out:st={END-0.03:.3f}:d=0.03" -ar 48000 {A}mix.wav',shell=True,check=True)
 I,LRA,TP=lufs(A+'mix.wav'); g+=-14.0-I
-subprocess.run(f'ffmpeg -y -hide_banner -loglevel error -i {A}premix.wav -af "volume={g}dB,alimiter=limit=0.78:attack=2:release=60:level=disabled" -ar 48000 {A}mix.wav',shell=True,check=True)
+subprocess.run(f'ffmpeg -y -hide_banner -loglevel error -i {A}premix.wav -af "volume={g}dB,alimiter=limit=0.78:attack=2:release=60:level=disabled,afade=t=out:st={END-0.03:.3f}:d=0.03" -ar 48000 {A}mix.wav',shell=True,check=True)
 I,LRA,TP=lufs(A+'mix.wav'); print(json.dumps({'I':I,'LRA':LRA,'TP':TP,'bed_under_vo':BED_UNDER,'sfx_under_vo':SFX_UNDER}))

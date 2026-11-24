@@ -28,7 +28,6 @@ def put(tr,t,x,g=1.0):
     if i>=N or i+len(x)<0: return
     j=min(N,i+len(x)); T[tr][i:j]+=x[:j-i]*g
 # round 5 (C1): D minor, i-VI-III-VII (Dm7, Bbmaj7, Fmaj7, C7): tense, sly, forward-moving
-# cc: E minor, i-VI-III-VII (Em7, Cmaj7, Gmaj7, D): sea-air, playful with an edge; 4-bar loop = 10.4 s at 92 BPM
 # sb: A minor, i-VI-III-VII (Am7, Fmaj7, Cmaj7, G): wintry, sly, warm; 4-bar loop = 10.0 s at 96 BPM
 CH=[(45,[69,72,76,79]),(41,[65,69,72,76]),(48,[67,72,76,79]),(43,[67,71,74,79])]
 MEL=[[81,0,84,83,81,0,79,81],[77,0,81,79,77,0,76,77],[79,0,76,79,84,0,83,81],[79,0,83,86,83,0,81,79]]
@@ -58,14 +57,14 @@ T['kick'][:]=0
 for bi in range(bars):
     for k in range(4): put('kick',bi*4*B+k*B,KICK,0.9)
 # round 5: level map from the Rick music study (section 7), dB relative to the bed median; layers thin out in dips (S6)
-MAP=[(0.0,3),(3.5,3.5),(4.5,-1.0),(8.4,3.0),(11.5,-2.6),(13.8,2.4),(16.5,-2.0),(18.6,1.8),(23.4,-2.6),(26.8,1.0),(28.3,-2.0),(33.2,0.6),(37.0,-2.8),(41.0,1.4),(46.5,3.0),(47.9,-3.0),(49.5,2.4),(54.8,-2.2),(58.8,1.2),(59.2,3.6),(63.4,4.5),(64.6,6),(66.0,8),(68.5,8)]   # sb: dips under the dense VO stretches, lift on the turn (48 s), rises into the 1766 reveal and the poster payoff
+MAP=[(0.0,3),(3.5,3.5),(4.5,-1.0),(8.4,3.0),(11.5,-2.6),(13.8,2.4),(16.5,-2.0),(18.6,1.8),(23.4,-2.6),(26.8,1.0),(28.3,-2.0),(33.2,0.6),(37.0,-2.8),(41.0,1.4),(46.5,3.0),(47.9,-3.0),(49.5,2.4),(54.8,-2.2),(58.8,1.2),(59.2,3.6),(63.4,4.0),(64.6,4.5),(66.0,5.0),(68.5,5.0)]   # r1b: audio verifier, bed only 6.4-8.7 dB under the payoff line at +6/+8; lift kept (+3 dB over the start)   # sb: dips under the dense VO stretches, lift on the turn (48 s), rises into the 1766 reveal and the poster payoff
 tt=np.arange(N)/SR-0.1   # VO plays 0.1 s late in the mix
 mk=np.array([m[0] for m in MAP]); mv=np.array([m[1] for m in MAP],float)
 gdb=np.interp(tt,mk,mv)
 k_=int(0.7*SR); gdb=np.convolve(np.pad(gdb,(k_//2,k_-k_//2-1),mode='edge'),np.ones(k_)/k_,mode='valid')   # rides take ~0.7 s (M8)
 gl=10**(gdb/20)
 # cc r2: stop-time on the payoff hit (mix time 59.74-60.10 s, ding at f1793): the bed drops 12 dB for the ding with 40 ms ramps, then returns at full payoff level (rule 319 payoff >= +6 over the local bed while rule 192 keeps it >= 8 LU under the VO)
-_tm=np.arange(N)/SR; _r=0.04; _st=np.clip(np.minimum((_tm-66.98)/_r,(67.34-_tm)/_r),0,1)   # sb: stop-time on the payoff ding ("Nicholas", f2007); gl=gl*10**(-12*_st/20)
+_tm=np.arange(N)/SR; _r=0.04; _st=np.clip(np.minimum((_tm-66.98)/_r,(67.34-_tm)/_r),0,1); gl=gl*10**(-12*_st/20)   # sb r1b: stop-time on the payoff ding (verifier A6: the r1 edit had left gl=... inside the comment, so the bed never dipped)
 thin=np.clip((gdb+1.0)/4.0,0,1)   # melody and plucks drop out in the -3..-5 dips, return on rises
 bed=(T['mal']*0.9*thin+T['plk']*0.6*(0.4+0.6*thin)+T['bass']*0.62+T['kick']*0.7+T['pad']*1.0)*gl
 # gentle bus compression for a constant level (no pumping: slow, light)
@@ -117,9 +116,9 @@ EV+=[(36,whoosh2(0.45),0.6),                          # S01 the preacher swings 
      (1141,whoosh2(0.5),0.55),                         # S13 dissolve into the snowy Christmas fair
      (1404,soft(ding(84,0.8),3000),0.35),              # S16 the preacher's victory
      (1444,whoosh2(0.5),0.7),                          # S17 the turn: the father and his fir
-     (1602,soft(ding(88,0.6),3000),0.35),(1624,soft(ding(91,0.6),3000),0.35),(1642,soft(ding(93,0.6),3000),0.35),   # rose, apple, sugar placed on their words
+     (1610,soft(ding(88,0.6),3000),0.35),(1632,soft(ding(91,0.6),3000),0.35),(1650,soft(ding(93,0.6),3000),0.35),   # r2: rose, apple, sugar land on the boughs (they ride the mitten from the word)
      (1769,whoosh2(0.45),0.65),                        # S20 match cut to today
-     (1975,whoosh2(0.4),0.6),(2007,soft(ding(84,1.4),3000),0.45),(2007,soft(ding(88,1.4),3000),0.32)]   # payoff push lands on the poster, ding on "Nicholas"
+     (1975,whoosh2(0.4),0.6),(2002,soft(ding(84,1.4),3000),0.45),(2002,soft(ding(88,1.4),3000),0.32)]   # r2: 'Nicholas' onset 66.72 s mix = f2002   # payoff push lands on the poster, ding on "Nicholas"
 # A6: level every SFX event against the bed under it so each lands at the same offset over the bed
 # (one common offset; mix.py then sets the global SFX gain so the median offset is +10 dB in the mix)
 BEDW=bed/np.abs(bed).max()*0.7
@@ -146,7 +145,7 @@ for it in range(12):   # overlapping tails add up: re-level every group against 
     for gr in G:
         i,w=gr['i'],gr['w']   # robust: average of three comparison spans (span, span+0.2 s, fixed 0.5 s)
         vv=[20*np.log10(pk50(S[i:i+ww])/rms(BEDW[i:i+ww])) for ww in (w,w+int(0.2*SR),int(0.5*SR))]; po=(min(vv)+max(vv))/2; gr['k']*=10**((16-po)/20*0.8)
-ATT={2007:-6.8,1602:-5.0,1404:-5.0,1975:-2.0,36:-1.5}   # tonal dings read louder than their RMS (K-weighting): keep every SFX >= 8 LU under the VO
+ATT={2002:-6.8,1610:-5.0,1404:-5.0,1975:-2.0,36:-1.5}   # tonal dings read louder than their RMS (K-weighting): keep every SFX >= 8 LU under the VO
 for gr in G: gr['k']*=10**(ATT.get(gr['f0'],0.0)/20)
 S[:]=sum(gr['tr']*gr['k'] for gr in G)
 evlog=[dict(f=gr['f0'],f1=gr['f1'],i=gr['i'],w=gr['w']) for gr in G]

@@ -16,12 +16,14 @@ SH={'S01':(0,130),'S02':(123,255),'S03':(248,355),'S04':(348,421),'S05':(414,514
     'S09':(793,852),'S10':(853,943),'S11':(936,1003),'S12':(996,1148),'S13':(1141,1259),'S14':(1252,1312),'S15':(1305,1405),
     'S16':(1398,1443),'S17':(1444,1531),'S18':(1524,1654),'S19':(1647,1768),'S20':(1769,1825),'S21':(1818,1927),'S22':(1920,END)}
 sc['shots']=json.dumps(SH)
-LENS={'S01':30,'S02':28,'S03':32,'S04':34,'S05':24,'S06':28,'S07':34,'S08':30,'S09':34,'S10':30,'S11':34,'S12':30,'S13':28,'S14':30,
-      'S15':32,'S16':30,'S17':30,'S18':32,'S19':34,'S20':26,'S21':30,'S22':32}
+LENS={'S01':30,'S02':28,'S03':32,'S04':34,'S05':24,'S06':28,'S07':34,'S08':26,'S09':34,'S10':30,'S11':34,'S12':30,'S13':28,'S14':30,
+      'S15':32,'S16':30,'S17':30,'S18':26,'S19':34,'S20':26,'S21':30,'S22':32}
 for n in SH: cam(n,LENS[n],11.0)   # sets stay sharp (BF r6 lesson)
 def C(n): return L.chr_coll(n)
 PATHS={}
+REV={'S02','S03','S06','S08','S10','S12','S14','S16','S18','S20'}   # r2 (rule 306, 17/21 joins pushed in on both sides): these shots pull out
 def path(n,keys):
+    if n in REV: keys=[(keys[i][0],)+tuple(keys[-1-i][1:]) for i in range(len(keys))]
     PATHS.setdefault(n,[]).extend(keys); L.path(n,keys)
 ALL=[]; COMBOS=[]
 INK=flat('inkc',lin((50,28,42)),0.9)
@@ -170,11 +172,12 @@ def fir_tree(n,c,h,coll=None,snow=False,decor=None):
     for k,(z,r_) in enumerate([(0.32,0.36),(0.56,0.28),(0.78,0.19)]):
         o_=cyl(f'{n}_c{k}',(c[0],c[1],c[2]+h*z),h*r_,h*0.34,m,v=14,r2=h*0.02,coll=coll); o_['noink']=1   # v2: the cone ink hull sat in the set collection and showed as a dark tree in S15
     return (c[0],c[1],c[2])
-def snowfall(shot,center,rx,ry,zr,count,seed,f0,f1,size=0.06):
+def snowfall(shot,center,rx,ry,zr,count,seed,f0,f1,size=0.06,ymin=None,xex=None):
     """falling flakes on ones (assets on ones), drifting; per shot collection"""
     rr=random.Random(seed); co=C(shot); m=card_mat('snowflk','snow',emit=0.8)
     for i in range(count):
         x=center[0]+rr.uniform(-rx,rx); y=center[1]+rr.uniform(-ry,ry); z=rr.uniform(*zr); sp=rr.uniform(0.012,0.022); ph=rr.uniform(0,6.28)
+        if (ymin is not None and y<ymin) or (xex and xex[0]<x<xex[1]): continue   # r2 (verifier: snow discs at the lens in S13/S21; truepost erased flakes over the poster)
         o=plane(f'{shot}_flk{i}',(x,y,z),size,size,m,coll=co); o['noink']=1; o.visible_shadow=False
         for f in range(f0,f1+1,2):
             zz=z-sp*(f-f0)
@@ -227,7 +230,8 @@ OAK=flat('pulpoak',lin((92,56,32)),0.6); OAKL=flat('pulpoakl',lin((150,100,58)),
 cyl('B_pulpitcol',(PU[0],PU[1],0.7),0.26,1.4,SAND_,v=12)
 cyl('B_pulpitcup',(PU[0],PU[1],1.48),0.30,0.28,OAK,v=8,r2=0.84)
 cyl('B_pulpitfloor',(PU[0],PU[1],1.64),0.86,0.06,OAK,v=8)
-cyl('B_pulpit',(PU[0],PU[1],1.95),0.84,0.62,OAK,v=8)
+_pp=cyl('B_pulpit',(PU[0],PU[1],1.95),0.84,0.62,OAK,v=8)
+_bm=bmesh.new(); _bm.from_mesh(_pp.data); bmesh.ops.delete(_bm,geom=[f_ for f_ in _bm.faces if abs(f_.normal.z)>0.9],context='FACES_ONLY'); _bm.to_mesh(_pp.data); _bm.free()   # r2 (rule 372: the preacher's torso came up through the solid drum top): open parapet, no lid
 cyl('B_pulpitrail',(PU[0],PU[1],2.29),0.90,0.07,GOLD,v=8)
 cyl('B_pulpitbase',(PU[0],PU[1],1.67),0.89,0.06,GOLD,v=8)
 for k in range(8):
@@ -275,12 +279,12 @@ box('D_winframe',(DX+1.6,3.44,1.6),(1.36,0.04,1.56),flat('wframe',lin((90,60,40)
 for k in range(2): box(f'D_wbar{k}',(DX+1.6,3.41,1.6),(0.05 if k==0 else 1.2,0.03,1.4 if k==0 else 0.05),flat('wframe',lin((90,60,40)),0.8),bv=0)
 STAR=sph('D_star',(DX+1.9,3.3,2.05),0.05,flat('starglow',lin((255,240,180)),0.3,emit=12.0)); STAR['noink']=1
 box('D_hearth',(DX-3.6,1.5,0.8),(0.7,1.8,1.6),GREY,bv=0.03); box('D_hearthin',(DX-3.25,1.5,0.5),(0.05,1.2,0.8),flat('ember',lin((255,140,60)),0.5,emit=3.0),bv=0)
-box('D_table',(DX-0.6,1.6,0.74),(2.0,1.0,0.06),WOOD,bv=0.02)
+box('D_table',(DX-0.6,1.6,0.58),(2.0,1.0,0.06),WOOD,bv=0.02)   # r2: table 0.16 lower so the mother's reach clears the top (hand 0.68)
 for sx in(-1,1):
-    for sy in(-1,1): box(f'D_tl{sx}{sy}',(DX-0.6+sx*0.9,1.6+sy*0.42,0.36),(0.08,0.08,0.72),WOOD,bv=0)
-box('D_bench',(DX-0.6,0.8,0.42),(1.8,0.35,0.06),WOOD,bv=0.01)
-cyl('D_candle',(DX-0.1,1.55,0.87),0.035,0.2,flat('wax',lin((240,230,200)),0.6),v=10); sph('D_flame',(DX-0.1,1.55,1.0),0.03,flat('flame',lin((255,200,110)),0.3,emit=8.0),sc_=(1,1,1.8))
-bpy.ops.object.light_add(type='POINT',location=(DX-0.1,1.4,1.2)); l=bpy.context.object; l.name='D_candleL'; l.data.energy=40; l.data.color=(1.0,0.75,0.45)
+    for sy in(-1,1): box(f'D_tl{sx}{sy}',(DX-0.6+sx*0.9,1.6+sy*0.42,0.28),(0.08,0.08,0.56),WOOD,bv=0)
+box('D_bench',(DX-0.6,0.8,0.34),(1.8,0.35,0.06),WOOD,bv=0.01)
+cyl('D_candle',(DX+0.3,1.85,0.71),0.035,0.2,flat('wax',lin((240,230,200)),0.6),v=10); sph('D_flame',(DX+0.3,1.85,0.84),0.03,flat('flame',lin((255,200,110)),0.3,emit=8.0),sc_=(1,1,1.8))
+bpy.ops.object.light_add(type='POINT',location=(DX+0.3,1.7,1.04)); l=bpy.context.object; l.name='D_candleL'; l.data.energy=40; l.data.color=(1.0,0.75,0.45)
 bpy.ops.object.light_add(type='POINT',location=(DX-3.0,1.5,1.0)); l=bpy.context.object; l.name='D_fireL'; l.data.energy=160; l.data.color=(1.0,0.6,0.3)
 bpy.ops.object.light_add(type='AREA',location=(DX,-1,2.85)); al=bpy.context.object; al.name='D_fill'; al.data.energy=260; al.data.size=5; al.data.color=(1.0,0.82,0.62)   # v4: warmer (kids 0.945/0.912)
 # Christmas Eve gifts (S14, S15): wrapped boxes on the table, one per child
@@ -288,14 +292,14 @@ GIFTS=shared('D_gifts',['S14','S15'])
 GC=[(200,50,50),(60,120,180),(60,140,80)]
 GIFT=[]
 for i,(x,y) in enumerate([(-1.2,1.55),(-0.65,1.7),(-0.1,1.45)]):
-    g=box(f'D_gift{i}',(DX+x,y,0.89),(0.26,0.22,0.24),flat(f'giftc{i}',lin(GC[i]),0.6),coll=GIFTS,bv=0.01)
-    box(f'D_ribbon{i}',(DX+x,y,0.89),(0.27,0.04,0.25),flat('ribbon',lin((250,220,110)),0.4),coll=GIFTS,bv=0).parent=None
+    g=box(f'D_gift{i}',(DX+x,y,0.73),(0.26,0.22,0.24),flat(f'giftc{i}',lin(GC[i]),0.6),coll=GIFTS,bv=0.01)
+    box(f'D_ribbon{i}',(DX+x,y,0.73),(0.27,0.04,0.25),flat('ribbon',lin((250,220,110)),0.4),coll=GIFTS,bv=0).parent=None
     GIFT.append(g)
 # 1605 tree (S18): fir in a tub by the window; decorations appear where a hand places them
 TREEC=shared('D_tree',['S18'])
 TP=(DX+1.2,2.2,0.0)
-cyl('D_tub',(TP[0],TP[1],0.22),0.36,0.44,WOOD,v=16,coll=TREEC)
-fir_tree('D_fir',(TP[0],TP[1],0.4),2.3,coll=TREEC)
+cyl('D_tub',(TP[0],TP[1],0.15),0.36,0.30,WOOD,v=16,coll=TREEC)
+fir_tree('D_fir',(TP[0],TP[1],0.25),2.3,coll=TREEC)
 # chronicle desk (S19): the open chronicle with the tree entry; quill rests in the pot (nobody writes)
 CHRC=shared('D_chron',['S19'])
 box('D_desk',(DX-2.6,-1.6,0.76),(1.4,0.9,0.06),WOOD,coll=CHRC,bv=0.02); box('D_deskbody',(DX-2.6,-1.35,0.38),(1.3,0.4,0.72),WOOD,coll=CHRC,bv=0.02)
@@ -347,6 +351,12 @@ box('poster_frame',(PCH[0],PY+0.03,PZ),(PW+0.12,0.04,PH+0.12),flat('pframe',lin(
 pmat=bpy.data.materials.new('poster'); N_,L_=L.nodes(pmat); pp_=N_['Principled BSDF']; it_=N_.new('ShaderNodeTexImage'); it_.image=bpy.data.images.load(L.TX+'poster.png'); it_.interpolation='Cubic'
 L_.new(it_.outputs['Color'],pp_.inputs['Base Color']); L_.new(it_.outputs['Color'],pp_.inputs['Emission Color']); pp_.inputs['Emission Strength'].default_value=0.35; pp_.inputs['Roughness'].default_value=1.0; pp_.inputs['Specular IOR Level'].default_value=0.0
 poster=plane('poster',(PCH[0],PY,PZ),PW,PH,pmat,coll=L.C_NOI); poster['noink']=1
+bpy.ops.object.light_add(type='POINT',location=(EX+0.3,5.0,1.5)); l=bpy.context.object; l.name='E_S21face'; l.data.color=(1.0,0.74,0.50); l.data.shadow_soft_size=0.8; l.data.use_shadow=False   # r2 (rule 355: S21 graded faces B/R 0.92): warm face fill on S21 only
+for f_,e_ in ((1817,0.0),(1818,70.0),(1927,70.0),(1928,0.0)): l.data.energy=e_; l.data.keyframe_insert('energy',frame=f_)
+for kp in l.data.animation_data.action.fcurves[0].keyframe_points: kp.interpolation='CONSTANT'
+bpy.ops.object.light_add(type='POINT',location=(PCH[0]-0.4,PCH[1]-2.6,1.6)); l=bpy.context.object; l.name='E_S22face'; l.data.color=(1.0,0.74,0.50); l.data.shadow_soft_size=0.8; l.data.use_shadow=False   # r2 stills: S22 visitor's face read grey outside the chalet lights
+for f_,e_ in ((1919,0.0),(1920,45.0)): l.data.energy=e_; l.data.keyframe_insert('energy',frame=f_)
+for kp in l.data.animation_data.action.fcurves[0].keyframe_points: kp.interpolation='CONSTANT'
 bpy.ops.object.light_add(type='AREA',location=(PCH[0],PCH[1]-0.6,2.4)); gl=bpy.context.object; gl.name='E_posterL'; gl.data.energy=60; gl.data.size=1.2; gl.data.color=(1.0,0.9,0.75); gl.rotation_euler=(math.radians(35),0,0)
 
 # ======================= v5 SET DRESSING (set sheet vs Rick 10#0406/10#0757/14#0695: our sets read bare) =======================
@@ -431,10 +441,10 @@ def S(n): return SH[n]
 A0=0.0   # day square x
 # ---- S01 (0-130): hook. The preacher glares at the saint's painted sign at the 1570 fair, points, scolds ----
 s='S01'; r=S(s)
-pr=char_on('S01_pre','preacher',s,(NB_P[0]-0.85,NB_P[1]-1.9,0),r,'angry',arms=('arm','arm_book'))
+pr=char_on('S01_pre','preacher',s,(NB_P[0]-0.85,NB_P[1]-1.9,0),r,'angry',arms=('arm_book','arm'))
 faces(pr,[(0,'angry'),(40,'angry_squint'),(96,'rage')])
 COMBOS+=[(pr,30,'point_out_tilt',1,'angry'),(pr,92,'akimbo_scold',1,'rage')]
-k1=char_on('S01_kidC','kidC',s,(NB_P[0]+0.8,NB_P[1]-1.5,0),r,'happy',arms=('arm','arm_apple')); drift_faces(k1,0,130,['happy','smile','content'],1)
+k1=char_on('S01_kidC','kidC',s,(NB_P[0]+0.8,NB_P[1]-1.5,0),r,'happy',arms=('arm_apple','arm')); drift_faces(k1,0,130,['happy','smile','content'],1)
 COMBOS.append((k1,60,'startle_recoil',-1,'shock'))
 path(s,[(0,(NB_P[0]-0.1,NB_P[1]-6.4,1.35),(NB_P[0]-0.1,NB_P[1]-1.0,1.25)),(130,(NB_P[0]-0.4,NB_P[1]-5.4,1.3),(NB_P[0]-0.3,NB_P[1]-1.0,1.25))])   # v5b: st9 had both characters out of frame
 # ---- S02 (123-255): the 1570 St Nicholas fair: kids with toys, a seller hands over a doll ----
@@ -473,7 +483,7 @@ path(s,[(414,(2.6,8.0,1.6),(1.0,22,3.5)),(470,(2.4,10.5,3.5),(0.6,26,14.0)),(514
 s='S06'; r=S(s)
 p6=char_on('S06_pre','preacher',s,(PU[0],PU[1],1.65),r,'determined',arms=('arm','arm_book')); COMBOS.append((p6,520,'tilt_talk',1,'determined'))
 for i in range(10):
-    x=BX+(-1)**i*(1.6+0.8*(i%3)); y=-4.6+(i//2)*0.9
+    x=BX+(-1)**i*(1.6+0.8*(i%3)); y=[-5.75,-4.25,-2.75,-1.25,0.25][i//2]   # r2 (rule 372: a congregant stood inside a pew): rows sit in the aisles between pews (pews y -8+1.5k +-0.25)
     c_=char_on(f'S06_c{i}',['father','mother','sellerA','sellerB','councilC','kidC'][i%6],s,(x,y,0),r,'back',scale=None); faces(c_,[(507,'back')])
 path(s,[(507,(BX+0.6,-7.6,2.2),(PU[0]+0.6,PU[1],2.4)),(565,(BX+0.1,-6.6,2.4),(PU[0]+0.3,PU[1],2.5))])
 # ---- S07 (558-710): pulpit close: "gifts come from the Christ Child, not a saint" ----
@@ -484,17 +494,18 @@ COMBOS+=[(p7,566,'eureka_point_up',-1,'determined'),(p7,618,'point_out_tilt',1,'
 path(s,[(558,(PU[0]+2.2,PU[1]-3.0,3.05),(PU[0],PU[1],2.55)),(710,(PU[0]+1.7,PU[1]-2.4,2.95),(PU[0],PU[1],2.55))])
 # ---- S08 (703-800): the council hears him and does not laugh ----
 s='S08'; r=S(s)
-cA=char_on('S08_cA','councilA',s,(CX-1.5,2.25,0),r,'stern',arms=('arm','arm_scroll')); cB=char_on('S08_cB','councilB',s,(CX,2.3,0),r,'skeptical',arms=('arm','arm_scroll')); cC=char_on('S08_cC','councilC',s,(CX+1.5,2.25,0),r,'stern',arms=('arm','arm_scroll'))
+cA=char_on('S08_cA','councilA',s,(CX-1.05,2.25,0),r,'stern',arms=('arm','arm_scroll')); cB=char_on('S08_cB','councilB',s,(CX,2.3,0),r,'skeptical',arms=('arm','arm_scroll')); cC=char_on('S08_cC','councilC',s,(CX+1.05,2.25,0),r,'stern',arms=('arm','arm_scroll'))
 faces(cA,[(703,'stern'),(760,'frown')]); faces(cB,[(703,'skeptical'),(770,'stern')]); faces(cC,[(703,'stern'),(750,'deadpan')])
 COMBOS+=[(cB,716,'cross_arms_huff',-1,'stern'),(cC,744,'think_chin',1,'skeptical'),(cA,770,'glance_shift',1,'stern')]
-path(s,[(703,(CX+0.4,-2.4,1.75),(CX,2.1,1.25)),(800,(CX+0.1,-1.9,1.7),(CX,2.1,1.25))])
+path(s,[(703,(CX+0.3,-2.9,1.75),(CX,2.1,1.3)),(800,(CX+0.1,-2.4,1.7),(CX,2.1,1.3))])   # r2: S08 showed 1 of 3 councillors (lens 26, no dolly, row at +-1.05)
 # ---- S09 (793-852): "fine, the saint is out": councilA raises the decree ----
 s='S09'; r=S(s)
-c9=char_on('S09_cA','councilA',s,(CX-1.5,2.25,0),r,'stern',arms=('arm','arm_scroll')); faces(c9,[(793,'stern'),(830,'smug')])
+c9=char_on('S09_cA','councilA',s,(CX-1.05,2.25,0),r,'stern',arms=('arm','arm_scroll')); faces(c9,[(793,'stern'),(830,'smug')])
 COMBOS.append((c9,808,'victory_up',1,'determined'))
-lipsync(c9,[w for w in WORDS if 25.0<=w[1]<=27.4],810,852)
+lipsync(c9,[w for w in WORDS if 25.0<=w[1]<=28.4],800,852)   # r2: words 'the saint is out' sit at 27.58-28.32 s
+arm(c9,1,806,-8); arm(c9,1,814,-150)   # r2 (beat: no decree shown): the scroll hand goes up with the decree (victory_up raises the free arm)
 o9=char_on('S09_cB','councilB',s,(CX,2.3,0),r,'stern',arms=('arm','arm_scroll')); faces(o9,[(793,'stern'),(830,'content')])
-path(s,[(793,(CX-0.6,-1.4,1.35),(CX-1.2,2.2,1.4)),(852,(CX-0.8,-1.1,1.4),(CX-1.3,2.2,1.45))])
+path(s,[(793,(CX-0.15,-1.5,1.45),(CX-0.75,2.2,1.55)),(852,(CX-0.35,-1.2,1.5),(CX-0.85,2.2,1.6))])
 # ---- S10 (853-943): two days before the feast: the clerk tips the saint's sign off its stand; sellers and kids watch ----
 s='S10'; r=S(s)
 cl=char_on('S10_clerk','councilC',s,(NB_P[0]-0.9,NB_P[1]-0.25,0),r,'stern'); faces(cl,[(853,'stern'),(900,'deadpan')])
@@ -525,30 +536,30 @@ s='S13'; r=S(s)
 for i,(x,y,k,st,sd) in enumerate([(SX-2.2,0.4,'father','walk',1),(SX-2.8,1.3,'mother','walk_stroll',1),(SX+2.0,1.8,'kidA','walk',-1),(SX+2.6,2.6,'kidB','walk_stroll',-1),(SX-1.4,4.4,'sellerA','walk_brisk',1)]):
     c_=char_on(f'S13_w{i}',k,s,(x,y,0),r,'happy'); drift_faces(c_,1141,1259,['happy','smile','content','excited'],30+i)
     walk_move(c_,1146+i*7,st,sd,'happy')
-snowfall(s,(SX,0.0),5.0,3.0,(0.2,4.5),160,13,1141,1259)
+snowfall(s,(SX,0.5),5.0,3.0,(0.2,4.5),150,13,1141,1259,ymin=-0.6)
 path(s,[(1141,(SX,-5.4,2.0),(SX,3.0,1.4)),(1259,(SX+0.4,-4.6,1.8),(SX,3.0,1.2))])
 # ---- S14 (1252-1312): Christmas Eve: the mother sets the gifts down ----
 s='S14'; r=S(s)
-m14=char_on('S14_mom','mother',s,(DX-0.9,2.35,0),r,'happy',arms=('arm','arm_gift')); faces(m14,[(1252,'happy'),(1290,'smile')])
+m14=char_on('S14_mom','mother',s,(DX-0.9,2.3,0),r,'happy',arms=('arm','arm')); faces(m14,[(1252,'happy'),(1290,'smile')])
 COMBOS.append((m14,1262,'lean_reach',1,'happy'))
 path(s,[(1252,(DX-0.2,-1.4,1.55),(DX-0.7,1.8,1.1)),(1312,(DX-0.4,-1.0,1.45),(DX-0.7,1.8,1.05))])
 # ---- S15 (1305-1405): the gifts come from the Christ Child now: kids and their gifts by the starlit window ----
 s='S15'; r=S(s)
-for i,(x,y,k,fc_) in enumerate([(DX-1.4,0.9,'kidA','excited'),(DX-0.4,0.8,'kidB','happy'),(DX+0.5,1.0,'kidC','excited')]):
+for i,(x,y,k,fc_) in enumerate([(DX-1.4,0.38,'kidA','excited'),(DX-0.4,0.30,'kidB','happy'),(DX+0.5,0.42,'kidC','excited')]):   # r2 (rule 372: bench plank cut through a figure): kids stand in front of the bench (y 0.625-0.975)
     c_=char_on(f'S15_k{i}',k,s,(x,y,0),r,fc_,arms=('arm','arm_gift')); drift_faces(c_,1305,1405,['excited','happy','grin','open_smile'],40+i)
-    COMBOS.append((c_,1320+i*14,['victory_up','clap','laugh_bob'][i],1 if i%2 else -1,'excited'))
-f15=char_on('S15_dad','father',s,(DX+1.8,2.2,0),r,'content'); faces(f15,[(1305,'content'),(1360,'smile')])
-path(s,[(1305,(DX-0.3,-3.0,1.4),(DX-0.1,1.6,1.15)),(1405,(DX+0.3,-2.5,1.4),(DX+0.6,2.2,1.4))])
+    COMBOS.append((c_,1320+i*14,['victory_up','wave_hello','laugh_bob'][i],1 if i%2 else -1,'excited'))
+f15=char_on('S15_dad','father',s,(DX+2.55,2.4,0),r,'content'); faces(f15,[(1305,'content'),(1360,'smile')])
+path(s,[(1305,(DX-0.3,-3.0,1.4),(DX-0.1,1.6,1.15)),(1405,(DX+0.8,-2.6,1.45),(DX+1.3,2.8,1.75))])   # r2 (beat: no window or star): ends on the starlit window
 # ---- S16 (1398-1443): "The preacher had won." victory in the snowy square ----
 s='S16'; r=S(s)
 p16=char_on('S16_pre','preacher',s,(SX+0.2,4.0,0),r,'smug_grin',arms=('arm','arm_book')); faces(p16,[(1398,'smug_grin'),(1425,'cool_shades')])
 COMBOS.append((p16,1404,'victory_up',1,'smug_grin'))
-snowfall(s,(SX,1.0),3.0,2.0,(0.2,3.5),90,16,1398,1443)
+snowfall(s,(SX,2.9),3.0,1.1,(0.2,3.5),70,16,1398,1443,ymin=2.6)
 path(s,[(1398,(SX+0.6,0.6,1.1),(SX+0.2,4.0,1.35)),(1443,(SX+0.5,1.0,1.05),(SX+0.2,4.0,1.4))])
 # ---- S17 (1444-1531): the turn: a father carries a fir into his house; a neighbour does a double take ----
 s='S17'; r=S(s)
 fa=char_on('S17_dad','father',s,(SX-4.6,-2.0,0),r,'proud',arms=('arm','arm')); faces(fa,[(1444,'proud'),(1490,'grin')])
-walk_move(fa,1450,'walk',1,'proud')
+walk_move(fa,1450,'walk',1,'proud',keep={-1,1})   # r2 (Q5: no mitten on the trunk): legs walk, arms hold the fir
 tree17=empty('S17_tree',(0.0,-0.02,0.0),parent=fa['root'],coll=C(s)); tree17.rotation_euler=(0,math.radians(48),0); tree17.location=(0.24,0.03,0.62)   # v3: behind the body card, top out past his right shoulder (v2 crossed his face)
 for k,(z,r_) in enumerate([(0.15,0.30),(0.40,0.24),(0.62,0.16)]):
     o_=cyl(f'S17_fir{k}',(0,0,z),r_,0.5,surf('firms','fir_snow',(1,1)),v=12,r2=0.02,coll=C(s)); o_.parent=tree17
@@ -560,24 +571,25 @@ snowfall(s,(SX-1.5,-1.0),4.5,2.5,(0.2,3.8),120,17,1444,1531)
 path(s,[(1444,(SX-4.2,-6.0,1.45),(SX-4.3,-1.6,1.2)),(1531,(SX-2.6,-5.6,1.4),(SX-2.6,-1.2,1.2))])
 # ---- S18 (1524-1654): 1605: the fir indoors; paper roses, apples, sugar placed by hand on "roses", "apples", "sugar" ----
 s='S18'; r=S(s)
-mo=char_on('S18_mom','mother',s,(TP[0]-0.75,TP[1]-0.45,0),r,'happy',arms=('arm','arm_rose')); faces(mo,[(1524,'happy'),(1620,'content')])
-COMBOS.append((mo,1590,'lean_reach',1,'happy'))
-kc=char_on('S18_kC','kidC',s,(TP[0]+0.75,TP[1]-0.5,0),r,'excited',arms=('arm_apple','arm')); drift_faces(kc,1524,1654,['excited','happy','grin'],50)
-COMBOS.append((kc,1612,'lean_reach',-1,'excited'))
-kb=char_on('S18_kB','kidB',s,(TP[0]+0.2,TP[1]-0.95,0),r,'happy',arms=('arm','arm_gingerbread')); drift_faces(kb,1524,1654,['happy','smile','open_smile'],51)
-COMBOS.append((kb,1632,'lean_reach',1,'happy'))
+mo=char_on('S18_mom','mother',s,(TP[0]-0.72,TP[1]-0.95,0),r,'happy'); faces(mo,[(1524,'happy'),(1616,'content')])
+COMBOS.append((mo,1598,'lean_reach',1,'happy'))   # r2: rose on 'roses' (1602)
+kc=char_on('S18_kC','kidC',s,(TP[0]+0.72,TP[1]-1.05,0),r,'excited'); drift_faces(kc,1524,1654,['excited','happy','grin'],50)
+COMBOS.append((kc,1620,'lean_reach',-1,'excited'))   # r2: apple on 'apples' (1624)
+kb=char_on('S18_kB','kidB',s,(TP[0]-0.38,TP[1]-1.5,0),r,'happy'); drift_faces(kb,1524,1654,['happy','smile','open_smile'],51)
+COMBOS.append((kb,1638,'lean_reach',1,'happy'))   # r2: sugar on 'sugar' (1642)
+PLACE=[(mo,1,1598,'rose'),(kc,-1,1620,'apple'),(kb,1,1638,'sugar')]   # ornaments ride the reaching mitten, then settle onto the boughs
 DEC=C(s)
 def ornament(n,kind,p,f0):
-    if kind=='rose': o=sph(n,p,0.055,flat('paperrose',lin((236,120,150)),0.8),coll=DEC,seg=10)
-    elif kind=='apple': o=sph(n,p,0.06,flat('applered',lin((200,40,40)),0.5),coll=DEC,seg=12)
-    else: o=box(n,p,(0.07,0.03,0.09),flat('sugarw',lin((250,248,240)),0.4),coll=DEC,bv=0.01)
+    if kind=='rose': o=sph(n,p,0.085,flat('paperrose',lin((236,120,150)),0.8),coll=DEC,seg=10)
+    elif kind=='apple': o=sph(n,p,0.085,flat('applered',lin((200,40,40)),0.5),coll=DEC,seg=12)
+    else: o=box(n,p,(0.12,0.05,0.15),flat('sugarw',lin((250,248,240)),0.4),coll=DEC,bv=0.01)
     vis(o,[(f0,END)]); return o
-TIERS=[(0.4+2.3*z-2.3*0.17,0.4+2.3*z+2.3*0.17,2.3*r_) for z,r_ in [(0.32,0.36),(0.56,0.28),(0.78,0.19)]]
+TIERS=[(0.25+2.3*z-2.3*0.17,0.25+2.3*z+2.3*0.17,2.3*r_) for z,r_ in [(0.32,0.36),(0.56,0.28),(0.78,0.19)]]
 def cone_R(z): return max([R0*(1-(z-a)/(b-a))+0.046*(z-a)/(b-a) for a,b,R0 in TIERS if a<=z<=b] or [0.05])
-for i,(kind,dx,z,f0) in enumerate([('rose',-0.35,1.05,1605),('rose',-0.2,1.65,1525),('apple',0.40,0.95,1627),('apple',0.2,1.95,1525),('sugar',0.05,0.9,1645),('sugar',-0.1,2.2,1525)]):
+for i,(kind,dx,z,f0) in enumerate([('rose',-0.2,1.5,1525),('apple',0.2,1.8,1525),('sugar',-0.1,2.05,1525)]):
     Rz=cone_R(z); dy=math.sqrt(max(0.0,Rz*Rz-dx*dx))
     ornament(f'S18_orn{i}',kind,(TP[0]+dx,TP[1]-dy-0.03,z),f0)   # v2: on the cone surface facing the camera (v1 floated off the boughs)
-path(s,[(1524,(TP[0]-0.2,TP[1]-4.4,1.45),(TP[0],TP[1],1.3)),(1654,(TP[0]-0.4,TP[1]-3.4,1.4),(TP[0],TP[1],1.25))])
+path(s,[(1524,(TP[0]-0.15,TP[1]-4.7,1.45),(TP[0],TP[1],1.2)),(1654,(TP[0]-0.05,TP[1]-4.15,1.4),(TP[0],TP[1],1.15))])   # r2: lens 26, all three placers in frame
 # ---- S19 (1647-1768): one of the first written records: the chronicle, pushed in until the tree sketch fills the frame ----
 s='S19'; r=S(s)
 rd=char_on('S19_cC','councilC',s,(DX-2.6,-0.6,0),r,'look_down'); faces(rd,[(1647,'look_down'),(1700,'impressed' if False else 'surprise'),(1730,'proud')])
@@ -592,18 +604,16 @@ snowfall(s,(EX,0.0),5.0,4.0,(0.2,5.0),140,20,1769,1825)
 path(s,[(1769,(EX,-9.5,2.4),(EX,8.0,3.0)),(1825,(EX+0.6,-8.0,2.0),(EX,8.0,3.6))])
 # ---- S21 (1818-1927): France's oldest Christmas market: mugs, phones, the big tree ----
 s='S21'; r=S(s)
-tA=char_on('S21_tA','tourA',s,(EX-0.9,8.0,0),r,'happy',arms=('arm_mug','arm_smartphone')); tB=char_on('S21_tB','tourB',s,(EX+0.8,8.3,0),r,'excited',arms=('arm_mug','arm'))
+tA=char_on('S21_tA','tourA',s,(EX-0.95,8.8,0),r,'happy',arms=('arm_mug','arm_smartphone')); tB=char_on('S21_tB','tourB',s,(EX-0.05,7.5,0),r,'excited',arms=('arm_mug','arm'))   # r2 (rule 345 frontal row 1.12x): three depths
 drift_faces(tA,1818,1927,['happy','grin','laugh'],70); drift_faces(tB,1818,1927,['excited','happy','open_smile'],71)
 COMBOS+=[(tB,1840,'wave_hello',1,'excited'),(tA,1880,'laugh_bob',-1,'laugh')]
-kM=char_on('S21_kid','kidM',s,(EX+0.1,7.2,0),r,'excited',arms=('arm','arm_gift')); COMBOS.append((kM,1862,'clap',1,'excited'))
-snowfall(s,(EX,6.0),3.5,3.0,(0.2,4.5),110,21,1818,1927)
-path(s,[(1818,(EX+0.2,4.4,1.3),(EX,9.0,1.25)),(1872,(EX+0.1,4.2,1.3),(EX,9.5,1.6)),(1927,(EX-0.2,3.6,1.3),(EX,12.0,4.2))])   # v5b: people first, tilt up to the tree on 'the big tree'
+kM=char_on('S21_kid','kidM',s,(EX+0.42,6.2,0),r,'excited',arms=('arm_gift','arm')); drift_faces(kM,1818,1927,['excited','happy','grin','open_smile'],72); COMBOS.append((kM,1862,'wave_hello',1,'excited'))   # r2: kid had no face keys 1818-1860
+snowfall(s,(EX,7.5),3.5,2.5,(0.2,4.5),100,21,1818,1927,ymin=6.4)
+path(s,[(1818,(EX+0.2,4.4,1.05),(EX,9.0,1.1)),(1872,(EX+0.15,4.2,1.05),(EX,9.5,1.25)),(1927,(EX-0.2,3.6,1.2),(EX,12.0,4.2))])   # r2: camera at kid-head height   # v5b: people first, tilt up to the tree on 'the big tree'
 # ---- S22 (1920-2040): payoff at the market chalet: the poster, whole, lands on "Nicholas" ----
 s='S22'; r=S(s)
-ve=char_on('S22_vend','chalet',s,(PCH[0]+0.95,PCH[1]+0.25,0),r,'happy',arms=('arm','arm_mug')); faces(ve,[(1920,'happy'),(1960,'grin')])
-COMBOS.append((ve,1932,'tilt_talk',-1,'happy'))
-vi=char_on('S22_tA','tourA',s,(PCH[0]-1.2,PCH[1]-1.3,0),r,'happy',arms=('arm','arm_smartphone')); COMBOS.append((vi,1946,'point_out_tilt',1,'excited'))
-snowfall(s,(PCH[0],PCH[1]-2.0),2.5,1.5,(0.2,3.2),70,22,1920,END)
+vi=char_on('S22_tA','tourA',s,(PCH[0]-0.55,PCH[1]-1.45,0),r,'happy',arms=('arm_smartphone','arm')); drift_faces(vi,1920,END,['happy','excited','grin'],73); COMBOS.append((vi,1946,'point_out_tilt',1,'excited'))
+snowfall(s,(PCH[0],PCH[1]-1.0),2.5,0.6,(0.2,3.2),60,22,1920,END,size=0.035,ymin=PCH[1]-1.3,xex=(PCH[0]-0.6,PCH[0]+0.6))
 path(s,[(1920,(PCH[0]+0.3,PCH[1]-6.0,1.75),(PCH[0],PY,1.55)),(1990,(PCH[0]+0.04,PCH[1]-2.35,1.7),(PCH[0],PY,PZ-0.16)),(END,(PCH[0]+0.03,PCH[1]-2.2,1.7),(PCH[0],PY,PZ-0.16))])
 # v5: dolly cameras toward their targets (set sheet: heads ~10 % of frame width vs Rick's 25-35 %)
 def dolly(n,k,frames=None):
@@ -611,7 +621,7 @@ def dolly(n,k,frames=None):
         f,l,t=key[:3]
         if frames and not(frames[0]<=f<=frames[1]): continue
         kloc(L.CAM[n],f,tuple(t[i]+(l[i]-t[i])*k for i in range(3)))
-for n,k in [('S02',0.62),('S03',0.7),('S08',0.75),('S10',0.7),('S11',0.75),('S13',0.62),('S15',0.75),('S16',0.85),('S17',0.7),('S18',0.8)]: dolly(n,k)
+for n,k in [('S02',0.62),('S03',0.7),('S10',0.7),('S11',0.75),('S13',0.62),('S15',0.75),('S16',0.85),('S17',0.7),]: dolly(n,k)
 # background crowd in the wide shots (Rick fills the square)
 def crowd(shot,spots,kinds,seed,pool=('happy','content','smile','neutral','excited')):
     rr=random.Random(seed)
@@ -636,10 +646,55 @@ for f,e,ws in [(0,5.0,1.3),(1140,5.0,1.3),(1141,3.4,1.1),(1531,3.4,1.1),(1532,5.
 for ad in (SUN.data.animation_data,sc.world.node_tree.animation_data):
     for fc in ad.action.fcurves:
         for kp in fc.keyframe_points: kp.interpolation='CONSTANT'
+def _used(name,side):
+    return {sx for fr in L.MO.frames(name,side,'smile',0,None,pre=0,post=0) for sx in (-1,1) if fr['arms'][sx]!='hang'}
+def _prop(ch): return {sx for sx in (-1,1) if ch['A'][sx]['sched'] and ch['A'][sx]['sched'][0][1]!='arm'}
+_C2=[]
+for c_,f_,k_,sd_,fc_ in COMBOS:   # r2 (verifier prop pops S01/S02/S11): a combo must not swap out an arm that holds a prop card
+    pp=_prop(c_)
+    if pp & _used(k_,sd_):
+        if not (pp & _used(k_,-sd_)): print('PROPFLIP',c_['root'].name,k_,sd_,'->',-sd_); sd_=-sd_
+        else: print('PROPKEEP',c_['root'].name,k_,sd_)   # two-arm move: lib.combo keeps the prop arm as it is
+    _C2.append((c_,f_,k_,sd_,fc_))
+COMBOS[:]=_C2
 for c_,f_,k_,sd_,fc_ in COMBOS: combo(c_,f_,k_,side=sd_,face=fc_)
 print('COMBOS',len(COMBOS),len(set(k for _,_,k,_,_ in COMBOS)))
 sc['air']=json.dumps(sorted(L.AIR))
 for a in ALL: finish(a)
+# r2 (S17 f1446-1488: the near lantern pole wiped over the father's face at the turn): that post is hidden for S17 only
+for _n in ('A300_lp0_post','A300_lp0_box','A300_lp0_cap'):
+    _o=bpy.data.objects[_n]
+    for f_,h_ in ((1443,False),(1444,True),(1531,True),(1532,False)): _o.hide_render=h_; _o.keyframe_insert('hide_render',frame=f_)
+# r2 (rule 367c, f162/f222 leg-shaped cast shadows beside the blob): character cards cast no shadows; the ground blob is the one shadow system
+for a in ALL:
+    for _o in a['root'].children_recursive:
+        if _o.type=='MESH' and not _o.name.endswith('_shadow'): _o.visible_shadow=False
+def tip(ch,sx,f):
+    sc.frame_set(f); c_=bpy.data.objects[f"{ch['inst']}_arm{sx}_arm_pose_reach"]
+    return c_.matrix_world @ Vector((sx*0.416,-0.004,-0.071))   # mitten tip on the reach drawing (alpha extreme at u 0.961/0.039, v 0.57)
+def ride(o,ch,sx,f,end_p,hold=(2,13),settle=4,last=END):
+    """o sits in the reaching mitten from f+hold[0] (the frame the reach drawing appears) to f+hold[1], then settles onto end_p"""
+    pts=[(g,tip(ch,sx,g)) for g in range(f+hold[0],f+hold[1]+1)]
+    for g,p in pts: o.location=p; o.keyframe_insert('location',frame=g)
+    p0=pts[-1][1]
+    for k in range(1,settle+1):
+        t=k/settle; t=t*t*(3-2*t); o.location=p0.lerp(Vector(end_p),t); o.keyframe_insert('location',frame=f+hold[1]+k)
+    vis(o,[(f+hold[0],last)]); return p0
+for ch,sx,f,kind in PLACE:
+    o=ornament(f'S18_place_{kind}',kind,(0,0,0),f)
+    p=tip(ch,sx,f+12)
+    sc.frame_set(f+12); cp=L.CAM['S18'].matrix_world.translation.copy()
+    q=p.copy(); q.z=max(q.z,TIERS[0][0]+0.06)
+    for _ in range(200):   # from the mitten straight toward the trunk until it meets the boughs (hung on the nearest branch)
+        if math.hypot(q.x-TP[0],q.y-TP[1])<=cone_R(q.z)+0.03: break
+        v=Vector((TP[0]-q.x,TP[1]-q.y,0)).normalized(); q=q+v*0.01
+    ride(o,ch,sx,f,tuple(q),hold=(2,9),settle=3); print('PLACE',kind,'hand',tuple(round(v,2) for v in p),'bough',tuple(round(v,2) for v in q))
+# S14: the blue gift rides the mother's reach and is set down on the table
+_g=bpy.data.objects['D_gift1']; _rb=bpy.data.objects['D_ribbon1']
+_p=tip(m14,1,1262+12); _end=(_p.x,1.88,0.73)
+for _o in (_g,_rb): ride(_o,m14,1,1262,_end,last=1405)
+print('GIFT hand',tuple(round(v,2) for v in _p))
+sc.frame_set(0)
 print('hulls',L.ink())
 for o_ in bpy.data.objects:
     if o_.type=='LIGHT' and o_.data.type!='SUN': o_.visible_camera=False

@@ -115,6 +115,8 @@ def fixwords(W_):
         w,s_,e=W_[i]; t=w.strip(); t=SUB.get(t,t)
         o.append([t,s_,e]); i+=1
     return o
+for _i,_t in ((78,20.83),(216,62.43),(227,66.62)):   # sb r2 (text verifier T5, payoff E3): ASR zero-length/late starts re-timed from the audio onsets ('Gifts', '450', last 'Nicholas.')
+    WORDS[_i]=[WORDS[_i][0],_t,max(_t,WORDS[_i][2])]
 WORDS=fixwords(WORDS)
 QUOTE={11.72:'\u201cThen',13.3:'You?\u201d',27.0:'\u201cFine,',28.04:'out.\u201d'}   # the two quoted lines (kid's doubt, the council's 'fine, the saint is out')
 WORDS=[[QUOTE.get(round(s_,2),w),s_,e] for w,s_,e in WORDS]
@@ -135,6 +137,9 @@ def chunks():
     for i in range(len(C)): C[i].append(C[i+1][0] if i+1<len(C) else END+1)
     return C
 CAPS=chunks()
+ENDV=2036   # r2 (payoff E3): last frame 2036, 1.2 s after 'Nicholas' (f2002)
+_J=[n for n in SH if any(a<=SH[n][0]<=b and m!=n for m,(a,b) in SH.items())]
+DL={n:[8,5,7,6,5,8,6,7][i%8] for i,n in enumerate(_J)}; DL['S22']=8   # payoff dissolve stays the longest   # r2 (shots K5/R12: all 18 dissolves were 8 f): 5-8 f, centred in each 8 f overlap
 DWMAX=17   # r2 (text verifier: dwell mean 0.374 s / P90 0.663 s vs Rick 0.32-0.35 / 0.53-0.57): a card leaves after at most 17 f (0.57 s); a gap shows no caption until the next word
 NUMX=30   # r4 (text verifier r3: '121', 'a 94-year-old', 'in 1620' went blank 13-19 f while still spoken): cards with a digit may stay up to 30 f
 CAPS=[[a,t,min(b,a+(NUMX if any(ch.isdigit() for ch in t) else DWMAX))] for a,t,b in CAPS]
@@ -182,7 +187,7 @@ if __name__=='__main__':
     else: enc=subprocess.Popen(['ffmpeg','-y','-v','error','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r','30','-i','-','-i','/root/sb/audio/mix.wav',
         '-c:v','libx264','-preset','slow','-crf','14' if K==1 else '20','-pix_fmt','yuv420p','-c:a','aac','-b:a','320k','-shortest','-movflags','+faststart',OUT],stdin=subprocess.PIPE)
     ci=0; capimg=None; capkey=None
-    for f in range(END+1):
+    for f in range(ENDV+1):
         act=[n for n,(a,b) in SH.items() if a<=f<=b]
         frames={}
         if RG and not (RG[0]<=f<=RG[1]):
@@ -199,12 +204,12 @@ if __name__=='__main__':
                 q=apply(raw,PAYP); q=np.clip(q+0.7*(q-cv2.GaussianBlur(q,(0,0),1.4*K)),0,1);   # round 4: poster read soft (38 % of file sharpness): gentle unsharp on the payoff
                 t=min(1.0,(f-PAY0+1)/(PAY1-PAY0+1)); t=t*t*(3-2*t); o=o*(1-t)+q*t
             if n in HIFLOOR: o=hifloor(o)   # r7 (rule 274): bright ending and S11 highlights (p98 >= 0.86 before the poster's true colours go on)
-            if n=='S22' and str(f) in PQ: o=truepost(o,PQ[str(f)])   # r5 (rule 196, round-4 E5 note): the shop file's true colours on the projected poster quad
+            if n=='S22' and f>=1954 and str(f) in PQ: o=truepost(o,PQ[str(f)])   # r5 (rule 196, round-4 E5 note): the shop file's true colours on the projected poster quad
             frames[n]=vig(bloom(floor_(o),BLOOM),VIG[n])
             if n=='S22': frames[n]=floor_(frames[n])   # r4: S19 soffit band fell under luma 0.07 after the vignette (rule 317)
         if len(act)==1: img=frames[act[0]]
         else:
-            A,B=act[0],act[1]; s0,e0=SH[B][0],SH[A][1]; t=(f-s0+1)/(e0-s0+2); w_=t*t*(3-2*t); img=frames[A]*(1-w_)+frames[B]*w_
+            A,B=act[0],act[1]; s0,e0=SH[B][0],SH[A][1]; dl=DL[B]; o_=(e0-s0+1-dl)//2; a0=s0+o_; t=min(1.0,max(0.0,(f-a0+1)/(dl+1))); w_=t*t*(3-2*t); img=frames[A]*(1-w_)+frames[B]*w_
         im=Image.fromarray((img*255+0.5).astype(np.uint8)).convert('RGBA')
         cur=[c for c in CAPS if c[0]<=f<c[2]]
         if cur:

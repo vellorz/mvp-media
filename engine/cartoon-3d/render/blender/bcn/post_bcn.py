@@ -6,7 +6,7 @@ SRC,OUT=sys.argv[1],sys.argv[2]; K=float(sys.argv[3]) if len(sys.argv)>3 else 1.
 W,H=int(1440*K),int(2560*K); END=1767
 SH={'S01':(0,94),'S02':(88,172),'S03':(172,300),'S04':(300,420),'S05':(420,482),'S06':(476,516),'S07':(512,540),
     'S08':(540,656),'S09':(656,815),'S10':(815,904),'S11':(898,950),'S12':(944,985),'S13':(985,1125),'S14':(1125,1192),
-    'S15':(1186,1268),'S16':(1268,1330),'S17':(1330,1420),'S18':(1414,1500),'S19':(1500,1640),'S20':(1634,END)}
+    'S15':(1186,1268),'S16':(1268,1330),'S17':(1330,1420),'S18':(1414,1500),'S19':(1500,1645),'S20':(1634,END)}
 # palette per time/mood (rule 187): blue night street, warm lamp-lit rooms, sunny day track/Rambla, golden stadium
 NT=(0.95,0.99,1.07); LAMP=(1.06,1.0,0.9); DAY=(1.03,1.0,0.95); GOLD=(1.06,1.0,0.9)
 TINT={'S01':NT,'S02':LAMP,'S03':DAY,'S04':(1.02,1.0,0.97),'S05':(1.02,1.0,0.97),'S06':(1.04,1.0,0.94),'S07':(1.02,1.0,0.97),'S08':LAMP,'S09':NT,'S10':LAMP,
@@ -79,7 +79,7 @@ def apply(x,p):
     tw=np.array(tint,np.float32); z=np.clip(z*(tw*(1-skin)+skin),0,1)
     # bcn r3 (probe Nov 24): the tone curve's y2/y ratio lifted the unlit plum ink (raw 32,12,43) to bright violet 103,10,146 (rule 308/341 want
     # Rick's dull plum). Ink pixels (dark, B >= 0.9 R) go to the plum ink colour instead of being stretched.
-    ink=(np.clip((0.17-y)/0.08,0,1)*np.clip((x[...,2]-0.75*x[...,0])/(0.15*x[...,0]+1e-4),0,1))[...,None]
+    ink=(np.clip((0.17-y)/0.08,0,1)*np.clip((x[...,2]-0.75*x[...,0])/(0.15*x[...,0]+1e-4),0,1)*np.clip((np.minimum(x[...,0],x[...,2])-x[...,1])/0.02,0,1))[...,None]   # r1b: purple hue only (R>G and B>G); dark greens/blues untouched
     return np.clip(z*(1-ink)+INKC*ink,0,1)
 INKC=np.array([52,32,60],np.float32)/255   # a touch above PLUM (46,28,54): floor_ then pulls it to the plum floor
 SKMAX=1.0
@@ -121,7 +121,7 @@ FNT=font(fs); BASE=int(0.717*H); STROKE=max(1,int(round(7*K))); SHX,SHY=int(roun
 WORDS=[[x['w'],x['s'],x['e']] if isinstance(x,dict) else x for x in json.load(open('/root/cc/vo/vo_trim.wav.words.json'))]
 def fixwords(W_):
     """caption text follows script.md, not ASR spelling: numbers as digits, Nauset, gray, quote marks"""
-    MERGE=[(['One','to','nothing.'],['1-0.'])]
+    MERGE=[(['One','to','nothing.'],['0-1.'])]   # bcn r1b (text verifier): '1-0.' read as a win under the 0-1 board
     SUB={'twelve':'12','nine':'9','Who':'\u201cWho','ad?':'ad?\u201d','laughed.':'laughed,'}
     o=[]; i=0
     while i<len(W_):
@@ -134,6 +134,7 @@ def fixwords(W_):
                 i+=len(src); hit=True; break
         if hit: continue
         w,s_,e=W_[i]; t=w.strip(); t=SUB.get(t,t)
+        t={(23.68,'two'):'2',(15.46,'wrong,'):'wrong.',(31.38,'paper'):'paper,',(40.0,'lost.'):'lost,'}.get((round(s_,2),t),t)   # bcn r1b (text verifier R11/S8/rule 212): digits and vo_text punctuation
         o.append([t,s_,e]); i+=1
     return o
 WORDS=fixwords(WORDS)
@@ -157,6 +158,13 @@ CAPS=chunks()
 DWMAX=17   # r2 (text verifier: dwell mean 0.374 s / P90 0.663 s vs Rick 0.32-0.35 / 0.53-0.57): a card leaves after at most 17 f (0.57 s); a gap shows no caption until the next word
 NUMX=30   # r4 (text verifier r3: '121', 'a 94-year-old', 'in 1620' went blank 13-19 f while still spoken): cards with a digit may stay up to 30 f
 CAPS=[[a,t,min(b,a+(NUMX if any(ch.isdigit() for ch in t) else DWMAX))] for a,t,b in CAPS]
+def s18zoom(o,f):
+    # bcn r1b (text verifier T7 [C], capprobe 3: S18 runners' faces under the caption band f1464-1492 as the crane pulls back):
+    # a gentle top-anchored 2D push (1.00 -> 1.14, eased over 1420-1470) keeps the runners' faces below the caption box
+    t=np.clip((f-1420)/50,0,1); t=t*t*(3-2*t); z=1.0+0.14*t
+    if z<=1.0001: return o
+    h,w=o.shape[:2]; big=cv2.resize(o,(int(round(w*z)),int(round(h*z))),interpolation=cv2.INTER_AREA if z<1 else cv2.INTER_CUBIC)
+    x0=(big.shape[1]-w)//2; return np.clip(big[:h,x0:x0+w],0,1)
 def cap_layer(txt):
     l,t,r,b=FNT.getbbox(txt,anchor='ls',stroke_width=STROKE); w=r-l
     lay=Image.new('RGBA',(W,H),(0,0,0,0)); sh=Image.new('RGBA',(W,H),(0,0,0,0))
@@ -214,6 +222,7 @@ if __name__=='__main__':
             continue
         for n in act:
             PROT[0]=(n in SATPROT); raw=R[n].next(); o=finish(apply(raw,P[n]))
+            if n=='S18': o=s18zoom(o,f)
             if n=='S20' and f>=PAY0:   # payoff close-up: protect the poster's real colours (no highlight stretch, gentle gamma)
                 q=apply(raw,PAYP); q=np.clip(q+0.7*(q-cv2.GaussianBlur(q,(0,0),1.4*K)),0,1);   # round 4: poster read soft (38 % of file sharpness): gentle unsharp on the payoff
                 t=min(1.0,(f-PAY0+1)/(PAY1-PAY0+1)); t=t*t*(3-2*t); o=o*(1-t)+q*t
@@ -223,7 +232,9 @@ if __name__=='__main__':
             if n=='S20': frames[n]=floor_(frames[n])   # r4: S19 soffit band fell under luma 0.07 after the vignette (rule 317)
         if len(act)==1: img=frames[act[0]]
         else:
-            A,B=act[0],act[1]; s0,e0=SH[B][0],SH[A][1]; t=(f-s0+1)/(e0-s0+2); w_=t*t*(3-2*t); img=frames[A]*(1-w_)+frames[B]*w_
+            A,B=act[0],act[1]; s0,e0=SH[B][0],SH[A][1]
+            if e0==s0: img=frames[B]   # bcn: a one-frame overlap is a HARD CUT (172, 300, 420, 540, 656, 815, 985, 1125, 1268, 1330, 1500), not a 50 % mix frame
+            else: t=(f-s0+1)/(e0-s0+2); w_=t*t*(3-2*t); img=frames[A]*(1-w_)+frames[B]*w_
         im=Image.fromarray((img*255+0.5).astype(np.uint8)).convert('RGBA')
         cur=[c for c in CAPS if c[0]<=f<c[2]]
         if cur:

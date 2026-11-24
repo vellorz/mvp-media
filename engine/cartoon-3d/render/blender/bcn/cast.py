@@ -342,11 +342,16 @@ def arm(name,prop=None,straight=None):
     if prop=='megaphone': d.polygon([(180,720),(220,720),(330,890),(70,890)],fill=(236,230,220,255),outline=K); d.ellipse([70,860,330,900],fill=(60,60,64,255),outline=K,width=8); d.line([200,724,200,860],fill=(200,190,176,255),width=6)
     if prop=='pennant': d.line([200,600,200,120],fill=(120,80,40,255),width=12); d.polygon([(200,120),(390,180),(200,250)],fill=tuple(c.get('scarf',(40,60,140)))+(255,),outline=K)
     if prop=='camera': d.rounded_rectangle([110,720,290,840],20,fill=(40,40,44,255),outline=K,width=12); d.ellipse([160,740,240,820],fill=(120,140,170,255),outline=K,width=8)
-    if prop=='paper':   # bcn: a folded newspaper (masthead bar, column lines), readable as a newspaper at a glance
-        d.rectangle([60,600,340,830],fill=(238,232,214,255),outline=K,width=10); d.rectangle([78,618,322,660],fill=(40,36,40,255))   # r2: smaller so the tilted page stays inside the card
+    if prop=='paper':   # bcn r2 (shots r1: read as an ID card): a folded broadsheet hanging from the mitten by its top edge: masthead, headline, photo, columns
+        P=[(40,700),(360,712),(352,898),(32,890)]
+        d.polygon(P,fill=(240,234,216,255)); d.line(P+[P[0]],fill=K,width=9)
+        d.polygon([(52,722),(348,733),(347,768),(51,757)],fill=(40,36,40,255))
+        for k in range(4): d.line([(80+k*66,740+k*2),(118+k*66,741+k*2)],fill=(240,234,216,255),width=8)
+        d.polygon([(48,778),(178,782),(176,846),(46,842)],fill=(150,140,128,255))
         for k in range(5):
-            for x0 in (82,206): d.line([x0,680+k*30,x0+112,680+k*30],fill=(120,112,104,255),width=8)
-        d.line([200,672,200,818],fill=(160,150,140,255),width=4); mitt()
+            d.line([(196,784+k*21),(340,788+k*21)],fill=(120,112,104,255),width=7)
+        for k in range(2): d.line([(46,858+k*16),(176,862+k*16)],fill=(120,112,104,255),width=7)
+        d.line([(188,772),(186,892)],fill=(170,160,148,255),width=4); mitt()
     if prop=='musket': d.line([200,860,200,60],fill=(90,64,44,255),width=26); d.line([200,860,200,60],fill=K,width=6); d.line([200,300,200,60],fill=(70,70,76,255),width=14); d.polygon([(178,860),(222,860),(236,900),(164,900)],fill=(90,64,44,255),outline=K); mitt()
     if prop=='shovel': d.line([200,860,200,200],fill=(130,96,60,255),width=18); d.line([200,860,200,200],fill=K,width=4); d.polygon([(150,860),(250,860),(240,900),(160,900)],fill=(120,120,126,255),outline=K); d.rectangle([170,180,230,210],fill=(130,96,60,255),outline=K,width=6); mitt()
     if prop=='spyglass': d.rounded_rectangle([170,560,230,760],12,fill=(170,130,60,255),outline=K,width=8); d.rectangle([178,560,222,600],fill=(90,70,40,255)); mitt()
@@ -361,9 +366,12 @@ def arm(name,prop=None,straight=None):
         d.line([200,658,200,862],fill=dk((150,96,52),0.6),width=7); d.arc([126,648,274,874],100,260,fill=dk((150,96,52),0.6),width=7)
         for k in range(4): d.line([186,728+k*20,214,728+k*20],fill=(240,226,190,255),width=6)
         d.ellipse([126,684,170,720],fill=(196,146,96,255)); mitt()
-    if prop=='dumbbell':   # bcn: gym dumbbell, two black balls on a short bar, held at the middle
-        d.line([40,712,360,712],fill=(70,70,76,255),width=26); d.ellipse([0,640,110,780],fill=(36,34,38,255),outline=K,width=10); d.ellipse([290,640,400,780],fill=(36,34,38,255),outline=K,width=10)
-        d.ellipse([20,656,52,690],fill=(120,120,130,255)); d.ellipse([310,656,342,690],fill=(120,120,130,255)); mitt()
+    if prop=='dumbbell':   # bcn r2 (shots r1: read as black dots): iron dumbbell side on, stacked grey plates on a long bar, held at the middle
+        G=(108,110,118,255); GD=(78,80,88,255)
+        d.line([20,712,380,712],fill=(150,150,158,255),width=22); d.line([20,712,380,712],fill=K,width=4)
+        for x0,w in ((24,34),(60,30),(310,30),(342,34)):
+            d.rounded_rectangle([x0,(712-95 if w==34 else 712-80),x0+w,(712+95 if w==34 else 712+80)],8,fill=(G if w==34 else GD),outline=K,width=8)
+        mitt()
     if prop=='suitcase':   # bcn: leather travel case hanging from the mitten by its handle (r2: whole case inside the canvas)
         d.arc([150,680,250,770],180,360,fill=K,width=14); d.rounded_rectangle([40,725,360,880],16,fill=(120,72,40,255),outline=K,width=12)
         d.line([40,772,360,772],fill=dk((120,72,40),0.6),width=8)

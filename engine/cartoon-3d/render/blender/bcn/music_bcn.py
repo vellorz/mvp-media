@@ -60,12 +60,13 @@ for bi in range(bars):
 # round 5: level map from the Rick music study (section 7), dB relative to the bed median; layers thin out in dips (S6)
 MAP=[(0.0,3),(3.0,3.6),(4.4,-1.0),(9.9,3.2),(12.0,-3.2),(14.3,1.0),(17.9,2.2),(22.0,-2.2),(22.9,2.0),(27.3,2.4),(30.9,-1.6),(33.0,0.8),(37.7,3.0),(40.0,-2.0),(42.3,-3.4),(44.5,2.6),(47.6,3.4),(50.1,0.2),(53.8,3.0),(55.0,4.5),(56.6,6.0),(58.0,8),(60.0,8)]   # bcn: level map on this VO's beats (doubter 12.0, escalations 18-34, turn 42.3, reveal 50.1, payoff 57.9 s)
 tt=np.arange(N)/SR-0.1   # VO plays 0.1 s late in the mix
-mk=np.array([m[0] for m in MAP]); mv=np.array([m[1] for m in MAP],float)
+mk=np.array([m[0] for m in MAP]); mv=1.3*np.array([m[1] for m in MAP],float)   # bcn r1b: verifier A4 bed std 2.04-2.19 dB (needs 2.3-4.0): swing x1.3
 gdb=np.interp(tt,mk,mv)
 k_=int(0.7*SR); gdb=np.convolve(np.pad(gdb,(k_//2,k_-k_//2-1),mode='edge'),np.ones(k_)/k_,mode='valid')   # rides take ~0.7 s (M8)
 gl=10**(gdb/20)
 # cc r2: stop-time on the payoff hit (mix time 59.74-60.10 s, ding at f1793): the bed drops 12 dB for the ding with 40 ms ramps, then returns at full payoff level (rule 319 payoff >= +6 over the local bed while rule 192 keeps it >= 8 LU under the VO)
-_tm=np.arange(N)/SR; _r=0.04; _st=np.clip(np.minimum((_tm-57.84)/_r,(58.20-_tm)/_r),0,1); gl=gl*10**(-12*_st/20)
+# bcn r1b: stop-time dip REMOVED (rule 342 [C]: the bed is never lowered for an effect; verifier measured a 16-18 dB dip)
+_tm=np.arange(N)/SR; _r=0.04; _st=0*np.clip(np.minimum((_tm-57.84)/_r,(58.20-_tm)/_r),0,1); gl=gl*10**(-12*_st/20)
 thin=np.clip((gdb+1.0)/4.0,0,1)   # melody and plucks drop out in the -3..-5 dips, return on rises
 bed=(T['mal']*0.9*thin+T['plk']*0.6*(0.4+0.6*thin)+T['bass']*0.62+T['kick']*0.7+T['pad']*1.0)*gl
 # gentle bus compression for a constant level (no pumping: slow, light)

@@ -2,7 +2,7 @@
 
 Work in D:\AI\MVP-render\nb3 with absolute D: paths only. One GPU job at a time; never stop another program; delete nothing.
 
-1. Join: `copy /b nb.blend.part0+nb.blend.part1 nb.blend`; SHA256 must equal `a136d1204e933cfb2847d93bdff9fc23fb19af66452595e9711490bae5e3805e` (53699386 bytes).
+1. Join: `copy /b nb.blend.part0+nb.blend.part1 nb.blend`; SHA256 must equal `c7cb54a87c24f07fc3d302ed530c9ce188fe213004482877da1430385fb65712` (53698162 bytes).
 2. Test: `blender.exe -b nb.blend --python pctest.py -- D:\AI\MVP-render\nb3\test S04:470 S11:1165 S18:1850`
 3. Render these 8 shots only (resume-safe): `blender.exe -b nb.blend --python pcrender.py -- D:\AI\MVP-render\nb3\frames S01 S04 S05 S07 S08 S11 S17 S18`
 4. Encode: `blender.exe -b --python pcencode.py -- D:\AI\MVP-render\nb3\frames D:\AI\MVP-render\nb3\clips`

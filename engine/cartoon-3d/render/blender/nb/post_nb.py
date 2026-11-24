@@ -186,7 +186,10 @@ def truepost(o,q,k=0.96):
 if __name__=='__main__':
     # grade params per shot from 5 sampled frames
     P={}; rep={}
-    for n in SH:
+    PC_=os.environ.get('PCACHE')   # nb r3: grade params cached by the first RANGE part and reused by the others (calibration decodes every shot, ~30 min a part)
+    if PC_ and os.path.exists(PC_):
+        _c=json.load(open(PC_)); P={k:tuple(v[:4])+(tuple(v[4]),) for k,v in _c['P'].items()}; VIG.update(_c['VIG']); rep=_c['rep']
+    for n in (SH if not P else []):
         PROT[0]=(n in SATPROT); CUR[0]=n
         rd=Reader(n); idx=set(np.linspace(0,rd.n-1,5).astype(int)); smp=[]
         for i in range(rd.n):
@@ -201,6 +204,8 @@ if __name__=='__main__':
                 else: hi_=k
             VIG[n]=round((lo_+hi_)/2,3); b=solve(smp,TINT[n],LT[n],VIG[n])
         P[n]=b[1]; rep[n]=dict(mean=b[2],sat=b[3],p2=b[4],p98=b[5],gamma=round(float(b[1][2]),2),satk=round(float(b[1][3]),2),vig=VIG[n],vratio=round(float(np.mean([vratio(vig(apply(q,b[1]),VIG[n])) for q in smp])),3)); print('GRADE',n,rep[n],flush=True)
+    if PC_ and not os.path.exists(PC_):
+        json.dump({'P':{k:[float(x) for x in v[:4]]+[[float(t) for t in v[4]]] for k,v in P.items()},'VIG':VIG,'rep':rep},open(PC_,'w'),default=float)
     json.dump({'grade':rep,'payoff_grade':dict(from_frame=PAY0,full_at=PAY1,params=PAYP[:4]),'captions':CAPS,'font_px':fs},open(OUT+'.post.json','w'),indent=1,default=str)
     widths=[]
     R={n:Reader(n) for n in SH}; cache={}

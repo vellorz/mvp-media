@@ -534,11 +534,12 @@ s='S06'; r=S(s)
 path(s,[(668,(NX,NY-0.11,NZ+0.12),(NX,NY-0.022,NZ)),(725,(NX,NY-0.095,NZ+0.105),(NX,NY-0.022,NZ))])
 # ---- S07 (725-815): "A big party hung on one wiggly line": low angle up to the banner on its sagging string ----
 s='S07'; r=S(s)
-b7=char_on('S07_partyB','partyB',s,(PX0+0.42,-0.2,0.0),r,'worried')
+b7=char_on('S07_partyB','partyB',s,(PX0+0.33,-0.2,0.0),r,'worried')
 at(b7,[(725,'worried@L1'),(745,'nervous@L2')]); COMBOS.append((b7,WF(86),'glance_shift',-1,'nervous')); at(b7,[(790,'wince@L1')])
-c7=char_on('S07_partyC','partyC',s,(PX0-0.42,-0.1,0.0),r,'worried',arms=('arm','arm_brush')); arm(c7,1,725,-30)
+c7=char_on('S07_partyC','partyC',s,(PX0-0.33,-0.1,0.0),r,'worried',arms=('arm','arm_brush')); arm(c7,1,725,-30)
 at(c7,[(725,'worried@R1'),(760,'look_up@R1'),(784,'nervous@R2'),(804,'wince@R1')])
-path(s,[(725,(PX0-0.08,-2.75,0.95),(PX0,3.0,1.6)),(815,(PX0+0.08,-2.6,0.97),(PX0+0.03,3.0,1.72))])   # r3 (capprobe f781-793: caption over both chins): less up-tilt so the faces sit above the caption line   # r1: low angle from in front of the pair (the cake hid partyB when they stood at the back wall)
+# r3 (run lead: R07): closer, pair 66 cm apart
+path(s,[(725,(PX0-0.04,-2.3,1.3),(PX0,3.0,1.4)),(815,(PX0+0.08,-2.15,1.32),(PX0+0.03,3.0,1.48))])   # r3 (capprobe f781-793: caption over both chins): less up-tilt so the faces sit above the caption line   # r1: low angle from in front of the pair (the cake hid partyB when they stood at the back wall)
 # ---- S08 (815-935): the photo tests: two flashes, the print on the wall, still a blob ----
 s='S08'; r=S(s)
 ph=char_on('S08_photog','photog',s,(AX-3.75,-0.75,0.0),r,'determined',arms=('arm','arm'))

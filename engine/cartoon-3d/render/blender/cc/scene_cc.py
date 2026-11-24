@@ -463,7 +463,7 @@ path(s,[(576,(DX-11.2,-9.6,dune(DX-11.2,-9.6)+1.6),(DX-11.8,-5.8,dune(DX-11.8,-5
 # ---- S08 (654-765): on deck, the sailors gripe; lips move on the quoted line ----
 s='S08'; r=S(s)
 s8a=onship(char_on('S08_sailA','sailorA',s,(SX-1.2,2.0,2.32),r,'deadpan')); s8b=onship(char_on('S08_sailB','sailorB',s,(SX+0.9,2.6,2.32),r,'grit'))
-faces(s8a,[(654,'deadpan'),(704,'deadpan')]); COMBOS.append((s8a,672,'akimbo_scold',1,'annoyed'))   # r6: owner-approved scold before the griping line; lipsync(s8a,WORDS[75:85],700,766)
+faces(s8a,[(654,'deadpan'),(704,'deadpan')]); COMBOS.append((s8a,672,'akimbo_scold',1,'annoyed')); lipsync(s8a,WORDS[75:85],700,766)   # r6c (shots r6 C6): the r6 comment had swallowed this lipsync call. r6: owner-approved scold before the griping line
 faces(s8b,[(654,'grit'),(752,'deadpan')])
 arm(s8a,1,654,-20)   # r6: hands stay on hips after the akimbo scold (armprobe: raising the akimbo card put the hand over his face)
 arm(s8b,-1,654,-30); COMBOS.append((s8b,660,'cross_arms_huff',-1,'annoyed'))   # r6: owner-approved huff (Nov 23)
@@ -502,6 +502,7 @@ for i,(x,y,k) in enumerate([(-1.4,2.4,'pilgrimA'),(1.3,2.0,'pilgrimB'),(2.2,2.6,
     if i==0: COMBOS.append((c_,1080,'glance_shift',-1,'worry'))   # r6: nervous look toward the tree line
 N=[]
 for i,(x,y,k) in enumerate([(-2.1,-16.6,'nausetA'),(0.5,-19.5,'nausetB'),(-1.6,-22.5,'nausetC')]):   # r4 (P3/R21): staggered in depth (were a near-equal-depth frontal row at 1008-1035)
+    if i==0: N.append(None); continue   # r6c (shots r6 C4, rule 56): the near man's head was cut 1053-1061 as the push passed him; every in-frame spot either hid him behind S10_n1 or stacked him under S10_n2 (grid3 probe + test renders), so S10 keeps two staggered Nauset men
     c_=char_on(f'S10_n{i}',k,s,(EX+x,y,eb(EX+x,y)),r,'neutral',arms=('arm','arm_bow')); N.append(c_)
     faces(c_,[(1005,'neutral'),(1040+i*6,'skeptical'),(1070+i*6,'deadpan'),(1100+i*4,'worry'),(1124+i*3,'skeptical')])   # r4f: 4+ faces per featured character (rule 332); watchful, never comic; bob(c_,[1050+i*12])
 for f,a in [(1066,-30),(1100,-20)]: arm(N[1],1,f,a)
@@ -654,7 +655,8 @@ L.render_setup(100,8)
 sc.cycles.samples=4; sc.cycles.transparent_max_bounces=8; sc.cycles.diffuse_bounces=1; sc.cycles.max_bounces=3   # r1 speed test: 89 s -> 53 s per 2K frame, mean abs diff 1.4/255
 os.makedirs('/root/cc/blend',exist_ok=True)
 # r5 (shots r4 C4): heads cut by the frame edge while the body is on screen; headnudge_cc.py gives the sideways shift (m) per character, x1.15 margin.
-NUDGE={"S01_pil": [0.273, -0.182], "S02_master": [0.104, 1.863], "S02_x2": [0.028, 0.51], "S03_pil": [-0.347, -0.228], "S05_pil": [-0.347, 0.264], "S05_pilB": [0.248, -0.188], "S07_p0": [0.827, 0.138], "S07_p1": [0.047, 0.008], "S08_pil": [-0.429, 0.039], "S08_sailA": [0.06, -0.005], "S09_carry": [-0.24, 0.134], "S10_n0": [0.895, -0.294], "S17_elder": [0.304, 0.089], "S15_writer": [0.034, 0.011]}
+# r6c (shots r6 C4, rule 56): S10_n0 head left the frame 1053-1061 as the push passed him; grid search (hx/grid probe on cc6b) (numpy projection on cam_S10) puts him +0.25 m x, -4.25 m y deeper, right of the close-up man: head 0.59-0.89 W for the whole shot and >= 77 px clear of the other two heads (first try, +2.0/-3.5, hid him behind S10_n1)
+NUDGE={"S01_pil": [0.273, -0.182], "S02_master": [0.104, 1.863], "S02_x2": [0.028, 0.51], "S03_pil": [-0.347, -0.228], "S05_pil": [-0.347, 0.264], "S05_pilB": [0.248, -0.188], "S07_p0": [0.827, 0.138], "S07_p1": [0.047, 0.008], "S08_pil": [-0.429, 0.039], "S08_sailA": [0.06, -0.005], "S09_carry": [-0.24, 0.134], "S10_n0": [1.112, -3.99], "S17_elder": [0.304, 0.089], "S15_writer": [0.034, 0.011]}
 for _n,(_dx,_dy) in NUDGE.items():
     _o=bpy.data.objects.get(_n)
     if not _o: continue

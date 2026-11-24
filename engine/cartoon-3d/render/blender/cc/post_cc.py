@@ -69,8 +69,13 @@ def apply(x,p):
     mx=x.max(-1); mn=x.min(-1); hs=(mx-mn)/np.maximum(mx,1e-4); hue=(x[...,1]-x[...,2])/np.maximum(mx-mn,1e-4)
     skin=((x[...,0]>=x[...,1])&(x[...,1]>=x[...,2]-0.02)&(hs>0.14)&(hs<0.55)&(hue>0.22)&(hue<0.58)&(y>0.22)).astype(np.float32)
     skin=cv2.GaussianBlur(skin,(0,0),2.0)[...,None]; sk=np.minimum(sat,SKMAX)*skin+sat*(1-skin)
+    if PROT[0] and sat>1:   # r6b (visual r6 critical: S10 Nauset deerskin mantles 163,103,62 went traffic-cone orange 222,88,0 and the face rim speckled once the narrowed skin mask left them out): warm pixels that are already saturated get little of the gain, low-sat sand still gets all of it
+        warm=np.clip((hue[...,None]+0.1)/0.2,0,1)*np.clip((0.75-hue[...,None])/0.15,0,1)*(x[...,:1]>=x[...,2:3])
+        keep=np.clip((0.62-hs[...,None])/0.32,0,1); sk=sk*(1-warm)+(1+(sk-1)*keep)*warm
     z=np.clip(y3+sk*(z-y3),0,1); z=np.clip(z*np.array(tint,np.float32),0,1); return z
 SKMAX=1.0
+SATPROT=set(os.environ.get('SATPROT','S10').split(','))   # r6b: shots graded with the saturated-warm protect (only S10 re-posted in round 6b; apply to every shot from the next video on)
+PROT=[False]
 CLAR=0.55; CLS=14.0; PLUM=np.array([46,28,54],np.float32)/255   # r4 (visual L6 0.361 > 0.35 and halos at f60/f1720): weaker, tighter local contrast (r3 was 0.8 / 24 px)
 def finish(o):
     y=gray(o)[...,None]; mid=np.clip(4*y*(1-y),0,1)   # r3: local contrast on midtones only (r2 crushed ink and coats to RGB 0)
@@ -166,6 +171,7 @@ if __name__=='__main__':
     # grade params per shot from 5 sampled frames
     P={}; rep={}
     for n in SH:
+        PROT[0]=(n in SATPROT)
         rd=Reader(n); idx=set(np.linspace(0,rd.n-1,5).astype(int)); smp=[]
         for i in range(rd.n):
             fr=rd.next()
@@ -201,7 +207,7 @@ if __name__=='__main__':
             if f>max(TESTF): break
             continue
         for n in act:
-            raw=R[n].next(); o=finish(apply(raw,P[n]))
+            PROT[0]=(n in SATPROT); raw=R[n].next(); o=finish(apply(raw,P[n]))
             if n=='S19' and f>=PAY0:   # payoff close-up: protect the poster's real colours (no highlight stretch, gentle gamma)
                 q=apply(raw,PAYP); q=np.clip(q+0.7*(q-cv2.GaussianBlur(q,(0,0),1.4*K)),0,1);   # round 4: poster read soft (38 % of file sharpness): gentle unsharp on the payoff
                 t=min(1.0,(f-PAY0+1)/(PAY1-PAY0+1)); t=t*t*(3-2*t); o=o*(1-t)+q*t

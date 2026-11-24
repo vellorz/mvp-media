@@ -1,22 +1,21 @@
-# Cape Cod (tue-cape-cod) post, from the BF post.py. Post: per-shot grade (rule 187 window) -> dissolves (smoothstep, varied lengths) -> captions on top (rule 186) -> encode with the mix.
+# Nuremberg (fri-nuremberg) post, from the Cape Cod post, from the BF post.py. Post: per-shot grade (rule 187 window) -> dissolves (smoothstep, varied lengths) -> captions on top (rule 186) -> encode with the mix.
 # python3 post.py SRC OUT.mp4 [scale]     SRC holds <shot>_<first>_.mp4 clips (PC encode) or <shot>/f_####.png folders
 import sys, os, glob, json, subprocess, numpy as np, re, cv2
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 SRC,OUT=sys.argv[1],sys.argv[2]; K=float(sys.argv[3]) if len(sys.argv)>3 else 1.0
-W,H=int(1440*K),int(2560*K); END=1816
-SH={'S01':(0,127),'S02':(120,214),'S03':(207,278),'S04':(271,392),'S05':(385,510),'S06':(502,583),'S07':(576,662),'S08':(654,765),
-    'S09':(766,1012),'S10':(1005,1140),'S11':(1141,1252),'S12':(1244,1330),'S13':(1322,1412),'S14':(1413,1443),'S15':(1436,1516),
-    'S16':(1509,1574),'S17':(1567,1712),'S18':(1702,1758),'S19':(1759,END)}
-# palette per era/mood (multipliers R,G,B): flips across each time/mood join (rule 187)
-TINT={'S01':(1.02,1.0,0.97),'S02':(0.98,1.0,1.03),'S03':(1.06,1.0,0.9),'S04':(0.96,1.0,1.04),'S05':(1.0,1.0,1.0),'S06':(1.06,1.0,0.9),
-      'S07':(1.04,1.0,0.95),'S08':(0.99,1.0,1.02),'S09':(1.04,1.0,0.95),'S10':(1.03,0.98,1.02),'S11':(1.03,0.98,1.02),'S12':(1.02,1.0,0.98),
-      'S13':(0.98,1.0,1.03),'S14':(1.02,1.0,0.97),'S15':(1.07,0.99,0.88),'S16':(1.06,1.0,0.9),'S17':(1.06,1.0,0.9),'S18':(1.02,1.0,0.97),'S19':(1.03,1.0,0.96)}
-# per-shot brightness targets: day streets bright, lamp-lit interiors darker (Rick's film swings 0.2-0.7 across scenes)
-LT={'S01':0.52,'S02':0.50,'S03':0.42,'S04':0.46,'S05':0.46,'S06':0.40,'S07':0.52,'S08':0.48,'S09':0.52,'S10':0.44,'S11':0.46,'S12':0.48,
-    'S13':0.48,'S14':0.48,'S15':0.40,'S16':0.47,'S17':0.48,'S18':0.52,'S19':0.50}
-# vignette strength (corner multiplier = 1-k): interiors get Rick's lantern falloff, exteriors a light one
-PAY0,PAY1=1778,1793; PAYP=(0.0,1.0,1.0,1.0,(1.03,0.99,1.0))   # S19 payoff grade (poster <1% clipped, luma ~143 vs file 117)
-INTR=('S03','S06','S15')
+W,H=int(1440*K),int(2560*K); END=1905
+# nb: all joins are hard cuts. pcrender writes both edge frames of a join (f1 of one shot = f0 of the next), so post reads each shot up to f1-1 (no 1-frame blend).
+_SH={'S01':(0,130),'S02':(130,193),'S03':(193,332),'S04':(332,505),'S05':(505,668),'S06':(668,725),'S07':(725,815),'S08':(815,935),'S09':(935,1062),
+     'S10':(1062,1158),'S11':(1158,1246),'S12':(1246,1334),'S13':(1334,1404),'S14':(1404,1520),'S15':(1520,1588),'S16':(1588,1676),'S17':(1676,1800),'S18':(1800,END)}
+SH={n:(a,(b if n=='S18' else b-1)) for n,(a,b) in _SH.items()}
+# palette per place/era (multipliers R,G,B), flips across each time/mood join (rule 187): dusk market cool-warm, museum neutral-cool, office warm, archive amber, graveyard cold, 1678 sepia-warm
+_M=(1.02,0.99,0.98); _A=(0.98,1.0,1.03); _P=(1.04,1.0,0.95); _G=(1.05,1.0,0.9); _C=(0.96,0.99,1.05); _H=(1.07,1.0,0.88)
+TINT={'S01':_M,'S02':_A,'S03':_A,'S04':_P,'S05':_A,'S06':_A,'S07':_P,'S08':_A,'S09':_G,'S10':_C,'S11':_G,'S12':_H,'S13':_P,'S14':_A,'S15':_A,'S16':_H,'S17':_M,'S18':(1.03,1.0,0.96)}
+# per-shot brightness targets: snow exteriors brighter, lamp-lit interiors darker (Rick's film swings 0.2-0.7 across scenes)
+LT={'S01':0.46,'S02':0.48,'S03':0.44,'S04':0.46,'S05':0.48,'S06':0.48,'S07':0.44,'S08':0.46,'S09':0.42,'S10':0.52,'S11':0.46,'S12':0.50,
+    'S13':0.44,'S14':0.44,'S15':0.48,'S16':0.50,'S17':0.46,'S18':0.48}
+PAY0,PAY1=1856,1878; PAYP=(0.0,1.0,1.0,1.0,(1.03,0.99,1.0))   # S18 payoff grade, full on "short"
+INTR=('S03','S04','S07','S08','S09','S13','S14')
 VIG={n:(0.70 if n in INTR else 0.10) for n in SH}   # start values; interiors are calibrated per shot below to corner/centre 0.38 (guide 0.33-0.42); day exteriors light only
 BLOOM=0.0   # light glow on emitters (lamps, screens, lit windows): guide L8
 def bloom(x,amt=BLOOM):
@@ -24,7 +23,7 @@ def bloom(x,amt=BLOOM):
     m=np.clip((Y-0.80)/0.2,0,1)[...,None]*sm
     g=cv2.GaussianBlur(m,(0,0),10*K)+cv2.GaussianBlur(m,(0,0),28*K)
     g=cv2.resize(g,(w,h),interpolation=cv2.INTER_LINEAR); return np.clip(x+amt*g*(1-x),0,1)
-HIFLOOR=('S19',)
+HIFLOOR=('S18',)
 def hifloor(x,target=0.88,gmax=1.28):
     """r7: per-frame highlight floor. Round 6 measured p98 0.73-0.80 over 1548-1751 (R19 needs >= 0.84): lift by gain to p98 target, soft knee above 0.9"""
     Y=gray(x[::6,::6]); p=float(np.percentile(Y,98))
@@ -74,7 +73,7 @@ def apply(x,p):
         keep=np.clip((0.62-hs[...,None])/0.32,0,1); sk=sk*(1-warm)+(1+(sk-1)*keep)*warm
     z=np.clip(y3+sk*(z-y3),0,1); z=np.clip(z*np.array(tint,np.float32),0,1); return z
 SKMAX=1.0
-SATPROT=set(os.environ.get('SATPROT','S10').split(','))   # r6b: shots graded with the saturated-warm protect (only S10 re-posted in round 6b; apply to every shot from the next video on)
+SATPROT=set(os.environ.get('SATPROT',','.join(_SH)).split(','))   # nb: warm-saturation protect on every shot (rules 355/367b)   # r6b: shots graded with the saturated-warm protect (only S10 re-posted in round 6b; apply to every shot from the next video on)
 PROT=[False]
 CLAR=0.55; CLS=14.0; PLUM=np.array([46,28,54],np.float32)/255   # r4 (visual L6 0.361 > 0.35 and halos at f60/f1720): weaker, tighter local contrast (r3 was 0.8 / 24 px)
 def finish(o):
@@ -109,12 +108,11 @@ for _ in range(30):
     if abs(ch-CAP)<1: break
     fs=int(round(fs*CAP/ch))
 FNT=font(fs); BASE=int(0.717*H); STROKE=max(1,int(round(7*K))); SHX,SHY=int(round(4*K)),int(round(5*K))
-WORDS=json.load(open('/root/nb/vo/vo_trim.wav.words.json'))
+WORDS=[[w['w'],w['s'],w['e']] for w in json.load(open('/root/nb/vo/vo_trim.wav.words.json'))]
 def fixwords(W_):
     """caption text follows script.md, not ASR spelling: numbers as digits, Nauset, gray, quote marks"""
-    MERGE=[(['foot','-touch'],['foot','touched']),(['A','hundred','and','twenty','-one'],['121']),(['ninety','-four','-year','-old'],['94-year-old'])]
-    SUB={"Pilgrim's":"Pilgrims'",'1620,':'1620','weeks,':'weeks','hill,':'hill','pick':'\u201cPick','soon':'soon,','beach.':'beach!\u201d',
-         'Nosset':'Nauset','grey':'gray',"that's":'\u201cThat\'s','rock,':'rock.'}
+    MERGE=[]
+    SUB={'400th':'400th','It':'\u201cIt','banners!':'banners!\u201d','Christkind':'Christkind'}
     o=[]; i=0
     while i<len(W_):
         hit=False
@@ -126,8 +124,6 @@ def fixwords(W_):
                 i+=len(src); hit=True; break
         if hit: continue
         w,s_,e=W_[i]; t=w.strip(); t=SUB.get(t,t)
-        if t=='one.' and o and o[-1][0]=='the' and len(o)>1 and o[-2][0].endswith("That's"): t='one.\u201d'
-        if t=='but' and o and o[-1][0]=='rock.': t='But'
         o.append([t,s_,e]); i+=1
     return o
 WORDS=fixwords(WORDS)
@@ -208,13 +204,13 @@ if __name__=='__main__':
             continue
         for n in act:
             PROT[0]=(n in SATPROT); raw=R[n].next(); o=finish(apply(raw,P[n]))
-            if n=='S19' and f>=PAY0:   # payoff close-up: protect the poster's real colours (no highlight stretch, gentle gamma)
+            if n=='S18' and f>=PAY0:   # payoff close-up: protect the poster's real colours (no highlight stretch, gentle gamma)
                 q=apply(raw,PAYP); q=np.clip(q+0.7*(q-cv2.GaussianBlur(q,(0,0),1.4*K)),0,1);   # round 4: poster read soft (38 % of file sharpness): gentle unsharp on the payoff
                 t=min(1.0,(f-PAY0+1)/(PAY1-PAY0+1)); t=t*t*(3-2*t); o=o*(1-t)+q*t
             if n in HIFLOOR: o=hifloor(o)   # r7 (rule 274): bright ending and S11 highlights (p98 >= 0.86 before the poster's true colours go on)
-            if n=='S19' and str(f) in PQ: o=truepost(o,PQ[str(f)])   # r5 (rule 196, round-4 E5 note): the shop file's true colours on the projected poster quad
+            if n=='S18' and str(f) in PQ: o=truepost(o,PQ[str(f)])   # r5 (rule 196, round-4 E5 note): the shop file's true colours on the projected poster quad
             frames[n]=vig(bloom(floor_(o),BLOOM),VIG[n])
-            if n=='S19': frames[n]=floor_(frames[n])   # r4: S19 soffit band fell under luma 0.07 after the vignette (rule 317)
+            if n=='S18': frames[n]=floor_(frames[n])   # r4: S19 soffit band fell under luma 0.07 after the vignette (rule 317)
         if len(act)==1: img=frames[act[0]]
         else:
             A,B=act[0],act[1]; s0,e0=SH[B][0],SH[A][1]; t=(f-s0+1)/(e0-s0+2); w_=t*t*(3-2*t); img=frames[A]*(1-w_)+frames[B]*w_

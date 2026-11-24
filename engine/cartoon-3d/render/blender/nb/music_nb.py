@@ -1,8 +1,8 @@
-# Music bed + SFX for the Cape Cod Pilgrims short (all synthesized here, nothing licensed). Built on the BF music.py engine; new key, tempo, chords, melody, level map and SFX list.
+# Music bed + SFX for the Nuremberg Christkindlesmarkt short (nb, from the Cape Cod music_cc) (all synthesized here, nothing licensed). Built on the BF music.py engine; new key, tempo, chords, melody, level map and SFX list.
 # Bed (rules 8/188 revised Nov 21): loop-based E-minor garage bed, 92 BPM, 4-bar loop = 10.4 s (Rick 6-11 s), level rides the MAP (not constant), louder into the payoff
 # (no swells, no ducking). Owner taste honoured inside it: melodic house feel, rounded sub bass, shuffled garage hats.
 import numpy as np, wave, json, sys
-SR=48000; END_F=1816; DUR=END_F/30+0.6; N=int(SR*DUR); rng=np.random.default_rng(7)
+SR=48000; END_F=1906; DUR=END_F/30+0.6; N=int(SR*DUR); rng=np.random.default_rng(7)
 BPM=92; B=60/BPM; S16=B/4   # round 5 (C2): 92-100 BPM
 def mtof(m): return 440*2**((m-69)/12)
 def env(n,a=0.004,d=8.0):
@@ -57,14 +57,14 @@ T['kick'][:]=0
 for bi in range(bars):
     for k in range(4): put('kick',bi*4*B+k*B,KICK,0.9)
 # round 5: level map from the Rick music study (section 7), dB relative to the bed median; layers thin out in dips (S6)
-MAP=[(0.0,3),(3.0,3.7),(4.5,-1.0),(9.5,3.3),(13.1,-3.2),(17.1,2.1),(19.2,-2.4),(23.2,1.9),(25.5,-2.0),(30.6,0.8),(33.0,-2.4),(36.9,3.8),(38.7,0.4),(43.8,-2.8),(47.1,2.2),(48.5,-2.8),(52.1,0.6),(55.6,3.5),(57.2,6),(59.0,8),(61.0,8)]   # cc r2: map times/levels searched so |r| VO vs bed <= 0.15 at 0.2-0.5 s windows; open lift +3 for 0-3 s (bedcheck +2..+6), swings x1.25 for std >= 2.3, bed louder into the payoff (+8), dips under the quoted lines, std target 2.3-4.0 dB
+MAP=[(0.0,3),(3.0,3.6),(4.6,-1.0),(9.0,3.2),(13.6,-3.2),(17.0,2.0),(19.6,-2.4),(22.6,1.8),(25.6,-2.0),(29.8,1.0),(33.2,-2.4),(36.4,3.6),(38.6,0.4),(42.6,-2.8),(45.6,2.2),(48.0,-2.6),(51.6,1.2),(53.0,3.4),(55.6,0.2),(58.4,4.0),(60.2,6),(61.6,8),(64.0,8)]   # nb: cc map re-timed to this VO; dip under the quoted line (14.1-16.6 s), lift on the 1678 reveal (52.2 s), +8 into the payoff
 tt=np.arange(N)/SR-0.1   # VO plays 0.1 s late in the mix
 mk=np.array([m[0] for m in MAP]); mv=np.array([m[1] for m in MAP],float)
 gdb=np.interp(tt,mk,mv)
 k_=int(0.7*SR); gdb=np.convolve(np.pad(gdb,(k_//2,k_-k_//2-1),mode='edge'),np.ones(k_)/k_,mode='valid')   # rides take ~0.7 s (M8)
 gl=10**(gdb/20)
 # cc r2: stop-time on the payoff hit (mix time 59.74-60.10 s, ding at f1793): the bed drops 12 dB for the ding with 40 ms ramps, then returns at full payoff level (rule 319 payoff >= +6 over the local bed while rule 192 keeps it >= 8 LU under the VO)
-_tm=np.arange(N)/SR; _r=0.04; _st=np.clip(np.minimum((_tm-59.74)/_r,(60.10-_tm)/_r),0,1); gl=gl*10**(-12*_st/20)
+_tm=np.arange(N)/SR; _r=0.04; _st=np.clip(np.minimum((_tm-62.57)/_r,(63.25-_tm)/_r),0,1); gl=gl*10**(-20*_st/20); _s2=np.clip(np.minimum((_tm-52.13)/_r,(52.55-_tm)/_r),0,1); gl=gl*10**(-9*_s2/20)   # nb: stop-time on the 1678 reveal ding too (f1565); payoff ding at f1878 ("short")
 thin=np.clip((gdb+1.0)/4.0,0,1)   # melody and plucks drop out in the -3..-5 dips, return on rises
 bed=(T['mal']*0.9*thin+T['plk']*0.6*(0.4+0.6*thin)+T['bass']*0.62+T['kick']*0.7+T['pad']*1.0)*gl
 # gentle bus compression for a constant level (no pumping: slow, light)
@@ -107,19 +107,15 @@ def whoosh2(dur=0.45):
     n=int(dur*SR); t=np.arange(n)/SR; x=soft(rng.normal(0,1,n),900); e=np.sin(np.pi*t/dur)**1.5; return x/np.abs(x).max()*e
 # Rick master guide: SFX are SPARSE, in the bed bus, well under the VO: whoosh on fast camera moves, thud on impacts, a bigger hit on the payoff.
 EV=[]
-EV+=[(92,whoosh2(0.5),0.6),                        # S01 swing to the route sign on "second stop"
-     (300,soft(noise(1.2,lp=500),900),0.35),          # S04 surf on the sandbars
-     (420,whoosh2(0.35),0.4),(433,soft(thump(55,0.4),700),1.0),   # anchor drops, splash
-     (486,soft(click(),1500),0.5),                    # foot pulled back on "sand"
-     (530,soft(click(),1800),0.35),(552,soft(click(),1800),0.35),   # quill scratches as names fill in
-     (804,soft(thump(80,0.2),900),0.7),(811,soft(thump(80,0.2),900),0.6),(818,soft(ding(83,0.9),3000),0.45),   # digging, the corn basket appears
-     (936,soft(ding(88,0.7),3000),0.35),              # basket handed back
-     (1169,soft(thump(120,0.15),1200),0.6),(1172,soft(thump(120,0.15),1200),0.5),(1175,soft(thump(120,0.15),1200),0.5),   # arrows thud into the logs
-     (1197,soft(thump(70,0.35),700),0.8),(1200,soft(thump(70,0.35),700),0.7),(1204,soft(thump(70,0.35),700),0.7),   # muffled musket pops
-     (1413,whoosh2(0.35),0.7),                        # crash push on the rock
-     (1519,soft(thump(140,0.12),1500),0.5),(1529,soft(thump(140,0.12),1500),0.5),(1539,soft(thump(140,0.12),1500),0.5),   # 1741 hammers
-     (1624,whoosh2(0.3),0.45),                        # the elder points
-     (1772,whoosh2(0.4),0.7),(1793,soft(ding(83,1.4),3000),0.45),(1793,soft(ding(88,1.4),3000),0.32)]   # payoff push lands on "first"
+EV+=[(100,whoosh2(0.5),0.6),                        # S01 swing up on "birthday"
+     (140,whoosh2(0.35),0.45),                        # S02 push down onto the ink blot
+     (684,soft(click(),1100),0.45),(712,soft(click(),1100),0.45),   # the 2, then the 7, tried on over the smudge
+     (862,soft(click(),1200),0.6),(871,soft(click(),1200),0.6),     # two photo flashes
+     (1376,soft(click(),1500),0.7),(1380,whoosh2(0.35),0.5),        # the banner string snaps, the banner swings down
+     (1491,soft(ding(88,0.7),3000),0.35),             # eureka on "blob"
+     (1565,soft(ding(83,0.9),3000),0.45),             # the 7 shows through: 1678
+     (1730,whoosh2(0.4),0.45),                        # crane up to the Christkind
+     (1878,soft(ding(83,1.4),3000),0.45),(1878,soft(ding(88,1.4),3000),0.32)]   # payoff push lands on "short"
 # A6: level every SFX event against the bed under it so each lands at the same offset over the bed
 # (one common offset; mix.py then sets the global SFX gain so the median offset is +10 dB in the mix)
 BEDW=bed/np.abs(bed).max()*0.7
@@ -146,7 +142,7 @@ for it in range(12):   # overlapping tails add up: re-level every group against 
     for gr in G:
         i,w=gr['i'],gr['w']   # robust: average of three comparison spans (span, span+0.2 s, fixed 0.5 s)
         vv=[20*np.log10(pk50(S[i:i+ww])/rms(BEDW[i:i+ww])) for ww in (w,w+int(0.2*SR),int(0.5*SR))]; po=(min(vv)+max(vv))/2; gr['k']*=10**((16-po)/20*0.8)
-ATT={1793:-6.8,818:-5.0,936:-5.0,1772:-2.0,92:-1.5}   # tonal dings read louder than their RMS (K-weighting): keep every SFX >= 8 LU under the VO
+ATT={1878:-6.8,1491:-5.0,1565:-5.0,100:-1.5}   # tonal dings read louder than their RMS (K-weighting): keep every SFX >= 8 LU under the VO
 for gr in G: gr['k']*=10**(ATT.get(gr['f0'],0.0)/20)
 S[:]=sum(gr['tr']*gr['k'] for gr in G)
 evlog=[dict(f=gr['f0'],f1=gr['f1'],i=gr['i'],w=gr['w']) for gr in G]

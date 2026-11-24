@@ -1,7 +1,7 @@
 # Cape Cod audio gate: bed std (3 s windows, 0.5 s hop and non-overlap), |r| VO vs bed envelope (200/400 ms, dB), SFX-over-bed per event in the mix.  python3 audiometrics_cc.py BED_GAIN_DB SFX_GAIN_DB [sfx stem]
 import numpy as np, json, subprocess, sys
 from scipy.signal import lfilter
-sr=48000; END=1817/30
+sr=48000; END=1906/30
 def rd(p): return np.frombuffer(subprocess.run(['ffmpeg','-v','error','-i',p,'-af','pan=mono|c0=c0','-ar',str(sr),'-f','f32le','-'],capture_output=True).stdout,np.float32).astype(np.float64)
 gb,gs=float(sys.argv[1]),float(sys.argv[2])
 n=int(END*sr); b=rd('/root/nb/audio/bed.wav')[:n]*10**(gb/20); s=rd(sys.argv[3] if len(sys.argv)>3 else '/root/nb/audio/sfx.wav')[:n]*10**(gs/20)

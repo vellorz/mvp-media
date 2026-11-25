@@ -56,10 +56,16 @@ def fx(n,img,loc,f0,dur,size,coll,face='-Y',grow=1.6,rise=0.0):
             for kp in fc.keyframe_points: kp.interpolation='CONSTANT'
     return o
 def onone(o):
+    """'on ones': one pose per frame. bcn r3t fix: first bake a key on EVERY frame between the first and last key (from the smooth curve), THEN set
+    CONSTANT. The old version set sparse keys CONSTANT, so a ball keyed every 4-6 frames held still and jumped (Barcelona r3s S15 [C])."""
     if o.animation_data and o.animation_data.action:
         for fc in o.animation_data.action.fcurves:
-            if fc.data_path!='hide_render':
-                for kp in fc.keyframe_points: kp.interpolation='CONSTANT'
+            if fc.data_path=='hide_render' or len(fc.keyframe_points)<2: continue
+            ks=sorted(int(round(kp.co[0])) for kp in fc.keyframe_points)
+            vals=[(f,fc.evaluate(f)) for f in range(ks[0],ks[-1]+1)]
+            for f,v in vals: fc.keyframe_points.insert(f,v,options={'FAST'})
+            fc.update()
+            for kp in fc.keyframe_points: kp.interpolation='CONSTANT'
 def hardcut(shot,f):
     for o_ in (L.CAM[shot],L.TGT[shot]):
         for fc in o_.animation_data.action.fcurves:
@@ -219,11 +225,12 @@ for sx in(-1,1):
     for sy in(-1,1): box(f'G_tleg{sx}{sy}',(GX+sx*1.65,0.6+sy*0.4,0.37),(0.07,0.07,0.74),DWOOD,bv=0.005)
 box('G_bench',(GX,1.55,0.24),(3.6,0.3,0.06),DWOOD,bv=0.01)
 for sx in(-1,1): box(f'G_benchleg{sx}',(GX+sx*1.6,1.55,0.12),(0.06,0.26,0.24),DWOOD,bv=0.005)
+for n_ in ('G_bench','G_benchleg-1','G_benchleg1'): vis(bpy.data.objects[n_],[(0,814),(986,END)])   # bcn r3t (shots r3s, rule 372: the standing front row stood inside the bench under the high camera): the twelve stand at the table in S10-S12, no bench
 box('G_ledger',(GX-0.2,0.5,0.8),(0.5,0.36,0.03),flat('ledger',lin((120,40,36)),0.8),bv=0.005); plane('G_ledgerpg',(GX-0.2,0.5,0.818),0.44,0.3,flat('pg',lin((240,232,212)),0.9),horiz=True)['noink']=1
 GW_D=card('G_winD',(GX+1.5,4.085,2.4),1.4,1.8,'sky_bcn',emit=0.9); GW_N=card('G_winN',(GX+1.5,4.08,2.4),1.4,1.8,'sky_night',emit=0.7)
 box('G_winframe',(GX+1.5,4.095,2.4),(1.54,0.01,1.94),DWOOD,bv=0.0); vis(GW_D,[(172,539),(985,END)]); vis(GW_N,[(0,171),(540,984)])
 card('G_signin',(GX-1.45,4.08,3.2),2.0,0.377,'sign_gym',emit=0.4,ink=True)   # bcn r3b: whole in S04 and S12 (signcut)
-for i,x in enumerate([1.15,2.6]):   # r3s: from the S10/S12 three-quarter cameras the left bulb and cord sat on GIMNASIO (eye pass); projected clear   # r3b: pendants and sign moved apart; the left bulb sat over the G of GIMNASIO in S10
+for i,x in enumerate([1.95,3.0]):   # r3t: projected for the r3s S10/S12 cameras (3.55-3.75,-2.65..-2.85): cord/bulb clear right of the sign;   # r3s: from the S10/S12 three-quarter cameras the left bulb and cord sat on GIMNASIO (eye pass); projected clear   # r3b: pendants and sign moved apart; the left bulb sat over the G of GIMNASIO in S10
     sph(f'G_pend{i}',(GX+x,0.6,2.6),0.14,flat('pendglow',lin((255,214,150)),0.3,emit=5.0)); cyl(f'G_pendc{i}',(GX+x,0.6,3.15),0.01,1.0,IRON,v=6)
     plight(f'G_pendL{i}',(GX+x,0.4,2.45),120)
 plight('G_fill',(GX-3,-2,2.6),90,(1.0,0.86,0.7),1.0)
@@ -435,10 +442,10 @@ leaves('S11_leaf',RX,4.4,4,898,950,11,coll=C(s))
 # ---- S12 (944-985): "and made a club": all twelve cheer (approved victory_up), the ledger signed ----
 s='S12'; r=S(s)
 for i,(k,(x,y)) in enumerate(zip(TWELVE,SEATS)):
-    if k=='hero': x,y=2.75,-1.45   # bcn r3s (rule 345): the hero in front, as in S10 (head 26-29 % W, under the caption band)
+    if k=='hero': x,y=2.85,-1.78   # r3y: 25-27 % after the tilt -> closer   # r3t: head 26.5 % -> about 29 % W   # bcn r3s (rule 345): the hero in front, as in S10 (head 26-29 % W, under the caption band)
     a_=char_on(f'S12_{k}',k,s,(GX+x,y,0),r,'happy'); faces(a_,[(944,'happy'),(964,'laugh')]); T12.append(a_)
     COMBOS.append((a_,962+(i%4),'victory_up',(1 if i%2 else -1),'laugh'))
-path(s,[(944,(GX+3.65,-2.8,2.45),(GX+0.3,1.8,1.2)),(985,(GX+3.5,-2.65,2.42),(GX+0.3,1.8,1.2))])   # bcn r3s (rule 345): high three-quarter 2.45 m up (S09 2.65, S10 2.4; S11 sits between S10 and S12)   # bcn r3e (occprobe: from the left the back row's faces sat behind the front row): three-quarter from the right like S10, higher (12 deg) so the back row clears the front
+path(s,[(944,(GX+3.65,-2.8,2.75),(GX+0.3,1.8,0.78)),(985,(GX+3.5,-2.65,2.72),(GX+0.3,1.8,0.45))])   # r3y: stills showed the cheering hero's chin cut by the frame bottom (head centre v 0.05); the camera tilts down with the cheer   # r3t: 2.75 m, 0.35 m above S10 (consecutive group shots change height)   # bcn r3s (rule 345): high three-quarter 2.45 m up (S09 2.65, S10 2.4; S11 sits between S10 and S12)   # bcn r3e (occprobe: from the left the back row's faces sat behind the front row): three-quarter from the right like S10, higher (12 deg) so the back row clears the front
 # ---- S13 (985-1125): no field, so nine days later: the old bike track by day; the team in plain white shirts walks onto the turf ----
 s='S13'; r=S(s)
 T13=[]
@@ -460,9 +467,20 @@ kp=char_on('S15_keeper','keeper',s,(VX-20+0.8,-0.6,0),r,'determined')
 faces(kp,[(1186,'determined'),(1201,'shock'),(1218,'sad'),(1240,'wince')]); COMBOS.append((kp,1200,'startle_recoil',-1,'shock'))   # r3s: recoil lands as the ball passes (1203), away from it
 # bcn r3s (r3 eye pass [C]: seen from the side of the goal the ball landed on the keeper's arm and lay in front of him; the goal never went in): camera now on the
 # field side facing the goal; the ball flies past the keeper's left, under the bar, into the back of the net, drops and rests in the goal
-BALL=sph('S15_ball',(VX-15,1.4,0.3),0.11,flat('leather',lin((150,96,52)),0.7),coll=C(s))
-for f,(x,y,z) in [(1186,(VX-15.0,1.4,0.3)),(1192,(VX-16.4,1.2,1.0)),(1198,(VX-17.8,1.0,1.45)),(1203,(VX-19.2,0.85,1.5)),(1205,(VX-20.0,0.75,1.4)),(1207,(VX-21.05,0.65,1.1)),(1210,(VX-20.9,0.6,0.45)),(1214,(VX-20.8,0.6,0.11)),(1268,(VX-20.8,0.6,0.11))]: kloc(BALL,f,(x,y,z))
+BALL=sph('S15_ball',(VX-14.2,0.5,0.2),0.11,flat('leather',lin((150,96,52)),0.7),coll=C(s))
+# bcn r3t (r3s eye pass [C]: onone() made every ball key CONSTANT, so the ball popped in and stepped): a key on EVERY frame along a smooth flight:
+# from the field near the camera, rising past the keeper's left, into the top of the back net (1206), dropping inside the goal (1211) and rolling to rest
+for f in range(1186,1269):
+    if f<=1206:
+        t=(f-1186)/20.0; x=-14.2+(-21.15+14.2)*t; y=0.5+0.15*t; z=0.2+1.05*t+1.5*t*(1-t)
+    elif f<=1211:
+        t=(f-1206)/5.0; x=-21.15+0.2*t; y=0.65-0.05*t; z=1.25-(1.25-0.11)*t*t
+    else:
+        t=min(1.0,(f-1211)/10.0); t=1-(1-t)**2; x=-20.95+0.2*t; y=0.6; z=0.11
+    kloc(BALL,f,(VX+x,y,z))
 onone(BALL)
+_nb=bpy.data.objects['V_net_back']   # the back net gives a little where the ball hits
+for f,dx in [(1186,0.0),(1205,0.0),(1207,-0.14),(1210,-0.05),(1214,0.0)]: kloc(_nb,f,(dx,0,0))
 path(s,[(1186,(VX-12.4,-2.3,1.45),(VX-19.6,0.3,1.25)),(1225,(VX-13.3,-1.9,1.42),(VX-19.7,0.3,1.25)),(1226,(VX-12.15,5.4,1.7),(VX-12,9.6,1.7)),(1268,(VX-12.1,5.8,1.7),(VX-12,9.6,1.7))])
 hardcut(s,1226)   # cut to the chalk 0-1 board on "one to nothing"
 # ---- S16 (1268-1330): the turn: "Most folks would have quit right there." The team sits on the turf, glum ----
@@ -554,7 +572,7 @@ for o_ in bpy.data.objects:
 L.render_setup(100,8)
 sc.cycles.samples=4; sc.cycles.transparent_max_bounces=8; sc.cycles.diffuse_bounces=1; sc.cycles.max_bounces=3
 # r3 (C4 probe, headedge 324 frames): heads cut by the frame edge while the body is on screen; headnudge_cc.py shifts x1.15 (Cape Cod r5 method)
-SKB_DEFAULT={"S01": [0.775, 1.031, 1.352], "S02": [0.849, 1.016, 1.287], "S03": [0.884, 1.005, 1.294], "S04": [0.844, 1.017, 1.289], "S05": [0.849, 1.016, 1.287], "S06": [0.849, 1.016, 1.287], "S07": [0.845, 1.018, 1.278], "S08": [0.725, 1.032, 1.495], "S09": [0.744, 1.042, 1.335], "S10": [0.747, 0.987, 1.39], "S11": [0.744, 1.042, 1.335], "S12": [0.752, 1.022, 1.509], "S13": [1.003, 0.984, 1.153], "S14": [0.976, 0.984, 1.228], "S15": [1.007, 0.983, 1.146], "S16": [0.986, 0.985, 1.193], "S17": [0.986, 0.984, 1.196], "S18": [0.962, 0.989, 1.217], "S19": [0.895, 1.005, 1.261], "S20": [0.895, 1.005, 1.261]}   # r3 pass 2 (+ S01 interpolated between pass 2 (0.964/0.91) and pass 3 (0.87/0.80))
+SKB_DEFAULT={"S01": [0.775, 1.031, 1.427], "S02": [0.849, 1.016, 1.287], "S03": [0.884, 1.005, 1.294], "S04": [0.844, 1.017, 1.289], "S05": [0.849, 1.016, 1.287], "S06": [0.849, 1.016, 1.287], "S07": [0.845, 1.018, 1.278], "S08": [0.725, 1.032, 1.495], "S09": [0.744, 1.042, 1.335], "S10": [0.747, 0.987, 1.39], "S11": [0.744, 1.042, 1.335], "S12": [0.752, 1.022, 1.509], "S13": [1.003, 0.984, 1.153], "S14": [0.976, 0.984, 1.228], "S15": [1.007, 0.983, 1.146], "S16": [0.986, 0.985, 1.193], "S17": [0.986, 0.984, 1.196], "S18": [0.962, 0.989, 1.217], "S19": [0.895, 1.005, 1.261], "S20": [0.895, 1.005, 1.261]}   # r3 pass 2 (+ S01 interpolated between pass 2 (0.964/0.91) and pass 3 (0.87/0.80))
 NUDGE={"S03_locA": [0.069, 0.006], "S03_locB": [0.324, 0.026], "S04_gymB": [-0.319, 0.071], "S04_hero": [0.22, -0.049], "S10_hero": [0.076, 0.003], "S10_locB": [-0.234, -0.01], "S10_locF": [-0.246, -0.01], "S10_swiss2": [0.127, 0.005], "S13_t0": [0.398, 0.102], "S13_t1": [0.463, 0.119], "S13_t2": [0.258, 0.066], "S13_t3": [0.465, 0.119], "S14_e0": [0.302, -0.036], "S14_e2": [-0.207, 0.024], "S16_t0": [0.247, -0.004], "S16_t2": [-0.159, 0.003], "S17_hero": [-0.3, -0.04], "S17_j0": [0.231, 0.031], "S17_j1": [0.317, 0.042], "S19_vendor": [0.106, 0.002]}
 # r3b second headnudge pass, static characters only (walk-ins that start off frame are entrances, not C4 cuts)
 for _n,(_dx,_dy) in {"S03_locB":[0.054,0.004],"S04_hero":[0.121,-0.027],"S16_t0":[0.182,-0.003],"S17_hero":[-0.136,-0.018]}.items():
@@ -591,7 +609,28 @@ nskb=0
 for o_ in bpy.data.objects:
     if o_.type=='MESH' and o_.active_material and o_.active_material.name in HM:
         sh_=o_.users_collection[0].name.replace('CHR_',''); o_['skb']=list(SKB.get(sh_,(1.0,1.0,1.0))); nskb+=1
+        # bcn r3t (visual r3s, rule 355 [A]): the foreground hero in S10/S12 sits near the lamp, so the shot balance left his face blue (raw B/R 0.92-0.95,
+        # outside the grade's skin mask, then warmed to 0.80). Per-object balance brings his raw face to about 0.92/0.86 so the mask keeps it
+        if o_.name.startswith('S10_hero'): o_['skb']=[0.747,0.987*0.92/0.938,1.39*0.86/0.920]
+        if o_.name.startswith('S12_hero'): o_['skb']=[0.752,1.022*0.92/0.956,1.509*0.86/0.947]
 print('SKB objects',nskb,'materials',len(HM))
+# bcn r3t (visual r3s, rule 369 [A]: the S19 tourist's orange vest renders at saturation 0.80, so the grade cannot keep it under the hot-orange limit
+# without moving its colour): in S19 only, her outfit card material gets saturation x0.84 (same hue and value, reads as the same vest)
+nvs=0
+for o_ in [o for o in bpy.data.objects if o.name.startswith('S19_tourW') and o.type=='MESH' and o.active_material and o.active_material.name not in HM]:
+    m0=o_.active_material
+    if not m0.use_nodes: continue
+    N0=m0.node_tree.nodes; tx=next((n for n in N0 if n.type=='TEX_IMAGE' and n.image),None); p0=N0.get('Principled BSDF')
+    if not tx or not p0: continue
+    m1=m0.copy(); m1.name=m0.name+'_s19'; o_.active_material=m1; N1=m1.node_tree.nodes; L1=m1.node_tree.links
+    tx1=next(n for n in N1 if n.type=='TEX_IMAGE' and n.image); p1=N1.get('Principled BSDF')
+    hs=N1.new('ShaderNodeHueSaturation'); hs.inputs['Saturation'].default_value=0.84
+    L1.new(tx1.outputs['Color'],hs.inputs['Color'])
+    for sock in ('Base Color','Emission Color'):
+        if p1.inputs[sock].links and p1.inputs[sock].links[0].from_node==tx1:
+            L1.remove(p1.inputs[sock].links[0]); L1.new(hs.outputs['Color'],p1.inputs[sock])
+    nvs+=1
+print('S19_VEST_DESAT',nvs)
 # bcn r2 (rule 367c, shots r1: card-cast character shadows beside the blobs in every outdoor shot): character cards, limbs and held props cast no lamp shadow; the blob is the only one
 nsh=0
 for c_ in bpy.data.collections:

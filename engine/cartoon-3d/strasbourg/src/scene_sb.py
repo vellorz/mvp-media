@@ -16,7 +16,7 @@ SH={'S01':(0,130),'S02':(123,255),'S03':(248,355),'S04':(348,421),'S05':(414,514
     'S09':(793,852),'S10':(853,943),'S11':(936,1003),'S12':(996,1148),'S13':(1141,1259),'S14':(1252,1312),'S15':(1305,1405),
     'S16':(1398,1443),'S17':(1444,1531),'S18':(1524,1654),'S19':(1647,1768),'S20':(1769,1825),'S21':(1818,1927),'S22':(1920,END)}
 sc['shots']=json.dumps(SH)
-LENS={'S01':30,'S02':28,'S03':32,'S04':34,'S05':24,'S06':28,'S07':34,'S08':26,'S09':34,'S10':30,'S11':34,'S12':30,'S13':28,'S14':30,
+LENS={'S01':30,'S02':28,'S03':32,'S04':34,'S05':24,'S06':28,'S07':34,'S08':26,'S09':34,'S10':30,'S11':30,'S12':26,'S13':28,'S14':30,
       'S15':32,'S16':30,'S17':30,'S18':26,'S19':34,'S20':26,'S21':30,'S22':32}
 for n in SH: cam(n,LENS[n],11.0)   # sets stay sharp (BF r6 lesson)
 def C(n): return L.chr_coll(n)
@@ -232,7 +232,8 @@ cyl('B_pulpitcup',(PU[0],PU[1],1.48),0.30,0.28,OAK,v=8,r2=0.84)
 cyl('B_pulpitfloor',(PU[0],PU[1],1.64),0.86,0.06,OAK,v=8)
 _pp=cyl('B_pulpit',(PU[0],PU[1],1.95),0.84,0.62,OAK,v=8)
 _bm=bmesh.new(); _bm.from_mesh(_pp.data); bmesh.ops.delete(_bm,geom=[f_ for f_ in _bm.faces if abs(f_.normal.z)>0.9],context='FACES_ONLY'); _bm.to_mesh(_pp.data); _bm.free()   # r2 (rule 372: the preacher's torso came up through the solid drum top): open parapet, no lid
-cyl('B_pulpitrail',(PU[0],PU[1],2.29),0.90,0.07,GOLD,v=8)
+_pr=cyl('B_pulpitrail',(PU[0],PU[1],2.29),0.90,0.07,GOLD,v=8)
+_bm=bmesh.new(); _bm.from_mesh(_pr.data); bmesh.ops.delete(_bm,geom=[f_ for f_ in _bm.faces if abs(f_.normal.z)>0.9],context='FACES_ONLY'); _bm.to_mesh(_pr.data); _bm.free()   # r2b (eye pass: the gold rail was a closed disc, the 'lid' the preacher rose out of): rail is a band
 cyl('B_pulpitbase',(PU[0],PU[1],1.67),0.89,0.06,GOLD,v=8)
 for k in range(8):
     a=math.radians(22.5+45*k); ca,sa=math.cos(a),math.sin(a)
@@ -274,9 +275,9 @@ box('D_floor',(DX,0,-0.05),(8,7,0.1),FLOORW,bv=0); box('D_ceil',(DX,0,3.0),(8,7,
 for sx in(-1,1): box(f'D_wallx{sx}',(DX+sx*4,0,1.5),(0.1,7,3.0),PLR,bv=0)
 box('D_wallb',(DX,3.5,1.5),(8,0.1,3.0),PLR,bv=0)
 for i in range(4): box(f'D_beam{i}',(DX-3+i*2,0,2.88),(0.22,7,0.22),flat('beam',lin((90,60,40)),0.8),bv=0.02)
-WINN=plane('D_window',(DX+1.6,3.43,1.6),1.2,1.4,card_mat('dwin','sky_night',emit=1.2),face='-Y'); WINN['noink']=1
+WINN=plane('D_window',(DX+1.6,3.415,1.6),1.2,1.4,card_mat('dwin','sky_night',emit=1.2),face='-Y'); WINN['noink']=1
 box('D_winframe',(DX+1.6,3.44,1.6),(1.36,0.04,1.56),flat('wframe',lin((90,60,40)),0.8),bv=0.01)
-for k in range(2): box(f'D_wbar{k}',(DX+1.6,3.41,1.6),(0.05 if k==0 else 1.2,0.03,1.4 if k==0 else 0.05),flat('wframe',lin((90,60,40)),0.8),bv=0)
+for k in range(2): box(f'D_wbar{k}',(DX+1.6,3.40,1.6),(0.05 if k==0 else 1.2,0.03,1.4 if k==0 else 0.05),flat('wframe',lin((90,60,40)),0.8),bv=0)
 STAR=sph('D_star',(DX+1.9,3.3,2.05),0.05,flat('starglow',lin((255,240,180)),0.3,emit=12.0)); STAR['noink']=1
 box('D_hearth',(DX-3.6,1.5,0.8),(0.7,1.8,1.6),GREY,bv=0.03); box('D_hearthin',(DX-3.25,1.5,0.5),(0.05,1.2,0.8),flat('ember',lin((255,140,60)),0.5,emit=3.0),bv=0)
 box('D_table',(DX-0.6,1.6,0.58),(2.0,1.0,0.06),WOOD,bv=0.02)   # r2: table 0.16 lower so the mother's reach clears the top (hand 0.68)
@@ -327,7 +328,7 @@ def chalet(n,c,rot=0.0,poster=False):
     parts.append(gable(n+'_roof',(0,0.3,2.6),3.0,1.5,0.9,ROOFS,axis='x'))
     parts.append(box(n+'_fascia',(0,-0.42,2.55),(3.2,0.06,0.24),flat('fascia',lin((150,40,40)),0.6),bv=0.01))
     for k in range(11): parts.append(sph(f'{n}_b{k}',(-1.5+k*0.3,-0.48,2.42-0.08*math.sin(math.pi*k/10)),0.03,BULB,seg=8))
-    for k in range(5): parts.append(cyl(f'{n}_mug{k}',(-1.0+k*0.5,-0.32,1.17),0.05,0.12,flat('mugred',lin((180,40,40)),0.6),v=12))
+    for k in (0,1,3,4): parts.append(cyl(f'{n}_mug{k}',(-1.0+k*0.5,-0.32,1.17),0.05,0.12,flat('mugred',lin((180,40,40)),0.6),v=12))
     for p in parts: p.parent=e
     return e
 for i,(x,y,r_) in enumerate([(-7,0,90),(-7,6,90),(-7,12,90),(7,-1,-90),(7,5,-90),(7,11,-90),(-3,-8,0),(3,-8,0)]):
@@ -454,7 +455,7 @@ COMBOS.append((sA,170,'lean_reach',1,'grin'))
 kA=char_on('S02_kidA','kidA',s,(-4.2,0.6,0),r,'excited',arms=('arm','arm_gift')); faces(kA,[(123,'excited'),(190,'happy'),(230,'grin')])
 COMBOS.append((kA,200,'victory_up',-1,'happy'))
 kB=char_on('S02_kidB','kidB',s,(-2.0,-1.2,0),r,'happy',arms=('arm','arm_gingerbread')); drift_faces(kB,123,255,['happy','smile','grin'],3)
-walk_move(kB,128,'walk_stroll',-1,'happy')
+walk_move(kB,128,'walk_stroll',1,'happy')   # r2b (eye pass: with S02 pulling out, the camera ended beside kidB and his head filled the corner): he strolls away from the camera's end point
 for i,(x,y,k) in enumerate([(1.5,6.0,'father'),(3.6,4.0,'mother'),(-1.0,9.5,'sellerB'),(4.8,9.0,'kidC')]):
     c_=char_on(f'S02_x{i}',k,s,(x,y,0),r,'neutral'); drift_faces(c_,123,255,['happy','content','smile','neutral'],10+i)
 path(s,[(123,(-2.0,-4.6,1.8),(-3.6,2.0,1.2)),(255,(-2.9,-3.8,1.55),(-4.2,1.6,1.05))])
@@ -497,12 +498,12 @@ s='S08'; r=S(s)
 cA=char_on('S08_cA','councilA',s,(CX-1.05,2.25,0),r,'stern',arms=('arm','arm_scroll')); cB=char_on('S08_cB','councilB',s,(CX,2.3,0),r,'skeptical',arms=('arm','arm_scroll')); cC=char_on('S08_cC','councilC',s,(CX+1.05,2.25,0),r,'stern',arms=('arm','arm_scroll'))
 faces(cA,[(703,'stern'),(760,'frown')]); faces(cB,[(703,'skeptical'),(770,'stern')]); faces(cC,[(703,'stern'),(750,'deadpan')])
 COMBOS+=[(cB,716,'cross_arms_huff',-1,'stern'),(cC,744,'think_chin',1,'skeptical'),(cA,770,'glance_shift',1,'stern')]
-path(s,[(703,(CX+0.3,-2.9,1.75),(CX,2.1,1.3)),(800,(CX+0.1,-2.4,1.7),(CX,2.1,1.3))])   # r2: S08 showed 1 of 3 councillors (lens 26, no dolly, row at +-1.05)
+path(s,[(703,(CX+2.5,-0.3,1.6),(CX+0.05,2.25,1.3)),(800,(CX+2.2,-0.6,1.6),(CX+0.05,2.25,1.3))])   # r2c (visual P3/R21: frontal eye-level row, spread 1.07x): 3/4 view down the row   # r2: S08 showed 1 of 3 councillors (lens 26, no dolly, row at +-1.05)
 # ---- S09 (793-852): "fine, the saint is out": councilA raises the decree ----
 s='S09'; r=S(s)
 c9=char_on('S09_cA','councilA',s,(CX-1.05,2.25,0),r,'stern',arms=('arm','arm_scroll')); faces(c9,[(793,'stern'),(830,'smug')])
 COMBOS.append((c9,808,'victory_up',1,'determined'))
-lipsync(c9,[w for w in WORDS if 25.0<=w[1]<=28.4],800,852)   # r2: words 'the saint is out' sit at 27.58-28.32 s
+lipsync(c9,[w for w in WORDS if 26.95<=w[1]<=28.4],800,852)   # r2: words 'the saint is out' sit at 27.58-28.32 s
 arm(c9,1,806,-8); arm(c9,1,814,-150)   # r2 (beat: no decree shown): the scroll hand goes up with the decree (victory_up raises the free arm)
 o9=char_on('S09_cB','councilB',s,(CX,2.3,0),r,'stern',arms=('arm','arm_scroll')); faces(o9,[(793,'stern'),(830,'content')])
 path(s,[(793,(CX-0.15,-1.5,1.45),(CX-0.75,2.2,1.55)),(852,(CX-0.35,-1.2,1.5),(CX-0.85,2.2,1.6))])
@@ -520,8 +521,8 @@ path(s,[(853,(NB_P[0]+0.4,NB_P[1]-6.4,1.4),(NB_P[0]+0.4,NB_P[1],1.2)),(943,(NB_P
 s='S11'; r=S(s)
 k11=char_on('S11_kA','kidA',s,(-0.4,2.0,0),r,'sad',arms=('arm','arm_doll')); faces(k11,[(936,'sad'),(970,'sad_tears')])
 COMBOS.append((k11,944,'panic_clutch',1,'shock'))
-k11b=char_on('S11_kC','kidC',s,(0.6,2.4,0),r,'shock'); faces(k11b,[(936,'shock'),(965,'sad')])
-p11=char_on('S11_pre','preacher',s,(-1.8,3.0,0),r,'smug',arms=('arm','arm_book')); faces(p11,[(936,'smug'),(975,'smug_grin')])
+k11b=char_on('S11_kC','kidC',s,(0.4,2.4,0),r,'shock'); faces(k11b,[(936,'shock'),(965,'sad')])
+p11=char_on('S11_pre','preacher',s,(-1.45,3.0,0),r,'smug',arms=('arm','arm_book')); faces(p11,[(936,'smug'),(975,'smug_grin')])
 COMBOS.append((p11,970,'cross_arms_huff',1,'smug'))
 path(s,[(936,(-0.4,-2.4,1.2),(-0.6,2.5,1.0)),(1003,(-0.5,-2.0,1.2),(-0.6,2.5,1.0))])
 # ---- S12 (996-1148): the sellers still had dolls and sweets; kids still wanted toys ----
@@ -529,7 +530,7 @@ s='S12'; r=S(s)
 s12=char_on('S12_sell','sellerB',s,(5.4,8.5,0),r,'sigh',arms=('arm','arm_candle')); faces(s12,[(996,'sigh'),(1040,'worried'),(1090,'hopeful' if False else 'smile')])
 s12b=char_on('S12_sellA','sellerA',s,(5.4,3.0,0),r,'worried',arms=('arm','arm_doll')); COMBOS.append((s12b,1020,'tilt_talk',-1,'worried'))
 k12=char_on('S12_kA','kidA',s,(4.1,5.4,0),r,'happy'); faces(k12,[(996,'happy'),(1080,'open_smile')]); COMBOS.append((k12,1074,'lean_reach',1,'happy'))
-k12b=char_on('S12_kB','kidB',s,(3.4,6.6,0),r,'content'); COMBOS.append((k12b,1100,'clap',1,'happy'))
+k12b=char_on('S12_kB','kidB',s,(5.3,5.9,0),r,'content'); COMBOS.append((k12b,1100,'clap',1,'happy'))
 path(s,[(996,(2.2,2.4,1.4),(4.8,5.7,1.15)),(1148,(2.6,3.0,1.35),(4.8,5.5,1.1))])
 # ---- S13 (1141-1259): the fair moves to just before Christmas: snow, firs, families walking ----
 s='S13'; r=S(s)
@@ -545,14 +546,14 @@ COMBOS.append((m14,1262,'lean_reach',1,'happy'))
 path(s,[(1252,(DX-0.2,-1.4,1.55),(DX-0.7,1.8,1.1)),(1312,(DX-0.4,-1.0,1.45),(DX-0.7,1.8,1.05))])
 # ---- S15 (1305-1405): the gifts come from the Christ Child now: kids and their gifts by the starlit window ----
 s='S15'; r=S(s)
-for i,(x,y,k,fc_) in enumerate([(DX-1.4,0.38,'kidA','excited'),(DX-0.4,0.30,'kidB','happy'),(DX+0.5,0.42,'kidC','excited')]):   # r2 (rule 372: bench plank cut through a figure): kids stand in front of the bench (y 0.625-0.975)
+for i,(x,y,k,fc_) in enumerate([(DX-1.15,0.38,'kidA','excited'),(DX-0.55,0.30,'kidB','happy'),(DX+0.5,0.42,'kidC','excited')]):   # r2 (rule 372: bench plank cut through a figure): kids stand in front of the bench (y 0.625-0.975)
     c_=char_on(f'S15_k{i}',k,s,(x,y,0),r,fc_,arms=('arm','arm_gift')); drift_faces(c_,1305,1405,['excited','happy','grin','open_smile'],40+i)
     COMBOS.append((c_,1320+i*14,['victory_up','wave_hello','laugh_bob'][i],1 if i%2 else -1,'excited'))
 f15=char_on('S15_dad','father',s,(DX+2.55,2.4,0),r,'content'); faces(f15,[(1305,'content'),(1360,'smile')])
-path(s,[(1305,(DX-0.3,-3.0,1.4),(DX-0.1,1.6,1.15)),(1405,(DX+0.8,-2.6,1.45),(DX+1.3,2.8,1.75))])   # r2 (beat: no window or star): ends on the starlit window
+path(s,[(1305,(DX-0.3,-3.0,1.4),(DX-0.1,1.6,1.15)),(1405,(DX+0.5,-2.6,1.45),(DX+0.9,2.8,1.75))])   # r2 (beat: no window or star): ends on the starlit window
 # ---- S16 (1398-1443): "The preacher had won." victory in the snowy square ----
 s='S16'; r=S(s)
-p16=char_on('S16_pre','preacher',s,(SX+0.2,4.0,0),r,'smug_grin',arms=('arm','arm_book')); faces(p16,[(1398,'smug_grin'),(1425,'cool_shades')])
+p16=char_on('S16_pre','preacher',s,(SX+0.2,4.0,0),r,'smug_grin',arms=('arm','arm_book')); faces(p16,[(1398,'smug_grin'),(1425,'smug')])   # r2b (eye pass Q8: sunglasses read wrong for 1570)
 COMBOS.append((p16,1404,'victory_up',1,'smug_grin'))
 snowfall(s,(SX,2.9),3.0,1.1,(0.2,3.5),70,16,1398,1443,ymin=2.6)
 path(s,[(1398,(SX+0.6,0.6,1.1),(SX+0.2,4.0,1.35)),(1443,(SX+0.5,1.0,1.05),(SX+0.2,4.0,1.4))])
@@ -589,7 +590,7 @@ def cone_R(z): return max([R0*(1-(z-a)/(b-a))+0.046*(z-a)/(b-a) for a,b,R0 in TI
 for i,(kind,dx,z,f0) in enumerate([('rose',-0.2,1.5,1525),('apple',0.2,1.8,1525),('sugar',-0.1,2.05,1525)]):
     Rz=cone_R(z); dy=math.sqrt(max(0.0,Rz*Rz-dx*dx))
     ornament(f'S18_orn{i}',kind,(TP[0]+dx,TP[1]-dy-0.03,z),f0)   # v2: on the cone surface facing the camera (v1 floated off the boughs)
-path(s,[(1524,(TP[0]-0.15,TP[1]-4.7,1.45),(TP[0],TP[1],1.2)),(1654,(TP[0]-0.05,TP[1]-4.15,1.4),(TP[0],TP[1],1.15))])   # r2: lens 26, all three placers in frame
+path(s,[(1524,(TP[0]+1.9,TP[1]-3.6,1.45),(TP[0]-0.25,TP[1]-0.7,1.0)),(1654,(TP[0]+1.6,TP[1]-3.2,1.4),(TP[0]-0.25,TP[1]-0.7,0.95))])   # r2c (visual P3: frontal group of three): 3/4 from the right, kidC near, mother far   # r2: lens 26, all three placers in frame
 # ---- S19 (1647-1768): one of the first written records: the chronicle, pushed in until the tree sketch fills the frame ----
 s='S19'; r=S(s)
 rd=char_on('S19_cC','councilC',s,(DX-2.6,-0.6,0),r,'look_down'); faces(rd,[(1647,'look_down'),(1700,'impressed' if False else 'surprise'),(1730,'proud')])
@@ -621,7 +622,7 @@ def dolly(n,k,frames=None):
         f,l,t=key[:3]
         if frames and not(frames[0]<=f<=frames[1]): continue
         kloc(L.CAM[n],f,tuple(t[i]+(l[i]-t[i])*k for i in range(3)))
-for n,k in [('S02',0.62),('S03',0.7),('S10',0.7),('S11',0.75),('S13',0.62),('S15',0.75),('S16',0.85),('S17',0.7),]: dolly(n,k)
+for n,k in [('S02',0.62),('S03',0.86),('S10',0.86),('S11',0.9),('S13',0.62),('S15',0.75),('S16',0.85),('S17',0.7),]: dolly(n,k)
 # background crowd in the wide shots (Rick fills the square)
 def crowd(shot,spots,kinds,seed,pool=('happy','content','smile','neutral','excited')):
     rr=random.Random(seed)
@@ -658,6 +659,10 @@ for c_,f_,k_,sd_,fc_ in COMBOS:   # r2 (verifier prop pops S01/S02/S11): a combo
     _C2.append((c_,f_,k_,sd_,fc_))
 COMBOS[:]=_C2
 for c_,f_,k_,sd_,fc_ in COMBOS: combo(c_,f_,k_,side=sd_,face=fc_)
+for _ch in (m14,mo,kb):   # r2b (shots verifier: dress and apron tore at the lean seam on the 18 deg lean_reach): skirted characters lean a third as far
+    for _fc in _ch['lean'].animation_data.action.fcurves:
+        if _fc.data_path=='rotation_euler':
+            for _kp in _fc.keyframe_points: _kp.co[1]*=0.35; _kp.handle_left[1]*=0.35; _kp.handle_right[1]*=0.35
 print('COMBOS',len(COMBOS),len(set(k for _,_,k,_,_ in COMBOS)))
 sc['air']=json.dumps(sorted(L.AIR))
 for a in ALL: finish(a)

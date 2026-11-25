@@ -6,5 +6,8 @@ for t0 in (20.734,55.64):
     c=int(t0*sr); seg=x[c-int(0.01*sr):c+int(0.01*sr),0]; d=np.abs(np.diff(seg)); k=c-int(0.01*sr)+int(np.argmax(d))
     a,b=k-int(0.003*sr),k+int(0.003*sr)
     for ch in range(p.nchannels): x[a:b,ch]=np.linspace(x[a,ch],x[b,ch],b-a)
+    if t0<30:   # r2b (audio verifier: the 20.73 s tick still 25 dB over the bed above 3 kHz): 1 ms moving average over 24 ms around it
+        a2,b2=k-int(0.012*sr),k+int(0.012*sr); kk=int(0.001*sr)
+        for ch in range(p.nchannels): x[a2:b2,ch]=np.convolve(x[a2-kk:b2+kk,ch],np.ones(2*kk+1)/(2*kk+1),mode='same')[kk:-kk]
     print('declick',t0,'at',round(k/sr,4),'max step before',int(d.max()))
 o=wave.open('/root/sb/vo/vo_final_dc.wav','wb'); o.setparams(p); o.writeframes(np.clip(x,-32768,32767).astype(np.int16).tobytes()); print('DECLICK_OK')

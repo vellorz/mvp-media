@@ -12,7 +12,7 @@ def bloom(x,amt=BLOOM):
     m=np.clip((Y-0.80)/0.2,0,1)[...,None]*sm
     g=cv2.GaussianBlur(m,(0,0),10*K)+cv2.GaussianBlur(m,(0,0),28*K)
     g=cv2.resize(g,(w,h),interpolation=cv2.INTER_LINEAR); return np.clip(x+amt*g*(1-x),0,1)
-HIFLOOR=('S22',)
+HIFLOOR=('S05','S22')   # r2b: S05 daylight exterior p98 0.776 (visual R19, rule 274)
 def hifloor(x,target=0.88,gmax=1.28):
     """r7: per-frame highlight floor. Round 6 measured p98 0.73-0.80 over 1548-1751 (R19 needs >= 0.84): lift by gain to p98 target, soft knee above 0.9"""
     Y=gray(x[::6,::6]); p=float(np.percentile(Y,98))
@@ -143,7 +143,10 @@ DL={n:[8,5,7,6,5,8,6,7][i%8] for i,n in enumerate(_J)}; DL['S22']=8   # payoff d
 DWMAX=17   # r2 (text verifier: dwell mean 0.374 s / P90 0.663 s vs Rick 0.32-0.35 / 0.53-0.57): a card leaves after at most 17 f (0.57 s); a gap shows no caption until the next word
 NUMX=30   # r4 (text verifier r3: '121', 'a 94-year-old', 'in 1620' went blank 13-19 f while still spoken): cards with a digit may stay up to 30 f
 CAPS=[[a,t,min(b,a+(NUMX if any(ch.isdigit() for ch in t) else DWMAX))] for a,t,b in CAPS]
-def cap_layer(txt):
+CAPUP=[((1336,1406),0.52),((1888,1928),0.50)]   # sb r2b (text verifier T7: the caption band crossed faces in S15 and S21): these cards ride higher, on the wall/window and on the tree
+def capbase(f):
+    return next((int(y*H) for (a,b),y in CAPUP if a<=f<=b),BASE)
+def cap_layer(txt,BASE=BASE):
     l,t,r,b=FNT.getbbox(txt,anchor='ls',stroke_width=STROKE); w=r-l
     lay=Image.new('RGBA',(W,H),(0,0,0,0)); sh=Image.new('RGBA',(W,H),(0,0,0,0))
     x=(W-w)//2-l; ImageDraw.Draw(sh).text((x+SHX,BASE+SHY),txt,font=FNT,fill=(0,0,0,150),anchor='ls',stroke_width=STROKE,stroke_fill=(0,0,0,150))
@@ -213,7 +216,7 @@ if __name__=='__main__':
         im=Image.fromarray((img*255+0.5).astype(np.uint8)).convert('RGBA')
         cur=[c for c in CAPS if c[0]<=f<c[2]]
         if cur:
-            if capkey!=cur[0][1]: capimg,wd=cap_layer(cur[0][1]); capkey=cur[0][1]; widths.append(wd)
+            if capkey!=(cur[0][1],capbase(f)): capimg,wd=cap_layer(cur[0][1],capbase(f)); capkey=(cur[0][1],capbase(f)); widths.append(wd)
             im.alpha_composite(capimg)
         if TESTF: im.convert('RGB').save(f'{OUT}_f{f}.png'); continue
         enc.stdin.write(np.asarray(im.convert('RGB')).tobytes())

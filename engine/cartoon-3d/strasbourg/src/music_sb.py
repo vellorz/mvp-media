@@ -64,7 +64,9 @@ gdb=np.interp(tt,mk,mv)
 k_=int(0.7*SR); gdb=np.convolve(np.pad(gdb,(k_//2,k_-k_//2-1),mode='edge'),np.ones(k_)/k_,mode='valid')   # rides take ~0.7 s (M8)
 gl=10**(gdb/20)
 # cc r2: stop-time on the payoff hit (mix time 59.74-60.10 s, ding at f1793): the bed drops 12 dB for the ding with 40 ms ramps, then returns at full payoff level (rule 319 payoff >= +6 over the local bed while rule 192 keeps it >= 8 LU under the VO)
-_tm=np.arange(N)/SR; _r=0.04; _st=np.clip(np.minimum((_tm-66.98)/_r,(67.34-_tm)/_r),0,1); gl=gl*10**(-12*_st/20)   # sb r1b: stop-time on the payoff ding (verifier A6: the r1 edit had left gl=... inside the comment, so the bed never dipped)
+_tm=np.arange(N)/SR; _r=0.04; _st=np.clip(np.minimum((_tm-66.69)/_r,(67.10-_tm)/_r),0,1); gl=gl*10**(-12*_st/20)
+for _f,_d,_dd in ((36,0.35,7),(1404,0.35,5),(1610,0.30,6),(1632,0.30,3),(1644,0.30,6),(1975,0.45,8)):   # sb r2b (audio verifier A6: rule 192 cap left these 2.5-6.9 dB over the bed): short stop-time hits, the bed steps down under the SFX hit only (not under the VO: no ducking)
+    _a=_f/30-0.03; _b=_f/30+_d; _st=np.clip(np.minimum((_tm-_a)/_r,(_b-_tm)/_r),0,1); gl=gl*10**(-_dd*_st/20)   # sb r1b: stop-time on the payoff ding (verifier A6: the r1 edit had left gl=... inside the comment, so the bed never dipped)
 thin=np.clip((gdb+1.0)/4.0,0,1)   # melody and plucks drop out in the -3..-5 dips, return on rises
 bed=(T['mal']*0.9*thin+T['plk']*0.6*(0.4+0.6*thin)+T['bass']*0.62+T['kick']*0.7+T['pad']*1.0)*gl
 # gentle bus compression for a constant level (no pumping: slow, light)
@@ -116,7 +118,7 @@ EV+=[(36,whoosh2(0.45),0.6),                          # S01 the preacher swings 
      (1141,whoosh2(0.5),0.55),                         # S13 dissolve into the snowy Christmas fair
      (1404,soft(ding(84,0.8),3000),0.35),              # S16 the preacher's victory
      (1444,whoosh2(0.5),0.7),                          # S17 the turn: the father and his fir
-     (1610,soft(ding(88,0.6),3000),0.35),(1632,soft(ding(91,0.6),3000),0.35),(1650,soft(ding(93,0.6),3000),0.35),   # r2: rose, apple, sugar land on the boughs (they ride the mitten from the word)
+     (1610,soft(ding(88,0.6),3000),0.35),(1632,soft(ding(91,0.6),3000),0.35),(1644,soft(ding(93,0.6),3000),0.35),   # r2: rose, apple, sugar land on the boughs (they ride the mitten from the word)
      (1769,whoosh2(0.45),0.65),                        # S20 match cut to today
      (1975,whoosh2(0.4),0.6),(2002,soft(ding(84,1.4),3000),0.45),(2002,soft(ding(88,1.4),3000),0.32)]   # r2: 'Nicholas' onset 66.72 s mix = f2002   # payoff push lands on the poster, ding on "Nicholas"
 # A6: level every SFX event against the bed under it so each lands at the same offset over the bed

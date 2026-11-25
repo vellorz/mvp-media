@@ -58,7 +58,7 @@ T['kick'][:]=0
 for bi in range(bars):
     for k in range(4): put('kick',bi*4*B+k*B,KICK,0.9)
 # round 5: level map from the Rick music study (section 7), dB relative to the bed median; layers thin out in dips (S6)
-MAP=[(0.0,3),(3.0,3.6),(4.4,-1.0),(9.9,3.2),(12.0,-3.2),(14.3,1.0),(17.9,2.2),(22.0,-2.2),(22.9,2.0),(27.3,2.4),(30.9,-1.6),(33.0,0.8),(37.7,3.0),(40.0,-2.0),(42.3,-3.4),(44.5,2.6),(47.6,3.4),(50.1,0.2),(53.8,3.0),(55.0,4.5),(56.6,6.0),(58.0,8),(60.0,8)]   # bcn: level map on this VO's beats (doubter 12.0, escalations 18-34, turn 42.3, reveal 50.1, payoff 57.9 s)
+MAP=[(0.0,3),(3.0,3.6),(4.4,-1.0),(9.9,3.2),(12.0,-3.2),(14.3,1.0),(17.9,2.2),(22.0,-2.2),(22.9,2.0),(27.3,2.4),(30.9,-1.6),(33.0,0.8),(37.7,3.0),(40.0,-2.0),(42.3,-3.4),(44.5,2.6),(47.6,3.4),(50.1,0.2),(53.8,3.0),(55.0,4.5),(56.6,5.0),(58.0,6.2),(60.0,6.2)]   # bcn r2b: x1.3 made the payoff bed so loud the ding sat -0.9 dB under it (A6/rule 319); tail eased   # bcn: level map on this VO's beats (doubter 12.0, escalations 18-34, turn 42.3, reveal 50.1, payoff 57.9 s)
 tt=np.arange(N)/SR-0.1   # VO plays 0.1 s late in the mix
 mk=np.array([m[0] for m in MAP]); mv=1.3*np.array([m[1] for m in MAP],float)   # bcn r1b: verifier A4 bed std 2.04-2.19 dB (needs 2.3-4.0): swing x1.3
 gdb=np.interp(tt,mk,mv)

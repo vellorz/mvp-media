@@ -76,7 +76,10 @@ def apply(x,p):
         keep=np.clip((0.62-hs[...,None])/0.32,0,1); sk=sk*(1-warm)+(1+(sk-1)*keep)*warm
     z=np.clip(y3+sk*(z-y3),0,1)
     # bcn r3 (rule 355 probe, Nov 24): the per-shot tint moved skin B/R by 0.06 (S03 DAY tint 1.03/1.0/0.95) with sat gain already capped; skin pixels skip the tint
-    tw=np.array(tint,np.float32); z=np.clip(z*(tw*(1-skin)+skin),0,1)
+    # bcn r3 (rule 369, r2 visual: S19 orange vest B/R moved 0.105 under the tint): warm saturated garments (hs>0.3, warm hue) skip the tint too
+    wg=np.clip((hue[...,None]+0.1)/0.2,0,1)*np.clip((0.75-hue[...,None])/0.15,0,1)*(x[...,:1]>=x[...,2:3])*np.clip((hs[...,None]-0.3)/0.1,0,1)
+    nt=np.maximum(skin,wg)
+    tw=np.array(tint,np.float32); z=np.clip(z*(tw*(1-nt)+nt),0,1)
     # bcn r3 (probe Nov 24): the tone curve's y2/y ratio lifted the unlit plum ink (raw 32,12,43) to bright violet 103,10,146 (rule 308/341 want
     # Rick's dull plum). Ink pixels (dark, B >= 0.9 R) go to the plum ink colour instead of being stretched.
     ink=(np.clip((0.17-y)/0.08,0,1)*np.clip((x[...,2]-0.75*x[...,0])/(0.15*x[...,0]+1e-4),0,1)*np.clip((np.minimum(x[...,0],x[...,2])-x[...,1])/0.02,0,1))[...,None]   # r1b: purple hue only (R>G and B>G); dark greens/blues untouched
@@ -97,6 +100,7 @@ def floor_(o):
     red=np.clip((o[...,:1]-np.maximum(o[...,1:2],o[...,2:3]))/0.12,0,1)*np.clip((sat-0.45)/0.2,0,1)*np.clip((0.40-y)/0.12,0,1)*np.maximum(line,np.clip((sat-0.6)/0.1,0,1)*np.clip((0.22-y)/0.08,0,1))   # r6: deep crimson fills (S03/S11 at sat 0.67-0.73, verifier r5) count even when not thin lines. r4b: rule 308 still crimson in S03/S06/S11/S15 (sat 0.61-0.74): reach brighter line pixels
     o=o*(1-0.85*red)+(PLUM*1.15)*0.85*red
     y=gray(o)[...,None]; w=np.clip((0.24-y)/0.14,0,1)*0.85   # darks go to Rick's plum (46,28,54); floor about luma 0.12, never black
+    w=w*(1-np.clip((o[...,1:2]-np.maximum(o[...,:1],o[...,2:3]))/0.03,0,1))   # bcn r2b (shots r2 critical: the S19/S20 dark-green kiosk went plum-black, raw 18.5 % green -> 4.9 %): green darks keep their hue
     return np.clip(o*(1-w)+PLUM*w,0,1)
 def solve(samples,tint,lt=0.45,vk=0.0):
     allY=np.concatenate([gray(s).ravel() for s in samples]); lo,hi=np.percentile(allY,0.8),np.percentile(allY,99.6)
@@ -161,10 +165,11 @@ CAPS=[[a,t,min(b,a+(NUMX if any(ch.isdigit() for ch in t) else DWMAX))] for a,t,
 def s18zoom(o,f):
     # bcn r1b (text verifier T7 [C], capprobe 3: S18 runners' faces under the caption band f1464-1492 as the crane pulls back):
     # a gentle top-anchored 2D push (1.00 -> 1.14, eased over 1420-1470) keeps the runners' faces below the caption box
-    t=np.clip((f-1420)/50,0,1); t=t*t*(3-2*t); z=1.0+0.14*t
+    # r2b: bottom-anchored instead (round-2 frames: the top-anchored push moved the faces INTO the band, 0.66 -> 0.72 H); faces go up to <= 0.66 H
+    t=np.clip((f-1420)/40,0,1); t=t*t*(3-2*t); z=1.0+0.14*t
     if z<=1.0001: return o
-    h,w=o.shape[:2]; big=cv2.resize(o,(int(round(w*z)),int(round(h*z))),interpolation=cv2.INTER_AREA if z<1 else cv2.INTER_CUBIC)
-    x0=(big.shape[1]-w)//2; return np.clip(big[:h,x0:x0+w],0,1)
+    h,w=o.shape[:2]; big=cv2.resize(o,(int(round(w*z)),int(round(h*z))),interpolation=cv2.INTER_CUBIC)
+    x0=(big.shape[1]-w)//2; return np.clip(big[big.shape[0]-h:,x0:x0+w],0,1)
 def cap_layer(txt):
     l,t,r,b=FNT.getbbox(txt,anchor='ls',stroke_width=STROKE); w=r-l
     lay=Image.new('RGBA',(W,H),(0,0,0,0)); sh=Image.new('RGBA',(W,H),(0,0,0,0))

@@ -100,6 +100,11 @@ def floor_(o):
     # magenta-red ink (blue above green, so red vests/banners with blue <= green are left alone), thick lines included
     if INKW.get(CUR[0],0)>0:
         mg=np.clip((o[...,2:3]-o[...,1:2]-0.02)/0.04,0,1)*np.clip((o[...,:1]-o[...,1:2]-0.10)/0.08,0,1)*np.clip((INKY.get(CUR[0],0.34)-y)/0.08,0,1)*np.clip((sat-0.35)/0.15,0,1)*np.clip((0.82-o[...,:1])/0.08,0,1)
+        # r4c (non-builder r4b: stair-step edges, pink fringe, plum specks on the lips): bright lip reds (R > 0.82) fade out; the mask is
+        # feathered ~1.2 px and spreads half-strength into the 1-2 px anti-aliased fringe beside the line
+        mg=mg*np.clip((0.88-o[...,:1])/0.06,0,1)
+        mg=np.maximum(mg,0.6*cv2.GaussianBlur(mg[...,0],(0,0),1.6*K)[...,None]*np.clip((sat-0.30)/0.15,0,1)*np.clip((o[...,2:3]-o[...,1:2])/0.03,0,1))
+        mg=cv2.GaussianBlur(mg[...,0],(0,0),0.8*K)[...,None]
         red=np.maximum(red,INKW[CUR[0]]*mg)
     o=o*(1-0.85*red)+(PLUM*1.15)*0.85*red
     y=gray(o)[...,None]; w=np.clip((0.24-y)/0.14,0,1)*0.85   # darks go to Rick's plum (46,28,54); floor about luma 0.12, never black

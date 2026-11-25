@@ -83,6 +83,7 @@ def apply(x,p):
 SKMAX=1.0
 SATPROT=set(os.environ.get('SATPROT',','.join(_SH)).split(','))   # nb: warm-saturation protect on every shot (rules 355/367b)   # r6b: shots graded with the saturated-warm protect (only S10 re-posted in round 6b; apply to every shot from the next video on)
 PROT=[False]; CUR=['']
+INKW={'S18':1.0,'S08':1.0}; INKY={'S18':0.48}   # S18 ink is a lighter magenta (luma 0.16-0.36), lips/red vest stay out (red above 0.82, or blue <= green)   # r4: shots whose ink read red/magenta on the video (see floor_)
 SKF={'S18':0.02}   # r3: S18 skin is near-neutral under the white stall fill (face saturation ~0.056), so its skin mask floor is lower
 SKC={"S01": (0.984, 0.973), "S03": (0.98, 0.952), "S04": (0.993, 0.996), "S07": (0.995, 1.004), "S08": (0.98, 0.953), "S09": (0.955, 0.972), "S10": (0.957, 0.914), "S12": (0.987, 1.012), "S13": (0.989, 0.994), "S14": (0.977, 0.945), "S16": (0.986, 1.011), "S17": (0.983, 0.952), "S18": (0.952, 0.943)}   # r2b skin balance per shot (skinprobe_nb.py, graded faces before balance); r3: S18 re-measured on the video after the neutral stall fill (G/R 0.968)
 CLAR=0.55; CLS=14.0; PLUM=np.array([46,28,54],np.float32)/255   # r4 (visual L6 0.361 > 0.35 and halos at f60/f1720): weaker, tighter local contrast (r3 was 0.8 / 24 px)
@@ -95,6 +96,11 @@ def floor_(o):
     mx=o.max(-1,keepdims=True); mn=o.min(-1,keepdims=True); sat=(mx-mn)/np.maximum(mx,1e-4)
     line=np.clip((0.75*cv2.GaussianBlur(y[...,0],(0,0),5*K)[...,None]-y)/0.05,0,1)   # thin ink lines only (darker than their surroundings), not smooth wood shadow
     red=np.clip((o[...,:1]-np.maximum(o[...,1:2],o[...,2:3]))/0.12,0,1)*np.clip((sat-0.45)/0.2,0,1)*np.clip((0.40-y)/0.12,0,1)*np.maximum(line,np.clip((sat-0.6)/0.1,0,1)*np.clip((0.22-y)/0.08,0,1))   # r6: deep crimson fills (S03/S11 at sat 0.67-0.73, verifier r5) count even when not thin lines. r4b: rule 308 still crimson in S03/S06/S11/S15 (sat 0.61-0.74): reach brighter line pixels
+    # r4 (visual r4 [C]: S18 partyA ink (102,35,55) sat 0.66 read red next to her red vest; S08 lowered arm magenta): per-shot extra pull of dark
+    # magenta-red ink (blue above green, so red vests/banners with blue <= green are left alone), thick lines included
+    if INKW.get(CUR[0],0)>0:
+        mg=np.clip((o[...,2:3]-o[...,1:2]-0.02)/0.04,0,1)*np.clip((o[...,:1]-o[...,1:2]-0.10)/0.08,0,1)*np.clip((INKY.get(CUR[0],0.34)-y)/0.08,0,1)*np.clip((sat-0.35)/0.15,0,1)*np.clip((0.82-o[...,:1])/0.08,0,1)
+        red=np.maximum(red,INKW[CUR[0]]*mg)
     o=o*(1-0.85*red)+(PLUM*1.15)*0.85*red
     y=gray(o)[...,None]; w=np.clip((0.24-y)/0.14,0,1)*0.85   # darks go to Rick's plum (46,28,54); floor about luma 0.12, never black
     return np.clip(o*(1-w)+PLUM*w,0,1)

@@ -223,7 +223,7 @@ box('G_ledger',(GX-0.2,0.5,0.8),(0.5,0.36,0.03),flat('ledger',lin((120,40,36)),0
 GW_D=card('G_winD',(GX+1.5,4.085,2.4),1.4,1.8,'sky_bcn',emit=0.9); GW_N=card('G_winN',(GX+1.5,4.08,2.4),1.4,1.8,'sky_night',emit=0.7)
 box('G_winframe',(GX+1.5,4.095,2.4),(1.54,0.01,1.94),DWOOD,bv=0.0); vis(GW_D,[(172,539),(985,END)]); vis(GW_N,[(0,171),(540,984)])
 card('G_signin',(GX-1.45,4.08,3.2),2.0,0.377,'sign_gym',emit=0.4,ink=True)   # bcn r3b: whole in S04 and S12 (signcut)
-for i,x in enumerate([0.25,2.5]):   # r3b: pendants and sign moved apart; the left bulb sat over the G of GIMNASIO in S10
+for i,x in enumerate([1.15,2.6]):   # r3s: from the S10/S12 three-quarter cameras the left bulb and cord sat on GIMNASIO (eye pass); projected clear   # r3b: pendants and sign moved apart; the left bulb sat over the G of GIMNASIO in S10
     sph(f'G_pend{i}',(GX+x,0.6,2.6),0.14,flat('pendglow',lin((255,214,150)),0.3,emit=5.0)); cyl(f'G_pendc{i}',(GX+x,0.6,3.15),0.01,1.0,IRON,v=6)
     plight(f'G_pendL{i}',(GX+x,0.4,2.45),120)
 plight('G_fill',(GX-3,-2,2.6),90,(1.0,0.86,0.7),1.0)
@@ -240,6 +240,17 @@ for i in range(64):
 for sx in(-1,1):   # goals: two white posts and a bar (no nets: 1899 match photos), on the long axis
     for sy in(-1,1): cyl(f'V_gpost{sx}{sy}',(VX+sx*20,sy*3.66,1.22),0.06,2.44,flat('gwhite',lin((246,244,236)),0.6),v=10)
     cyl(f'V_gbar{sx}',(VX+sx*20,0,2.44),0.06,7.44,flat('gwhite',lin((246,244,236)),0.6),v=10,rot=(math.radians(90),0,0))
+# bcn r3s: a net on the west goal (nets were in use by 1899) so the 0-1 goal reads; thin white mesh, no ink hull
+def netpanel(n,co,nu,nv):
+    me=bpy.data.meshes.new(n); bm_=bmesh.new(); V=[[bm_.verts.new(co(u/nu,v/nv)) for v in range(nv+1)] for u in range(nu+1)]
+    for u in range(nu):
+        for v in range(nv): bm_.faces.new((V[u][v],V[u+1][v],V[u+1][v+1],V[u][v+1]))
+    bm_.to_mesh(me); bm_.free(); o=bpy.data.objects.new(n,me); L.C_SET.objects.link(o); o['noink']=1
+    m=o.modifiers.new('wf','WIREFRAME'); m.thickness=0.014; m.use_replace=True; o.data.materials.append(flat('netwhite',lin((236,236,230)),0.7)); o.visible_shadow=False; return o
+NX0,NX1=VX-20.0,VX-21.3
+netpanel('V_net_back',lambda u,v:(NX1,-3.66+7.32*u,2.0*v),40,11)
+netpanel('V_net_top',lambda u,v:(NX0-(NX0-NX1)*v,-3.66+7.32*u,2.44-0.44*v),40,7)
+for sy in(-1,1): netpanel(f'V_net_side{sy}',lambda u,v,sy=sy:(NX0-(NX0-NX1)*u,sy*3.66,(2.44-0.44*u)*v),7,12)
 for i in range(5):   # chalk lines on the turf
     pass
 box('V_halfline',(VX,0,0.006),(0.1,20,0.01),flat('chalk',lin((240,240,232)),0.9),bv=0); bpy.data.objects['V_halfline']['noink']=1
@@ -373,7 +384,7 @@ COMBOS.append((h5,456,'double_take',1,'shock'))
 path(s,[(420,(NX+3.2,-3.0,1.3),(NX+2.6,-0.9,1.2)),(482,(NX+3.05,-2.6,1.28),(NX+2.6,-0.9,1.22))])   # bcn r2 (shots r1: the iron press behind his head read as a hair slab/hat): camera from the right, the window sits behind him
 # ---- S06 (476-516): insert, the misprint circled: "Kans Kamper" ----
 s='S06'; r=S(s)
-path(s,[(476,(NX+3.02,-2.15,1.32),(NX+3.0,-1.64,0.78)),(516,(NX+3.0,-1.95,1.12),(NX+2.97,-1.6,0.78))])   # bcn r2: press box out of the top, the ad sits above the caption band (rule 196)
+path(s,[(476,(NX+3.02,-2.15,1.32),(NX+3.0,-1.64,0.78)),(516,(NX+3.02,-2.0,1.24),(NX+3.0,-1.64,0.78))])   # r3s: the end pan revealed the masthead at the right edge (504-512); now a gentle pull with no pan so it stays whole   # bcn r2: press box out of the top, the ad sits above the caption band (rule 196)
 # ---- S07 (512-540): "Close enough." shrug ----
 s='S07'; r=S(s)
 h7=char_on('S07_hero','heroH',s,(NX+2.6,-0.9,0),r,'deadpan',arms=('arm','arm'))
@@ -388,7 +399,7 @@ COMBOS.append((h8,578,'tilt_talk',-1,'determined'))
 path(s,[(540,(NX-0.6,-3.0,1.5),(NX-0.55,1.0,1.45)),(600,(NX-0.6,-2.4,1.45),(NX-0.55,0.9,1.4)),(656,(NX-0.6,-2.1,1.42),(NX-0.55,0.9,1.4))])
 # ---- S09 (656-815): "And they came." outside the building at night: the Swiss pal, two English brothers, a German, a pack of locals walk up ----
 s='S09'; r=S(s)
-h9=char_on('S09_hero','hero',s,(RX-0.7,4.9,0.12),r,'happy',arms=('arm','arm_ball'))
+h9=char_on('S09_hero','hero',s,(RX+1.2,-0.3,0.0),r,'happy',arms=('arm','arm_ball'))   # bcn r3s (rule 345 [C]): the hero waits in the foreground, about 2 m from the camera; the arrivals gather 5 m behind him at the door
 faces(h9,[(656,'happy'),(666,'surprise'),(690,'happy'),(730,'grin'),(780,'laugh')]); COMBOS.append((h9,668,'wave_hello',1,'happy'))   # r2b: waves with the far arm (the near arm covered pal's face)
 # (kind, walk start frame, style, start x, y): each walks in from off frame and stops in the group by the door (one cycle each)
 # bcn r3b (visual/shots r2 P3: a frontal row facing camera; r3 probe: german stood cut at the edge before walking, engB cut at the end): three-quarter camera
@@ -402,7 +413,7 @@ for i,(k,f0,wk,xe,ye,sd,dv) in enumerate(ARR):
     a_=char_on(f'S09_{k}',k,s,(RX+xe-dv[0]*D,ye-dv[1]*D,0.12),r,fc)
     look(a_,656,fc,2*sd); fe=walk_far(a_,f0,f0+125,wk,sd,fc,dirv=dv)
     look(a_,min(fe+2,812),fc,2*sd)   # r3g: turned in toward the hero, not out to camera; faces(a_,[(min(fe+4,813),'laugh')])
-path(s,[(656,(RX+1.5,-2.4,1.5),(RX-0.35,4.9,1.8)),(815,(RX+1.9,-1.9,1.5),(RX-0.45,4.9,1.8))])   # bcn r3b: slow arc + dolly, the three facade signs stay whole (projected)
+path(s,[(656,(RX+1.0,-2.6,2.7),(RX-0.35,4.9,1.4)),(815,(RX+1.75,-2.05,2.62),(RX-0.3,4.9,1.4))])   # bcn r3s (shots r3 [C] K1/318: the drift read as still): a high arc around the foreground hero (parallax), signs projected whole, his head stays under the caption band
 leaves('S09_leaf',RX,4.0,5,656,815,9,coll=C(s))
 # ---- S10 (815-904): "one night that fall, twelve of them met in a gym": the founding table, wide, slow push ----
 s='S10'; r=S(s)
@@ -411,10 +422,12 @@ SEATS=[(-0.375,1.55),(0.375,1.55),(-1.125,1.55),(1.125,1.55),(-1.875,1.55),(1.87
 box('G_riser',(GX+0.4,2.35,0.15),(5.6,0.55,0.3),DWOOD,bv=0.01)
 T10=[];T12=[]
 for i,(k,(x,y)) in enumerate(zip(TWELVE,SEATS)):
+    if k=='hero': x,y=2.85,-1.55   # bcn r3s (rule 345 [C]): the speaker stands in front, about 1.3-1.7 m from the camera; his seat stays empty
     a_=char_on(f'S10_{k}',k,s,(GX+x,y,0),r,'happy'); drift_faces(a_,815,904,['happy','smile','grin','proud','content','open_smile'],100+i); T10.append(a_)
     if i%3==0: turn(a_,840+i*3,'happy',0,(-1 if x>0 else 1))
 COMBOS+=[(T10[0],878,'tilt_talk',1,'determined'),(T10[4],884,'dip_talk',-1,'proud'),(T10[9],870,'glance_shift',1,'smile')]
-path(s,[(815,(GX+2.6,-4.4,2.1),(GX+0.1,1.8,1.15)),(904,(GX+2.2,-3.7,1.95),(GX+0.1,1.8,1.2))])   # bcn r3 (visual r2 P3 frontal row): three-quarter view, rows recede on a diagonal
+look(T10[0],815,'determined',-2)
+path(s,[(815,(GX+3.75,-2.85,2.4),(GX+0.3,1.8,1.2)),(904,(GX+3.55,-2.65,2.35),(GX+0.3,1.8,1.2))])   # r3t: locF head was cut at the right edge   # bcn r3s (rule 345 [C]): high three-quarter, about 38 deg off the table axis, 2.4 m up, slow push past the speaker   # bcn r3 (visual r2 P3 frontal row): three-quarter view, rows recede on a diagonal
 # ---- S11 (898-950): "in the same building as the paper": exterior, both signs on one building, lit windows, pull back ----
 s='S11'; r=S(s)
 path(s,[(898,(RX-0.3,-0.4,2.1),(RX-0.3,6.1,3.3)),(950,(RX-0.3,-1.4,2.0),(RX-0.3,6.1,3.3))])   # bcn r2 (shots r1: DEPORTES/PRENSA cut at the left edge, pitch 18.9 deg up): pull back with both signs whole, pitch under 12 deg
@@ -422,9 +435,10 @@ leaves('S11_leaf',RX,4.4,4,898,950,11,coll=C(s))
 # ---- S12 (944-985): "and made a club": all twelve cheer (approved victory_up), the ledger signed ----
 s='S12'; r=S(s)
 for i,(k,(x,y)) in enumerate(zip(TWELVE,SEATS)):
+    if k=='hero': x,y=2.75,-1.45   # bcn r3s (rule 345): the hero in front, as in S10 (head 26-29 % W, under the caption band)
     a_=char_on(f'S12_{k}',k,s,(GX+x,y,0),r,'happy'); faces(a_,[(944,'happy'),(964,'laugh')]); T12.append(a_)
     COMBOS.append((a_,962+(i%4),'victory_up',(1 if i%2 else -1),'laugh'))
-path(s,[(944,(GX+2.1,-4.1,2.5),(GX+0.1,1.8,1.2)),(985,(GX+1.9,-3.8,2.45),(GX+0.1,1.8,1.22))])   # bcn r3e (occprobe: from the left the back row's faces sat behind the front row): three-quarter from the right like S10, higher (12 deg) so the back row clears the front
+path(s,[(944,(GX+3.65,-2.8,2.45),(GX+0.3,1.8,1.2)),(985,(GX+3.5,-2.65,2.42),(GX+0.3,1.8,1.2))])   # bcn r3s (rule 345): high three-quarter 2.45 m up (S09 2.65, S10 2.4; S11 sits between S10 and S12)   # bcn r3e (occprobe: from the left the back row's faces sat behind the front row): three-quarter from the right like S10, higher (12 deg) so the back row clears the front
 # ---- S13 (985-1125): no field, so nine days later: the old bike track by day; the team in plain white shirts walks onto the turf ----
 s='S13'; r=S(s)
 T13=[]
@@ -438,25 +452,27 @@ E14=[]
 for i,(k,(x,y)) in enumerate(zip(['engT1','engT2','engT1'],[(0.0,0.3),(0.85,1.05),(1.75,1.9)])):   # bcn r3b: e0 head was cut at the left edge 1127-1191   # bcn r3 (visual r2 P3): a diagonal in depth   # bcn r2 (shots r1: e1's akimbo arm over e2's face, e0 cut at the left edge)
     a_=char_on(f'S14_e{i}',k,s,(VX+4+x,y,0),r,'smug'); E14.append(a_); faces(a_,[(1125,'smug'),(1160,'smug_grin')])
 look(E14[0],1125,'smug',-1); look(E14[1],1125,'smug',-2); look(E14[2],1125,'smug',-1)
-COMBOS+=[(E14[0],1140,'cross_arms_huff',1,'smug'),(E14[1],1150,'akimbo_scold',1,'smug_grin'),(E14[2],1146,'tilt_talk',-1,'smug')]
+COMBOS+=[(E14[0],1140,'cross_arms_huff',1,'smug'),(E14[1],1150,'cross_arms_huff',1,'smug_grin'),(E14[2],1146,'tilt_talk',-1,'smug')]   # r3s: e1 akimbo arm crossed e2's face
 path(s,[(1125,(VX+4.6,-3.9,1.3),(VX+4.8,0.9,1.2)),(1192,(VX+4.65,-3.4,1.28),(VX+4.8,0.9,1.22))])   # r2c: e2 was cut at the right edge
 # ---- S15 (1186-1268): "and they lost, one to nothing": the ball flies past our keeper between the posts; chalk score insert at the end ----
 s='S15'; r=S(s)
 kp=char_on('S15_keeper','keeper',s,(VX-20+0.8,-0.6,0),r,'determined')
-faces(kp,[(1186,'determined'),(1199,'shock'),(1218,'sad'),(1240,'wince')]); COMBOS.append((kp,1197,'startle_recoil',1,'shock'))
-BALL=sph('S15_ball',(VX-12,1.5,0.4),0.11,flat('leather',lin((150,96,52)),0.7),coll=C(s))
-for f,(x,y,z) in [(1186,(VX-12,1.5,0.4)),(1192,(VX-14.5,1.2,1.0)),(1198,(VX-17,0.9,1.5)),(1203,(VX-19.6,0.6,1.6)),(1207,(VX-20.6,0.5,0.6)),(1212,(VX-21.2,0.4,0.12)),(1268,(VX-21.2,0.4,0.12))]: kloc(BALL,f,(x,y,z))
+faces(kp,[(1186,'determined'),(1201,'shock'),(1218,'sad'),(1240,'wince')]); COMBOS.append((kp,1200,'startle_recoil',-1,'shock'))   # r3s: recoil lands as the ball passes (1203), away from it
+# bcn r3s (r3 eye pass [C]: seen from the side of the goal the ball landed on the keeper's arm and lay in front of him; the goal never went in): camera now on the
+# field side facing the goal; the ball flies past the keeper's left, under the bar, into the back of the net, drops and rests in the goal
+BALL=sph('S15_ball',(VX-15,1.4,0.3),0.11,flat('leather',lin((150,96,52)),0.7),coll=C(s))
+for f,(x,y,z) in [(1186,(VX-15.0,1.4,0.3)),(1192,(VX-16.4,1.2,1.0)),(1198,(VX-17.8,1.0,1.45)),(1203,(VX-19.2,0.85,1.5)),(1205,(VX-20.0,0.75,1.4)),(1207,(VX-21.05,0.65,1.1)),(1210,(VX-20.9,0.6,0.45)),(1214,(VX-20.8,0.6,0.11)),(1268,(VX-20.8,0.6,0.11))]: kloc(BALL,f,(x,y,z))
 onone(BALL)
-path(s,[(1186,(VX-15.5,-5.5,1.5),(VX-19.4,0.2,1.2)),(1225,(VX-16.3,-4.5,1.45),(VX-19.6,0.0,1.2)),(1226,(VX-12.15,5.4,1.7),(VX-12,9.6,1.7)),(1268,(VX-12.1,5.8,1.7),(VX-12,9.6,1.7))])
+path(s,[(1186,(VX-12.4,-2.3,1.45),(VX-19.6,0.3,1.25)),(1225,(VX-13.3,-1.9,1.42),(VX-19.7,0.3,1.25)),(1226,(VX-12.15,5.4,1.7),(VX-12,9.6,1.7)),(1268,(VX-12.1,5.8,1.7),(VX-12,9.6,1.7))])
 hardcut(s,1226)   # cut to the chalk 0-1 board on "one to nothing"
 # ---- S16 (1268-1330): the turn: "Most folks would have quit right there." The team sits on the turf, glum ----
 s='S16'; r=S(s)
 D16=[]
-for i,(k,(x,y)) in enumerate(zip(['heroK','palK','keeper'],[(-0.9,0.1),(0.25,0.9),(1.3,1.7)])):   # bcn r3 (visual r2 P3): a diagonal in depth
+for i,(k,(x,y)) in enumerate(zip(['heroK','palK','keeper'],[(-0.6,0.15),(0.35,0.9),(1.3,1.7)])):   # r3s: t0 was cut by the left edge   # bcn r3 (visual r2 P3): a diagonal in depth
     a_=char_on(f'S16_t{i}',k,s,(VX-8+x,y,0),r,'sad'); D16.append(a_); faces(a_,[(1268,'sad'),(1298,'sigh'),(1316,'sad')])
 COMBOS+=[(D16[0],1290,'dip_talk',1,'sad'),(D16[2],1300,'glance_shift',-1,'sigh')]
 look(D16[1],1268,'sad',-1); turn(D16[1],1306,'sad',-1,1)
-path(s,[(1268,(VX-7.6,-3.6,1.6),(VX-7.6,0.5,1.0)),(1330,(VX-7.65,-2.6,1.45),(VX-7.6,0.5,1.05))])
+path(s,[(1268,(VX-7.9,-3.6,1.6),(VX-7.9,0.5,1.0)),(1330,(VX-7.95,-3.0,1.5),(VX-7.9,0.5,1.05))])   # r3t: t0 still cut at the left edge
 # ---- S17 (1330-1420): "Not them." He jumps up pointing (eureka); they kept on playing week after week: the team jogs past ----
 s='S17'; r=S(s)
 h17=char_on('S17_hero','heroK',s,(VX-8,0.4,0),r,'determined',arms=('arm','arm'))
@@ -473,7 +489,7 @@ path(s,[(1330,(VX-8.4,-3.4,1.25),(VX-8,0.4,1.3)),(1352,(VX-9.6,-4.6,1.45),(VX-10
 # ---- S18 (1414-1500): "Then the crowds came, so they built bigger stadiums": the big bowl, crane up and back over the pitch ----
 s='S18'; r=S(s)
 B18=[]
-for i,(k,(x,y)) in enumerate(zip(['heroK','palK','keeper'],[(-1.0,-0.2),(0.15,0.6),(1.3,1.4)])):   # bcn r3 (visual r2 P3): a diagonal in depth
+for i,(k,(x,y)) in enumerate(zip(['heroK','palK','keeper'],[(-1.0,-0.2),(0.45,0.6),(1.3,1.4)])):   # r3s: the field line stood above t1's head   # bcn r3 (visual r2 P3): a diagonal in depth
     a_=char_on(f'S18_t{i}',k,s,(BX+x,y,0),r,'happy'); B18.append(a_); faces(a_,[(1414,'happy'),(1440,'laugh')])
 COMBOS+=[(B18[0],1440,'wave_hello',1,'happy'),(B18[1],1444,'victory_up',1,'laugh'),(B18[2],1452,'clap',-1,'laugh')]
 path(s,[(1414,(BX+0.2,-3.0,1.4),(BX,0.4,1.3)),(1446,(BX+0.4,-5.0,2.0),(BX,2,2.2)),(1500,(BX+0.6,-8.5,3.4),(BX,6,4.2))])
@@ -538,7 +554,7 @@ for o_ in bpy.data.objects:
 L.render_setup(100,8)
 sc.cycles.samples=4; sc.cycles.transparent_max_bounces=8; sc.cycles.diffuse_bounces=1; sc.cycles.max_bounces=3
 # r3 (C4 probe, headedge 324 frames): heads cut by the frame edge while the body is on screen; headnudge_cc.py shifts x1.15 (Cape Cod r5 method)
-SKB_DEFAULT={"S01": [0.775, 1.031, 1.352], "S02": [0.849, 1.016, 1.287], "S03": [0.884, 1.005, 1.294], "S04": [0.844, 1.017, 1.289], "S05": [0.849, 1.016, 1.287], "S06": [0.849, 1.016, 1.287], "S07": [0.845, 1.018, 1.278], "S08": [0.725, 1.032, 1.495], "S09": [0.744, 1.042, 1.335], "S10": [0.747, 1.023, 1.45], "S11": [0.744, 1.042, 1.335], "S12": [0.752, 1.022, 1.509], "S13": [1.003, 0.984, 1.153], "S14": [0.976, 0.984, 1.228], "S15": [1.007, 0.983, 1.146], "S16": [0.986, 0.985, 1.193], "S17": [0.986, 0.984, 1.196], "S18": [0.962, 0.989, 1.217], "S19": [0.895, 1.005, 1.261], "S20": [0.895, 1.005, 1.261]}   # r3 pass 2 (+ S01 interpolated between pass 2 (0.964/0.91) and pass 3 (0.87/0.80))
+SKB_DEFAULT={"S01": [0.775, 1.031, 1.352], "S02": [0.849, 1.016, 1.287], "S03": [0.884, 1.005, 1.294], "S04": [0.844, 1.017, 1.289], "S05": [0.849, 1.016, 1.287], "S06": [0.849, 1.016, 1.287], "S07": [0.845, 1.018, 1.278], "S08": [0.725, 1.032, 1.495], "S09": [0.744, 1.042, 1.335], "S10": [0.747, 0.987, 1.39], "S11": [0.744, 1.042, 1.335], "S12": [0.752, 1.022, 1.509], "S13": [1.003, 0.984, 1.153], "S14": [0.976, 0.984, 1.228], "S15": [1.007, 0.983, 1.146], "S16": [0.986, 0.985, 1.193], "S17": [0.986, 0.984, 1.196], "S18": [0.962, 0.989, 1.217], "S19": [0.895, 1.005, 1.261], "S20": [0.895, 1.005, 1.261]}   # r3 pass 2 (+ S01 interpolated between pass 2 (0.964/0.91) and pass 3 (0.87/0.80))
 NUDGE={"S03_locA": [0.069, 0.006], "S03_locB": [0.324, 0.026], "S04_gymB": [-0.319, 0.071], "S04_hero": [0.22, -0.049], "S10_hero": [0.076, 0.003], "S10_locB": [-0.234, -0.01], "S10_locF": [-0.246, -0.01], "S10_swiss2": [0.127, 0.005], "S13_t0": [0.398, 0.102], "S13_t1": [0.463, 0.119], "S13_t2": [0.258, 0.066], "S13_t3": [0.465, 0.119], "S14_e0": [0.302, -0.036], "S14_e2": [-0.207, 0.024], "S16_t0": [0.247, -0.004], "S16_t2": [-0.159, 0.003], "S17_hero": [-0.3, -0.04], "S17_j0": [0.231, 0.031], "S17_j1": [0.317, 0.042], "S19_vendor": [0.106, 0.002]}
 # r3b second headnudge pass, static characters only (walk-ins that start off frame are entrances, not C4 cuts)
 for _n,(_dx,_dy) in {"S03_locB":[0.054,0.004],"S04_hero":[0.121,-0.027],"S16_t0":[0.182,-0.003],"S17_hero":[-0.136,-0.018]}.items():
@@ -583,4 +599,6 @@ for c_ in bpy.data.collections:
     for o_ in c_.all_objects:
         if o_.type=='MESH' and o_.visible_shadow: o_.visible_shadow=False; nsh+=1
 print('ONE_SHADOW cards off',nsh)
+for o_ in bpy.data.objects:   # bcn r3s (eye pass/shots r3, rule 367c: S03 lay under big shadows of Rambla trees never in frame): kiosk-set canopy cards cast no sun shadow
+    if o_.name.startswith('K_tree'): o_.visible_shadow=False   # canopy cards and trunks
 bpy.ops.wm.save_as_mainfile(filepath='/root/cc/blend/bcn.blend'); print('SCENE_OK all')

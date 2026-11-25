@@ -97,11 +97,19 @@ def floor_(o):
     # rule 308: dark saturated crimson ink (S03/S06/S11/S15 at ~(100,24,44)) pulled to Rick's dull plum
     mx=o.max(-1,keepdims=True); mn=o.min(-1,keepdims=True); sat=(mx-mn)/np.maximum(mx,1e-4)
     line=np.clip((0.75*cv2.GaussianBlur(y[...,0],(0,0),5*K)[...,None]-y)/0.05,0,1)   # thin ink lines only (darker than their surroundings), not smooth wood shadow
-    red=np.clip((o[...,:1]-np.maximum(o[...,1:2],o[...,2:3]))/0.12,0,1)*np.clip((sat-0.45)/0.2,0,1)*np.clip((0.40-y)/0.12,0,1)*np.maximum(line,np.clip((sat-0.6)/0.1,0,1)*np.clip((0.22-y)/0.08,0,1))   # r6: deep crimson fills (S03/S11 at sat 0.67-0.73, verifier r5) count even when not thin lines. r4b: rule 308 still crimson in S03/S06/S11/S15 (sat 0.61-0.74): reach brighter line pixels
+    red=np.clip((o[...,:1]-np.maximum(o[...,1:2],o[...,2:3]))/0.12,0,1)*np.clip((sat-0.45)/0.2,0,1)*np.clip((0.40-y)/0.12,0,1)*line   # bcn r3s (shots r3, rule 369: the S19/S20 kiosk roof fill, raw 65,4,0, went plum): thin crimson ink lines only, fills keep their colour. Was r6: deep crimson fills (S03/S11 at sat 0.67-0.73, verifier r5) count even when not thin lines. r4b: rule 308 still crimson in S03/S06/S11/S15 (sat 0.61-0.74): reach brighter line pixels
     o=o*(1-0.85*red)+(PLUM*1.15)*0.85*red
     y=gray(o)[...,None]; w=np.clip((0.24-y)/0.14,0,1)*0.85   # darks go to Rick's plum (46,28,54); floor about luma 0.12, never black
     w=w*(1-np.clip((o[...,1:2]-np.maximum(o[...,:1],o[...,2:3]))/0.03,0,1))   # bcn r2b (shots r2 critical: the S19/S20 dark-green kiosk went plum-black, raw 18.5 % green -> 4.9 %): green darks keep their hue
+    w=w*(1-np.clip((sat-0.55)/0.1,0,1)*np.clip((o[...,:1]-o[...,2:3])/0.05,0,1))   # bcn r3s: saturated warm darks (red roof, red cap) keep their hue
     return np.clip(o*(1-w)+PLUM*w,0,1)
+def hotcap(o,smax=0.72):
+    # bcn r3s (visual r3, rule 369: S19 vest 47-51 % hot orange, hue 8-40 deg sat > 0.75): warm saturated pixels capped at sat 0.72, value kept
+    mx=o.max(-1,keepdims=True); mn=o.min(-1,keepdims=True); sat=(mx-mn)/np.maximum(mx,1e-4)
+    hdeg=np.degrees(np.arctan2(np.sqrt(3)*(o[...,1]-o[...,2]),2*o[...,0]-o[...,1]-o[...,2]))%360
+    m=((hdeg>=6)&(hdeg<=42))[...,None]&(sat>smax)
+    k=np.where(m,smax/np.maximum(sat,1e-4),1.0)
+    return np.clip(mx-(mx-o)*k,0,1)
 def solve(samples,tint,lt=0.45,vk=0.0):
     allY=np.concatenate([gray(s).ravel() for s in samples]); lo,hi=np.percentile(allY,0.8),np.percentile(allY,99.6)
     best=None
@@ -234,6 +242,7 @@ if __name__=='__main__':
             if n in HIFLOOR: o=hifloor(o)   # r7 (rule 274): bright ending and S11 highlights (p98 >= 0.86 before the poster's true colours go on)
             if n=='S20' and str(f) in PQ: o=truepost(o,PQ[str(f)])   # r5 (rule 196, round-4 E5 note): the shop file's true colours on the projected poster quad
             frames[n]=vig(bloom(floor_(o),BLOOM),VIG[n])
+            if n in ('S19','S20'): frames[n]=hotcap(frames[n])
             if n=='S20': frames[n]=floor_(frames[n])   # r4: S19 soffit band fell under luma 0.07 after the vignette (rule 317)
         if len(act)==1: img=frames[act[0]]
         else:

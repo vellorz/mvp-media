@@ -69,7 +69,7 @@ def apply(x,p):
     y3=gray(z)[...,None]
     # r4b (visual r4 critical: S10 Nauset and S01 Pilgrim skin went orange under satk 2.4): skin-hued pixels (R>G>B, warm hue, mid saturation, lit) keep at most SKMAX saturation gain
     mx=x.max(-1); mn=x.min(-1); hs=(mx-mn)/np.maximum(mx,1e-4); hue=(x[...,1]-x[...,2])/np.maximum(mx-mn,1e-4)
-    skin=((x[...,0]>=x[...,1])&(x[...,1]>=x[...,2]-0.02)&(hs>0.05)&(hs<0.55)&(hue>0.22)&(hue<0.58)&(y>0.22)).astype(np.float32)
+    skin=((x[...,0]>=x[...,1])&(x[...,1]>=x[...,2]-0.02)&(hs>SKF.get(CUR[0],0.05))&(hs<0.55)&(hue>0.22)&(hue<0.58)&(y>0.22)).astype(np.float32)
     skin=cv2.GaussianBlur(skin,(0,0),2.0)[...,None]; sk=np.minimum(sat,SKMAX)*skin+sat*(1-skin)
     if PROT[0] and sat>1:   # r6b (visual r6 critical: S10 Nauset deerskin mantles 163,103,62 went traffic-cone orange 222,88,0 and the face rim speckled once the narrowed skin mask left them out): warm pixels that are already saturated get little of the gain, low-sat sand still gets all of it
         warm=np.clip((hue[...,None]+0.1)/0.2,0,1)*np.clip((0.75-hue[...,None])/0.15,0,1)*(x[...,:1]>=x[...,2:3])
@@ -83,7 +83,8 @@ def apply(x,p):
 SKMAX=1.0
 SATPROT=set(os.environ.get('SATPROT',','.join(_SH)).split(','))   # nb: warm-saturation protect on every shot (rules 355/367b)   # r6b: shots graded with the saturated-warm protect (only S10 re-posted in round 6b; apply to every shot from the next video on)
 PROT=[False]; CUR=['']
-SKC={"S01": (0.984, 0.973), "S03": (0.98, 0.952), "S04": (0.993, 0.996), "S07": (0.995, 1.004), "S08": (0.98, 0.953), "S09": (0.955, 0.972), "S10": (0.957, 0.914), "S12": (0.987, 1.012), "S13": (0.989, 0.994), "S14": (0.977, 0.945), "S16": (0.986, 1.011), "S17": (0.983, 0.952), "S18": (0.941, 0.933)}   # r2b skin balance per shot (skinprobe_nb.py, graded faces before balance)
+SKF={'S18':0.02}   # r3: S18 skin is near-neutral under the white stall fill (face saturation ~0.056), so its skin mask floor is lower
+SKC={"S01": (0.984, 0.973), "S03": (0.98, 0.952), "S04": (0.993, 0.996), "S07": (0.995, 1.004), "S08": (0.98, 0.953), "S09": (0.955, 0.972), "S10": (0.957, 0.914), "S12": (0.987, 1.012), "S13": (0.989, 0.994), "S14": (0.977, 0.945), "S16": (0.986, 1.011), "S17": (0.983, 0.952), "S18": (0.952, 0.943)}   # r2b skin balance per shot (skinprobe_nb.py, graded faces before balance); r3: S18 re-measured on the video after the neutral stall fill (G/R 0.968)
 CLAR=0.55; CLS=14.0; PLUM=np.array([46,28,54],np.float32)/255   # r4 (visual L6 0.361 > 0.35 and halos at f60/f1720): weaker, tighter local contrast (r3 was 0.8 / 24 px)
 def finish(o):
     y=gray(o)[...,None]; mid=np.clip(4*y*(1-y),0,1)   # r3: local contrast on midtones only (r2 crushed ink and coats to RGB 0)

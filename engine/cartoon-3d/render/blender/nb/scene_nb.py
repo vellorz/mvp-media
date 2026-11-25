@@ -543,12 +543,19 @@ path(s,[(725,(PX0-0.04,-2.3,1.3),(PX0,3.0,1.4)),(815,(PX0+0.08,-2.15,1.32),(PX0+
 # ---- S08 (815-935): the photo tests: two flashes, the print on the wall, still a blob ----
 s='S08'; r=S(s)
 ph=char_on('S08_photog','photog',s,(AX-3.75,-0.75,0.0),r,'determined',arms=('arm','arm'))
-for f,a in [(815,-20),(876,-25)]: arm(ph,1,f,a)
-for f,a in [(815,-30),(846,-30),(852,-4),(880,-4),(888,-30)]: arm(ph,-1,f,a)   # r3 (shots 374: the flashes fired with both hands away from the tripod camera): the camera-side hand is on the camera body through both flashes
+for f,a in [(815,-20),(846,-25),(852,-100),(881,-100),(888,-25)]: arm(ph,1,f,a)   # r4 (374, eyepass r3 critical): the camera-side arm reaches out and rests on the S08 tripod camera through both flashes (f860-879)
+for f,a in [(815,-30),(888,-30)]: arm(ph,-1,f,a)
+# r4: S08-only tripod camera at his hand, in view beside him (the set tripod hid behind his head); the set tripod is hidden in S08 only
+for n_ in ['A_tricam','A_trilens','A_tri0','A_tri1','A_tri2']: vis(bpy.data.objects[n_],[(0,814),(936,99999)])
+_DX,_DY,_DZ=(AX-3.14)-(AX-3.6),-0.55-(-0.2),0.83-1.28
+for k in range(3):
+    a=k*2*math.pi/3; _o=cyl(f'A8_tri{k}',(AX-3.14+0.22*math.cos(a),-0.55+0.22*math.sin(a),(1.25+_DZ)/2-0.025),0.015,1.25+_DZ,DARK,v=6,rot=(0.18*math.sin(a),-0.18*math.cos(a),0)); vis(_o,[(815,935)])
+_o=box('A8_tricam',(AX-3.14,-0.55,0.83),(0.22,0.16,0.16),flat('camblack',lin((40,40,44)),0.5),bv=0.02); vis(_o,[(815,935)])
+_o=cyl('A8_trilens',(AX-2.99,-0.50,0.82),0.05,0.08,flat('lensm',lin((90,110,140)),0.3),v=12,rot=(0,math.radians(90),0.45)); vis(_o,[(815,935)])   # r3 (shots 374: the flashes fired with both hands away from the tripod camera): the camera-side hand is on the camera body through both flashes
 at(ph,[(815,'determined@R1'),(850,'squint@R1'),(884,'neutral@R2')]); COMBOS.append((ph,WF(103)-6,'tilt_talk',1,'deadpan'))
 a8=char_on('S08_arch','archivist',s,(AX-2.3,-0.45,0.0),r,'hope' if False else 'smile')
 at(a8,[(815,'smile@L1'),(846,'open_smile@L2'),(880,'worried@R1')]); COMBOS.append((a8,WF(100),'dip_talk',-1,'sigh'))
-for f_ in (WF(96)-2,WF(97)): fx(f'S08_flash{f_}','fx_spark',(AX-3.25,-0.12,1.27),f_,8,0.35,C(s),grow=1.4)   # eyepass r1: smaller, clear of the photographer's face
+for f_ in (WF(96)-2,WF(97)): fx(f'S08_flash{f_}','fx_spark',(AX-2.92,-0.49,0.84),f_,8,0.35,C(s),grow=1.4)   # r4: at the moved S08 camera's lens   # eyepass r1: smaller, clear of the photographer's face
 path(s,[(815,(AX-3.05,-3.6,1.45),(AX-3.05,0.0,1.15)),(880,(AX-3.02,-3.45,1.48),(AX-3.02,1.0,1.25)),(935,(AX-3.1,-3.3,1.52),(AX-3.1,1.5,1.32))])   # r2 (shots C4: both faces cut at the edges f900-934): no pan past them   # eyepass r1: the archivist was cut by the right edge; the pan now leaves her out
 # nb eyepass r1 (critical: the pointing hand went into the table edge): archivist 35 cm further from the table
 # ---- S09 (935-1062): "Then she went where no one looks for a Christmas gift. The old graveyard books." ----

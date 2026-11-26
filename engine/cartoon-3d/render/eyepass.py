@@ -18,6 +18,7 @@ Q = """# Owner's-eye pass (rule 378). Answer for every shot; each NO gets a time
 11. Does every falling or thrown object have a source and a landing (382)? Step frame by frame.
 12. Is every character at a desk or table wholly on its own side, only hands on top (383)?
 13. Is every handled or optical tool gripped by the handle, working end the right way (374f)?
+14. Does any stretch over 4 s feel like a slideshow: no fast move, portal, wipe or relight (385, 387, 389)? Run kineticcheck.py and print its line.
 """
 def main():
     v, out = sys.argv[1], sys.argv[2]

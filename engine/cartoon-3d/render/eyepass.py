@@ -13,6 +13,11 @@ Q = """# Owner's-eye pass (rule 378). Answer for every shot; each NO gets a time
 6. Is every structure planted, square and uncut by its supports (376)?
 7. Is the camera smooth, above all on boats and vehicles (377)?
 8. Is there one steady shadow per character (367, 367c)?
+9. Is every hung object attached to a line anchored at both ends (380)?
+10. Does any garment flicker at a pose change (381)? Step these frame by frame.
+11. Does every falling or thrown object have a source and a landing (382)? Step frame by frame.
+12. Is every character at a desk or table wholly on its own side, only hands on top (383)?
+13. Is every handled or optical tool gripped by the handle, working end the right way (374f)?
 """
 def main():
     v, out = sys.argv[1], sys.argv[2]
